@@ -13,39 +13,79 @@
 <div class="container">
   <div class="topbar">
     <div>
-      <h1 class="title">Pantau<span class="dot">.</span></h1>
-      <p class="subtitle">Markets</p>
+      <h1 class="title">Markets<span class="dot">.</span></h1>
+      <p class="subtitle" id="marketsSubtitle">Memuat...</p>
     </div>
-    <div class="icon-group">
-      <button class="icon-btn" id="themeBtn">🌙</button>
-    </div>
+    <button class="icon-btn" id="themeBtn">🌙</button>
   </div>
 
-  <div class="coming-soon">
-    <div class="big-icon">🪙</div>
-    <p>Halaman <strong>Markets</strong> segera hadir — lagi dibangun di phase berikutnya.</p>
+  <input class="search-input" id="marketSearch" placeholder="Cari koin (BTC, ETH...)" style="margin: 16px 0 10px;" />
+
+  <div class="tabs">
+    <button class="tab filter-tab active" data-filter="all">Semua</button>
+    <button class="tab filter-tab" data-filter="trending">Trending</button>
+    <button class="tab filter-tab" data-filter="gainers">Naik</button>
+    <button class="tab filter-tab" data-filter="losers">Turun</button>
   </div>
+
+  <div id="errorContainer"></div>
+
+  <table style="width:100%; border-collapse: collapse; margin-top: 12px; font-size: 12px;">
+    <thead>
+      <tr style="color: var(--faint); text-align:left; font-size: 10px; text-transform: uppercase;">
+        <th style="padding: 6px 4px; width: 24px;">#</th>
+        <th style="padding: 6px 4px;">Koin</th>
+        <th style="padding: 6px 4px; text-align:right;">Harga</th>
+        <th style="padding: 6px 4px; text-align:right;">24H</th>
+      </tr>
+    </thead>
+    <tbody id="marketsBody">
+      <tr><td colspan="4" class="loading">Memuat data pasar...</td></tr>
+    </tbody>
+  </table>
 </div>
 
-<nav class="bottom-nav">
-  <a href="index.html" class="nav-item" data-page="index.html"><span class="nav-icon">🏠</span>Home</a>
-  <a href="markets.html" class="nav-item" data-page="markets.html"><span class="nav-icon">🪙</span>Markets</a>
-  <a href="trending.html" class="nav-item" data-page="trending.html"><span class="nav-icon">🔥</span>Trending</a>
-  <a href="tools.html" class="nav-item" data-page="tools.html"><span class="nav-icon">🧮</span>Tools</a>
-  <a href="education.html" class="nav-item" data-page="education.html"><span class="nav-icon">📚</span>Edukasi</a>
-</nav>
+<div id="bottom-nav"></div>
+
+<style>
+  .market-row td { padding: 12px 4px; border-top: 1px solid var(--border); }
+  .market-row { cursor: pointer; }
+  .market-row:active { background: var(--card-hover); }
+  .rank-cell { color: var(--faint); }
+  .price-cell { text-align: right; }
+  .change-cell { text-align: right; }
+</style>
 
 <script type="module">
-import { initTheme, toggleTheme, markActiveNav } from "./js/app.js";
+import { initTheme, toggleTheme, renderError } from "./js/app.js";
+import { renderNav } from "./js/components/navigation.js";
+import { initMarkets } from "./js/features/market.js";
+import { ALL_COINS } from "./js/api.js";
+
 initTheme();
-markActiveNav();
+renderNav();
+
 document.getElementById("themeBtn").addEventListener("click", () => {
   const t = toggleTheme();
   document.getElementById("themeBtn").textContent = t === "dark" ? "🌙" : "☀️";
 });
 document.getElementById("themeBtn").textContent =
   document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
+
+initMarkets({
+  onLoading: () => {
+    document.getElementById("marketsSubtitle").textContent = "Memuat...";
+    document.getElementById("errorContainer").innerHTML = "";
+  },
+  onLoaded: () => {
+    document.getElementById("marketsSubtitle").textContent = `${ALL_COINS.length} koin · Binance · refresh 30 detik`;
+  },
+  onError: (err, retryFn) => {
+    document.getElementById("marketsSubtitle").textContent = "Gagal memuat";
+    renderError(document.getElementById("errorContainer"), "Unable to load market data. " + err.message, retryFn);
+    document.getElementById("marketsBody").innerHTML = "";
+  },
+});
 </script>
 </body>
-  </html>
-  
+</html>
