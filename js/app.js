@@ -30,15 +30,21 @@ export function currencySymbol(currency) {
   return currency === "IDR" ? "Rp" : "$";
 }
 
-// Highlight menu bottom-nav sesuai file HTML yang lagi dibuka
-export function markActiveNav() {
-  const current = location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".nav-item").forEach((el) => {
-    const target = el.getAttribute("data-page");
-    if (target === current || (target === "index.html" && current === "")) {
-      el.classList.add("active");
-    }
-  });
+// Catatan: highlight menu bottom-nav sekarang ditangani langsung oleh
+// js/components/navigation.js saat nav di-render, jadi nggak perlu fungsi
+// terpisah lagi di sini.
+
+// Tampilkan error state yang konsisten di semua halaman, lengkap
+// tombol "Coba lagi" biar orang nggak cuma lihat halaman kosong.
+export function renderError(container, message, onRetry) {
+  container.innerHTML = `
+    <div class="error-box">
+      <div>⚠️ ${message}</div>
+      <button class="icon-btn" style="margin-top:10px;" id="retryBtn">Coba lagi</button>
+    </div>`;
+  if (onRetry) {
+    container.querySelector("#retryBtn").addEventListener("click", onRetry);
+  }
 }
 
 // Watchlist tersimpan lokal di HP, dipakai bareng di semua halaman
