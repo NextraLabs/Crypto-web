@@ -27,18 +27,13 @@
   </div>
 </div>
 
-<nav class="bottom-nav">
-  <a href="index.html" class="nav-item" data-page="index.html"><span class="nav-icon">🏠</span>Home</a>
-  <a href="markets.html" class="nav-item" data-page="markets.html"><span class="nav-icon">🪙</span>Markets</a>
-  <a href="trending.html" class="nav-item" data-page="trending.html"><span class="nav-icon">🔥</span>Trending</a>
-  <a href="tools.html" class="nav-item" data-page="tools.html"><span class="nav-icon">🧮</span>Tools</a>
-  <a href="education.html" class="nav-item" data-page="education.html"><span class="nav-icon">📚</span>Edukasi</a>
-</nav>
+<div id="bottom-nav"></div>
 
 <script type="module">
-import { initTheme, toggleTheme, markActiveNav } from "./js/app.js";
+import { initTheme, toggleTheme } from "./js/app.js";
+import { renderNav } from "./js/components/navigation.js";
 initTheme();
-markActiveNav();
+renderNav();
 const params = new URLSearchParams(location.search);
 const symbol = params.get("symbol");
 if (symbol) document.getElementById("coinTitle").innerHTML = symbol + '<span class="dot">.</span>';
