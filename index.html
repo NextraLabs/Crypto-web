@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pantau — Home</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<div class="container">
+  <div class="topbar">
+    <div>
+      <h1 class="title">Pantau<span class="dot">.</span></h1>
+      <p class="subtitle">Market overview · Binance</p>
+    </div>
+    <div class="icon-group">
+      <button class="icon-btn" id="themeBtn">🌙</button>
+    </div>
+  </div>
+
+  <div id="topMoverBox" class="highlight-box" style="display:none;"></div>
+
+  <div id="errorBox"></div>
+  <div id="loadingBox" class="loading">Memuat data pasar...</div>
+
+  <h2 style="font-size:14px; margin: 24px 0 8px; color: var(--dim);">🔥 Trending sekarang</h2>
+  <div id="trendingList"></div>
+
+  <h2 style="font-size:14px; margin: 24px 0 8px; color: var(--dim);">🟢 Top Naik</h2>
+  <div id="gainersList"></div>
+
+  <h2 style="font-size:14px; margin: 24px 0 8px; color: var(--dim);">🔴 Top Turun</h2>
+  <div id="losersList"></div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item" data-page="index.html"><span class="nav-icon">🏠</span>Home</a>
+  <a href="markets.html" class="nav-item" data-page="markets.html"><span class="nav-icon">🪙</span>Markets</a>
+  <a href="trending.html" class="nav-item" data-page="trending.html"><span class="nav-icon">🔥</span>Trending</a>
+  <a href="tools.html" class="nav-item" data-page="tools.html"><span class="nav-icon">🧮</span>Tools</a>
+  <a href="education.html" class="nav-item" data-page="education.html"><span class="nav-icon">📚</span>Edukasi</a>
+</nav>
+
+<script type="module">
+import { fetchAllTickers, ALL_COINS } from "./js/api.js";
+import { initTheme, toggleTheme, markActiveNav } from "./js/app.js";
+
+initTheme();
+markActiveNav();
+
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const t = toggleTheme();
+  document.getElementById("themeBtn").textContent = t === "dark" ? "🌙" : "☀️";
+});
+document.getElementById("themeBtn").textContent =
+  document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
+
+function coinRow(symbol, d) {
+  const up = d.usd_24h_change >= 0;
+  const price = d.usd >= 1000
+    ? d.usd.toLocaleString("en-US", { maximumFractionDigits: 0 })
+    : d.usd >= 1 ? d.usd.toFixed(2) : d.usd.toFixed(6);
+  const div = document.createElement("a");
+  div.href = `coin.html?symbol=${symbol}`;
+  div.className = "coin-card";
+  div.innerHTML = `
+    <div style="flex:1;">
+      <div class="coin-symbol">${symbol}</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="coin-price">$${price}</div>
+      <div class="coin-change ${up ? "up" : "down"}">${up ? "▲" : "▼"} ${Math.abs(d.usd_24h_change).toFixed(2)}%</div>
+    </div>
+  `;
+  return div;
+}
+
+async function load() {
+  try {
+    const data = await fetchAllTickers();
+
+    document.getElementById("loadingBox").style.display = "none";
+
+    // Top mover
+    let best = null;
+    ALL_COINS.forEach((c) => {
+      const d = data[c.symbol];
+      if (!d) return;
+      if (!best || Math.abs(d.usd_24h_change) > Math.abs(data[best].usd_24h_change)) best = c.symbol;
+    });
+    if (best) {
+      const d = data[best];
+      const up = d.usd_24h_change >= 0;
+      const box = document.getElementById("topMoverBox");
+      box.style.display = "block";
+      box.innerHTML = `<span class="dim">Gerakan terbesar 24 jam</span> <strong>${best}</strong> <span class="${up ? "up" : "down"}">${up ? "▲" : "▼"} ${Math.abs(d.usd_24h_change).toFixed(2)}%</span>`;
+    }
+
+    // Trending = 5 volume tertinggi
+    const byVolume = [...ALL_COINS].filter(c => data[c.symbol]).sort((a, b) => data[b.symbol].volume - data[a.symbol].volume).slice(0, 5);
+    const trendingList = document.getElementById("trendingList");
+    byVolume.forEach((c) => trendingList.appendChild(coinRow(c.symbol, data[c.symbol])));
+
+    // Top gainers
+    const gainers = [...ALL_COINS].filter(c => data[c.symbol]).sort((a, b) => data[b.symbol].usd_24h_change - data[a.symbol].usd_24h_change).slice(0, 5);
+    const gainersList = document.getElementById("gainersList");
+    gainers.forEach((c) => gainersList.appendChild(coinRow(c.symbol, data[c.symbol])));
+
+    // Top losers
+    const losers = [...ALL_COINS].filter(c => data[c.symbol]).sort((a, b) => data[a.symbol].usd_24h_change - data[b.symbol].usd_24h_change).slice(0, 5);
+    const losersList = document.getElementById("losersList");
+    losers.forEach((c) => losersList.appendChild(coinRow(c.symbol, data[c.symbol])));
+
+  } catch (e) {
+    document.getElementById("loadingBox").style.display = "none";
+    document.getElementById("errorBox").innerHTML = `<div class="error-box">Gagal ambil data: ${e.message}</div>`;
+  }
+}
+
+load();
+setInterval(load, 30000);
+</script>
+</body>
+</html>
