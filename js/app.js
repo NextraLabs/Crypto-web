@@ -1,15 +1,15 @@
-// app.js — hal-hal yang dipakai bersama di SEMUA halaman:
-// tema gelap/terang, format angka, dan penanda halaman aktif di bottom nav.
+// app.js — global helpers dipakai semua halaman
+// Tidak pakai ES module, langsung global namespace
 
 const THEME_KEY = "pantau_theme";
 
-export function initTheme() {
+function initTheme() {
   const saved = localStorage.getItem(THEME_KEY) || "dark";
   document.documentElement.setAttribute("data-theme", saved);
   return saved;
 }
 
-export function toggleTheme() {
+function toggleTheme() {
   const current = document.documentElement.getAttribute("data-theme");
   const next = current === "dark" ? "light" : "dark";
   document.documentElement.setAttribute("data-theme", next);
@@ -17,7 +17,7 @@ export function toggleTheme() {
   return next;
 }
 
-export function formatNum(n, currency = "USD") {
+function formatNum(n, currency) {
   if (currency === "IDR") {
     return n.toLocaleString("id-ID", { maximumFractionDigits: n >= 1000 ? 0 : 2 });
   }
@@ -26,41 +26,49 @@ export function formatNum(n, currency = "USD") {
   return n.toFixed(6);
 }
 
-export function currencySymbol(currency) {
-  return currency === "IDR" ? "Rp" : "$";
-}
-
-// Catatan: highlight menu bottom-nav sekarang ditangani langsung oleh
-// js/components/navigation.js saat nav di-render, jadi nggak perlu fungsi
-// terpisah lagi di sini.
-
-// Tampilkan error state yang konsisten di semua halaman, lengkap
-// tombol "Coba lagi" biar orang nggak cuma lihat halaman kosong.
-export function renderError(container, message, onRetry) {
+function renderError(container, message, onRetry) {
   container.innerHTML = `
     <div class="error-box">
       <div>⚠️ ${message}</div>
       <button class="icon-btn" style="margin-top:10px;" id="retryBtn">Coba lagi</button>
     </div>`;
   if (onRetry) {
-    container.querySelector("#retryBtn").addEventListener("click", onRetry);
+    document.getElementById("retryBtn").addEventListener("click", onRetry);
   }
 }
 
-// Watchlist tersimpan lokal di HP, dipakai bareng di semua halaman
-const WATCHLIST_KEY = "pantau_favorites";
-export function loadWatchlist() {
-  try {
-    const raw = localStorage.getItem(WATCHLIST_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
+function renderNav() {
+  const NAV_ITEMS = [
+    { href: "index.html", icon: "🏠", label: "Home" },
+    { href: "markets.html", icon: "🪙", label: "Markets" },
+    { href: "trending.html", icon: "🔥", label: "Trending" },
+    { href: "tools.html", icon: "🧮", label: "Tools" },
+    { href: "education.html", icon: "📚", label: "Edukasi" },
+  ];
+  const mount = document.getElementById("bottom-nav");
+  if (!mount) return;
+  const current = location.pathname.split("/").pop() || "index.html";
+  const nav = document.createElement("nav");
+  nav.className = "bottom-nav";
+  nav.innerHTML = NAV_ITEMS.map((item) => {
+    const active = item.href === current ? "active" : "";
+    return `<a href="${item.href}" class="nav-item ${active}">
+      <span class="nav-icon">${item.icon}</span>${item.label}
+    </a>`;
+  }).join("");
+  mount.replaceWith(nav);
 }
-export function saveWatchlist(list) {
+
+const WATCHLIST_KEY = "pantau_favorites";
+function loadWatchlist() {
+  try { return JSON.parse(localStorage.getItem(WATCHLIST_KEY) || "[]"); } catch { return []; }
+}
+function saveWatchlist(list) {
   try { localStorage.setItem(WATCHLIST_KEY, JSON.stringify(list)); } catch {}
 }
-export function toggleWatchlistItem(symbol) {
+function toggleWatchlistItem(symbol) {
   const list = loadWatchlist();
-  const next = list.includes(symbol) ? list.filter((s) => s !== symbol) : [...list, symbol];
+  const next = list.includes(symbol) ? list.filter(s => s !== symbol) : [...list, symbol];
   saveWatchlist(next);
   return next;
 }
