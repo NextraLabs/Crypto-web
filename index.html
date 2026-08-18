@@ -9,109 +9,89 @@
 <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
-
 <div class="container">
   <div class="topbar">
     <div>
       <h1 class="title">Pantau<span class="dot">.</span></h1>
       <p class="subtitle">Market overview · Binance</p>
     </div>
-    <div class="icon-group">
-      <button class="icon-btn" id="themeBtn">🌙</button>
-    </div>
+    <button class="icon-btn" id="themeBtn">🌙</button>
   </div>
 
   <div id="topMoverBox" class="highlight-box" style="display:none;"></div>
-
   <div id="errorBox"></div>
   <div id="loadingBox" class="loading">Memuat data pasar...</div>
 
-  <h2 style="font-size:14px; margin: 24px 0 8px; color: var(--dim);">🔥 Trending sekarang</h2>
+  <h2 style="font-size:14px;margin:24px 0 8px;color:var(--dim);">🔥 Trending sekarang</h2>
   <div id="trendingList"></div>
-
-  <h2 style="font-size:14px; margin: 24px 0 8px; color: var(--dim);">🟢 Top Naik</h2>
+  <h2 style="font-size:14px;margin:24px 0 8px;color:var(--dim);">🟢 Top Naik</h2>
   <div id="gainersList"></div>
-
-  <h2 style="font-size:14px; margin: 24px 0 8px; color: var(--dim);">🔴 Top Turun</h2>
+  <h2 style="font-size:14px;margin:24px 0 8px;color:var(--dim);">🔴 Top Turun</h2>
   <div id="losersList"></div>
 </div>
 
 <div id="bottom-nav"></div>
 
-<script type="module">
-import { fetchAllTickers, ALL_COINS } from "./js/api.js";
-import { initTheme, toggleTheme, renderError } from "./js/app.js";
-import { renderNav } from "./js/components/navigation.js";
-
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
 initTheme();
 renderNav();
 
-document.getElementById("themeBtn").addEventListener("click", () => {
-  const t = toggleTheme();
-  document.getElementById("themeBtn").textContent = t === "dark" ? "🌙" : "☀️";
+const themeBtn = document.getElementById("themeBtn");
+themeBtn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
+themeBtn.addEventListener("click", () => {
+  themeBtn.textContent = toggleTheme() === "dark" ? "🌙" : "☀️";
 });
-document.getElementById("themeBtn").textContent =
-  document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
 
 function coinRow(symbol, d) {
   const up = d.usd_24h_change >= 0;
-  const price = d.usd >= 1000
-    ? d.usd.toLocaleString("en-US", { maximumFractionDigits: 0 })
-    : d.usd >= 1 ? d.usd.toFixed(2) : d.usd.toFixed(6);
-  const div = document.createElement("a");
-  div.href = `coin.html?symbol=${symbol}`;
-  div.className = "coin-card";
-  div.innerHTML = `
-    <div style="flex:1;">
-      <div class="coin-symbol">${symbol}</div>
-    </div>
-    <div style="text-align:right;">
+  const price = formatNum(d.usd, "USD");
+  const a = document.createElement("a");
+  a.href = `coin.html?symbol=${symbol}`;
+  a.className = "coin-card";
+  a.innerHTML = `
+    <div style="flex:1"><div class="coin-symbol">${symbol}</div></div>
+    <div style="text-align:right">
       <div class="coin-price">$${price}</div>
       <div class="coin-change ${up ? "up" : "down"}">${up ? "▲" : "▼"} ${Math.abs(d.usd_24h_change).toFixed(2)}%</div>
-    </div>
-  `;
-  return div;
+    </div>`;
+  return a;
 }
 
 async function load() {
   try {
     const data = await fetchAllTickers();
-
     document.getElementById("loadingBox").style.display = "none";
 
-    // Top mover
+    // top mover
     let best = null;
-    ALL_COINS.forEach((c) => {
-      const d = data[c.symbol];
-      if (!d) return;
-      if (!best || Math.abs(d.usd_24h_change) > Math.abs(data[best].usd_24h_change)) best = c.symbol;
+    ALL_COINS.forEach(c => {
+      if (!data[c.symbol]) return;
+      if (!best || Math.abs(data[c.symbol].usd_24h_change) > Math.abs(data[best].usd_24h_change)) best = c.symbol;
     });
     if (best) {
-      const d = data[best];
-      const up = d.usd_24h_change >= 0;
+      const d = data[best], up = d.usd_24h_change >= 0;
       const box = document.getElementById("topMoverBox");
       box.style.display = "block";
       box.innerHTML = `<span class="dim">Gerakan terbesar 24 jam</span> <strong>${best}</strong> <span class="${up ? "up" : "down"}">${up ? "▲" : "▼"} ${Math.abs(d.usd_24h_change).toFixed(2)}%</span>`;
     }
 
-    // Trending = 5 volume tertinggi
-    const byVolume = [...ALL_COINS].filter(c => data[c.symbol]).sort((a, b) => data[b.symbol].volume - data[a.symbol].volume).slice(0, 5);
-    const trendingList = document.getElementById("trendingList");
-    byVolume.forEach((c) => trendingList.appendChild(coinRow(c.symbol, data[c.symbol])));
+    const sorted = [...ALL_COINS].filter(c => data[c.symbol]);
+    const byVol = [...sorted].sort((a,b) => data[b.symbol].volume - data[a.symbol].volume).slice(0,5);
+    const byGain = [...sorted].sort((a,b) => data[b.symbol].usd_24h_change - data[a.symbol].usd_24h_change).slice(0,5);
+    const byLoss = [...sorted].sort((a,b) => data[a.symbol].usd_24h_change - data[b.symbol].usd_24h_change).slice(0,5);
 
-    // Top gainers
-    const gainers = [...ALL_COINS].filter(c => data[c.symbol]).sort((a, b) => data[b.symbol].usd_24h_change - data[a.symbol].usd_24h_change).slice(0, 5);
-    const gainersList = document.getElementById("gainersList");
-    gainers.forEach((c) => gainersList.appendChild(coinRow(c.symbol, data[c.symbol])));
-
-    // Top losers
-    const losers = [...ALL_COINS].filter(c => data[c.symbol]).sort((a, b) => data[a.symbol].usd_24h_change - data[b.symbol].usd_24h_change).slice(0, 5);
-    const losersList = document.getElementById("losersList");
-    losers.forEach((c) => losersList.appendChild(coinRow(c.symbol, data[c.symbol])));
-
-  } catch (e) {
+    const tl = document.getElementById("trendingList");
+    const gl = document.getElementById("gainersList");
+    const ll = document.getElementById("losersList");
+    tl.innerHTML = gl.innerHTML = ll.innerHTML = "";
+    byVol.forEach(c => tl.appendChild(coinRow(c.symbol, data[c.symbol])));
+    byGain.forEach(c => gl.appendChild(coinRow(c.symbol, data[c.symbol])));
+    byLoss.forEach(c => ll.appendChild(coinRow(c.symbol, data[c.symbol])));
+  } catch(e) {
     document.getElementById("loadingBox").style.display = "none";
-    renderError(document.getElementById("errorBox"), "Unable to load market data. " + e.message, load);
+    renderError(document.getElementById("errorBox"), "Gagal memuat data: " + e.message, load);
   }
 }
 
