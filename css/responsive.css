@@ -1,0 +1,12 @@
+/* Situs ini mobile-first secara default. Aturan di bawah nambahin
+   penyesuaian buat layar lebih lebar (tablet/desktop). */
+
+@media (min-width: 640px) {
+  .container { max-width: 600px; padding-top: 32px; }
+  .title { font-size: 34px; }
+  .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); border-radius: 16px 16px 0 0; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: 720px; }
+}
