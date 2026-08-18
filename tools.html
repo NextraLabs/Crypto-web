@@ -3,43 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pantau — Crypto Tools</title>
+<title>Pantau</title>
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/components.css" />
 <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
-
 <div class="container">
   <div class="topbar">
-    <div>
-      <h1 class="title">Pantau<span class="dot">.</span></h1>
-      <p class="subtitle">Crypto Tools</p>
-    </div>
-    <div class="icon-group">
-      <button class="icon-btn" id="themeBtn">🌙</button>
-    </div>
+    <div><h1 class="title">Pantau<span class="dot">.</span></h1></div>
+    <button class="icon-btn" id="themeBtn">🌙</button>
   </div>
-
   <div class="coming-soon">
-    <div class="big-icon">🧮</div>
-    <p>Halaman <strong>Crypto Tools</strong> segera hadir — lagi dibangun di phase berikutnya.</p>
+    <div class="big-icon">🚧</div>
+    <p>Halaman ini segera hadir.</p>
   </div>
 </div>
-
 <div id="bottom-nav"></div>
-
-<script type="module">
-import { initTheme, toggleTheme } from "./js/app.js";
-import { renderNav } from "./js/components/navigation.js";
-initTheme();
-renderNav();
-document.getElementById("themeBtn").addEventListener("click", () => {
-  const t = toggleTheme();
-  document.getElementById("themeBtn").textContent = t === "dark" ? "🌙" : "☀️";
-});
-document.getElementById("themeBtn").textContent =
-  document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+initTheme(); renderNav();
+const b = document.getElementById("themeBtn");
+b.textContent = document.documentElement.getAttribute("data-theme")==="dark"?"🌙":"☀️";
+b.addEventListener("click",()=>{b.textContent=toggleTheme()==="dark"?"🌙":"☀️";});
 </script>
 </body>
 </html>
