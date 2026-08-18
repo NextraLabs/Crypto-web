@@ -1,0 +1,30 @@
+// navigation.js — satu-satunya tempat markup bottom-nav didefinisikan.
+// Semua halaman tinggal punya <div id="bottom-nav"></div> dan panggil
+// renderNav() — kalau nanti mau ubah menu, cukup edit di sini SEKALI.
+
+const NAV_ITEMS = [
+  { href: "index.html", icon: "🏠", label: "Home" },
+  { href: "markets.html", icon: "🪙", label: "Markets" },
+  { href: "trending.html", icon: "🔥", label: "Trending" },
+  { href: "tools.html", icon: "🧮", label: "Tools" },
+  { href: "education.html", icon: "📚", label: "Edukasi" },
+];
+
+export function renderNav() {
+  const mount = document.getElementById("bottom-nav");
+  if (!mount) return;
+
+  const current = location.pathname.split("/").pop() || "index.html";
+
+  const nav = document.createElement("nav");
+  nav.className = "bottom-nav";
+  nav.innerHTML = NAV_ITEMS.map((item) => {
+    const active = item.href === current ? "active" : "";
+    return `
+      <a href="${item.href}" class="nav-item ${active}" data-page="${item.href}">
+        <span class="nav-icon">${item.icon}</span>${item.label}
+      </a>`;
+  }).join("");
+
+  mount.replaceWith(nav);
+}
