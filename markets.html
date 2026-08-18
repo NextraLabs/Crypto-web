@@ -9,17 +9,16 @@
 <link rel="stylesheet" href="css/responsive.css" />
 </head>
 <body>
-
 <div class="container">
   <div class="topbar">
     <div>
       <h1 class="title">Markets<span class="dot">.</span></h1>
-      <p class="subtitle" id="marketsSubtitle">Memuat...</p>
+      <p class="subtitle" id="sub">Memuat...</p>
     </div>
     <button class="icon-btn" id="themeBtn">🌙</button>
   </div>
 
-  <input class="search-input" id="marketSearch" placeholder="Cari koin (BTC, ETH...)" style="margin: 16px 0 10px;" />
+  <input class="search-input" id="marketSearch" placeholder="Cari koin (BTC, ETH...)" style="margin:16px 0 10px;" />
 
   <div class="tabs">
     <button class="tab filter-tab active" data-filter="all">Semua</button>
@@ -28,19 +27,19 @@
     <button class="tab filter-tab" data-filter="losers">Turun</button>
   </div>
 
-  <div id="errorContainer"></div>
+  <div id="errorBox"></div>
 
-  <table style="width:100%; border-collapse: collapse; margin-top: 12px; font-size: 12px;">
+  <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:12px;">
     <thead>
-      <tr style="color: var(--faint); text-align:left; font-size: 10px; text-transform: uppercase;">
-        <th style="padding: 6px 4px; width: 24px;">#</th>
-        <th style="padding: 6px 4px;">Koin</th>
-        <th style="padding: 6px 4px; text-align:right;">Harga</th>
-        <th style="padding: 6px 4px; text-align:right;">24H</th>
+      <tr style="color:var(--faint);text-align:left;font-size:10px;text-transform:uppercase;">
+        <th style="padding:6px 4px;width:24px;">#</th>
+        <th style="padding:6px 4px;">Koin</th>
+        <th style="padding:6px 4px;text-align:right;">Harga</th>
+        <th style="padding:6px 4px;text-align:right;">24H</th>
       </tr>
     </thead>
     <tbody id="marketsBody">
-      <tr><td colspan="4" class="loading">Memuat data pasar...</td></tr>
+      <tr><td colspan="4" class="loading">Memuat...</td></tr>
     </tbody>
   </table>
 </div>
@@ -48,44 +47,76 @@
 <div id="bottom-nav"></div>
 
 <style>
-  .market-row td { padding: 12px 4px; border-top: 1px solid var(--border); }
-  .market-row { cursor: pointer; }
-  .market-row:active { background: var(--card-hover); }
-  .rank-cell { color: var(--faint); }
-  .price-cell { text-align: right; }
-  .change-cell { text-align: right; }
+  .market-row td { padding:12px 4px;border-top:1px solid var(--border); }
+  .market-row { cursor:pointer; }
+  .market-row:active { background:var(--card-hover); }
 </style>
 
-<script type="module">
-import { initTheme, toggleTheme, renderError } from "./js/app.js";
-import { renderNav } from "./js/components/navigation.js";
-import { initMarkets } from "./js/features/market.js";
-import { ALL_COINS } from "./js/api.js";
-
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
 initTheme();
 renderNav();
 
-document.getElementById("themeBtn").addEventListener("click", () => {
-  const t = toggleTheme();
-  document.getElementById("themeBtn").textContent = t === "dark" ? "🌙" : "☀️";
-});
-document.getElementById("themeBtn").textContent =
-  document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
+const themeBtn = document.getElementById("themeBtn");
+themeBtn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
+themeBtn.addEventListener("click", () => { themeBtn.textContent = toggleTheme() === "dark" ? "🌙" : "☀️"; });
 
-initMarkets({
-  onLoading: () => {
-    document.getElementById("marketsSubtitle").textContent = "Memuat...";
-    document.getElementById("errorContainer").innerHTML = "";
-  },
-  onLoaded: () => {
-    document.getElementById("marketsSubtitle").textContent = `${ALL_COINS.length} koin · Binance · refresh 30 detik`;
-  },
-  onError: (err, retryFn) => {
-    document.getElementById("marketsSubtitle").textContent = "Gagal memuat";
-    renderError(document.getElementById("errorContainer"), "Unable to load market data. " + err.message, retryFn);
-    document.getElementById("marketsBody").innerHTML = "";
-  },
+let cachedData = null, currentFilter = "all", currentQuery = "";
+
+function fmtVol(n) {
+  if (n >= 1e9) return (n/1e9).toFixed(1) + "B";
+  if (n >= 1e6) return (n/1e6).toFixed(1) + "M";
+  return (n/1e3).toFixed(0) + "K";
+}
+
+function renderTable() {
+  if (!cachedData) return;
+  let list = ALL_COINS.filter(c => cachedData[c.symbol] &&
+    c.symbol.toLowerCase().includes(currentQuery.toLowerCase()));
+  if (currentFilter === "gainers") list = [...list].sort((a,b) => cachedData[b.symbol].usd_24h_change - cachedData[a.symbol].usd_24h_change);
+  else if (currentFilter === "losers") list = [...list].sort((a,b) => cachedData[a.symbol].usd_24h_change - cachedData[b.symbol].usd_24h_change);
+  else if (currentFilter === "trending") list = [...list].sort((a,b) => cachedData[b.symbol].volume - cachedData[a.symbol].volume);
+
+  const tbody = document.getElementById("marketsBody");
+  if (!list.length) { tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Nggak ada hasil</td></tr>`; return; }
+
+  tbody.innerHTML = list.map((c, i) => {
+    const d = cachedData[c.symbol], up = d.usd_24h_change >= 0;
+    return `<tr class="market-row" onclick="location.href='coin.html?symbol=${c.symbol}'">
+      <td style="color:var(--faint);padding:12px 4px;">${i+1}</td>
+      <td style="padding:12px 4px;"><div class="coin-symbol">${c.symbol}</div><div style="font-size:10px;color:var(--faint);">Vol ${fmtVol(d.volume)}</div></td>
+      <td style="padding:12px 4px;text-align:right;">$${formatNum(d.usd,"USD")}</td>
+      <td style="padding:12px 4px;text-align:right;color:${up ? "var(--up)" : "var(--down)"};">${up?"▲":"▼"} ${Math.abs(d.usd_24h_change).toFixed(2)}%</td>
+    </tr>`;
+  }).join("");
+}
+
+document.getElementById("marketSearch").addEventListener("input", e => { currentQuery = e.target.value; renderTable(); });
+document.querySelectorAll(".filter-tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-tab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentFilter = btn.dataset.filter;
+    renderTable();
+  });
 });
+
+async function load() {
+  try {
+    cachedData = await fetchAllTickers();
+    document.getElementById("sub").textContent = `${ALL_COINS.length} koin · Binance · refresh 30 detik`;
+    document.getElementById("errorBox").innerHTML = "";
+    renderTable();
+  } catch(e) {
+    document.getElementById("sub").textContent = "Gagal memuat";
+    renderError(document.getElementById("errorBox"), "Unable to load market data. " + e.message, load);
+    document.getElementById("marketsBody").innerHTML = "";
+  }
+}
+
+load();
+setInterval(load, 30000);
 </script>
 </body>
 </html>
