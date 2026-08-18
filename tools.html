@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pantau — Crypto Tools</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+<div class="container">
+  <div class="topbar">
+    <div>
+      <h1 class="title">Pantau<span class="dot">.</span></h1>
+      <p class="subtitle">Crypto Tools</p>
+    </div>
+    <div class="icon-group">
+      <button class="icon-btn" id="themeBtn">🌙</button>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <div class="big-icon">🧮</div>
+    <p>Halaman <strong>Crypto Tools</strong> segera hadir — lagi dibangun di phase berikutnya.</p>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item" data-page="index.html"><span class="nav-icon">🏠</span>Home</a>
+  <a href="markets.html" class="nav-item" data-page="markets.html"><span class="nav-icon">🪙</span>Markets</a>
+  <a href="trending.html" class="nav-item" data-page="trending.html"><span class="nav-icon">🔥</span>Trending</a>
+  <a href="tools.html" class="nav-item" data-page="tools.html"><span class="nav-icon">🧮</span>Tools</a>
+  <a href="education.html" class="nav-item" data-page="education.html"><span class="nav-icon">📚</span>Edukasi</a>
+</nav>
+
+<script type="module">
+import { initTheme, toggleTheme, markActiveNav } from "./js/app.js";
+initTheme();
+markActiveNav();
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const t = toggleTheme();
+  document.getElementById("themeBtn").textContent = t === "dark" ? "🌙" : "☀️";
+});
+document.getElementById("themeBtn").textContent =
+  document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
+</script>
+</body>
+  </html>
+  
