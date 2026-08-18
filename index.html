@@ -36,20 +36,15 @@
   <div id="losersList"></div>
 </div>
 
-<nav class="bottom-nav">
-  <a href="index.html" class="nav-item" data-page="index.html"><span class="nav-icon">🏠</span>Home</a>
-  <a href="markets.html" class="nav-item" data-page="markets.html"><span class="nav-icon">🪙</span>Markets</a>
-  <a href="trending.html" class="nav-item" data-page="trending.html"><span class="nav-icon">🔥</span>Trending</a>
-  <a href="tools.html" class="nav-item" data-page="tools.html"><span class="nav-icon">🧮</span>Tools</a>
-  <a href="education.html" class="nav-item" data-page="education.html"><span class="nav-icon">📚</span>Edukasi</a>
-</nav>
+<div id="bottom-nav"></div>
 
 <script type="module">
 import { fetchAllTickers, ALL_COINS } from "./js/api.js";
-import { initTheme, toggleTheme, markActiveNav } from "./js/app.js";
+import { initTheme, toggleTheme, renderError } from "./js/app.js";
+import { renderNav } from "./js/components/navigation.js";
 
 initTheme();
-markActiveNav();
+renderNav();
 
 document.getElementById("themeBtn").addEventListener("click", () => {
   const t = toggleTheme();
@@ -116,7 +111,7 @@ async function load() {
 
   } catch (e) {
     document.getElementById("loadingBox").style.display = "none";
-    document.getElementById("errorBox").innerHTML = `<div class="error-box">Gagal ambil data: ${e.message}</div>`;
+    renderError(document.getElementById("errorBox"), "Unable to load market data. " + e.message, load);
   }
 }
 
