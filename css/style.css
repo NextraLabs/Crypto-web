@@ -1,372 +1,667 @@
+/* =========================================================
+   NEXTRA — PREMIUM UI SYSTEM V2
+   Apple × Stripe × Bloomberg inspired
+========================================================= */
+
 :root {
-  --bg-dark: #05070a;
-  --bg-light: #f5f7f8;
 
-  --text: #f1f5f4;
-  --dim: #8b9695;
-  --faint: #5f6968;
+  --bg-dark: #050708;
+  --bg-light: #f4f7f6;
 
-  --card: rgba(255,255,255,0.035);
-  --card-hover: rgba(255,255,255,0.065);
+  --surface: #0b0f10;
+  --surface-2: #101516;
+  --surface-3: #151b1c;
 
-  --border: rgba(255,255,255,0.085);
-  --border-strong: rgba(255,255,255,0.14);
+  --text: #f5f8f7;
+  --dim: #899593;
+  --faint: #596361;
 
-  --input-bg: rgba(255,255,255,0.045);
+  --card: rgba(255,255,255,.035);
+  --card-hover: rgba(255,255,255,.055);
 
-  --accent: #42f5a7;
-  --accent-blue: #20cfff;
+  --border: rgba(255,255,255,.075);
+  --border-strong: rgba(255,255,255,.13);
 
-  --up: #42f5a7;
-  --down: #ff5d63;
+  --input-bg: rgba(255,255,255,.045);
 
-  --warning: #f5c451;
+  --accent: #39f2a0;
+  --accent-blue: #2bd3ff;
 
-  --radius: 14px;
-  --radius-lg: 20px;
+  --up: #39f2a0;
+  --down: #ff5963;
+
+  --warning: #f4c95d;
+
+  --shadow:
+    0 12px 40px rgba(0,0,0,.28);
+
+  --shadow-soft:
+    0 5px 20px rgba(0,0,0,.18);
+
+  --radius-sm: 10px;
+  --radius: 15px;
+  --radius-lg: 21px;
+
+  --ease:
+    cubic-bezier(.2,.8,.2,1);
 }
+
+
+/* =========================================================
+   LIGHT MODE
+========================================================= */
 
 [data-theme="light"] {
+
   --text: #101615;
-  --dim: #65706e;
-  --faint: #89918f;
+  --dim: #66726f;
+  --faint: #8b9693;
 
-  --card: rgba(255,255,255,0.72);
-  --card-hover: rgba(255,255,255,0.95);
+  --surface: #ffffff;
+  --surface-2: #f7f9f8;
+  --surface-3: #eef2f1;
 
-  --border: rgba(10,20,18,0.09);
-  --border-strong: rgba(10,20,18,0.16);
+  --card: rgba(255,255,255,.78);
+  --card-hover: rgba(255,255,255,.96);
 
-  --input-bg: rgba(255,255,255,0.75);
+  --border: rgba(10,20,18,.08);
+  --border-strong: rgba(10,20,18,.14);
+
+  --input-bg: rgba(255,255,255,.85);
+
+  --shadow:
+    0 12px 35px rgba(20,35,30,.08);
+
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
   box-sizing: border-box;
 }
 
+
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
+
 body {
+
   margin: 0;
+
   min-height: 100vh;
 
   font-family:
     Inter,
     -apple-system,
     BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
     "Segoe UI",
     sans-serif;
 
-  background:
-    radial-gradient(
-      circle at 50% -15%,
-      rgba(66,245,167,.08),
-      transparent 32%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(32,207,255,.045),
-      transparent 28%
-    ),
-    var(--bg-dark);
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  letter-spacing: -.01em;
 
   color: var(--text);
 
+  background:
+
+    radial-gradient(
+      700px 420px at 50% -160px,
+      rgba(57,242,160,.105),
+      transparent 70%
+    ),
+
+    radial-gradient(
+      500px 350px at 100% 15%,
+      rgba(43,211,255,.045),
+      transparent 70%
+    ),
+
+    var(--bg-dark);
+
   transition:
-    background .3s ease,
-    color .3s ease;
+    background .35s ease,
+    color .35s ease;
+
+  overflow-x: hidden;
 }
 
+
 [data-theme="light"] body {
+
   background:
+
     radial-gradient(
-      circle at 50% -15%,
-      rgba(66,245,167,.12),
-      transparent 32%
+      700px 420px at 50% -160px,
+      rgba(57,242,160,.10),
+      transparent 70%
     ),
+
     var(--bg-light);
 }
 
+
 ::selection {
+
   background: var(--accent);
-  color: #04110b;
+
+  color: #04120b;
 }
 
+
 a {
+
   color: inherit;
+
   text-decoration: none;
 }
 
+
 button,
-input {
+input,
+select {
+
   font: inherit;
 }
 
+
 button {
+
   -webkit-tap-highlight-color: transparent;
+
+  border: 0;
 }
 
-/* =========================================
-   MAIN CONTAINER
-========================================= */
+
+img {
+
+  max-width: 100%;
+
+  display: block;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .container {
-  width: 100%;
-  max-width: 1180px;
+
+  width: min(
+    100%,
+    1180px
+  );
 
   margin: 0 auto;
 
   padding:
-    18px
-    18px
-    100px;
+    20px
+    17px
+    105px;
 }
 
-/* =========================================
+
+/* =========================================================
    TYPOGRAPHY
-========================================= */
+========================================================= */
 
 .title {
+
   margin: 0;
 
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-size: clamp(
+    25px,
+    6vw,
+    34px
+  );
 
-  font-size: 28px;
-  font-weight: 800;
+  line-height: 1;
 
-  letter-spacing: -1px;
+  font-weight: 850;
+
+  letter-spacing: -.055em;
 }
+
 
 .title .dot {
+
   color: var(--accent);
+
+  text-shadow:
+    0 0 18px
+    rgba(57,242,160,.45);
 }
 
+
 .subtitle {
-  margin: 5px 0 0;
+
+  margin:
+    7px 0 0;
 
   color: var(--dim);
 
   font-size: 11px;
+
+  letter-spacing: .01em;
 }
+
 
 .dim {
   color: var(--dim);
 }
 
+
 .faint {
   color: var(--faint);
 }
+
 
 .up {
   color: var(--up) !important;
 }
 
+
 .down {
   color: var(--down) !important;
 }
 
-/* =========================================
+
+/* =========================================================
    TOP BAR
-========================================= */
+========================================================= */
 
 .topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
 
-  margin-bottom: 20px;
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 24px;
+
+  padding:
+    3px 0;
 }
 
-/* =========================================
-   BUTTONS
-========================================= */
+
+.topbar::after {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: -13px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--border),
+      transparent
+    );
+
+  opacity: .6;
+}
+
+
+/* =========================================================
+   ICON BUTTON
+========================================================= */
 
 .icon-btn {
-  min-width: 38px;
+
+  width: 38px;
+
   height: 38px;
 
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
 
-  padding: 0 11px;
+  align-items: center;
+
+  justify-content: center;
 
   border:
     1px solid var(--border);
 
-  border-radius: 11px;
+  border-radius:
+    12px;
 
-  background: var(--input-bg);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.06),
+      rgba(255,255,255,.025)
+    );
+
   color: var(--text);
 
   cursor: pointer;
 
+  box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.12);
+
   transition:
-    background .18s ease,
-    border-color .18s ease,
-    transform .18s ease;
+    transform .2s var(--ease),
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
 }
+
 
 .icon-btn:hover {
-  background: var(--card-hover);
-  border-color: var(--border-strong);
+
+  border-color:
+    rgba(57,242,160,.28);
+
+  background:
+    rgba(57,242,160,.06);
+
+  box-shadow:
+    0 8px 22px
+    rgba(0,0,0,.2);
 }
+
 
 .icon-btn:active {
-  transform: scale(.96);
+
+  transform:
+    scale(.93);
 }
 
-/* =========================================
+
+/* =========================================================
    SEARCH
-========================================= */
+========================================================= */
 
 .search-input {
+
   width: 100%;
 
-  padding: 12px 14px;
+  height: 46px;
+
+  padding:
+    0 15px;
 
   border:
     1px solid var(--border);
 
-  border-radius: 12px;
-
-  background: var(--input-bg);
-
-  color: var(--text);
+  border-radius:
+    13px;
 
   outline: none;
 
-  transition:
-    border-color .2s ease,
-    background .2s ease;
-}
-
-.search-input:focus {
-  border-color: rgba(66,245,167,.45);
-
   background:
-    rgba(255,255,255,.055);
+    rgba(255,255,255,.035);
+
+  color: var(--text);
 
   box-shadow:
-    0 0 0 3px rgba(66,245,167,.06);
+    inset 0 1px 0
+    rgba(255,255,255,.025);
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
 }
 
+
+.search-input:hover {
+
+  border-color:
+    var(--border-strong);
+}
+
+
+.search-input:focus {
+
+  border-color:
+    rgba(57,242,160,.45);
+
+  background:
+    rgba(255,255,255,.05);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(57,242,160,.055),
+    0 8px 25px
+    rgba(0,0,0,.15);
+}
+
+
 .search-input::placeholder {
+
   color: var(--faint);
 }
 
-/* =========================================
+
+/* =========================================================
    TABS
-========================================= */
+========================================================= */
 
 .tabs {
+
   display: flex;
 
   gap: 6px;
 
-  margin: 10px 0;
-}
+  padding: 4px;
 
-.tab {
-  flex: 1;
+  margin:
+    13px 0;
 
-  padding: 9px 8px;
+  overflow-x: auto;
 
   border:
     1px solid var(--border);
 
-  border-radius: 9px;
+  border-radius:
+    13px;
 
-  background: var(--input-bg);
+  background:
+    rgba(255,255,255,.018);
+}
+
+
+.tab {
+
+  flex: 1;
+
+  min-height: 35px;
+
+  padding:
+    7px 12px;
+
+  border-radius:
+    9px;
+
+  background:
+    transparent;
 
   color: var(--dim);
 
   font-size: 10px;
 
-  cursor: pointer;
+  font-weight: 700;
 
-  transition: .18s ease;
-}
-
-.tab:hover {
-  background: var(--card-hover);
-}
-
-.tab.active {
-  border-color:
-    rgba(66,245,167,.35);
-
-  background:
-    rgba(66,245,167,.09);
-
-  color:
-    var(--accent);
-}
-
-/* =========================================
-   COIN CARD
-========================================= */
-
-.coin-card {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 14px 15px;
-
-  margin-bottom: 8px;
-
-  border:
-    1px solid var(--border);
-
-  border-radius: var(--radius);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.035),
-      rgba(255,255,255,.015)
-    );
-
-  backdrop-filter: blur(10px);
+  white-space: nowrap;
 
   cursor: pointer;
 
   transition:
-    transform .18s ease,
-    background .18s ease,
-    border-color .18s ease;
+    .2s var(--ease);
 }
 
-.coin-card:hover {
-  transform: translateY(-1px);
+
+.tab:hover {
+
+  color: var(--text);
 
   background:
-    var(--card-hover);
+    rgba(255,255,255,.04);
+}
+
+
+.tab.active {
+
+  color: #07140d;
+
+  background:
+    var(--accent);
+
+  box-shadow:
+    0 4px 15px
+    rgba(57,242,160,.16);
+}
+
+
+/* =========================================================
+   COIN CARD
+========================================================= */
+
+.coin-card {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding:
+    15px;
+
+  margin-bottom:
+    9px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    var(--radius);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.018)
+    );
+
+  box-shadow:
+    var(--shadow-soft);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform .22s var(--ease),
+    border-color .22s ease,
+    background .22s ease,
+    box-shadow .22s ease;
+}
+
+
+.coin-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255,255,255,.035),
+      transparent 80%
+    );
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity .25s ease;
+}
+
+
+.coin-card:hover {
+
+  transform:
+    translateY(-2px);
 
   border-color:
-    rgba(66,245,167,.16);
+    rgba(57,242,160,.18);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.06),
+      rgba(255,255,255,.025)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.25);
 }
+
+
+.coin-card:hover::before {
+
+  opacity: 1;
+}
+
 
 .coin-card:active {
-  transform: scale(.99);
+
+  transform:
+    scale(.985);
 }
+
 
 .coin-symbol {
+
   font-size: 13px;
-  font-weight: 800;
+
+  font-weight: 850;
+
+  letter-spacing: -.025em;
 }
 
+
 .coin-pair {
+
   margin-top: 3px;
 
   color: var(--faint);
@@ -374,158 +669,565 @@ button {
   font-size: 9px;
 }
 
+
 .coin-price {
+
   font-size: 13px;
+
+  font-weight: 750;
+}
+
+
+.coin-change {
+
+  margin-top: 3px;
+
+  font-size: 10px;
+
   font-weight: 700;
 }
 
-.coin-change {
-  margin-top: 3px;
+
+/* =========================================================
+   MINI STAT
+========================================================= */
+
+.mini-stat {
+
+  min-width: 0;
+
+  padding:
+    10px 11px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    11px;
+
+  background:
+    rgba(255,255,255,.022);
+}
+
+
+.mini-stat span {
+
+  display: block;
+
+  color: var(--faint);
+
+  font-size: 7px;
+
+  font-weight: 650;
+
+  text-transform: uppercase;
+
+  letter-spacing: .04em;
+}
+
+
+.mini-stat strong {
+
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   HIGHLIGHT
+========================================================= */
+
+.highlight-box {
+
+  position: relative;
+
+  padding:
+    15px 16px;
+
+  margin:
+    16px 0;
+
+  border:
+    1px solid
+    rgba(57,242,160,.16);
+
+  border-radius:
+    var(--radius);
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(57,242,160,.075),
+      rgba(43,211,255,.025)
+    );
+
+  box-shadow:
+    0 10px 35px
+    rgba(0,0,0,.16);
+
+  overflow: hidden;
+}
+
+
+.highlight-box::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 150px;
+
+  height: 150px;
+
+  right: -80px;
+
+  top: -90px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(57,242,160,.07);
+
+  filter: blur(25px);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primary-btn {
+
+  min-height: 40px;
+
+  padding:
+    0 16px;
+
+  border-radius:
+    11px;
+
+  background:
+    var(--accent);
+
+  color:
+    #04120b;
+
+  font-size: 10px;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 22px
+    rgba(57,242,160,.14);
+
+  transition:
+    transform .18s var(--ease),
+    box-shadow .18s ease,
+    filter .18s ease;
+}
+
+
+.primary-btn:hover {
+
+  filter:
+    brightness(1.06);
+
+  box-shadow:
+    0 10px 28px
+    rgba(57,242,160,.22);
+}
+
+
+.primary-btn:active {
+
+  transform:
+    scale(.96);
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading,
+.empty-state {
+
+  padding:
+    45px 20px;
+
+  text-align: center;
+
+  color: var(--dim);
 
   font-size: 10px;
 }
 
-/* =========================================
-   HIGHLIGHT
-========================================= */
 
-.highlight-box {
-  padding: 13px 15px;
-
-  margin: 15px 0;
-
-  border:
-    1px solid rgba(66,245,167,.16);
-
-  border-radius: 13px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(66,245,167,.06),
-      rgba(32,207,255,.025)
-    );
-
-  color: var(--text);
-
-  font-size: 11px;
-}
-
-/* =========================================
-   LOADING
-========================================= */
-
-.loading,
-.empty-state {
-  padding: 25px 0;
-
-  text-align: center;
-
-  color: var(--dim);
-
-  font-size: 11px;
-}
-
-/* =========================================
+/* =========================================================
    ERROR
-========================================= */
+========================================================= */
 
 .error-box {
-  padding: 13px 15px;
 
-  margin: 15px 0;
+  padding:
+    15px;
+
+  margin:
+    15px 0;
 
   border:
-    1px solid rgba(255,93,99,.22);
+    1px solid
+    rgba(255,89,99,.20);
 
-  border-radius: 12px;
+  border-radius:
+    var(--radius);
 
   background:
-    rgba(255,93,99,.055);
+    rgba(255,89,99,.045);
 
-  color: var(--down);
+  color:
+    var(--down);
 
-  font-size: 11px;
+  font-size: 10px;
 }
 
-/* =========================================
+
+/* =========================================================
+   RISK
+========================================================= */
+
+.risk-low {
+
+  color:
+    var(--up) !important;
+}
+
+
+.risk-medium {
+
+  color:
+    var(--warning) !important;
+}
+
+
+.risk-high {
+
+  color:
+    var(--down) !important;
+}
+
+
+/* =========================================================
    TABLE
-========================================= */
+========================================================= */
 
 table {
+
+  width: 100%;
+
+  border-collapse:
+    separate;
+
+  border-spacing:
+    0 6px;
+
   color: var(--text);
 }
 
+
 th {
-  font-weight: 600;
+
+  padding:
+    7px 10px;
+
+  color:
+    var(--faint);
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    .04em;
 }
 
-tr {
-  transition: background .15s ease;
+
+td {
+
+  padding:
+    12px 10px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  border-top:
+    1px solid var(--border);
+
+  border-bottom:
+    1px solid var(--border);
 }
 
-/* =========================================
+
+td:first-child {
+
+  border-left:
+    1px solid var(--border);
+
+  border-radius:
+    10px 0 0 10px;
+}
+
+
+td:last-child {
+
+  border-right:
+    1px solid var(--border);
+
+  border-radius:
+    0 10px 10px 0;
+}
+
+
+/* =========================================================
    COMING SOON
-========================================= */
+========================================================= */
 
 .coming-soon {
-  padding: 70px 20px;
 
-  text-align: center;
+  min-height:
+    55vh;
 
-  color: var(--dim);
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    50px 20px;
+
+  text-align:
+    center;
+
+  color:
+    var(--dim);
 }
+
 
 .coming-soon .big-icon {
-  margin-bottom: 12px;
 
-  font-size: 40px;
+  width:
+    72px;
+
+  height:
+    72px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  margin-bottom:
+    18px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius:
+    22px;
+
+  background:
+    rgba(255,255,255,.035);
+
+  font-size:
+    32px;
+
+  box-shadow:
+    var(--shadow-soft);
 }
 
-/* =========================================
+
+/* =========================================================
    SCROLLBAR
-========================================= */
+========================================================= */
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+
+  width:
+    5px;
+
+  height:
+    5px;
 }
+
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+
+  background:
+    transparent;
 }
+
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,.12);
-  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,.11);
+
+  border-radius:
+    999px;
 }
+
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,.2);
+
+  background:
+    rgba(255,255,255,.20);
 }
 
-/* =========================================
-   DESKTOP
-========================================= */
 
-@media (min-width: 700px) {
+/* =========================================================
+   FOCUS
+========================================================= */
+
+:focus-visible {
+
+  outline:
+    2px solid
+    rgba(57,242,160,.55);
+
+  outline-offset:
+    3px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
 
   .container {
+
     padding:
-      30px
-      28px
-      60px;
+      18px
+      14px
+      105px;
+  }
+
+
+  .topbar {
+
+    margin-bottom:
+      21px;
+  }
+
+
+  .coin-card {
+
+    padding:
+      14px;
+
+    border-radius:
+      14px;
   }
 
 }
 
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 700px) {
+
+  .container {
+
+    padding:
+      30px
+      28px
+      75px;
+  }
+
+
+  .coin-card {
+
+    border-radius:
+      16px;
+  }
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
 @media (min-width: 1100px) {
 
   .container {
+
     padding:
       38px
       34px
-      70px;
+      80px;
+  }
+
+
+  .topbar {
+
+    margin-bottom:
+      28px;
+  }
+
+
+  .coin-card {
+
+    padding:
+      17px 18px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+
+    scroll-behavior:
+      auto !important;
+
+    transition:
+      none !important;
+
+    animation:
+      none !important;
   }
 
 }
