@@ -1,4 +1,4 @@
-// api.js — NEXTRA Market + Futures API
+// api.js — NEXTRA Market + Futures API V2
 
 const COINGECKO_API =
   "https://api.coingecko.com/api/v3";
@@ -29,6 +29,7 @@ async function apiFetch(
     }
   );
 
+
   if (!response.ok) {
 
     throw new Error(
@@ -36,6 +37,7 @@ async function apiFetch(
     );
 
   }
+
 
   return response.json();
 
@@ -455,7 +457,119 @@ async function fetchOpenInterest(
 
 
 /* =========================================
-   FUTURES — COMPLETE DATA
+   FUTURES — OI HISTORY
+========================================= */
+
+async function fetchOpenInterestHistory(
+  symbol
+) {
+
+  try {
+
+    const data =
+      await binanceFetch(
+        `/futures/data/openInterestHist?symbol=${symbol}&period=1h&limit=25`
+      );
+
+
+    if (
+      !Array.isArray(data) ||
+      data.length < 2
+    ) {
+
+      return {
+
+        current: null,
+
+        previous: null,
+
+        change: null
+
+      };
+
+    }
+
+
+    const current =
+      Number(
+        data[data.length - 1]
+          .sumOpenInterestValue
+      );
+
+
+    const previous =
+      Number(
+        data[0]
+          .sumOpenInterestValue
+      );
+
+
+    if (
+      !Number.isFinite(current) ||
+      !Number.isFinite(previous) ||
+      previous === 0
+    ) {
+
+      return {
+
+        current: null,
+
+        previous: null,
+
+        change: null
+
+      };
+
+    }
+
+
+    const change =
+      (
+        (
+          current -
+          previous
+        ) /
+        previous
+      ) * 100;
+
+
+    return {
+
+      current,
+
+      previous,
+
+      change
+
+    };
+
+  }
+
+  catch (error) {
+
+    console.warn(
+      `OI history unavailable for ${symbol}`,
+      error
+    );
+
+
+    return {
+
+      current: null,
+
+      previous: null,
+
+      change: null
+
+    };
+
+  }
+
+}
+
+
+/* =========================================
+   FUTURES — COMPLETE DATA V2
 ========================================= */
 
 async function fetchFuturesData(
@@ -465,7 +579,8 @@ async function fetchFuturesData(
   const [
     ticker,
     funding,
-    oi
+    oi,
+    oiHistory
   ] = await Promise.all([
 
     fetchFuturesTicker(
@@ -478,6 +593,10 @@ async function fetchFuturesData(
 
     fetchOpenInterest(
       symbol
+    ),
+
+    fetchOpenInterestHistory(
+      symbol
     )
 
   ]);
@@ -489,7 +608,16 @@ async function fetchFuturesData(
 
     ...funding,
 
-    ...oi
+    ...oi,
+
+    oiCurrent:
+      oiHistory.current,
+
+    oiPrevious:
+      oiHistory.previous,
+
+    oiChange24h:
+      oiHistory.change
 
   };
 
@@ -508,16 +636,237 @@ async function fetchFuturesMarkets(
   ]
 ) {
 
-  return Promise.all(
+  const results = [];
 
-    symbols.map(
-      symbol =>
-        fetchFuturesData(
+
+  /*
+    Sequential loading supaya
+    tidak terlalu agresif terhadap
+    Binance API.
+  */
+
+  for (
+    const symbol of symbols
+  ) {
+
+    try {
+
+      const data =
+        await fetchFuturesData(
           symbol
-        )
-    )
+        );
 
-  );
+
+      results.push(
+        data
+      );
+
+    }
+
+    catch (error) {
+
+      console.warn(
+        `Failed ${symbol}:`,
+        error
+      );
+
+    }
+
+  }
+
+
+  return results;
+
+}
+
+
+/* =========================================
+   FUTURES — OI INTERPRETATION
+========================================= */
+
+function interpretOIChange(
+  priceChange,
+  oiChange
+) {
+
+  if (
+    priceChange === null ||
+    oiChange === null
+  ) {
+
+    return "INSUFFICIENT DATA";
+
+  }
+
+
+  const priceUp =
+    priceChange > 0;
+
+  const oiUp =
+    oiChange > 0;
+
+
+  if (
+    priceUp &&
+    oiUp
+  ) {
+
+    return "LONG CONFIRMATION";
+
+  }
+
+
+  if (
+    !priceUp &&
+    oiUp
+  ) {
+
+    return "SHORT CONFIRMATION";
+
+  }
+
+
+  if (
+    priceUp &&
+    !oiUp
+  ) {
+
+    return "SHORT COVERING";
+
+  }
+
+
+  if (
+    !priceUp &&
+    !oiUp
+  ) {
+
+    return "LONG REDUCTION";
+
+  }
+
+
+  return "NEUTRAL";
+
+}
+
+
+/* =========================================
+   FUTURES — MARKET SIGNAL
+========================================= */
+
+function getFuturesSignal(
+  data
+) {
+
+  const priceChange =
+    Number.isFinite(
+      Number(
+        data?.change24h
+      )
+    )
+      ? Number(
+          data.change24h
+        )
+      : null;
+
+
+  const oiChange =
+    Number.isFinite(
+      Number(
+        data?.oiChange24h
+      )
+    )
+      ? Number(
+          data.oiChange24h
+        )
+      : null;
+
+
+  const funding =
+    Number.isFinite(
+      Number(
+        data?.fundingRate
+      )
+    )
+      ? Number(
+          data.fundingRate
+        )
+      : null;
+
+
+  const oiSignal =
+    interpretOIChange(
+      priceChange,
+      oiChange
+    );
+
+
+  let fundingSignal =
+    "BALANCED";
+
+
+  if (
+    funding !== null
+  ) {
+
+    const percent =
+      funding * 100;
+
+
+    if (
+      percent >= 0.10
+    ) {
+
+      fundingSignal =
+        "CROWDED LONG";
+
+    }
+
+    else if (
+      percent >= 0.05
+    ) {
+
+      fundingSignal =
+        "LONG HEAVY";
+
+    }
+
+    else if (
+      percent <= -0.10
+    ) {
+
+      fundingSignal =
+        "CROWDED SHORT";
+
+    }
+
+    else if (
+      percent <= -0.05
+    ) {
+
+      fundingSignal =
+        "SHORT HEAVY";
+
+    }
+
+  }
+
+
+  return {
+
+    oiSignal,
+
+    fundingSignal,
+
+    priceChange,
+
+    oiChange,
+
+    fundingRate:
+      funding
+
+  };
 
 }
 
@@ -550,8 +899,14 @@ window.NEXTRA_API = {
 
   fetchOpenInterest,
 
+  fetchOpenInterestHistory,
+
   fetchFuturesData,
 
-  fetchFuturesMarkets
+  fetchFuturesMarkets,
+
+  interpretOIChange,
+
+  getFuturesSignal
 
 };
