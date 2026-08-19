@@ -9,14 +9,13 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>NEXTRA — Radar</title>
+  <title>NEXTRA — Radar V2</title>
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
 </head>
-
 
 <body>
 
@@ -33,11 +32,10 @@
       </h1>
 
       <p class="subtitle">
-        Market opportunity scanner
+        Intelligent market opportunity scanner
       </p>
 
     </div>
-
 
     <div
       style="
@@ -49,6 +47,7 @@
       <button
         class="icon-btn"
         id="radar-refresh"
+        title="Refresh"
       >
         ↻
       </button>
@@ -56,6 +55,7 @@
       <button
         class="icon-btn"
         id="theme-toggle"
+        title="Theme"
       >
         ◐
       </button>
@@ -65,12 +65,12 @@
   </header>
 
 
-  <!-- STATUS -->
+  <!-- LIVE STATUS -->
 
   <section
     class="highlight-box"
     style="
-      margin-bottom:14px;
+      margin-bottom:12px;
     "
   >
 
@@ -79,6 +79,7 @@
         display:flex;
         align-items:center;
         justify-content:space-between;
+        gap:10px;
       "
     >
 
@@ -86,21 +87,22 @@
 
         <div
           style="
-            font-size:12px;
+            font-size:13px;
             font-weight:900;
           "
         >
-          🔥 NEXTRA Radar
+          🔥 Radar V2
         </div>
 
         <div
           class="dim"
           style="
             font-size:8px;
+            line-height:1.5;
             margin-top:4px;
           "
         >
-          Scanning market opportunities
+          Price · Volume · Funding · OI
         </div>
 
       </div>
@@ -110,7 +112,7 @@
         id="radar-status"
         style="
           font-size:8px;
-          color:var(--accent);
+          font-weight:800;
         "
       >
         SCANNING
@@ -121,29 +123,29 @@
   </section>
 
 
-  <!-- MARKET OVERVIEW -->
+  <!-- MARKET SUMMARY -->
 
   <section
     style="
       display:grid;
       grid-template-columns:
-        repeat(3,1fr);
-      gap:7px;
+        repeat(4,1fr);
+      gap:6px;
     "
   >
 
     <div
       class="coin-card"
       style="
-        display:block;
-        text-align:center;
         margin:0;
+        text-align:center;
+        display:block;
       "
     >
 
       <div
         class="dim"
-        style="font-size:7px;"
+        style="font-size:6px;"
       >
         BULLISH
       </div>
@@ -153,7 +155,7 @@
         class="up"
         style="
           display:block;
-          font-size:16px;
+          font-size:15px;
           margin-top:4px;
         "
       >
@@ -166,15 +168,15 @@
     <div
       class="coin-card"
       style="
-        display:block;
-        text-align:center;
         margin:0;
+        text-align:center;
+        display:block;
       "
     >
 
       <div
         class="dim"
-        style="font-size:7px;"
+        style="font-size:6px;"
       >
         BEARISH
       </div>
@@ -184,7 +186,7 @@
         class="down"
         style="
           display:block;
-          font-size:16px;
+          font-size:15px;
           margin-top:4px;
         "
       >
@@ -197,15 +199,45 @@
     <div
       class="coin-card"
       style="
-        display:block;
-        text-align:center;
         margin:0;
+        text-align:center;
+        display:block;
       "
     >
 
       <div
         class="dim"
-        style="font-size:7px;"
+        style="font-size:6px;"
+      >
+        STRONG
+      </div>
+
+      <strong
+        id="radar-strong"
+        style="
+          display:block;
+          font-size:15px;
+          margin-top:4px;
+        "
+      >
+        --
+      </strong>
+
+    </div>
+
+
+    <div
+      class="coin-card"
+      style="
+        margin:0;
+        text-align:center;
+        display:block;
+      "
+    >
+
+      <div
+        class="dim"
+        style="font-size:6px;"
       >
         SCANNED
       </div>
@@ -214,7 +246,7 @@
         id="radar-scanned"
         style="
           display:block;
-          font-size:16px;
+          font-size:15px;
           margin-top:4px;
         "
       >
@@ -233,7 +265,7 @@
       display:flex;
       gap:6px;
       overflow-x:auto;
-      margin:16px 0 10px;
+      margin:14px 0 10px;
       padding-bottom:2px;
     "
   >
@@ -247,29 +279,72 @@
 
     <button
       class="radar-filter"
-      data-filter="gainers"
+      data-filter="strong-long"
     >
-      🚀 Gainers
+      🟢 Strong Long
     </button>
 
     <button
       class="radar-filter"
-      data-filter="losers"
+      data-filter="long"
     >
-      🔴 Losers
+      Long
     </button>
 
     <button
       class="radar-filter"
-      data-filter="momentum"
+      data-filter="neutral"
     >
-      ⚡ Momentum
+      Neutral
+    </button>
+
+    <button
+      class="radar-filter"
+      data-filter="short"
+    >
+      Short
+    </button>
+
+    <button
+      class="radar-filter"
+      data-filter="strong-short"
+    >
+      🔴 Strong Short
     </button>
 
   </div>
 
 
-  <!-- RADAR RESULTS -->
+  <!-- SORT -->
+
+  <div
+    style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:8px;
+    "
+  >
+
+    <span
+      class="dim"
+      style="font-size:8px;"
+    >
+      Ranked by Opportunity Score
+    </span>
+
+    <span
+      id="radar-updated"
+      class="dim"
+      style="font-size:7px;"
+    >
+      --
+    </span>
+
+  </div>
+
+
+  <!-- RESULTS -->
 
   <section id="radar-results">
 
@@ -280,29 +355,82 @@
   </section>
 
 
-  <!-- INFO -->
+  <!-- EXPLANATION -->
+
+  <section
+    class="coin-card"
+    style="
+      display:block;
+      margin-top:16px;
+    "
+  >
+
+    <div
+      style="
+        font-size:10px;
+        font-weight:800;
+      "
+    >
+      🧠 How Radar V2 works
+    </div>
+
+    <div
+      class="dim"
+      style="
+        font-size:8px;
+        line-height:1.7;
+        margin-top:7px;
+      "
+    >
+
+      <div>
+        📈 Price momentum membaca perubahan
+        harga 24 jam.
+      </div>
+
+      <div>
+        💧 Volume membantu melihat aktivitas
+        market.
+      </div>
+
+      <div>
+        💰 Funding menunjukkan kondisi
+        long/short positioning.
+      </div>
+
+      <div>
+        🐋 Open Interest digunakan jika data
+        tersedia dari API.
+      </div>
+
+      <div>
+        ⚠️ Data yang tidak tersedia tidak akan
+        dibuat-buat.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- DISCLAIMER -->
 
   <div
     style="
-      margin-top:18px;
-      padding:12px;
+      margin-top:14px;
+      padding:11px;
       border:1px solid var(--border);
       border-radius:12px;
       color:var(--faint);
-      font-size:8px;
+      font-size:7px;
       line-height:1.5;
       text-align:center;
     "
   >
 
-    Opportunity Score adalah indikator
-    otomatis berdasarkan momentum harga
-    dan kondisi market.
-
-    <br><br>
-
-    Bukan sinyal trading dan bukan
-    jaminan profit.
+    Radar V2 adalah alat analisis market,
+    bukan jaminan arah harga atau profit.
+    Selalu gunakan risk management.
 
   </div>
 
@@ -315,8 +443,6 @@
 <div id="bottom-nav"></div>
 
 
-<!-- CORE -->
-
 <script src="js/app.js"></script>
 
 <script src="js/api.js"></script>
@@ -324,9 +450,9 @@
 
 <script>
 
-/* =========================================
-   RADAR STATE
-========================================= */
+/* =====================================================
+   NEXTRA RADAR V2
+===================================================== */
 
 const RADAR = {
 
@@ -346,21 +472,537 @@ const RADAR = {
 
   data: [],
 
-  filter: "all"
+  filter: "all",
+
+  loading: false
 
 };
 
 
-/* =========================================
-   LOAD
-========================================= */
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function radarNumber(value) {
+
+  const n = Number(value);
+
+  return Number.isFinite(n) ? n : null;
+
+}
+
+
+function radarChange(item) {
+
+  return radarNumber(
+    item?.change24h ??
+    item?.priceChangePercent ??
+    item?.change
+  );
+
+}
+
+
+function radarFunding(item) {
+
+  const value =
+    radarNumber(
+      item?.fundingRate ??
+      item?.funding
+    );
+
+  if (value === null) {
+    return null;
+  }
+
+  /*
+    API biasanya mengembalikan
+    funding sebagai decimal.
+
+    Contoh:
+    0.0001 = 0.01%
+  */
+
+  return value;
+
+}
+
+
+function radarOI(item) {
+
+  return radarNumber(
+    item?.openInterest ??
+    item?.oi ??
+    item?.open_interest
+  );
+
+}
+
+
+function radarVolume(item) {
+
+  return radarNumber(
+    item?.volume ??
+    item?.quoteVolume ??
+    item?.volume24h
+  );
+
+}
+
+
+function radarPrice(item) {
+
+  return radarNumber(
+    item?.price ??
+    item?.lastPrice ??
+    item?.last
+  );
+
+}
+
+
+/* =====================================================
+   FUNDING SIGNAL
+===================================================== */
+
+function fundingSignal(item) {
+
+  const funding =
+    radarFunding(item);
+
+  if (funding === null) {
+
+    return {
+      value: null,
+      score: 0,
+      label: "N/A"
+    };
+
+  }
+
+
+  const percent =
+    funding * 100;
+
+
+  if (percent >= 0.10) {
+
+    return {
+      value: percent,
+      score: -8,
+      label: "Crowded Long"
+    };
+
+  }
+
+
+  if (percent >= 0.05) {
+
+    return {
+      value: percent,
+      score: -4,
+      label: "Long Heavy"
+    };
+
+  }
+
+
+  if (percent <= -0.10) {
+
+    return {
+      value: percent,
+      score: 8,
+      label: "Crowded Short"
+    };
+
+  }
+
+
+  if (percent <= -0.05) {
+
+    return {
+      value: percent,
+      score: 4,
+      label: "Short Heavy"
+    };
+
+  }
+
+
+  return {
+    value: percent,
+    score: 0,
+    label: "Balanced"
+  };
+
+}
+
+
+/* =====================================================
+   MOMENTUM
+===================================================== */
+
+function momentumScore(item) {
+
+  const change =
+    radarChange(item);
+
+  if (change === null) {
+
+    return {
+      score: 0,
+      label: "No Data"
+    };
+
+  }
+
+
+  /*
+    Positive movement = bullish
+    Negative movement = bearish
+  */
+
+  if (change >= 8) {
+
+    return {
+      score: 28,
+      label: "Very Strong"
+    };
+
+  }
+
+
+  if (change >= 5) {
+
+    return {
+      score: 23,
+      label: "Strong"
+    };
+
+  }
+
+
+  if (change >= 3) {
+
+    return {
+      score: 18,
+      label: "Bullish"
+    };
+
+  }
+
+
+  if (change >= 1) {
+
+    return {
+      score: 9,
+      label: "Positive"
+    };
+
+  }
+
+
+  if (change <= -8) {
+
+    return {
+      score: -28,
+      label: "Very Weak"
+    };
+
+  }
+
+
+  if (change <= -5) {
+
+    return {
+      score: -23,
+      label: "Strong Bearish"
+    };
+
+  }
+
+
+  if (change <= -3) {
+
+    return {
+      score: -18,
+      label: "Bearish"
+    };
+
+  }
+
+
+  if (change <= -1) {
+
+    return {
+      score: -9,
+      label: "Negative"
+    };
+
+  }
+
+
+  return {
+    score: 0,
+    label: "Flat"
+  };
+
+}
+
+
+/* =====================================================
+   VOLUME SCORE
+===================================================== */
+
+function volumeScore(item) {
+
+  /*
+    Kalau API menyediakan volume,
+    kita pakai sebagai faktor tambahan.
+
+    Tidak membandingkan volume absolut
+    antar aset karena tiap coin punya
+    skala volume berbeda.
+  */
+
+  const volume =
+    radarVolume(item);
+
+  if (volume === null) {
+
+    return {
+      score: 0,
+      label: "N/A"
+    };
+
+  }
+
+
+  if (volume >= 1e9) {
+
+    return {
+      score: 5,
+      label: "Very High"
+    };
+
+  }
+
+
+  if (volume >= 100e6) {
+
+    return {
+      score: 3,
+      label: "High"
+    };
+
+  }
+
+
+  if (volume >= 10e6) {
+
+    return {
+      score: 1,
+      label: "Active"
+    };
+
+  }
+
+
+  return {
+    score: 0,
+    label: "Normal"
+  };
+
+}
+
+
+/* =====================================================
+   OPPORTUNITY SCORE
+===================================================== */
+
+function calculateRadar(item) {
+
+  const momentum =
+    momentumScore(item);
+
+
+  const funding =
+    fundingSignal(item);
+
+
+  const volume =
+    volumeScore(item);
+
+
+  let raw =
+    50 +
+    momentum.score +
+    funding.score +
+    volume.score;
+
+
+  /*
+    Clamp 0-100
+  */
+
+  raw =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        raw
+      )
+    );
+
+
+  /*
+    Direction
+  */
+
+  let bias = "neutral";
+
+
+  if (raw >= 80) {
+
+    bias =
+      momentum.score >= 0
+        ? "strong-long"
+        : "strong-short";
+
+  }
+
+  else if (raw >= 65) {
+
+    bias =
+      momentum.score >= 0
+        ? "long"
+        : "short";
+
+  }
+
+  else if (raw <= 35) {
+
+    bias =
+      momentum.score < 0
+        ? "strong-short"
+        : "strong-long";
+
+  }
+
+  else if (raw <= 45) {
+
+    bias =
+      momentum.score < 0
+        ? "short"
+        : "long";
+
+  }
+
+
+  /*
+    Important:
+    Score menunjukkan strength,
+    bukan probabilitas profit.
+  */
+
+
+  return {
+
+    score: Math.round(raw),
+
+    bias,
+
+    momentum,
+
+    funding,
+
+    volume
+
+  };
+
+}
+
+
+/* =====================================================
+   RISK
+===================================================== */
+
+function calculateRisk(
+  item,
+  analysis
+) {
+
+  const change =
+    Math.abs(
+      radarChange(item) || 0
+    );
+
+
+  const funding =
+    Math.abs(
+      radarFunding(item) || 0
+    ) * 100;
+
+
+  /*
+    Volatility tinggi
+    + funding ekstrem
+    = risk lebih tinggi
+  */
+
+  if (
+    change >= 8 ||
+    funding >= 0.10
+  ) {
+
+    return {
+      label: "HIGH",
+      className: "risk-high"
+    };
+
+  }
+
+
+  if (
+    change >= 4 ||
+    funding >= 0.05
+  ) {
+
+    return {
+      label: "MODERATE",
+      className: "risk-medium"
+    };
+
+  }
+
+
+  return {
+    label: "LOW",
+    className: "risk-low"
+  };
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
 
 async function loadRadar() {
 
-  const container =
+  if (RADAR.loading) {
+    return;
+  }
+
+
+  RADAR.loading = true;
+
+
+  const results =
     document.getElementById(
       "radar-results"
     );
+
 
   const status =
     document.getElementById(
@@ -376,11 +1018,11 @@ async function loadRadar() {
   }
 
 
-  if (container) {
+  if (results) {
 
-    container.innerHTML = `
+    results.innerHTML = `
       <div class="loading">
-        Scanning market opportunities...
+        Scanning market intelligence...
       </div>
     `;
 
@@ -389,7 +1031,26 @@ async function loadRadar() {
 
   try {
 
-    const data =
+    /*
+      Menggunakan API futures yang
+      sudah dipakai halaman Futures.
+    */
+
+    if (
+      typeof NEXTRA_API ===
+        "undefined" ||
+      typeof NEXTRA_API.fetchFuturesMarkets !==
+        "function"
+    ) {
+
+      throw new Error(
+        "fetchFuturesMarkets tidak tersedia"
+      );
+
+    }
+
+
+    const response =
       await NEXTRA_API
         .fetchFuturesMarkets(
           RADAR.symbols
@@ -397,8 +1058,8 @@ async function loadRadar() {
 
 
     RADAR.data =
-      Array.isArray(data)
-        ? data
+      Array.isArray(response)
+        ? response
         : [];
 
 
@@ -412,12 +1073,34 @@ async function loadRadar() {
 
     }
 
+
+    const updated =
+      document.getElementById(
+        "radar-updated"
+      );
+
+
+    if (updated) {
+
+      updated.textContent =
+        "Updated " +
+        new Date()
+          .toLocaleTimeString(
+            "id-ID",
+            {
+              hour: "2-digit",
+              minute: "2-digit"
+            }
+          );
+
+    }
+
   }
 
   catch (error) {
 
     console.error(
-      "Radar error:",
+      "NEXTRA Radar V2:",
       error
     );
 
@@ -430,13 +1113,20 @@ async function loadRadar() {
     }
 
 
-    if (container) {
+    if (results) {
 
-      container.innerHTML = `
+      results.innerHTML = `
         <div class="error-box">
           ⚠️ Gagal memuat Radar.
           <br><br>
-          Coba refresh kembali.
+          Periksa koneksi atau API.
+          <br><br>
+          <button
+            class="primary-btn"
+            onclick="loadRadar()"
+          >
+            Coba Lagi
+          </button>
         </div>
       `;
 
@@ -444,194 +1134,20 @@ async function loadRadar() {
 
   }
 
-}
+  finally {
 
-
-/* =========================================
-   SCORE
-========================================= */
-
-function getOpportunityScore(
-  item
-) {
-
-  let score = 50;
-
-
-  const change =
-    Number(
-      item.change24h
-    ) || 0;
-
-
-  const funding =
-    Number(
-      item.fundingRate
-    ) || 0;
-
-
-  /*
-    MOMENTUM
-  */
-
-  if (change >= 8) {
-
-    score += 30;
+    RADAR.loading = false;
 
   }
-
-  else if (change >= 5) {
-
-    score += 24;
-
-  }
-
-  else if (change >= 3) {
-
-    score += 18;
-
-  }
-
-  else if (change >= 1) {
-
-    score += 10;
-
-  }
-
-  else if (change <= -8) {
-
-    score += 30;
-
-  }
-
-  else if (change <= -5) {
-
-    score += 24;
-
-  }
-
-  else if (change <= -3) {
-
-    score += 18;
-
-  }
-
-  else if (change <= -1) {
-
-    score += 10;
-
-  }
-
-
-  /*
-    FUNDING EXTREME
-  */
-
-  if (
-    Math.abs(funding)
-    >= 0.001
-  ) {
-
-    score += 8;
-
-  }
-
-  else if (
-    Math.abs(funding)
-    >= 0.0005
-  ) {
-
-    score += 4;
-
-  }
-
-
-  return Math.max(
-    0,
-    Math.min(
-      100,
-      score
-    )
-  );
 
 }
 
 
-/* =========================================
-   CLASSIFICATION
-========================================= */
-
-function getRadarType(
-  item
-) {
-
-  const change =
-    Number(
-      item.change24h
-    ) || 0;
-
-
-  if (change >= 3) {
-
-    return "gainers";
-
-  }
-
-
-  if (change <= -3) {
-
-    return "losers";
-
-  }
-
-
-  if (
-    Math.abs(change)
-    >= 1.5
-  ) {
-
-    return "momentum";
-
-  }
-
-
-  return "normal";
-
-}
-
-
-/* =========================================
-   SORT
-========================================= */
-
-function sortRadar(
-  data
-) {
-
-  return [...data].sort(
-    (
-      a,
-      b
-    ) => {
-
-      return (
-        getOpportunityScore(b) -
-        getOpportunityScore(a)
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================
+/* =====================================================
    FILTER
-========================================= */
+===================================================== */
 
-function filterRadar(
-  data
-) {
+function filterRadar(data) {
 
   if (
     RADAR.filter ===
@@ -644,30 +1160,65 @@ function filterRadar(
 
 
   return data.filter(
-    item =>
-      getRadarType(item) ===
-      RADAR.filter
+    item => {
+
+      const analysis =
+        calculateRadar(item);
+
+      return (
+        analysis.bias ===
+        RADAR.filter
+      );
+
+    }
   );
 
 }
 
 
-/* =========================================
+/* =====================================================
+   SORT
+===================================================== */
+
+function sortRadar(data) {
+
+  return [...data].sort(
+    (a, b) => {
+
+      const A =
+        calculateRadar(a);
+
+      const B =
+        calculateRadar(b);
+
+
+      return (
+        B.score -
+        A.score
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
    RENDER
-========================================= */
+===================================================== */
 
 function renderRadar() {
 
-  updateRadarStats();
+  updateSummary();
 
 
-  const container =
+  const results =
     document.getElementById(
       "radar-results"
     );
 
 
-  if (!container) {
+  if (!results) {
     return;
   }
 
@@ -686,7 +1237,7 @@ function renderRadar() {
 
   if (!data.length) {
 
-    container.innerHTML = `
+    results.innerHTML = `
       <div class="empty-state">
         Tidak ada aset yang cocok
         dengan filter ini.
@@ -698,81 +1249,130 @@ function renderRadar() {
   }
 
 
-  container.innerHTML =
+  results.innerHTML =
     data
       .map(
-        renderRadarCard
+        renderCard
       )
       .join("");
 
 }
 
 
-/* =========================================
-   STATS
-========================================= */
+/* =====================================================
+   SUMMARY
+===================================================== */
 
-function updateRadarStats() {
+function updateSummary() {
 
   const data =
     RADAR.data;
 
 
-  const bullish =
-    data.filter(
-      item =>
-        Number(
-          item.change24h
-        ) > 0
-    ).length;
+  let bullish = 0;
+
+  let bearish = 0;
+
+  let strong = 0;
 
 
-  const bearish =
-    data.filter(
-      item =>
-        Number(
-          item.change24h
-        ) < 0
-    ).length;
+  data.forEach(
+    item => {
+
+      const analysis =
+        calculateRadar(item);
 
 
-  const bullishElement =
+      if (
+        analysis.bias ===
+          "long" ||
+        analysis.bias ===
+          "strong-long"
+      ) {
+
+        bullish++;
+
+      }
+
+
+      if (
+        analysis.bias ===
+          "short" ||
+        analysis.bias ===
+          "strong-short"
+      ) {
+
+        bearish++;
+
+      }
+
+
+      if (
+        analysis.bias ===
+          "strong-long" ||
+        analysis.bias ===
+          "strong-short"
+      ) {
+
+        strong++;
+
+      }
+
+    }
+  );
+
+
+  const bullishEl =
     document.getElementById(
       "radar-bullish"
     );
 
 
-  const bearishElement =
+  const bearishEl =
     document.getElementById(
       "radar-bearish"
     );
 
 
-  const scannedElement =
+  const strongEl =
+    document.getElementById(
+      "radar-strong"
+    );
+
+
+  const scannedEl =
     document.getElementById(
       "radar-scanned"
     );
 
 
-  if (bullishElement) {
+  if (bullishEl) {
 
-    bullishElement.textContent =
+    bullishEl.textContent =
       bullish;
 
   }
 
 
-  if (bearishElement) {
+  if (bearishEl) {
 
-    bearishElement.textContent =
+    bearishEl.textContent =
       bearish;
 
   }
 
 
-  if (scannedElement) {
+  if (strongEl) {
 
-    scannedElement.textContent =
+    strongEl.textContent =
+      strong;
+
+  }
+
+
+  if (scannedEl) {
+
+    scannedEl.textContent =
       data.length;
 
   }
@@ -780,91 +1380,160 @@ function updateRadarStats() {
 }
 
 
-/* =========================================
-   CARD
-========================================= */
+/* =====================================================
+   BIAS UI
+===================================================== */
 
-function renderRadarCard(
-  item
+function biasLabel(
+  bias
 ) {
 
-  const score =
-    getOpportunityScore(
-      item
+  const map = {
+
+    "strong-long":
+      `
+      <span class="up">
+        🟢 STRONG LONG
+      </span>
+      `,
+
+    "long":
+      `
+      <span class="up">
+        LONG
+      </span>
+      `,
+
+    "neutral":
+      `
+      <span class="dim">
+        NEUTRAL
+      </span>
+      `,
+
+    "short":
+      `
+      <span class="down">
+        SHORT
+      </span>
+      `,
+
+    "strong-short":
+      `
+      <span class="down">
+        🔴 STRONG SHORT
+      </span>
+      `
+
+  };
+
+
+  return (
+    map[bias] ||
+    map.neutral
+  );
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+function renderCard(item) {
+
+  const analysis =
+    calculateRadar(item);
+
+
+  const risk =
+    calculateRisk(
+      item,
+      analysis
     );
 
 
   const change =
-    Number(
-      item.change24h
-    ) || 0;
+    radarChange(item);
 
 
-  const type =
-    getRadarType(
-      item
+  const price =
+    radarPrice(item);
+
+
+  const volume =
+    radarVolume(item);
+
+
+  const funding =
+    analysis.funding;
+
+
+  const oi =
+    radarOI(item);
+
+
+  const symbol =
+    String(
+      item?.symbol ||
+      "UNKNOWN"
+    ).replace(
+      "USDT",
+      "/USDT"
     );
 
 
-  const positive =
-    change >= 0;
+  const changeText =
+    change === null
+      ? "N/A"
+      : (
+          change >= 0
+            ? "+"
+            : ""
+        ) +
+        change.toFixed(2) +
+        "%";
 
 
   const changeClass =
-    positive
-      ? "up"
-      : "down";
+    change === null
+      ? "dim"
+      : change >= 0
+        ? "up"
+        : "down";
 
 
-  const sign =
-    positive
-      ? "+"
-      : "";
+  const fundingText =
+    funding.value === null
+      ? "N/A"
+      : (
+          funding.value >= 0
+            ? "+"
+            : ""
+        ) +
+        funding.value.toFixed(4) +
+        "%";
 
 
-  let bias;
-
-
-  if (change >= 3) {
-
-    bias = `
-      <span class="up">
-        LONG BIAS
-      </span>
-    `;
-
-  }
-
-  else if (change <= -3) {
-
-    bias = `
-      <span class="down">
-        SHORT BIAS
-      </span>
-    `;
-
-  }
-
-  else {
-
-    bias = `
-      <span class="dim">
-        NEUTRAL
-      </span>
-    `;
-
-  }
+  const oiText =
+    oi === null
+      ? "N/A"
+      : formatCompact(
+          oi
+        );
 
 
   return `
 
     <article
-      class="coin-card"
+      class="coin-card radar-card"
       style="
         display:block;
         margin-bottom:10px;
       "
     >
+
+      <!-- TOP -->
 
       <div
         style="
@@ -872,6 +1541,7 @@ function renderRadarCard(
           justify-content:
             space-between;
           align-items:center;
+          gap:10px;
         "
       >
 
@@ -879,24 +1549,21 @@ function renderRadarCard(
 
           <strong
             style="
-              font-size:14px;
+              font-size:15px;
             "
           >
-            ${item.symbol
-              .replace(
-                "USDT",
-                "/USDT"
-              )}
+            ${symbol}
           </strong>
 
           <div
-            class="dim"
             style="
-              font-size:7px;
-              margin-top:3px;
+              margin-top:5px;
+              font-size:8px;
             "
           >
-            ${type.toUpperCase()}
+            ${biasLabel(
+              analysis.bias
+            )}
           </div>
 
         </div>
@@ -910,22 +1577,47 @@ function renderRadarCard(
 
           <strong
             style="
-              font-size:17px;
+              font-size:22px;
             "
           >
-            ${score}
+            ${analysis.score}
           </strong>
 
           <div
             class="dim"
             style="
-              font-size:7px;
+              font-size:6px;
+              margin-top:1px;
             "
           >
-            SCORE
+            OPPORTUNITY
           </div>
 
         </div>
+
+      </div>
+
+
+      <!-- SCORE BAR -->
+
+      <div
+        style="
+          height:5px;
+          background:var(--border);
+          border-radius:20px;
+          overflow:hidden;
+          margin-top:10px;
+        "
+      >
+
+        <div
+          style="
+            width:${analysis.score}%;
+            height:100%;
+            background:var(--accent);
+            border-radius:20px;
+          "
+        ></div>
 
       </div>
 
@@ -938,46 +1630,55 @@ function renderRadarCard(
           justify-content:
             space-between;
           align-items:center;
-          margin-top:10px;
+          margin-top:11px;
         "
       >
 
-        <span
-          class="dim"
-          style="font-size:8px;"
-        >
-          24H Change
-        </span>
+        <div>
 
-        <strong
-          class="${changeClass}"
-          style="font-size:11px;"
-        >
-          ${sign}${change.toFixed(2)}%
-        </strong>
+          <div
+            class="dim"
+            style="font-size:7px;"
+          >
+            PRICE
+          </div>
 
-      </div>
+          <strong
+            style="
+              font-size:11px;
+            "
+          >
+            ${formatPrice(
+              price
+            )}
+          </strong>
 
+        </div>
 
-      <!-- BAR -->
-
-      <div
-        style="
-          height:5px;
-          background:var(--border);
-          border-radius:10px;
-          overflow:hidden;
-          margin-top:7px;
-        "
-      >
 
         <div
           style="
-            width:${score}%;
-            height:100%;
-            background:var(--accent);
+            text-align:right;
           "
-        ></div>
+        >
+
+          <div
+            class="dim"
+            style="font-size:7px;"
+          >
+            24H
+          </div>
+
+          <strong
+            class="${changeClass}"
+            style="
+              font-size:11px;
+            "
+          >
+            ${changeText}
+          </strong>
+
+        </div>
 
       </div>
 
@@ -989,7 +1690,7 @@ function renderRadarCard(
           display:grid;
           grid-template-columns:
             repeat(2,1fr);
-          gap:7px;
+          gap:6px;
           margin-top:10px;
         "
       >
@@ -997,11 +1698,11 @@ function renderRadarCard(
         <div class="mini-stat">
 
           <span>
-            Bias
+            Momentum
           </span>
 
           <strong>
-            ${bias}
+            ${analysis.momentum.label}
           </strong>
 
         </div>
@@ -1014,11 +1715,7 @@ function renderRadarCard(
           </span>
 
           <strong>
-            ${(
-              Number(
-                item.fundingRate
-              ) * 100
-            ).toFixed(4)}%
+            ${fundingText}
           </strong>
 
         </div>
@@ -1031,8 +1728,8 @@ function renderRadarCard(
           </span>
 
           <strong>
-            ${formatRadarNumber(
-              item.volume
+            ${formatCompact(
+              volume
             )}
           </strong>
 
@@ -1042,16 +1739,46 @@ function renderRadarCard(
         <div class="mini-stat">
 
           <span>
-            Price
+            Open Interest
           </span>
 
           <strong>
-            ${formatRadarPrice(
-              item.price
-            )}
+            ${oiText}
           </strong>
 
         </div>
+
+      </div>
+
+
+      <!-- RISK -->
+
+      <div
+        style="
+          display:flex;
+          justify-content:
+            space-between;
+          align-items:center;
+          margin-top:10px;
+          padding-top:9px;
+          border-top:
+            1px solid var(--border);
+        "
+      >
+
+        <span
+          class="dim"
+          style="font-size:8px;"
+        >
+          Risk Level
+        </span>
+
+        <strong
+          class="${risk.className}"
+          style="font-size:8px;"
+        >
+          ${risk.label}
+        </strong>
 
       </div>
 
@@ -1060,19 +1787,24 @@ function renderRadarCard(
 
       <div
         style="
-          margin-top:9px;
-          padding-top:9px;
-          border-top:
-            1px solid var(--border);
+          margin-top:8px;
+          padding:9px;
+          border-radius:9px;
+          background:
+            rgba(127,127,127,0.06);
           font-size:8px;
+          line-height:1.55;
         "
       >
 
         <span class="dim">
-          Radar:
+          🧠 Radar reasoning:
         </span>
 
-        ${getRadarReason(item)}
+        ${getReason(
+          item,
+          analysis
+        )}
 
       </div>
 
@@ -1083,180 +1815,228 @@ function renderRadarCard(
 }
 
 
-/* =========================================
-   REASON
-========================================= */
+/* =====================================================
+   REASONING
+===================================================== */
 
-function getRadarReason(
-  item
+function getReason(
+  item,
+  analysis
 ) {
 
   const change =
-    Number(
-      item.change24h
-    ) || 0;
+    radarChange(item);
 
 
   const funding =
-    Number(
-      item.fundingRate
-    ) || 0;
+    analysis.funding;
 
 
-  if (change >= 5) {
+  if (
+    analysis.bias ===
+    "strong-long"
+  ) {
 
     if (
-      funding > 0.001
+      funding.value !== null &&
+      funding.value >= 0.10
     ) {
 
       return `
-        Momentum kuat, tetapi
-        funding mulai tinggi.
-        Waspadai crowded long.
+        Momentum bullish kuat,
+        tetapi funding sangat tinggi.
+        Potensi crowded long perlu
+        diperhatikan.
       `;
 
     }
 
 
     return `
-      Momentum bullish kuat.
-      Perhatikan volume dan
-      konfirmasi breakout.
-    `;
-
-  }
-
-
-  if (change <= -5) {
-
-    if (
-      funding < -0.001
-    ) {
-
-      return `
-        Tekanan bearish kuat,
-        tetapi short mulai crowded.
-      `;
-
-    }
-
-
-    return `
-      Tekanan bearish kuat.
-      Tunggu konfirmasi sebelum
-      mengambil posisi.
+      Momentum bullish dominan.
+      Score tinggi karena pergerakan
+      harga mendukung arah positif.
     `;
 
   }
 
 
   if (
-    Math.abs(change)
-    >= 1.5
+    analysis.bias ===
+    "long"
   ) {
 
     return `
-      Momentum mulai meningkat.
-      Pantau arah pergerakan berikutnya.
+      Kondisi market cenderung bullish,
+      tetapi kekuatannya belum cukup
+      untuk kategori strong.
+    `;
+
+  }
+
+
+  if (
+    analysis.bias ===
+    "strong-short"
+  ) {
+
+    if (
+      funding.value !== null &&
+      funding.value <= -0.10
+    ) {
+
+      return `
+        Tekanan bearish kuat,
+        tetapi funding sangat negatif.
+        Potensi crowded short perlu
+        diperhatikan.
+      `;
+
+    }
+
+
+    return `
+      Momentum bearish dominan.
+      Harga menunjukkan tekanan turun
+      yang relatif kuat.
+    `;
+
+  }
+
+
+  if (
+    analysis.bias ===
+    "short"
+  ) {
+
+    return `
+      Kondisi market cenderung bearish,
+      tetapi belum masuk kategori
+      strong short.
+    `;
+
+  }
+
+
+  if (
+    change !== null &&
+    Math.abs(change) < 1
+  ) {
+
+    return `
+      Pergerakan relatif datar.
+      Belum terlihat momentum yang
+      cukup kuat.
     `;
 
   }
 
 
   return `
-    Belum ada momentum signifikan.
-    Market masih relatif tenang.
+    Sinyal masih bercampur.
+    Tunggu konfirmasi momentum berikutnya.
   `;
 
 }
 
 
-/* =========================================
-   FORMAT NUMBER
-========================================= */
+/* =====================================================
+   FORMAT COMPACT
+===================================================== */
 
-function formatRadarNumber(
+function formatCompact(
   value
 ) {
 
-  const number =
+  const n =
     Number(value);
 
 
   if (
-    !Number.isFinite(number)
+    !Number.isFinite(n)
   ) {
 
-    return "-";
+    return "N/A";
 
   }
 
 
   if (
-    number >= 1e9
+    Math.abs(n) >= 1e12
   ) {
 
     return (
-      number / 1e9
+      n / 1e12
+    ).toFixed(2) + "T";
+
+  }
+
+
+  if (
+    Math.abs(n) >= 1e9
+  ) {
+
+    return (
+      n / 1e9
     ).toFixed(2) + "B";
 
   }
 
 
   if (
-    number >= 1e6
+    Math.abs(n) >= 1e6
   ) {
 
     return (
-      number / 1e6
+      n / 1e6
     ).toFixed(2) + "M";
 
   }
 
 
   if (
-    number >= 1e3
+    Math.abs(n) >= 1e3
   ) {
 
     return (
-      number / 1e3
+      n / 1e3
     ).toFixed(2) + "K";
 
   }
 
 
-  return number.toFixed(0);
+  return n.toFixed(0);
 
 }
 
 
-/* =========================================
+/* =====================================================
    FORMAT PRICE
-========================================= */
+===================================================== */
 
-function formatRadarPrice(
+function formatPrice(
   value
 ) {
 
-  const price =
+  const n =
     Number(value);
 
 
   if (
-    !Number.isFinite(price)
+    !Number.isFinite(n)
   ) {
 
-    return "-";
+    return "N/A";
 
   }
 
 
   if (
-    price >= 1000
+    n >= 1000
   ) {
 
     return "$" +
-      price.toLocaleString(
+      n.toLocaleString(
         "en-US",
         {
           maximumFractionDigits:2
@@ -1267,24 +2047,34 @@ function formatRadarPrice(
 
 
   if (
-    price >= 1
+    n >= 1
   ) {
 
     return "$" +
-      price.toFixed(2);
+      n.toFixed(2);
+
+  }
+
+
+  if (
+    n >= 0.01
+  ) {
+
+    return "$" +
+      n.toFixed(4);
 
   }
 
 
   return "$" +
-    price.toPrecision(5);
+    n.toPrecision(5);
 
 }
 
 
-/* =========================================
+/* =====================================================
    FILTER BUTTONS
-========================================= */
+===================================================== */
 
 document
   .querySelectorAll(
@@ -1302,11 +2092,14 @@ document
               ".radar-filter"
             )
             .forEach(
-              item =>
-                item.classList
+              btn => {
+
+                btn.classList
                   .remove(
                     "active"
-                  )
+                  );
+
+              }
             );
 
 
@@ -1327,9 +2120,9 @@ document
   );
 
 
-/* =========================================
+/* =====================================================
    REFRESH
-========================================= */
+===================================================== */
 
 document
   .getElementById(
@@ -1337,17 +2130,13 @@ document
   )
   ?.addEventListener(
     "click",
-    () => {
-
-      loadRadar();
-
-    }
+    loadRadar
   );
 
 
-/* =========================================
+/* =====================================================
    THEME
-========================================= */
+===================================================== */
 
 document
   .getElementById(
@@ -1370,9 +2159,9 @@ document
   );
 
 
-/* =========================================
+/* =====================================================
    INIT
-========================================= */
+===================================================== */
 
 document.addEventListener(
   "DOMContentLoaded",
