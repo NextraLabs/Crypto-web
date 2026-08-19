@@ -1,122 +1,412 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pantau — Markets</title>
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/components.css" />
-<link rel="stylesheet" href="css/responsive.css" />
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NEXTRA — Markets</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
 </head>
+
+
 <body>
-<div class="container">
-  <div class="topbar">
-    <div>
-      <h1 class="title">Markets<span class="dot">.</span></h1>
-      <p class="subtitle" id="sub">Memuat...</p>
+
+  <main class="container">
+
+
+    <!-- ================================
+         TOP BAR
+    ================================= -->
+
+    <header class="topbar">
+
+      <div>
+
+        <h1 class="title">
+          Markets<span class="dot">.</span>
+        </h1>
+
+        <p class="subtitle">
+          Live crypto market intelligence
+        </p>
+
+      </div>
+
+
+      <button
+        class="icon-btn"
+        id="theme-toggle"
+        title="Ganti tema"
+      >
+        ◐
+      </button>
+
+    </header>
+
+
+
+    <!-- ================================
+         SEARCH
+    ================================= -->
+
+    <section>
+
+      <input
+        id="market-search"
+        class="search-input"
+        type="search"
+        placeholder="Cari Bitcoin, Ethereum, Solana..."
+        autocomplete="off"
+      >
+
+    </section>
+
+
+
+    <!-- ================================
+         MARKET FILTER
+    ================================= -->
+
+    <div
+      class="tabs"
+      style="margin-top:14px;"
+    >
+
+      <button
+        class="tab active"
+        data-market-filter="all"
+      >
+        All
+      </button>
+
+      <button
+        class="tab"
+        data-market-filter="trending"
+      >
+        🔥 Trending
+      </button>
+
+      <button
+        class="tab"
+        data-market-filter="gainers"
+      >
+        🟢 Gainers
+      </button>
+
+      <button
+        class="tab"
+        data-market-filter="losers"
+      >
+        🔴 Losers
+      </button>
+
+      <button
+        class="tab"
+        data-market-filter="watchlist"
+        onclick="
+          NEXTRA_MARKETS.state.watchlistOnly =
+          !NEXTRA_MARKETS.state.watchlistOnly;
+          NEXTRA_MARKETS.state.page = 1;
+          NEXTRA_MARKETS.filter();
+        "
+      >
+        ⭐ Watchlist
+      </button>
+
     </div>
-    <button class="icon-btn" id="themeBtn">🌙</button>
-  </div>
 
-  <input class="search-input" id="marketSearch" placeholder="Cari koin (BTC, ETH...)" style="margin:16px 0 10px;" />
 
-  <div class="tabs">
-    <button class="tab filter-tab active" data-filter="all">Semua</button>
-    <button class="tab filter-tab" data-filter="trending">Trending</button>
-    <button class="tab filter-tab" data-filter="gainers">Naik</button>
-    <button class="tab filter-tab" data-filter="losers">Turun</button>
-  </div>
 
-  <div id="errorBox"></div>
+    <!-- ================================
+         MARKET STATS
+    ================================= -->
 
-  <table style="width:100%;border-collapse:collapse;margin-top:12px;font-size:12px;">
-    <thead>
-      <tr style="color:var(--faint);text-align:left;font-size:10px;text-transform:uppercase;">
-        <th style="padding:6px 4px;width:24px;">#</th>
-        <th style="padding:6px 4px;">Koin</th>
-        <th style="padding:6px 4px;text-align:right;">Harga</th>
-        <th style="padding:6px 4px;text-align:right;">24H</th>
-      </tr>
-    </thead>
-    <tbody id="marketsBody">
-      <tr><td colspan="4" class="loading">Memuat...</td></tr>
-    </tbody>
-  </table>
-</div>
+    <section
+      style="
+        display:grid;
+        grid-template-columns:
+          repeat(3,1fr);
+        gap:8px;
+        margin:14px 0;
+      "
+    >
 
-<div id="bottom-nav"></div>
+      <div
+        class="coin-card"
+        style="
+          display:block;
+          cursor:default;
+          margin:0;
+        "
+      >
 
-<style>
-  .market-row td { padding:12px 4px;border-top:1px solid var(--border); }
-  .market-row { cursor:pointer; }
-  .market-row:active { background:var(--card-hover); }
-</style>
+        <div class="dim">
+          Coins
+        </div>
 
-<script src="js/api.js"></script>
-<script src="js/app.js"></script>
-<script>
-initTheme();
-renderNav();
+        <strong
+          id="market-total"
+          style="
+            display:block;
+            margin-top:5px;
+            font-size:18px;
+          "
+        >
+          —
+        </strong>
 
-const themeBtn = document.getElementById("themeBtn");
-themeBtn.textContent = document.documentElement.getAttribute("data-theme") === "dark" ? "🌙" : "☀️";
-themeBtn.addEventListener("click", () => { themeBtn.textContent = toggleTheme() === "dark" ? "🌙" : "☀️"; });
+      </div>
 
-let cachedData = null, currentFilter = "all", currentQuery = "";
 
-function fmtVol(n) {
-  if (n >= 1e9) return (n/1e9).toFixed(1) + "B";
-  if (n >= 1e6) return (n/1e6).toFixed(1) + "M";
-  return (n/1e3).toFixed(0) + "K";
-}
+      <div
+        class="coin-card"
+        style="
+          display:block;
+          cursor:default;
+          margin:0;
+        "
+      >
 
-function renderTable() {
-  if (!cachedData) return;
-  let list = ALL_COINS.filter(c => cachedData[c.symbol] &&
-    c.symbol.toLowerCase().includes(currentQuery.toLowerCase()));
-  if (currentFilter === "gainers") list = [...list].sort((a,b) => cachedData[b.symbol].usd_24h_change - cachedData[a.symbol].usd_24h_change);
-  else if (currentFilter === "losers") list = [...list].sort((a,b) => cachedData[a.symbol].usd_24h_change - cachedData[b.symbol].usd_24h_change);
-  else if (currentFilter === "trending") list = [...list].sort((a,b) => cachedData[b.symbol].volume - cachedData[a.symbol].volume);
+        <div class="dim">
+          Gainers
+        </div>
 
-  const tbody = document.getElementById("marketsBody");
-  if (!list.length) { tbody.innerHTML = `<tr><td colspan="4" class="empty-state">Nggak ada hasil</td></tr>`; return; }
+        <strong
+          id="market-gainers"
+          class="up"
+          style="
+            display:block;
+            margin-top:5px;
+            font-size:18px;
+          "
+        >
+          —
+        </strong>
 
-  tbody.innerHTML = list.map((c, i) => {
-    const d = cachedData[c.symbol], up = d.usd_24h_change >= 0;
-    return `<tr class="market-row" onclick="location.href='coin.html?symbol=${c.symbol}'">
-      <td style="color:var(--faint);padding:12px 4px;">${i+1}</td>
-      <td style="padding:12px 4px;"><div class="coin-symbol">${c.symbol}</div><div style="font-size:10px;color:var(--faint);">Vol ${fmtVol(d.volume)}</div></td>
-      <td style="padding:12px 4px;text-align:right;">$${formatNum(d.usd,"USD")}</td>
-      <td style="padding:12px 4px;text-align:right;color:${up ? "var(--up)" : "var(--down)"};">${up?"▲":"▼"} ${Math.abs(d.usd_24h_change).toFixed(2)}%</td>
-    </tr>`;
-  }).join("");
-}
+      </div>
 
-document.getElementById("marketSearch").addEventListener("input", e => { currentQuery = e.target.value; renderTable(); });
-document.querySelectorAll(".filter-tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".filter-tab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentFilter = btn.dataset.filter;
-    renderTable();
-  });
-});
 
-async function load() {
-  try {
-    cachedData = await fetchAllTickers();
-    document.getElementById("sub").textContent = `${ALL_COINS.length} koin · Binance · refresh 30 detik`;
-    document.getElementById("errorBox").innerHTML = "";
-    renderTable();
-  } catch(e) {
-    document.getElementById("sub").textContent = "Gagal memuat";
-    renderError(document.getElementById("errorBox"), "Unable to load market data. " + e.message, load);
-    document.getElementById("marketsBody").innerHTML = "";
-  }
-}
+      <div
+        class="coin-card"
+        style="
+          display:block;
+          cursor:default;
+          margin:0;
+        "
+      >
 
-load();
-setInterval(load, 30000);
-</script>
+        <div class="dim">
+          Losers
+        </div>
+
+        <strong
+          id="market-losers"
+          class="down"
+          style="
+            display:block;
+            margin-top:5px;
+            font-size:18px;
+          "
+        >
+          —
+        </strong>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================================
+         SORT
+    ================================= -->
+
+    <div
+      style="
+        display:flex;
+        gap:6px;
+        overflow-x:auto;
+        padding-bottom:4px;
+        margin-bottom:12px;
+      "
+    >
+
+      <button
+        class="icon-btn"
+        data-market-sort="market_cap"
+      >
+        Market Cap
+      </button>
+
+      <button
+        class="icon-btn"
+        data-market-sort="price"
+      >
+        Price
+      </button>
+
+      <button
+        class="icon-btn"
+        data-market-sort="change1h"
+      >
+        1H
+      </button>
+
+      <button
+        class="icon-btn"
+        data-market-sort="change24h"
+      >
+        24H
+      </button>
+
+      <button
+        class="icon-btn"
+        data-market-sort="change7d"
+      >
+        7D
+      </button>
+
+      <button
+        class="icon-btn"
+        data-market-sort="volume"
+      >
+        Volume
+      </button>
+
+    </div>
+
+
+
+    <!-- ================================
+         COLUMN HEADER
+    ================================= -->
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:
+          28px 34px 1fr auto 30px;
+        gap:12px;
+        align-items:center;
+        padding:0 15px 8px;
+        color:var(--faint);
+        font-size:9px;
+        text-transform:uppercase;
+        letter-spacing:.5px;
+      "
+    >
+
+      <span>#</span>
+
+      <span></span>
+
+      <span>Asset</span>
+
+      <span>Price</span>
+
+      <span>★</span>
+
+    </div>
+
+
+
+    <!-- ================================
+         MARKET LIST
+    ================================= -->
+
+    <section
+      id="market-list"
+    >
+
+      <div class="loading">
+        Memuat market...
+      </div>
+
+    </section>
+
+
+
+    <!-- ================================
+         PAGINATION
+    ================================= -->
+
+    <div
+      id="market-pagination"
+      style="
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin-top:16px;
+      "
+    ></div>
+
+
+    <!-- ================================
+         SOURCE
+    ================================= -->
+
+    <div
+      style="
+        text-align:center;
+        margin-top:20px;
+        color:var(--faint);
+        font-size:9px;
+      "
+    >
+      Market data powered by CoinGecko
+    </div>
+
+
+  </main>
+
+
+
+  <!-- ================================
+       BOTTOM NAV MOUNT
+  ================================= -->
+
+  <div id="bottom-nav"></div>
+
+
+
+  <!-- ================================
+       SCRIPTS
+  ================================= -->
+
+  <script src="js/app.js"></script>
+
+  <script src="js/api.js"></script>
+
+  <script src="js/features/market.js"></script>
+
+
+  <script>
+
+    document
+      .getElementById("theme-toggle")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          toggleTheme();
+
+        }
+      );
+
+  </script>
+
+
 </body>
+
 </html>
