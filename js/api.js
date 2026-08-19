@@ -1,49 +1,332 @@
-// api.js — satu-satunya pintu ke API luar
-const ALL_COINS = [
-  { symbol: "BTC", pair: "BTCUSDT" }, { symbol: "ETH", pair: "ETHUSDT" },
-  { symbol: "SOL", pair: "SOLUSDT" }, { symbol: "BNB", pair: "BNBUSDT" },
-  { symbol: "XRP", pair: "XRPUSDT" }, { symbol: "DOGE", pair: "DOGEUSDT" },
-  { symbol: "ADA", pair: "ADAUSDT" }, { symbol: "AVAX", pair: "AVAXUSDT" },
-  { symbol: "LINK", pair: "LINKUSDT" }, { symbol: "DOT", pair: "DOTUSDT" },
-  { symbol: "LTC", pair: "LTCUSDT" }, { symbol: "TRX", pair: "TRXUSDT" },
-  { symbol: "MATIC", pair: "MATICUSDT" }, { symbol: "SHIB", pair: "SHIBUSDT" },
-  { symbol: "UNI", pair: "UNIUSDT" }, { symbol: "ATOM", pair: "ATOMUSDT" },
-  { symbol: "ETC", pair: "ETCUSDT" }, { symbol: "NEAR", pair: "NEARUSDT" },
-  { symbol: "APT", pair: "APTUSDT" }, { symbol: "ARB", pair: "ARBUSDT" },
-  { symbol: "OP", pair: "OPUSDT" }, { symbol: "FIL", pair: "FILUSDT" },
-  { symbol: "ICP", pair: "ICPUSDT" }, { symbol: "ALGO", pair: "ALGOUSDT" },
-];
+// api.js — NEXTRA Market Data API
+// CoinGecko public API
 
-async function fetchAllTickers() {
-  const symbols = JSON.stringify(ALL_COINS.map(c => c.pair));
-  const res = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbols=${encodeURIComponent(symbols)}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const arr = await res.json();
-  const mapped = {};
-  arr.forEach(row => {
-    const coin = ALL_COINS.find(c => c.pair === row.symbol);
-    if (coin) mapped[coin.symbol] = {
-      usd: parseFloat(row.lastPrice),
-      usd_24h_change: parseFloat(row.priceChangePercent),
-      volume: parseFloat(row.quoteVolume),
+const COINGECKO_API =
+  "https://api.coingecko.com/api/v3";
+
+const MARKET_CURRENCY = "usd";
+
+
+/* =========================================
+   GENERIC FETCH
+========================================= */
+
+async function apiFetch(
+  endpoint,
+  options = {}
+) {
+
+  const response = await fetch(
+    `${COINGECKO_API}${endpoint}`,
+    {
+      ...options,
+      headers: {
+        Accept: "application/json",
+        ...(options.headers || {})
+      }
+    }
+  );
+
+  if (!response.ok) {
+
+    throw new Error(
+      `API error: ${response.status}`
+    );
+
+  }
+
+  return response.json();
+}
+
+
+/* =========================================
+   MARKET LIST
+========================================= */
+
+async function fetchMarkets({
+
+  page = 1,
+
+  perPage = 50,
+
+  currency = MARKET_CURRENCY,
+
+  order = "market_cap_desc"
+
+} = {}) {
+
+  const params =
+    new URLSearchParams({
+
+      vs_currency: currency,
+
+      order,
+
+      per_page: perPage,
+
+      page,
+
+      sparkline: "true",
+
+      price_change_percentage:
+        "1h,24h,7d"
+
+    });
+
+
+  return apiFetch(
+    `/coins/markets?${params}`
+  );
+}
+
+
+/* =========================================
+   TRENDING
+========================================= */
+
+async function fetchTrending() {
+
+  return apiFetch(
+    "/search/trending"
+  );
+
+}
+
+
+/* =========================================
+   GLOBAL MARKET DATA
+========================================= */
+
+async function fetchGlobalMarket() {
+
+  return apiFetch(
+    "/global"
+  );
+
+}
+
+
+/* =========================================
+   COIN DETAIL
+========================================= */
+
+async function fetchCoin(
+  coinId
+) {
+
+  if (!coinId) {
+    throw new Error(
+      "Coin ID tidak ditemukan"
+    );
+  }
+
+
+  const params =
+    new URLSearchParams({
+
+      localization: "false",
+
+      tickers: "false",
+
+      market_data: "true",
+
+      community_data: "false",
+
+      developer_data: "false",
+
+      sparkline: "true"
+
+    });
+
+
+  return apiFetch(
+    `/coins/${encodeURIComponent(
+      coinId
+    )}?${params}`
+  );
+
+}
+
+
+/* =========================================
+   SEARCH COIN
+========================================= */
+
+async function searchCoins(
+  query
+) {
+
+  if (!query) {
+    return {
+      coins: []
     };
-  });
-  return mapped;
+  }
+
+
+  return apiFetch(
+    `/search?query=${encodeURIComponent(
+      query
+    )}`
+  );
+
 }
 
-async function fetchKlines(pair, interval = "1h", limit = 24) {
-  const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${pair}&interval=${interval}&limit=${limit}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return (await res.json()).map(k => ({ time: k[0], close: parseFloat(k[4]) }));
+
+/* =========================================
+   MARKET HELPERS
+========================================= */
+
+function getMarketChange(
+  coin,
+  timeframe = "24h"
+) {
+
+  if (!coin) return 0;
+
+
+  if (timeframe === "1h") {
+
+    return (
+      coin
+        .price_change_percentage_1h_in_currency
+      ?? 0
+    );
+
+  }
+
+
+  if (timeframe === "7d") {
+
+    return (
+      coin
+        .price_change_percentage_7d_in_currency
+      ?? 0
+    );
+
+  }
+
+
+  return (
+    coin
+      .price_change_percentage_24h_in_currency
+    ?? 0
+  );
+
 }
 
-let idrCache = { rate: 16300, at: 0 };
-async function fetchIdrRate() {
-  if (Date.now() - idrCache.at < 300000) return idrCache.rate;
-  try {
-    const res = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
-    const json = await res.json();
-    if (json?.rates?.IDR) idrCache = { rate: json.rates.IDR, at: Date.now() };
-  } catch {}
-  return idrCache.rate;
+
+/* =========================================
+   FORMAT MARKET COIN
+========================================= */
+
+function normalizeMarketCoin(
+  coin
+) {
+
+  return {
+
+    id: coin.id,
+
+    rank:
+      coin.market_cap_rank ?? "-",
+
+    name:
+      coin.name ?? "-",
+
+    symbol:
+      (coin.symbol || "")
+        .toUpperCase(),
+
+    image:
+      coin.image ?? "",
+
+    price:
+      coin.current_price ?? 0,
+
+    marketCap:
+      coin.market_cap ?? 0,
+
+    volume:
+      coin.total_volume ?? 0,
+
+    change1h:
+      coin
+        .price_change_percentage_1h_in_currency
+      ?? 0,
+
+    change24h:
+      coin
+        .price_change_percentage_24h_in_currency
+      ?? 0,
+
+    change7d:
+      coin
+        .price_change_percentage_7d_in_currency
+      ?? 0,
+
+    high24h:
+      coin.high_24h ?? 0,
+
+    low24h:
+      coin.low_24h ?? 0,
+
+    circulatingSupply:
+      coin.circulating_supply ?? 0,
+
+    totalSupply:
+      coin.total_supply ?? 0,
+
+    maxSupply:
+      coin.max_supply ?? 0,
+
+    sparkline:
+      coin.sparkline_in_7d?.price
+      ?? []
+
+  };
+
 }
+
+
+/* =========================================
+   NORMALIZED MARKETS
+========================================= */
+
+async function fetchNormalizedMarkets(
+  options = {}
+) {
+
+  const data =
+    await fetchMarkets(options);
+
+
+  return data.map(
+    normalizeMarketCoin
+  );
+
+}
+
+
+/* =========================================
+   API EXPORT GLOBAL
+========================================= */
+
+window.NEXTRA_API = {
+
+  fetchMarkets,
+
+  fetchTrending,
+
+  fetchGlobalMarket,
+
+  fetchCoin,
+
+  searchCoins,
+
+  fetchNormalizedMarkets,
+
+  normalizeMarketCoin,
+
+  getMarketChange
+
+};
