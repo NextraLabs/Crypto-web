@@ -9,13 +9,14 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>NEXTRA — Radar V2</title>
+  <title>NEXTRA — Radar</title>
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
 </head>
+
 
 <body>
 
@@ -32,7 +33,7 @@
       </h1>
 
       <p class="subtitle">
-        Intelligent market opportunity scanner
+        Futures market intelligence
       </p>
 
     </div>
@@ -47,7 +48,6 @@
       <button
         class="icon-btn"
         id="radar-refresh"
-        title="Refresh"
       >
         ↻
       </button>
@@ -55,7 +55,6 @@
       <button
         class="icon-btn"
         id="theme-toggle"
-        title="Theme"
       >
         ◐
       </button>
@@ -65,7 +64,7 @@
   </header>
 
 
-  <!-- LIVE STATUS -->
+  <!-- LIVE -->
 
   <section
     class="highlight-box"
@@ -91,18 +90,17 @@
             font-weight:900;
           "
         >
-          🔥 Radar V2
+          🔥 NEXTRA Radar
         </div>
 
         <div
           class="dim"
           style="
             font-size:8px;
-            line-height:1.5;
             margin-top:4px;
           "
         >
-          Price · Volume · Funding · OI
+          Price + Open Interest + Funding
         </div>
 
       </div>
@@ -112,7 +110,7 @@
         id="radar-status"
         style="
           font-size:8px;
-          font-weight:800;
+          font-weight:900;
         "
       >
         SCANNING
@@ -123,7 +121,7 @@
   </section>
 
 
-  <!-- MARKET SUMMARY -->
+  <!-- SUMMARY -->
 
   <section
     style="
@@ -138,8 +136,8 @@
       class="coin-card"
       style="
         margin:0;
-        text-align:center;
         display:block;
+        text-align:center;
       "
     >
 
@@ -147,11 +145,11 @@
         class="dim"
         style="font-size:6px;"
       >
-        BULLISH
+        LONG
       </div>
 
       <strong
-        id="radar-bullish"
+        id="radar-long"
         class="up"
         style="
           display:block;
@@ -169,8 +167,8 @@
       class="coin-card"
       style="
         margin:0;
-        text-align:center;
         display:block;
+        text-align:center;
       "
     >
 
@@ -178,11 +176,11 @@
         class="dim"
         style="font-size:6px;"
       >
-        BEARISH
+        SHORT
       </div>
 
       <strong
-        id="radar-bearish"
+        id="radar-short"
         class="down"
         style="
           display:block;
@@ -200,8 +198,8 @@
       class="coin-card"
       style="
         margin:0;
-        text-align:center;
         display:block;
+        text-align:center;
       "
     >
 
@@ -209,11 +207,11 @@
         class="dim"
         style="font-size:6px;"
       >
-        STRONG
+        CONFIRMED
       </div>
 
       <strong
-        id="radar-strong"
+        id="radar-confirmed"
         style="
           display:block;
           font-size:15px;
@@ -230,8 +228,8 @@
       class="coin-card"
       style="
         margin:0;
-        text-align:center;
         display:block;
+        text-align:center;
       "
     >
 
@@ -279,9 +277,9 @@
 
     <button
       class="radar-filter"
-      data-filter="strong-long"
+      data-filter="long-confirmed"
     >
-      🟢 Strong Long
+      🟢 Long Confirmed
     </button>
 
     <button
@@ -307,21 +305,20 @@
 
     <button
       class="radar-filter"
-      data-filter="strong-short"
+      data-filter="short-confirmed"
     >
-      🔴 Strong Short
+      🔴 Short Confirmed
     </button>
 
   </div>
 
 
-  <!-- SORT -->
+  <!-- UPDATED -->
 
   <div
     style="
       display:flex;
       justify-content:space-between;
-      align-items:center;
       margin-bottom:8px;
     "
   >
@@ -330,7 +327,7 @@
       class="dim"
       style="font-size:8px;"
     >
-      Ranked by Opportunity Score
+      Ranked by confirmation strength
     </span>
 
     <span
@@ -349,13 +346,13 @@
   <section id="radar-results">
 
     <div class="loading">
-      Scanning market...
+      Scanning futures market...
     </div>
 
   </section>
 
 
-  <!-- EXPLANATION -->
+  <!-- LEGEND -->
 
   <section
     class="coin-card"
@@ -368,11 +365,12 @@
     <div
       style="
         font-size:10px;
-        font-weight:800;
+        font-weight:900;
       "
     >
-      🧠 How Radar V2 works
+      🧠 Radar Logic
     </div>
+
 
     <div
       class="dim"
@@ -384,28 +382,28 @@
     >
 
       <div>
-        📈 Price momentum membaca perubahan
-        harga 24 jam.
+        📈 Price ↑ + OI ↑ =
+        <b>Long Confirmation</b>
       </div>
 
       <div>
-        💧 Volume membantu melihat aktivitas
-        market.
+        📉 Price ↓ + OI ↑ =
+        <b>Short Confirmation</b>
       </div>
 
       <div>
-        💰 Funding menunjukkan kondisi
-        long/short positioning.
+        📈 Price ↑ + OI ↓ =
+        <b>Short Covering</b>
       </div>
 
       <div>
-        🐋 Open Interest digunakan jika data
-        tersedia dari API.
+        📉 Price ↓ + OI ↓ =
+        <b>Long Reduction</b>
       </div>
 
       <div>
-        ⚠️ Data yang tidak tersedia tidak akan
-        dibuat-buat.
+        💰 Funding ekstrem =
+        crowded positioning warning
       </div>
 
     </div>
@@ -428,9 +426,9 @@
     "
   >
 
-    Radar V2 adalah alat analisis market,
-    bukan jaminan arah harga atau profit.
-    Selalu gunakan risk management.
+    Radar menunjukkan kondisi market
+    berdasarkan data yang tersedia.
+    Bukan jaminan arah harga atau profit.
 
   </div>
 
@@ -438,7 +436,7 @@
 </main>
 
 
-<!-- BOTTOM NAV -->
+<!-- NAV -->
 
 <div id="bottom-nav"></div>
 
@@ -451,7 +449,7 @@
 <script>
 
 /* =====================================================
-   NEXTRA RADAR V2
+   NEXTRA RADAR V3
 ===================================================== */
 
 const RADAR = {
@@ -480,445 +478,426 @@ const RADAR = {
 
 
 /* =====================================================
-   HELPERS
+   NUMBER HELPERS
 ===================================================== */
 
-function radarNumber(value) {
+function num(value) {
 
-  const n = Number(value);
+  const n =
+    Number(value);
 
-  return Number.isFinite(n) ? n : null;
+  return Number.isFinite(n)
+    ? n
+    : null;
 
 }
 
 
-function radarChange(item) {
+function priceChange(item) {
 
-  return radarNumber(
-    item?.change24h ??
-    item?.priceChangePercent ??
-    item?.change
+  return num(
+    item?.change24h
   );
 
 }
 
 
-function radarFunding(item) {
+function oiChange(item) {
 
-  const value =
-    radarNumber(
-      item?.fundingRate ??
-      item?.funding
-    );
-
-  if (value === null) {
-    return null;
-  }
-
-  /*
-    API biasanya mengembalikan
-    funding sebagai decimal.
-
-    Contoh:
-    0.0001 = 0.01%
-  */
-
-  return value;
-
-}
-
-
-function radarOI(item) {
-
-  return radarNumber(
-    item?.openInterest ??
-    item?.oi ??
-    item?.open_interest
+  return num(
+    item?.oiChange24h
   );
 
 }
 
 
-function radarVolume(item) {
+function funding(item) {
 
-  return radarNumber(
-    item?.volume ??
+  return num(
+    item?.fundingRate
+  );
+
+}
+
+
+function volume(item) {
+
+  return num(
     item?.quoteVolume ??
-    item?.volume24h
+    item?.volume
   );
 
 }
 
 
-function radarPrice(item) {
+function price(item) {
 
-  return radarNumber(
+  return num(
     item?.price ??
-    item?.lastPrice ??
-    item?.last
+    item?.markPrice
   );
 
 }
 
 
 /* =====================================================
-   FUNDING SIGNAL
+   OI + PRICE CONFIRMATION
 ===================================================== */
 
-function fundingSignal(item) {
+function getConfirmation(
+  item
+) {
 
-  const funding =
-    radarFunding(item);
+  const change =
+    priceChange(item);
 
-  if (funding === null) {
+  const oi =
+    oiChange(item);
+
+
+  if (
+    change === null ||
+    oi === null
+  ) {
 
     return {
-      value: null,
-      score: 0,
-      label: "N/A"
+
+      type: "neutral",
+
+      label:
+        "INSUFFICIENT DATA",
+
+      score: 0
+
+    };
+
+  }
+
+
+  /*
+    PRICE UP + OI UP
+    =================
+    New positions entering
+    while price rises.
+  */
+
+  if (
+    change > 0 &&
+    oi > 0
+  ) {
+
+    return {
+
+      type:
+        "long-confirmed",
+
+      label:
+        "LONG CONFIRMATION",
+
+      score:
+        Math.min(
+          100,
+          50 +
+          Math.abs(change) * 4 +
+          Math.abs(oi) * 2
+        )
+
+    };
+
+  }
+
+
+  /*
+    PRICE DOWN + OI UP
+    ==================
+    New positions while
+    price falls.
+  */
+
+  if (
+    change < 0 &&
+    oi > 0
+  ) {
+
+    return {
+
+      type:
+        "short-confirmed",
+
+      label:
+        "SHORT CONFIRMATION",
+
+      score:
+        Math.min(
+          100,
+          50 +
+          Math.abs(change) * 4 +
+          Math.abs(oi) * 2
+        )
+
+    };
+
+  }
+
+
+  /*
+    PRICE UP + OI DOWN
+  */
+
+  if (
+    change > 0 &&
+    oi < 0
+  ) {
+
+    return {
+
+      type:
+        "long",
+
+      label:
+        "SHORT COVERING",
+
+      score:
+        Math.min(
+          100,
+          50 +
+          Math.abs(change) * 3
+        )
+
+    };
+
+  }
+
+
+  /*
+    PRICE DOWN + OI DOWN
+  */
+
+  if (
+    change < 0 &&
+    oi < 0
+  ) {
+
+    return {
+
+      type:
+        "short",
+
+      label:
+        "LONG REDUCTION",
+
+      score:
+        Math.min(
+          100,
+          50 +
+          Math.abs(change) * 3
+        )
+
+    };
+
+  }
+
+
+  return {
+
+    type:
+      "neutral",
+
+    label:
+      "NEUTRAL",
+
+    score: 50
+
+  };
+
+}
+
+
+/* =====================================================
+   FUNDING ANALYSIS
+===================================================== */
+
+function getFundingAnalysis(
+  item
+) {
+
+  const rate =
+    funding(item);
+
+
+  if (
+    rate === null
+  ) {
+
+    return {
+
+      percent: null,
+
+      label: "N/A",
+
+      adjustment: 0
+
     };
 
   }
 
 
   const percent =
-    funding * 100;
+    rate * 100;
 
 
-  if (percent >= 0.10) {
+  if (
+    percent >= 0.10
+  ) {
 
     return {
-      value: percent,
-      score: -8,
-      label: "Crowded Long"
+
+      percent,
+
+      label:
+        "CROWDED LONG",
+
+      adjustment:
+        -10
+
     };
 
   }
 
 
-  if (percent >= 0.05) {
+  if (
+    percent >= 0.05
+  ) {
 
     return {
-      value: percent,
-      score: -4,
-      label: "Long Heavy"
+
+      percent,
+
+      label:
+        "LONG HEAVY",
+
+      adjustment:
+        -4
+
     };
 
   }
 
 
-  if (percent <= -0.10) {
+  if (
+    percent <= -0.10
+  ) {
 
     return {
-      value: percent,
-      score: 8,
-      label: "Crowded Short"
+
+      percent,
+
+      label:
+        "CROWDED SHORT",
+
+      adjustment:
+        10
+
     };
 
   }
 
 
-  if (percent <= -0.05) {
+  if (
+    percent <= -0.05
+  ) {
 
     return {
-      value: percent,
-      score: 4,
-      label: "Short Heavy"
+
+      percent,
+
+      label:
+        "SHORT HEAVY",
+
+      adjustment:
+        4
+
     };
 
   }
 
 
   return {
-    value: percent,
-    score: 0,
-    label: "Balanced"
+
+    percent,
+
+    label:
+      "BALANCED",
+
+    adjustment: 0
+
   };
 
 }
 
 
 /* =====================================================
-   MOMENTUM
+   SCORE
 ===================================================== */
 
-function momentumScore(item) {
+function calculateScore(
+  item
+) {
+
+  const confirmation =
+    getConfirmation(item);
+
+
+  const fundingData =
+    getFundingAnalysis(item);
+
+
+  let score =
+    confirmation.score;
+
+
+  score +=
+    fundingData.adjustment;
+
+
+  /*
+    Momentum bonus
+  */
 
   const change =
-    radarChange(item);
-
-  if (change === null) {
-
-    return {
-      score: 0,
-      label: "No Data"
-    };
-
-  }
+    priceChange(item);
 
 
-  /*
-    Positive movement = bullish
-    Negative movement = bearish
-  */
+  if (
+    change !== null
+  ) {
 
-  if (change >= 8) {
+    if (
+      Math.abs(change) >= 5
+    ) {
 
-    return {
-      score: 28,
-      label: "Very Strong"
-    };
+      score += 8;
 
-  }
+    }
 
+    else if (
+      Math.abs(change) >= 3
+    ) {
 
-  if (change >= 5) {
+      score += 5;
 
-    return {
-      score: 23,
-      label: "Strong"
-    };
+    }
 
   }
 
 
-  if (change >= 3) {
-
-    return {
-      score: 18,
-      label: "Bullish"
-    };
-
-  }
-
-
-  if (change >= 1) {
-
-    return {
-      score: 9,
-      label: "Positive"
-    };
-
-  }
-
-
-  if (change <= -8) {
-
-    return {
-      score: -28,
-      label: "Very Weak"
-    };
-
-  }
-
-
-  if (change <= -5) {
-
-    return {
-      score: -23,
-      label: "Strong Bearish"
-    };
-
-  }
-
-
-  if (change <= -3) {
-
-    return {
-      score: -18,
-      label: "Bearish"
-    };
-
-  }
-
-
-  if (change <= -1) {
-
-    return {
-      score: -9,
-      label: "Negative"
-    };
-
-  }
-
-
-  return {
-    score: 0,
-    label: "Flat"
-  };
-
-}
-
-
-/* =====================================================
-   VOLUME SCORE
-===================================================== */
-
-function volumeScore(item) {
-
-  /*
-    Kalau API menyediakan volume,
-    kita pakai sebagai faktor tambahan.
-
-    Tidak membandingkan volume absolut
-    antar aset karena tiap coin punya
-    skala volume berbeda.
-  */
-
-  const volume =
-    radarVolume(item);
-
-  if (volume === null) {
-
-    return {
-      score: 0,
-      label: "N/A"
-    };
-
-  }
-
-
-  if (volume >= 1e9) {
-
-    return {
-      score: 5,
-      label: "Very High"
-    };
-
-  }
-
-
-  if (volume >= 100e6) {
-
-    return {
-      score: 3,
-      label: "High"
-    };
-
-  }
-
-
-  if (volume >= 10e6) {
-
-    return {
-      score: 1,
-      label: "Active"
-    };
-
-  }
-
-
-  return {
-    score: 0,
-    label: "Normal"
-  };
-
-}
-
-
-/* =====================================================
-   OPPORTUNITY SCORE
-===================================================== */
-
-function calculateRadar(item) {
-
-  const momentum =
-    momentumScore(item);
-
-
-  const funding =
-    fundingSignal(item);
-
-
-  const volume =
-    volumeScore(item);
-
-
-  let raw =
-    50 +
-    momentum.score +
-    funding.score +
-    volume.score;
-
-
-  /*
-    Clamp 0-100
-  */
-
-  raw =
-    Math.max(
-      0,
-      Math.min(
-        100,
-        raw
-      )
-    );
-
-
-  /*
-    Direction
-  */
-
-  let bias = "neutral";
-
-
-  if (raw >= 80) {
-
-    bias =
-      momentum.score >= 0
-        ? "strong-long"
-        : "strong-short";
-
-  }
-
-  else if (raw >= 65) {
-
-    bias =
-      momentum.score >= 0
-        ? "long"
-        : "short";
-
-  }
-
-  else if (raw <= 35) {
-
-    bias =
-      momentum.score < 0
-        ? "strong-short"
-        : "strong-long";
-
-  }
-
-  else if (raw <= 45) {
-
-    bias =
-      momentum.score < 0
-        ? "short"
-        : "long";
-
-  }
-
-
-  /*
-    Important:
-    Score menunjukkan strength,
-    bukan probabilitas profit.
-  */
-
-
-  return {
-
-    score: Math.round(raw),
-
-    bias,
-
-    momentum,
-
-    funding,
-
-    volume
-
-  };
+  return Math.max(
+    0,
+    Math.min(
+      100,
+      Math.round(score)
+    )
+  );
 
 }
 
@@ -927,37 +906,35 @@ function calculateRadar(item) {
    RISK
 ===================================================== */
 
-function calculateRisk(
-  item,
-  analysis
+function getRisk(
+  item
 ) {
 
   const change =
     Math.abs(
-      radarChange(item) || 0
+      priceChange(item) || 0
     );
 
 
-  const funding =
+  const fundingRate =
     Math.abs(
-      radarFunding(item) || 0
+      funding(item) || 0
     ) * 100;
 
 
-  /*
-    Volatility tinggi
-    + funding ekstrem
-    = risk lebih tinggi
-  */
-
   if (
     change >= 8 ||
-    funding >= 0.10
+    fundingRate >= 0.10
   ) {
 
     return {
-      label: "HIGH",
-      className: "risk-high"
+
+      label:
+        "HIGH",
+
+      className:
+        "risk-high"
+
     };
 
   }
@@ -965,37 +942,52 @@ function calculateRisk(
 
   if (
     change >= 4 ||
-    funding >= 0.05
+    fundingRate >= 0.05
   ) {
 
     return {
-      label: "MODERATE",
-      className: "risk-medium"
+
+      label:
+        "MODERATE",
+
+      className:
+        "risk-medium"
+
     };
 
   }
 
 
   return {
-    label: "LOW",
-    className: "risk-low"
+
+    label:
+      "LOW",
+
+    className:
+      "risk-low"
+
   };
 
 }
 
 
 /* =====================================================
-   LOAD DATA
+   LOAD
 ===================================================== */
 
 async function loadRadar() {
 
-  if (RADAR.loading) {
+  if (
+    RADAR.loading
+  ) {
+
     return;
+
   }
 
 
-  RADAR.loading = true;
+  RADAR.loading =
+    true;
 
 
   const results =
@@ -1022,7 +1014,7 @@ async function loadRadar() {
 
     results.innerHTML = `
       <div class="loading">
-        Scanning market intelligence...
+        Loading futures intelligence...
       </div>
     `;
 
@@ -1031,26 +1023,19 @@ async function loadRadar() {
 
   try {
 
-    /*
-      Menggunakan API futures yang
-      sudah dipakai halaman Futures.
-    */
-
     if (
       typeof NEXTRA_API ===
-        "undefined" ||
-      typeof NEXTRA_API.fetchFuturesMarkets !==
-        "function"
+        "undefined"
     ) {
 
       throw new Error(
-        "fetchFuturesMarkets tidak tersedia"
+        "NEXTRA_API unavailable"
       );
 
     }
 
 
-    const response =
+    const data =
       await NEXTRA_API
         .fetchFuturesMarkets(
           RADAR.symbols
@@ -1058,8 +1043,8 @@ async function loadRadar() {
 
 
     RADAR.data =
-      Array.isArray(response)
-        ? response
+      Array.isArray(data)
+        ? data
         : [];
 
 
@@ -1100,7 +1085,7 @@ async function loadRadar() {
   catch (error) {
 
     console.error(
-      "NEXTRA Radar V2:",
+      "Radar V3 error:",
       error
     );
 
@@ -1119,14 +1104,16 @@ async function loadRadar() {
         <div class="error-box">
           ⚠️ Gagal memuat Radar.
           <br><br>
-          Periksa koneksi atau API.
+          Coba refresh kembali.
           <br><br>
+
           <button
             class="primary-btn"
             onclick="loadRadar()"
           >
             Coba Lagi
           </button>
+
         </div>
       `;
 
@@ -1136,7 +1123,8 @@ async function loadRadar() {
 
   finally {
 
-    RADAR.loading = false;
+    RADAR.loading =
+      false;
 
   }
 
@@ -1147,7 +1135,9 @@ async function loadRadar() {
    FILTER
 ===================================================== */
 
-function filterRadar(data) {
+function filterData(
+  data
+) {
 
   if (
     RADAR.filter ===
@@ -1162,11 +1152,14 @@ function filterRadar(data) {
   return data.filter(
     item => {
 
-      const analysis =
-        calculateRadar(item);
+      const confirmation =
+        getConfirmation(
+          item
+        );
+
 
       return (
-        analysis.bias ===
+        confirmation.type ===
         RADAR.filter
       );
 
@@ -1180,25 +1173,115 @@ function filterRadar(data) {
    SORT
 ===================================================== */
 
-function sortRadar(data) {
+function sortData(
+  data
+) {
 
   return [...data].sort(
-    (a, b) => {
-
-      const A =
-        calculateRadar(a);
-
-      const B =
-        calculateRadar(b);
-
+    (a,b) => {
 
       return (
-        B.score -
-        A.score
+        calculateScore(b) -
+        calculateScore(a)
       );
 
     }
   );
+
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+function updateSummary() {
+
+  let long = 0;
+
+  let short = 0;
+
+  let confirmed = 0;
+
+
+  RADAR.data.forEach(
+    item => {
+
+      const signal =
+        getConfirmation(
+          item
+        );
+
+
+      if (
+        signal.type ===
+          "long" ||
+        signal.type ===
+          "long-confirmed"
+      ) {
+
+        long++;
+
+      }
+
+
+      if (
+        signal.type ===
+          "short" ||
+        signal.type ===
+          "short-confirmed"
+      ) {
+
+        short++;
+
+      }
+
+
+      if (
+        signal.type ===
+          "long-confirmed" ||
+        signal.type ===
+          "short-confirmed"
+      ) {
+
+        confirmed++;
+
+      }
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      "radar-long"
+    )
+    .textContent =
+      long;
+
+
+  document
+    .getElementById(
+      "radar-short"
+    )
+    .textContent =
+      short;
+
+
+  document
+    .getElementById(
+      "radar-confirmed"
+    )
+    .textContent =
+      confirmed;
+
+
+  document
+    .getElementById(
+      "radar-scanned"
+    )
+    .textContent =
+      RADAR.data.length;
 
 }
 
@@ -1218,24 +1301,21 @@ function renderRadar() {
     );
 
 
-  if (!results) {
-    return;
-  }
-
-
   let data =
-    sortRadar(
+    sortData(
       RADAR.data
     );
 
 
   data =
-    filterRadar(
+    filterData(
       data
     );
 
 
-  if (!data.length) {
+  if (
+    !data.length
+  ) {
 
     results.innerHTML = `
       <div class="empty-state">
@@ -1260,178 +1340,74 @@ function renderRadar() {
 
 
 /* =====================================================
-   SUMMARY
-===================================================== */
-
-function updateSummary() {
-
-  const data =
-    RADAR.data;
-
-
-  let bullish = 0;
-
-  let bearish = 0;
-
-  let strong = 0;
-
-
-  data.forEach(
-    item => {
-
-      const analysis =
-        calculateRadar(item);
-
-
-      if (
-        analysis.bias ===
-          "long" ||
-        analysis.bias ===
-          "strong-long"
-      ) {
-
-        bullish++;
-
-      }
-
-
-      if (
-        analysis.bias ===
-          "short" ||
-        analysis.bias ===
-          "strong-short"
-      ) {
-
-        bearish++;
-
-      }
-
-
-      if (
-        analysis.bias ===
-          "strong-long" ||
-        analysis.bias ===
-          "strong-short"
-      ) {
-
-        strong++;
-
-      }
-
-    }
-  );
-
-
-  const bullishEl =
-    document.getElementById(
-      "radar-bullish"
-    );
-
-
-  const bearishEl =
-    document.getElementById(
-      "radar-bearish"
-    );
-
-
-  const strongEl =
-    document.getElementById(
-      "radar-strong"
-    );
-
-
-  const scannedEl =
-    document.getElementById(
-      "radar-scanned"
-    );
-
-
-  if (bullishEl) {
-
-    bullishEl.textContent =
-      bullish;
-
-  }
-
-
-  if (bearishEl) {
-
-    bearishEl.textContent =
-      bearish;
-
-  }
-
-
-  if (strongEl) {
-
-    strongEl.textContent =
-      strong;
-
-  }
-
-
-  if (scannedEl) {
-
-    scannedEl.textContent =
-      data.length;
-
-  }
-
-}
-
-
-/* =====================================================
-   BIAS UI
+   BIAS LABEL
 ===================================================== */
 
 function biasLabel(
-  bias
+  type
 ) {
 
-  const map = {
+  if (
+    type ===
+    "long-confirmed"
+  ) {
 
-    "strong-long":
-      `
+    return `
       <span class="up">
-        🟢 STRONG LONG
+        🟢 LONG CONFIRMED
       </span>
-      `,
+    `;
 
-    "long":
-      `
+  }
+
+
+  if (
+    type ===
+    "short-confirmed"
+  ) {
+
+    return `
+      <span class="down">
+        🔴 SHORT CONFIRMED
+      </span>
+    `;
+
+  }
+
+
+  if (
+    type ===
+    "long"
+  ) {
+
+    return `
       <span class="up">
         LONG
       </span>
-      `,
+    `;
 
-    "neutral":
-      `
-      <span class="dim">
-        NEUTRAL
-      </span>
-      `,
+  }
 
-    "short":
-      `
+
+  if (
+    type ===
+    "short"
+  ) {
+
+    return `
       <span class="down">
         SHORT
       </span>
-      `,
+    `;
 
-    "strong-short":
-      `
-      <span class="down">
-        🔴 STRONG SHORT
-      </span>
-      `
-
-  };
+  }
 
 
-  return (
-    map[bias] ||
-    map.neutral
-  );
+  return `
+    <span class="dim">
+      NEUTRAL
+    </span>
+  `;
 
 }
 
@@ -1440,42 +1416,53 @@ function biasLabel(
    CARD
 ===================================================== */
 
-function renderCard(item) {
+function renderCard(
+  item
+) {
 
-  const analysis =
-    calculateRadar(item);
+  const confirmation =
+    getConfirmation(
+      item
+    );
+
+
+  const fundingData =
+    getFundingAnalysis(
+      item
+    );
+
+
+  const score =
+    calculateScore(
+      item
+    );
 
 
   const risk =
-    calculateRisk(
-      item,
-      analysis
+    getRisk(
+      item
     );
 
 
   const change =
-    radarChange(item);
-
-
-  const price =
-    radarPrice(item);
-
-
-  const volume =
-    radarVolume(item);
-
-
-  const funding =
-    analysis.funding;
+    priceChange(item);
 
 
   const oi =
-    radarOI(item);
+    oiChange(item);
+
+
+  const p =
+    price(item);
+
+
+  const vol =
+    volume(item);
 
 
   const symbol =
     String(
-      item?.symbol ||
+      item.symbol ||
       "UNKNOWN"
     ).replace(
       "USDT",
@@ -1495,45 +1482,41 @@ function renderCard(item) {
         "%";
 
 
-  const changeClass =
-    change === null
-      ? "dim"
-      : change >= 0
-        ? "up"
-        : "down";
-
-
-  const fundingText =
-    funding.value === null
-      ? "N/A"
-      : (
-          funding.value >= 0
-            ? "+"
-            : ""
-        ) +
-        funding.value.toFixed(4) +
-        "%";
-
-
   const oiText =
     oi === null
       ? "N/A"
-      : formatCompact(
-          oi
-        );
+      : (
+          oi >= 0
+            ? "+"
+            : ""
+        ) +
+        oi.toFixed(2) +
+        "%";
+
+
+  const fundingText =
+    fundingData.percent === null
+      ? "N/A"
+      : (
+          fundingData.percent >= 0
+            ? "+"
+            : ""
+        ) +
+        fundingData.percent.toFixed(4) +
+        "%";
 
 
   return `
 
     <article
-      class="coin-card radar-card"
+      class="coin-card"
       style="
         display:block;
         margin-bottom:10px;
       "
     >
 
-      <!-- TOP -->
+      <!-- HEADER -->
 
       <div
         style="
@@ -1541,7 +1524,6 @@ function renderCard(item) {
           justify-content:
             space-between;
           align-items:center;
-          gap:10px;
         "
       >
 
@@ -1561,9 +1543,11 @@ function renderCard(item) {
               font-size:8px;
             "
           >
+
             ${biasLabel(
-              analysis.bias
+              confirmation.type
             )}
+
           </div>
 
         </div>
@@ -1580,17 +1564,16 @@ function renderCard(item) {
               font-size:22px;
             "
           >
-            ${analysis.score}
+            ${score}
           </strong>
 
           <div
             class="dim"
             style="
               font-size:6px;
-              margin-top:1px;
             "
           >
-            OPPORTUNITY
+            SCORE
           </div>
 
         </div>
@@ -1612,97 +1595,64 @@ function renderCard(item) {
 
         <div
           style="
-            width:${analysis.score}%;
+            width:${score}%;
             height:100%;
             background:var(--accent);
-            border-radius:20px;
           "
         ></div>
 
       </div>
 
 
-      <!-- PRICE -->
-
-      <div
-        style="
-          display:flex;
-          justify-content:
-            space-between;
-          align-items:center;
-          margin-top:11px;
-        "
-      >
-
-        <div>
-
-          <div
-            class="dim"
-            style="font-size:7px;"
-          >
-            PRICE
-          </div>
-
-          <strong
-            style="
-              font-size:11px;
-            "
-          >
-            ${formatPrice(
-              price
-            )}
-          </strong>
-
-        </div>
-
-
-        <div
-          style="
-            text-align:right;
-          "
-        >
-
-          <div
-            class="dim"
-            style="font-size:7px;"
-          >
-            24H
-          </div>
-
-          <strong
-            class="${changeClass}"
-            style="
-              font-size:11px;
-            "
-          >
-            ${changeText}
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <!-- METRICS -->
+      <!-- PRICE + OI -->
 
       <div
         style="
           display:grid;
           grid-template-columns:
             repeat(2,1fr);
-          gap:6px;
-          margin-top:10px;
+          gap:7px;
+          margin-top:11px;
         "
       >
 
         <div class="mini-stat">
 
           <span>
-            Momentum
+            Price 24H
           </span>
 
-          <strong>
-            ${analysis.momentum.label}
+          <strong
+            class="${
+              change === null
+                ? "dim"
+                : change >= 0
+                  ? "up"
+                  : "down"
+            }"
+          >
+            ${changeText}
+          </strong>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <span>
+            OI Change
+          </span>
+
+          <strong
+            class="${
+              oi === null
+                ? "dim"
+                : oi >= 0
+                  ? "up"
+                  : "down"
+            }"
+          >
+            ${oiText}
           </strong>
 
         </div>
@@ -1729,22 +1679,63 @@ function renderCard(item) {
 
           <strong>
             ${formatCompact(
-              volume
+              vol
             )}
           </strong>
 
         </div>
 
+      </div>
 
-        <div class="mini-stat">
 
-          <span>
-            Open Interest
-          </span>
+      <!-- CONFIRMATION -->
 
-          <strong>
-            ${oiText}
-          </strong>
+      <div
+        style="
+          margin-top:10px;
+          padding:10px;
+          border-radius:10px;
+          background:
+            rgba(127,127,127,0.06);
+        "
+      >
+
+        <div
+          style="
+            font-size:8px;
+            font-weight:800;
+          "
+        >
+          🧠 Market Structure
+        </div>
+
+
+        <div
+          style="
+            font-size:8px;
+            margin-top:5px;
+          "
+        >
+
+          ${confirmation.label}
+
+        </div>
+
+
+        <div
+          class="dim"
+          style="
+            font-size:7px;
+            margin-top:4px;
+            line-height:1.5;
+          "
+        >
+
+          ${getReason(
+            item,
+            confirmation,
+            fundingData
+          )}
 
         </div>
 
@@ -1783,28 +1774,19 @@ function renderCard(item) {
       </div>
 
 
-      <!-- REASON -->
+      <!-- PRICE -->
 
       <div
+        class="dim"
         style="
-          margin-top:8px;
-          padding:9px;
-          border-radius:9px;
-          background:
-            rgba(127,127,127,0.06);
-          font-size:8px;
-          line-height:1.55;
+          text-align:right;
+          font-size:7px;
+          margin-top:6px;
         "
       >
 
-        <span class="dim">
-          🧠 Radar reasoning:
-        </span>
-
-        ${getReason(
-          item,
-          analysis
-        )}
+        Price:
+        ${formatPrice(p)}
 
       </div>
 
@@ -1816,103 +1798,107 @@ function renderCard(item) {
 
 
 /* =====================================================
-   REASONING
+   REASON
 ===================================================== */
 
 function getReason(
   item,
-  analysis
+  confirmation,
+  fundingData
 ) {
 
   const change =
-    radarChange(item);
+    priceChange(item);
 
 
-  const funding =
-    analysis.funding;
+  const oi =
+    oiChange(item);
 
 
   if (
-    analysis.bias ===
-    "strong-long"
+    confirmation.type ===
+    "long-confirmed"
   ) {
 
     if (
-      funding.value !== null &&
-      funding.value >= 0.10
+      fundingData.percent !== null &&
+      fundingData.percent >= 0.10
     ) {
 
       return `
-        Momentum bullish kuat,
+        Harga naik dan OI naik,
         tetapi funding sangat tinggi.
-        Potensi crowded long perlu
-        diperhatikan.
+        Momentum bullish terkonfirmasi
+        namun posisi long mulai crowded.
       `;
 
     }
 
 
     return `
-      Momentum bullish dominan.
-      Score tinggi karena pergerakan
-      harga mendukung arah positif.
+      Harga naik bersamaan dengan
+      Open Interest yang meningkat.
+      Ini menunjukkan posisi baru
+      ikut masuk ke pergerakan bullish.
     `;
 
   }
 
 
   if (
-    analysis.bias ===
-    "long"
-  ) {
-
-    return `
-      Kondisi market cenderung bullish,
-      tetapi kekuatannya belum cukup
-      untuk kategori strong.
-    `;
-
-  }
-
-
-  if (
-    analysis.bias ===
-    "strong-short"
+    confirmation.type ===
+    "short-confirmed"
   ) {
 
     if (
-      funding.value !== null &&
-      funding.value <= -0.10
+      fundingData.percent !== null &&
+      fundingData.percent <= -0.10
     ) {
 
       return `
-        Tekanan bearish kuat,
+        Harga turun dan OI naik,
         tetapi funding sangat negatif.
-        Potensi crowded short perlu
-        diperhatikan.
+        Tekanan bearish terkonfirmasi
+        namun short mulai crowded.
       `;
 
     }
 
 
     return `
-      Momentum bearish dominan.
-      Harga menunjukkan tekanan turun
-      yang relatif kuat.
+      Harga turun sementara
+      Open Interest meningkat.
+      Ini menunjukkan posisi baru
+      masuk saat market bergerak bearish.
     `;
 
   }
 
 
   if (
-    analysis.bias ===
-    "short"
+    confirmation.label ===
+    "SHORT COVERING"
   ) {
 
     return `
-      Kondisi market cenderung bearish,
-      tetapi belum masuk kategori
-      strong short.
+      Harga naik sementara OI turun.
+      Kondisi ini lebih konsisten dengan
+      short yang ditutup daripada pembukaan
+      long baru.
+    `;
+
+  }
+
+
+  if (
+    confirmation.label ===
+    "LONG REDUCTION"
+  ) {
+
+    return `
+      Harga turun sementara OI turun.
+      Kondisi ini lebih konsisten dengan
+      long yang ditutup atau berkurang.
     `;
 
   }
@@ -1924,24 +1910,24 @@ function getReason(
   ) {
 
     return `
-      Pergerakan relatif datar.
-      Belum terlihat momentum yang
-      cukup kuat.
+      Perubahan harga relatif kecil.
+      Belum ada konfirmasi arah yang kuat.
     `;
 
   }
 
 
   return `
-    Sinyal masih bercampur.
-    Tunggu konfirmasi momentum berikutnya.
+    Data belum memberikan konfirmasi
+    yang cukup kuat untuk menentukan
+    struktur posisi.
   `;
 
 }
 
 
 /* =====================================================
-   FORMAT COMPACT
+   FORMAT
 ===================================================== */
 
 function formatCompact(
@@ -2009,10 +1995,6 @@ function formatCompact(
 
 }
 
-
-/* =====================================================
-   FORMAT PRICE
-===================================================== */
 
 function formatPrice(
   value
