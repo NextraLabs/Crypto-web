@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NEXTRA — Intelligence</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body>
+
+<main class="container">
+
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+        Intelligence<span class="dot">.</span>
+      </h1>
+
+      <p class="subtitle">
+        AI-powered market intelligence
+      </p>
+
+    </div>
+
+
+    <div
+      style="
+        display:flex;
+        gap:6px;
+      "
+    >
+
+      <button
+        class="icon-btn"
+        id="intel-refresh"
+        title="Refresh"
+      >
+        ↻
+      </button>
+
+
+      <button
+        class="icon-btn"
+        id="theme-toggle"
+        title="Ganti tema"
+      >
+        ◐
+      </button>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- AI STATUS -->
+
+  <section
+    class="highlight-box"
+    style="
+      margin-bottom:14px;
+    "
+  >
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:10px;
+      "
+    >
+
+      <div>
+
+        <div
+          style="
+            font-size:12px;
+            font-weight:800;
+          "
+        >
+          🧠 NEXTRA Intelligence
+        </div>
+
+        <div
+          class="dim"
+          style="
+            font-size:9px;
+            margin-top:4px;
+          "
+        >
+          Market analysis engine
+        </div>
+
+      </div>
+
+
+      <div
+        id="intel-status"
+        style="
+          font-size:8px;
+          color:var(--accent);
+        "
+      >
+        SCANNING
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- MARKET SCORE -->
+
+  <section
+    class="coin-card"
+    style="
+      display:block;
+      margin-bottom:10px;
+    "
+  >
+
+    <div
+      style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+      "
+    >
+
+      <div>
+
+        <div
+          class="dim"
+          style="
+            font-size:8px;
+          "
+        >
+          MARKET SENTIMENT
+        </div>
+
+        <div
+          id="market-sentiment"
+          style="
+            font-size:20px;
+            font-weight:900;
+            margin-top:4px;
+          "
+        >
+          --
+        </div>
+
+      </div>
+
+
+      <div
+        id="market-score"
+        style="
+          font-size:28px;
+          font-weight:900;
+        "
+      >
+        --
+      </div>
+
+    </div>
+
+
+    <div
+      style="
+        margin-top:12px;
+        height:6px;
+        background:var(--border);
+        border-radius:10px;
+        overflow:hidden;
+      "
+    >
+
+      <div
+        id="sentiment-bar"
+        style="
+          width:50%;
+          height:100%;
+          background:var(--accent);
+          border-radius:10px;
+          transition:width .4s ease;
+        "
+      ></div>
+
+    </div>
+
+
+    <div
+      style="
+        display:flex;
+        justify-content:space-between;
+        margin-top:7px;
+      "
+    >
+
+      <span
+        class="dim"
+        style="font-size:8px;"
+      >
+        Bearish
+      </span>
+
+      <span
+        class="dim"
+        style="font-size:8px;"
+      >
+        Bullish
+      </span>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- AI SUMMARY -->
+
+  <section
+    class="coin-card"
+    style="
+      display:block;
+      margin-bottom:10px;
+    "
+  >
+
+    <div
+      style="
+        font-size:10px;
+        font-weight:800;
+        margin-bottom:8px;
+      "
+    >
+      AI Market Overview
+    </div>
+
+
+    <div
+      id="ai-overview"
+      class="dim"
+      style="
+        font-size:10px;
+        line-height:1.6;
+      "
+    >
+      Menganalisis kondisi market...
+    </div>
+
+  </section>
+
+
+
+  <!-- ASSET ANALYSIS -->
+
+  <div
+    style="
+      font-size:10px;
+      font-weight:800;
+      margin:16px 0 8px;
+    "
+  >
+    Asset Intelligence
+  </div>
+
+
+  <section id="intel-assets">
+
+    <div class="loading">
+      Memuat analisis...
+    </div>
+
+  </section>
+
+
+
+  <!-- DISCLAIMER -->
+
+  <div
+    style="
+      margin-top:18px;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      color:var(--faint);
+      font-size:8px;
+      line-height:1.5;
+      text-align:center;
+    "
+  >
+
+    Intelligence memberikan analisis
+    berbasis data market.
+
+    Bukan nasihat keuangan dan bukan
+    jaminan profit.
+
+  </div>
+
+
+</main>
+
+
+
+<!-- BOTTOM NAV -->
+
+<div id="bottom-nav"></div>
+
+
+
+<script src="js/app.js"></script>
+
+<script src="js/api.js"></script>
+
+
+<script>
+
+/* =========================================
+   STATE
+========================================= */
+
+const INTELLIGENCE = {
+
+  assets: [
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT"
+  ],
+
+  data: [],
+
+  updated: null
+
+};
+
+
+/* =========================================
+   FORMAT
+========================================= */
+
+function formatPrice(price) {
+
+  if (!Number.isFinite(price)) {
+    return "-";
+  }
+
+
+  if (price >= 1000) {
+
+    return "$" +
+      price.toLocaleString(
+        "en-US",
+        {
+          maximumFractionDigits: 2
+        }
+      );
+
+  }
+
+
+  if (price >= 1) {
+
+    return "$" +
+      price.toFixed(2);
+
+  }
+
+
+  return "$" +
+    price.toPrecision(6);
+
+}
+
+
+function formatFunding(value) {
+
+  if (!Number.isFinite(value)) {
+    return "-";
+  }
+
+  return (
+    value * 100
+  ).toFixed(4) + "%";
+
+}
+
+
+/* =========================================
+   FETCH
+========================================= */
+
+async function loadIntelligence() {
+
+  const assets =
+    document.getElementById(
+      "intel-assets"
+    );
+
+
+  const status =
+    document.getElementById(
+      "intel-status"
+    );
+
+
+  if (status) {
+
+    status.textContent =
+      "SCANNING";
+
+  }
+
+
+  if (assets) {
+
+    assets.innerHTML = `
+      <div class="loading">
+        Menganalisis market...
+      </div>
+    `;
+
+  }
+
+
+  try {
+
+    const data =
+      await NEXTRA_API
+        .fetchFuturesMarkets(
+          INTELLIGENCE.assets
+        );
+
+
+    INTELLIGENCE.data =
+      data || [];
+
+
+    INTELLIGENCE.updated =
+      new Date();
+
+
+    renderIntelligence();
+
+
+    if (status) {
+
+      status.textContent =
+        "LIVE";
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Intelligence:",
+      error
+    );
+
+
+    if (status) {
+
+      status.textContent =
+        "ERROR";
+
+    }
+
+
+    if (assets) {
+
+      assets.innerHTML = `
+        <div class="error-box">
+          ⚠️ Gagal memuat
+          intelligence.
+        </div>
+      `;
+
+    }
+
+  }
+
+}
+
+
+/* =========================================
+   SCORE
+========================================= */
+
+function calculateScore(data) {
+
+  if (!data.length) {
+    return 50;
+  }
+
+
+  let score = 50;
+
+
+  data.forEach(item => {
+
+    if (item.change24h > 0) {
+
+      score += 10;
+
+    } else {
+
+      score -= 10;
+
+    }
+
+
+    if (item.fundingRate > 0) {
+
+      score += 3;
+
+    } else {
+
+      score -= 3;
+
+    }
+
+  });
+
+
+  return Math.max(
+    0,
+    Math.min(
+      100,
+      score
+    )
+  );
+
+}
+
+
+/* =========================================
+   RENDER
+========================================= */
+
+function renderIntelligence() {
+
+  const data =
+    INTELLIGENCE.data;
+
+
+  const score =
+    calculateScore(data);
+
+
+  const sentiment =
+    document.getElementById(
+      "market-sentiment"
+    );
+
+
+  const scoreElement =
+    document.getElementById(
+      "market-score"
+    );
+
+
+  const bar =
+    document.getElementById(
+      "sentiment-bar"
+    );
+
+
+  const overview =
+    document.getElementById(
+      "ai-overview"
+    );
+
+
+  if (scoreElement) {
+
+    scoreElement.textContent =
+      `${Math.round(score)}/100`;
+
+  }
+
+
+  if (bar) {
+
+    bar.style.width =
+      `${score}%`;
+
+  }
+
+
+  if (sentiment) {
+
+    if (score >= 65) {
+
+      sentiment.textContent =
+        "BULLISH";
+
+      sentiment.className =
+        "up";
+
+    }
+
+    else if (score <= 35) {
+
+      sentiment.textContent =
+        "BEARISH";
+
+      sentiment.className =
+        "down";
+
+    }
+
+    else {
+
+      sentiment.textContent =
+        "NEUTRAL";
+
+      sentiment.className =
+        "dim";
+
+    }
+
+  }
+
+
+  if (overview) {
+
+    overview.textContent =
+      generateOverview(
+        data,
+        score
+      );
+
+  }
+
+
+  renderAssets(data);
+
+}
+
+
+/* =========================================
+   OVERVIEW
+========================================= */
+
+function generateOverview(
+  data,
+  score
+) {
+
+  if (!data.length) {
+
+    return "Belum cukup data untuk membuat analisis.";
+
+  }
+
+
+  const bullish =
+    data.filter(
+      item =>
+        item.change24h > 0
+    ).length;
+
+
+  const bearish =
+    data.filter(
+      item =>
+        item.change24h < 0
+    ).length;
+
+
+  if (score >= 65) {
+
+    return `
+      Market menunjukkan bias bullish.
+      ${bullish} dari ${data.length}
+      aset utama sedang bergerak positif.
+      Tetap perhatikan funding rate,
+      open interest, dan volatilitas
+      sebelum mengambil posisi.
+    `;
+
+  }
+
+
+  if (score <= 35) {
+
+    return `
+      Market menunjukkan tekanan bearish.
+      ${bearish} dari ${data.length}
+      aset utama sedang bergerak negatif.
+      Risiko volatilitas tetap tinggi,
+      sehingga konfirmasi trend diperlukan.
+    `;
+
+  }
+
+
+  return `
+    Market berada dalam kondisi mixed/
+    neutral. Pergerakan BTC, ETH dan SOL
+    belum menunjukkan dominasi arah yang
+    kuat. Tunggu konfirmasi momentum
+    sebelum mengambil keputusan.
+  `;
+
+}
+
+
+/* =========================================
+   ASSET CARDS
+========================================= */
+
+function renderAssets(data) {
+
+  const container =
+    document.getElementById(
+      "intel-assets"
+    );
+
+
+  if (!container) {
+    return;
+  }
+
+
+  if (!data.length) {
+
+    container.innerHTML = `
+      <div class="empty-state">
+        Tidak ada data.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    data.map(
+      renderAssetCard
+    ).join("");
+
+}
+
+
+/* =========================================
+   CARD
+========================================= */
+
+function renderAssetCard(
+  item
+) {
+
+  const change =
+    item.change24h;
+
+
+  const changeClass =
+    change >= 0
+      ? "up"
+      : "down";
+
+
+  const sign =
+    change >= 0
+      ? "+"
+      : "";
+
+
+  const trend =
+    getTrend(item);
+
+
+  const risk =
+    getRisk(item);
+
+
+  return `
+
+    <article
+      class="coin-card"
+      style="
+        display:block;
+        margin-bottom:10px;
+      "
+    >
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+        "
+      >
+
+        <div>
+
+          <strong
+            style="font-size:13px;"
+          >
+            ${item.symbol
+              .replace(
+                "USDT",
+                "/USDT"
+              )}
+          </strong>
+
+          <div
+            class="dim"
+            style="
+              font-size:8px;
+              margin-top:3px;
+            "
+          >
+            Futures Intelligence
+          </div>
+
+        </div>
+
+
+        <div
+          style="
+            text-align:right;
+          "
+        >
+
+          <strong
+            style="font-size:14px;"
+          >
+            ${formatPrice(
+              item.price
+            )}
+          </strong>
+
+          <div
+            class="${changeClass}"
+            style="
+              font-size:9px;
+              margin-top:3px;
+            "
+          >
+            ${sign}${change.toFixed(2)}%
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:
+            repeat(2,1fr);
+          gap:8px;
+          margin-top:12px;
+        "
+      >
+
+        <div
+          style="
+            padding:9px;
+            border:
+              1px solid var(--border);
+            border-radius:9px;
+          "
+        >
+
+          <div
+            class="dim"
+            style="font-size:7px;"
+          >
+            TREND
+          </div>
+
+          <strong
+            class="${trend.className}"
+            style="
+              display:block;
+              margin-top:3px;
+              font-size:10px;
+            "
+          >
+            ${trend.label}
+          </strong>
+
+        </div>
+
+
+        <div
+          style="
+            padding:9px;
+            border:
+              1px solid var(--border);
+            border-radius:9px;
+          "
+        >
+
+          <div
+            class="dim"
+            style="font-size:7px;"
+          >
+            FUNDING
+          </div>
+
+          <strong
+            style="
+              display:block;
+              margin-top:3px;
+              font-size:10px;
+            "
+          >
+            ${formatFunding(
+              item.fundingRate
+            )}
+          </strong>
+
+        </div>
+
+
+        <div
+          style="
+            padding:9px;
+            border:
+              1px solid var(--border);
+            border-radius:9px;
+          "
+        >
+
+          <div
+            class="dim"
+            style="font-size:7px;"
+          >
+            OPEN INTEREST
+          </div>
+
+          <strong
+            style="
+              display:block;
+              margin-top:3px;
+              font-size:10px;
+            "
+          >
+            ${Number(
+              item.openInterest
+            ).toLocaleString(
+              "en-US",
+              {
+                maximumFractionDigits:0
+              }
+            )}
+          </strong>
+
+        </div>
+
+
+        <div
+          style="
+            padding:9px;
+            border:
+              1px solid var(--border);
+            border-radius:9px;
+          "
+        >
+
+          <div
+            class="dim"
+            style="font-size:7px;"
+          >
+            RISK
+          </div>
+
+          <strong
+            class="${risk.className}"
+            style="
+              display:block;
+              margin-top:3px;
+              font-size:10px;
+            "
+          >
+            ${risk.label}
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        style="
+          margin-top:10px;
+          padding-top:9px;
+          border-top:
+            1px solid var(--border);
+          font-size:8px;
+          line-height:1.5;
+        "
+      >
+
+        <span class="dim">
+          AI Read:
+        </span>
+
+        ${generateAssetRead(item)}
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* =========================================
+   TREND
+========================================= */
+
+function getTrend(item) {
+
+  if (item.change24h >= 3) {
+
+    return {
+      label: "STRONG BULLISH",
+      className: "up"
+    };
+
+  }
+
+
+  if (item.change24h > 0) {
+
+    return {
+      label: "BULLISH",
+      className: "up"
+    };
+
+  }
+
+
+  if (item.change24h <= -3) {
+
+    return {
+      label: "STRONG BEARISH",
+      className: "down"
+    };
+
+  }
+
+
+  if (item.change24h < 0) {
+
+    return {
+      label: "BEARISH",
+      className: "down"
+    };
+
+  }
+
+
+  return {
+    label: "NEUTRAL",
+    className: "dim"
+  };
+
+}
+
+
+/* =========================================
+   RISK
+========================================= */
+
+function getRisk(item) {
+
+  const move =
+    Math.abs(
+      item.change24h
+    );
+
+
+  const funding =
+    Math.abs(
+      item.fundingRate * 100
+    );
+
+
+  if (
+    move >= 8 ||
+    funding >= 0.08
+  ) {
+
+    return {
+      label: "HIGH",
+      className: "down"
+    };
+
+  }
+
+
+  if (
+    move >= 4 ||
+    funding >= 0.04
+  ) {
+
+    return {
+      label: "MODERATE",
+      className: ""
+    };
+
+  }
+
+
+  return {
+    label: "LOW",
+    className: "up"
+  };
+
+}
+
+
+/* =========================================
+   AI READ
+========================================= */
+
+function generateAssetRead(item) {
+
+  const parts = [];
+
+
+  if (
+    item.change24h >= 3
+  ) {
+
+    parts.push(
+      "momentum bullish kuat"
+    );
+
+  }
+
+  else if (
+    item.change24h > 0
+  ) {
+
+    parts.push(
+      "momentum masih positif"
+    );
+
+  }
+
+  else if (
+    item.change24h <= -3
+  ) {
+
+    parts.push(
+      "tekanan bearish cukup kuat"
+    );
+
+  }
+
+  else {
+
+    parts.push(
+      "momentum relatif lemah"
+    );
+
+  }
+
+
+  if (
+    item.fundingRate > 0.0005
+  ) {
+
+    parts.push(
+      "long mulai crowded"
+    );
+
+  }
+
+  else if (
+    item.fundingRate < -0.0005
+  ) {
+
+    parts.push(
+      "short mulai dominan"
+    );
+
+  }
+
+  else {
+
+    parts.push(
+      "funding relatif netral"
+    );
+
+  }
+
+
+  return (
+    parts.join(", ") +
+    "."
+  );
+
+}
+
+
+/* =========================================
+   REFRESH
+========================================= */
+
+document
+  .getElementById(
+    "intel-refresh"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      loadIntelligence();
+
+    }
+  );
+
+
+/* =========================================
+   THEME
+========================================= */
+
+document
+  .getElementById(
+    "theme-toggle"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      toggleTheme();
+
+    }
+  );
+
+
+/* =========================================
+   INIT
+========================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    loadIntelligence();
+
+  }
+);
+
+</script>
+
+
+</body>
+
+</html>
