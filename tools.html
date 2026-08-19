@@ -1,32 +1,998 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pantau</title>
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/components.css" />
-<link rel="stylesheet" href="css/responsive.css" />
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NEXTRA — Tools</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
 </head>
+
+
 <body>
-<div class="container">
-  <div class="topbar">
-    <div><h1 class="title">Pantau<span class="dot">.</span></h1></div>
-    <button class="icon-btn" id="themeBtn">🌙</button>
+
+<main class="container">
+
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+        Tools<span class="dot">.</span>
+      </h1>
+
+      <p class="subtitle">
+        Trading calculators
+      </p>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+    >
+      ◐
+    </button>
+
+  </header>
+
+
+
+  <!-- TABS -->
+
+  <div
+    class="tabs"
+    style="
+      overflow-x:auto;
+      margin-bottom:14px;
+    "
+  >
+
+    <button
+      class="tab active"
+      data-tool="position"
+    >
+      Position
+    </button>
+
+    <button
+      class="tab"
+      data-tool="risk"
+    >
+      Risk / Reward
+    </button>
+
+    <button
+      class="tab"
+      data-tool="pnl"
+    >
+      P&L
+    </button>
+
+    <button
+      class="tab"
+      data-tool="liquidation"
+    >
+      Liquidation
+    </button>
+
   </div>
-  <div class="coming-soon">
-    <div class="big-icon">🚧</div>
-    <p>Halaman ini segera hadir.</p>
-  </div>
-</div>
+
+
+
+  <!-- POSITION SIZE -->
+
+  <section
+    id="tool-position"
+    class="tool-panel"
+  >
+
+    <div class="coin-card"
+      style="display:block;"
+    >
+
+      <h2 style="font-size:15px;">
+        Position Size
+      </h2>
+
+      <p class="dim"
+        style="font-size:9px;"
+      >
+        Hitung ukuran posisi berdasarkan
+        modal dan risiko.
+      </p>
+
+
+      <label>Account Balance ($)</label>
+
+      <input
+        id="pos-balance"
+        class="search-input"
+        type="number"
+        placeholder="1000"
+      >
+
+
+      <label>Risk (%)</label>
+
+      <input
+        id="pos-risk"
+        class="search-input"
+        type="number"
+        placeholder="1"
+        step="0.1"
+      >
+
+
+      <label>Entry Price</label>
+
+      <input
+        id="pos-entry"
+        class="search-input"
+        type="number"
+        placeholder="100000"
+      >
+
+
+      <label>Stop Loss Price</label>
+
+      <input
+        id="pos-stop"
+        class="search-input"
+        type="number"
+        placeholder="98000"
+      >
+
+
+      <button
+        id="calculate-position"
+        class="primary-btn"
+        style="width:100%;margin-top:8px;"
+      >
+        Calculate
+      </button>
+
+
+      <div
+        id="position-result"
+        style="margin-top:14px;"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- RISK REWARD -->
+
+  <section
+    id="tool-risk"
+    class="tool-panel"
+    style="display:none;"
+  >
+
+    <div
+      class="coin-card"
+      style="display:block;"
+    >
+
+      <h2 style="font-size:15px;">
+        Risk / Reward
+      </h2>
+
+      <p class="dim"
+        style="font-size:9px;"
+      >
+        Hitung rasio risiko terhadap
+        potensi reward.
+      </p>
+
+
+      <label>Entry</label>
+
+      <input
+        id="rr-entry"
+        class="search-input"
+        type="number"
+      >
+
+
+      <label>Stop Loss</label>
+
+      <input
+        id="rr-stop"
+        class="search-input"
+        type="number"
+      >
+
+
+      <label>Take Profit</label>
+
+      <input
+        id="rr-target"
+        class="search-input"
+        type="number"
+      >
+
+
+      <button
+        id="calculate-rr"
+        class="primary-btn"
+        style="width:100%;margin-top:8px;"
+      >
+        Calculate
+      </button>
+
+
+      <div
+        id="rr-result"
+        style="margin-top:14px;"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- PNL -->
+
+  <section
+    id="tool-pnl"
+    class="tool-panel"
+    style="display:none;"
+  >
+
+    <div
+      class="coin-card"
+      style="display:block;"
+    >
+
+      <h2 style="font-size:15px;">
+        Profit & Loss
+      </h2>
+
+
+      <label>Entry Price</label>
+
+      <input
+        id="pnl-entry"
+        class="search-input"
+        type="number"
+      >
+
+
+      <label>Exit Price</label>
+
+      <input
+        id="pnl-exit"
+        class="search-input"
+        type="number"
+      >
+
+
+      <label>Position Size ($)</label>
+
+      <input
+        id="pnl-size"
+        class="search-input"
+        type="number"
+      >
+
+
+      <label>Side</label>
+
+      <select
+        id="pnl-side"
+        class="search-input"
+      >
+
+        <option value="long">
+          Long
+        </option>
+
+        <option value="short">
+          Short
+        </option>
+
+      </select>
+
+
+      <button
+        id="calculate-pnl"
+        class="primary-btn"
+        style="width:100%;margin-top:8px;"
+      >
+        Calculate
+      </button>
+
+
+      <div
+        id="pnl-result"
+        style="margin-top:14px;"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- LIQUIDATION -->
+
+  <section
+    id="tool-liquidation"
+    class="tool-panel"
+    style="display:none;"
+  >
+
+    <div
+      class="coin-card"
+      style="display:block;"
+    >
+
+      <h2 style="font-size:15px;">
+        Liquidation Estimate
+      </h2>
+
+      <p class="dim"
+        style="font-size:9px;"
+      >
+        Estimasi sederhana liquidation
+        price untuk futures.
+      </p>
+
+
+      <label>Entry Price</label>
+
+      <input
+        id="liq-entry"
+        class="search-input"
+        type="number"
+      >
+
+
+      <label>Leverage</label>
+
+      <input
+        id="liq-leverage"
+        class="search-input"
+        type="number"
+        placeholder="10"
+      >
+
+
+      <label>Side</label>
+
+      <select
+        id="liq-side"
+        class="search-input"
+      >
+
+        <option value="long">
+          Long
+        </option>
+
+        <option value="short">
+          Short
+        </option>
+
+      </select>
+
+
+      <button
+        id="calculate-liquidation"
+        class="primary-btn"
+        style="width:100%;margin-top:8px;"
+      >
+        Calculate
+      </button>
+
+
+      <div
+        id="liq-result"
+        style="margin-top:14px;"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+
+<!-- NAV -->
+
 <div id="bottom-nav"></div>
-<script src="js/api.js"></script>
+
+
+
 <script src="js/app.js"></script>
+
+
 <script>
-initTheme(); renderNav();
-const b = document.getElementById("themeBtn");
-b.textContent = document.documentElement.getAttribute("data-theme")==="dark"?"🌙":"☀️";
-b.addEventListener("click",()=>{b.textContent=toggleTheme()==="dark"?"🌙":"☀️";});
+
+function money(value) {
+
+  return "$" +
+    Number(value)
+      .toLocaleString(
+        "en-US",
+        {
+          maximumFractionDigits:2
+        }
+      );
+
+}
+
+
+/* ===============================
+   TABS
+================================ */
+
+document
+  .querySelectorAll("[data-tool]")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        const tool =
+          button.dataset.tool;
+
+
+        document
+          .querySelectorAll(
+            ".tool-panel"
+          )
+          .forEach(panel => {
+
+            panel.style.display =
+              "none";
+
+          });
+
+
+        document
+          .getElementById(
+            `tool-${tool}`
+          )
+          .style.display =
+          "block";
+
+
+        document
+          .querySelectorAll(
+            "[data-tool]"
+          )
+          .forEach(btn => {
+
+            btn.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+    );
+
+  });
+
+
+/* ===============================
+   POSITION SIZE
+================================ */
+
+document
+  .getElementById(
+    "calculate-position"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const balance =
+        Number(
+          document.getElementById(
+            "pos-balance"
+          ).value
+        );
+
+
+      const risk =
+        Number(
+          document.getElementById(
+            "pos-risk"
+          ).value
+        );
+
+
+      const entry =
+        Number(
+          document.getElementById(
+            "pos-entry"
+          ).value
+        );
+
+
+      const stop =
+        Number(
+          document.getElementById(
+            "pos-stop"
+          ).value
+        );
+
+
+      if (
+        !balance ||
+        !risk ||
+        !entry ||
+        !stop
+      ) {
+
+        return;
+
+      }
+
+
+      const riskAmount =
+        balance *
+        risk /
+        100;
+
+
+      const priceRisk =
+        Math.abs(
+          entry - stop
+        );
+
+
+      const coins =
+        riskAmount /
+        priceRisk;
+
+
+      const position =
+        coins *
+        entry;
+
+
+      document
+        .getElementById(
+          "position-result"
+        )
+        .innerHTML = `
+
+          <div class="highlight-box">
+
+            <div class="dim">
+              Maximum Risk
+            </div>
+
+            <strong>
+              ${money(riskAmount)}
+            </strong>
+
+            <br><br>
+
+            <div class="dim">
+              Position Size
+            </div>
+
+            <strong>
+              ${money(position)}
+            </strong>
+
+            <br><br>
+
+            <div class="dim">
+              Quantity
+            </div>
+
+            <strong>
+              ${coins.toFixed(6)}
+            </strong>
+
+          </div>
+
+        `;
+
+    }
+  );
+
+
+/* ===============================
+   RISK / REWARD
+================================ */
+
+document
+  .getElementById(
+    "calculate-rr"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const entry =
+        Number(
+          document.getElementById(
+            "rr-entry"
+          ).value
+        );
+
+
+      const stop =
+        Number(
+          document.getElementById(
+            "rr-stop"
+          ).value
+        );
+
+
+      const target =
+        Number(
+          document.getElementById(
+            "rr-target"
+          ).value
+        );
+
+
+      if (
+        !entry ||
+        !stop ||
+        !target
+      ) return;
+
+
+      const risk =
+        Math.abs(
+          entry - stop
+        );
+
+
+      const reward =
+        Math.abs(
+          target - entry
+        );
+
+
+      const ratio =
+        reward /
+        risk;
+
+
+      document
+        .getElementById(
+          "rr-result"
+        )
+        .innerHTML = `
+
+          <div class="highlight-box">
+
+            <div class="dim">
+              Risk
+            </div>
+
+            <strong>
+              ${money(risk)}
+            </strong>
+
+            <br><br>
+
+            <div class="dim">
+              Reward
+            </div>
+
+            <strong>
+              ${money(reward)}
+            </strong>
+
+            <br><br>
+
+            <div class="dim">
+              Risk / Reward
+            </div>
+
+            <strong
+              class="${
+                ratio >= 2
+                  ? "up"
+                  : ""
+              }"
+            >
+              1 : ${ratio.toFixed(2)}
+            </strong>
+
+          </div>
+
+        `;
+
+    }
+  );
+
+
+/* ===============================
+   PNL
+================================ */
+
+document
+  .getElementById(
+    "calculate-pnl"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const entry =
+        Number(
+          document.getElementById(
+            "pnl-entry"
+          ).value
+        );
+
+
+      const exit =
+        Number(
+          document.getElementById(
+            "pnl-exit"
+          ).value
+        );
+
+
+      const size =
+        Number(
+          document.getElementById(
+            "pnl-size"
+          ).value
+        );
+
+
+      const side =
+        document.getElementById(
+          "pnl-side"
+        ).value;
+
+
+      if (
+        !entry ||
+        !exit ||
+        !size
+      ) return;
+
+
+      let percentage =
+        (
+          exit - entry
+        ) /
+        entry *
+        100;
+
+
+      if (
+        side === "short"
+      ) {
+
+        percentage *= -1;
+
+      }
+
+
+      const pnl =
+        size *
+        percentage /
+        100;
+
+
+      const cls =
+        pnl >= 0
+          ? "up"
+          : "down";
+
+
+      document
+        .getElementById(
+          "pnl-result"
+        )
+        .innerHTML = `
+
+          <div class="highlight-box">
+
+            <div class="dim">
+              P&L
+            </div>
+
+            <strong
+              class="${cls}"
+              style="font-size:20px;"
+            >
+              ${pnl >= 0 ? "+" : ""}
+              ${money(pnl)}
+            </strong>
+
+            <br><br>
+
+            <div class="dim">
+              Return
+            </div>
+
+            <strong
+              class="${cls}"
+            >
+              ${percentage.toFixed(2)}%
+            </strong>
+
+          </div>
+
+        `;
+
+    }
+  );
+
+
+/* ===============================
+   LIQUIDATION
+================================ */
+
+document
+  .getElementById(
+    "calculate-liquidation"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const entry =
+        Number(
+          document.getElementById(
+            "liq-entry"
+          ).value
+        );
+
+
+      const leverage =
+        Number(
+          document.getElementById(
+            "liq-leverage"
+          ).value
+        );
+
+
+      const side =
+        document.getElementById(
+          "liq-side"
+        ).value;
+
+
+      if (
+        !entry ||
+        !leverage ||
+        leverage <= 1
+      ) return;
+
+
+      const maintenance =
+        0.005;
+
+
+      let liquidation;
+
+
+      if (
+        side === "long"
+      ) {
+
+        liquidation =
+          entry *
+          (
+            1 -
+            (
+              1 / leverage
+            ) +
+            maintenance
+          );
+
+      } else {
+
+        liquidation =
+          entry *
+          (
+            1 +
+            (
+              1 / leverage
+            ) -
+            maintenance
+          );
+
+      }
+
+
+      document
+        .getElementById(
+          "liq-result"
+        )
+        .innerHTML = `
+
+          <div class="highlight-box">
+
+            <div class="dim">
+              Estimated Liquidation
+            </div>
+
+            <strong
+              style="font-size:20px;"
+            >
+              ${money(
+                liquidation
+              )}
+            </strong>
+
+            <br><br>
+
+            <div
+              class="dim"
+              style="
+                font-size:8px;
+              "
+            >
+              Ini hanya estimasi.
+              Harga liquidation sebenarnya
+              dapat berbeda karena maintenance
+              margin, fee, tier posisi dan
+              aturan exchange.
+            </div>
+
+          </div>
+
+        `;
+
+    }
+  );
+
+
+/* ===============================
+   THEME
+================================ */
+
+document
+  .getElementById(
+    "theme-toggle"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      toggleTheme();
+
+    }
+  );
+
 </script>
+
+
 </body>
+
 </html>
