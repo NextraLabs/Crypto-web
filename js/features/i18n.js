@@ -1,11 +1,23 @@
 /* =========================================================
-   NEXTRA i18n — MULTI LANGUAGE SYSTEM V2
-   20 LANGUAGES + PROFILE
+   NEXTRA i18n — MULTI LANGUAGE SYSTEM V3
+   20 LANGUAGES
+   Persistent Language
+   RTL Support
+   Profile Support
 ========================================================= */
 
 (() => {
 
-  const LANGUAGE_KEY = "nextra_settings";
+  "use strict";
+
+
+  /* =====================================================
+     CONFIG
+  ====================================================== */
+
+  const SETTINGS_KEY = "nextra_settings";
+
+  const DEFAULT_LANGUAGE = "id";
 
 
   /* =====================================================
@@ -154,11 +166,11 @@
       profileTitle: "Profil",
       profileSubtitle: "Identitas NEXTRA kamu",
       editProfile: "Edit Profil",
-
       active: "Aktif",
 
       traderLevel: "LEVEL TRADER",
       rookieTrader: "Rookie Trader",
+
       currentPlan: "PAKET SAAT INI",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Inteligensi market inti",
@@ -193,7 +205,8 @@
       darkMode: "Mode gelap",
 
       aboutNextra: "TENTANG NEXTRA",
-      yourMarketIntelligence: "Your Market. Your Intelligence.",
+      yourMarketIntelligence:
+        "Your Market. Your Intelligence.",
 
       displayName: "Nama tampilan",
       username: "Username",
@@ -241,11 +254,11 @@
       profileTitle: "Profile",
       profileSubtitle: "Your NEXTRA identity",
       editProfile: "Edit Profile",
-
       active: "Active",
 
       traderLevel: "TRADER LEVEL",
       rookieTrader: "Rookie Trader",
+
       currentPlan: "CURRENT PLAN",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Core market intelligence",
@@ -280,7 +293,8 @@
       darkMode: "Dark mode",
 
       aboutNextra: "ABOUT NEXTRA",
-      yourMarketIntelligence: "Your Market. Your Intelligence.",
+      yourMarketIntelligence:
+        "Your Market. Your Intelligence.",
 
       displayName: "Display name",
       username: "Username",
@@ -328,11 +342,11 @@
       profileTitle: "Perfil",
       profileSubtitle: "Tu identidad NEXTRA",
       editProfile: "Editar perfil",
-
       active: "Activo",
 
       traderLevel: "NIVEL DE TRADER",
       rookieTrader: "Trader principiante",
+
       currentPlan: "PLAN ACTUAL",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Inteligencia de mercado",
@@ -416,11 +430,11 @@
       profileTitle: "Profil",
       profileSubtitle: "Votre identité NEXTRA",
       editProfile: "Modifier le profil",
-
       active: "Actif",
 
       traderLevel: "NIVEAU TRADER",
       rookieTrader: "Trader débutant",
+
       currentPlan: "FORFAIT ACTUEL",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Intelligence du marché",
@@ -504,11 +518,11 @@
       profileTitle: "Profil",
       profileSubtitle: "Deine NEXTRA-Identität",
       editProfile: "Profil bearbeiten",
-
       active: "Aktiv",
 
       traderLevel: "TRADER-LEVEL",
       rookieTrader: "Anfänger-Trader",
+
       currentPlan: "AKTUELLER TARIF",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Kern-Marktintelligenz",
@@ -592,11 +606,11 @@
       profileTitle: "Profilo",
       profileSubtitle: "La tua identità NEXTRA",
       editProfile: "Modifica profilo",
-
       active: "Attivo",
 
       traderLevel: "LIVELLO TRADER",
       rookieTrader: "Trader principiante",
+
       currentPlan: "PIANO ATTUALE",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Intelligenza di mercato",
@@ -680,11 +694,11 @@
       profileTitle: "Perfil",
       profileSubtitle: "Sua identidade NEXTRA",
       editProfile: "Editar perfil",
-
       active: "Ativo",
 
       traderLevel: "NÍVEL DO TRADER",
       rookieTrader: "Trader iniciante",
+
       currentPlan: "PLANO ATUAL",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Inteligência de mercado",
@@ -738,6 +752,10 @@
     },
 
 
+    /* ===================================================
+       PORTUGUESE BRAZIL
+    =================================================== */
+
     "pt-BR": {
 
       home: "Início",
@@ -764,11 +782,11 @@
       profileTitle: "Perfil",
       profileSubtitle: "Sua identidade NEXTRA",
       editProfile: "Editar perfil",
-
       active: "Ativo",
 
       traderLevel: "NÍVEL DO TRADER",
       rookieTrader: "Trader iniciante",
+
       currentPlan: "PLANO ATUAL",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Inteligência de mercado",
@@ -852,11 +870,11 @@
       profileTitle: "Профиль",
       profileSubtitle: "Ваша идентичность NEXTRA",
       editProfile: "Изменить профиль",
-
       active: "Активен",
 
       traderLevel: "УРОВЕНЬ ТРЕЙДЕРА",
       rookieTrader: "Начинающий трейдер",
+
       currentPlan: "ТЕКУЩИЙ ПЛАН",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Рыночная аналитика",
@@ -940,11 +958,11 @@
       profileTitle: "个人资料",
       profileSubtitle: "你的 NEXTRA 身份",
       editProfile: "编辑资料",
-
       active: "活跃",
 
       traderLevel: "交易员等级",
       rookieTrader: "新手交易员",
+
       currentPlan: "当前方案",
       freePlan: "NEXTRA Free",
       coreIntelligence: "核心市场情报",
@@ -998,6 +1016,10 @@
     },
 
 
+    /* ===================================================
+       TRADITIONAL CHINESE
+    =================================================== */
+
     "zh-TW": {
 
       home: "首頁",
@@ -1024,11 +1046,11 @@
       profileTitle: "個人資料",
       profileSubtitle: "你的 NEXTRA 身份",
       editProfile: "編輯個人資料",
-
       active: "啟用",
 
       traderLevel: "交易員等級",
       rookieTrader: "新手交易員",
+
       currentPlan: "目前方案",
       freePlan: "NEXTRA Free",
       coreIntelligence: "核心市場情報",
@@ -1112,11 +1134,11 @@
       profileTitle: "プロフィール",
       profileSubtitle: "あなたのNEXTRAアイデンティティ",
       editProfile: "プロフィールを編集",
-
       active: "アクティブ",
 
       traderLevel: "トレーダーレベル",
       rookieTrader: "ルーキートレーダー",
+
       currentPlan: "現在のプラン",
       freePlan: "NEXTRA Free",
       coreIntelligence: "市場インテリジェンス",
@@ -1200,11 +1222,11 @@
       profileTitle: "프로필",
       profileSubtitle: "나의 NEXTRA 아이덴티티",
       editProfile: "프로필 수정",
-
       active: "활성",
 
       traderLevel: "트레이더 레벨",
       rookieTrader: "초보 트레이더",
+
       currentPlan: "현재 플랜",
       freePlan: "NEXTRA Free",
       coreIntelligence: "핵심 시장 인텔리전스",
@@ -1288,11 +1310,11 @@
       profileTitle: "Profil",
       profileSubtitle: "NEXTRA kimliğiniz",
       editProfile: "Profili düzenle",
-
       active: "Aktif",
 
       traderLevel: "TRADER SEVİYESİ",
       rookieTrader: "Acemi Trader",
+
       currentPlan: "MEVCUT PLAN",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Temel piyasa istihbaratı",
@@ -1376,11 +1398,11 @@
       profileTitle: "Hồ sơ",
       profileSubtitle: "Danh tính NEXTRA của bạn",
       editProfile: "Chỉnh sửa hồ sơ",
-
       active: "Đang hoạt động",
 
       traderLevel: "CẤP ĐỘ TRADER",
       rookieTrader: "Trader mới",
+
       currentPlan: "GÓI HIỆN TẠI",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Thông tin thị trường cốt lõi",
@@ -1464,11 +1486,11 @@
       profileTitle: "โปรไฟล์",
       profileSubtitle: "ตัวตน NEXTRA ของคุณ",
       editProfile: "แก้ไขโปรไฟล์",
-
       active: "ใช้งานอยู่",
 
       traderLevel: "ระดับเทรดเดอร์",
       rookieTrader: "เทรดเดอร์มือใหม่",
+
       currentPlan: "แพ็กเกจปัจจุบัน",
       freePlan: "NEXTRA Free",
       coreIntelligence: "ข้อมูลตลาดหลัก",
@@ -1552,11 +1574,11 @@
       profileTitle: "الملف الشخصي",
       profileSubtitle: "هويتك في NEXTRA",
       editProfile: "تعديل الملف الشخصي",
-
       active: "نشط",
 
       traderLevel: "مستوى المتداول",
       rookieTrader: "متداول مبتدئ",
+
       currentPlan: "الخطة الحالية",
       freePlan: "NEXTRA Free",
       coreIntelligence: "ذكاء السوق الأساسي",
@@ -1640,11 +1662,11 @@
       profileTitle: "प्रोफ़ाइल",
       profileSubtitle: "आपकी NEXTRA पहचान",
       editProfile: "प्रोफ़ाइल संपादित करें",
-
       active: "सक्रिय",
 
       traderLevel: "ट्रेडर स्तर",
       rookieTrader: "नए ट्रेडर",
+
       currentPlan: "वर्तमान प्लान",
       freePlan: "NEXTRA Free",
       coreIntelligence: "मुख्य मार्केट इंटेलिजेंस",
@@ -1728,11 +1750,11 @@
       profileTitle: "Profiel",
       profileSubtitle: "Jouw NEXTRA-identiteit",
       editProfile: "Profiel bewerken",
-
       active: "Actief",
 
       traderLevel: "TRADER-NIVEAU",
       rookieTrader: "Beginnende trader",
+
       currentPlan: "HUIDIG PLAN",
       freePlan: "NEXTRA Free",
       coreIntelligence: "Marktintelligentie",
@@ -1750,4 +1772,1221 @@
       futuresAchievement: "Futures",
       openFutures: "Futures openen",
       marketHunter: "Marktjager",
-      trackMarkets
+      trackMarkets: "Markten volgen",
+
+      account: "ACCOUNT",
+      email: "E-mail",
+      notConnected: "Niet verbonden",
+      accountStatus: "Accountstatus",
+      activeAccount: "Actief account",
+
+      quickActions: "SNELLE ACTIES",
+      manageFavoriteAssets: "Favoriete activa beheren",
+      binanceFuturesMarket: "Binance Futures-markt",
+      manageMarketAlerts: "Marktwaarschuwingen beheren",
+
+      preferences: "VOORKEUREN",
+      darkMode: "Donkere modus",
+
+      aboutNextra: "OVER NEXTRA",
+      yourMarketIntelligence:
+        "Jouw markt. Jouw intelligentie.",
+
+      displayName: "Weergavenaam",
+      username: "Gebruikersnaam",
+      yourName: "Jouw naam",
+      saveChanges: "Wijzigingen opslaan",
+
+      languageTitle: "Taal",
+      selectLanguage: "Taal selecteren",
+
+      traderDescription:
+        "Blijf NEXTRA ontdekken om je volgende niveau vrij te spelen.",
+
+      xp: "XP"
+
+    },
+
+
+    /* ===================================================
+       POLISH
+    =================================================== */
+
+    pl: {
+
+      home: "Strona główna",
+      markets: "Rynki",
+      trending: "Trendy",
+      futures: "Futures",
+      tools: "Narzędzia",
+      education: "Edukacja",
+      profile: "Profil",
+
+      search: "Szukaj",
+      settings: "Ustawienia",
+      notifications: "Powiadomienia",
+      language: "Język",
+      appearance: "Wygląd",
+
+      dark: "Ciemny",
+      light: "Jasny",
+
+      save: "Zapisz",
+      cancel: "Anuluj",
+      close: "Zamknij",
+
+      profileTitle: "Profil",
+      profileSubtitle: "Twoja tożsamość NEXTRA",
+      editProfile: "Edytuj profil",
+      active: "Aktywny",
+
+      traderLevel: "POZIOM TRADERA",
+      rookieTrader: "Początkujący trader",
+
+      currentPlan: "AKTUALNY PLAN",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Podstawowa inteligencja rynkowa",
+      upgrade: "Ulepsz",
+
+      watchlist: "Lista obserwowanych",
+      alerts: "Alerty",
+      marketsCount: "Rynki",
+
+      achievements: "OSIĄGNIĘCIA",
+      firstLook: "Pierwsze spojrzenie",
+      exploredNextra: "Poznano NEXTRA",
+      watcher: "Obserwator",
+      buildWatchlist: "Utwórz listę",
+      futuresAchievement: "Futures",
+      openFutures: "Otwórz futures",
+      marketHunter: "Łowca rynków",
+      trackMarkets: "Śledź rynki",
+
+      account: "KONTO",
+      email: "E-mail",
+      notConnected: "Niepołączone",
+      accountStatus: "Status konta",
+      activeAccount: "Aktywne konto",
+
+      quickActions: "SZYBKIE AKCJE",
+      manageFavoriteAssets: "Zarządzaj ulubionymi aktywami",
+      binanceFuturesMarket: "Rynek Binance Futures",
+      manageMarketAlerts: "Zarządzaj alertami",
+
+      preferences: "PREFERENCJE",
+      darkMode: "Tryb ciemny",
+
+      aboutNextra: "O NEXTRA",
+      yourMarketIntelligence:
+        "Twój rynek. Twoja inteligencja.",
+
+      displayName: "Nazwa wyświetlana",
+      username: "Nazwa użytkownika",
+      yourName: "Twoje imię",
+      saveChanges: "Zapisz zmiany",
+
+      languageTitle: "Język",
+      selectLanguage: "Wybierz język",
+
+      traderDescription:
+        "Odkrywaj NEXTRA dalej, aby odblokować kolejny poziom.",
+
+      xp: "XP"
+
+    }
+
+  };
+
+
+  /* =====================================================
+     GET SAVED SETTINGS
+  ====================================================== */
+
+  function getSettings() {
+
+    try {
+
+      const saved =
+        JSON.parse(
+          localStorage.getItem(
+            SETTINGS_KEY
+          ) || "{}"
+        );
+
+      return saved &&
+        typeof saved === "object"
+        ? saved
+        : {};
+
+    }
+
+    catch {
+
+      return {};
+
+    }
+
+  }
+
+
+  /* =====================================================
+     SAVE SETTINGS
+  ====================================================== */
+
+  function saveSettings(settings) {
+
+    try {
+
+      localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+      );
+
+    }
+
+    catch {
+
+      console.warn(
+        "NEXTRA: Unable to save language settings."
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     GET LANGUAGE
+  ====================================================== */
+
+  function getLanguage() {
+
+    const settings =
+      getSettings();
+
+    let language =
+      settings.language ||
+      DEFAULT_LANGUAGE;
+
+
+    if (!LANGUAGES[language]) {
+
+      language =
+        DEFAULT_LANGUAGE;
+
+    }
+
+
+    return language;
+
+  }
+
+
+  /* =====================================================
+     TRANSLATE
+  ====================================================== */
+
+  function translate(key) {
+
+    const language =
+      getLanguage();
+
+    const current =
+      TRANSLATIONS[language] ||
+      TRANSLATIONS[DEFAULT_LANGUAGE];
+
+    return (
+      current[key] ??
+      TRANSLATIONS[DEFAULT_LANGUAGE][key] ??
+      key
+    );
+
+  }
+
+
+  /* =====================================================
+     APPLY DOCUMENT DIRECTION
+  ====================================================== */
+
+  function applyDirection(language) {
+
+    const rtlLanguages = [
+      "ar"
+    ];
+
+    const direction =
+      rtlLanguages.includes(language)
+        ? "rtl"
+        : "ltr";
+
+
+    document.documentElement.dir =
+      direction;
+
+
+    document.documentElement.lang =
+      language;
+
+  }
+
+
+  /* =====================================================
+     DATA-I18N SUPPORT
+  ====================================================== */
+
+  function translateDataAttributes() {
+
+    const elements =
+      document.querySelectorAll(
+        "[data-i18n]"
+      );
+
+
+    elements.forEach(
+      element => {
+
+        const key =
+          element.dataset.i18n;
+
+        if (!key) return;
+
+
+        element.textContent =
+          translate(key);
+
+      }
+    );
+
+
+    const placeholders =
+      document.querySelectorAll(
+        "[data-i18n-placeholder]"
+      );
+
+
+    placeholders.forEach(
+      element => {
+
+        const key =
+          element.dataset.i18nPlaceholder;
+
+        if (!key) return;
+
+
+        element.placeholder =
+          translate(key);
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     PROFILE PAGE SUPPORT
+  ====================================================== */
+
+  function translateProfilePage() {
+
+    const page =
+      document.title
+        .toLowerCase()
+        .includes("profile");
+
+
+    if (!page) return;
+
+
+    const map = {
+
+      ".title":
+        "profileTitle",
+
+      ".subtitle":
+        "profileSubtitle",
+
+      "#editProfileBtn":
+        "editProfile",
+
+      ".profile-status":
+        "active",
+
+      ".mini-label":
+        null
+
+    };
+
+
+    Object.entries(map)
+      .forEach(
+        ([selector, key]) => {
+
+          if (!key) return;
+
+
+          const element =
+            document.querySelector(
+              selector
+            );
+
+
+          if (element) {
+
+            if (
+              selector ===
+              ".profile-status"
+            ) {
+
+              const icon =
+                element.querySelector(
+                  "i"
+                );
+
+              element.textContent =
+                "";
+
+              if (icon) {
+
+                element.appendChild(
+                  icon
+                );
+
+              }
+
+              element.append(
+                " " +
+                translate(key)
+              );
+
+            }
+
+            else {
+
+              element.textContent =
+                translate(key);
+
+            }
+
+          }
+
+        }
+      );
+
+
+    /* -------------------------------------------------
+       PROFILE SECTION LABELS
+    ------------------------------------------------- */
+
+    const labels =
+      document.querySelectorAll(
+        ".section-label"
+      );
+
+
+    const labelTranslations = {
+
+      "EDIT PROFILE":
+        "languageTitle",
+
+      "ACHIEVEMENTS":
+        "achievements",
+
+      "ACCOUNT":
+        "account",
+
+      "QUICK ACTIONS":
+        "quickActions",
+
+      "PREFERENCES":
+        "preferences",
+
+      "ABOUT NEXTRA":
+        "aboutNextra"
+
+    };
+
+
+    labels.forEach(
+      label => {
+
+        const text =
+          label.textContent
+            .trim()
+            .toUpperCase();
+
+
+        const key =
+          labelTranslations[text];
+
+
+        if (key) {
+
+          label.textContent =
+            translate(key);
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------
+       PROFILE LEVEL
+    ------------------------------------------------- */
+
+    const traderLevel =
+      document.querySelector(
+        ".trader-level-card h3"
+      );
+
+
+    if (traderLevel) {
+
+      traderLevel.textContent =
+        translate(
+          "rookieTrader"
+        );
+
+    }
+
+
+    const traderLabel =
+      document.querySelector(
+        ".trader-level-card .mini-label"
+      );
+
+
+    if (traderLabel) {
+
+      traderLabel.textContent =
+        translate(
+          "traderLevel"
+        );
+
+    }
+
+
+    /* -------------------------------------------------
+       XP DESCRIPTION
+    ------------------------------------------------- */
+
+    const xpDescription =
+      document.querySelector(
+        ".xp-description"
+      );
+
+
+    if (xpDescription) {
+
+      xpDescription.textContent =
+        translate(
+          "traderDescription"
+        );
+
+    }
+
+
+    /* -------------------------------------------------
+       PLAN
+    ------------------------------------------------- */
+
+    const plan =
+      document.querySelector(
+        ".plan-card"
+      );
+
+
+    if (plan) {
+
+      const labels =
+        plan.querySelectorAll(
+          ".mini-label"
+        );
+
+
+      if (labels[0]) {
+
+        labels[0].textContent =
+          translate(
+            "currentPlan"
+          );
+
+      }
+
+
+      const strong =
+        plan.querySelector(
+          "strong"
+        );
+
+
+      if (strong) {
+
+        strong.textContent =
+          translate(
+            "freePlan"
+          );
+
+      }
+
+
+      const spans =
+        plan.querySelectorAll(
+          ".plan-content > span"
+        );
+
+
+      if (spans[1]) {
+
+        spans[1].textContent =
+          translate(
+            "coreIntelligence"
+          );
+
+      }
+
+
+      const button =
+        plan.querySelector(
+          ".plan-button"
+        );
+
+
+      if (button) {
+
+        button.textContent =
+          translate(
+            "upgrade"
+          );
+
+      }
+
+    }
+
+
+    /* -------------------------------------------------
+       STATS
+    ------------------------------------------------- */
+
+    const statLabels =
+      document.querySelectorAll(
+        ".profile-stat span"
+      );
+
+
+    const statKeys = [
+
+      "watchlist",
+      "alerts",
+      "marketsCount"
+
+    ];
+
+
+    statLabels.forEach(
+      (element, index) => {
+
+        if (statKeys[index]) {
+
+          element.textContent =
+            translate(
+              statKeys[index]
+            );
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------
+       ACHIEVEMENTS
+    ------------------------------------------------- */
+
+    const achievements =
+      document.querySelectorAll(
+        ".achievement-card"
+      );
+
+
+    const achievementKeys = [
+
+      [
+        "firstLook",
+        "exploredNextra"
+      ],
+
+      [
+        "watcher",
+        "buildWatchlist"
+      ],
+
+      [
+        "futuresAchievement",
+        "openFutures"
+      ],
+
+      [
+        "marketHunter",
+        "trackMarkets"
+      ]
+
+    ];
+
+
+    achievements.forEach(
+      (card, index) => {
+
+        const keys =
+          achievementKeys[index];
+
+        if (!keys) return;
+
+
+        const strong =
+          card.querySelector(
+            "strong"
+          );
+
+
+        const span =
+          card.querySelector(
+            "span"
+          );
+
+
+        if (strong) {
+
+          strong.textContent =
+            translate(
+              keys[0]
+            );
+
+        }
+
+
+        if (span) {
+
+          span.textContent =
+            translate(
+              keys[1]
+            );
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------
+       ACCOUNT
+    ------------------------------------------------- */
+
+    const accountItems =
+      document.querySelectorAll(
+        ".profile-section .profile-item"
+      );
+
+
+    accountItems.forEach(
+      item => {
+
+        const strong =
+          item.querySelector(
+            "strong"
+          );
+
+
+        const span =
+          item.querySelector(
+            "span"
+          );
+
+
+        if (!strong) return;
+
+
+        const text =
+          strong.textContent
+            .trim()
+            .replace(
+              /^[^A-Za-zÀ-ÿ\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af\u0600-\u06ff]+/,
+              ""
+            );
+
+
+        if (
+          text === "Email"
+        ) {
+
+          strong.textContent =
+            translate(
+              "email"
+            );
+
+
+          if (span) {
+
+            span.textContent =
+              translate(
+                "notConnected"
+              );
+
+          }
+
+        }
+
+
+        if (
+          text === "Account Status"
+        ) {
+
+          strong.textContent =
+            translate(
+              "accountStatus"
+            );
+
+
+          if (span) {
+
+            span.textContent =
+              translate(
+                "activeAccount"
+              );
+
+          }
+
+        }
+
+      }
+    );
+
+
+    /* -------------------------------------------------
+       EDIT PROFILE FORM
+    ------------------------------------------------- */
+
+    const editLabels =
+      document.querySelectorAll(
+        ".profile-edit-card label"
+      );
+
+
+    editLabels.forEach(
+      label => {
+
+        const text =
+          label.textContent
+            .trim()
+            .toLowerCase();
+
+
+        if (
+          text ===
+          "display name"
+        ) {
+
+          label.textContent =
+            translate(
+              "displayName"
+            );
+
+        }
+
+
+        if (
+          text ===
+          "username"
+        ) {
+
+          label.textContent =
+            translate(
+              "username"
+            );
+
+        }
+
+      }
+    );
+
+
+    const nameInput =
+      document.getElementById(
+        "nameInput"
+      );
+
+
+    const usernameInput =
+      document.getElementById(
+        "usernameInput"
+      );
+
+
+    if (nameInput) {
+
+      nameInput.placeholder =
+        translate(
+          "yourName"
+        );
+
+    }
+
+
+    if (usernameInput) {
+
+      usernameInput.placeholder =
+        "nextra_user";
+
+    }
+
+
+    const cancelButton =
+      document.getElementById(
+        "cancelProfileBtn"
+      );
+
+
+    const saveButton =
+      document.getElementById(
+        "saveProfileBtn"
+      );
+
+
+    if (cancelButton) {
+
+      cancelButton.textContent =
+        translate(
+          "cancel"
+        );
+
+    }
+
+
+    if (saveButton) {
+
+      saveButton.textContent =
+        translate(
+          "saveChanges"
+        );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     GENERIC NAVIGATION TRANSLATION
+  ====================================================== */
+
+  function translateNavigation() {
+
+    const navMap = {
+
+      "Home": "home",
+      "Markets": "markets",
+      "Trending": "trending",
+      "Futures": "futures",
+      "Tools": "tools",
+      "Education": "education",
+      "Profile": "profile"
+
+    };
+
+
+    document
+      .querySelectorAll(
+        "a, button"
+      )
+      .forEach(
+        element => {
+
+          const text =
+            element.textContent
+              .trim();
+
+
+          const key =
+            navMap[text];
+
+
+          if (!key) return;
+
+
+          /*
+             Hanya translate elemen
+             yang benar-benar berupa
+             label navigasi.
+          */
+
+          const hasComplexContent =
+            element.children.length > 1;
+
+
+          if (!hasComplexContent) {
+
+            element.textContent =
+              translate(key);
+
+          }
+
+        }
+      );
+
+  }
+
+
+  /* =====================================================
+     APPLY TRANSLATION
+  ====================================================== */
+
+  function applyLanguage() {
+
+    const language =
+      getLanguage();
+
+
+    applyDirection(
+      language
+    );
+
+
+    translateDataAttributes();
+
+
+    translateNavigation();
+
+
+    translateProfilePage();
+
+
+    /*
+       Update language selectors
+       yang menggunakan data-language.
+    */
+
+    document
+      .querySelectorAll(
+        "[data-language]"
+      )
+      .forEach(
+        element => {
+
+          const selected =
+            element.dataset.language ===
+            language;
+
+
+          element.classList.toggle(
+            "active",
+            selected
+          );
+
+
+          element.setAttribute(
+            "aria-selected",
+            selected
+              ? "true"
+              : "false"
+          );
+
+        }
+      );
+
+
+    /*
+       Event global.
+    */
+
+    document.dispatchEvent(
+      new CustomEvent(
+        "nextraLanguageChanged",
+        {
+          detail: {
+            language,
+            translations:
+              TRANSLATIONS[language]
+          }
+        }
+      )
+    );
+
+  }
+
+
+  /* =====================================================
+     SET LANGUAGE
+  ====================================================== */
+
+  function setLanguage(language) {
+
+    if (
+      !LANGUAGES[language]
+    ) {
+
+      console.warn(
+        "NEXTRA: Unsupported language:",
+        language
+      );
+
+      return false;
+
+    }
+
+
+    const settings =
+      getSettings();
+
+
+    settings.language =
+      language;
+
+
+    saveSettings(
+      settings
+    );
+
+
+    applyLanguage();
+
+
+    return true;
+
+  }
+
+
+  /* =====================================================
+     LANGUAGE SELECTOR
+  ====================================================== */
+
+  function createLanguageSelector(
+    container
+  ) {
+
+    if (!container) return;
+
+
+    container.innerHTML =
+      "";
+
+
+    Object.entries(
+      LANGUAGES
+    )
+      .forEach(
+        ([code, language]) => {
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.type =
+            "button";
+
+
+          button.dataset.language =
+            code;
+
+
+          button.className =
+            "nextra-language-option";
+
+
+          button.innerHTML = `
+
+            <span class="language-native">
+              ${language.native}
+            </span>
+
+            <span class="language-name">
+              ${language.name}
+            </span>
+
+          `;
+
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              setLanguage(
+                code
+              );
+
+            }
+          );
+
+
+          container.appendChild(
+            button
+          );
+
+        }
+      );
+
+
+    applyLanguage();
+
+  }
+
+
+  /* =====================================================
+     GLOBAL API
+  ====================================================== */
+
+  window.NEXTRA_I18N = {
+
+    languages:
+      LANGUAGES,
+
+    translations:
+      TRANSLATIONS,
+
+    getLanguage,
+
+    setLanguage,
+
+    translate,
+
+    applyLanguage,
+
+    createLanguageSelector
+
+  };
+
+
+  /* =====================================================
+     INITIALIZE
+  ====================================================== */
+
+  function initialize() {
+
+    applyLanguage();
+
+  }
+
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initialize,
+      {
+        once: true
+      }
+    );
+
+  }
+
+  else {
+
+    initialize();
+
+  }
+
+
+})();
