@@ -10,6 +10,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
   <title>Profile — NEXTRA</title>
 
   <link
@@ -27,12 +32,11 @@
 
 <body>
 
+
   <main class="container">
 
 
-    <!-- =========================================
-         HEADER
-    ========================================== -->
+    <!-- HEADER -->
 
     <header class="topbar">
 
@@ -61,26 +65,104 @@
 
 
 
-    <!-- =========================================
-         PROFILE HEADER
-    ========================================== -->
+    <!-- PROFILE HEADER -->
 
     <section class="profile-header">
 
-      <div class="profile-avatar">
+      <button
+        class="profile-avatar"
+        id="avatarButton"
+        type="button"
+        aria-label="Edit profile"
+      >
         N
-      </div>
+      </button>
 
 
       <div class="profile-info">
 
-        <h2>
+        <h2 id="profileName">
           NEXTRA User
         </h2>
 
-        <p>
-          Free Account
+        <p id="profileUsername">
+          @nextra_user
         </p>
+
+      </div>
+
+
+      <button
+        class="profile-edit-btn"
+        id="editProfileBtn"
+        type="button"
+      >
+        Edit
+      </button>
+
+    </section>
+
+
+
+    <!-- EDIT PROFILE -->
+
+    <section
+      class="profile-section"
+      id="editProfilePanel"
+      hidden
+    >
+
+      <div class="section-label">
+        EDIT PROFILE
+      </div>
+
+
+      <div class="profile-edit-card">
+
+        <label for="nameInput">
+          Display name
+        </label>
+
+        <input
+          id="nameInput"
+          type="text"
+          maxlength="30"
+          placeholder="Your name"
+        >
+
+
+        <label for="usernameInput">
+          Username
+        </label>
+
+        <input
+          id="usernameInput"
+          type="text"
+          maxlength="20"
+          placeholder="nextra_user"
+        >
+
+
+        <div class="profile-edit-actions">
+
+          <button
+            id="cancelProfileBtn"
+            type="button"
+            class="profile-secondary-btn"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            id="saveProfileBtn"
+            type="button"
+            class="profile-primary-btn"
+          >
+            Save changes
+          </button>
+
+        </div>
 
       </div>
 
@@ -88,9 +170,7 @@
 
 
 
-    <!-- =========================================
-         ACCOUNT
-    ========================================== -->
+    <!-- ACCOUNT -->
 
     <section class="profile-section">
 
@@ -107,7 +187,7 @@
             Email
           </strong>
 
-          <span>
+          <span id="emailStatus">
             Not connected
           </span>
 
@@ -136,8 +216,8 @@
         </div>
 
 
-        <span class="profile-arrow">
-          ›
+        <span class="profile-check">
+          ✓
         </span>
 
       </div>
@@ -146,9 +226,7 @@
 
 
 
-    <!-- =========================================
-         PREFERENCES
-    ========================================== -->
+    <!-- PREFERENCES -->
 
     <section class="profile-section">
 
@@ -204,9 +282,7 @@
 
 
 
-    <!-- =========================================
-         TRADING
-    ========================================== -->
+    <!-- TRADING -->
 
     <section class="profile-section">
 
@@ -268,9 +344,7 @@
 
 
 
-    <!-- =========================================
-         ABOUT
-    ========================================== -->
+    <!-- ABOUT -->
 
     <section class="profile-section">
 
@@ -304,9 +378,7 @@
 
 
 
-    <!-- =========================================
-         FOOTER
-    ========================================== -->
+    <!-- FOOTER -->
 
     <div class="profile-footer">
 
@@ -319,21 +391,178 @@
 
 
 
-  <!-- =========================================
-       BOTTOM NAVIGATION
-  ========================================== -->
+  <!-- BOTTOM NAVIGATION -->
 
   <div id="bottom-nav"></div>
 
 
 
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================== -->
+  <!-- JAVASCRIPT -->
 
   <script src="js/api.js"></script>
 
   <script src="js/app.js"></script>
+
+
+  <script>
+
+    (() => {
+
+      const KEY = "nextra_profile";
+
+
+      const defaults = {
+
+        name: "NEXTRA User",
+
+        username: "nextra_user"
+
+      };
+
+
+      let profile = {
+
+        ...defaults,
+
+        ...(JSON.parse(
+          localStorage.getItem(KEY) || "{}"
+        ))
+
+      };
+
+
+      const nameEl =
+        document.getElementById("profileName");
+
+      const usernameEl =
+        document.getElementById("profileUsername");
+
+      const avatarEl =
+        document.getElementById("avatarButton");
+
+      const panel =
+        document.getElementById("editProfilePanel");
+
+      const nameInput =
+        document.getElementById("nameInput");
+
+      const usernameInput =
+        document.getElementById("usernameInput");
+
+
+
+      function render() {
+
+        nameEl.textContent =
+          profile.name;
+
+        usernameEl.textContent =
+          "@" + profile.username;
+
+        avatarEl.textContent =
+          (
+            profile.name.trim()[0] || "N"
+          ).toUpperCase();
+
+      }
+
+
+
+      function openEditor() {
+
+        nameInput.value =
+          profile.name;
+
+        usernameInput.value =
+          profile.username;
+
+        panel.hidden = false;
+
+        nameInput.focus();
+
+      }
+
+
+
+      document
+        .getElementById("editProfileBtn")
+        .addEventListener(
+          "click",
+          openEditor
+        );
+
+
+
+      avatarEl.addEventListener(
+        "click",
+        openEditor
+      );
+
+
+
+      document
+        .getElementById("cancelProfileBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            panel.hidden = true;
+
+          }
+        );
+
+
+
+      document
+        .getElementById("saveProfileBtn")
+        .addEventListener(
+          "click",
+          () => {
+
+            const name =
+              nameInput.value.trim()
+              || defaults.name;
+
+
+            const username =
+              (
+                usernameInput.value
+                  .trim()
+                  .replace(
+                    /[^a-zA-Z0-9_]/g,
+                    ""
+                  )
+                || defaults.username
+              ).slice(0, 20);
+
+
+            profile.name =
+              name.slice(0, 30);
+
+            profile.username =
+              username;
+
+
+            localStorage.setItem(
+              KEY,
+              JSON.stringify(profile)
+            );
+
+
+            render();
+
+            panel.hidden = true;
+
+          }
+        );
+
+
+
+      render();
+
+    })();
+
+  </script>
 
 
 </body>
