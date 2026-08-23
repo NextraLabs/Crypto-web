@@ -1,5 +1,6 @@
-// market.js — NEXTRA Markets V3
-// 250 COINS / TOKENS + SEARCH + FILTER + SORT + WATCHLIST
+// market.js — NEXTRA Markets V4
+// 1.000 COINS + 100 COINS / PAGE
+// SEARCH + FILTER + SORT + WATCHLIST
 
 const MARKET_STATE = {
 
@@ -9,11 +10,11 @@ const MARKET_STATE = {
 
   page: 1,
 
-  // Jumlah yang tampil setiap halaman
-  perPage: 25,
+  // 100 coin per halaman
+  perPage: 100,
 
-  // Jumlah data yang diambil dari CoinGecko
-  dataLimit: 250,
+  // Total coin yang disimpan
+  dataLimit: 1000,
 
   search: "",
 
@@ -35,9 +36,7 @@ const MARKET_STATE = {
 ========================================= */
 
 function marketEl(id) {
-
   return document.getElementById(id);
-
 }
 
 
@@ -57,7 +56,7 @@ async function loadMarkets() {
 
     container.innerHTML = `
       <div class="loading">
-        Memuat market...
+        Memuat 1.000 market...
       </div>
     `;
 
@@ -69,10 +68,14 @@ async function loadMarkets() {
     const coins =
       await NEXTRA_API.fetchNormalizedMarkets({
 
-        page: 1,
+        total:
+          MARKET_STATE.dataLimit,
 
         perPage:
-          MARKET_STATE.dataLimit
+          100,
+
+        delay:
+          350
 
       });
 
@@ -108,12 +111,11 @@ async function loadMarkets() {
 
       renderError(
         container,
-        "Gagal memuat market. Coba refresh.",
+        "Gagal memuat market. Coba lagi.",
         loadMarkets
       );
 
     }
-
 
   } finally {
 
@@ -191,7 +193,7 @@ function applyMarketFilters() {
   }
 
 
-  /* GAINERS */
+  /* FILTER */
 
   if (
     MARKET_STATE.filter ===
@@ -208,8 +210,6 @@ function applyMarketFilters() {
 
   }
 
-
-  /* LOSERS */
 
   if (
     MARKET_STATE.filter ===
@@ -238,10 +238,14 @@ function applyMarketFilters() {
       [...data].sort(
         (a, b) =>
           Math.abs(
-            Number(b.change24h)
+            Number(
+              b.change24h
+            )
           ) -
           Math.abs(
-            Number(a.change24h)
+            Number(
+              a.change24h
+            )
           )
       );
 
@@ -261,7 +265,6 @@ function applyMarketFilters() {
     (a, b) => {
 
       let valueA = 0;
-
       let valueB = 0;
 
 
@@ -272,10 +275,14 @@ function applyMarketFilters() {
         case "price":
 
           valueA =
-            Number(a.price) || 0;
+            Number(
+              a.price
+            ) || 0;
 
           valueB =
-            Number(b.price) || 0;
+            Number(
+              b.price
+            ) || 0;
 
           break;
 
@@ -283,10 +290,14 @@ function applyMarketFilters() {
         case "change1h":
 
           valueA =
-            Number(a.change1h) || 0;
+            Number(
+              a.change1h
+            ) || 0;
 
           valueB =
-            Number(b.change1h) || 0;
+            Number(
+              b.change1h
+            ) || 0;
 
           break;
 
@@ -294,10 +305,14 @@ function applyMarketFilters() {
         case "change24h":
 
           valueA =
-            Number(a.change24h) || 0;
+            Number(
+              a.change24h
+            ) || 0;
 
           valueB =
-            Number(b.change24h) || 0;
+            Number(
+              b.change24h
+            ) || 0;
 
           break;
 
@@ -305,10 +320,14 @@ function applyMarketFilters() {
         case "change7d":
 
           valueA =
-            Number(a.change7d) || 0;
+            Number(
+              a.change7d
+            ) || 0;
 
           valueB =
-            Number(b.change7d) || 0;
+            Number(
+              b.change7d
+            ) || 0;
 
           break;
 
@@ -316,10 +335,14 @@ function applyMarketFilters() {
         case "volume":
 
           valueA =
-            Number(a.volume) || 0;
+            Number(
+              a.volume
+            ) || 0;
 
           valueB =
-            Number(b.volume) || 0;
+            Number(
+              b.volume
+            ) || 0;
 
           break;
 
@@ -329,16 +352,21 @@ function applyMarketFilters() {
         default:
 
           valueA =
-            Number(a.marketCap) || 0;
+            Number(
+              a.marketCap
+            ) || 0;
 
           valueB =
-            Number(b.marketCap) || 0;
+            Number(
+              b.marketCap
+            ) || 0;
 
       }
 
 
       return (
-        valueA - valueB
+        valueA -
+        valueB
       ) * direction;
 
     }
@@ -349,7 +377,7 @@ function applyMarketFilters() {
     data;
 
 
-  /* SAFETY */
+  /* PAGE SAFETY */
 
   const maxPage =
     Math.max(
@@ -386,7 +414,9 @@ function applyMarketFilters() {
 function renderMarkets() {
 
   const container =
-    marketEl("market-list");
+    marketEl(
+      "market-list"
+    );
 
 
   if (!container) return;
@@ -486,12 +516,14 @@ function renderMarketCard(
       data-coin-id="${coin.id}"
     >
 
+      <!-- RANK -->
+
       <div
         class="market-rank"
         style="
           width:30px;
           flex-shrink:0;
-          color:var(--faint);
+          color:var(--muted);
           font-size:10px;
           text-align:center;
         "
@@ -499,6 +531,8 @@ function renderMarketCard(
         #${coin.rank}
       </div>
 
+
+      <!-- IMAGE -->
 
       ${
         coin.image
@@ -521,6 +555,8 @@ function renderMarketCard(
       }
 
 
+      <!-- NAME -->
+
       <div
         style="
           min-width:0;
@@ -538,6 +574,8 @@ function renderMarketCard(
 
       </div>
 
+
+      <!-- PRICE -->
 
       <div
         style="
@@ -566,6 +604,8 @@ function renderMarketCard(
       </div>
 
 
+      <!-- WATCHLIST -->
+
       <button
         class="watch-btn"
         data-symbol="${coin.symbol}"
@@ -576,8 +616,8 @@ function renderMarketCard(
           background:none;
           color:${
             isFavorite
-              ? "var(--accent)"
-              : "var(--faint)"
+              ? "var(--green)"
+              : "var(--muted)"
           };
           font-size:19px;
           cursor:pointer;
@@ -620,20 +660,25 @@ function formatMarketPrice(
   }
 
 
-  if (price >= 1000) {
+  if (
+    price >= 1000
+  ) {
 
     return "$" +
       price.toLocaleString(
         "en-US",
         {
-          maximumFractionDigits: 0
+          maximumFractionDigits:
+            0
         }
       );
 
   }
 
 
-  if (price >= 1) {
+  if (
+    price >= 1
+  ) {
 
     return "$" +
       price.toFixed(2);
@@ -641,7 +686,9 @@ function formatMarketPrice(
   }
 
 
-  if (price >= 0.01) {
+  if (
+    price >= 0.01
+  ) {
 
     return "$" +
       price.toFixed(4);
@@ -749,7 +796,8 @@ function renderPagination(
 
   if (pages <= 1) {
 
-    container.innerHTML = "";
+    container.innerHTML =
+      "";
 
     return;
 
@@ -774,8 +822,9 @@ function renderPagination(
     <span
       style="
         padding:0 14px;
-        color:var(--dim);
+        color:var(--muted);
         font-size:12px;
+        font-weight:700;
       "
     >
       ${MARKET_STATE.page}
@@ -813,6 +862,8 @@ function initMarketEvents() {
     );
 
 
+  /* SEARCH */
+
   if (search) {
 
     search.addEventListener(
@@ -823,7 +874,8 @@ function initMarketEvents() {
           event.target.value;
 
 
-        MARKET_STATE.page = 1;
+        MARKET_STATE.page =
+          1;
 
 
         applyMarketFilters();
@@ -833,6 +885,8 @@ function initMarketEvents() {
 
   }
 
+
+  /* CLICK EVENTS */
 
   document.addEventListener(
     "click",
@@ -864,7 +918,6 @@ function initMarketEvents() {
 
         applyMarketFilters();
 
-
         return;
 
       }
@@ -887,7 +940,9 @@ function initMarketEvents() {
 
         const maxPage =
           Math.ceil(
-            MARKET_STATE.filtered.length /
+            MARKET_STATE
+              .filtered
+              .length /
             MARKET_STATE.perPage
           );
 
@@ -914,6 +969,8 @@ function initMarketEvents() {
 
         renderMarkets();
 
+        return;
+
       }
 
     }
@@ -935,12 +992,40 @@ function initMarketEvents() {
       if (!button) return;
 
 
-      MARKET_STATE.filter =
+      const filter =
         button.dataset
           .marketFilter;
 
 
-      MARKET_STATE.page = 1;
+      /*
+        Watchlist button menggunakan
+        state khusus agar bisa ON/OFF.
+      */
+
+      if (
+        filter ===
+        "watchlist"
+      ) {
+
+        MARKET_STATE.watchlistOnly =
+          !MARKET_STATE.watchlistOnly;
+
+      }
+
+      else {
+
+        MARKET_STATE.watchlistOnly =
+          false;
+
+      }
+
+
+      MARKET_STATE.filter =
+        filter;
+
+
+      MARKET_STATE.page =
+        1;
 
 
       document
@@ -992,12 +1077,15 @@ function initMarketEvents() {
       ) {
 
         MARKET_STATE.sortDirection =
-          MARKET_STATE.sortDirection ===
+          MARKET_STATE
+            .sortDirection ===
           "asc"
             ? "desc"
             : "asc";
 
-      } else {
+      }
+
+      else {
 
         MARKET_STATE.sort =
           sort;
@@ -1006,6 +1094,10 @@ function initMarketEvents() {
           "desc";
 
       }
+
+
+      MARKET_STATE.page =
+        1;
 
 
       applyMarketFilters();
