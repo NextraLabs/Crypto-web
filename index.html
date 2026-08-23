@@ -24,688 +24,362 @@
 
   <style>
 
-    /* =====================================================
-       NEXTRA HOME V4
-    ===================================================== */
-
     .home-hero {
-
       position: relative;
-
       overflow: hidden;
-
       margin-bottom: 25px;
-
       padding: 23px 20px;
-
-      border:
-        1px solid
-        rgba(57,242,160,.12);
-
+      border: 1px solid rgba(57,242,160,.12);
       border-radius: 21px;
-
       background:
-        radial-gradient(
-          circle at 100% 0%,
-          rgba(53,207,255,.13),
-          transparent 43%
-        ),
-        radial-gradient(
-          circle at 0% 100%,
-          rgba(57,242,160,.09),
-          transparent 48%
-        ),
+        radial-gradient(circle at 100% 0%, rgba(53,207,255,.13), transparent 43%),
+        radial-gradient(circle at 0% 100%, rgba(57,242,160,.09), transparent 48%),
         var(--surface);
-
-      box-shadow:
-        0 12px 35px
-        rgba(0,0,0,.16);
-
+      box-shadow: 0 12px 35px rgba(0,0,0,.16);
     }
-
 
     .hero-glow {
-
       position: absolute;
-
       width: 170px;
-
       height: 170px;
-
       right: -90px;
-
       top: -90px;
-
       border-radius: 50%;
-
-      background:
-        var(--green);
-
+      background: var(--green);
       opacity: .06;
-
       filter: blur(20px);
-
       pointer-events: none;
-
     }
-
 
     .hero-label {
-
       display: flex;
-
       align-items: center;
-
       gap: 7px;
-
-      color:
-        var(--green);
-
+      color: var(--green);
       font-size: 9px;
-
       font-weight: 800;
-
       letter-spacing: 1.4px;
-
       text-transform: uppercase;
-
     }
-
 
     .hero-live {
-
       width: 6px;
-
       height: 6px;
-
       border-radius: 50%;
-
-      background:
-        var(--green);
-
-      box-shadow:
-        0 0 9px
-        var(--green);
-
-      animation:
-        pulse 1.8s infinite;
-
+      background: var(--green);
+      box-shadow: 0 0 9px var(--green);
+      animation: pulse 1.8s infinite;
     }
-
 
     @keyframes pulse {
-
-      0%,
-      100% {
-
-        opacity: 1;
-
-      }
-
-      50% {
-
-        opacity: .35;
-
-      }
-
+      0%,100% { opacity: 1; }
+      50% { opacity: .35; }
     }
-
 
     .hero-title {
-
-      margin:
-        12px 0 8px;
-
+      margin: 12px 0 8px;
       font-size: 27px;
-
       line-height: 1.08;
-
       letter-spacing: -.8px;
-
       font-weight: 850;
-
     }
-
 
     .hero-title span {
-
-      color:
-        var(--green);
-
+      color: var(--green);
     }
-
 
     .hero-description {
-
       max-width: 330px;
-
       margin: 0;
-
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 11px;
-
       line-height: 1.65;
-
     }
 
+    /* SEARCH */
+
+    .home-search {
+      display: flex;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .home-search input {
+      flex: 1;
+      min-width: 0;
+      height: 42px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      outline: none;
+      background: var(--surface-soft);
+      color: var(--text);
+      font-size: 11px;
+      transition: .18s ease;
+    }
+
+    .home-search input:focus {
+      border-color: rgba(57,242,160,.45);
+      box-shadow: 0 0 0 3px rgba(57,242,160,.06);
+    }
+
+    .home-search input::placeholder {
+      color: var(--subtle);
+    }
+
+    .home-search button {
+      height: 42px;
+      padding: 0 15px;
+      white-space: nowrap;
+    }
 
     .hero-stats {
-
       display: grid;
-
-      grid-template-columns:
-        repeat(3,1fr);
-
+      grid-template-columns: repeat(3,1fr);
       gap: 7px;
-
       margin-top: 18px;
-
     }
-
 
     .hero-stat {
-
       padding: 10px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.05);
-
+      border: 1px solid rgba(255,255,255,.05);
       border-radius: 12px;
-
-      background:
-        rgba(255,255,255,.025);
-
+      background: rgba(255,255,255,.025);
     }
-
 
     .hero-stat strong {
-
       display: block;
-
       font-size: 12px;
-
       font-weight: 800;
-
     }
-
 
     .hero-stat span {
-
       display: block;
-
       margin-top: 3px;
-
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 8px;
-
     }
-
-
-    /* =====================================================
-       MARKET HEADER
-    ===================================================== */
 
     .home-section-header {
-
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
       margin-bottom: 10px;
-
     }
-
 
     .home-section-title {
-
       margin: 0;
-
       font-size: 16px;
-
       font-weight: 800;
-
     }
-
 
     .home-section-sub {
-
       margin-top: 3px;
-
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 9px;
-
     }
-
 
     .home-view-all {
-
-      padding:
-        7px 10px;
-
-      border:
-        1px solid
-        var(--line);
-
+      padding: 7px 10px;
+      border: 1px solid var(--line);
       border-radius: 9px;
-
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 9px;
-
-      transition:
-        .18s ease;
-
+      transition: .18s ease;
     }
-
 
     .home-view-all:hover {
-
-      color:
-        var(--green);
-
-      border-color:
-        rgba(57,242,160,.25);
-
+      color: var(--green);
+      border-color: rgba(57,242,160,.25);
     }
-
-
-    /* =====================================================
-       MARKET LIST
-    ===================================================== */
 
     #home-market-list {
-
       display: flex;
-
       flex-direction: column;
-
       gap: 0;
-
       overflow: hidden;
-
-      border:
-        1px solid
-        var(--line);
-
+      border: 1px solid var(--line);
       border-radius: 15px;
-
-      background:
-        var(--surface);
-
+      background: var(--surface);
     }
-
 
     #home-market-list .coin-card {
-
       min-height: 67px;
-
-      padding:
-        10px 12px;
-
-      border-bottom:
-        1px solid
-        var(--line);
-
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
     }
-
 
     #home-market-list .coin-card:last-child {
-
       border-bottom: 0;
-
     }
-
 
     #home-market-list .coin-card:hover {
-
-      background:
-        rgba(57,242,160,.025);
-
+      background: rgba(57,242,160,.025);
     }
-
 
     .market-rank {
-
       width: 19px;
-
-      color:
-        var(--subtle);
-
+      color: var(--subtle);
       font-size: 8px;
-
       font-weight: 700;
-
       text-align: center;
-
     }
-
-
-    /* =====================================================
-       MARKET PULSE
-    ===================================================== */
 
     .pulse-card {
-
       margin-top: 23px;
-
       padding: 16px;
-
-      border:
-        1px solid
-        var(--line);
-
+      border: 1px solid var(--line);
       border-radius: 17px;
-
-      background:
-        var(--surface);
-
+      background: var(--surface);
     }
-
 
     .pulse-header {
-
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
     }
-
 
     .pulse-name {
-
       font-size: 12px;
-
       font-weight: 800;
-
     }
-
 
     .pulse-sub {
-
       margin-top: 3px;
-
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 8px;
-
     }
-
 
     .pulse-value {
-
       font-size: 20px;
-
       font-weight: 900;
-
-      color:
-        var(--green);
-
+      color: var(--green);
     }
-
 
     .pulse-track {
-
       height: 7px;
-
       margin-top: 15px;
-
       overflow: hidden;
-
       border-radius: 999px;
-
-      background:
-        var(--surface-soft);
-
+      background: var(--surface-soft);
     }
-
 
     .pulse-bar {
-
       width: 0%;
-
       height: 100%;
-
       border-radius: 999px;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--green),
-          var(--blue)
-        );
-
-      transition:
-        width .5s ease;
-
+      background: linear-gradient(90deg,var(--green),var(--blue));
+      transition: width .5s ease;
     }
-
 
     .pulse-labels {
-
       display: flex;
-
       justify-content: space-between;
-
       margin-top: 7px;
-
-      color:
-        var(--subtle);
-
+      color: var(--subtle);
       font-size: 8px;
-
     }
-
-
-    /* =====================================================
-       EXPLORE
-    ===================================================== */
 
     .explore-title {
-
-      margin:
-        25px 0 10px;
-
+      margin: 25px 0 10px;
       font-size: 16px;
-
       font-weight: 800;
-
     }
-
 
     .explore-grid {
-
       display: grid;
-
-      grid-template-columns:
-        repeat(2,1fr);
-
+      grid-template-columns: repeat(2,1fr);
       gap: 8px;
-
     }
-
 
     .explore-card {
-
       position: relative;
-
       min-height: 108px;
-
       padding: 14px !important;
-
       margin: 0 !important;
-
       overflow: hidden;
-
-      border:
-        1px solid
-        var(--line) !important;
-
-      border-radius:
-        16px !important;
-
-      background:
-        var(--surface) !important;
-
-      transition:
-        transform .18s ease,
-        border-color .18s ease;
-
+      border: 1px solid var(--line) !important;
+      border-radius: 16px !important;
+      background: var(--surface) !important;
+      transition: transform .18s ease,border-color .18s ease;
     }
-
 
     .explore-card:hover {
-
-      transform:
-        translateY(-2px);
-
-      border-color:
-        rgba(57,242,160,.2) !important;
-
+      transform: translateY(-2px);
+      border-color: rgba(57,242,160,.2) !important;
     }
-
 
     .explore-icon {
-
       width: 34px;
-
       height: 34px;
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
-
       margin-bottom: 11px;
-
       border-radius: 10px;
-
-      background:
-        rgba(57,242,160,.07);
-
-      color:
-        var(--green);
-
+      background: rgba(57,242,160,.07);
+      color: var(--green);
     }
-
 
     .explore-icon svg {
-
       width: 18px;
-
       height: 18px;
-
       fill: none;
-
       stroke: currentColor;
-
       stroke-width: 1.8;
-
       stroke-linecap: round;
-
       stroke-linejoin: round;
-
     }
-
 
     .explore-name {
-
       font-size: 11px;
-
       font-weight: 800;
-
     }
-
 
     .explore-desc {
-
       margin-top: 4px;
-
       max-width: 130px;
-
-      color:
-        var(--muted);
-
+      color: var(--muted);
       font-size: 8px;
-
       line-height: 1.4;
-
     }
-
 
     .explore-arrow {
-
       position: absolute;
-
       right: 13px;
-
       bottom: 12px;
-
-      color:
-        var(--subtle);
-
+      color: var(--subtle);
       font-size: 11px;
-
     }
-
-
-    /* =====================================================
-       FOOTER
-    ===================================================== */
 
     .home-footer {
-
       margin-top: 30px;
-
       padding-bottom: 20px;
-
-      color:
-        var(--subtle);
-
+      color: var(--subtle);
       font-size: 8px;
-
       text-align: center;
-
     }
-
 
     @media (max-width: 360px) {
 
       .hero-title {
-
         font-size: 24px;
-
       }
 
       .hero-stats {
-
         gap: 5px;
-
       }
 
       .hero-stat {
-
         padding: 8px;
-
       }
 
       .explore-grid {
-
         gap: 6px;
+      }
 
+      .home-search button {
+        padding: 0 12px;
       }
 
     }
@@ -717,32 +391,21 @@
 
 <body>
 
-
 <main class="container">
-
-
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
 
   <header class="topbar">
 
     <div>
 
       <h1 class="title">
-
         NEXTRA<span class="dot">.</span>
-
       </h1>
 
       <p class="subtitle">
-
         Your Market. Your Intelligence.
-
       </p>
 
     </div>
-
 
     <button
       class="icon-btn"
@@ -750,23 +413,17 @@
       title="Ganti tema"
       aria-label="Ganti tema"
     >
-
       ◐
-
     </button>
 
   </header>
 
 
-
-  <!-- =====================================================
-       HERO
-  ====================================================== -->
+  <!-- HERO -->
 
   <section class="home-hero">
 
     <div class="hero-glow"></div>
-
 
     <div class="hero-label">
 
@@ -776,7 +433,6 @@
 
     </div>
 
-
     <h2 class="hero-title">
 
       Understand the market.<br>
@@ -784,7 +440,6 @@
       <span>Trade with intelligence.</span>
 
     </h2>
-
 
     <p class="hero-description">
 
@@ -795,32 +450,43 @@
     </p>
 
 
+    <!-- SEARCH -->
+
+    <div class="home-search">
+
+      <input
+        id="home-search"
+        type="search"
+        placeholder="Cari Bitcoin, Ethereum..."
+        autocomplete="off"
+      >
+
+      <button
+        id="home-search-btn"
+        class="primary-btn"
+        type="button"
+      >
+        Search
+      </button>
+
+    </div>
+
+
     <div class="hero-stats">
 
       <div class="hero-stat">
-
         <strong>LIVE</strong>
-
         <span>Market Data</span>
-
       </div>
 
-
       <div class="hero-stat">
-
         <strong>24H</strong>
-
         <span>Price Movement</span>
-
       </div>
 
-
       <div class="hero-stat">
-
         <strong>AI</strong>
-
         <span>Intelligence</span>
-
       </div>
 
     </div>
@@ -828,10 +494,7 @@
   </section>
 
 
-
-  <!-- =====================================================
-       MARKET OVERVIEW
-  ====================================================== -->
+  <!-- MARKET OVERVIEW -->
 
   <section>
 
@@ -840,27 +503,20 @@
       <div>
 
         <h2 class="home-section-title">
-
           Market Overview
-
         </h2>
 
         <div class="home-section-sub">
-
           Live crypto market
-
         </div>
 
       </div>
-
 
       <a
         href="markets.html"
         class="home-view-all"
       >
-
         View all →
-
       </a>
 
     </div>
@@ -869,9 +525,7 @@
     <div id="home-market-list">
 
       <div class="loading">
-
         Memuat market...
-
       </div>
 
     </div>
@@ -879,10 +533,7 @@
   </section>
 
 
-
-  <!-- =====================================================
-       MARKET PULSE
-  ====================================================== -->
+  <!-- MARKET PULSE -->
 
   <section class="pulse-card">
 
@@ -891,27 +542,20 @@
       <div>
 
         <div class="pulse-name">
-
           Market Pulse
-
         </div>
 
         <div class="pulse-sub">
-
           Market yang sedang bergerak naik
-
         </div>
 
       </div>
-
 
       <div
         id="market-pulse"
         class="pulse-value"
       >
-
         —
-
       </div>
 
     </div>
@@ -930,9 +574,7 @@
     <div class="pulse-labels">
 
       <span>Bearish</span>
-
       <span>Neutral</span>
-
       <span>Bullish</span>
 
     </div>
@@ -940,24 +582,17 @@
   </section>
 
 
-
-  <!-- =====================================================
-       EXPLORE
-  ====================================================== -->
+  <!-- EXPLORE -->
 
   <section>
 
     <h2 class="explore-title">
-
       Explore NEXTRA
-
     </h2>
 
 
     <div class="explore-grid">
 
-
-      <!-- MARKETS -->
 
       <a
         href="markets.html"
@@ -969,45 +604,29 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 19V9"/>
-
             <path d="M9.3 19V5"/>
-
             <path d="M14.7 19v-8"/>
-
             <path d="M20 19V3"/>
-
             <path d="M2.5 19.5h19"/>
 
           </svg>
 
         </div>
 
-
         <div class="explore-name">
-
           Markets
-
         </div>
-
 
         <div class="explore-desc">
-
           Explore crypto market
-
         </div>
 
-
         <div class="explore-arrow">
-
           →
-
         </div>
 
       </a>
 
-
-
-      <!-- TRENDING -->
 
       <a
         href="trending.html"
@@ -1019,39 +638,26 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 16c3-1 4-5 6-9 2 4 3 7 6 7 1.7 0 2.8-1 4-3"/>
-
             <path d="M16 5h4v4"/>
 
           </svg>
 
         </div>
 
-
         <div class="explore-name">
-
           Trending
-
         </div>
-
 
         <div class="explore-desc">
-
           Coins yang sedang ramai
-
         </div>
 
-
         <div class="explore-arrow">
-
           →
-
         </div>
 
       </a>
 
-
-
-      <!-- TOOLS -->
 
       <a
         href="tools.html"
@@ -1063,39 +669,26 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/>
-
             <path d="m14 4 6 6"/>
 
           </svg>
 
         </div>
 
-
         <div class="explore-name">
-
           Tools
-
         </div>
-
 
         <div class="explore-desc">
-
           Trading utilities
-
         </div>
 
-
         <div class="explore-arrow">
-
           →
-
         </div>
 
       </a>
 
-
-
-      <!-- LEARN -->
 
       <a
         href="education.html"
@@ -1107,45 +700,31 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/>
-
             <path d="M4 5.5V22"/>
-
             <path d="M8 7h8"/>
-
             <path d="M8 11h6"/>
 
           </svg>
 
         </div>
 
-
         <div class="explore-name">
-
           Learn
-
         </div>
-
 
         <div class="explore-desc">
-
           Belajar crypto
-
         </div>
 
-
         <div class="explore-arrow">
-
           →
-
         </div>
 
       </a>
 
-
     </div>
 
   </section>
-
 
 
   <footer class="home-footer">
@@ -1158,18 +737,14 @@
 </main>
 
 
-
 <div id="bottom-nav"></div>
 
 
-
 <script src="js/app.js"></script>
-
 <script src="js/api.js"></script>
 
 
 <script>
-
 
 /* =====================================================
    HOME MARKET
@@ -1190,7 +765,6 @@ async function loadHomeMarkets() {
         .fetchNormalizedMarkets({
 
           page: 1,
-
           perPage: 6
 
         });
@@ -1234,7 +808,7 @@ async function loadHomeMarkets() {
           return `
 
             <a
-              href="coin.html?id=${coin.id}"
+              href="coin.html?id=${encodeURIComponent(coin.id)}"
               class="coin-card"
             >
 
@@ -1275,16 +849,11 @@ async function loadHomeMarkets() {
               >
 
                 <div class="coin-symbol">
-
                   ${coin.symbol}
-
                 </div>
 
-
                 <div class="coin-pair">
-
                   ${coin.name}
-
                 </div>
 
               </div>
@@ -1349,9 +918,7 @@ async function loadHomeMarkets() {
           style="margin-top:10px;"
           onclick="loadHomeMarkets()"
         >
-
           Coba lagi
-
         </button>
 
       </div>
@@ -1361,7 +928,6 @@ async function loadHomeMarkets() {
   }
 
 }
-
 
 
 /* =====================================================
@@ -1418,7 +984,6 @@ function formatHomePrice(price) {
 }
 
 
-
 /* =====================================================
    MARKET PULSE
 ===================================================== */
@@ -1438,9 +1003,7 @@ function updateMarketPulse(coins) {
 
 
   if (!pulse || !bar) {
-
     return;
-
   }
 
 
@@ -1458,7 +1021,6 @@ function updateMarketPulse(coins) {
   if (!valid.length) {
 
     pulse.textContent = "—";
-
     bar.style.width = "0%";
 
     return;
@@ -1494,6 +1056,68 @@ function updateMarketPulse(coins) {
 }
 
 
+/* =====================================================
+   HOME SEARCH
+===================================================== */
+
+const homeSearch =
+  document.getElementById(
+    "home-search"
+  );
+
+
+const homeSearchBtn =
+  document.getElementById(
+    "home-search-btn"
+  );
+
+
+function goToMarketSearch() {
+
+  const query =
+    homeSearch?.value
+      ?.trim();
+
+
+  if (!query) {
+
+    homeSearch?.focus();
+
+    return;
+
+  }
+
+
+  window.location.href =
+    "markets.html?search=" +
+    encodeURIComponent(
+      query
+    );
+
+}
+
+
+homeSearchBtn?.addEventListener(
+  "click",
+  goToMarketSearch
+);
+
+
+homeSearch?.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      goToMarketSearch();
+
+    }
+
+  }
+);
+
 
 /* =====================================================
    THEME BUTTON
@@ -1511,7 +1135,6 @@ document
 
     }
   );
-
 
 
 /* =====================================================
