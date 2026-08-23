@@ -1,5 +1,5 @@
-// market.js — NEXTRA Markets V5
-// SEARCH HOME + SEARCH MARKET + FILTER + SORT + WATCHLIST
+// market.js — NEXTRA Markets V6
+// SEARCH HOME + SEARCH MARKET + FILTER + SORT + WATCHLIST + XP
 
 const MARKET_STATE = {
 
@@ -921,6 +921,7 @@ function initMarketEvents() {
       if (watch) {
 
         event.preventDefault();
+
         event.stopPropagation();
 
 
@@ -928,9 +929,54 @@ function initMarketEvents() {
           watch.dataset.symbol;
 
 
+        /* STATUS SEBELUM */
+
+        const beforeWatchlist =
+          loadWatchlist();
+
+
+        const wasFavorite =
+          beforeWatchlist.includes(
+            symbol
+          );
+
+
+        /* TOGGLE */
+
         toggleWatchlistItem(
           symbol
         );
+
+
+        /* STATUS SESUDAH */
+
+        const afterWatchlist =
+          loadWatchlist();
+
+
+        const isFavoriteNow =
+          afterWatchlist.includes(
+            symbol
+          );
+
+
+        /* XP +25 HANYA SAAT
+           MENAMBAHKAN */
+
+        if (
+          !wasFavorite &&
+          isFavoriteNow &&
+          window.NEXTRA_XP &&
+          typeof
+            window.NEXTRA_XP.add ===
+            "function"
+        ) {
+
+          window.NEXTRA_XP.add(
+            25
+          );
+
+        }
 
 
         applyMarketFilters();
