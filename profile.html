@@ -2,92 +2,96 @@
 <html lang="id">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#070909"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070909">
 
   <title>Profile — NEXTRA</title>
 
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="css/profile.css"
-  >
-
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/profile.css">
 </head>
-
 
 <body>
 
+<main class="container">
 
-  <main class="container">
+  <!-- HEADER -->
+  <header class="topbar">
 
+    <div>
+      <h1 class="title">
+        Profile<span class="dot">.</span>
+      </h1>
 
-    <!-- HEADER -->
+      <p class="subtitle">
+        Your NEXTRA identity
+      </p>
+    </div>
 
-    <header class="topbar">
+    <a
+      href="index.html"
+      class="icon-btn"
+      aria-label="Back to Home"
+    >
+      ←
+    </a>
 
-      <div>
-
-        <h1 class="title">
-          Profile<span class="dot">.</span>
-        </h1>
-
-        <p class="subtitle">
-          Manage your NEXTRA account
-        </p>
-
-      </div>
-
-
-      <a
-        href="index.html"
-        class="icon-btn"
-        aria-label="Back to Home"
-      >
-        ←
-      </a>
-
-    </header>
+  </header>
 
 
+  <!-- PROFILE CARD -->
+  <section class="profile-card">
 
-    <!-- PROFILE HEADER -->
+    <div class="profile-cover">
 
-    <section class="profile-header">
+      <div class="profile-glow"></div>
 
       <button
         class="profile-avatar"
         id="avatarButton"
         type="button"
-        aria-label="Edit profile"
+        aria-label="Change profile photo"
       >
-        N
+
+        <span id="avatarInitial">
+          N
+        </span>
+
+        <img
+          id="avatarImage"
+          alt="Profile photo"
+        >
+
+        <span class="avatar-camera">
+          📷
+        </span>
+
       </button>
 
+    </div>
 
-      <div class="profile-info">
 
-        <h2 id="profileName">
-          NEXTRA User
-        </h2>
+    <div class="profile-main">
 
-        <p id="profileUsername">
-          @nextra_user
-        </p>
+      <div class="profile-name-row">
+
+        <div>
+
+          <h2 id="profileName">
+            NEXTRA User
+          </h2>
+
+          <p id="profileUsername">
+            @nextra_user
+          </p>
+
+        </div>
+
+        <span class="profile-status">
+          <i></i>
+          Active
+        </span>
 
       </div>
 
@@ -97,474 +101,716 @@
         id="editProfileBtn"
         type="button"
       >
-        Edit
+        ✏️ Edit Profile
       </button>
 
-    </section>
+    </div>
 
+  </section>
 
 
-    <!-- EDIT PROFILE -->
+  <!-- HIDDEN PHOTO INPUT -->
 
-    <section
-      class="profile-section"
-      id="editProfilePanel"
-      hidden
-    >
+  <input
+    type="file"
+    id="avatarInput"
+    accept="image/*"
+    hidden
+  >
 
-      <div class="section-label">
-        EDIT PROFILE
-      </div>
 
+  <!-- EDIT PROFILE -->
 
-      <div class="profile-edit-card">
+  <section
+    class="profile-section"
+    id="editProfilePanel"
+    hidden
+  >
 
-        <label for="nameInput">
-          Display name
-        </label>
+    <div class="section-label">
+      EDIT PROFILE
+    </div>
 
-        <input
-          id="nameInput"
-          type="text"
-          maxlength="30"
-          placeholder="Your name"
-        >
 
+    <div class="profile-edit-card">
 
-        <label for="usernameInput">
-          Username
-        </label>
+      <label for="nameInput">
+        Display name
+      </label>
 
-        <input
-          id="usernameInput"
-          type="text"
-          maxlength="20"
-          placeholder="nextra_user"
-        >
-
-
-        <div class="profile-edit-actions">
-
-          <button
-            id="cancelProfileBtn"
-            type="button"
-            class="profile-secondary-btn"
-          >
-            Cancel
-          </button>
-
-
-          <button
-            id="saveProfileBtn"
-            type="button"
-            class="profile-primary-btn"
-          >
-            Save changes
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ACCOUNT -->
-
-    <section class="profile-section">
-
-      <div class="section-label">
-        ACCOUNT
-      </div>
-
-
-      <div class="profile-item">
-
-        <div>
-
-          <strong>
-            Email
-          </strong>
-
-          <span id="emailStatus">
-            Not connected
-          </span>
-
-        </div>
-
-
-        <span class="profile-arrow">
-          ›
-        </span>
-
-      </div>
-
-
-      <div class="profile-item">
-
-        <div>
-
-          <strong>
-            Account Status
-          </strong>
-
-          <span class="up">
-            Active
-          </span>
-
-        </div>
-
-
-        <span class="profile-check">
-          ✓
-        </span>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- PREFERENCES -->
-
-    <section class="profile-section">
-
-      <div class="section-label">
-        PREFERENCES
-      </div>
-
-
-      <div class="profile-item">
-
-        <div>
-
-          <strong>
-            Appearance
-          </strong>
-
-          <span>
-            Dark mode
-          </span>
-
-        </div>
-
-
-        <span>
-          ◐
-        </span>
-
-      </div>
-
-
-      <div class="profile-item">
-
-        <div>
-
-          <strong>
-            Notifications
-          </strong>
-
-          <span>
-            Manage alerts
-          </span>
-
-        </div>
-
-
-        <span class="profile-arrow">
-          ›
-        </span>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- TRADING -->
-
-    <section class="profile-section">
-
-      <div class="section-label">
-        TRADING
-      </div>
-
-
-      <a
-        href="markets.html"
-        class="profile-item"
+      <input
+        id="nameInput"
+        type="text"
+        maxlength="30"
+        placeholder="Your name"
       >
 
-        <div>
 
-          <strong>
-            Watchlist
-          </strong>
+      <label for="usernameInput">
+        Username
+      </label>
 
-          <span>
-            Manage favorite assets
-          </span>
-
-        </div>
-
-
-        <span class="profile-arrow">
-          ›
-        </span>
-
-      </a>
-
-
-      <a
-        href="futures.html"
-        class="profile-item"
+      <input
+        id="usernameInput"
+        type="text"
+        maxlength="20"
+        placeholder="nextra_user"
       >
 
-        <div>
 
-          <strong>
-            Futures
-          </strong>
+      <div class="profile-edit-actions">
 
-          <span>
-            Binance Futures market
-          </span>
-
-        </div>
-
-
-        <span class="profile-arrow">
-          ›
-        </span>
-
-      </a>
-
-    </section>
+        <button
+          id="cancelProfileBtn"
+          type="button"
+          class="profile-secondary-btn"
+        >
+          Cancel
+        </button>
 
 
-
-    <!-- ABOUT -->
-
-    <section class="profile-section">
-
-      <div class="section-label">
-        ABOUT
-      </div>
-
-
-      <div class="profile-item">
-
-        <div>
-
-          <strong>
-            NEXTRA
-          </strong>
-
-          <span>
-            Your Market. Your Intelligence.
-          </span>
-
-        </div>
-
-
-        <span>
-          v1.0
-        </span>
+        <button
+          id="saveProfileBtn"
+          type="button"
+          class="profile-primary-btn"
+        >
+          Save changes
+        </button>
 
       </div>
 
-    </section>
+    </div>
+
+  </section>
 
 
+  <!-- STATS -->
 
-    <!-- FOOTER -->
+  <section class="profile-stats">
 
-    <div class="profile-footer">
+    <div class="profile-stat">
 
-      NEXTRA © 2026
+      <strong id="watchlistCount">
+        0
+      </strong>
+
+      <span>
+        Watchlist
+      </span>
 
     </div>
 
 
-  </main>
+    <div class="profile-stat">
+
+      <strong id="alertCount">
+        0
+      </strong>
+
+      <span>
+        Alerts
+      </span>
+
+    </div>
 
 
+    <div class="profile-stat">
 
-  <!-- BOTTOM NAVIGATION -->
+      <strong>
+        Free
+      </strong>
 
-  <div id="bottom-nav"></div>
+      <span>
+        Plan
+      </span>
 
+    </div>
 
-
-  <!-- JAVASCRIPT -->
-
-  <script src="js/api.js"></script>
-
-  <script src="js/app.js"></script>
-
-
-  <script>
-
-    (() => {
-
-      const KEY = "nextra_profile";
+  </section>
 
 
-      const defaults = {
+  <!-- ACCOUNT -->
 
-        name: "NEXTRA User",
+  <section class="profile-section">
 
-        username: "nextra_user"
-
-      };
-
-
-      let profile = {
-
-        ...defaults,
-
-        ...(JSON.parse(
-          localStorage.getItem(KEY) || "{}"
-        ))
-
-      };
+    <div class="section-label">
+      ACCOUNT
+    </div>
 
 
-      const nameEl =
-        document.getElementById("profileName");
+    <div class="profile-item">
 
-      const usernameEl =
-        document.getElementById("profileUsername");
+      <div>
 
-      const avatarEl =
-        document.getElementById("avatarButton");
+        <strong>
+          Email
+        </strong>
 
-      const panel =
-        document.getElementById("editProfilePanel");
+        <span>
+          Not connected
+        </span>
 
-      const nameInput =
-        document.getElementById("nameInput");
+      </div>
 
-      const usernameInput =
-        document.getElementById("usernameInput");
+      <span class="profile-arrow">
+        ›
+      </span>
 
-
-
-      function render() {
-
-        nameEl.textContent =
-          profile.name;
-
-        usernameEl.textContent =
-          "@" + profile.username;
-
-        avatarEl.textContent =
-          (
-            profile.name.trim()[0] || "N"
-          ).toUpperCase();
-
-      }
+    </div>
 
 
+    <div class="profile-item">
 
-      function openEditor() {
+      <div>
 
-        nameInput.value =
-          profile.name;
+        <strong>
+          Account Status
+        </strong>
 
-        usernameInput.value =
-          profile.username;
+        <span class="up">
+          Active account
+        </span>
 
-        panel.hidden = false;
+      </div>
 
-        nameInput.focus();
+      <span class="profile-check">
+        ✓
+      </span>
 
-      }
+    </div>
 
-
-
-      document
-        .getElementById("editProfileBtn")
-        .addEventListener(
-          "click",
-          openEditor
-        );
+  </section>
 
 
+  <!-- QUICK ACTIONS -->
 
-      avatarEl.addEventListener(
-        "click",
-        openEditor
+  <section class="profile-section">
+
+    <div class="section-label">
+      QUICK ACTIONS
+    </div>
+
+
+    <a
+      href="markets.html"
+      class="profile-item"
+    >
+
+      <div>
+
+        <strong>
+          ⭐ Watchlist
+        </strong>
+
+        <span>
+          Manage favorite assets
+        </span>
+
+      </div>
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </a>
+
+
+    <a
+      href="futures.html"
+      class="profile-item"
+    >
+
+      <div>
+
+        <strong>
+          ⚡ Futures
+        </strong>
+
+        <span>
+          Binance Futures market
+        </span>
+
+      </div>
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </a>
+
+
+    <div
+      class="profile-item"
+      id="notificationItem"
+    >
+
+      <div>
+
+        <strong>
+          🔔 Notifications
+        </strong>
+
+        <span>
+          Manage your market alerts
+        </span>
+
+      </div>
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- PREFERENCES -->
+
+  <section class="profile-section">
+
+    <div class="section-label">
+      PREFERENCES
+    </div>
+
+
+    <div class="profile-item">
+
+      <div>
+
+        <strong>
+          Appearance
+        </strong>
+
+        <span>
+          Dark mode
+        </span>
+
+      </div>
+
+      <span>
+        ◐
+      </span>
+
+    </div>
+
+
+    <div class="profile-item">
+
+      <div>
+
+        <strong>
+          Language
+        </strong>
+
+        <span>
+          Bahasa Indonesia
+        </span>
+
+      </div>
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section class="profile-section">
+
+    <div class="section-label">
+      ABOUT NEXTRA
+    </div>
+
+
+    <div class="profile-item">
+
+      <div>
+
+        <strong>
+          NEXTRA
+        </strong>
+
+        <span>
+          Your Market. Your Intelligence.
+        </span>
+
+      </div>
+
+      <span>
+        v1.0
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <div class="profile-footer">
+
+    NEXTRA © 2026
+
+  </div>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<div id="bottom-nav"></div>
+
+
+<!-- JS -->
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+
+<script>
+
+(() => {
+
+  const PROFILE_KEY =
+    "nextra_profile";
+
+  const AVATAR_KEY =
+    "nextra_avatar";
+
+
+  const defaults = {
+
+    name: "NEXTRA User",
+
+    username: "nextra_user"
+
+  };
+
+
+  let profile = {
+
+    ...defaults,
+
+    ...(JSON.parse(
+      localStorage.getItem(PROFILE_KEY)
+      || "{}"
+    ))
+
+  };
+
+
+  const nameEl =
+    document.getElementById(
+      "profileName"
+    );
+
+
+  const usernameEl =
+    document.getElementById(
+      "profileUsername"
+    );
+
+
+  const avatarInitial =
+    document.getElementById(
+      "avatarInitial"
+    );
+
+
+  const avatarImage =
+    document.getElementById(
+      "avatarImage"
+    );
+
+
+  const avatarButton =
+    document.getElementById(
+      "avatarButton"
+    );
+
+
+  const avatarInput =
+    document.getElementById(
+      "avatarInput"
+    );
+
+
+  const panel =
+    document.getElementById(
+      "editProfilePanel"
+    );
+
+
+  const nameInput =
+    document.getElementById(
+      "nameInput"
+    );
+
+
+  const usernameInput =
+    document.getElementById(
+      "usernameInput"
+    );
+
+
+  function renderProfile() {
+
+    nameEl.textContent =
+      profile.name;
+
+    usernameEl.textContent =
+      "@" + profile.username;
+
+
+    avatarInitial.textContent =
+      (
+        profile.name
+          .trim()[0]
+        || "N"
+      ).toUpperCase();
+
+
+    const savedAvatar =
+      localStorage.getItem(
+        AVATAR_KEY
       );
 
 
+    if (savedAvatar) {
 
-      document
-        .getElementById("cancelProfileBtn")
-        .addEventListener(
-          "click",
-          () => {
+      avatarImage.src =
+        savedAvatar;
 
-            panel.hidden = true;
+      avatarImage.classList.add(
+        "visible"
+      );
 
-          }
+      avatarInitial.style.display =
+        "none";
+
+    }
+
+    else {
+
+      avatarImage.classList.remove(
+        "visible"
+      );
+
+      avatarInitial.style.display =
+        "block";
+
+    }
+
+  }
+
+
+  /* =========================
+     CHANGE AVATAR
+  ========================= */
+
+  avatarButton.addEventListener(
+    "click",
+    () => {
+
+      avatarInput.click();
+
+    }
+  );
+
+
+  avatarInput.addEventListener(
+    "change",
+    event => {
+
+      const file =
+        event.target.files[0];
+
+      if (!file) return;
+
+
+      if (!file.type.startsWith(
+        "image/"
+      )) {
+
+        return;
+
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload = () => {
+
+        try {
+
+          localStorage.setItem(
+            AVATAR_KEY,
+            reader.result
+          );
+
+          renderProfile();
+
+        }
+
+        catch {
+
+          alert(
+            "Foto terlalu besar. Coba gunakan foto dengan ukuran lebih kecil."
+          );
+
+        }
+
+      };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+
+  /* =========================
+     EDIT PROFILE
+  ========================= */
+
+  function openEditor() {
+
+    nameInput.value =
+      profile.name;
+
+    usernameInput.value =
+      profile.username;
+
+    panel.hidden =
+      false;
+
+    nameInput.focus();
+
+  }
+
+
+  document
+    .getElementById(
+      "editProfileBtn"
+    )
+    .addEventListener(
+      "click",
+      openEditor
+    );
+
+
+  document
+    .getElementById(
+      "cancelProfileBtn"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        panel.hidden =
+          true;
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "saveProfileBtn"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        const name =
+          nameInput.value.trim()
+          || defaults.name;
+
+
+        const username =
+          (
+            usernameInput.value
+              .trim()
+              .replace(
+                /[^a-zA-Z0-9_]/g,
+                ""
+              )
+            || defaults.username
+          )
+          .slice(0, 20);
+
+
+        profile.name =
+          name.slice(0, 30);
+
+
+        profile.username =
+          username;
+
+
+        localStorage.setItem(
+          PROFILE_KEY,
+          JSON.stringify(profile)
         );
 
 
-
-      document
-        .getElementById("saveProfileBtn")
-        .addEventListener(
-          "click",
-          () => {
-
-            const name =
-              nameInput.value.trim()
-              || defaults.name;
+        renderProfile();
 
 
-            const username =
-              (
-                usernameInput.value
-                  .trim()
-                  .replace(
-                    /[^a-zA-Z0-9_]/g,
-                    ""
-                  )
-                || defaults.username
-              ).slice(0, 20);
+        panel.hidden =
+          true;
+
+      }
+    );
 
 
-            profile.name =
-              name.slice(0, 30);
+  /* =========================
+     WATCHLIST COUNT
+  ========================= */
 
-            profile.username =
-              username;
+  try {
 
-
-            localStorage.setItem(
-              KEY,
-              JSON.stringify(profile)
-            );
-
-
-            render();
-
-            panel.hidden = true;
-
-          }
-        );
+    const watchlist =
+      JSON.parse(
+        localStorage.getItem(
+          "nextra_watchlist"
+        ) || "[]"
+      );
 
 
+    document.getElementById(
+      "watchlistCount"
+    ).textContent =
+      Array.isArray(watchlist)
+        ? watchlist.length
+        : 0;
 
-      render();
+  }
 
-    })();
+  catch {
 
-  </script>
+    document.getElementById(
+      "watchlistCount"
+    ).textContent =
+      "0";
 
+  }
+
+
+  renderProfile();
+
+})();
+
+</script>
 
 </body>
-
 </html>
