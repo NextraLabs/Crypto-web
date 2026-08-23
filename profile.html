@@ -2,24 +2,48 @@
 <html lang="id">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#070909">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
 
   <title>Profile — NEXTRA</title>
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/profile.css">
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/profile.css"
+  >
+
 </head>
+
 
 <body>
 
+
 <main class="container">
 
-  <!-- HEADER -->
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
   <header class="topbar">
 
     <div>
+
       <h1 class="title">
         Profile<span class="dot">.</span>
       </h1>
@@ -27,7 +51,9 @@
       <p class="subtitle">
         Your NEXTRA identity
       </p>
+
     </div>
+
 
     <a
       href="index.html"
@@ -40,12 +66,18 @@
   </header>
 
 
-  <!-- PROFILE CARD -->
+
+  <!-- =====================================================
+       PROFILE CARD
+  ====================================================== -->
+
   <section class="profile-card">
+
 
     <div class="profile-cover">
 
       <div class="profile-glow"></div>
+
 
       <button
         class="profile-avatar"
@@ -58,10 +90,12 @@
           N
         </span>
 
+
         <img
           id="avatarImage"
           alt="Profile photo"
         >
+
 
         <span class="avatar-camera">
           📷
@@ -72,9 +106,12 @@
     </div>
 
 
+
     <div class="profile-main">
 
+
       <div class="profile-name-row">
+
 
         <div>
 
@@ -88,12 +125,17 @@
 
         </div>
 
+
         <span class="profile-status">
+
           <i></i>
+
           Active
+
         </span>
 
       </div>
+
 
 
       <button
@@ -104,12 +146,17 @@
         ✏️ Edit Profile
       </button>
 
+
     </div>
+
 
   </section>
 
 
-  <!-- HIDDEN PHOTO INPUT -->
+
+  <!-- =====================================================
+       AVATAR INPUT
+  ====================================================== -->
 
   <input
     type="file"
@@ -119,13 +166,17 @@
   >
 
 
-  <!-- EDIT PROFILE -->
+
+  <!-- =====================================================
+       EDIT PROFILE
+  ====================================================== -->
 
   <section
     class="profile-section"
     id="editProfilePanel"
     hidden
   >
+
 
     <div class="section-label">
       EDIT PROFILE
@@ -134,9 +185,11 @@
 
     <div class="profile-edit-card">
 
+
       <label for="nameInput">
         Display name
       </label>
+
 
       <input
         id="nameInput"
@@ -146,9 +199,11 @@
       >
 
 
+
       <label for="usernameInput">
         Username
       </label>
+
 
       <input
         id="usernameInput"
@@ -158,7 +213,9 @@
       >
 
 
+
       <div class="profile-edit-actions">
+
 
         <button
           id="cancelProfileBtn"
@@ -177,16 +234,138 @@
           Save changes
         </button>
 
+
       </div>
 
+
     </div>
+
 
   </section>
 
 
-  <!-- STATS -->
+
+  <!-- =====================================================
+       TRADER LEVEL
+  ====================================================== -->
+
+  <section class="trader-level-card">
+
+
+    <div class="trader-level-top">
+
+
+      <div>
+
+        <span class="mini-label">
+          TRADER LEVEL
+        </span>
+
+
+        <h3>
+          Rookie Trader
+        </h3>
+
+      </div>
+
+
+      <div class="level-number">
+        LVL 01
+      </div>
+
+
+    </div>
+
+
+
+    <div class="xp-row">
+
+
+      <span>
+        120 XP
+      </span>
+
+
+      <span>
+        1,000 XP
+      </span>
+
+
+    </div>
+
+
+    <div class="xp-track">
+
+      <div
+        class="xp-progress"
+        style="width:12%"
+      ></div>
+
+    </div>
+
+
+    <p class="xp-description">
+
+      Keep exploring NEXTRA to unlock your next level.
+
+    </p>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       ACCOUNT PLAN
+  ====================================================== -->
+
+  <section class="plan-card">
+
+
+    <div class="plan-icon">
+      N
+    </div>
+
+
+    <div class="plan-content">
+
+
+      <span class="mini-label">
+        CURRENT PLAN
+      </span>
+
+
+      <strong>
+        NEXTRA Free
+      </strong>
+
+
+      <span>
+        Core market intelligence
+      </span>
+
+
+    </div>
+
+
+    <button
+      class="plan-button"
+      type="button"
+    >
+      Upgrade
+    </button>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       STATS
+  ====================================================== -->
 
   <section class="profile-stats">
+
 
     <div class="profile-stat">
 
@@ -199,6 +378,7 @@
       </span>
 
     </div>
+
 
 
     <div class="profile-stat">
@@ -214,31 +394,133 @@
     </div>
 
 
+
     <div class="profile-stat">
 
-      <strong>
-        Free
+      <strong id="marketCount">
+        0
       </strong>
 
       <span>
-        Plan
+        Markets
       </span>
 
     </div>
 
+
   </section>
 
 
-  <!-- ACCOUNT -->
+
+  <!-- =====================================================
+       ACHIEVEMENTS
+  ====================================================== -->
 
   <section class="profile-section">
+
+
+    <div class="section-label">
+      ACHIEVEMENTS
+    </div>
+
+
+
+    <div class="achievement-grid">
+
+
+      <div class="achievement-card active">
+
+        <div class="achievement-icon">
+          ◈
+        </div>
+
+        <strong>
+          First Look
+        </strong>
+
+        <span>
+          Explored NEXTRA
+        </span>
+
+      </div>
+
+
+
+      <div class="achievement-card">
+
+        <div class="achievement-icon">
+          ⭐
+        </div>
+
+        <strong>
+          Watcher
+        </strong>
+
+        <span>
+          Build watchlist
+        </span>
+
+      </div>
+
+
+
+      <div class="achievement-card">
+
+        <div class="achievement-icon">
+          ⚡
+        </div>
+
+        <strong>
+          Futures
+        </strong>
+
+        <span>
+          Open futures
+        </span>
+
+      </div>
+
+
+
+      <div class="achievement-card">
+
+        <div class="achievement-icon">
+          🔥
+        </div>
+
+        <strong>
+          Market Hunter
+        </strong>
+
+        <span>
+          Track markets
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================================
+       ACCOUNT
+  ====================================================== -->
+
+  <section class="profile-section">
+
 
     <div class="section-label">
       ACCOUNT
     </div>
 
 
+
     <div class="profile-item">
+
 
       <div>
 
@@ -252,14 +534,18 @@
 
       </div>
 
+
       <span class="profile-arrow">
         ›
       </span>
 
+
     </div>
 
 
+
     <div class="profile-item">
+
 
       <div>
 
@@ -273,22 +559,30 @@
 
       </div>
 
+
       <span class="profile-check">
         ✓
       </span>
 
+
     </div>
+
 
   </section>
 
 
-  <!-- QUICK ACTIONS -->
+
+  <!-- =====================================================
+       QUICK ACTIONS
+  ====================================================== -->
 
   <section class="profile-section">
+
 
     <div class="section-label">
       QUICK ACTIONS
     </div>
+
 
 
     <a
@@ -308,11 +602,13 @@
 
       </div>
 
+
       <span class="profile-arrow">
         ›
       </span>
 
     </a>
+
 
 
     <a
@@ -332,6 +628,7 @@
 
       </div>
 
+
       <span class="profile-arrow">
         ›
       </span>
@@ -339,10 +636,8 @@
     </a>
 
 
-    <div
-      class="profile-item"
-      id="notificationItem"
-    >
+
+    <div class="profile-item">
 
       <div>
 
@@ -351,10 +646,11 @@
         </strong>
 
         <span>
-          Manage your market alerts
+          Manage market alerts
         </span>
 
       </div>
+
 
       <span class="profile-arrow">
         ›
@@ -362,19 +658,26 @@
 
     </div>
 
+
   </section>
 
 
-  <!-- PREFERENCES -->
+
+  <!-- =====================================================
+       PREFERENCES
+  ====================================================== -->
 
   <section class="profile-section">
+
 
     <div class="section-label">
       PREFERENCES
     </div>
 
 
+
     <div class="profile-item">
+
 
       <div>
 
@@ -388,14 +691,18 @@
 
       </div>
 
+
       <span>
         ◐
       </span>
 
+
     </div>
 
 
+
     <div class="profile-item">
+
 
       <div>
 
@@ -409,25 +716,34 @@
 
       </div>
 
+
       <span class="profile-arrow">
         ›
       </span>
 
+
     </div>
+
 
   </section>
 
 
-  <!-- ABOUT -->
+
+  <!-- =====================================================
+       ABOUT
+  ====================================================== -->
 
   <section class="profile-section">
+
 
     <div class="section-label">
       ABOUT NEXTRA
     </div>
 
 
+
     <div class="profile-item">
+
 
       <div>
 
@@ -441,16 +757,22 @@
 
       </div>
 
+
       <span>
         v1.0
       </span>
 
+
     </div>
+
 
   </section>
 
 
-  <!-- FOOTER -->
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <div class="profile-footer">
 
@@ -458,7 +780,9 @@
 
   </div>
 
+
 </main>
+
 
 
 <!-- BOTTOM NAV -->
@@ -466,30 +790,45 @@
 <div id="bottom-nav"></div>
 
 
-<!-- JS -->
+
+<!-- =====================================================
+     GLOBAL JS
+====================================================== -->
 
 <script src="js/api.js"></script>
+
 <script src="js/app.js"></script>
 
+
+
+<!-- =====================================================
+     PROFILE JS
+====================================================== -->
 
 <script>
 
 (() => {
 
+
   const PROFILE_KEY =
     "nextra_profile";
+
 
   const AVATAR_KEY =
     "nextra_avatar";
 
 
+
   const defaults = {
 
-    name: "NEXTRA User",
+    name:
+      "NEXTRA User",
 
-    username: "nextra_user"
+    username:
+      "nextra_user"
 
   };
+
 
 
   let profile = {
@@ -497,11 +836,13 @@
     ...defaults,
 
     ...(JSON.parse(
-      localStorage.getItem(PROFILE_KEY)
-      || "{}"
+      localStorage.getItem(
+        PROFILE_KEY
+      ) || "{}"
     ))
 
   };
+
 
 
   const nameEl =
@@ -558,13 +899,21 @@
     );
 
 
+
+  /* =====================================================
+     RENDER
+  ====================================================== */
+
   function renderProfile() {
+
 
     nameEl.textContent =
       profile.name;
 
+
     usernameEl.textContent =
-      "@" + profile.username;
+      "@" +
+      profile.username;
 
 
     avatarInitial.textContent =
@@ -575,43 +924,54 @@
       ).toUpperCase();
 
 
+
     const savedAvatar =
       localStorage.getItem(
         AVATAR_KEY
       );
 
 
+
     if (savedAvatar) {
+
 
       avatarImage.src =
         savedAvatar;
+
 
       avatarImage.classList.add(
         "visible"
       );
 
+
       avatarInitial.style.display =
         "none";
+
 
     }
 
     else {
 
+
       avatarImage.classList.remove(
         "visible"
       );
 
+
       avatarInitial.style.display =
         "block";
 
+
     }
+
 
   }
 
 
-  /* =========================
-     CHANGE AVATAR
-  ========================= */
+
+  /* =====================================================
+     AVATAR
+  ====================================================== */
 
   avatarButton.addEventListener(
     "click",
@@ -623,79 +983,104 @@
   );
 
 
+
   avatarInput.addEventListener(
     "change",
     event => {
 
+
       const file =
         event.target.files[0];
+
 
       if (!file) return;
 
 
-      if (!file.type.startsWith(
-        "image/"
-      )) {
+
+      if (
+        !file.type.startsWith(
+          "image/"
+        )
+      ) {
 
         return;
 
       }
 
 
+
       const reader =
         new FileReader();
 
 
-      reader.onload = () => {
 
-        try {
+      reader.onload =
+        () => {
 
-          localStorage.setItem(
-            AVATAR_KEY,
-            reader.result
-          );
 
-          renderProfile();
+          try {
 
-        }
 
-        catch {
+            localStorage.setItem(
+              AVATAR_KEY,
+              reader.result
+            );
 
-          alert(
-            "Foto terlalu besar. Coba gunakan foto dengan ukuran lebih kecil."
-          );
 
-        }
+            renderProfile();
 
-      };
+
+          }
+
+          catch {
+
+
+            alert(
+              "Foto terlalu besar. Gunakan foto yang lebih kecil."
+            );
+
+
+          }
+
+
+        };
+
 
 
       reader.readAsDataURL(
         file
       );
 
+
     }
   );
 
 
-  /* =========================
+
+  /* =====================================================
      EDIT PROFILE
-  ========================= */
+  ====================================================== */
 
   function openEditor() {
+
 
     nameInput.value =
       profile.name;
 
+
     usernameInput.value =
       profile.username;
+
 
     panel.hidden =
       false;
 
+
     nameInput.focus();
 
+
   }
+
 
 
   document
@@ -706,6 +1091,7 @@
       "click",
       openEditor
     );
+
 
 
   document
@@ -723,6 +1109,7 @@
     );
 
 
+
   document
     .getElementById(
       "saveProfileBtn"
@@ -731,9 +1118,11 @@
       "click",
       () => {
 
+
         const name =
           nameInput.value.trim()
           || defaults.name;
+
 
 
         const username =
@@ -746,38 +1135,53 @@
               )
             || defaults.username
           )
-          .slice(0, 20);
+          .slice(
+            0,
+            20
+          );
+
 
 
         profile.name =
-          name.slice(0, 30);
+          name.slice(
+            0,
+            30
+          );
 
 
         profile.username =
           username;
 
 
+
         localStorage.setItem(
           PROFILE_KEY,
-          JSON.stringify(profile)
+          JSON.stringify(
+            profile
+          )
         );
+
 
 
         renderProfile();
 
 
+
         panel.hidden =
           true;
+
 
       }
     );
 
 
-  /* =========================
-     WATCHLIST COUNT
-  ========================= */
+
+  /* =====================================================
+     WATCHLIST
+  ====================================================== */
 
   try {
+
 
     const watchlist =
       JSON.parse(
@@ -787,30 +1191,92 @@
       );
 
 
+
     document.getElementById(
       "watchlistCount"
     ).textContent =
-      Array.isArray(watchlist)
+      Array.isArray(
+        watchlist
+      )
         ? watchlist.length
         : 0;
+
 
   }
 
   catch {
+
 
     document.getElementById(
       "watchlistCount"
     ).textContent =
       "0";
 
+
   }
 
 
+
+  /* =====================================================
+     ALERT COUNT
+  ====================================================== */
+
+  try {
+
+
+    const alerts =
+      JSON.parse(
+        localStorage.getItem(
+          "nextra_alerts"
+        ) || "[]"
+      );
+
+
+
+    document.getElementById(
+      "alertCount"
+    ).textContent =
+      Array.isArray(
+        alerts
+      )
+        ? alerts.length
+        : 0;
+
+
+  }
+
+  catch {
+
+
+    document.getElementById(
+      "alertCount"
+    ).textContent =
+      "0";
+
+
+  }
+
+
+
+  /* =====================================================
+     MARKET COUNTER
+  ====================================================== */
+
+  document.getElementById(
+    "marketCount"
+  ).textContent =
+    "Live";
+
+
+
   renderProfile();
+
 
 })();
 
 </script>
 
+
 </body>
+
 </html>
