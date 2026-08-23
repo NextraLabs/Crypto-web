@@ -1,4 +1,5 @@
-// api.js — NEXTRA Market + Futures API V4
+// api.js — NEXTRA Market + Futures API V5
+// SPEED OPTIMIZED
 // Market: sampai 250 coins
 // Futures: Binance Futures
 // Coin Detail: Chart / History
@@ -88,7 +89,9 @@ async function fetchMarkets({
 
   currency = MARKET_CURRENCY,
 
-  order = "market_cap_desc"
+  order = "market_cap_desc",
+
+  sparkline = false
 
 } = {}) {
 
@@ -108,7 +111,14 @@ async function fetchMarkets({
 
       page,
 
-      sparkline: "true",
+      /*
+       * FALSE = jauh lebih ringan
+       * Coin Detail tetap menggunakan
+       * sparkline sendiri.
+       */
+
+      sparkline:
+        sparkline ? "true" : "false",
 
       price_change_percentage:
         "1h,24h,7d"
@@ -124,8 +134,112 @@ async function fetchMarkets({
 
 
 /* =========================================
-   FETCH 1.000 COINS
+   FAST MARKET LOADER
+   =========================================
+   Maksimum 250 coin.
+
+   Sebelumnya:
+   1000 coin
+   10 request
+   sequential
+   + delay 350ms
+
+   Sekarang:
+   250 coin
+   3 request
+   parallel
+   tanpa delay
 ========================================= */
+
+async function fetchFastMarkets({
+
+  currency = MARKET_CURRENCY,
+
+  total = 250,
+
+  perPage = 100
+
+} = {}) {
+
+  const safeTotal =
+    Math.min(
+      Math.max(
+        Number(total) || 250,
+        1
+      ),
+      250
+    );
+
+
+  const safePerPage =
+    Math.min(
+      Math.max(
+        Number(perPage) || 100,
+        1
+      ),
+      250
+    );
+
+
+  const pages =
+    Math.ceil(
+      safeTotal /
+      safePerPage
+    );
+
+
+  const requests =
+    Array.from(
+      {
+        length: pages
+      },
+      (_, index) => {
+
+        return fetchMarkets({
+
+          page:
+            index + 1,
+
+          perPage:
+            safePerPage,
+
+          currency,
+
+          order:
+            "market_cap_desc",
+
+          /*
+           * IMPORTANT
+           */
+
+          sparkline:
+            false
+
+        });
+
+      }
+    );
+
+
+  const responses =
+    await Promise.all(
+      requests
+    );
+
+
+  return responses
+    .flat()
+    .slice(
+      0,
+      safeTotal
+    );
+
+}
+
+
+/* =========================================
+   LEGACY 1000 COINS
+======================================== */
 
 async function fetch1000Markets({
 
@@ -135,73 +249,111 @@ async function fetch1000Markets({
 
   perPage = 100,
 
-  delay = 350
+  delay = 0
 
 } = {}) {
 
-  const results = [];
-
-  const pages =
-    Math.ceil(
-      total / perPage
+  const safeTotal =
+    Math.min(
+      Number(total) || 1000,
+      1000
     );
 
 
+  const pages =
+    Math.ceil(
+      safeTotal /
+      perPage
+    );
+
+
+  const results = [];
+
+
+  /*
+   * Batch 3 request sekaligus
+   * supaya tidak membebani API.
+   */
+
+  const batchSize = 3;
+
+
   for (
-    let page = 1;
-    page <= pages;
-    page++
+    let start = 1;
+    start <= pages;
+    start += batchSize
   ) {
 
-    try {
-
-      const data =
-        await fetchMarkets({
-
-          page,
-
-          perPage,
-
-          currency,
-
-          order:
-            "market_cap_desc"
-
-        });
-
-
-      if (
-        Array.isArray(data)
-      ) {
-
-        results.push(
-          ...data
-        );
-
-      }
-
-
-      if (
-        page < pages
-      ) {
-
-        await new Promise(
-          resolve =>
-            setTimeout(
-              resolve,
-              delay
+    const batchPages =
+      Array.from(
+        {
+          length:
+            Math.min(
+              batchSize,
+              pages - start + 1
             )
-        );
+        },
+        (_, index) =>
+          start + index
+      );
+
+
+    const batchResults =
+      await Promise.all(
+        batchPages.map(
+          page =>
+            fetchMarkets({
+
+              page,
+
+              perPage,
+
+              currency,
+
+              order:
+                "market_cap_desc",
+
+              sparkline:
+                false
+
+            })
+        )
+      );
+
+
+    batchResults.forEach(
+      data => {
+
+        if (
+          Array.isArray(data)
+        ) {
+
+          results.push(
+            ...data
+          );
+
+        }
 
       }
+    );
 
-    }
 
-    catch (error) {
+    /*
+     * Delay opsional.
+     * Default 0.
+     */
 
-      console.warn(
-        `Gagal mengambil market page ${page}:`,
-        error
+    if (
+      delay > 0 &&
+      start + batchSize <= pages
+    ) {
+
+      await new Promise(
+        resolve =>
+          setTimeout(
+            resolve,
+            delay
+          )
       );
 
     }
@@ -211,7 +363,7 @@ async function fetch1000Markets({
 
   return results.slice(
     0,
-    total
+    safeTotal
   );
 
 }
@@ -317,8 +469,7 @@ async function fetchCoinChart(
       vs_currency:
         MARKET_CURRENCY,
 
-      days:
-        days,
+      days,
 
       interval:
         days <= 1
@@ -432,9 +583,13 @@ function normalizeMarketCoin(
     maxSupply:
       coin.max_supply ?? 0,
 
+    /*
+     * Markets tidak perlu sparkline.
+     * Ini membuat response jauh lebih ringan.
+     */
+
     sparkline:
-      coin.sparkline_in_7d?.price
-      ?? []
+      []
 
   };
 
@@ -449,8 +604,12 @@ async function fetchNormalizedMarkets(
   options = {}
 ) {
 
+  /*
+   * DEFAULT SEKARANG 250
+   */
+
   const data =
-    await fetch1000Markets({
+    await fetchFastMarkets({
 
       currency:
         options.currency ||
@@ -458,15 +617,11 @@ async function fetchNormalizedMarkets(
 
       total:
         options.total ||
-        1000,
+        250,
 
       perPage:
         options.perPage ||
-        100,
-
-      delay:
-        options.delay ??
-        350
+        100
 
     });
 
@@ -497,6 +652,7 @@ function getMarketChange(
     return (
       coin
         .price_change_percentage_1h_in_currency
+      ?? coin.change1h
       ?? 0
     );
 
@@ -510,6 +666,7 @@ function getMarketChange(
     return (
       coin
         .price_change_percentage_7d_in_currency
+      ?? coin.change7d
       ?? 0
     );
 
@@ -519,6 +676,7 @@ function getMarketChange(
   return (
     coin
       .price_change_percentage_24h_in_currency
+    ?? coin.change24h
     ?? 0
   );
 
@@ -826,40 +984,43 @@ async function fetchFuturesMarkets(
   ]
 ) {
 
-  const results = [];
+  /*
+   * Jalankan semua symbol bersamaan.
+   * Sebelumnya satu-satu.
+   */
+
+  const results =
+    await Promise.all(
+      symbols.map(
+        async symbol => {
+
+          try {
+
+            return await fetchFuturesData(
+              symbol
+            );
+
+          }
+
+          catch (error) {
+
+            console.warn(
+              `Failed ${symbol}:`,
+              error
+            );
+
+            return null;
+
+          }
+
+        }
+      )
+    );
 
 
-  for (
-    const symbol of symbols
-  ) {
-
-    try {
-
-      const data =
-        await fetchFuturesData(
-          symbol
-        );
-
-
-      results.push(
-        data
-      );
-
-    }
-
-    catch (error) {
-
-      console.warn(
-        `Failed ${symbol}:`,
-        error
-      );
-
-    }
-
-  }
-
-
-  return results;
+  return results.filter(
+    Boolean
+  );
 
 }
 
@@ -1062,6 +1223,8 @@ function getFuturesSignal(
 window.NEXTRA_API = {
 
   fetchMarkets,
+
+  fetchFastMarkets,
 
   fetch1000Markets,
 
