@@ -1,4 +1,6 @@
-// api.js — NEXTRA Market + Futures API V2
+// api.js — NEXTRA Market + Futures API V3
+// Market: sampai 1.000 coins
+// Futures: Binance Futures
 
 const COINGECKO_API =
   "https://api.coingecko.com/api/v3";
@@ -10,7 +12,7 @@ const MARKET_CURRENCY = "usd";
 
 
 /* =========================================
-   GENERIC FETCH
+   GENERIC FETCH — COINGECKO
 ========================================= */
 
 async function apiFetch(
@@ -22,6 +24,7 @@ async function apiFetch(
     `${COINGECKO_API}${endpoint}`,
     {
       ...options,
+
       headers: {
         Accept: "application/json",
         ...(options.headers || {})
@@ -33,7 +36,7 @@ async function apiFetch(
   if (!response.ok) {
 
     throw new Error(
-      `API error: ${response.status}`
+      `CoinGecko API error: ${response.status}`
     );
 
   }
@@ -80,7 +83,7 @@ async function fetchMarkets({
 
   page = 1,
 
-  perPage = 50,
+  perPage = 100,
 
   currency = MARKET_CURRENCY,
 
@@ -91,11 +94,16 @@ async function fetchMarkets({
   const params =
     new URLSearchParams({
 
-      vs_currency: currency,
+      vs_currency:
+        currency,
 
       order,
 
-      per_page: perPage,
+      per_page:
+        Math.min(
+          Number(perPage) || 100,
+          250
+        ),
 
       page,
 
@@ -115,6 +123,116 @@ async function fetchMarkets({
 
 
 /* =========================================
+   FETCH 1.000 COINS
+========================================= */
+
+async function fetch1000Markets({
+
+  currency = MARKET_CURRENCY,
+
+  total = 1000,
+
+  perPage = 100,
+
+  delay = 350
+
+} = {}) {
+
+  const results = [];
+
+  const pages =
+    Math.ceil(
+      total / perPage
+    );
+
+
+  for (
+    let page = 1;
+    page <= pages;
+    page++
+  ) {
+
+    try {
+
+      const data =
+        await fetchMarkets({
+
+          page,
+
+          perPage,
+
+          currency,
+
+          order:
+            "market_cap_desc"
+
+        });
+
+
+      if (
+        Array.isArray(data)
+      ) {
+
+        results.push(
+          ...data
+        );
+
+      }
+
+
+      /*
+        Delay kecil supaya
+        request tidak terlalu agresif
+        terhadap CoinGecko.
+      */
+
+      if (
+        page < pages
+      ) {
+
+        await new Promise(
+          resolve =>
+            setTimeout(
+              resolve,
+              delay
+            )
+        );
+
+      }
+
+    }
+
+    catch (error) {
+
+      console.warn(
+        `Gagal mengambil market page ${page}:`,
+        error
+      );
+
+      /*
+        Kalau satu halaman gagal,
+        kita lanjutkan halaman berikutnya.
+      */
+
+    }
+
+  }
+
+
+  /*
+    Pastikan maksimal sesuai
+    jumlah yang diminta.
+  */
+
+  return results.slice(
+    0,
+    total
+  );
+
+}
+
+
+/* =========================================
    TRENDING
 ========================================= */
 
@@ -128,7 +246,7 @@ async function fetchTrending() {
 
 
 /* =========================================
-   GLOBAL
+   GLOBAL MARKET
 ========================================= */
 
 async function fetchGlobalMarket() {
@@ -160,17 +278,23 @@ async function fetchCoin(
   const params =
     new URLSearchParams({
 
-      localization: "false",
+      localization:
+        "false",
 
-      tickers: "false",
+      tickers:
+        "false",
 
-      market_data: "true",
+      market_data:
+        "true",
 
-      community_data: "false",
+      community_data:
+        "false",
 
-      developer_data: "false",
+      developer_data:
+        "false",
 
-      sparkline: "true"
+      sparkline:
+        "true"
 
     });
 
@@ -211,7 +335,7 @@ async function searchCoins(
 
 
 /* =========================================
-   NORMALIZE MARKET
+   NORMALIZE MARKET COIN
 ========================================= */
 
 function normalizeMarketCoin(
@@ -230,8 +354,9 @@ function normalizeMarketCoin(
       coin.name ?? "-",
 
     symbol:
-      (coin.symbol || "")
-        .toUpperCase(),
+      (
+        coin.symbol || ""
+      ).toUpperCase(),
 
     image:
       coin.image ?? "",
@@ -293,7 +418,25 @@ async function fetchNormalizedMarkets(
 ) {
 
   const data =
-    await fetchMarkets(options);
+    await fetch1000Markets({
+
+      currency:
+        options.currency ||
+        MARKET_CURRENCY,
+
+      total:
+        options.total ||
+        1000,
+
+      perPage:
+        options.perPage ||
+        100,
+
+      delay:
+        options.delay ??
+        350
+
+    });
 
 
   return data.map(
@@ -315,7 +458,9 @@ function getMarketChange(
   if (!coin) return 0;
 
 
-  if (timeframe === "1h") {
+  if (
+    timeframe === "1h"
+  ) {
 
     return (
       coin
@@ -326,7 +471,9 @@ function getMarketChange(
   }
 
 
-  if (timeframe === "7d") {
+  if (
+    timeframe === "7d"
+  ) {
 
     return (
       coin
@@ -366,7 +513,9 @@ async function fetchFuturesTicker(
       data.symbol,
 
     price:
-      Number(data.lastPrice),
+      Number(
+        data.lastPrice
+      ),
 
     change24h:
       Number(
@@ -374,16 +523,24 @@ async function fetchFuturesTicker(
       ),
 
     volume:
-      Number(data.volume),
+      Number(
+        data.volume
+      ),
 
     quoteVolume:
-      Number(data.quoteVolume),
+      Number(
+        data.quoteVolume
+      ),
 
     high24h:
-      Number(data.highPrice),
+      Number(
+        data.highPrice
+      ),
 
     low24h:
-      Number(data.lowPrice)
+      Number(
+        data.lowPrice
+      )
 
   };
 
@@ -410,13 +567,19 @@ async function fetchFundingRate(
       data.symbol,
 
     fundingRate:
-      Number(data.lastFundingRate),
+      Number(
+        data.lastFundingRate
+      ),
 
     markPrice:
-      Number(data.markPrice),
+      Number(
+        data.markPrice
+      ),
 
     indexPrice:
-      Number(data.indexPrice),
+      Number(
+        data.indexPrice
+      ),
 
     nextFundingTime:
       data.nextFundingTime
@@ -446,7 +609,9 @@ async function fetchOpenInterest(
       data.symbol,
 
     openInterest:
-      Number(data.openInterest),
+      Number(
+        data.openInterest
+      ),
 
     time:
       data.time
@@ -480,9 +645,7 @@ async function fetchOpenInterestHistory(
       return {
 
         current: null,
-
         previous: null,
-
         change: null
 
       };
@@ -492,8 +655,9 @@ async function fetchOpenInterestHistory(
 
     const current =
       Number(
-        data[data.length - 1]
-          .sumOpenInterestValue
+        data[
+          data.length - 1
+        ].sumOpenInterestValue
       );
 
 
@@ -513,9 +677,7 @@ async function fetchOpenInterestHistory(
       return {
 
         current: null,
-
         previous: null,
-
         change: null
 
       };
@@ -536,9 +698,7 @@ async function fetchOpenInterestHistory(
     return {
 
       current,
-
       previous,
-
       change
 
     };
@@ -556,9 +716,7 @@ async function fetchOpenInterestHistory(
     return {
 
       current: null,
-
       previous: null,
-
       change: null
 
     };
@@ -569,7 +727,7 @@ async function fetchOpenInterestHistory(
 
 
 /* =========================================
-   FUTURES — COMPLETE DATA V2
+   FUTURES — COMPLETE DATA
 ========================================= */
 
 async function fetchFuturesData(
@@ -638,12 +796,6 @@ async function fetchFuturesMarkets(
 
   const results = [];
 
-
-  /*
-    Sequential loading supaya
-    tidak terlalu agresif terhadap
-    Binance API.
-  */
 
   for (
     const symbol of symbols
@@ -878,6 +1030,8 @@ function getFuturesSignal(
 window.NEXTRA_API = {
 
   fetchMarkets,
+
+  fetch1000Markets,
 
   fetchTrending,
 
