@@ -1,53 +1,76 @@
-// futures.js — NEXTRA Futures V1
+// futures.js — NEXTRA Futures V2
+// Funding + Open Interest + Volume + Market Bias + Risk
 
 const FUTURES_STATE = {
+
   symbols: [
     "BTCUSDT",
     "ETHUSDT",
-    "SOLUSDT"
+    "SOLUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "AVAXUSDT",
+    "LINKUSDT",
+    "SUIUSDT"
   ],
+
   data: [],
+
   loading: false,
+
   lastUpdate: null
+
 };
 
 
 /* =========================================
-   LOAD FUTURES
+   ELEMENT
+========================================= */
+
+function futuresEl(id) {
+
+  return document.getElementById(id);
+
+}
+
+
+/* =========================================
+   LOAD
 ========================================= */
 
 async function loadFutures() {
 
   const container =
-    document.getElementById(
-      "futures-content"
-    );
+    futuresEl("futures-content");
+
+  if (!container) return;
+
+  if (FUTURES_STATE.loading) return;
 
   FUTURES_STATE.loading = true;
 
 
-  if (container) {
-
-    container.innerHTML = `
-      <div class="loading">
-        Memuat Futures...
-      </div>
-    `;
-
-  }
+  container.innerHTML = `
+    <div class="loading">
+      Memuat Futures...
+    </div>
+  `;
 
 
   try {
 
     const data =
-      await NEXTRA_API
-        .fetchFuturesMarkets(
-          FUTURES_STATE.symbols
-        );
+      await NEXTRA_API.fetchFuturesMarkets(
+        FUTURES_STATE.symbols
+      );
 
 
     FUTURES_STATE.data =
-      data || [];
+      Array.isArray(data)
+        ? data
+        : [];
 
 
     FUTURES_STATE.lastUpdate =
@@ -56,45 +79,41 @@ async function loadFutures() {
 
     renderFutures();
 
+  }
 
-  } catch (error) {
+  catch (error) {
 
     console.error(
-      "Futures error:",
+      "NEXTRA Futures:",
       error
     );
 
 
-    if (container) {
+    container.innerHTML = `
 
-      container.innerHTML = `
+      <div class="error-box">
 
-        <div class="error-box">
+        ⚠️ Gagal memuat Futures.
 
-          ⚠️ Gagal memuat Futures.
+        <br>
 
-          <br>
+        <button
+          class="icon-btn"
+          style="margin-top:10px;"
+          onclick="NEXTRA_FUTURES.refresh()"
+        >
+          Coba lagi
+        </button>
 
-          <button
-            class="icon-btn"
-            style="
-              margin-top:10px;
-            "
-            onclick="loadFutures()"
-          >
-            Coba lagi
-          </button>
+      </div>
 
-        </div>
+    `;
 
-      `;
+  }
 
-    }
+  finally {
 
-  } finally {
-
-    FUTURES_STATE.loading =
-      false;
+    FUTURES_STATE.loading = false;
 
   }
 
@@ -108,16 +127,12 @@ async function loadFutures() {
 function renderFutures() {
 
   const container =
-    document.getElementById(
-      "futures-content"
-    );
+    futuresEl("futures-content");
 
   if (!container) return;
 
 
-  if (
-    !FUTURES_STATE.data.length
-  ) {
+  if (!FUTURES_STATE.data.length) {
 
     container.innerHTML = `
       <div class="empty-state">
@@ -132,9 +147,7 @@ function renderFutures() {
 
   container.innerHTML =
     FUTURES_STATE.data
-      .map(
-        renderFuturesCard
-      )
+      .map(renderFuturesCard)
       .join("");
 
 
@@ -144,15 +157,21 @@ function renderFutures() {
 
 
 /* =========================================
-   FUTURES CARD
+   CARD
 ========================================= */
 
-function renderFuturesCard(
-  item
-) {
+function renderFuturesCard(item) {
 
   const change =
-    item.change24h;
+    Number(item.change24h) || 0;
+
+
+  const funding =
+    Number(item.fundingRate);
+
+
+  const oiChange =
+    Number(item.oiChange24h);
 
 
   const changeClass =
@@ -161,32 +180,41 @@ function renderFuturesCard(
       : "down";
 
 
-  const sign =
+  const changeSign =
     change >= 0
       ? "+"
       : "";
 
 
   const fundingPercent =
-    item.fundingRate *
-    100;
+    Number.isFinite(funding)
+      ? funding * 100
+      : null;
 
 
   const fundingClass =
-    fundingPercent >= 0
-      ? "up"
-      : "down";
+    fundingPercent === null
+      ? "dim"
+      : fundingPercent >= 0
+        ? "up"
+        : "down";
+
+
+  const signal =
+    NEXTRA_API.getFuturesSignal(item);
 
 
   const bias =
-    getBias(
-      item
+    getMarketBias(
+      item,
+      signal
     );
 
 
   const risk =
     getRisk(
-      item
+      item,
+      signal
     );
 
 
@@ -206,8 +234,9 @@ function renderFuturesCard(
       <div
         style="
           display:flex;
-          align-items:center;
           justify-content:space-between;
+          align-items:center;
+          gap:12px;
           margin-bottom:14px;
         "
       >
@@ -216,12 +245,10 @@ function renderFuturesCard(
 
           <strong
             style="
-              font-size:14px;
+              font-size:15px;
             "
           >
-            ${formatSymbol(
-              item.symbol
-            )}
+            ${formatSymbol(item.symbol)}
           </strong>
 
           <div
@@ -249,19 +276,17 @@ function renderFuturesCard(
               font-weight:800;
             "
           >
-            ${formatPrice(
-              item.price
-            )}
+            ${formatPrice(item.price)}
           </div>
 
           <div
             class="${changeClass}"
             style="
               font-size:10px;
-              margin-top:2px;
+              margin-top:3px;
             "
           >
-            ${sign}${change.toFixed(2)}%
+            ${changeSign}${change.toFixed(2)}%
           </div>
 
         </div>
@@ -280,131 +305,100 @@ function renderFuturesCard(
         "
       >
 
+        ${metricBox(
+          "FUNDING RATE",
+          fundingPercent === null
+            ? "-"
+            : `${fundingPercent.toFixed(4)}%`,
+          fundingClass
+        )}
+
+
+        ${metricBox(
+          "OPEN INTEREST",
+          formatOI(item.openInterest),
+          ""
+        )}
+
+
+        ${metricBox(
+          "OI CHANGE",
+          Number.isFinite(oiChange)
+            ? `${oiChange >= 0 ? "+" : ""}${oiChange.toFixed(2)}%`
+            : "-",
+          Number.isFinite(oiChange)
+            ? oiChange >= 0
+              ? "up"
+              : "down"
+            : "dim"
+        )}
+
+
+        ${metricBox(
+          "24H VOLUME",
+          formatLarge(item.quoteVolume),
+          ""
+        )}
+
+      </div>
+
+
+      <!-- SIGNAL -->
+
+      <div
+        style="
+          margin-top:12px;
+          padding:12px;
+          border:1px solid var(--line);
+          border-radius:11px;
+          background:rgba(255,255,255,.018);
+        "
+      >
+
         <div
+          class="dim"
           style="
-            padding:10px;
-            border:
-              1px solid var(--border);
-            border-radius:10px;
+            font-size:8px;
+            margin-bottom:6px;
           "
         >
-
-          <div
-            class="dim"
-            style="font-size:8px;"
-          >
-            FUNDING RATE
-          </div>
-
-          <strong
-            class="${fundingClass}"
-            style="
-              display:block;
-              margin-top:4px;
-              font-size:11px;
-            "
-          >
-            ${fundingPercent.toFixed(4)}%
-          </strong>
-
+          MARKET SIGNAL
         </div>
 
 
         <div
           style="
-            padding:10px;
-            border:
-              1px solid var(--border);
-            border-radius:10px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
           "
         >
 
-          <div
-            class="dim"
-            style="font-size:8px;"
-          >
-            OPEN INTEREST
-          </div>
-
           <strong
-            style="
-              display:block;
-              margin-top:4px;
-              font-size:11px;
-            "
+            class="${signalClass(signal.oiSignal)}"
+            style="font-size:11px;"
           >
-            ${formatOI(
-              item.openInterest
-            )}
+            ${signal.oiSignal}
           </strong>
 
-        </div>
 
-
-        <div
-          style="
-            padding:10px;
-            border:
-              1px solid var(--border);
-            border-radius:10px;
-          "
-        >
-
-          <div
-            class="dim"
-            style="font-size:8px;"
-          >
-            24H VOLUME
-          </div>
-
-          <strong
+          <span
+            class="${signalClass(signal.fundingSignal)}"
             style="
-              display:block;
-              margin-top:4px;
-              font-size:11px;
+              font-size:9px;
+              font-weight:700;
             "
           >
-            ${formatLarge(
-              item.quoteVolume
-            )}
-          </strong>
-
-        </div>
-
-
-        <div
-          style="
-            padding:10px;
-            border:
-              1px solid var(--border);
-            border-radius:10px;
-          "
-        >
-
-          <div
-            class="dim"
-            style="font-size:8px;"
-          >
-            MARKET BIAS
-          </div>
-
-          <strong
-            class="${bias.className}"
-            style="
-              display:block;
-              margin-top:4px;
-              font-size:11px;
-            "
-          >
-            ${bias.label}
-          </strong>
+            ${signal.fundingSignal}
+          </span>
 
         </div>
 
       </div>
 
 
-      <!-- RISK -->
+      <!-- BIAS / RISK -->
 
       <div
         style="
@@ -413,24 +407,58 @@ function renderFuturesCard(
           align-items:center;
           margin-top:12px;
           padding-top:10px;
-          border-top:
-            1px solid var(--border);
+          border-top:1px solid var(--line);
         "
       >
 
-        <span
-          class="dim"
-          style="font-size:9px;"
-        >
-          Risk Level
-        </span>
+        <div>
 
-        <strong
-          class="${risk.className}"
-          style="font-size:10px;"
+          <span
+            class="dim"
+            style="font-size:8px;"
+          >
+            MARKET BIAS
+          </span>
+
+          <strong
+            class="${bias.className}"
+            style="
+              display:block;
+              margin-top:3px;
+              font-size:10px;
+            "
+          >
+            ${bias.label}
+          </strong>
+
+        </div>
+
+
+        <div
+          style="
+            text-align:right;
+          "
         >
-          ${risk.label}
-        </strong>
+
+          <span
+            class="dim"
+            style="font-size:8px;"
+          >
+            RISK
+          </span>
+
+          <strong
+            class="${risk.className}"
+            style="
+              display:block;
+              margin-top:3px;
+              font-size:10px;
+            "
+          >
+            ${risk.label}
+          </strong>
+
+        </div>
 
       </div>
 
@@ -442,18 +470,238 @@ function renderFuturesCard(
 
 
 /* =========================================
+   METRIC BOX
+========================================= */
+
+function metricBox(
+  label,
+  value,
+  className
+) {
+
+  return `
+
+    <div
+      style="
+        padding:10px;
+        border:1px solid var(--line);
+        border-radius:10px;
+      "
+    >
+
+      <div
+        class="dim"
+        style="font-size:8px;"
+      >
+        ${label}
+      </div>
+
+      <strong
+        class="${className}"
+        style="
+          display:block;
+          margin-top:4px;
+          font-size:11px;
+        "
+      >
+        ${value}
+      </strong>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================
+   SIGNAL CLASS
+========================================= */
+
+function signalClass(signal) {
+
+  if (!signal) return "dim";
+
+
+  if (
+    signal.includes("LONG") ||
+    signal.includes("BULL")
+  ) {
+
+    return "up";
+
+  }
+
+
+  if (
+    signal.includes("SHORT") ||
+    signal.includes("BEAR") ||
+    signal.includes("CROWDED")
+  ) {
+
+    return "down";
+
+  }
+
+
+  return "dim";
+
+}
+
+
+/* =========================================
+   MARKET BIAS
+========================================= */
+
+function getMarketBias(
+  item,
+  signal
+) {
+
+  let score = 0;
+
+
+  const price =
+    Number(item.change24h) || 0;
+
+
+  const oi =
+    Number(item.oiChange24h);
+
+
+  if (price > 0) score += 1;
+
+  if (price < 0) score -= 1;
+
+
+  if (Number.isFinite(oi)) {
+
+    if (oi > 0) score += 0.5;
+
+    if (oi < 0) score -= 0.5;
+
+  }
+
+
+  if (
+    signal.oiSignal ===
+    "LONG CONFIRMATION"
+  ) {
+
+    score += 1;
+
+  }
+
+
+  if (
+    signal.oiSignal ===
+    "SHORT CONFIRMATION"
+  ) {
+
+    score -= 1;
+
+  }
+
+
+  if (score >= 1.5) {
+
+    return {
+      label: "BULLISH",
+      className: "up"
+    };
+
+  }
+
+
+  if (score <= -1.5) {
+
+    return {
+      label: "BEARISH",
+      className: "down"
+    };
+
+  }
+
+
+  return {
+    label: "NEUTRAL",
+    className: "dim"
+  };
+
+}
+
+
+/* =========================================
+   RISK
+========================================= */
+
+function getRisk(
+  item,
+  signal
+) {
+
+  const change =
+    Math.abs(
+      Number(item.change24h) || 0
+    );
+
+
+  const funding =
+    Math.abs(
+      Number(item.fundingRate) * 100 || 0
+    );
+
+
+  const oi =
+    Math.abs(
+      Number(item.oiChange24h) || 0
+    );
+
+
+  if (
+    change >= 8 ||
+    funding >= 0.10 ||
+    oi >= 15
+  ) {
+
+    return {
+      label: "HIGH",
+      className: "down"
+    };
+
+  }
+
+
+  if (
+    change >= 4 ||
+    funding >= 0.05 ||
+    oi >= 8
+  ) {
+
+    return {
+      label: "MODERATE",
+      className: ""
+    };
+
+  }
+
+
+  return {
+    label: "LOW",
+    className: "up"
+  };
+
+}
+
+
+/* =========================================
    SYMBOL
 ========================================= */
 
-function formatSymbol(
-  symbol
-) {
+function formatSymbol(symbol) {
 
-  return symbol
-    .replace(
-      "USDT",
-      "/USDT"
-    );
+  return String(symbol || "")
+    .replace("USDT", "/USDT");
 
 }
 
@@ -462,13 +710,13 @@ function formatSymbol(
    PRICE
 ========================================= */
 
-function formatPrice(
-  price
-) {
+function formatPrice(price) {
 
-  if (
-    !Number.isFinite(price)
-  ) {
+  price =
+    Number(price);
+
+
+  if (!Number.isFinite(price)) {
 
     return "-";
 
@@ -481,7 +729,7 @@ function formatPrice(
       price.toLocaleString(
         "en-US",
         {
-          maximumFractionDigits:2
+          maximumFractionDigits: 2
         }
       );
 
@@ -496,6 +744,14 @@ function formatPrice(
   }
 
 
+  if (price >= 0.01) {
+
+    return "$" +
+      price.toFixed(4);
+
+  }
+
+
   return "$" +
     price.toPrecision(6);
 
@@ -506,26 +762,25 @@ function formatPrice(
    OPEN INTEREST
 ========================================= */
 
-function formatOI(
-  value
-) {
+function formatOI(value) {
 
-  if (
-    !Number.isFinite(value)
-  ) {
+  value =
+    Number(value);
+
+
+  if (!Number.isFinite(value)) {
 
     return "-";
 
   }
 
 
-  return Number(value)
-    .toLocaleString(
-      "en-US",
-      {
-        maximumFractionDigits:0
-      }
-    );
+  return value.toLocaleString(
+    "en-US",
+    {
+      maximumFractionDigits: 0
+    }
+  );
 
 }
 
@@ -534,54 +789,51 @@ function formatOI(
    LARGE NUMBER
 ========================================= */
 
-function formatLarge(
-  value
-) {
+function formatLarge(value) {
 
-  if (
-    !Number.isFinite(value)
-  ) {
+  value =
+    Number(value);
+
+
+  if (!Number.isFinite(value)) {
 
     return "-";
 
   }
 
 
+  if (value >= 1e12) {
+
+    return "$" +
+      (value / 1e12).toFixed(2) +
+      "T";
+
+  }
+
+
   if (value >= 1e9) {
 
-    return (
-      "$" +
-      (
-        value / 1e9
-      ).toFixed(2) +
-      "B"
-    );
+    return "$" +
+      (value / 1e9).toFixed(2) +
+      "B";
 
   }
 
 
   if (value >= 1e6) {
 
-    return (
-      "$" +
-      (
-        value / 1e6
-      ).toFixed(2) +
-      "M"
-    );
+    return "$" +
+      (value / 1e6).toFixed(2) +
+      "M";
 
   }
 
 
   if (value >= 1e3) {
 
-    return (
-      "$" +
-      (
-        value / 1e3
-      ).toFixed(2) +
-      "K"
-    );
+    return "$" +
+      (value / 1e3).toFixed(2) +
+      "K";
 
   }
 
@@ -593,160 +845,21 @@ function formatLarge(
 
 
 /* =========================================
-   MARKET BIAS
-========================================= */
-
-function getBias(
-  item
-) {
-
-  let score = 0;
-
-
-  if (
-    item.change24h > 0
-  ) {
-
-    score += 1;
-
-  } else {
-
-    score -= 1;
-
-  }
-
-
-  if (
-    item.fundingRate > 0
-  ) {
-
-    score += 0.5;
-
-  } else {
-
-    score -= 0.5;
-
-  }
-
-
-  if (score >= 1) {
-
-    return {
-
-      label: "BULLISH",
-
-      className: "up"
-
-    };
-
-  }
-
-
-  if (score <= -1) {
-
-    return {
-
-      label: "BEARISH",
-
-      className: "down"
-
-    };
-
-  }
-
-
-  return {
-
-    label: "NEUTRAL",
-
-    className: "dim"
-
-  };
-
-}
-
-
-/* =========================================
-   RISK
-========================================= */
-
-function getRisk(
-  item
-) {
-
-  const change =
-    Math.abs(
-      item.change24h
-    );
-
-
-  const funding =
-    Math.abs(
-      item.fundingRate *
-      100
-    );
-
-
-  if (
-    change >= 8 ||
-    funding >= 0.08
-  ) {
-
-    return {
-
-      label: "HIGH",
-
-      className: "down"
-
-    };
-
-  }
-
-
-  if (
-    change >= 4 ||
-    funding >= 0.04
-  ) {
-
-    return {
-
-      label: "MODERATE",
-
-      className: ""
-
-    };
-
-  }
-
-
-  return {
-
-    label: "LOW",
-
-    className: "up"
-
-  };
-
-}
-
-
-/* =========================================
    UPDATE TIME
 ========================================= */
 
 function updateFuturesTime() {
 
   const element =
-    document.getElementById(
+    futuresEl(
       "futures-update"
     );
+
 
   if (!element) return;
 
 
-  if (
-    !FUTURES_STATE.lastUpdate
-  ) {
+  if (!FUTURES_STATE.lastUpdate) {
 
     element.textContent =
       "Belum diperbarui";
@@ -798,7 +911,7 @@ document.addEventListener(
   () => {
 
     if (
-      document.getElementById(
+      futuresEl(
         "futures-content"
       )
     ) {
