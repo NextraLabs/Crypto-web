@@ -1,22 +1,28 @@
 // market.js — NEXTRA Markets V5
-// SEARCH + FILTER + SORT + WATCHLIST + COIN DETAIL
+// SEARCH HOME + SEARCH MARKET + FILTER + SORT + WATCHLIST
 
 const MARKET_STATE = {
 
   coins: [],
+
   filtered: [],
 
   page: 1,
+
   perPage: 25,
 
   dataLimit: 250,
 
   search: "",
+
   filter: "all",
+
   sort: "market_cap",
+
   sortDirection: "desc",
 
   watchlistOnly: false,
+
   loading: false
 
 };
@@ -42,33 +48,24 @@ async function loadMarkets() {
   const container =
     marketEl("market-list");
 
+
   MARKET_STATE.loading = true;
 
 
   if (container) {
 
     container.innerHTML = `
+
       <div class="loading">
         Memuat market...
       </div>
+
     `;
 
   }
 
 
   try {
-
-    if (
-      typeof NEXTRA_API ===
-      "undefined"
-    ) {
-
-      throw new Error(
-        "NEXTRA_API tidak tersedia"
-      );
-
-    }
-
 
     const coins =
       await NEXTRA_API.fetchNormalizedMarkets({
@@ -98,7 +95,8 @@ async function loadMarkets() {
       coins;
 
 
-    MARKET_STATE.page = 1;
+    MARKET_STATE.page =
+      1;
 
 
     applyMarketFilters();
@@ -248,7 +246,7 @@ function applyMarketFilters() {
 
     data =
       [...data].sort(
-        (a, b) =>
+        (a,b) =>
           Math.abs(
             Number(
               b.change24h
@@ -274,7 +272,7 @@ function applyMarketFilters() {
 
 
   data.sort(
-    (a, b) => {
+    (a,b) => {
 
       let valueA = 0;
       let valueB = 0;
@@ -460,9 +458,14 @@ function renderMarkets() {
   if (!visible.length) {
 
     container.innerHTML = `
+
       <div class="empty-state">
-        Tidak ada coin atau token ditemukan.
+
+        Tidak ada coin atau token
+        ditemukan.
+
       </div>
+
     `;
 
 
@@ -522,34 +525,15 @@ function renderMarketCard(
     );
 
 
-  /*
-   * PENTING:
-   * coin.id harus berupa CoinGecko ID
-   * contoh: bitcoin
-   */
-
-  const coinId =
-    String(
-      coin.id || ""
-    ).trim();
-
-
   return `
 
     <article
       class="coin-card market-card"
-      data-coin-id="${escapeAttribute(
-        coinId
-      )}"
+      data-coin-id="${coin.id}"
       role="link"
       tabindex="0"
-      aria-label="Buka ${escapeAttribute(
-        coin.name || coin.symbol || "coin"
-      )}"
+      style="cursor:pointer;"
     >
-
-
-      <!-- RANK -->
 
       <div
         class="market-rank"
@@ -561,25 +545,17 @@ function renderMarketCard(
           text-align:center;
         "
       >
-
-        #${coin.rank || "-"}
-
+        #${coin.rank}
       </div>
 
-
-      <!-- IMAGE -->
 
       ${
         coin.image
           ? `
 
             <img
-              src="${escapeAttribute(
-                coin.image
-              )}"
-              alt="${escapeAttribute(
-                coin.name || ""
-              )}"
+              src="${coin.image}"
+              alt="${coin.name}"
               width="36"
               height="36"
               style="
@@ -596,8 +572,6 @@ function renderMarketCard(
       }
 
 
-      <!-- NAME -->
-
       <div
         style="
           min-width:0;
@@ -606,26 +580,15 @@ function renderMarketCard(
       >
 
         <div class="coin-symbol">
-
-          ${escapeHTML(
-            coin.symbol || "-"
-          )}
-
+          ${coin.symbol}
         </div>
 
-
         <div class="coin-pair">
-
-          ${escapeHTML(
-            coin.name || "-"
-          )}
-
+          ${coin.name}
         </div>
 
       </div>
 
-
-      <!-- PRICE -->
 
       <div
         style="
@@ -644,7 +607,10 @@ function renderMarketCard(
 
 
         <div
-          class="coin-change ${changeClass}"
+          class="
+            coin-change
+            ${changeClass}
+          "
         >
 
           ${sign}${change24.toFixed(2)}%
@@ -654,17 +620,11 @@ function renderMarketCard(
       </div>
 
 
-      <!-- WATCHLIST -->
-
       <button
         class="watch-btn"
-        data-symbol="${escapeAttribute(
-          coin.symbol || ""
-        )}"
+        data-symbol="${coin.symbol}"
         title="Watchlist"
-        aria-label="Watchlist ${escapeAttribute(
-          coin.symbol || ""
-        )}"
+        aria-label="Watchlist ${coin.symbol}"
         style="
           border:0;
           background:none;
@@ -686,7 +646,6 @@ function renderMarketCard(
         }
 
       </button>
-
 
     </article>
 
@@ -900,47 +859,11 @@ function renderPagination(
           : ""
       }
     >
-
       ›
 
     </button>
 
   `;
-
-}
-
-
-/* =========================================
-   COIN DETAIL NAVIGATION
-========================================= */
-
-function openCoinDetail(
-  card
-) {
-
-  if (!card) return;
-
-
-  const coinId =
-    card.dataset.coinId;
-
-
-  if (!coinId) {
-
-    console.warn(
-      "NEXTRA: Coin ID kosong."
-    );
-
-    return;
-
-  }
-
-
-  window.location.href =
-    "coin.html?id=" +
-    encodeURIComponent(
-      coinId
-    );
 
 }
 
@@ -998,7 +921,6 @@ function initMarketEvents() {
       if (watch) {
 
         event.preventDefault();
-
         event.stopPropagation();
 
 
@@ -1018,7 +940,7 @@ function initMarketEvents() {
       }
 
 
-      /* COIN CARD */
+      /* COIN CLICK */
 
       const card =
         event.target.closest(
@@ -1028,9 +950,19 @@ function initMarketEvents() {
 
       if (card) {
 
-        openCoinDetail(
-          card
-        );
+        const coinId =
+          card.dataset.coinId;
+
+
+        if (coinId) {
+
+          window.location.href =
+            "coin.html?id=" +
+            encodeURIComponent(
+              coinId
+            );
+
+        }
 
         return;
 
@@ -1091,17 +1023,19 @@ function initMarketEvents() {
   );
 
 
-  /* KEYBOARD */
+  /* KEYBOARD COIN CLICK */
 
   document.addEventListener(
     "keydown",
     event => {
 
       if (
-        event.key !==
-        "Enter"
+        event.key !== "Enter" &&
+        event.key !== " "
       ) {
+
         return;
+
       }
 
 
@@ -1119,13 +1053,28 @@ function initMarketEvents() {
           ".watch-btn"
         )
       ) {
+
         return;
+
       }
 
 
-      openCoinDetail(
-        card
-      );
+      event.preventDefault();
+
+
+      const coinId =
+        card.dataset.coinId;
+
+
+      if (coinId) {
+
+        window.location.href =
+          "coin.html?id=" +
+          encodeURIComponent(
+            coinId
+          );
+
+      }
 
     }
   );
@@ -1258,63 +1207,50 @@ function initMarketEvents() {
 
 
 /* =========================================
-   ESCAPE
-========================================= */
-
-function escapeHTML(
-  value
-) {
-
-  return String(
-    value ?? ""
-  )
-
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-
-    .replace(
-      /</g,
-      "&lt;"
-    )
-
-    .replace(
-      />/g,
-      "&gt;"
-    )
-
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-function escapeAttribute(
-  value
-) {
-
-  return escapeHTML(
-    value
-  );
-
-}
-
-
-/* =========================================
    INIT
 ========================================= */
 
 function initMarkets() {
 
   initMarketEvents();
+
+
+  /*
+   * Baca search dari Home:
+   * markets.html?search=bitcoin
+   */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const searchParam =
+    params.get("search");
+
+
+  if (searchParam) {
+
+    MARKET_STATE.search =
+      searchParam.trim();
+
+
+    const searchInput =
+      marketEl(
+        "market-search"
+      );
+
+
+    if (searchInput) {
+
+      searchInput.value =
+        MARKET_STATE.search;
+
+    }
+
+  }
+
 
   loadMarkets();
 
