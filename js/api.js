@@ -1,6 +1,7 @@
-// api.js — NEXTRA Market + Futures API V3
-// Market: sampai 1.000 coins
+// api.js — NEXTRA Market + Futures API V4
+// Market: sampai 250 coins
 // Futures: Binance Futures
+// Coin Detail: Chart / History
 
 const COINGECKO_API =
   "https://api.coingecko.com/api/v3";
@@ -180,12 +181,6 @@ async function fetch1000Markets({
       }
 
 
-      /*
-        Delay kecil supaya
-        request tidak terlalu agresif
-        terhadap CoinGecko.
-      */
-
       if (
         page < pages
       ) {
@@ -209,20 +204,10 @@ async function fetch1000Markets({
         error
       );
 
-      /*
-        Kalau satu halaman gagal,
-        kita lanjutkan halaman berikutnya.
-      */
-
     }
 
   }
 
-
-  /*
-    Pastikan maksimal sesuai
-    jumlah yang diminta.
-  */
 
   return results.slice(
     0,
@@ -303,6 +288,53 @@ async function fetchCoin(
     `/coins/${encodeURIComponent(
       coinId
     )}?${params}`
+  );
+
+}
+
+
+/* =========================================
+   COIN CHART / HISTORY
+========================================= */
+
+async function fetchCoinChart(
+  coinId,
+  days = 7
+) {
+
+  if (!coinId) {
+
+    throw new Error(
+      "Coin ID untuk chart tidak ditemukan"
+    );
+
+  }
+
+
+  const params =
+    new URLSearchParams({
+
+      vs_currency:
+        MARKET_CURRENCY,
+
+      days:
+        days,
+
+      interval:
+        days <= 1
+          ? "hourly"
+          : "daily",
+
+      precision:
+        "full"
+
+    });
+
+
+  return apiFetch(
+    `/coins/${encodeURIComponent(
+      coinId
+    )}/market_chart?${params}`
   );
 
 }
@@ -1038,6 +1070,8 @@ window.NEXTRA_API = {
   fetchGlobalMarket,
 
   fetchCoin,
+
+  fetchCoinChart,
 
   searchCoins,
 
