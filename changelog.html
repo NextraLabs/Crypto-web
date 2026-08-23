@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
+  <title>NEXTRA — Changelog</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <style>
+
+    /* =================================================
+       NEXTRA CHANGELOG
+    ================================================= */
+
+    .change-hero {
+      position: relative;
+      overflow: hidden;
+
+      padding: 22px;
+
+      margin-bottom: 24px;
+
+      border: 1px solid var(--line);
+      border-radius: 21px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53,207,255,.11),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(57,242,160,.08),
+          transparent 50%
+        ),
+        var(--surface);
+    }
+
+
+    .change-label {
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      color: var(--green);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+
+    .change-label::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 10px
+        rgba(57,242,160,.7);
+    }
+
+
+    .change-title {
+      margin: 11px 0 7px;
+
+      font-size: 27px;
+      line-height: 1.1;
+
+      letter-spacing: -.05em;
+    }
+
+
+    .change-description {
+      margin: 0;
+
+      max-width: 330px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.65;
+    }
+
+
+    /* =================================================
+       VERSION
+    ================================================= */
+
+    .version-block {
+      position: relative;
+
+      padding-left: 20px;
+
+      margin-bottom: 28px;
+    }
+
+
+    .version-block::before {
+      content: "";
+
+      position: absolute;
+
+      left: 4px;
+      top: 7px;
+      bottom: -18px;
+
+      width: 1px;
+
+      background:
+        var(--line);
+    }
+
+
+    .version-block:last-child::before {
+      display: none;
+    }
+
+
+    .version-dot {
+      position: absolute;
+
+      left: 0;
+      top: 4px;
+
+      width: 9px;
+      height: 9px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(57,242,160,.08);
+    }
+
+
+    .version-header {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-bottom: 5px;
+    }
+
+
+    .version-name {
+      font-size: 14px;
+
+      font-weight: 900;
+
+      letter-spacing: -.025em;
+    }
+
+
+    .version-date {
+      color: var(--subtle);
+
+      font-size: 7px;
+
+      white-space: nowrap;
+    }
+
+
+    .version-status {
+      display: inline-flex;
+
+      align-items: center;
+
+      padding: 4px 7px;
+
+      margin-bottom: 10px;
+
+      border-radius: 7px;
+
+      background:
+        rgba(57,242,160,.07);
+
+      color: var(--green);
+
+      font-size: 7px;
+
+      font-weight: 800;
+
+      letter-spacing: .5px;
+    }
+
+
+    /* =================================================
+       CHANGE ITEMS
+    ================================================= */
+
+    .change-list {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 7px;
+    }
+
+
+    .change-item {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 8px;
+
+      padding: 10px;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,255,255,.018);
+    }
+
+
+    .change-type {
+      flex-shrink: 0;
+
+      min-width: 45px;
+
+      padding: 4px 5px;
+
+      border-radius: 6px;
+
+      text-align: center;
+
+      font-size: 6px;
+
+      font-weight: 900;
+
+      letter-spacing: .4px;
+
+      text-transform: uppercase;
+    }
+
+
+    .type-new {
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.08);
+    }
+
+
+    .type-improved {
+      color: #20cfff;
+
+      background:
+        rgba(32,207,255,.08);
+    }
+
+
+    .type-fixed {
+      color: #ffb84d;
+
+      background:
+        rgba(255,184,77,.08);
+    }
+
+
+    .type-security {
+      color: #c6a7ff;
+
+      background:
+        rgba(198,167,255,.08);
+    }
+
+
+    .change-text {
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.55;
+    }
+
+
+    /* =================================================
+       ROADMAP CARD
+    ================================================= */
+
+    .roadmap-card {
+      padding: 17px;
+
+      margin-top: 5px;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 18px;
+
+      background: var(--surface);
+    }
+
+
+    .roadmap-title {
+      margin: 0;
+
+      font-size: 11px;
+
+      font-weight: 900;
+    }
+
+
+    .roadmap-text {
+      margin: 6px 0 13px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.6;
+    }
+
+
+    .roadmap-list {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 7px;
+    }
+
+
+    .roadmap-item {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 9px;
+
+      border-radius: 9px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+
+    .roadmap-icon {
+      width: 6px;
+      height: 6px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: var(--green);
+    }
+
+
+    /* =================================================
+       FOOTER
+    ================================================= */
+
+    .change-footer {
+      padding: 30px 0 35px;
+
+      text-align: center;
+    }
+
+
+    .change-footer-logo {
+      font-size: 12px;
+
+      font-weight: 900;
+
+      letter-spacing: -.04em;
+    }
+
+
+    .change-footer-logo span {
+      color: var(--green);
+    }
+
+
+    .change-footer-text {
+      margin-top: 4px;
+
+      color: var(--subtle);
+
+      font-size: 7px;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<main class="container">
+
+
+  <!-- =================================================
+       HEADER
+  ================================================= -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+        Changelog<span class="dot">.</span>
+      </h1>
+
+      <p class="subtitle">
+        What's new in NEXTRA
+      </p>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+      title="Ganti tema"
+      aria-label="Ganti tema"
+    >
+      ◐
+    </button>
+
+  </header>
+
+
+
+  <!-- =================================================
+       HERO
+  ================================================= -->
+
+  <section class="change-hero">
+
+    <div class="change-label">
+      NEXTRA UPDATES
+    </div>
+
+
+    <h2 class="change-title">
+      Built. Improved. Evolved.
+    </h2>
+
+
+    <p class="change-description">
+
+      Semua perkembangan NEXTRA akan dicatat
+      di sini supaya kamu bisa melihat apa
+      yang baru dan apa yang sedang diperbaiki.
+
+    </p>
+
+  </section>
+
+
+
+  <!-- =================================================
+       VERSION 1.0
+  ================================================= -->
+
+  <section class="version-block">
+
+    <div class="version-dot"></div>
+
+
+    <div class="version-header">
+
+      <div class="version-name">
+        v1.0.0
+      </div>
+
+
+      <div class="version-date">
+        23 Aug 2026
+      </div>
+
+    </div>
+
+
+    <div class="version-status">
+      INITIAL RELEASE
+    </div>
+
+
+    <div class="change-list">
+
+
+      <div class="change-item">
+
+        <div class="change-type type-new">
+          New
+        </div>
+
+        <div class="change-text">
+          NEXTRA Market Dashboard diperkenalkan
+          sebagai pusat informasi crypto.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-new">
+          New
+        </div>
+
+        <div class="change-text">
+          Halaman Markets dengan data market
+          crypto dan fitur pencarian.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-new">
+          New
+        </div>
+
+        <div class="change-text">
+          Halaman Trending untuk memantau aset
+          yang sedang mendapatkan perhatian.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-new">
+          New
+        </div>
+
+        <div class="change-text">
+          Tools dan Intelligence mulai
+          dikembangkan sebagai bagian dari
+          ekosistem NEXTRA.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-new">
+          New
+        </div>
+
+        <div class="change-text">
+          Dark mode dan light mode tersedia
+          untuk menyesuaikan pengalaman pengguna.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-new">
+          New
+        </div>
+
+        <div class="change-text">
+          Halaman Profile, Education, Contact,
+          Privacy, Terms, dan Risk Disclaimer.
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       VERSION 0.9
+  ================================================= -->
+
+  <section class="version-block">
+
+    <div class="version-dot"></div>
+
+
+    <div class="version-header">
+
+      <div class="version-name">
+        v0.9.0
+      </div>
+
+
+      <div class="version-date">
+        Development
+      </div>
+
+    </div>
+
+
+    <div class="version-status">
+      DEVELOPMENT
+    </div>
+
+
+    <div class="change-list">
+
+
+      <div class="change-item">
+
+        <div class="change-type type-improved">
+          Improved
+        </div>
+
+        <div class="change-text">
+          Struktur website dipisahkan menjadi
+          beberapa halaman agar lebih mudah
+          dikembangkan.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-improved">
+          Improved
+        </div>
+
+        <div class="change-text">
+          Sistem JavaScript modular mulai
+          digunakan untuk berbagai fitur.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-improved">
+          Improved
+        </div>
+
+        <div class="change-text">
+          Sistem market data dikembangkan
+          menggunakan API crypto.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-improved">
+          Improved
+        </div>
+
+        <div class="change-text">
+          Mobile navigation dan pengalaman
+          pengguna mobile diperbaiki.
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       EARLY DEVELOPMENT
+  ================================================= -->
+
+  <section class="version-block">
+
+    <div class="version-dot"></div>
+
+
+    <div class="version-header">
+
+      <div class="version-name">
+        Early Build
+      </div>
+
+
+      <div class="version-date">
+        2026
+      </div>
+
+    </div>
+
+
+    <div class="version-status">
+      FOUNDATION
+    </div>
+
+
+    <div class="change-list">
+
+
+      <div class="change-item">
+
+        <div class="change-type type-new">
+          New
+        </div>
+
+        <div class="change-text">
+          Konsep awal website crypto mulai
+          dikembangkan.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-improved">
+          Improved
+        </div>
+
+        <div class="change-text">
+          Identitas brand berkembang menjadi
+          NEXTRA — Your Market. Your Intelligence.
+        </div>
+
+      </div>
+
+
+      <div class="change-item">
+
+        <div class="change-type type-improved">
+          Improved
+        </div>
+
+        <div class="change-text">
+          Sistem desain dan struktur UI
+          terus disempurnakan.
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       ROADMAP
+  ================================================= -->
+
+  <section>
+
+    <div class="roadmap-card">
+
+      <h2 class="roadmap-title">
+        What's next?
+      </h2>
+
+
+      <p class="roadmap-text">
+
+        NEXTRA masih terus dikembangkan.
+        Beberapa fitur berikut dapat menjadi
+        bagian dari update selanjutnya.
+
+      </p>
+
+
+      <div class="roadmap-list">
+
+
+        <div class="roadmap-item">
+
+          <span class="roadmap-icon"></span>
+
+          Advanced Market Intelligence
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+          <span class="roadmap-icon"></span>
+
+          Portfolio Tracking
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+          <span class="roadmap-icon"></span>
+
+          Advanced Futures Tools
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+          <span class="roadmap-icon"></span>
+
+          AI-powered Market Analysis
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+          <span class="roadmap-icon"></span>
+
+          Personalized Trader Dashboard
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       FOOTER
+  ================================================= -->
+
+  <footer class="change-footer">
+
+    <div class="change-footer-logo">
+      NEX<span>TRA</span>
+    </div>
+
+
+    <div class="change-footer-text">
+      Your Market. Your Intelligence.
+    </div>
+
+  </footer>
+
+
+</main>
+
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>
