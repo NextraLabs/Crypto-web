@@ -11,10 +11,10 @@ const MARKET_STATE = {
   page: 1,
 
   // 100 coin per halaman
-  perPage: 100,
+  perPage: 25,
 
   // Total coin yang disimpan
-  dataLimit: 1000,
+  dataLimit: 250,
 
   search: "",
 
