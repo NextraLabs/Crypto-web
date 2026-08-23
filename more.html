@@ -15,6 +15,438 @@
     rel="stylesheet"
     href="css/style.css"
   >
+
+  <style>
+
+    /* =================================================
+       NEXTRA MORE — PREMIUM
+    ================================================= */
+
+    .more-hero {
+      position: relative;
+      overflow: hidden;
+
+      padding: 20px;
+
+      margin-bottom: 24px;
+
+      border: 1px solid var(--line);
+      border-radius: 20px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53,207,255,.10),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(57,242,160,.08),
+          transparent 50%
+        ),
+        var(--surface);
+    }
+
+    .more-hero-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      color: var(--green);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .more-hero-label::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 10px
+        rgba(57,242,160,.7);
+    }
+
+    .more-title {
+      margin: 10px 0 6px;
+
+      font-size: 25px;
+      line-height: 1.1;
+
+      letter-spacing: -.05em;
+    }
+
+    .more-description {
+      margin: 0;
+
+      max-width: 300px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+
+    /* =================================================
+       SECTION HEADER
+    ================================================= */
+
+    .more-section {
+      margin-top: 23px;
+    }
+
+    .more-section:first-of-type {
+      margin-top: 0;
+    }
+
+    .more-section-header {
+      margin-bottom: 10px;
+    }
+
+    .more-section-title {
+      margin: 0;
+
+      font-size: 15px;
+      font-weight: 800;
+
+      letter-spacing: -.02em;
+    }
+
+    .more-section-subtitle {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+
+    /* =================================================
+       FEATURE LIST
+    ================================================= */
+
+    .more-list {
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid var(--line);
+
+      border-radius: 17px;
+
+      overflow: hidden;
+
+      background: var(--surface);
+    }
+
+    .more-item {
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      min-height: 68px;
+
+      padding: 10px 13px;
+
+      border-bottom: 1px solid var(--line);
+
+      text-decoration: none;
+
+      transition:
+        background .18s ease,
+        transform .18s ease;
+    }
+
+    .more-item:last-child {
+      border-bottom: 0;
+    }
+
+    .more-item:hover {
+      background:
+        rgba(255,255,255,.025);
+    }
+
+    .more-item:active {
+      background:
+        rgba(57,242,160,.045);
+
+      transform: scale(.99);
+    }
+
+
+    /* ICON BOX */
+
+    .more-icon {
+      flex-shrink: 0;
+
+      width: 39px;
+      height: 39px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 12px;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.075);
+
+      border:
+        1px solid
+        rgba(57,242,160,.08);
+    }
+
+    .more-icon svg {
+      width: 19px;
+      height: 19px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.8;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+
+    /* TEXT */
+
+    .more-item-content {
+      flex: 1;
+
+      min-width: 0;
+    }
+
+    .more-item-title {
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+    .more-item-description {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.35;
+    }
+
+
+    /* ARROW */
+
+    .more-arrow {
+      color: var(--subtle);
+
+      font-size: 17px;
+
+      transition:
+        transform .18s ease,
+        color .18s ease;
+    }
+
+    .more-item:hover .more-arrow {
+      color: var(--green);
+
+      transform:
+        translateX(2px);
+    }
+
+
+    /* =================================================
+       QUICK ACCESS
+    ================================================= */
+
+    .quick-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 9px;
+    }
+
+    .quick-card {
+      position: relative;
+
+      min-height: 105px;
+
+      display: block;
+
+      padding: 14px;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 17px;
+
+      background: var(--surface);
+
+      text-decoration: none;
+
+      transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+    }
+
+    .quick-card:hover {
+      transform:
+        translateY(-2px);
+
+      border-color:
+        rgba(57,242,160,.22);
+    }
+
+    .quick-card:active {
+      transform:
+        scale(.98);
+    }
+
+    .quick-icon {
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: 12px;
+
+      border-radius: 10px;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.07);
+    }
+
+    .quick-icon svg {
+      width: 18px;
+      height: 18px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.8;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .quick-name {
+      font-size: 10px;
+
+      font-weight: 800;
+    }
+
+    .quick-description {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 7.5px;
+
+      line-height: 1.4;
+    }
+
+    .quick-arrow {
+      position: absolute;
+
+      right: 12px;
+      bottom: 11px;
+
+      color: var(--subtle);
+
+      font-size: 11px;
+    }
+
+
+    /* =================================================
+       BRAND FOOTER
+    ================================================= */
+
+    .more-footer {
+      margin-top: 30px;
+
+      padding:
+        8px 0 22px;
+
+      text-align: center;
+    }
+
+    .more-footer-logo {
+      font-size: 12px;
+
+      font-weight: 900;
+
+      letter-spacing: -.04em;
+    }
+
+    .more-footer-logo span {
+      color: var(--green);
+    }
+
+    .more-footer-text {
+      margin-top: 4px;
+
+      color: var(--subtle);
+
+      font-size: 7px;
+    }
+
+
+    /* =================================================
+       SMALL SCREEN
+    ================================================= */
+
+    @media (max-width: 360px) {
+
+      .more-item {
+        min-height: 64px;
+
+        padding:
+          9px 11px;
+      }
+
+      .more-icon {
+        width: 36px;
+        height: 36px;
+      }
+
+      .quick-card {
+        min-height: 100px;
+
+        padding: 12px;
+      }
+
+    }
+
+  </style>
+
 </head>
 
 
@@ -22,7 +454,10 @@
 
 <main class="container">
 
-  <!-- HEADER -->
+
+  <!-- =================================================
+       HEADER
+  ================================================= -->
 
   <header class="topbar">
 
@@ -42,6 +477,8 @@
     <button
       class="icon-btn"
       id="theme-toggle"
+      title="Ganti tema"
+      aria-label="Ganti tema"
     >
       ◐
     </button>
@@ -49,448 +486,495 @@
   </header>
 
 
-  <!-- EXPLORE -->
 
-  <div
-    style="
-      font-size:10px;
-      font-weight:800;
-      margin:16px 0 8px;
-    "
-  >
-    Explore
-  </div>
+  <!-- =================================================
+       HERO
+  ================================================= -->
 
+  <section class="more-hero">
 
-  <section>
-
-
-    <!-- TOOLS -->
-
-    <a
-      href="tools.html"
-      class="coin-card"
-      style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-        text-decoration:none;
-      "
-    >
-
-      <div style="font-size:24px;">
-        🧰
-      </div>
-
-      <div style="flex:1;">
-
-        <strong>
-          Tools
-        </strong>
-
-        <div
-          class="dim"
-          style="
-            font-size:8px;
-            margin-top:3px;
-          "
-        >
-          Position Size · R/R · P&L · Liquidation
-        </div>
-
-      </div>
-
-      <span class="dim">
-        ›
-      </span>
-
-    </a>
-
-
-    <!-- INTELLIGENCE -->
-
-    <a
-      href="intelligence.html"
-      class="coin-card"
-      style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-        text-decoration:none;
-      "
-    >
-
-      <div style="font-size:24px;">
-        🧠
-      </div>
-
-      <div style="flex:1;">
-
-        <strong>
-          Intelligence
-        </strong>
-
-        <div
-          class="dim"
-          style="
-            font-size:8px;
-            margin-top:3px;
-          "
-        >
-          AI Market Analysis
-        </div>
-
-      </div>
-
-      <span class="dim">
-        ›
-      </span>
-
-    </a>
-
-
-    <!-- COMMUNITY -->
-
-    <a
-      href="community.html"
-      class="coin-card"
-      style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-        text-decoration:none;
-      "
-    >
-
-      <div style="font-size:24px;">
-        👥
-      </div>
-
-      <div style="flex:1;">
-
-        <strong>
-          Community
-        </strong>
-
-        <div
-          class="dim"
-          style="
-            font-size:8px;
-            margin-top:3px;
-          "
-        >
-          Discuss · Share · Learn
-        </div>
-
-      </div>
-
-      <span class="dim">
-        ›
-      </span>
-
-    </a>
-
-
-    <!-- LEARN -->
-
-    <a
-      href="learn.html"
-      class="coin-card"
-      style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-        text-decoration:none;
-      "
-    >
-
-      <div style="font-size:24px;">
-        📚
-      </div>
-
-      <div style="flex:1;">
-
-        <strong>
-          Learn
-        </strong>
-
-        <div
-          class="dim"
-          style="
-            font-size:8px;
-            margin-top:3px;
-          "
-        >
-          Crypto Education Hub
-        </div>
-
-      </div>
-
-      <span class="dim">
-        ›
-      </span>
-
-    </a>
-
-
-    <!-- PROFILE -->
-
-    <a
-      href="profile.html"
-      class="coin-card"
-      style="
-        display:flex;
-        align-items:center;
-        gap:12px;
-        text-decoration:none;
-      "
-    >
-
-      <div style="font-size:24px;">
-        👤
-      </div>
-
-      <div style="flex:1;">
-
-        <strong>
-          Profile
-        </strong>
-
-        <div
-          class="dim"
-          style="
-            font-size:8px;
-            margin-top:3px;
-          "
-        >
-          Account & Preferences
-        </div>
-
-      </div>
-
-      <span class="dim">
-        ›
-      </span>
-
-    </a>
-
-  </section>
-
-
-  <!-- QUICK ACCESS -->
-
-  <div
-    style="
-      font-size:10px;
-      font-weight:800;
-      margin:18px 0 8px;
-    "
-  >
-    Quick Access
-  </div>
-
-
-  <section
-    style="
-      display:grid;
-      grid-template-columns:
-        repeat(2,1fr);
-      gap:8px;
-    "
-  >
-
-
-    <a
-      href="markets.html"
-      class="coin-card"
-      style="
-        display:block;
-        text-decoration:none;
-        margin:0;
-      "
-    >
-
-      <div
-        style="
-          font-size:20px;
-          margin-bottom:6px;
-        "
-      >
-        📊
-      </div>
-
-      <strong
-        style="font-size:10px;"
-      >
-        Markets
-      </strong>
-
-      <div
-        class="dim"
-        style="
-          font-size:7px;
-          margin-top:3px;
-        "
-      >
-        Explore markets
-      </div>
-
-    </a>
-
-
-    <a
-      href="radar.html"
-      class="coin-card"
-      style="
-        display:block;
-        text-decoration:none;
-        margin:0;
-      "
-    >
-
-      <div
-        style="
-          font-size:20px;
-          margin-bottom:6px;
-        "
-      >
-        🔥
-      </div>
-
-      <strong
-        style="font-size:10px;"
-      >
-        Radar
-      </strong>
-
-      <div
-        class="dim"
-        style="
-          font-size:7px;
-          margin-top:3px;
-        "
-      >
-        Find opportunities
-      </div>
-
-    </a>
-
-
-    <a
-      href="futures.html"
-      class="coin-card"
-      style="
-        display:block;
-        text-decoration:none;
-        margin:0;
-      "
-    >
-
-      <div
-        style="
-          font-size:20px;
-          margin-bottom:6px;
-        "
-      >
-        📈
-      </div>
-
-      <strong
-        style="font-size:10px;"
-      >
-        Futures
-      </strong>
-
-      <div
-        class="dim"
-        style="
-          font-size:7px;
-          margin-top:3px;
-        "
-      >
-        Futures market
-      </div>
-
-    </a>
-
-
-    <a
-      href="index.html"
-      class="coin-card"
-      style="
-        display:block;
-        text-decoration:none;
-        margin:0;
-      "
-    >
-
-      <div
-        style="
-          font-size:20px;
-          margin-bottom:6px;
-        "
-      >
-        🏠
-      </div>
-
-      <strong
-        style="font-size:10px;"
-      >
-        Home
-      </strong>
-
-      <div
-        class="dim"
-        style="
-          font-size:7px;
-          margin-top:3px;
-        "
-      >
-        Back to dashboard
-      </div>
-
-    </a>
-
-  </section>
-
-
-  <!-- FOOTER -->
-
-  <div
-    style="
-      margin-top:22px;
-      text-align:center;
-    "
-  >
-
-    <div
-      style="
-        font-size:11px;
-        font-weight:900;
-      "
-    >
-      NEXTRA<span class="dot">.</span>
+    <div class="more-hero-label">
+      NEXTRA HUB
     </div>
 
-    <div
-      class="dim"
-      style="
-        font-size:7px;
-        margin-top:4px;
-      "
-    >
+    <h2 class="more-title">
+      Everything you need.
+    </h2>
+
+    <p class="more-description">
+      Akses tools, intelligence, community,
+      education, dan pengaturan akun NEXTRA
+      dari satu tempat.
+    </p>
+
+  </section>
+
+
+
+  <!-- =================================================
+       EXPLORE
+  ================================================= -->
+
+  <section class="more-section">
+
+    <div class="more-section-header">
+
+      <h2 class="more-section-title">
+        Explore
+      </h2>
+
+      <div class="more-section-subtitle">
+        Tools & features untuk trader
+      </div>
+
+    </div>
+
+
+    <div class="more-list">
+
+
+      <!-- TOOLS -->
+
+      <a
+        href="tools.html"
+        class="more-item"
+      >
+
+        <div class="more-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M14.7 6.3a4.2 4.2 0 0 0-5.6 5.6L4 17v3h3l5.1-5.1a4.2 4.2 0 0 0 5.6-5.6l-2.1 2.1-2.8-.8-.8-2.8z"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="more-item-content">
+
+          <div class="more-item-title">
+            Tools
+          </div>
+
+          <div class="more-item-description">
+            Position Size · R/R · P&L · Liquidation
+          </div>
+
+        </div>
+
+
+        <div class="more-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+
+      <!-- INTELLIGENCE -->
+
+      <a
+        href="intelligence.html"
+        class="more-item"
+      >
+
+        <div class="more-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M9 4.5a6 6 0 0 0-2 11.7V19h10v-2.8A6 6 0 0 0 15 4.5"/>
+
+            <path d="M9 22h6"/>
+
+            <path d="M10 19v-5l-2-2"/>
+
+            <path d="M14 19v-5l2-2"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="more-item-content">
+
+          <div class="more-item-title">
+            Intelligence
+          </div>
+
+          <div class="more-item-description">
+            AI Market Analysis & Insights
+          </div>
+
+        </div>
+
+
+        <div class="more-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+
+      <!-- COMMUNITY -->
+
+      <a
+        href="community.html"
+        class="more-item"
+      >
+
+        <div class="more-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20"/>
+
+            <circle
+              cx="9.5"
+              cy="7"
+              r="3"
+            />
+
+            <path d="M16 11a3 3 0 1 0 0-6"/>
+
+            <path d="M17 14.5a4 4 0 0 1 4 4V20"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="more-item-content">
+
+          <div class="more-item-title">
+            Community
+          </div>
+
+          <div class="more-item-description">
+            Discuss · Share · Learn with traders
+          </div>
+
+        </div>
+
+
+        <div class="more-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+
+      <!-- LEARN -->
+
+      <a
+        href="learn.html"
+        class="more-item"
+      >
+
+        <div class="more-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/>
+
+            <path d="M4 5.5v15"/>
+
+            <path d="M8 7h8"/>
+
+            <path d="M8 11h8"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="more-item-content">
+
+          <div class="more-item-title">
+            Learn
+          </div>
+
+          <div class="more-item-description">
+            Crypto Education Hub
+          </div>
+
+        </div>
+
+
+        <div class="more-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+
+      <!-- PROFILE -->
+
+      <a
+        href="profile.html"
+        class="more-item"
+      >
+
+        <div class="more-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="8"
+              r="3.5"
+            />
+
+            <path
+              d="M5 21a7 7 0 0 1 14 0"
+            />
+
+          </svg>
+
+        </div>
+
+
+        <div class="more-item-content">
+
+          <div class="more-item-title">
+            Profile
+          </div>
+
+          <div class="more-item-description">
+            Account & Preferences
+          </div>
+
+        </div>
+
+
+        <div class="more-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       QUICK ACCESS
+  ================================================= -->
+
+  <section class="more-section">
+
+    <div class="more-section-header">
+
+      <h2 class="more-section-title">
+        Quick Access
+      </h2>
+
+      <div class="more-section-subtitle">
+        Jump langsung ke market
+      </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+
+      <!-- MARKETS -->
+
+      <a
+        href="markets.html"
+        class="quick-card"
+      >
+
+        <div class="quick-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 19V9"/>
+
+            <path d="M9.3 19V5"/>
+
+            <path d="M14.7 19v-8"/>
+
+            <path d="M20 19V3"/>
+
+            <path d="M2.5 19.5h19"/>
+
+          </svg>
+
+        </div>
+
+        <div class="quick-name">
+          Markets
+        </div>
+
+        <div class="quick-description">
+          Explore crypto markets
+        </div>
+
+        <div class="quick-arrow">
+          →
+        </div>
+
+      </a>
+
+
+
+      <!-- RADAR -->
+
+      <a
+        href="radar.html"
+        class="quick-card"
+      >
+
+        <div class="quick-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M12 20a8 8 0 1 0-8-8"/>
+
+            <path d="M12 16a4 4 0 1 0-4-4"/>
+
+            <path d="M12 12 19.5 4.5"/>
+
+            <circle
+              cx="12"
+              cy="12"
+              r="1.3"
+              fill="currentColor"
+              stroke="none"
+            />
+
+          </svg>
+
+        </div>
+
+        <div class="quick-name">
+          Radar
+        </div>
+
+        <div class="quick-description">
+          Find market opportunities
+        </div>
+
+        <div class="quick-arrow">
+          →
+        </div>
+
+      </a>
+
+
+
+      <!-- FUTURES -->
+
+      <a
+        href="futures.html"
+        class="quick-card"
+      >
+
+        <div class="quick-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M5 18 18.5 4.5"/>
+
+            <path d="M10 4.5h8.5V13"/>
+
+            <path d="M4 9.5V19h9.5"/>
+
+          </svg>
+
+        </div>
+
+        <div class="quick-name">
+          Futures
+        </div>
+
+        <div class="quick-description">
+          Futures market & data
+        </div>
+
+        <div class="quick-arrow">
+          →
+        </div>
+
+      </a>
+
+
+
+      <!-- HOME -->
+
+      <a
+        href="index.html"
+        class="quick-card"
+      >
+
+        <div class="quick-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M3.5 10.7 12 3.8l8.5 6.9v9.1a1.7 1.7 0 0 1-1.7 1.7H5.2a1.7 1.7 0 0 1-1.7-1.7z"/>
+
+            <path d="M9 21.5v-6.8h6v6.8"/>
+
+          </svg>
+
+        </div>
+
+        <div class="quick-name">
+          Home
+        </div>
+
+        <div class="quick-description">
+          Back to dashboard
+        </div>
+
+        <div class="quick-arrow">
+          →
+        </div>
+
+      </a>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       FOOTER
+  ================================================= -->
+
+  <footer class="more-footer">
+
+    <div class="more-footer-logo">
+      NEXTRA<span>.</span>
+    </div>
+
+    <div class="more-footer-text">
       Your Market. Your Intelligence.
     </div>
 
-  </div>
+  </footer>
 
 
 </main>
 
 
-<!-- BOTTOM NAV -->
+
+<!-- =================================================
+     BOTTOM NAV
+================================================= -->
 
 <div id="bottom-nav"></div>
+
 
 
 <script src="js/app.js"></script>
@@ -498,25 +982,26 @@
 
 <script>
 
-document
-  .getElementById("theme-toggle")
-  ?.addEventListener(
-    "click",
-    () => {
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener(
+      "click",
+      () => {
 
-      if (
-        typeof toggleTheme ===
-        "function"
-      ) {
+        if (
+          typeof toggleTheme ===
+          "function"
+        ) {
 
-        toggleTheme();
+          toggleTheme();
+
+        }
 
       }
-
-    }
-  );
+    );
 
 </script>
+
 
 </body>
 
