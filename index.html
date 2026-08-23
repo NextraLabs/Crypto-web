@@ -10,6 +10,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
   <title>NEXTRA — Your Market. Your Intelligence.</title>
 
   <link
@@ -19,308 +24,690 @@
 
   <style>
 
-    /* =========================================
-       NEXTRA HOME — PREMIUM OVERRIDE
-    ========================================== */
+    /* =====================================================
+       NEXTRA HOME V4
+    ===================================================== */
 
     .home-hero {
+
       position: relative;
+
       overflow: hidden;
-      padding: 24px 20px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(66,245,167,.12);
-      border-radius: 22px;
+
+      margin-bottom: 25px;
+
+      padding: 23px 20px;
+
+      border:
+        1px solid
+        rgba(57,242,160,.12);
+
+      border-radius: 21px;
+
       background:
         radial-gradient(
           circle at 100% 0%,
-          rgba(32,207,255,.12),
-          transparent 45%
+          rgba(53,207,255,.13),
+          transparent 43%
         ),
         radial-gradient(
           circle at 0% 100%,
-          rgba(66,245,167,.08),
-          transparent 45%
+          rgba(57,242,160,.09),
+          transparent 48%
         ),
-        var(--card-bg);
+        var(--surface);
+
+      box-shadow:
+        0 12px 35px
+        rgba(0,0,0,.16);
+
     }
 
-    .home-hero::after {
-      content: "";
+
+    .hero-glow {
+
       position: absolute;
-      width: 140px;
-      height: 140px;
-      right: -60px;
-      bottom: -70px;
+
+      width: 170px;
+
+      height: 170px;
+
+      right: -90px;
+
+      top: -90px;
+
       border-radius: 50%;
-      background: var(--accent);
-      opacity: .04;
-      filter: blur(15px);
+
+      background:
+        var(--green);
+
+      opacity: .06;
+
+      filter: blur(20px);
+
+      pointer-events: none;
+
     }
+
 
     .hero-label {
-      display: inline-flex;
+
+      display: flex;
+
       align-items: center;
+
       gap: 7px;
-      color: var(--accent);
+
+      color:
+        var(--green);
+
       font-size: 9px;
+
       font-weight: 800;
+
       letter-spacing: 1.4px;
+
       text-transform: uppercase;
+
     }
 
-    .hero-label::before {
-      content: "";
+
+    .hero-live {
+
       width: 6px;
+
       height: 6px;
+
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+
+      background:
+        var(--green);
+
+      box-shadow:
+        0 0 9px
+        var(--green);
+
+      animation:
+        pulse 1.8s infinite;
+
     }
+
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+
+        opacity: 1;
+
+      }
+
+      50% {
+
+        opacity: .35;
+
+      }
+
+    }
+
 
     .hero-title {
-      margin: 12px 0 8px;
-      font-size: 28px;
+
+      margin:
+        12px 0 8px;
+
+      font-size: 27px;
+
       line-height: 1.08;
+
       letter-spacing: -.8px;
+
+      font-weight: 850;
+
     }
+
 
     .hero-title span {
-      color: var(--accent);
+
+      color:
+        var(--green);
+
     }
+
 
     .hero-description {
-      max-width: 310px;
+
+      max-width: 330px;
+
       margin: 0;
-      color: var(--dim);
+
+      color:
+        var(--muted);
+
       font-size: 11px;
-      line-height: 1.7;
+
+      line-height: 1.65;
+
     }
+
 
     .hero-stats {
-      display: flex;
-      gap: 8px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 7px;
+
       margin-top: 18px;
+
     }
+
 
     .hero-stat {
-      flex: 1;
+
       padding: 10px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.05);
+
       border-radius: 12px;
-      background: rgba(255,255,255,.025);
-      border: 1px solid rgba(255,255,255,.04);
+
+      background:
+        rgba(255,255,255,.025);
+
     }
+
 
     .hero-stat strong {
+
       display: block;
-      font-size: 13px;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
     }
+
 
     .hero-stat span {
+
       display: block;
-      margin-top: 2px;
-      color: var(--dim);
-      font-size: 8px;
-    }
 
-
-    /* SECTION HEADER */
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 11px;
-    }
-
-    .section-title {
-      margin: 0;
-      font-size: 16px;
-      letter-spacing: -.2px;
-    }
-
-    .section-subtitle {
       margin-top: 3px;
-      color: var(--dim);
-      font-size: 9px;
+
+      color:
+        var(--muted);
+
+      font-size: 8px;
+
     }
 
-    .view-all {
-      padding: 7px 10px;
+
+    /* =====================================================
+       MARKET HEADER
+    ===================================================== */
+
+    .home-section-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .home-section-title {
+
+      margin: 0;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+    }
+
+
+    .home-section-sub {
+
+      margin-top: 3px;
+
+      color:
+        var(--muted);
+
+      font-size: 9px;
+
+    }
+
+
+    .home-view-all {
+
+      padding:
+        7px 10px;
+
+      border:
+        1px solid
+        var(--line);
+
       border-radius: 9px;
+
+      color:
+        var(--muted);
+
       font-size: 9px;
-      text-decoration: none;
+
+      transition:
+        .18s ease;
+
     }
 
 
-    /* MARKET CARDS */
+    .home-view-all:hover {
+
+      color:
+        var(--green);
+
+      border-color:
+        rgba(57,242,160,.25);
+
+    }
+
+
+    /* =====================================================
+       MARKET LIST
+    ===================================================== */
 
     #home-market-list {
+
       display: flex;
+
       flex-direction: column;
-      gap: 7px;
+
+      gap: 0;
+
+      overflow: hidden;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 15px;
+
+      background:
+        var(--surface);
+
     }
+
 
     #home-market-list .coin-card {
-      margin: 0;
-      min-height: 62px;
-      padding: 11px 12px;
-      border-radius: 15px;
-      border: 1px solid rgba(255,255,255,.045);
-      transition:
-        transform .18s ease,
-        border-color .18s ease,
-        background .18s ease;
+
+      min-height: 67px;
+
+      padding:
+        10px 12px;
+
+      border-bottom:
+        1px solid
+        var(--line);
+
     }
+
+
+    #home-market-list .coin-card:last-child {
+
+      border-bottom: 0;
+
+    }
+
 
     #home-market-list .coin-card:hover {
-      transform: translateY(-1px);
-      border-color: rgba(66,245,167,.18);
+
+      background:
+        rgba(57,242,160,.025);
+
     }
 
-    #home-market-list .coin-card img {
-      width: 36px !important;
-      height: 36px !important;
-    }
 
-    .home-rank {
-      width: 20px;
-      color: var(--faint);
+    .market-rank {
+
+      width: 19px;
+
+      color:
+        var(--subtle);
+
       font-size: 8px;
+
+      font-weight: 700;
+
       text-align: center;
+
     }
 
 
-    /* MARKET PULSE */
+    /* =====================================================
+       MARKET PULSE
+    ===================================================== */
 
     .pulse-card {
-      position: relative;
-      overflow: hidden;
+
+      margin-top: 23px;
+
       padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(66,245,167,.08);
-      background: var(--card-bg);
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 17px;
+
+      background:
+        var(--surface);
+
     }
 
-    .pulse-top {
+
+    .pulse-header {
+
       display: flex;
-      justify-content: space-between;
+
       align-items: center;
+
+      justify-content: space-between;
+
     }
 
-    .pulse-title {
+
+    .pulse-name {
+
       font-size: 12px;
+
       font-weight: 800;
+
     }
 
-    .pulse-description {
+
+    .pulse-sub {
+
       margin-top: 3px;
-      color: var(--dim);
+
+      color:
+        var(--muted);
+
       font-size: 8px;
+
     }
+
 
     .pulse-value {
+
       font-size: 20px;
+
       font-weight: 900;
-      color: var(--accent);
+
+      color:
+        var(--green);
+
     }
+
 
     .pulse-track {
+
       height: 7px;
+
       margin-top: 15px;
+
       overflow: hidden;
+
       border-radius: 999px;
-      background: var(--input-bg);
+
+      background:
+        var(--surface-soft);
+
     }
+
 
     .pulse-bar {
+
       width: 0%;
+
       height: 100%;
+
       border-radius: 999px;
-      background: linear-gradient(
-        90deg,
-        var(--accent),
-        #20cfff
-      );
-      transition: width .5s ease;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--green),
+          var(--blue)
+        );
+
+      transition:
+        width .5s ease;
+
     }
+
 
     .pulse-labels {
+
       display: flex;
+
       justify-content: space-between;
+
       margin-top: 7px;
-      color: var(--faint);
+
+      color:
+        var(--subtle);
+
       font-size: 8px;
+
     }
 
 
-    /* EXPLORE */
+    /* =====================================================
+       EXPLORE
+    ===================================================== */
+
+    .explore-title {
+
+      margin:
+        25px 0 10px;
+
+      font-size: 16px;
+
+      font-weight: 800;
+
+    }
+
 
     .explore-grid {
+
       display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 9px;
+
+      grid-template-columns:
+        repeat(2,1fr);
+
+      gap: 8px;
+
     }
 
+
     .explore-card {
+
       position: relative;
+
       min-height: 108px;
+
+      padding: 14px !important;
+
       margin: 0 !important;
-      padding: 15px !important;
+
       overflow: hidden;
-      border-radius: 17px !important;
-      text-decoration: none;
+
+      border:
+        1px solid
+        var(--line) !important;
+
+      border-radius:
+        16px !important;
+
+      background:
+        var(--surface) !important;
+
       transition:
         transform .18s ease,
         border-color .18s ease;
+
     }
+
 
     .explore-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(66,245,167,.2);
+
+      transform:
+        translateY(-2px);
+
+      border-color:
+        rgba(57,242,160,.2) !important;
+
     }
+
 
     .explore-icon {
+
+      width: 34px;
+
+      height: 34px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
-      width: 35px;
-      height: 35px;
-      margin-bottom: 12px;
-      border-radius: 11px;
-      background: rgba(66,245,167,.08);
-      font-size: 17px;
+
+      margin-bottom: 11px;
+
+      border-radius: 10px;
+
+      background:
+        rgba(57,242,160,.07);
+
+      color:
+        var(--green);
+
     }
+
+
+    .explore-icon svg {
+
+      width: 18px;
+
+      height: 18px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.8;
+
+      stroke-linecap: round;
+
+      stroke-linejoin: round;
+
+    }
+
 
     .explore-name {
+
       font-size: 11px;
+
       font-weight: 800;
+
     }
+
 
     .explore-desc {
+
       margin-top: 4px;
-      color: var(--dim);
+
+      max-width: 130px;
+
+      color:
+        var(--muted);
+
       font-size: 8px;
+
       line-height: 1.4;
+
     }
+
 
     .explore-arrow {
+
       position: absolute;
+
       right: 13px;
+
       bottom: 12px;
-      color: var(--faint);
+
+      color:
+        var(--subtle);
+
       font-size: 11px;
+
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
     .home-footer {
-      margin-top: 32px;
-      padding: 5px 0 22px;
-      color: var(--faint);
+
+      margin-top: 30px;
+
+      padding-bottom: 20px;
+
+      color:
+        var(--subtle);
+
       font-size: 8px;
+
       text-align: center;
-      letter-spacing: .2px;
+
+    }
+
+
+    @media (max-width: 360px) {
+
+      .hero-title {
+
+        font-size: 24px;
+
+      }
+
+      .hero-stats {
+
+        gap: 5px;
+
+      }
+
+      .hero-stat {
+
+        padding: 8px;
+
+      }
+
+      .explore-grid {
+
+        gap: 6px;
+
+      }
+
     }
 
   </style>
@@ -330,645 +717,817 @@
 
 <body>
 
-  <main class="container">
+
+<main class="container">
 
 
-    <!-- HEADER -->
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
-    <header class="topbar">
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+
+        NEXTRA<span class="dot">.</span>
+
+      </h1>
+
+      <p class="subtitle">
+
+        Your Market. Your Intelligence.
+
+      </p>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+      title="Ganti tema"
+      aria-label="Ganti tema"
+    >
+
+      ◐
+
+    </button>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="home-hero">
+
+    <div class="hero-glow"></div>
+
+
+    <div class="hero-label">
+
+      <span class="hero-live"></span>
+
+      Market Intelligence
+
+    </div>
+
+
+    <h2 class="hero-title">
+
+      Understand the market.<br>
+
+      <span>Trade with intelligence.</span>
+
+    </h2>
+
+
+    <p class="hero-description">
+
+      Pantau pergerakan crypto secara real-time
+      dan pahami kondisi market dengan data
+      yang lebih sederhana.
+
+    </p>
+
+
+    <div class="hero-stats">
+
+      <div class="hero-stat">
+
+        <strong>LIVE</strong>
+
+        <span>Market Data</span>
+
+      </div>
+
+
+      <div class="hero-stat">
+
+        <strong>24H</strong>
+
+        <span>Price Movement</span>
+
+      </div>
+
+
+      <div class="hero-stat">
+
+        <strong>AI</strong>
+
+        <span>Intelligence</span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       MARKET OVERVIEW
+  ====================================================== -->
+
+  <section>
+
+    <div class="home-section-header">
 
       <div>
 
-        <h1 class="title">
-          NEXTRA<span class="dot">.</span>
-        </h1>
+        <h2 class="home-section-title">
 
-        <p class="subtitle">
-          Your Market. Your Intelligence.
-        </p>
+          Market Overview
+
+        </h2>
+
+        <div class="home-section-sub">
+
+          Live crypto market
+
+        </div>
 
       </div>
 
 
-      <button
-        class="icon-btn"
-        id="theme-toggle"
-        title="Ganti tema"
+      <a
+        href="markets.html"
+        class="home-view-all"
       >
-        ◐
-      </button>
 
-    </header>
+        View all →
 
+      </a>
 
-
-    <!-- HERO -->
-
-    <section class="home-hero">
-
-      <div class="hero-label">
-        Market Intelligence
-      </div>
-
-      <h2 class="hero-title">
-        Understand the market.<br>
-        <span>Trade with intelligence.</span>
-      </h2>
-
-      <p class="hero-description">
-        Pantau pergerakan crypto secara real-time
-        dan pahami market tanpa harus melihat
-        data yang rumit.
-      </p>
+    </div>
 
 
-      <div class="hero-stats">
+    <div id="home-market-list">
 
-        <div class="hero-stat">
-          <strong>LIVE</strong>
-          <span>Market Data</span>
-        </div>
+      <div class="loading">
 
-        <div class="hero-stat">
-          <strong>24H</strong>
-          <span>Price Movement</span>
-        </div>
-
-        <div class="hero-stat">
-          <strong>AI</strong>
-          <span>Intelligence</span>
-        </div>
+        Memuat market...
 
       </div>
 
-    </section>
+    </div>
+
+  </section>
 
 
 
-    <!-- MARKET OVERVIEW -->
+  <!-- =====================================================
+       MARKET PULSE
+  ====================================================== -->
 
-    <section>
+  <section class="pulse-card">
 
-      <div class="section-header">
+    <div class="pulse-header">
 
-        <div>
+      <div>
 
-          <h2 class="section-title">
-            Market Overview
-          </h2>
+        <div class="pulse-name">
 
-          <div class="section-subtitle">
-            Live crypto market
-          </div>
-
-        </div>
-
-
-        <a
-          href="markets.html"
-          class="icon-btn view-all"
-        >
-          View all →
-        </a>
-
-      </div>
-
-
-      <div id="home-market-list">
-
-        <div class="loading">
-          Memuat market...
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- MARKET PULSE -->
-
-    <section style="margin-top:22px;">
-
-      <div class="pulse-card">
-
-        <div class="pulse-top">
-
-          <div>
-
-            <div class="pulse-title">
-              Market Pulse
-            </div>
-
-            <div class="pulse-description">
-              Persentase market yang sedang naik
-            </div>
-
-          </div>
-
-
-          <div
-            id="market-pulse"
-            class="pulse-value"
-          >
-            —
-          </div>
+          Market Pulse
 
         </div>
 
+        <div class="pulse-sub">
 
-        <div class="pulse-track">
-
-          <div
-            id="market-pulse-bar"
-            class="pulse-bar"
-          ></div>
-
-        </div>
-
-
-        <div class="pulse-labels">
-
-          <span>Bearish</span>
-
-          <span>Neutral</span>
-
-          <span>Bullish</span>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- EXPLORE -->
-
-    <section style="margin-top:22px;">
-
-      <div class="section-header">
-
-        <div>
-
-          <h2 class="section-title">
-            Explore NEXTRA
-          </h2>
-
-          <div class="section-subtitle">
-            Tools untuk trader
-          </div>
+          Market yang sedang bergerak naik
 
         </div>
 
       </div>
 
 
-      <div class="explore-grid">
+      <div
+        id="market-pulse"
+        class="pulse-value"
+      >
 
-
-        <a
-          href="markets.html"
-          class="coin-card explore-card"
-        >
-
-          <div class="explore-icon">
-            ◈
-          </div>
-
-          <div class="explore-name">
-            Markets
-          </div>
-
-          <div class="explore-desc">
-            Explore crypto market
-          </div>
-
-          <div class="explore-arrow">
-            →
-          </div>
-
-        </a>
-
-
-
-        <a
-          href="trending.html"
-          class="coin-card explore-card"
-        >
-
-          <div class="explore-icon">
-            🔥
-          </div>
-
-          <div class="explore-name">
-            Trending
-          </div>
-
-          <div class="explore-desc">
-            Coins yang sedang ramai
-          </div>
-
-          <div class="explore-arrow">
-            →
-          </div>
-
-        </a>
-
-
-
-        <a
-          href="tools.html"
-          class="coin-card explore-card"
-        >
-
-          <div class="explore-icon">
-            🧰
-          </div>
-
-          <div class="explore-name">
-            Tools
-          </div>
-
-          <div class="explore-desc">
-            Trading utilities
-          </div>
-
-          <div class="explore-arrow">
-            →
-          </div>
-
-        </a>
-
-
-
-        <a
-          href="education.html"
-          class="coin-card explore-card"
-        >
-
-          <div class="explore-icon">
-            🧠
-          </div>
-
-          <div class="explore-name">
-            Learn
-          </div>
-
-          <div class="explore-desc">
-            Belajar crypto
-          </div>
-
-          <div class="explore-arrow">
-            →
-          </div>
-
-        </a>
-
+        —
 
       </div>
 
-    </section>
+    </div>
+
+
+    <div class="pulse-track">
+
+      <div
+        id="market-pulse-bar"
+        class="pulse-bar"
+      ></div>
+
+    </div>
+
+
+    <div class="pulse-labels">
+
+      <span>Bearish</span>
+
+      <span>Neutral</span>
+
+      <span>Bullish</span>
+
+    </div>
+
+  </section>
 
 
 
-    <!-- FOOTER -->
+  <!-- =====================================================
+       EXPLORE
+  ====================================================== -->
 
-    <footer class="home-footer">
+  <section>
 
-      NEXTRA · Your Market. Your Intelligence.
+    <h2 class="explore-title">
 
-    </footer>
+      Explore NEXTRA
 
-
-  </main>
-
-
-
-  <!-- NAV -->
-
-  <div id="bottom-nav"></div>
+    </h2>
 
 
-
-  <!-- SCRIPTS -->
-
-  <script src="js/app.js"></script>
-
-  <script src="js/api.js"></script>
+    <div class="explore-grid">
 
 
-  <script>
+      <!-- MARKETS -->
 
-    const homeContainer =
-      document.getElementById(
-        "home-market-list"
+      <a
+        href="markets.html"
+        class="coin-card explore-card"
+      >
+
+        <div class="explore-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 19V9"/>
+
+            <path d="M9.3 19V5"/>
+
+            <path d="M14.7 19v-8"/>
+
+            <path d="M20 19V3"/>
+
+            <path d="M2.5 19.5h19"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="explore-name">
+
+          Markets
+
+        </div>
+
+
+        <div class="explore-desc">
+
+          Explore crypto market
+
+        </div>
+
+
+        <div class="explore-arrow">
+
+          →
+
+        </div>
+
+      </a>
+
+
+
+      <!-- TRENDING -->
+
+      <a
+        href="trending.html"
+        class="coin-card explore-card"
+      >
+
+        <div class="explore-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 16c3-1 4-5 6-9 2 4 3 7 6 7 1.7 0 2.8-1 4-3"/>
+
+            <path d="M16 5h4v4"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="explore-name">
+
+          Trending
+
+        </div>
+
+
+        <div class="explore-desc">
+
+          Coins yang sedang ramai
+
+        </div>
+
+
+        <div class="explore-arrow">
+
+          →
+
+        </div>
+
+      </a>
+
+
+
+      <!-- TOOLS -->
+
+      <a
+        href="tools.html"
+        class="coin-card explore-card"
+      >
+
+        <div class="explore-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/>
+
+            <path d="m14 4 6 6"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="explore-name">
+
+          Tools
+
+        </div>
+
+
+        <div class="explore-desc">
+
+          Trading utilities
+
+        </div>
+
+
+        <div class="explore-arrow">
+
+          →
+
+        </div>
+
+      </a>
+
+
+
+      <!-- LEARN -->
+
+      <a
+        href="education.html"
+        class="coin-card explore-card"
+      >
+
+        <div class="explore-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/>
+
+            <path d="M4 5.5V22"/>
+
+            <path d="M8 7h8"/>
+
+            <path d="M8 11h6"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="explore-name">
+
+          Learn
+
+        </div>
+
+
+        <div class="explore-desc">
+
+          Belajar crypto
+
+        </div>
+
+
+        <div class="explore-arrow">
+
+          →
+
+        </div>
+
+      </a>
+
+
+    </div>
+
+  </section>
+
+
+
+  <footer class="home-footer">
+
+    NEXTRA · Your Market. Your Intelligence.
+
+  </footer>
+
+
+</main>
+
+
+
+<div id="bottom-nav"></div>
+
+
+
+<script src="js/app.js"></script>
+
+<script src="js/api.js"></script>
+
+
+<script>
+
+
+/* =====================================================
+   HOME MARKET
+===================================================== */
+
+const homeContainer =
+  document.getElementById(
+    "home-market-list"
+  );
+
+
+async function loadHomeMarkets() {
+
+  try {
+
+    const coins =
+      await NEXTRA_API
+        .fetchNormalizedMarkets({
+
+          page: 1,
+
+          perPage: 6
+
+        });
+
+
+    if (
+      !coins ||
+      !coins.length
+    ) {
+
+      throw new Error(
+        "Market kosong"
       );
 
-
-    async function loadHomeMarkets() {
-
-      try {
-
-        const coins =
-          await NEXTRA_API
-            .fetchNormalizedMarkets({
-              page: 1,
-              perPage: 6
-            });
+    }
 
 
-        if (
-          !coins ||
-          !coins.length
-        ) {
+    homeContainer.innerHTML =
 
-          throw new Error(
-            "Market kosong"
-          );
+      coins
+        .map((coin,index) => {
 
-        }
-
-
-        homeContainer.innerHTML =
-          coins
-            .map((coin, index) => {
-
-              const change =
-                Number(coin.change24h) || 0;
+          const change =
+            Number(
+              coin.change24h
+            ) || 0;
 
 
-              const changeClass =
-                change >= 0
-                  ? "up"
-                  : "down";
+          const changeClass =
+            change >= 0
+              ? "up"
+              : "down";
 
 
-              const sign =
-                change >= 0
-                  ? "+"
-                  : "";
+          const sign =
+            change >= 0
+              ? "+"
+              : "";
 
 
-              return `
+          return `
 
-                <a
-                  href="coin.html?id=${coin.id}"
-                  class="coin-card"
+            <a
+              href="coin.html?id=${coin.id}"
+              class="coin-card"
+            >
+
+              <div class="market-rank">
+
+                ${String(index + 1)
+                  .padStart(2,"0")}
+
+              </div>
+
+
+              ${
+                coin.image
+                  ? `
+
+                    <img
+                      src="${coin.image}"
+                      width="36"
+                      height="36"
+                      style="
+                        border-radius:50%;
+                        flex-shrink:0;
+                      "
+                      alt="${coin.name}"
+                      loading="lazy"
+                    >
+
+                  `
+                  : ""
+              }
+
+
+              <div
+                style="
+                  flex:1;
+                  min-width:0;
+                "
+              >
+
+                <div class="coin-symbol">
+
+                  ${coin.symbol}
+
+                </div>
+
+
+                <div class="coin-pair">
+
+                  ${coin.name}
+
+                </div>
+
+              </div>
+
+
+              <div>
+
+                <div class="coin-price">
+
+                  ${formatHomePrice(
+                    coin.price
+                  )}
+
+                </div>
+
+
+                <div
+                  class="
+                    coin-change
+                    ${changeClass}
+                  "
                 >
 
-                  <div class="home-rank">
-                    ${String(index + 1).padStart(2,"0")}
-                  </div>
+                  ${sign}${change.toFixed(2)}%
 
+                </div>
 
-                  ${
-                    coin.image
-                      ? `
-                        <img
-                          src="${coin.image}"
-                          width="36"
-                          height="36"
-                          style="
-                            border-radius:50%;
-                            flex-shrink:0;
-                          "
-                          alt="${coin.name}"
-                          loading="lazy"
-                        >
-                      `
-                      : ""
-                  }
+              </div>
 
+            </a>
 
-                  <div
-                    style="
-                      flex:1;
-                      min-width:0;
-                      padding-left:4px;
-                    "
-                  >
+          `;
 
-                    <div class="coin-symbol">
-                      ${coin.symbol}
-                    </div>
+        })
 
-                    <div class="coin-pair">
-                      ${coin.name}
-                    </div>
+        .join("");
 
-                  </div>
 
+    updateMarketPulse(
+      coins
+    );
 
-                  <div
-                    style="
-                      text-align:right;
-                      padding-left:8px;
-                    "
-                  >
 
-                    <div class="coin-price">
-                      ${formatHomePrice(coin.price)}
-                    </div>
+  } catch(error) {
 
+    console.error(
+      "Home market error:",
+      error
+    );
 
-                    <div
-                      class="
-                        coin-change
-                        ${changeClass}
-                      "
-                    >
-                      ${sign}${change.toFixed(2)}%
-                    </div>
 
-                  </div>
+    homeContainer.innerHTML = `
 
-                </a>
+      <div class="error-box">
 
-              `;
+        ⚠️ Gagal memuat market.
 
-            })
-            .join("");
+        <br>
 
+        <button
+          class="icon-btn"
+          style="margin-top:10px;"
+          onclick="loadHomeMarkets()"
+        >
 
-        updateMarketPulse(
-          coins
-        );
+          Coba lagi
 
+        </button>
 
-      } catch (error) {
+      </div>
 
-        console.error(
-          "Home market error:",
-          error
-        );
+    `;
 
+  }
 
-        homeContainer.innerHTML = `
+}
 
-          <div class="error-box">
 
-            ⚠️ Gagal memuat market.
 
-            <br>
+/* =====================================================
+   PRICE FORMAT
+===================================================== */
 
-            <button
-              class="icon-btn"
-              style="margin-top:10px;"
-              onclick="loadHomeMarkets()"
-            >
-              Coba lagi
-            </button>
+function formatHomePrice(price) {
 
-          </div>
+  price =
+    Number(price);
 
-        `;
 
-      }
+  if (
+    !Number.isFinite(price)
+  ) {
 
-    }
+    return "-";
 
+  }
 
-    function formatHomePrice(price) {
 
-      if (
-        !Number.isFinite(Number(price))
-      ) {
+  if (price >= 1000) {
 
-        return "-";
-
-      }
-
-
-      price = Number(price);
-
-
-      if (price >= 1000) {
-
-        return "$" +
-          price.toLocaleString(
-            "en-US",
-            {
-              maximumFractionDigits: 0
-            }
-          );
-
-      }
-
-
-      if (price >= 1) {
-
-        return "$" +
-          price.toFixed(2);
-
-      }
-
-
-      if (price >= 0.01) {
-
-        return "$" +
-          price.toFixed(4);
-
-      }
-
-
-      return "$" +
-        price.toPrecision(5);
-
-    }
-
-
-    function updateMarketPulse(coins) {
-
-      const pulse =
-        document.getElementById(
-          "market-pulse"
-        );
-
-
-      const bar =
-        document.getElementById(
-          "market-pulse-bar"
-        );
-
-
-      if (!pulse || !bar) {
-
-        return;
-
-      }
-
-
-      const validCoins =
-        coins.filter(
-          coin =>
-            Number.isFinite(
-              Number(coin.change24h)
-            )
-        );
-
-
-      if (!validCoins.length) {
-
-        pulse.textContent = "—";
-
-        bar.style.width = "0%";
-
-        return;
-
-      }
-
-
-      const gainers =
-        validCoins.filter(
-          coin =>
-            Number(coin.change24h) >= 0
-        ).length;
-
-
-      const percentage =
-        Math.round(
-          (
-            gainers /
-            validCoins.length
-          ) * 100
-        );
-
-
-      pulse.textContent =
-        percentage + "%";
-
-
-      bar.style.width =
-        percentage + "%";
-
-    }
-
-
-    document
-      .getElementById(
-        "theme-toggle"
-      )
-      ?.addEventListener(
-        "click",
-        () => {
-
-          toggleTheme();
-
+    return "$" +
+      price.toLocaleString(
+        "en-US",
+        {
+          maximumFractionDigits: 0
         }
       );
 
+  }
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
 
-        loadHomeMarkets();
+  if (price >= 1) {
 
-      }
+    return "$" +
+      price.toFixed(2);
+
+  }
+
+
+  if (price >= .01) {
+
+    return "$" +
+      price.toFixed(4);
+
+  }
+
+
+  return "$" +
+    price.toPrecision(5);
+
+}
+
+
+
+/* =====================================================
+   MARKET PULSE
+===================================================== */
+
+function updateMarketPulse(coins) {
+
+  const pulse =
+    document.getElementById(
+      "market-pulse"
     );
 
-  </script>
+
+  const bar =
+    document.getElementById(
+      "market-pulse-bar"
+    );
+
+
+  if (!pulse || !bar) {
+
+    return;
+
+  }
+
+
+  const valid =
+    coins.filter(
+      coin =>
+        Number.isFinite(
+          Number(
+            coin.change24h
+          )
+        )
+    );
+
+
+  if (!valid.length) {
+
+    pulse.textContent = "—";
+
+    bar.style.width = "0%";
+
+    return;
+
+  }
+
+
+  const gainers =
+    valid.filter(
+      coin =>
+        Number(
+          coin.change24h
+        ) >= 0
+    ).length;
+
+
+  const percentage =
+    Math.round(
+      (
+        gainers /
+        valid.length
+      ) * 100
+    );
+
+
+  pulse.textContent =
+    percentage + "%";
+
+
+  bar.style.width =
+    percentage + "%";
+
+}
+
+
+
+/* =====================================================
+   THEME BUTTON
+===================================================== */
+
+document
+  .getElementById(
+    "theme-toggle"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      toggleTheme();
+
+    }
+  );
+
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    loadHomeMarkets();
+
+  }
+);
+
+</script>
 
 
 </body>
