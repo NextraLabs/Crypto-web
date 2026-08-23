@@ -1,37 +1,621 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pantau — Coin</title>
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/components.css" />
-<link rel="stylesheet" href="css/responsive.css" />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>NEXTRA — Coin</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
 </head>
+
+
 <body>
-<div class="container">
-  <div class="topbar">
-    <div>
-      <h1 class="title" id="coinTitle">Coin<span class="dot">.</span></h1>
-      <p class="subtitle">Coin detail</p>
+
+<main class="container">
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        gap:8px;
+      "
+    >
+
+      <button
+        class="icon-btn"
+        id="coin-back"
+        title="Kembali"
+      >
+        ←
+      </button>
+
+      <div>
+
+        <h1
+          class="title"
+          id="coin-title"
+        >
+          Coin<span class="dot">.</span>
+        </h1>
+
+        <p
+          class="subtitle"
+          id="coin-subtitle"
+        >
+          Loading...
+        </p>
+
+      </div>
+
     </div>
-    <button class="icon-btn" id="themeBtn">🌙</button>
-  </div>
-  <div class="coming-soon">
-    <div class="big-icon">🔎</div>
-    <p>Halaman detail koin — dibangun di Phase 3.</p>
-  </div>
-</div>
+
+
+    <div
+      style="
+        display:flex;
+        gap:6px;
+      "
+    >
+
+      <button
+        class="icon-btn"
+        id="coin-watch"
+        title="Watchlist"
+      >
+        ☆
+      </button>
+
+      <button
+        class="icon-btn"
+        id="coin-refresh"
+        title="Refresh"
+      >
+        ↻
+      </button>
+
+      <button
+        class="icon-btn"
+        id="theme-toggle"
+        title="Tema"
+      >
+        ◐
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- LOADING -->
+
+  <section id="coin-loading">
+
+    <div class="loading">
+      Memuat data coin...
+    </div>
+
+  </section>
+
+
+  <!-- CONTENT -->
+
+  <section
+    id="coin-content"
+    style="display:none;"
+  >
+
+
+    <!-- COIN HERO -->
+
+    <section
+      class="highlight-box"
+      style="
+        margin-bottom:12px;
+      "
+    >
+
+      <div
+        style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+        "
+      >
+
+        <img
+          id="coin-image"
+          src=""
+          alt=""
+          width="44"
+          height="44"
+          style="
+            width:44px;
+            height:44px;
+            border-radius:50%;
+          "
+        >
+
+
+        <div
+          style="
+            min-width:0;
+            flex:1;
+          "
+        >
+
+          <div
+            id="coin-name"
+            style="
+              font-size:15px;
+              font-weight:900;
+            "
+          >
+            -
+          </div>
+
+          <div
+            id="coin-symbol"
+            class="dim"
+            style="
+              font-size:9px;
+              margin-top:3px;
+            "
+          >
+            -
+          </div>
+
+        </div>
+
+
+        <div
+          style="
+            text-align:right;
+          "
+        >
+
+          <div
+            id="coin-price"
+            style="
+              font-size:20px;
+              font-weight:900;
+            "
+          >
+            -
+          </div>
+
+          <div
+            id="coin-change"
+            style="
+              font-size:10px;
+              margin-top:3px;
+            "
+          >
+            -
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PERFORMANCE -->
+
+    <section
+      style="
+        display:grid;
+        grid-template-columns:
+          repeat(3,1fr);
+        gap:6px;
+        margin-bottom:12px;
+      "
+    >
+
+      <div class="mini-stat">
+
+        <span>
+          1H
+        </span>
+
+        <strong id="change-1h">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="mini-stat">
+
+        <span>
+          24H
+        </span>
+
+        <strong id="change-24h">
+          -
+        </strong>
+
+      </div>
+
+
+      <div class="mini-stat">
+
+        <span>
+          7D
+        </span>
+
+        <strong id="change-7d">
+          -
+        </strong>
+
+      </div>
+
+    </section>
+
+
+    <!-- CHART -->
+
+    <section
+      class="coin-card"
+      style="
+        display:block;
+        margin-bottom:12px;
+      "
+    >
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:10px;
+        "
+      >
+
+        <strong
+          style="
+            font-size:11px;
+          "
+        >
+          7D Price Chart
+        </strong>
+
+        <span
+          id="chart-status"
+          class="dim"
+          style="
+            font-size:7px;
+          "
+        >
+          CoinGecko
+        </span>
+
+      </div>
+
+
+      <div
+        id="coin-chart"
+        style="
+          width:100%;
+          height:180px;
+          position:relative;
+          overflow:hidden;
+        "
+      >
+
+        <div
+          class="loading"
+        >
+          Memuat chart...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MARKET DATA -->
+
+    <section
+      class="coin-card"
+      style="
+        display:block;
+        margin-bottom:12px;
+      "
+    >
+
+      <div
+        style="
+          font-size:11px;
+          font-weight:900;
+          margin-bottom:10px;
+        "
+      >
+        Market Data
+      </div>
+
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:
+            repeat(2,1fr);
+          gap:7px;
+        "
+      >
+
+        <div class="mini-stat">
+
+          <span>
+            Market Cap
+          </span>
+
+          <strong id="market-cap">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <span>
+            24H Volume
+          </span>
+
+          <strong id="volume">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <span>
+            24H High
+          </span>
+
+          <strong id="high-24h">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <span>
+            24H Low
+          </span>
+
+          <strong id="low-24h">
+            -
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SUPPLY -->
+
+    <section
+      class="coin-card"
+      style="
+        display:block;
+        margin-bottom:12px;
+      "
+    >
+
+      <div
+        style="
+          font-size:11px;
+          font-weight:900;
+          margin-bottom:10px;
+        "
+      >
+        Supply
+      </div>
+
+
+      <div
+        style="
+          display:grid;
+          grid-template-columns:
+            repeat(3,1fr);
+          gap:6px;
+        "
+      >
+
+        <div class="mini-stat">
+
+          <span>
+            Circulating
+          </span>
+
+          <strong id="circulating">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <span>
+            Total
+          </span>
+
+          <strong id="total-supply">
+            -
+          </strong>
+
+        </div>
+
+
+        <div class="mini-stat">
+
+          <span>
+            Max
+          </span>
+
+          <strong id="max-supply">
+            -
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RANK -->
+
+    <section
+      class="highlight-box"
+      style="
+        margin-bottom:12px;
+      "
+    >
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+        "
+      >
+
+        <span
+          class="dim"
+          style="
+            font-size:9px;
+          "
+        >
+          CoinGecko Rank
+        </span>
+
+        <strong
+          id="coin-rank"
+          style="
+            font-size:14px;
+          "
+        >
+          -
+        </strong>
+
+      </div>
+
+    </section>
+
+
+    <!-- DISCLAIMER -->
+
+    <div
+      style="
+        margin-top:14px;
+        padding:11px;
+        border:1px solid var(--border);
+        border-radius:12px;
+        color:var(--faint);
+        font-size:7px;
+        line-height:1.5;
+        text-align:center;
+      "
+    >
+
+      Data market berasal dari CoinGecko.
+      Harga dapat berubah secara realtime.
+      Informasi ini bukan saran investasi.
+
+    </div>
+
+
+  </section>
+
+
+  <!-- ERROR -->
+
+  <section
+    id="coin-error"
+    style="display:none;"
+  >
+
+    <div class="error-box">
+
+      ⚠️ Gagal memuat data coin.
+
+      <br><br>
+
+      <button
+        class="primary-btn"
+        id="coin-retry"
+      >
+        Coba Lagi
+      </button>
+
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
 <div id="bottom-nav"></div>
-<script src="js/api.js"></script>
+
+
+<!-- SCRIPTS -->
+
 <script src="js/app.js"></script>
+
+<script src="js/api.js"></script>
+
+<script src="js/features/coin.js"></script>
+
+
 <script>
-initTheme(); renderNav();
-const b = document.getElementById("themeBtn");
-b.textContent = document.documentElement.getAttribute("data-theme")==="dark"?"🌙":"☀️";
-b.addEventListener("click",()=>{b.textContent=toggleTheme()==="dark"?"🌙":"☀️";});
-const sym = new URLSearchParams(location.search).get("symbol");
-if (sym) document.getElementById("coinTitle").innerHTML = sym + '<span class="dot">.</span>';
+
+document
+  .getElementById("theme-toggle")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      if (
+        typeof toggleTheme ===
+        "function"
+      ) {
+
+        toggleTheme();
+
+      }
+
+    }
+  );
+
 </script>
+
+
 </body>
+
 </html>
