@@ -17,394 +17,905 @@
     href="css/style.css"
   >
 
+  <style>
+
+    /* =================================================
+       NEXTRA MARKETS V4
+       PREMIUM MARKET DASHBOARD
+    ================================================= */
+
+    .markets-hero {
+      position: relative;
+      overflow: hidden;
+
+      padding: 20px;
+
+      margin-bottom: 18px;
+
+      border: 1px solid var(--line);
+      border-radius: 20px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53,207,255,.11),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(57,242,160,.08),
+          transparent 50%
+        ),
+        var(--surface);
+    }
+
+    .markets-hero-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      color: var(--green);
+
+      font-size: 8px;
+      font-weight: 850;
+
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .markets-hero-label::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 10px
+        rgba(57,242,160,.7);
+    }
+
+    .markets-hero-title {
+      margin: 9px 0 5px;
+
+      font-size: 23px;
+      line-height: 1.1;
+
+      letter-spacing: -.045em;
+    }
+
+    .markets-hero-description {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+
+    /* =================================================
+       SEARCH
+    ================================================= */
+
+    .market-search-wrap {
+      position: relative;
+
+      margin-bottom: 13px;
+    }
+
+    .market-search-icon {
+      position: absolute;
+
+      left: 14px;
+      top: 50%;
+
+      width: 17px;
+      height: 17px;
+
+      transform:
+        translateY(-50%);
+
+      color: var(--subtle);
+
+      pointer-events: none;
+    }
+
+    .market-search-icon svg {
+      width: 100%;
+      height: 100%;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.8;
+
+      stroke-linecap: round;
+    }
+
+    .market-search {
+      padding-left: 42px !important;
+      padding-right: 40px !important;
+
+      height: 47px !important;
+
+      border-radius: 14px !important;
+    }
+
+
+    /* =================================================
+       FILTER TABS
+    ================================================= */
+
+    .market-tabs {
+      display: flex;
+
+      gap: 7px;
+
+      margin-bottom: 15px;
+
+      overflow-x: auto;
+
+      scrollbar-width: none;
+    }
+
+    .market-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .market-tab {
+      flex: none;
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      min-height: 32px;
+
+      padding:
+        0 12px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 10px;
+
+      background: var(--surface);
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      font-weight: 750;
+
+      cursor: pointer;
+
+      white-space: nowrap;
+
+      transition:
+        .18s ease;
+    }
+
+    .market-tab:hover {
+      color: var(--text);
+
+      border-color:
+        rgba(57,242,160,.18);
+    }
+
+    .market-tab.active {
+      color: #03120a;
+
+      border-color:
+        var(--green);
+
+      background:
+        var(--green);
+    }
+
+
+    /* =================================================
+       MARKET STATS
+    ================================================= */
+
+    .market-stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 8px;
+
+      margin-bottom: 19px;
+    }
+
+    .market-stat {
+      position: relative;
+
+      overflow: hidden;
+
+      min-height: 73px;
+
+      padding: 12px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+
+      background: var(--surface);
+    }
+
+    .market-stat-label {
+      color: var(--muted);
+
+      font-size: 8px;
+
+      font-weight: 650;
+    }
+
+    .market-stat-value {
+      display: block;
+
+      margin-top: 7px;
+
+      font-size: 18px;
+
+      font-weight: 850;
+
+      letter-spacing: -.04em;
+    }
+
+    .market-stat::after {
+      content: "";
+
+      position: absolute;
+
+      width: 55px;
+      height: 55px;
+
+      right: -28px;
+      bottom: -28px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(57,242,160,.06);
+    }
+
+
+    /* =================================================
+       SORT BAR
+    ================================================= */
+
+    .sort-section {
+      margin-bottom: 13px;
+    }
+
+    .sort-title {
+      margin-bottom: 7px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: .7px;
+    }
+
+    .sort-scroll {
+      display: flex;
+
+      gap: 6px;
+
+      overflow-x: auto;
+
+      padding-bottom: 3px;
+
+      scrollbar-width: none;
+    }
+
+    .sort-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sort-btn {
+      flex: none;
+
+      height: 31px;
+
+      padding:
+        0 10px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 9px;
+
+      background: var(--surface);
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      white-space: nowrap;
+
+      transition:
+        .18s ease;
+    }
+
+    .sort-btn:hover {
+      color: var(--text);
+    }
+
+
+    /* =================================================
+       MARKET TABLE HEADER
+    ================================================= */
+
+    .market-table-head {
+      display: grid;
+
+      grid-template-columns:
+        25px 36px 1fr auto 28px;
+
+      gap: 10px;
+
+      align-items: center;
+
+      padding:
+        0 12px 8px;
+
+      color: var(--subtle);
+
+      font-size: 7px;
+
+      font-weight: 750;
+
+      text-transform: uppercase;
+
+      letter-spacing: .6px;
+    }
+
+
+    /* =================================================
+       MARKET LIST
+    ================================================= */
+
+    #market-list {
+      border-top:
+        1px solid var(--line);
+    }
+
+    #market-list .coin-card {
+      min-height: 69px;
+
+      padding:
+        10px 12px;
+
+      margin: 0;
+
+      border-radius: 0;
+
+      border-top: 0;
+    }
+
+    #market-list .coin-card:hover {
+      padding-left: 14px;
+      padding-right: 14px;
+
+      border-radius: 0;
+    }
+
+    #market-list img {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+    }
+
+
+    /* =================================================
+       PAGINATION
+    ================================================= */
+
+    .pagination-wrap {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      margin-top: 18px;
+
+      min-height: 38px;
+    }
+
+
+    /* =================================================
+       SOURCE
+    ================================================= */
+
+    .market-source {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 6px;
+
+      margin-top: 19px;
+
+      color: var(--subtle);
+
+      font-size: 7px;
+    }
+
+    .source-dot {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+    }
+
+
+    /* =================================================
+       MOBILE
+    ================================================= */
+
+    @media (max-width: 380px) {
+
+      .market-stats {
+        gap: 6px;
+      }
+
+      .market-stat {
+        padding: 10px;
+      }
+
+      .market-stat-value {
+        font-size: 16px;
+      }
+
+      .market-table-head {
+        grid-template-columns:
+          22px 34px 1fr auto 24px;
+
+        gap: 7px;
+
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+
+      #market-list .coin-card {
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+
+    }
+
+
+    /* =================================================
+       DESKTOP
+    ================================================= */
+
+    @media (min-width: 700px) {
+
+      .markets-hero {
+        padding: 25px;
+      }
+
+      .markets-hero-title {
+        font-size: 28px;
+      }
+
+      .markets-hero-description {
+        font-size: 11px;
+      }
+
+      .market-stats {
+        max-width: 650px;
+      }
+
+    }
+
+  </style>
+
 </head>
 
 
 <body>
 
-  <main class="container">
+<main class="container">
 
 
-    <!-- ================================
-         TOP BAR
-    ================================= -->
+  <!-- =================================================
+       HEADER
+  ================================================= -->
 
-    <header class="topbar">
+  <header class="topbar">
 
-      <div>
+    <div>
 
-        <h1 class="title">
-          Markets<span class="dot">.</span>
-        </h1>
+      <h1 class="title">
+        Markets<span class="dot">.</span>
+      </h1>
 
-        <p class="subtitle">
-          Live crypto market intelligence
-        </p>
-
-      </div>
-
-
-      <button
-        class="icon-btn"
-        id="theme-toggle"
-        title="Ganti tema"
-      >
-        ◐
-      </button>
-
-    </header>
-
-
-
-    <!-- ================================
-         SEARCH
-    ================================= -->
-
-    <section>
-
-      <input
-        id="market-search"
-        class="search-input"
-        type="search"
-        placeholder="Cari Bitcoin, Ethereum, Solana..."
-        autocomplete="off"
-      >
-
-    </section>
-
-
-
-    <!-- ================================
-         MARKET FILTER
-    ================================= -->
-
-    <div
-      class="tabs"
-      style="margin-top:14px;"
-    >
-
-      <button
-        class="tab active"
-        data-market-filter="all"
-      >
-        All
-      </button>
-
-      <button
-        class="tab"
-        data-market-filter="trending"
-      >
-        🔥 Trending
-      </button>
-
-      <button
-        class="tab"
-        data-market-filter="gainers"
-      >
-        🟢 Gainers
-      </button>
-
-      <button
-        class="tab"
-        data-market-filter="losers"
-      >
-        🔴 Losers
-      </button>
-
-      <button
-        class="tab"
-        data-market-filter="watchlist"
-        onclick="
-          NEXTRA_MARKETS.state.watchlistOnly =
-          !NEXTRA_MARKETS.state.watchlistOnly;
-          NEXTRA_MARKETS.state.page = 1;
-          NEXTRA_MARKETS.filter();
-        "
-      >
-        ⭐ Watchlist
-      </button>
+      <p class="subtitle">
+        Live crypto market intelligence
+      </p>
 
     </div>
 
 
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+      title="Ganti tema"
+      aria-label="Ganti tema"
+    >
+      ◐
+    </button>
 
-    <!-- ================================
-         MARKET STATS
-    ================================= -->
+  </header>
 
-    <section
-      style="
-        display:grid;
-        grid-template-columns:
-          repeat(3,1fr);
-        gap:8px;
-        margin:14px 0;
-      "
+
+
+  <!-- =================================================
+       HERO
+  ================================================= -->
+
+  <section class="markets-hero">
+
+    <div class="markets-hero-label">
+      Live Market
+    </div>
+
+    <h2 class="markets-hero-title">
+      Explore the crypto market.
+    </h2>
+
+    <p class="markets-hero-description">
+      Pantau harga, pergerakan, volume,
+      dan performa aset crypto secara real-time.
+    </p>
+
+  </section>
+
+
+
+  <!-- =================================================
+       SEARCH
+  ================================================= -->
+
+  <section class="market-search-wrap">
+
+    <div class="market-search-icon">
+
+      <svg viewBox="0 0 24 24">
+
+        <circle
+          cx="11"
+          cy="11"
+          r="6.5"
+        />
+
+        <path d="m16 16 5 5"/>
+
+      </svg>
+
+    </div>
+
+
+    <input
+      id="market-search"
+      class="search-input market-search"
+      type="search"
+      placeholder="Search Bitcoin, Ethereum..."
+      autocomplete="off"
+      aria-label="Search crypto"
     >
 
-      <div
-        class="coin-card"
-        style="
-          display:block;
-          cursor:default;
-          margin:0;
-        "
-      >
-
-        <div class="dim">
-          Coins
-        </div>
-
-        <strong
-          id="market-total"
-          style="
-            display:block;
-            margin-top:5px;
-            font-size:18px;
-          "
-        >
-          —
-        </strong>
-
-      </div>
-
-
-      <div
-        class="coin-card"
-        style="
-          display:block;
-          cursor:default;
-          margin:0;
-        "
-      >
-
-        <div class="dim">
-          Gainers
-        </div>
-
-        <strong
-          id="market-gainers"
-          class="up"
-          style="
-            display:block;
-            margin-top:5px;
-            font-size:18px;
-          "
-        >
-          —
-        </strong>
-
-      </div>
-
-
-      <div
-        class="coin-card"
-        style="
-          display:block;
-          cursor:default;
-          margin:0;
-        "
-      >
-
-        <div class="dim">
-          Losers
-        </div>
-
-        <strong
-          id="market-losers"
-          class="down"
-          style="
-            display:block;
-            margin-top:5px;
-            font-size:18px;
-          "
-        >
-          —
-        </strong>
-
-      </div>
-
-    </section>
+  </section>
 
 
 
-    <!-- ================================
-         SORT
-    ================================= -->
+  <!-- =================================================
+       FILTER
+  ================================================= -->
 
-    <div
-      style="
-        display:flex;
-        gap:6px;
-        overflow-x:auto;
-        padding-bottom:4px;
-        margin-bottom:12px;
+  <div class="market-tabs">
+
+
+    <button
+      class="market-tab active"
+      data-market-filter="all"
+    >
+      All
+    </button>
+
+
+    <button
+      class="market-tab"
+      data-market-filter="trending"
+    >
+      Trending
+    </button>
+
+
+    <button
+      class="market-tab"
+      data-market-filter="gainers"
+    >
+      Gainers
+    </button>
+
+
+    <button
+      class="market-tab"
+      data-market-filter="losers"
+    >
+      Losers
+    </button>
+
+
+    <button
+      class="market-tab"
+      data-market-filter="watchlist"
+      onclick="
+        NEXTRA_MARKETS.state.watchlistOnly =
+        !NEXTRA_MARKETS.state.watchlistOnly;
+
+        NEXTRA_MARKETS.state.page = 1;
+
+        NEXTRA_MARKETS.filter();
       "
     >
+      Watchlist
+    </button>
+
+
+  </div>
+
+
+
+  <!-- =================================================
+       STATS
+  ================================================= -->
+
+  <section class="market-stats">
+
+
+    <div class="market-stat">
+
+      <div class="market-stat-label">
+        Total Coins
+      </div>
+
+      <strong
+        id="market-total"
+        class="market-stat-value"
+      >
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="market-stat">
+
+      <div class="market-stat-label">
+        Gainers
+      </div>
+
+      <strong
+        id="market-gainers"
+        class="market-stat-value up"
+      >
+        —
+      </strong>
+
+    </div>
+
+
+    <div class="market-stat">
+
+      <div class="market-stat-label">
+        Losers
+      </div>
+
+      <strong
+        id="market-losers"
+        class="market-stat-value down"
+      >
+        —
+      </strong>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =================================================
+       SORT
+  ================================================= -->
+
+  <section class="sort-section">
+
+    <div class="sort-title">
+      Sort market
+    </div>
+
+
+    <div class="sort-scroll">
+
 
       <button
-        class="icon-btn"
+        class="sort-btn"
         data-market-sort="market_cap"
       >
         Market Cap
       </button>
 
+
       <button
-        class="icon-btn"
+        class="sort-btn"
         data-market-sort="price"
       >
         Price
       </button>
 
+
       <button
-        class="icon-btn"
+        class="sort-btn"
         data-market-sort="change1h"
       >
         1H
       </button>
 
+
       <button
-        class="icon-btn"
+        class="sort-btn"
         data-market-sort="change24h"
       >
         24H
       </button>
 
+
       <button
-        class="icon-btn"
+        class="sort-btn"
         data-market-sort="change7d"
       >
         7D
       </button>
 
+
       <button
-        class="icon-btn"
+        class="sort-btn"
         data-market-sort="volume"
       >
         Volume
       </button>
 
-    </div>
-
-
-
-    <!-- ================================
-         COLUMN HEADER
-    ================================= -->
-
-    <div
-      style="
-        display:grid;
-        grid-template-columns:
-          28px 34px 1fr auto 30px;
-        gap:12px;
-        align-items:center;
-        padding:0 15px 8px;
-        color:var(--faint);
-        font-size:9px;
-        text-transform:uppercase;
-        letter-spacing:.5px;
-      "
-    >
-
-      <span>#</span>
-
-      <span></span>
-
-      <span>Asset</span>
-
-      <span>Price</span>
-
-      <span>★</span>
 
     </div>
 
-
-
-    <!-- ================================
-         MARKET LIST
-    ================================= -->
-
-    <section
-      id="market-list"
-    >
-
-      <div class="loading">
-        Memuat market...
-      </div>
-
-    </section>
+  </section>
 
 
 
-    <!-- ================================
-         PAGINATION
-    ================================= -->
+  <!-- =================================================
+       COLUMN HEADER
+  ================================================= -->
 
-    <div
-      id="market-pagination"
-      style="
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        margin-top:16px;
-      "
-    ></div>
+  <div class="market-table-head">
+
+    <span>#</span>
+
+    <span></span>
+
+    <span>Asset</span>
+
+    <span>Price</span>
+
+    <span>★</span>
+
+  </div>
 
 
-    <!-- ================================
-         SOURCE
-    ================================= -->
 
-    <div
-      style="
-        text-align:center;
-        margin-top:20px;
-        color:var(--faint);
-        font-size:9px;
-      "
-    >
-      Market data powered by CoinGecko
+  <!-- =================================================
+       MARKET LIST
+  ================================================= -->
+
+  <section id="market-list">
+
+    <div class="loading">
+      Memuat market...
     </div>
 
-
-  </main>
-
-
-
-  <!-- ================================
-       BOTTOM NAV MOUNT
-  ================================= -->
-
-  <div id="bottom-nav"></div>
+  </section>
 
 
 
-  <!-- ================================
-       SCRIPTS
-  ================================= -->
+  <!-- =================================================
+       PAGINATION
+  ================================================= -->
 
-  <script src="js/app.js"></script>
+  <div
+    id="market-pagination"
+    class="pagination-wrap"
+  ></div>
 
-  <script src="js/api.js"></script>
-
-  <script src="js/features/market.js"></script>
 
 
-  <script>
+  <!-- =================================================
+       SOURCE
+  ================================================= -->
 
-    document
-      .getElementById("theme-toggle")
-      ?.addEventListener(
-        "click",
-        () => {
+  <div class="market-source">
 
-          toggleTheme();
+    <span class="source-dot"></span>
 
-        }
-      );
+    <span>
+      Live market data · CoinGecko
+    </span>
 
-  </script>
+  </div>
+
+
+</main>
+
+
+
+<!-- =================================================
+     BOTTOM NAV
+================================================= -->
+
+<div id="bottom-nav"></div>
+
+
+
+<!-- =================================================
+     SCRIPTS
+================================================= -->
+
+<script src="js/app.js"></script>
+
+<script src="js/api.js"></script>
+
+<script src="js/features/market.js"></script>
+
+
+<script>
+
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        toggleTheme();
+
+      }
+    );
+
+</script>
 
 
 </body>
