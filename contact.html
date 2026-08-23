@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
+  <title>NEXTRA — Contact</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <style>
+
+    /* =================================================
+       NEXTRA CONTACT
+    ================================================= */
+
+    .contact-hero {
+      position: relative;
+      overflow: hidden;
+
+      padding: 22px;
+
+      margin-bottom: 22px;
+
+      border: 1px solid var(--line);
+      border-radius: 21px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53,207,255,.11),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(57,242,160,.08),
+          transparent 50%
+        ),
+        var(--surface);
+    }
+
+
+    .contact-label {
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      color: var(--green);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+
+    .contact-label::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 10px
+        rgba(57,242,160,.7);
+    }
+
+
+    .contact-title {
+      margin: 11px 0 7px;
+
+      font-size: 27px;
+      line-height: 1.1;
+
+      letter-spacing: -.05em;
+    }
+
+
+    .contact-description {
+      margin: 0;
+
+      max-width: 320px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.65;
+    }
+
+
+    /* =================================================
+       CONTACT OPTIONS
+    ================================================= */
+
+    .contact-section {
+      margin-top: 23px;
+    }
+
+
+    .contact-section-title {
+      margin: 0 0 10px;
+
+      font-size: 15px;
+      font-weight: 800;
+
+      letter-spacing: -.025em;
+    }
+
+
+    .contact-section-subtitle {
+      margin-top: -5px;
+      margin-bottom: 11px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+
+    .contact-list {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 9px;
+    }
+
+
+    .contact-card {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 14px;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 17px;
+
+      background: var(--surface);
+
+      text-decoration: none;
+
+      transition:
+        transform .18s ease,
+        border-color .18s ease;
+    }
+
+
+    .contact-card:hover {
+      transform:
+        translateY(-2px);
+
+      border-color:
+        rgba(57,242,160,.20);
+    }
+
+
+    .contact-icon {
+      flex-shrink: 0;
+
+      width: 40px;
+      height: 40px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 12px;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.075);
+    }
+
+
+    .contact-icon svg {
+      width: 19px;
+      height: 19px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.8;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+
+    .contact-content {
+      flex: 1;
+    }
+
+
+    .contact-name {
+      font-size: 10px;
+
+      font-weight: 800;
+    }
+
+
+    .contact-text {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.4;
+    }
+
+
+    .contact-arrow {
+      color: var(--subtle);
+
+      font-size: 17px;
+    }
+
+
+    /* =================================================
+       FEEDBACK CARD
+    ================================================= */
+
+    .feedback-card {
+      padding: 18px;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 18px;
+
+      background: var(--surface);
+    }
+
+
+    .feedback-title {
+      margin: 0;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+
+    .feedback-text {
+      margin: 6px 0 14px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.6;
+    }
+
+
+    .feedback-list {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 7px;
+    }
+
+
+    .feedback-item {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 9px 10px;
+
+      border-radius: 10px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+
+    .feedback-dot {
+      width: 5px;
+      height: 5px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: var(--green);
+    }
+
+
+    /* =================================================
+       BUG REPORT
+    ================================================= */
+
+    .report-card {
+      padding: 18px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.06);
+
+      border-radius: 18px;
+
+      background:
+        rgba(255,255,255,.018);
+    }
+
+
+    .report-title {
+      margin: 0;
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+
+    .report-text {
+      margin: 6px 0 0;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =================================================
+       FOOTER
+    ================================================= */
+
+    .contact-footer {
+      padding: 28px 0 35px;
+
+      text-align: center;
+    }
+
+
+    .contact-footer-logo {
+      font-size: 12px;
+
+      font-weight: 900;
+
+      letter-spacing: -.04em;
+    }
+
+
+    .contact-footer-logo span {
+      color: var(--green);
+    }
+
+
+    .contact-footer-text {
+      margin-top: 4px;
+
+      color: var(--subtle);
+
+      font-size: 7px;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<main class="container">
+
+
+  <!-- =================================================
+       HEADER
+  ================================================= -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+        Contact<span class="dot">.</span>
+      </h1>
+
+      <p class="subtitle">
+        Get in touch with NEXTRA
+      </p>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+      title="Ganti tema"
+      aria-label="Ganti tema"
+    >
+      ◐
+    </button>
+
+  </header>
+
+
+
+  <!-- =================================================
+       HERO
+  ================================================= -->
+
+  <section class="contact-hero">
+
+    <div class="contact-label">
+      NEXTRA SUPPORT
+    </div>
+
+
+    <h2 class="contact-title">
+      Let's build better.
+    </h2>
+
+
+    <p class="contact-description">
+
+      Punya pertanyaan, menemukan bug,
+      atau punya ide untuk fitur baru?
+      Kami ingin mendengarnya.
+
+    </p>
+
+  </section>
+
+
+
+  <!-- =================================================
+       CONTACT OPTIONS
+  ================================================= -->
+
+  <section class="contact-section">
+
+    <h2 class="contact-section-title">
+      Contact NEXTRA
+    </h2>
+
+
+    <div class="contact-section-subtitle">
+      Pilih kebutuhan kamu
+    </div>
+
+
+    <div class="contact-list">
+
+
+      <!-- GENERAL -->
+
+      <a
+        href="mailto:contact@nextra.crypto"
+        class="contact-card"
+      >
+
+        <div class="contact-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+            />
+
+            <path d="m3 7 9 6 9-6"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="contact-content">
+
+          <div class="contact-name">
+            General
+          </div>
+
+          <div class="contact-text">
+            Pertanyaan umum dan informasi NEXTRA
+          </div>
+
+        </div>
+
+
+        <div class="contact-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+
+      <!-- FEEDBACK -->
+
+      <a
+        href="mailto:feedback@nextra.crypto"
+        class="contact-card"
+      >
+
+        <div class="contact-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 9.2 9.2 0 0 1-4-.9L3 21l1.8-4.1A8.4 8.4 0 1 1 21 11.5z"/>
+
+            <path d="M8 12h.01"/>
+
+            <path d="M12 12h.01"/>
+
+            <path d="M16 12h.01"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="contact-content">
+
+          <div class="contact-name">
+            Feedback
+          </div>
+
+          <div class="contact-text">
+            Saran untuk meningkatkan NEXTRA
+          </div>
+
+        </div>
+
+
+        <div class="contact-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+
+      <!-- BUG -->
+
+      <a
+        href="mailto:bugs@nextra.crypto"
+        class="contact-card"
+      >
+
+        <div class="contact-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M8 8h8v8a4 4 0 0 1-8 0z"/>
+
+            <path d="M12 4v4"/>
+
+            <path d="M8 5 6 3"/>
+
+            <path d="m16 5 2-2"/>
+
+            <path d="M4 10h4"/>
+
+            <path d="M16 10h4"/>
+
+            <path d="M4 15h4"/>
+
+            <path d="M16 15h4"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="contact-content">
+
+          <div class="contact-name">
+            Bug Report
+          </div>
+
+          <div class="contact-text">
+            Laporkan error atau masalah teknis
+          </div>
+
+        </div>
+
+
+        <div class="contact-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       FEEDBACK
+  ================================================= -->
+
+  <section class="contact-section">
+
+    <div class="feedback-card">
+
+      <h2 class="feedback-title">
+        Kami ingin mendengar dari kamu.
+      </h2>
+
+
+      <p class="feedback-text">
+
+        NEXTRA akan terus dikembangkan.
+        Feedback dari pengguna membantu
+        menentukan fitur dan perbaikan
+        yang paling penting.
+
+      </p>
+
+
+      <div class="feedback-list">
+
+        <div class="feedback-item">
+
+          <span class="feedback-dot"></span>
+
+          Ide fitur baru
+
+        </div>
+
+
+        <div class="feedback-item">
+
+          <span class="feedback-dot"></span>
+
+          Saran desain dan pengalaman pengguna
+
+        </div>
+
+
+        <div class="feedback-item">
+
+          <span class="feedback-dot"></span>
+
+          Masalah data atau market
+
+        </div>
+
+
+        <div class="feedback-item">
+
+          <span class="feedback-dot"></span>
+
+          Bug atau error pada website
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       BUG REPORT
+  ================================================= -->
+
+  <section class="contact-section">
+
+    <div class="report-card">
+
+      <h2 class="report-title">
+        Saat melaporkan bug
+      </h2>
+
+
+      <p class="report-text">
+
+        Sertakan nama halaman, perangkat yang
+        digunakan, langkah yang menyebabkan
+        masalah, serta screenshot jika tersedia.
+        Informasi tersebut akan membantu proses
+        pengecekan menjadi lebih cepat.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       FOOTER
+  ================================================= -->
+
+  <footer class="contact-footer">
+
+    <div class="contact-footer-logo">
+      NEX<span>TRA</span>
+    </div>
+
+
+    <div class="contact-footer-text">
+      Your Market. Your Intelligence.
+    </div>
+
+  </footer>
+
+
+</main>
+
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>
