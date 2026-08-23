@@ -1,5 +1,5 @@
 /* =========================================================
-   NEXTRA PROFILE SETTINGS — V1
+   NEXTRA PROFILE SETTINGS — MULTI LANGUAGE V2
 ========================================================= */
 
 (() => {
@@ -52,6 +52,22 @@
   }
 
 
+  function notifyLanguageChanged() {
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "nextra:languageChanged",
+        {
+          detail: {
+            language: settings.language
+          }
+        }
+      )
+    );
+
+  }
+
+
   function toggleSetting(key) {
 
     settings[key] =
@@ -97,8 +113,8 @@
 
         element.classList.toggle(
           "selected",
-          element.dataset.appearance
-            === settings.appearance
+          element.dataset.appearance ===
+          settings.appearance
         );
 
       });
@@ -110,11 +126,22 @@
 
         element.classList.toggle(
           "selected",
-          element.dataset.language
-            === settings.language
+          element.dataset.language ===
+          settings.language
         );
 
       });
+
+
+    if (
+      window.NEXTRA_I18N &&
+      typeof window.NEXTRA_I18N.translatePage ===
+      "function"
+    ) {
+
+      window.NEXTRA_I18N.translatePage();
+
+    }
 
   }
 
@@ -147,8 +174,13 @@
         "profileSettingsPanel"
       );
 
+    if (existing) {
 
-    if (existing) return;
+      render();
+
+      return;
+
+    }
 
 
     const profileSections =
@@ -176,7 +208,10 @@
 
     section.innerHTML = `
 
-      <div class="section-label">
+      <div
+        class="section-label"
+        data-i18n="notifications"
+      >
         NOTIFICATIONS
       </div>
 
@@ -187,7 +222,9 @@
 
           <div>
 
-            <strong>
+            <strong
+              data-i18n="notifications"
+            >
               Notifications
             </strong>
 
@@ -206,7 +243,9 @@
 
           <div>
 
-            <strong>
+            <strong
+              data-i18n="priceAlerts"
+            >
               Price Alerts
             </strong>
 
@@ -225,7 +264,9 @@
 
           <div>
 
-            <strong>
+            <strong
+              data-i18n="marketAlerts"
+            >
               Market Alerts
             </strong>
 
@@ -244,7 +285,9 @@
 
           <div>
 
-            <strong>
+            <strong
+              data-i18n="futuresAlerts"
+            >
               Futures Alerts
             </strong>
 
@@ -261,8 +304,10 @@
       </div>
 
 
-
-      <div class="section-label settings-label">
+      <div
+        class="section-label settings-label"
+        data-i18n="appearance"
+      >
         APPEARANCE
       </div>
 
@@ -280,7 +325,9 @@
 
           <span>
 
-            <strong>
+            <strong
+              data-i18n="dark"
+            >
               Dark
             </strong>
 
@@ -304,7 +351,9 @@
 
           <span>
 
-            <strong>
+            <strong
+              data-i18n="light"
+            >
               Light
             </strong>
 
@@ -319,69 +368,43 @@
       </div>
 
 
-
-      <div class="section-label settings-label">
+      <div
+        class="section-label settings-label"
+        data-i18n="language"
+      >
         LANGUAGE
       </div>
 
 
-      <div class="settings-choice">
+      <div
+        class="settings-choice"
+        id="nextraLanguageList"
+      >
 
-        <button
-          type="button"
-          data-language="id"
-        >
-
-          <span class="choice-icon">
-            ID
-          </span>
-
-          <span>
-
-            <strong>
-              Bahasa Indonesia
-            </strong>
-
-            <small>
-              Indonesian
-            </small>
-
-          </span>
-
-        </button>
-
-
-        <button
-          type="button"
-          data-language="en"
-        >
-
-          <span class="choice-icon">
-            EN
-          </span>
-
-          <span>
-
-            <strong>
-              English
-            </strong>
-
-            <small>
-              English interface
-            </small>
-
-          </span>
-
-        </button>
+        ${createLanguageButtons()}
 
       </div>
 
     `;
 
 
-    document
-      .querySelector(".profile-footer")
-      .before(section);
+    const footer =
+      document.querySelector(
+        ".profile-footer"
+      );
+
+
+    if (footer) {
+
+      footer.before(section);
+
+    } else {
+
+      document.body.appendChild(
+        section
+      );
+
+    }
 
 
     section
@@ -444,6 +467,8 @@
 
             saveSettings();
 
+            notifyLanguageChanged();
+
             render();
 
           }
@@ -453,6 +478,70 @@
 
 
     render();
+
+  }
+
+
+  function createLanguageButtons() {
+
+    const languages =
+      window.NEXTRA_I18N &&
+      window.NEXTRA_I18N.languages
+        ? window.NEXTRA_I18N.languages
+        : {
+
+            id: {
+              native: "Bahasa Indonesia"
+            },
+
+            en: {
+              native: "English"
+            }
+
+          };
+
+
+    return Object.entries(
+      languages
+    )
+      .map(
+        ([code, language]) => `
+
+          <button
+            type="button"
+            data-language="${code}"
+          >
+
+            <span class="choice-icon">
+              ${code
+                .replace(
+                  "-",
+                  ""
+                )
+                .toUpperCase()
+                .slice(
+                  0,
+                  3
+                )}
+            </span>
+
+            <span>
+
+              <strong>
+                ${language.native}
+              </strong>
+
+              <small>
+                ${language.name}
+              </small>
+
+            </span>
+
+          </button>
+
+        `
+      )
+      .join("");
 
   }
 
@@ -470,9 +559,7 @@
       buildSettings
     );
 
-  }
-
-  else {
+  } else {
 
     buildSettings();
 
