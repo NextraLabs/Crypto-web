@@ -2,6 +2,7 @@
 <html lang="id">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -9,12 +10,13 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>NEXTRA — Radar</title>
+  <title>NEXTRA — Radar V4</title>
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
+
 </head>
 
 
@@ -22,7 +24,10 @@
 
 <main class="container">
 
-  <!-- HEADER -->
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
 
   <header class="topbar">
 
@@ -38,6 +43,7 @@
 
     </div>
 
+
     <div
       style="
         display:flex;
@@ -48,13 +54,16 @@
       <button
         class="icon-btn"
         id="radar-refresh"
+        title="Refresh"
       >
         ↻
       </button>
 
+
       <button
         class="icon-btn"
         id="theme-toggle"
+        title="Ganti tema"
       >
         ◐
       </button>
@@ -64,7 +73,10 @@
   </header>
 
 
-  <!-- LIVE -->
+
+  <!-- =========================================
+       RADAR STATUS
+  ========================================== -->
 
   <section
     class="highlight-box"
@@ -76,8 +88,8 @@
     <div
       style="
         display:flex;
-        align-items:center;
         justify-content:space-between;
+        align-items:center;
         gap:10px;
       "
     >
@@ -90,7 +102,7 @@
             font-weight:900;
           "
         >
-          🔥 NEXTRA Radar
+          🔥 NEXTRA Radar V4
         </div>
 
         <div
@@ -111,9 +123,10 @@
         style="
           font-size:8px;
           font-weight:900;
+          color:var(--accent);
         "
       >
-        SCANNING
+        READY
       </div>
 
     </div>
@@ -121,7 +134,10 @@
   </section>
 
 
-  <!-- SUMMARY -->
+
+  <!-- =========================================
+       SUMMARY
+  ========================================== -->
 
   <section
     style="
@@ -256,7 +272,10 @@
   </section>
 
 
-  <!-- FILTER -->
+
+  <!-- =========================================
+       FILTER
+  ========================================== -->
 
   <div
     style="
@@ -264,7 +283,7 @@
       gap:6px;
       overflow-x:auto;
       margin:14px 0 10px;
-      padding-bottom:2px;
+      padding-bottom:3px;
     "
   >
 
@@ -313,12 +332,16 @@
   </div>
 
 
-  <!-- UPDATED -->
+
+  <!-- =========================================
+       UPDATE
+  ========================================== -->
 
   <div
     style="
       display:flex;
       justify-content:space-between;
+      align-items:center;
       margin-bottom:8px;
     "
   >
@@ -341,7 +364,10 @@
   </div>
 
 
-  <!-- RESULTS -->
+
+  <!-- =========================================
+       RESULTS
+  ========================================== -->
 
   <section id="radar-results">
 
@@ -352,7 +378,10 @@
   </section>
 
 
-  <!-- LEGEND -->
+
+  <!-- =========================================
+       RADAR LOGIC
+  ========================================== -->
 
   <section
     class="coin-card"
@@ -411,7 +440,10 @@
   </section>
 
 
-  <!-- DISCLAIMER -->
+
+  <!-- =========================================
+       DISCLAIMER
+  ========================================== -->
 
   <div
     style="
@@ -436,20 +468,29 @@
 </main>
 
 
-<!-- NAV -->
+
+<!-- =========================================
+     NAV
+========================================== -->
 
 <div id="bottom-nav"></div>
 
+
+
+<!-- =========================================
+     SCRIPTS
+========================================== -->
 
 <script src="js/app.js"></script>
 
 <script src="js/api.js"></script>
 
 
+
 <script>
 
 /* =====================================================
-   NEXTRA RADAR V3
+   NEXTRA RADAR V4
 ===================================================== */
 
 const RADAR = {
@@ -477,14 +518,14 @@ const RADAR = {
 };
 
 
+
 /* =====================================================
-   NUMBER HELPERS
+   HELPERS
 ===================================================== */
 
-function num(value) {
+function radarNum(value) {
 
-  const n =
-    Number(value);
+  const n = Number(value);
 
   return Number.isFinite(n)
     ? n
@@ -493,46 +534,9 @@ function num(value) {
 }
 
 
-function priceChange(item) {
+function radarPrice(item) {
 
-  return num(
-    item?.change24h
-  );
-
-}
-
-
-function oiChange(item) {
-
-  return num(
-    item?.oiChange24h
-  );
-
-}
-
-
-function funding(item) {
-
-  return num(
-    item?.fundingRate
-  );
-
-}
-
-
-function volume(item) {
-
-  return num(
-    item?.quoteVolume ??
-    item?.volume
-  );
-
-}
-
-
-function price(item) {
-
-  return num(
+  return radarNum(
     item?.price ??
     item?.markPrice
   );
@@ -540,19 +544,55 @@ function price(item) {
 }
 
 
+function radarChange(item) {
+
+  return radarNum(
+    item?.change24h
+  );
+
+}
+
+
+function radarOI(item) {
+
+  return radarNum(
+    item?.oiChange24h
+  );
+
+}
+
+
+function radarFunding(item) {
+
+  return radarNum(
+    item?.fundingRate
+  );
+
+}
+
+
+function radarVolume(item) {
+
+  return radarNum(
+    item?.quoteVolume ??
+    item?.volume
+  );
+
+}
+
+
+
 /* =====================================================
-   OI + PRICE CONFIRMATION
+   CONFIRMATION ENGINE
 ===================================================== */
 
-function getConfirmation(
-  item
-) {
+function getConfirmation(item) {
 
   const change =
-    priceChange(item);
+    radarChange(item);
 
   const oi =
-    oiChange(item);
+    radarOI(item);
 
 
   if (
@@ -564,8 +604,7 @@ function getConfirmation(
 
       type: "neutral",
 
-      label:
-        "INSUFFICIENT DATA",
+      label: "INSUFFICIENT DATA",
 
       score: 0
 
@@ -574,12 +613,7 @@ function getConfirmation(
   }
 
 
-  /*
-    PRICE UP + OI UP
-    =================
-    New positions entering
-    while price rises.
-  */
+  /* LONG CONFIRMATION */
 
   if (
     change > 0 &&
@@ -588,11 +622,9 @@ function getConfirmation(
 
     return {
 
-      type:
-        "long-confirmed",
+      type: "long-confirmed",
 
-      label:
-        "LONG CONFIRMATION",
+      label: "LONG CONFIRMATION",
 
       score:
         Math.min(
@@ -607,12 +639,7 @@ function getConfirmation(
   }
 
 
-  /*
-    PRICE DOWN + OI UP
-    ==================
-    New positions while
-    price falls.
-  */
+  /* SHORT CONFIRMATION */
 
   if (
     change < 0 &&
@@ -621,11 +648,9 @@ function getConfirmation(
 
     return {
 
-      type:
-        "short-confirmed",
+      type: "short-confirmed",
 
-      label:
-        "SHORT CONFIRMATION",
+      label: "SHORT CONFIRMATION",
 
       score:
         Math.min(
@@ -640,9 +665,7 @@ function getConfirmation(
   }
 
 
-  /*
-    PRICE UP + OI DOWN
-  */
+  /* SHORT COVERING */
 
   if (
     change > 0 &&
@@ -651,11 +674,9 @@ function getConfirmation(
 
     return {
 
-      type:
-        "long",
+      type: "long",
 
-      label:
-        "SHORT COVERING",
+      label: "SHORT COVERING",
 
       score:
         Math.min(
@@ -669,9 +690,7 @@ function getConfirmation(
   }
 
 
-  /*
-    PRICE DOWN + OI DOWN
-  */
+  /* LONG REDUCTION */
 
   if (
     change < 0 &&
@@ -680,11 +699,9 @@ function getConfirmation(
 
     return {
 
-      type:
-        "short",
+      type: "short",
 
-      label:
-        "LONG REDUCTION",
+      label: "LONG REDUCTION",
 
       score:
         Math.min(
@@ -700,11 +717,9 @@ function getConfirmation(
 
   return {
 
-    type:
-      "neutral",
+    type: "neutral",
 
-    label:
-      "NEUTRAL",
+    label: "NEUTRAL",
 
     score: 50
 
@@ -713,16 +728,15 @@ function getConfirmation(
 }
 
 
+
 /* =====================================================
-   FUNDING ANALYSIS
+   FUNDING
 ===================================================== */
 
-function getFundingAnalysis(
-  item
-) {
+function getFundingAnalysis(item) {
 
   const rate =
-    funding(item);
+    radarFunding(item);
 
 
   if (
@@ -754,11 +768,9 @@ function getFundingAnalysis(
 
       percent,
 
-      label:
-        "CROWDED LONG",
+      label: "CROWDED LONG",
 
-      adjustment:
-        -10
+      adjustment: -10
 
     };
 
@@ -773,11 +785,9 @@ function getFundingAnalysis(
 
       percent,
 
-      label:
-        "LONG HEAVY",
+      label: "LONG HEAVY",
 
-      adjustment:
-        -4
+      adjustment: -4
 
     };
 
@@ -792,11 +802,9 @@ function getFundingAnalysis(
 
       percent,
 
-      label:
-        "CROWDED SHORT",
+      label: "CROWDED SHORT",
 
-      adjustment:
-        10
+      adjustment: 10
 
     };
 
@@ -811,11 +819,9 @@ function getFundingAnalysis(
 
       percent,
 
-      label:
-        "SHORT HEAVY",
+      label: "SHORT HEAVY",
 
-      adjustment:
-        4
+      adjustment: 4
 
     };
 
@@ -826,8 +832,7 @@ function getFundingAnalysis(
 
     percent,
 
-    label:
-      "BALANCED",
+    label: "BALANCED",
 
     adjustment: 0
 
@@ -836,19 +841,17 @@ function getFundingAnalysis(
 }
 
 
+
 /* =====================================================
    SCORE
 ===================================================== */
 
-function calculateScore(
-  item
-) {
+function calculateScore(item) {
 
   const confirmation =
     getConfirmation(item);
 
-
-  const fundingData =
+  const funding =
     getFundingAnalysis(item);
 
 
@@ -857,15 +860,11 @@ function calculateScore(
 
 
   score +=
-    fundingData.adjustment;
+    funding.adjustment;
 
-
-  /*
-    Momentum bonus
-  */
 
   const change =
-    priceChange(item);
+    radarChange(item);
 
 
   if (
@@ -902,38 +901,35 @@ function calculateScore(
 }
 
 
+
 /* =====================================================
    RISK
 ===================================================== */
 
-function getRisk(
-  item
-) {
+function getRisk(item) {
 
   const change =
     Math.abs(
-      priceChange(item) || 0
+      radarChange(item) || 0
     );
 
 
-  const fundingRate =
+  const funding =
     Math.abs(
-      funding(item) || 0
+      radarFunding(item) || 0
     ) * 100;
 
 
   if (
     change >= 8 ||
-    fundingRate >= 0.10
+    funding >= 0.10
   ) {
 
     return {
 
-      label:
-        "HIGH",
+      label: "HIGH",
 
-      className:
-        "risk-high"
+      className: "risk-high"
 
     };
 
@@ -942,16 +938,14 @@ function getRisk(
 
   if (
     change >= 4 ||
-    fundingRate >= 0.05
+    funding >= 0.05
   ) {
 
     return {
 
-      label:
-        "MODERATE",
+      label: "MODERATE",
 
-      className:
-        "risk-medium"
+      className: "risk-medium"
 
     };
 
@@ -960,19 +954,18 @@ function getRisk(
 
   return {
 
-    label:
-      "LOW",
+    label: "LOW",
 
-    className:
-      "risk-low"
+    className: "risk-low"
 
   };
 
 }
 
 
+
 /* =====================================================
-   LOAD
+   LOAD RADAR
 ===================================================== */
 
 async function loadRadar() {
@@ -986,8 +979,7 @@ async function loadRadar() {
   }
 
 
-  RADAR.loading =
-    true;
+  RADAR.loading = true;
 
 
   const results =
@@ -1025,7 +1017,7 @@ async function loadRadar() {
 
     if (
       typeof NEXTRA_API ===
-        "undefined"
+      "undefined"
     ) {
 
       throw new Error(
@@ -1085,7 +1077,7 @@ async function loadRadar() {
   catch (error) {
 
     console.error(
-      "Radar V3 error:",
+      "NEXTRA Radar V4:",
       error
     );
 
@@ -1102,9 +1094,21 @@ async function loadRadar() {
 
       results.innerHTML = `
         <div class="error-box">
+
           ⚠️ Gagal memuat Radar.
+
           <br><br>
-          Coba refresh kembali.
+
+          <span
+            style="
+              font-size:8px;
+              color:var(--faint);
+            "
+          >
+            Periksa koneksi internet
+            atau coba refresh.
+          </span>
+
           <br><br>
 
           <button
@@ -1123,21 +1127,19 @@ async function loadRadar() {
 
   finally {
 
-    RADAR.loading =
-      false;
+    RADAR.loading = false;
 
   }
 
 }
 
 
+
 /* =====================================================
    FILTER
 ===================================================== */
 
-function filterData(
-  data
-) {
+function filterData(data) {
 
   if (
     RADAR.filter ===
@@ -1153,9 +1155,7 @@ function filterData(
     item => {
 
       const confirmation =
-        getConfirmation(
-          item
-        );
+        getConfirmation(item);
 
 
       return (
@@ -1169,16 +1169,15 @@ function filterData(
 }
 
 
+
 /* =====================================================
    SORT
 ===================================================== */
 
-function sortData(
-  data
-) {
+function sortData(data) {
 
   return [...data].sort(
-    (a,b) => {
+    (a, b) => {
 
       return (
         calculateScore(b) -
@@ -1189,6 +1188,7 @@ function sortData(
   );
 
 }
+
 
 
 /* =====================================================
@@ -1208,9 +1208,7 @@ function updateSummary() {
     item => {
 
       const signal =
-        getConfirmation(
-          item
-        );
+        getConfirmation(item);
 
 
       if (
@@ -1252,38 +1250,63 @@ function updateSummary() {
   );
 
 
-  document
-    .getElementById(
+  const longEl =
+    document.getElementById(
       "radar-long"
-    )
-    .textContent =
+    );
+
+
+  const shortEl =
+    document.getElementById(
+      "radar-short"
+    );
+
+
+  const confirmedEl =
+    document.getElementById(
+      "radar-confirmed"
+    );
+
+
+  const scannedEl =
+    document.getElementById(
+      "radar-scanned"
+    );
+
+
+  if (longEl) {
+
+    longEl.textContent =
       long;
 
+  }
 
-  document
-    .getElementById(
-      "radar-short"
-    )
-    .textContent =
+
+  if (shortEl) {
+
+    shortEl.textContent =
       short;
 
+  }
 
-  document
-    .getElementById(
-      "radar-confirmed"
-    )
-    .textContent =
+
+  if (confirmedEl) {
+
+    confirmedEl.textContent =
       confirmed;
 
+  }
 
-  document
-    .getElementById(
-      "radar-scanned"
-    )
-    .textContent =
+
+  if (scannedEl) {
+
+    scannedEl.textContent =
       RADAR.data.length;
 
+  }
+
 }
+
 
 
 /* =====================================================
@@ -1301,6 +1324,9 @@ function renderRadar() {
     );
 
 
+  if (!results) return;
+
+
   let data =
     sortData(
       RADAR.data
@@ -1313,9 +1339,7 @@ function renderRadar() {
     );
 
 
-  if (
-    !data.length
-  ) {
+  if (!data.length) {
 
     results.innerHTML = `
       <div class="empty-state">
@@ -1339,13 +1363,12 @@ function renderRadar() {
 }
 
 
+
 /* =====================================================
    BIAS LABEL
 ===================================================== */
 
-function biasLabel(
-  type
-) {
+function biasLabel(type) {
 
   if (
     type ===
@@ -1412,52 +1435,43 @@ function biasLabel(
 }
 
 
+
 /* =====================================================
    CARD
 ===================================================== */
 
-function renderCard(
-  item
-) {
+function renderCard(item) {
 
   const confirmation =
-    getConfirmation(
-      item
-    );
+    getConfirmation(item);
 
 
   const fundingData =
-    getFundingAnalysis(
-      item
-    );
+    getFundingAnalysis(item);
 
 
   const score =
-    calculateScore(
-      item
-    );
+    calculateScore(item);
 
 
   const risk =
-    getRisk(
-      item
-    );
+    getRisk(item);
 
 
   const change =
-    priceChange(item);
+    radarChange(item);
 
 
   const oi =
-    oiChange(item);
+    radarOI(item);
 
 
   const p =
-    price(item);
+    radarPrice(item);
 
 
   const vol =
-    volume(item);
+    radarVolume(item);
 
 
   const symbol =
@@ -1473,7 +1487,8 @@ function renderCard(
   const changeText =
     change === null
       ? "N/A"
-      : (
+      :
+        (
           change >= 0
             ? "+"
             : ""
@@ -1485,7 +1500,8 @@ function renderCard(
   const oiText =
     oi === null
       ? "N/A"
-      : (
+      :
+        (
           oi >= 0
             ? "+"
             : ""
@@ -1497,7 +1513,8 @@ function renderCard(
   const fundingText =
     fundingData.percent === null
       ? "N/A"
-      : (
+      :
+        (
           fundingData.percent >= 0
             ? "+"
             : ""
@@ -1516,13 +1533,13 @@ function renderCard(
       "
     >
 
+
       <!-- HEADER -->
 
       <div
         style="
           display:flex;
-          justify-content:
-            space-between;
+          justify-content:space-between;
           align-items:center;
         "
       >
@@ -1536,6 +1553,7 @@ function renderCard(
           >
             ${symbol}
           </strong>
+
 
           <div
             style="
@@ -1567,6 +1585,7 @@ function renderCard(
             ${score}
           </strong>
 
+
           <div
             class="dim"
             style="
@@ -1579,6 +1598,7 @@ function renderCard(
         </div>
 
       </div>
+
 
 
       <!-- SCORE BAR -->
@@ -1604,7 +1624,8 @@ function renderCard(
       </div>
 
 
-      <!-- PRICE + OI -->
+
+      <!-- METRICS -->
 
       <div
         style="
@@ -1678,9 +1699,7 @@ function renderCard(
           </span>
 
           <strong>
-            ${formatCompact(
-              vol
-            )}
+            ${formatCompact(vol)}
           </strong>
 
         </div>
@@ -1688,7 +1707,8 @@ function renderCard(
       </div>
 
 
-      <!-- CONFIRMATION -->
+
+      <!-- MARKET STRUCTURE -->
 
       <div
         style="
@@ -1742,13 +1762,13 @@ function renderCard(
       </div>
 
 
+
       <!-- RISK -->
 
       <div
         style="
           display:flex;
-          justify-content:
-            space-between;
+          justify-content:space-between;
           align-items:center;
           margin-top:10px;
           padding-top:9px;
@@ -1764,6 +1784,7 @@ function renderCard(
           Risk Level
         </span>
 
+
         <strong
           class="${risk.className}"
           style="font-size:8px;"
@@ -1772,6 +1793,7 @@ function renderCard(
         </strong>
 
       </div>
+
 
 
       <!-- PRICE -->
@@ -1797,6 +1819,7 @@ function renderCard(
 }
 
 
+
 /* =====================================================
    REASON
 ===================================================== */
@@ -1808,11 +1831,7 @@ function getReason(
 ) {
 
   const change =
-    priceChange(item);
-
-
-  const oi =
-    oiChange(item);
+    radarChange(item);
 
 
   if (
@@ -1828,8 +1847,8 @@ function getReason(
       return `
         Harga naik dan OI naik,
         tetapi funding sangat tinggi.
-        Momentum bullish terkonfirmasi
-        namun posisi long mulai crowded.
+        Momentum bullish terkonfirmasi,
+        namun long mulai crowded.
       `;
 
     }
@@ -1838,8 +1857,8 @@ function getReason(
     return `
       Harga naik bersamaan dengan
       Open Interest yang meningkat.
-      Ini menunjukkan posisi baru
-      ikut masuk ke pergerakan bullish.
+      Posisi baru ikut masuk ke
+      pergerakan bullish.
     `;
 
   }
@@ -1858,7 +1877,7 @@ function getReason(
       return `
         Harga turun dan OI naik,
         tetapi funding sangat negatif.
-        Tekanan bearish terkonfirmasi
+        Tekanan bearish terkonfirmasi,
         namun short mulai crowded.
       `;
 
@@ -1868,8 +1887,8 @@ function getReason(
     return `
       Harga turun sementara
       Open Interest meningkat.
-      Ini menunjukkan posisi baru
-      masuk saat market bergerak bearish.
+      Posisi baru masuk ketika
+      market bergerak bearish.
     `;
 
   }
@@ -1882,9 +1901,9 @@ function getReason(
 
     return `
       Harga naik sementara OI turun.
-      Kondisi ini lebih konsisten dengan
-      short yang ditutup daripada pembukaan
-      long baru.
+      Kondisi ini lebih konsisten
+      dengan short yang ditutup
+      daripada long baru.
     `;
 
   }
@@ -1897,8 +1916,9 @@ function getReason(
 
     return `
       Harga turun sementara OI turun.
-      Kondisi ini lebih konsisten dengan
-      long yang ditutup atau berkurang.
+      Kondisi ini lebih konsisten
+      dengan long yang ditutup
+      atau berkurang.
     `;
 
   }
@@ -1911,28 +1931,27 @@ function getReason(
 
     return `
       Perubahan harga relatif kecil.
-      Belum ada konfirmasi arah yang kuat.
+      Belum ada konfirmasi arah
+      yang kuat.
     `;
 
   }
 
 
   return `
-    Data belum memberikan konfirmasi
-    yang cukup kuat untuk menentukan
-    struktur posisi.
+    Data belum memberikan
+    konfirmasi yang cukup kuat.
   `;
 
 }
+
 
 
 /* =====================================================
    FORMAT
 ===================================================== */
 
-function formatCompact(
-  value
-) {
+function formatCompact(value) {
 
   const n =
     Number(value);
@@ -1996,9 +2015,7 @@ function formatCompact(
 }
 
 
-function formatPrice(
-  value
-) {
+function formatPrice(value) {
 
   const n =
     Number(value);
@@ -2054,6 +2071,7 @@ function formatPrice(
 }
 
 
+
 /* =====================================================
    FILTER BUTTONS
 ===================================================== */
@@ -2102,6 +2120,7 @@ document
   );
 
 
+
 /* =====================================================
    REFRESH
 ===================================================== */
@@ -2114,6 +2133,7 @@ document
     "click",
     loadRadar
   );
+
 
 
 /* =====================================================
@@ -2141,6 +2161,7 @@ document
   );
 
 
+
 /* =====================================================
    INIT
 ===================================================== */
@@ -2155,6 +2176,7 @@ document.addEventListener(
 );
 
 </script>
+
 
 </body>
 
