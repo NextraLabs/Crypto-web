@@ -2,7 +2,6 @@
 <html lang="id">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -24,40 +23,31 @@
 
   <style>
 
-    /* =================================================
-       NEXTRA RISK DISCLAIMER
-    ================================================= */
+    .risk-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+    }
 
     .risk-hero {
-      position: relative;
-      overflow: hidden;
-
-      padding: 22px;
-
+      padding: 24px;
       margin-bottom: 22px;
 
-      border: 1px solid var(--line);
-      border-radius: 21px;
+      border: 1px solid var(--line, #202525);
+      border-radius: 22px;
 
       background:
         radial-gradient(
-          circle at 100% 0%,
-          rgba(255,184,77,.10),
+          circle at top right,
+          rgba(255,184,77,.12),
           transparent 45%
         ),
-        radial-gradient(
-          circle at 0% 100%,
-          rgba(57,242,160,.07),
-          transparent 50%
-        ),
-        var(--surface);
+        var(--surface, #0d1111);
     }
-
 
     .risk-label {
       display: flex;
       align-items: center;
-
       gap: 7px;
 
       color: #ffb84d;
@@ -66,59 +56,55 @@
       font-weight: 800;
 
       letter-spacing: 1.4px;
-      text-transform: uppercase;
     }
-
 
     .risk-label::before {
       content: "!";
 
-      width: 16px;
-      height: 16px;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
 
+      width: 17px;
+      height: 17px;
+
       border-radius: 50%;
 
-      background:
-        rgba(255,184,77,.12);
+      background: rgba(255,184,77,.12);
 
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 900;
     }
 
-
     .risk-title {
-      margin: 12px 0 7px;
+      margin: 13px 0 8px;
 
-      font-size: 27px;
-      line-height: 1.1;
+      font-size: 30px;
+      line-height: 1.08;
 
       letter-spacing: -.05em;
     }
 
-
-    .risk-description {
+    .risk-intro {
       margin: 0;
 
-      color: var(--muted);
+      color: var(--muted, #9ca6a6);
 
       font-size: 9px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
+    .risk-updated {
+      margin-top: 12px;
 
-    /* =================================================
-       CONTENT
-    ================================================= */
+      color: var(--subtle, #697272);
+
+      font-size: 7px;
+    }
 
     .risk-section {
-      margin-top: 22px;
+      margin-top: 24px;
     }
-
 
     .risk-section h2 {
       margin: 0 0 8px;
@@ -126,151 +112,103 @@
       font-size: 14px;
       font-weight: 800;
 
-      letter-spacing: -.02em;
+      letter-spacing: -.025em;
     }
-
 
     .risk-section p {
-      margin: 0 0 9px;
+      margin: 0 0 10px;
 
-      color: var(--muted);
+      color: var(--muted, #9ca6a6);
 
       font-size: 8.5px;
-
       line-height: 1.75;
     }
 
+    .risk-list {
+      margin: 8px 0 0;
+      padding-left: 19px;
 
-    .risk-section ul {
-      margin: 7px 0 0;
-
-      padding-left: 18px;
-
-      color: var(--muted);
+      color: var(--muted, #9ca6a6);
 
       font-size: 8.5px;
-
       line-height: 1.75;
     }
 
-
-    .risk-section li {
+    .risk-list li {
       margin-bottom: 6px;
     }
 
-
-    /* =================================================
-       RISK CARDS
-    ================================================= */
-
     .risk-card {
-      padding: 16px;
+      padding: 17px;
 
-      margin-top: 10px;
+      margin-top: 11px;
 
-      border:
-        1px solid
-        var(--line);
-
+      border: 1px solid var(--line, #202525);
       border-radius: 17px;
 
-      background: var(--surface);
+      background: var(--surface, #0d1111);
     }
 
-
     .risk-card-title {
-      margin: 0 0 5px;
+      margin: 0 0 6px;
 
       font-size: 10px;
-
       font-weight: 800;
     }
 
-
-    .risk-card-text {
+    .risk-card p {
       margin: 0;
 
-      color: var(--muted);
-
       font-size: 8px;
-
-      line-height: 1.65;
     }
-
-
-    /* =================================================
-       WARNING
-    ================================================= */
 
     .risk-warning {
-      position: relative;
-
-      overflow: hidden;
-
       padding: 18px;
 
-      margin-top: 22px;
+      margin-top: 24px;
 
-      border:
-        1px solid
-        rgba(255,184,77,.18);
-
+      border: 1px solid rgba(255,184,77,.2);
       border-radius: 18px;
 
-      background:
-        rgba(255,184,77,.045);
+      background: rgba(255,184,77,.045);
     }
-
 
     .risk-warning-title {
       color: #ffb84d;
 
       font-size: 10px;
-
       font-weight: 900;
     }
 
-
-    .risk-warning-text {
+    .risk-warning p {
       margin: 7px 0 0;
 
-      color: var(--muted);
+      color: var(--muted, #9ca6a6);
 
       font-size: 8px;
-
       line-height: 1.7;
     }
 
-
-    /* =================================================
-       FOOTER
-    ================================================= */
-
     .risk-footer {
-      padding: 28px 0 35px;
+      padding: 30px 0;
 
       text-align: center;
     }
 
-
     .risk-footer-logo {
-      font-size: 12px;
-
+      font-size: 13px;
       font-weight: 900;
-
       letter-spacing: -.04em;
     }
 
-
     .risk-footer-logo span {
-      color: var(--green);
+      color: var(--green, #39f2a0);
     }
 
-
     .risk-footer-text {
-      margin-top: 4px;
+      margin-top: 5px;
 
-      color: var(--subtle);
+      color: var(--subtle, #697272);
 
       font-size: 7px;
     }
@@ -282,436 +220,346 @@
 
 <body>
 
+  <main class="container risk-page">
 
-<main class="container">
 
+    <!-- HEADER -->
 
-  <!-- =================================================
-       HEADER
-  ================================================= -->
+    <header class="topbar">
 
-  <header class="topbar">
+      <div>
 
-    <div>
+        <h1 class="title">
+          Risk<span class="dot">.</span>
+        </h1>
 
-      <h1 class="title">
-        Risk<span class="dot">.</span>
-      </h1>
+        <p class="subtitle">
+          Risk Disclaimer
+        </p>
 
-      <p class="subtitle">
-        Risk Disclaimer
-      </p>
-
-    </div>
-
-
-    <button
-      class="icon-btn"
-      id="theme-toggle"
-      title="Ganti tema"
-      aria-label="Ganti tema"
-    >
-      ◐
-    </button>
-
-  </header>
-
-
-
-  <!-- =================================================
-       HERO
-  ================================================= -->
-
-  <section class="risk-hero">
-
-    <div class="risk-label">
-      IMPORTANT NOTICE
-    </div>
-
-
-    <h2 class="risk-title">
-      Crypto involves risk.
-    </h2>
-
-
-    <p class="risk-description">
-
-      Trading dan investasi aset crypto
-      memiliki risiko tinggi. Pastikan kamu
-      memahami risiko sebelum mengambil
-      keputusan finansial.
-
-    </p>
-
-  </section>
-
-
-
-  <!-- =================================================
-       01
-  ================================================= -->
-
-  <section class="risk-section">
-
-    <h2>
-      1. Bukan Nasihat Keuangan
-    </h2>
-
-
-    <p>
-
-      Semua informasi yang tersedia di NEXTRA,
-      termasuk harga, grafik, data market,
-      indikator, analisis, intelligence,
-      artikel, dan tools disediakan untuk
-      tujuan informasi dan edukasi.
-
-    </p>
-
-
-    <p>
-
-      Informasi tersebut tidak dimaksudkan
-      sebagai nasihat keuangan, investasi,
-      hukum, atau pajak.
-
-    </p>
-
-  </section>
-
-
-
-  <!-- =================================================
-       02
-  ================================================= -->
-
-  <section class="risk-section">
-
-    <h2>
-      2. Risiko Kehilangan Modal
-    </h2>
-
-
-    <p>
-
-      Nilai aset crypto dapat naik maupun
-      turun secara signifikan. Dalam kondisi
-      tertentu, pengguna dapat kehilangan
-      sebagian atau bahkan seluruh modal
-      yang digunakan.
-
-    </p>
-
-
-    <ul>
-
-      <li>
-        Jangan menggunakan dana yang tidak
-        mampu kamu tanggung jika hilang.
-      </li>
-
-      <li>
-        Pertimbangkan kondisi keuangan dan
-        toleransi risiko sebelum trading.
-      </li>
-
-      <li>
-        Jangan menganggap keuntungan masa
-        lalu sebagai jaminan keuntungan
-        di masa depan.
-      </li>
-
-    </ul>
-
-  </section>
-
-
-
-  <!-- =================================================
-       03
-  ================================================= -->
-
-  <section class="risk-section">
-
-    <h2>
-      3. Volatilitas Market
-    </h2>
-
-
-    <div class="risk-card">
-
-      <h3 class="risk-card-title">
-        Pergerakan harga sangat cepat
-      </h3>
-
-
-      <p class="risk-card-text">
-
-        Market crypto dapat bergerak sangat
-        cepat akibat berita, sentimen pasar,
-        likuiditas, aktivitas whale, kondisi
-        ekonomi, regulasi, dan berbagai faktor
-        lainnya.
-
-      </p>
-
-    </div>
-
-
-    <p>
-
-      Harga yang terlihat ketika informasi
-      dibaca dapat berbeda dari harga ketika
-      transaksi benar-benar dilakukan.
-
-    </p>
-
-  </section>
-
-
-
-  <!-- =================================================
-       04
-  ================================================= -->
-
-  <section class="risk-section">
-
-    <h2>
-      4. Risiko Leverage
-    </h2>
-
-
-    <p>
-
-      Trading menggunakan leverage memiliki
-      risiko yang lebih tinggi dibandingkan
-      trading tanpa leverage.
-
-    </p>
-
-
-    <ul>
-
-      <li>
-        Leverage dapat memperbesar keuntungan.
-      </li>
-
-      <li>
-        Leverage juga dapat memperbesar kerugian.
-      </li>
-
-      <li>
-        Posisi dapat terkena liquidation ketika
-        kondisi market bergerak berlawanan.
-      </li>
-
-    </ul>
-
-
-    <div class="risk-warning">
-
-      <div class="risk-warning-title">
-        ⚠ Perhatikan Risiko
       </div>
 
 
-      <p class="risk-warning-text">
+      <button
+        class="icon-btn"
+        id="theme-toggle"
+        aria-label="Ganti tema"
+      >
+        ◐
+      </button>
 
-        Jangan menggunakan leverage hanya karena
-        ingin mengejar profit yang lebih besar.
-        Pahami liquidation price, margin,
-        position size, dan risiko terlebih dahulu.
-
-      </p>
-
-    </div>
-
-  </section>
+    </header>
 
 
+    <!-- HERO -->
 
-  <!-- =================================================
-       05
-  ================================================= -->
+    <section class="risk-hero">
 
-  <section class="risk-section">
+      <div class="risk-label">
+        IMPORTANT NOTICE
+      </div>
 
-    <h2>
-      5. Risiko Data
-    </h2>
+      <h2 class="risk-title">
+        Crypto involves risk.
+      </h2>
 
+      <p class="risk-intro">
 
-    <p>
-
-      NEXTRA dapat menggunakan data dari
-      API atau penyedia layanan pihak ketiga.
-      Data tersebut dapat mengalami delay,
-      kesalahan, perubahan, atau gangguan.
-
-    </p>
-
-
-    <p>
-
-      Karena itu, jangan menganggap satu sumber
-      data sebagai satu-satunya dasar dalam
-      mengambil keputusan trading.
-
-    </p>
-
-  </section>
-
-
-
-  <!-- =================================================
-       06
-  ================================================= -->
-
-  <section class="risk-section">
-
-    <h2>
-      6. Risiko Teknologi
-    </h2>
-
-
-    <p>
-
-      Website dan layanan digital dapat
-      mengalami downtime, bug, kesalahan
-      sistem, maintenance, masalah koneksi,
-      atau gangguan dari penyedia layanan
-      pihak ketiga.
-
-    </p>
-
-
-    <p>
-
-      NEXTRA tidak menjamin bahwa seluruh
-      fitur akan selalu tersedia tanpa
-      gangguan.
-
-    </p>
-
-  </section>
-
-
-
-  <!-- =================================================
-       07
-  ================================================= -->
-
-  <section class="risk-section">
-
-    <h2>
-      7. Jangan Bagikan Private Key
-    </h2>
-
-
-    <div class="risk-card">
-
-      <h3 class="risk-card-title">
-        🔐 Lindungi wallet kamu
-      </h3>
-
-
-      <p class="risk-card-text">
-
-        Jangan pernah membagikan seed phrase,
-        private key, password wallet, recovery
-        phrase, atau kode keamanan kepada siapa
-        pun.
+        Trading dan investasi aset crypto memiliki
+        risiko tinggi. Pastikan kamu memahami
+        risiko sebelum mengambil keputusan
+        finansial.
 
       </p>
 
-    </div>
+      <div class="risk-updated">
+        Terakhir diperbarui: 23 Agustus 2026
+      </div>
 
-  </section>
-
-
-
-  <!-- =================================================
-       08
-  ================================================= -->
-
-  <section class="risk-section">
-
-    <h2>
-      8. Lakukan Riset Sendiri
-    </h2>
+    </section>
 
 
-    <p>
+    <!-- 01 -->
 
-      Sebelum melakukan transaksi atau
-      investasi, lakukan riset secara mandiri
-      dan pertimbangkan beberapa sumber
-      informasi.
+    <section class="risk-section">
 
-    </p>
+      <h2>
+        1. Bukan Nasihat Keuangan
+      </h2>
 
+      <p>
 
-    <p>
+        Semua informasi yang tersedia di NEXTRA,
+        termasuk harga, grafik, market data,
+        indikator, intelligence, artikel, dan
+        tools disediakan untuk tujuan informasi
+        dan edukasi.
 
-      Pertimbangkan juga untuk berkonsultasi
-      dengan profesional keuangan yang
-      memiliki izin jika diperlukan.
+      </p>
 
-    </p>
+      <p>
 
-  </section>
+        Informasi tersebut bukan merupakan
+        nasihat keuangan, investasi, hukum,
+        atau pajak.
 
+      </p>
 
-
-  <!-- =================================================
-       FINAL WARNING
-  ================================================= -->
-
-  <div class="risk-warning">
-
-    <div class="risk-warning-title">
-      ⚠ Final Risk Notice
-    </div>
+    </section>
 
 
-    <p class="risk-warning-text">
+    <!-- 02 -->
 
-      Dengan menggunakan NEXTRA, kamu memahami
-      bahwa trading dan investasi crypto
-      memiliki risiko. NEXTRA tidak menjamin
-      keuntungan dan tidak bertanggung jawab
-      atas keputusan finansial yang kamu buat
-      berdasarkan informasi dari platform.
+    <section class="risk-section">
 
-    </p>
+      <h2>
+        2. Risiko Kehilangan Modal
+      </h2>
 
-  </div>
+      <p>
+
+        Nilai aset crypto dapat naik maupun turun
+        secara signifikan. Dalam kondisi tertentu,
+        pengguna dapat kehilangan sebagian atau
+        bahkan seluruh modal.
+
+      </p>
+
+      <ul class="risk-list">
+
+        <li>
+          Jangan menggunakan dana yang tidak
+          mampu kamu tanggung jika hilang.
+        </li>
+
+        <li>
+          Pertimbangkan kondisi keuangan dan
+          toleransi risiko.
+        </li>
+
+        <li>
+          Keuntungan masa lalu bukan jaminan
+          keuntungan di masa depan.
+        </li>
+
+      </ul>
+
+    </section>
 
 
+    <!-- 03 -->
 
-  <!-- =================================================
-       FOOTER
-  ================================================= -->
+    <section class="risk-section">
 
-  <footer class="risk-footer">
+      <h2>
+        3. Volatilitas Market
+      </h2>
 
-    <div class="risk-footer-logo">
-      NEX<span>TRA</span>
-    </div>
+      <div class="risk-card">
+
+        <h3 class="risk-card-title">
+          Pergerakan harga dapat sangat cepat
+        </h3>
+
+        <p>
+
+          Market crypto dapat bergerak drastis
+          akibat berita, sentimen pasar, likuiditas,
+          aktivitas whale, kondisi ekonomi,
+          regulasi, dan berbagai faktor lainnya.
+
+        </p>
+
+      </div>
+
+    </section>
 
 
-    <div class="risk-footer-text">
-      Your Market. Your Intelligence.
-    </div>
+    <!-- 04 -->
 
-  </footer>
+    <section class="risk-section">
+
+      <h2>
+        4. Risiko Leverage
+      </h2>
+
+      <p>
+
+        Trading menggunakan leverage memiliki
+        risiko lebih tinggi dibandingkan trading
+        tanpa leverage.
+
+      </p>
+
+      <ul class="risk-list">
+
+        <li>
+          Leverage dapat memperbesar keuntungan.
+        </li>
+
+        <li>
+          Leverage juga dapat memperbesar kerugian.
+        </li>
+
+        <li>
+          Posisi dapat mengalami liquidation.
+        </li>
+
+      </ul>
+
+    </section>
 
 
-</main>
+    <!-- 05 -->
+
+    <section class="risk-section">
+
+      <h2>
+        5. Risiko Data
+      </h2>
+
+      <p>
+
+        NEXTRA dapat menggunakan data dari API
+        atau penyedia layanan pihak ketiga.
+        Data dapat mengalami delay, kesalahan,
+        perubahan, atau gangguan.
+
+      </p>
+
+      <p>
+
+        Karena itu, jangan menggunakan satu sumber
+        informasi sebagai satu-satunya dasar
+        keputusan trading.
+
+      </p>
+
+    </section>
 
 
-<script src="js/app.js"></script>
+    <!-- 06 -->
 
+    <section class="risk-section">
+
+      <h2>
+        6. Risiko Teknologi
+      </h2>
+
+      <p>
+
+        Website dan layanan digital dapat
+        mengalami downtime, bug, maintenance,
+        masalah koneksi, atau gangguan dari
+        penyedia layanan pihak ketiga.
+
+      </p>
+
+      <p>
+
+        NEXTRA tidak menjamin seluruh fitur
+        selalu tersedia tanpa gangguan.
+
+      </p>
+
+    </section>
+
+
+    <!-- 07 -->
+
+    <section class="risk-section">
+
+      <h2>
+        7. Lindungi Informasi Wallet
+      </h2>
+
+      <div class="risk-card">
+
+        <h3 class="risk-card-title">
+          🔐 Jangan pernah membagikan private key
+        </h3>
+
+        <p>
+
+          Jangan membagikan seed phrase, private
+          key, password wallet, recovery phrase,
+          atau kode keamanan kepada siapa pun.
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- 08 -->
+
+    <section class="risk-section">
+
+      <h2>
+        8. Lakukan Riset Sendiri
+      </h2>
+
+      <p>
+
+        Sebelum melakukan transaksi atau investasi,
+        lakukan riset secara mandiri dan
+        pertimbangkan beberapa sumber informasi.
+
+      </p>
+
+      <p>
+
+        Jika diperlukan, pertimbangkan untuk
+        berkonsultasi dengan profesional keuangan
+        yang memiliki izin.
+
+      </p>
+
+    </section>
+
+
+    <!-- FINAL WARNING -->
+
+    <section class="risk-warning">
+
+      <div class="risk-warning-title">
+        ⚠ Final Risk Notice
+      </div>
+
+      <p>
+
+        Dengan menggunakan NEXTRA, kamu memahami
+        bahwa trading dan investasi crypto memiliki
+        risiko. NEXTRA tidak menjamin keuntungan
+        dan tidak bertanggung jawab atas keputusan
+        finansial yang kamu buat berdasarkan
+        informasi dari platform.
+
+      </p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="risk-footer">
+
+      <div class="risk-footer-logo">
+        NEX<span>TRA</span>
+      </div>
+
+      <div class="risk-footer-text">
+        Your Market. Your Intelligence.
+      </div>
+
+    </footer>
+
+
+  </main>
+
+
+  <script src="js/app.js"></script>
 
 </body>
 
