@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
+  <title>NEXTRA — FAQ</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <style>
+
+    /* =================================================
+       NEXTRA FAQ
+    ================================================= */
+
+    .faq-hero {
+      position: relative;
+      overflow: hidden;
+
+      padding: 22px;
+
+      margin-bottom: 22px;
+
+      border: 1px solid var(--line);
+      border-radius: 21px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53,207,255,.11),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(57,242,160,.08),
+          transparent 50%
+        ),
+        var(--surface);
+    }
+
+
+    .faq-label {
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      color: var(--green);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+
+    .faq-label::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 10px
+        rgba(57,242,160,.7);
+    }
+
+
+    .faq-title {
+      margin: 11px 0 7px;
+
+      font-size: 27px;
+      line-height: 1.1;
+
+      letter-spacing: -.05em;
+    }
+
+
+    .faq-description {
+      margin: 0;
+
+      max-width: 320px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.65;
+    }
+
+
+    /* =================================================
+       FAQ SECTION
+    ================================================= */
+
+    .faq-section {
+      margin-top: 23px;
+    }
+
+
+    .faq-section-title {
+      margin: 0 0 10px;
+
+      font-size: 15px;
+      font-weight: 800;
+
+      letter-spacing: -.025em;
+    }
+
+
+    .faq-section-subtitle {
+      margin-top: -5px;
+      margin-bottom: 11px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+
+    /* =================================================
+       FAQ LIST
+    ================================================= */
+
+    .faq-list {
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 8px;
+    }
+
+
+    .faq-item {
+      overflow: hidden;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 16px;
+
+      background: var(--surface);
+
+      transition:
+        border-color .18s ease,
+        background .18s ease;
+    }
+
+
+    .faq-item.active {
+      border-color:
+        rgba(57,242,160,.20);
+    }
+
+
+    .faq-question {
+      width: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding: 15px;
+
+      border: 0;
+
+      background: transparent;
+
+      color: inherit;
+
+      text-align: left;
+
+      font-family: inherit;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+    }
+
+
+    .faq-question-text {
+      flex: 1;
+    }
+
+
+    .faq-icon {
+      flex-shrink: 0;
+
+      width: 24px;
+      height: 24px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.07);
+
+      font-size: 15px;
+
+      transition:
+        transform .2s ease;
+    }
+
+
+    .faq-item.active .faq-icon {
+      transform:
+        rotate(45deg);
+    }
+
+
+    .faq-answer {
+      display: grid;
+
+      grid-template-rows: 0fr;
+
+      transition:
+        grid-template-rows .25s ease;
+    }
+
+
+    .faq-answer-inner {
+      overflow: hidden;
+
+      min-height: 0;
+
+      padding: 0 15px;
+
+      color: var(--muted);
+
+      font-size: 8.5px;
+
+      line-height: 1.7;
+
+      transition:
+        padding .25s ease;
+    }
+
+
+    .faq-item.active .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+
+    .faq-item.active .faq-answer-inner {
+      padding:
+        0 15px 16px;
+    }
+
+
+    /* =================================================
+       CATEGORY CARDS
+    ================================================= */
+
+    .category-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 9px;
+
+      margin-top: 12px;
+    }
+
+
+    .category-card {
+      padding: 14px;
+
+      border:
+        1px solid
+        var(--line);
+
+      border-radius: 16px;
+
+      background: var(--surface);
+    }
+
+
+    .category-icon {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: 10px;
+
+      border-radius: 9px;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.07);
+    }
+
+
+    .category-icon svg {
+      width: 17px;
+      height: 17px;
+
+      fill: none;
+
+      stroke: currentColor;
+
+      stroke-width: 1.8;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+
+    .category-title {
+      font-size: 9px;
+
+      font-weight: 800;
+    }
+
+
+    .category-text {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 7px;
+
+      line-height: 1.45;
+    }
+
+
+    /* =================================================
+       CONTACT CTA
+    ================================================= */
+
+    .faq-cta {
+      position: relative;
+
+      overflow: hidden;
+
+      margin-top: 24px;
+
+      padding: 19px;
+
+      border:
+        1px solid
+        rgba(57,242,160,.13);
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(57,242,160,.05),
+          rgba(53,207,255,.035)
+        ),
+        var(--surface);
+    }
+
+
+    .faq-cta-title {
+      margin: 0;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+    .faq-cta-text {
+      margin: 5px 0 13px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.55;
+    }
+
+
+    .faq-cta-button {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 9px 13px;
+
+      border:
+        1px solid
+        rgba(57,242,160,.18);
+
+      border-radius: 10px;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.07);
+
+      text-decoration: none;
+
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+
+    /* =================================================
+       FOOTER
+    ================================================= */
+
+    .faq-footer {
+      padding: 27px 0 35px;
+
+      text-align: center;
+    }
+
+
+    .faq-footer-logo {
+      font-size: 12px;
+
+      font-weight: 900;
+
+      letter-spacing: -.04em;
+    }
+
+
+    .faq-footer-logo span {
+      color: var(--green);
+    }
+
+
+    .faq-footer-text {
+      margin-top: 4px;
+
+      color: var(--subtle);
+
+      font-size: 7px;
+    }
+
+
+    /* =================================================
+       SMALL SCREEN
+    ================================================= */
+
+    @media (max-width: 360px) {
+
+      .faq-hero {
+        padding: 19px;
+      }
+
+      .faq-title {
+        font-size: 25px;
+      }
+
+      .faq-question {
+        padding: 13px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<main class="container">
+
+
+  <!-- =================================================
+       HEADER
+  ================================================= -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+        FAQ<span class="dot">.</span>
+      </h1>
+
+      <p class="subtitle">
+        Frequently Asked Questions
+      </p>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+      title="Ganti tema"
+      aria-label="Ganti tema"
+    >
+      ◐
+    </button>
+
+  </header>
+
+
+
+  <!-- =================================================
+       HERO
+  ================================================= -->
+
+  <section class="faq-hero">
+
+    <div class="faq-label">
+      NEXTRA HELP CENTER
+    </div>
+
+
+    <h2 class="faq-title">
+      Ada pertanyaan?
+    </h2>
+
+
+    <p class="faq-description">
+
+      Temukan jawaban untuk pertanyaan
+      yang paling sering ditanyakan tentang
+      NEXTRA, data market, tools, dan
+      fitur yang tersedia.
+
+    </p>
+
+  </section>
+
+
+
+  <!-- =================================================
+       GENERAL
+  ================================================= -->
+
+  <section class="faq-section">
+
+    <h2 class="faq-section-title">
+      General
+    </h2>
+
+    <div class="faq-section-subtitle">
+      Pertanyaan umum tentang NEXTRA
+    </div>
+
+
+    <div class="faq-list">
+
+
+      <!-- FAQ 1 -->
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Apa itu NEXTRA?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            NEXTRA adalah platform market
+            intelligence untuk membantu trader
+            memantau market crypto, menggunakan
+            tools trading, mendapatkan insight,
+            dan mempelajari crypto dalam satu
+            tempat.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FAQ 2 -->
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Apakah NEXTRA gratis?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            Beberapa fitur NEXTRA dapat digunakan
+            tanpa biaya. Fitur tertentu dapat
+            berubah atau dikembangkan menjadi
+            bagian dari layanan premium di masa
+            mendatang.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FAQ 3 -->
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Siapa yang cocok menggunakan NEXTRA?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            NEXTRA dibuat untuk siapa saja yang
+            ingin memahami market crypto, mulai
+            dari pemula sampai trader yang sudah
+            berpengalaman.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FAQ 4 -->
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Apakah NEXTRA memberikan sinyal trading?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            Fitur intelligence dan analisis NEXTRA
+            ditujukan untuk membantu memahami
+            kondisi market. Informasi tersebut
+            tidak dimaksudkan sebagai jaminan
+            profit atau rekomendasi investasi
+            personal.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       MARKET DATA
+  ================================================= -->
+
+  <section class="faq-section">
+
+    <h2 class="faq-section-title">
+      Market Data
+    </h2>
+
+    <div class="faq-section-subtitle">
+      Tentang data yang ditampilkan
+    </div>
+
+
+    <div class="faq-list">
+
+
+      <!-- FAQ 5 -->
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Dari mana data crypto NEXTRA berasal?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            NEXTRA menggunakan data dari layanan
+            dan API market pihak ketiga. Ketersediaan
+            dan akurasi data dapat bergantung pada
+            penyedia data tersebut.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FAQ 6 -->
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Apakah harga crypto ditampilkan secara real-time?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            Beberapa data dapat diperbarui secara
+            berkala atau mendekati real-time,
+            tergantung sumber API dan batasan
+            layanan penyedia data.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FAQ 7 -->
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Kenapa harga di NEXTRA bisa berbeda dengan exchange?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            Harga crypto dapat berbeda antar
+            exchange karena likuiditas, volume,
+            spread, dan sumber data yang digunakan.
+            NEXTRA menampilkan data berdasarkan
+            sumber yang digunakan oleh sistem.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       FEATURES
+  ================================================= -->
+
+  <section class="faq-section">
+
+    <h2 class="faq-section-title">
+      Features
+    </h2>
+
+
+    <div class="category-grid">
+
+
+      <div class="category-card">
+
+        <div class="category-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 19V5"/>
+
+            <path d="M4 19h16"/>
+
+            <path d="m7 15 3-4 3 2 5-7"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="category-title">
+          Markets
+        </div>
+
+
+        <div class="category-text">
+          Pantau aset dan kondisi market crypto.
+        </div>
+
+      </div>
+
+
+
+      <div class="category-card">
+
+        <div class="category-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="12"
+              r="8"
+            />
+
+            <path d="M12 4v8l5 3"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="category-title">
+          Radar
+        </div>
+
+
+        <div class="category-text">
+          Temukan pergerakan market yang menarik.
+        </div>
+
+      </div>
+
+
+
+      <div class="category-card">
+
+        <div class="category-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M9 4.5a6 6 0 0 0-2 11.7V19h10v-2.8A6 6 0 0 0 15 4.5"/>
+
+            <path d="M9 22h6"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="category-title">
+          Intelligence
+        </div>
+
+
+        <div class="category-text">
+          Insight untuk membantu membaca market.
+        </div>
+
+      </div>
+
+
+
+      <div class="category-card">
+
+        <div class="category-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M14.7 6.3a4.2 4.2 0 0 0-5.6 5.6L4 17v3h3l5.1-5.1a4.2 4.2 0 0 0 5.6-5.6l-2.1 2.1-2.8-.8-.8-2.8z"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="category-title">
+          Tools
+        </div>
+
+
+        <div class="category-text">
+          Kalkulator dan alat bantu trading.
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       ACCOUNT
+  ================================================= -->
+
+  <section class="faq-section">
+
+    <h2 class="faq-section-title">
+      Account & Privacy
+    </h2>
+
+
+    <div class="faq-list">
+
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Apakah NEXTRA menyimpan data saya?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            Penggunaan data bergantung pada fitur
+            yang digunakan. NEXTRA berusaha
+            meminimalkan data yang diperlukan dan
+            akan menjelaskan penggunaan data pada
+            Privacy Policy.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="faq-item">
+
+        <button
+          class="faq-question"
+          type="button"
+        >
+
+          <span class="faq-question-text">
+            Apakah NEXTRA menyimpan password wallet?
+          </span>
+
+          <span class="faq-icon">
+            +
+          </span>
+
+        </button>
+
+
+        <div class="faq-answer">
+
+          <div class="faq-answer-inner">
+
+            Jangan pernah memasukkan seed phrase,
+            private key, atau password wallet ke
+            dalam NEXTRA. Informasi rahasia tersebut
+            tidak diperlukan untuk menggunakan
+            fitur market umum.
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       CTA
+  ================================================= -->
+
+  <section class="faq-cta">
+
+    <h2 class="faq-cta-title">
+      Masih punya pertanyaan?
+    </h2>
+
+
+    <p class="faq-cta-text">
+
+      Kalau jawaban yang kamu cari belum ada,
+      kamu bisa menghubungi NEXTRA untuk
+      feedback, pertanyaan, atau laporan bug.
+
+    </p>
+
+
+    <a
+      href="contact.html"
+      class="faq-cta-button"
+    >
+      Contact NEXTRA →
+    </a>
+
+  </section>
+
+
+
+  <!-- =================================================
+       FOOTER
+  ================================================= -->
+
+  <footer class="faq-footer">
+
+    <div class="faq-footer-logo">
+      NEX<span>TRA</span>
+    </div>
+
+
+    <div class="faq-footer-text">
+      Your Market. Your Intelligence.
+    </div>
+
+  </footer>
+
+
+</main>
+
+
+
+<script>
+
+  /* =================================================
+     FAQ ACCORDION
+  ================================================= */
+
+  const faqItems =
+    document.querySelectorAll(".faq-item");
+
+
+  faqItems.forEach(item => {
+
+    const button =
+      item.querySelector(".faq-question");
+
+
+    button.addEventListener("click", () => {
+
+      const isActive =
+        item.classList.contains("active");
+
+
+      faqItems.forEach(otherItem => {
+
+        otherItem.classList.remove("active");
+
+      });
+
+
+      if (!isActive) {
+
+        item.classList.add("active");
+
+      }
+
+    });
+
+  });
+
+</script>
+
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>
