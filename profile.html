@@ -27,6 +27,279 @@
     href="css/profile.css"
   >
 
+  <style>
+
+    /* =====================================================
+       NEXTRA LANGUAGE MODAL
+    ====================================================== */
+
+    .language-modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 9999;
+
+      display: none;
+
+      align-items: flex-end;
+
+      justify-content: center;
+
+      background: rgba(0,0,0,.72);
+
+      backdrop-filter: blur(10px);
+
+      -webkit-backdrop-filter: blur(10px);
+
+      padding: 16px;
+
+    }
+
+
+    .language-modal.show {
+
+      display: flex;
+
+    }
+
+
+    .language-panel {
+
+      width: 100%;
+
+      max-width: 520px;
+
+      max-height: 82vh;
+
+      overflow-y: auto;
+
+      background: #0b0f11;
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      border-radius: 24px;
+
+      padding: 20px;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.55);
+
+      animation:
+        languagePanelIn .22s ease;
+
+    }
+
+
+    @keyframes languagePanelIn {
+
+      from {
+
+        transform:
+          translateY(30px);
+
+        opacity: 0;
+
+      }
+
+      to {
+
+        transform:
+          translateY(0);
+
+        opacity: 1;
+
+      }
+
+    }
+
+
+    .language-panel-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .language-panel-header h3 {
+
+      margin: 0;
+
+      font-size: 20px;
+
+    }
+
+
+    .language-close {
+
+      width: 38px;
+
+      height: 38px;
+
+      border: 0;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.07);
+
+      color: inherit;
+
+      font-size: 22px;
+
+      cursor: pointer;
+
+    }
+
+
+    .language-list {
+
+      display: grid;
+
+      gap: 8px;
+
+    }
+
+
+    .language-option {
+
+      width: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 13px;
+
+      border: 1px solid
+        rgba(255,255,255,.06);
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color: inherit;
+
+      text-align: left;
+
+      cursor: pointer;
+
+      transition: .18s ease;
+
+    }
+
+
+    .language-option:hover {
+
+      background:
+        rgba(255,255,255,.07);
+
+    }
+
+
+    .language-option.selected {
+
+      border-color:
+        rgba(66,245,167,.65);
+
+      background:
+        rgba(66,245,167,.08);
+
+    }
+
+
+    .language-flag {
+
+      width: 38px;
+
+      height: 38px;
+
+      display: grid;
+
+      place-items: center;
+
+      flex: 0 0 38px;
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,255,255,.06);
+
+      font-size: 20px;
+
+    }
+
+
+    .language-info {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 3px;
+
+      min-width: 0;
+
+    }
+
+
+    .language-info strong {
+
+      font-size: 14px;
+
+    }
+
+
+    .language-info span {
+
+      font-size: 12px;
+
+      opacity: .55;
+
+    }
+
+
+    .language-check {
+
+      margin-left: auto;
+
+      font-size: 18px;
+
+      opacity: 0;
+
+    }
+
+
+    .language-option.selected
+    .language-check {
+
+      opacity: 1;
+
+    }
+
+
+    @media (min-width: 700px) {
+
+      .language-modal {
+
+        align-items: center;
+
+      }
+
+    }
+
+  </style>
+
 </head>
 
 
@@ -45,11 +318,15 @@
     <div>
 
       <h1 class="title">
+
         Profile<span class="dot">.</span>
+
       </h1>
 
       <p class="subtitle">
+
         Your NEXTRA identity
+
       </p>
 
     </div>
@@ -111,7 +388,6 @@
 
 
       <div class="profile-name-row">
-
 
         <div>
 
@@ -177,7 +453,6 @@
     hidden
   >
 
-
     <div class="section-label">
       EDIT PROFILE
     </div>
@@ -199,7 +474,6 @@
       >
 
 
-
       <label for="usernameInput">
         Username
       </label>
@@ -211,7 +485,6 @@
         maxlength="20"
         placeholder="nextra_user"
       >
-
 
 
       <div class="profile-edit-actions">
@@ -237,9 +510,7 @@
 
       </div>
 
-
     </div>
-
 
   </section>
 
@@ -251,16 +522,13 @@
 
   <section class="trader-level-card">
 
-
     <div class="trader-level-top">
-
 
       <div>
 
         <span class="mini-label">
           TRADER LEVEL
         </span>
-
 
         <h3>
           Rookie Trader
@@ -273,23 +541,18 @@
         LVL 01
       </div>
 
-
     </div>
 
 
-
     <div class="xp-row">
-
 
       <span>
         120 XP
       </span>
 
-
       <span>
         1,000 XP
       </span>
-
 
     </div>
 
@@ -305,11 +568,8 @@
 
 
     <p class="xp-description">
-
       Keep exploring NEXTRA to unlock your next level.
-
     </p>
-
 
   </section>
 
@@ -321,7 +581,6 @@
 
   <section class="plan-card">
 
-
     <div class="plan-icon">
       N
     </div>
@@ -329,21 +588,17 @@
 
     <div class="plan-content">
 
-
       <span class="mini-label">
         CURRENT PLAN
       </span>
-
 
       <strong>
         NEXTRA Free
       </strong>
 
-
       <span>
         Core market intelligence
       </span>
-
 
     </div>
 
@@ -354,7 +609,6 @@
     >
       Upgrade
     </button>
-
 
   </section>
 
@@ -380,7 +634,6 @@
     </div>
 
 
-
     <div class="profile-stat">
 
       <strong id="alertCount">
@@ -392,7 +645,6 @@
       </span>
 
     </div>
-
 
 
     <div class="profile-stat">
@@ -418,11 +670,9 @@
 
   <section class="profile-section">
 
-
     <div class="section-label">
       ACHIEVEMENTS
     </div>
-
 
 
     <div class="achievement-grid">
@@ -445,7 +695,6 @@
       </div>
 
 
-
       <div class="achievement-card">
 
         <div class="achievement-icon">
@@ -463,7 +712,6 @@
       </div>
 
 
-
       <div class="achievement-card">
 
         <div class="achievement-icon">
@@ -479,7 +727,6 @@
         </span>
 
       </div>
-
 
 
       <div class="achievement-card">
@@ -501,7 +748,6 @@
 
     </div>
 
-
   </section>
 
 
@@ -518,9 +764,7 @@
     </div>
 
 
-
     <div class="profile-item">
-
 
       <div>
 
@@ -539,13 +783,10 @@
         ›
       </span>
 
-
     </div>
 
 
-
     <div class="profile-item">
-
 
       <div>
 
@@ -564,7 +805,6 @@
         ✓
       </span>
 
-
     </div>
 
 
@@ -582,7 +822,6 @@
     <div class="section-label">
       QUICK ACTIONS
     </div>
-
 
 
     <a
@@ -610,7 +849,6 @@
     </a>
 
 
-
     <a
       href="futures.html"
       class="profile-item"
@@ -634,7 +872,6 @@
       </span>
 
     </a>
-
 
 
     <div class="profile-item">
@@ -675,9 +912,7 @@
     </div>
 
 
-
     <div class="profile-item">
-
 
       <div>
 
@@ -696,13 +931,25 @@
         ◐
       </span>
 
-
     </div>
 
 
 
-    <div class="profile-item">
+    <!-- LANGUAGE BUTTON -->
 
+    <button
+      class="profile-item"
+      id="languageButton"
+      type="button"
+      style="
+        width:100%;
+        border:0;
+        color:inherit;
+        text-align:left;
+        font:inherit;
+        cursor:pointer;
+      "
+    >
 
       <div>
 
@@ -710,7 +957,7 @@
           Language
         </strong>
 
-        <span>
+        <span id="currentLanguage">
           Bahasa Indonesia
         </span>
 
@@ -721,8 +968,7 @@
         ›
       </span>
 
-
-    </div>
+    </button>
 
 
   </section>
@@ -739,7 +985,6 @@
     <div class="section-label">
       ABOUT NEXTRA
     </div>
-
 
 
     <div class="profile-item">
@@ -761,7 +1006,6 @@
       <span>
         v1.0
       </span>
-
 
     </div>
 
@@ -785,6 +1029,52 @@
 
 
 
+<!-- =====================================================
+     LANGUAGE MODAL
+====================================================== -->
+
+<div
+  class="language-modal"
+  id="languageModal"
+  aria-hidden="true"
+>
+
+
+  <div class="language-panel">
+
+
+    <div class="language-panel-header">
+
+      <h3>
+        🌍 Language
+      </h3>
+
+
+      <button
+        type="button"
+        class="language-close"
+        id="languageClose"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="language-list"
+      id="languageList"
+    ></div>
+
+
+  </div>
+
+
+</div>
+
+
+
 <!-- BOTTOM NAV -->
 
 <div id="bottom-nav"></div>
@@ -799,11 +1089,11 @@
 
 <script src="js/app.js"></script>
 
-  <script src="js/features/i18n.js"></script>
+<script src="js/features/i18n.js"></script>
 
-<script src="js/features/profile-settings.js"></script>
-  
-  <script src="js/features/profile-stats.js"></script>
+<script src="js/features/profile-stats.js"></script>
+
+
 
 <!-- =====================================================
      PROFILE JS
@@ -822,6 +1112,9 @@
     "nextra_avatar";
 
 
+  const SETTINGS_KEY =
+    "nextra_settings";
+
 
   const defaults = {
 
@@ -832,7 +1125,6 @@
       "nextra_user"
 
   };
-
 
 
   let profile = {
@@ -848,6 +1140,10 @@
   };
 
 
+
+  /* =====================================================
+     ELEMENTS
+  ====================================================== */
 
   const nameEl =
     document.getElementById(
@@ -903,9 +1199,421 @@
     );
 
 
+  const languageButton =
+    document.getElementById(
+      "languageButton"
+    );
+
+
+  const languageModal =
+    document.getElementById(
+      "languageModal"
+    );
+
+
+  const languageClose =
+    document.getElementById(
+      "languageClose"
+    );
+
+
+  const languageList =
+    document.getElementById(
+      "languageList"
+    );
+
+
+  const currentLanguage =
+    document.getElementById(
+      "currentLanguage"
+    );
+
+
 
   /* =====================================================
-     RENDER
+     SETTINGS
+  ====================================================== */
+
+  function getSettings() {
+
+    try {
+
+      return JSON.parse(
+        localStorage.getItem(
+          SETTINGS_KEY
+        ) || "{}"
+      );
+
+    }
+
+    catch {
+
+      return {};
+
+    }
+
+  }
+
+
+  function saveSettings(settings) {
+
+    localStorage.setItem(
+      SETTINGS_KEY,
+      JSON.stringify(settings)
+    );
+
+  }
+
+
+  function getCurrentLanguage() {
+
+    const settings =
+      getSettings();
+
+
+    if (
+      window.NEXTRA_I18N &&
+      window.NEXTRA_I18N.languages &&
+      window.NEXTRA_I18N.languages[
+        settings.language
+      ]
+    ) {
+
+      return settings.language;
+
+    }
+
+
+    return "id";
+
+  }
+
+
+
+  /* =====================================================
+     LANGUAGE LIST
+  ====================================================== */
+
+  const LANGUAGE_DATA = [
+
+    ["id", "🇮🇩", "Bahasa Indonesia", "Bahasa Indonesia"],
+
+    ["en", "🇺🇸", "English", "English"],
+
+    ["es", "🇪🇸", "Español", "Spanish"],
+
+    ["fr", "🇫🇷", "Français", "French"],
+
+    ["de", "🇩🇪", "Deutsch", "German"],
+
+    ["it", "🇮🇹", "Italiano", "Italian"],
+
+    ["pt", "🇵🇹", "Português", "Portuguese"],
+
+    ["pt-BR", "🇧🇷", "Português (Brasil)", "Portuguese Brazil"],
+
+    ["ru", "🇷🇺", "Русский", "Russian"],
+
+    ["zh", "🇨🇳", "简体中文", "Chinese Simplified"],
+
+    ["zh-TW", "🇹🇼", "繁體中文", "Chinese Traditional"],
+
+    ["ja", "🇯🇵", "日本語", "Japanese"],
+
+    ["ko", "🇰🇷", "한국어", "Korean"],
+
+    ["tr", "🇹🇷", "Türkçe", "Turkish"],
+
+    ["vi", "🇻🇳", "Tiếng Việt", "Vietnamese"],
+
+    ["th", "🇹🇭", "ไทย", "Thai"],
+
+    ["ar", "🇸🇦", "العربية", "Arabic"],
+
+    ["hi", "🇮🇳", "हिन्दी", "Hindi"],
+
+    ["nl", "🇳🇱", "Nederlands", "Dutch"],
+
+    ["pl", "🇵🇱", "Polski", "Polish"]
+
+  ];
+
+
+
+  function renderLanguages() {
+
+
+    const selected =
+      getCurrentLanguage();
+
+
+    languageList.innerHTML =
+      "";
+
+
+    LANGUAGE_DATA.forEach(
+      language => {
+
+
+        const [
+          code,
+          flag,
+          nativeName,
+          englishName
+        ] = language;
+
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type =
+          "button";
+
+
+        button.className =
+          "language-option";
+
+
+        if (
+          code === selected
+        ) {
+
+          button.classList.add(
+            "selected"
+          );
+
+        }
+
+
+        button.innerHTML = `
+
+          <span class="language-flag">
+            ${flag}
+          </span>
+
+          <span class="language-info">
+
+            <strong>
+              ${nativeName}
+            </strong>
+
+            <span>
+              ${englishName}
+            </span>
+
+          </span>
+
+          <span class="language-check">
+            ✓
+          </span>
+
+        `;
+
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            selectLanguage(
+              code
+            );
+
+          }
+        );
+
+
+        languageList.appendChild(
+          button
+        );
+
+      }
+    );
+
+  }
+
+
+
+  /* =====================================================
+     SELECT LANGUAGE
+  ====================================================== */
+
+  function selectLanguage(code) {
+
+
+    const settings =
+      getSettings();
+
+
+    settings.language =
+      code;
+
+
+    saveSettings(
+      settings
+    );
+
+
+    currentLanguage.textContent =
+      getLanguageName(code);
+
+
+    document.documentElement.lang =
+      code;
+
+
+    if (
+      window.NEXTRA_I18N &&
+      typeof
+        window.NEXTRA_I18N.translatePage ===
+        "function"
+    ) {
+
+      window.NEXTRA_I18N.translatePage();
+
+    }
+
+
+    window.dispatchEvent(
+      new CustomEvent(
+        "nextra:languageChanged",
+        {
+          detail: {
+            language: code
+          }
+        }
+      )
+    );
+
+
+    renderLanguages();
+
+
+    closeLanguage();
+
+  }
+
+
+
+  function getLanguageName(code) {
+
+
+    const found =
+      LANGUAGE_DATA.find(
+        language =>
+          language[0] === code
+      );
+
+
+    return found
+      ? found[2]
+      : "Bahasa Indonesia";
+
+  }
+
+
+
+  /* =====================================================
+     LANGUAGE MODAL
+  ====================================================== */
+
+  function openLanguage() {
+
+    renderLanguages();
+
+    languageModal.classList.add(
+      "show"
+    );
+
+    languageModal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+
+  function closeLanguage() {
+
+    languageModal.classList.remove(
+      "show"
+    );
+
+    languageModal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.style.overflow =
+      "";
+
+  }
+
+
+  languageButton.addEventListener(
+    "click",
+    openLanguage
+  );
+
+
+  languageClose.addEventListener(
+    "click",
+    closeLanguage
+  );
+
+
+  languageModal.addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target ===
+        languageModal
+      ) {
+
+        closeLanguage();
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        closeLanguage();
+
+      }
+
+    }
+  );
+
+
+
+  /* =====================================================
+     INITIAL LANGUAGE
+  ====================================================== */
+
+  currentLanguage.textContent =
+    getLanguageName(
+      getCurrentLanguage()
+    );
+
+
+
+  /* =====================================================
+     PROFILE RENDER
   ====================================================== */
 
   function renderProfile() {
@@ -933,7 +1641,6 @@
       localStorage.getItem(
         AVATAR_KEY
       );
-
 
 
     if (savedAvatar) {
@@ -968,7 +1675,6 @@
 
     }
 
-
   }
 
 
@@ -987,7 +1693,6 @@
   );
 
 
-
   avatarInput.addEventListener(
     "change",
     event => {
@@ -997,8 +1702,8 @@
         event.target.files[0];
 
 
-      if (!file) return;
-
+      if (!file)
+        return;
 
 
       if (
@@ -1012,10 +1717,8 @@
       }
 
 
-
       const reader =
         new FileReader();
-
 
 
       reader.onload =
@@ -1043,18 +1746,14 @@
               "Foto terlalu besar. Gunakan foto yang lebih kecil."
             );
 
-
           }
 
-
         };
-
 
 
       reader.readAsDataURL(
         file
       );
-
 
     }
   );
@@ -1082,9 +1781,7 @@
 
     nameInput.focus();
 
-
   }
-
 
 
   document
@@ -1095,7 +1792,6 @@
       "click",
       openEditor
     );
-
 
 
   document
@@ -1113,7 +1809,6 @@
     );
 
 
-
   document
     .getElementById(
       "saveProfileBtn"
@@ -1126,7 +1821,6 @@
         const name =
           nameInput.value.trim()
           || defaults.name;
-
 
 
         const username =
@@ -1145,7 +1839,6 @@
           );
 
 
-
         profile.name =
           name.slice(
             0,
@@ -1157,7 +1850,6 @@
           username;
 
 
-
         localStorage.setItem(
           PROFILE_KEY,
           JSON.stringify(
@@ -1166,14 +1858,11 @@
         );
 
 
-
         renderProfile();
-
 
 
         panel.hidden =
           true;
-
 
       }
     );
@@ -1195,7 +1884,6 @@
       );
 
 
-
     document.getElementById(
       "watchlistCount"
     ).textContent =
@@ -1204,7 +1892,6 @@
       )
         ? watchlist.length
         : 0;
-
 
   }
 
@@ -1215,7 +1902,6 @@
       "watchlistCount"
     ).textContent =
       "0";
-
 
   }
 
@@ -1236,7 +1922,6 @@
       );
 
 
-
     document.getElementById(
       "alertCount"
     ).textContent =
@@ -1245,7 +1930,6 @@
       )
         ? alerts.length
         : 0;
-
 
   }
 
@@ -1256,7 +1940,6 @@
       "alertCount"
     ).textContent =
       "0";
-
 
   }
 
