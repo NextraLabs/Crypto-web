@@ -1221,6 +1221,487 @@
     transition:
       none !important;
 
+
+
+/* =========================================================
+   PROFILE V5 — SETTINGS
+========================================================= */
+
+
+/* =========================================================
+   SETTINGS CARD
+========================================================= */
+
+.settings-card {
+
+  overflow: hidden;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 16px;
+
+  background:
+    rgba(255,255,255,.015);
+
+}
+
+
+.setting-row {
+
+  min-height: 64px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding:
+    12px 14px;
+
+}
+
+
+.setting-row + .setting-row {
+
+  border-top:
+    1px solid var(--line);
+
+}
+
+
+.setting-row > div {
+
+  min-width: 0;
+
+  flex: 1;
+
+}
+
+
+.setting-row strong {
+
+  display: block;
+
+  color: var(--text);
+
+  font-size: 13px;
+
+  font-weight: 650;
+
+}
+
+
+.setting-row span {
+
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  line-height: 1.3;
+
+}
+
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.setting-toggle {
+
+  position: relative;
+
+  width: 42px;
+
+  height: 24px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,.12);
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    box-shadow .2s ease;
+
+}
+
+
+.setting-toggle span {
+
+  position: absolute;
+
+  top: 3px;
+
+  left: 3px;
+
+  width: 18px;
+
+  height: 18px;
+
+  margin: 0;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  box-shadow:
+    0 2px 7px
+    rgba(0,0,0,.3);
+
+  transition:
+    transform .2s ease;
+
+}
+
+
+.setting-toggle.is-on {
+
+  background:
+    var(--green);
+
+  box-shadow:
+    0 0 12px
+    rgba(57,242,160,.16);
+
+}
+
+
+.setting-toggle.is-on span {
+
+  transform:
+    translateX(18px);
+
+}
+
+
+.setting-toggle:active {
+
+  transform:
+    scale(.94);
+
+}
+
+
+/* =========================================================
+   SETTINGS LABEL
+========================================================= */
+
+.settings-label {
+
+  margin-top:
+    28px;
+
+}
+
+
+/* =========================================================
+   CHOICE CARDS
+========================================================= */
+
+.settings-choice {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+
+}
+
+
+.settings-choice button {
+
+  min-height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255,255,255,.012);
+
+  color: var(--text);
+
+  text-align: left;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color .18s ease,
+    background .18s ease,
+    transform .18s ease;
+
+}
+
+
+.settings-choice button:hover {
+
+  background:
+    rgba(255,255,255,.025);
+
+}
+
+
+.settings-choice button:active {
+
+  transform:
+    scale(.98);
+
+}
+
+
+.settings-choice button.selected {
+
+  border-color:
+    rgba(57,242,160,.35);
+
+  background:
+    rgba(57,242,160,.045);
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(57,242,160,.04);
+
+}
+
+
+.choice-icon {
+
+  width: 32px;
+
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  margin: 0 !important;
+
+  border-radius: 9px;
+
+  background:
+    rgba(255,255,255,.05);
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+}
+
+
+.settings-choice button.selected
+.choice-icon {
+
+  background:
+    rgba(57,242,160,.1);
+
+  color:
+    var(--green);
+
+}
+
+
+.settings-choice button span:last-child {
+
+  min-width: 0;
+
+}
+
+
+.settings-choice strong {
+
+  display: block;
+
+  color: var(--text);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+}
+
+
+.settings-choice small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+}
+
+
+/* =========================================================
+   LIGHT MODE PREPARATION
+========================================================= */
+
+html[data-theme="light"] {
+
+  --bg: #f5f7f8;
+
+  --card: #ffffff;
+
+  --text: #111618;
+
+  --muted: #667276;
+
+  --subtle: #8b9699;
+
+  --line: rgba(0,0,0,.09);
+
+}
+
+
+html[data-theme="light"] body {
+
+  background:
+    var(--bg);
+
+}
+
+
+html[data-theme="light"]
+.profile-card,
+html[data-theme="light"]
+.trader-level-card,
+html[data-theme="light"]
+.plan-card,
+html[data-theme="light"]
+.profile-stats,
+html[data-theme="light"]
+.settings-card,
+html[data-theme="light"]
+.settings-choice button {
+
+  background-color:
+    var(--card);
+
+}
+
+
+html[data-theme="light"]
+.profile-cover {
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(57,242,160,.12),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(32,207,255,.12),
+      transparent 42%
+    ),
+    #e9eff0;
+
+}
+
+
+html[data-theme="light"]
+.profile-avatar {
+
+  border-color:
+    #e9eff0;
+
+}
+
+
+html[data-theme="light"]
+.profile-edit-card input {
+
+  background:
+    #f4f6f6;
+
+}
+
+
+html[data-theme="light"]
+.profile-item:hover {
+
+  background:
+    rgba(0,0,0,.025);
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
+
+  .setting-row {
+
+    min-height:
+      66px;
+
+    padding:
+      12px;
+
+  }
+
+
+  .settings-choice {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .settings-choice button {
+
+    min-height:
+      62px;
+
   }
 
 }
+     
+
+  }
+
+}
+
+
+
+
+
