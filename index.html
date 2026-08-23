@@ -17,6 +17,314 @@
     href="css/style.css"
   >
 
+  <style>
+
+    /* =========================================
+       NEXTRA HOME — PREMIUM OVERRIDE
+    ========================================== */
+
+    .home-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(66,245,167,.12);
+      border-radius: 22px;
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(32,207,255,.12),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(66,245,167,.08),
+          transparent 45%
+        ),
+        var(--card-bg);
+    }
+
+    .home-hero::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      right: -60px;
+      bottom: -70px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .04;
+      filter: blur(15px);
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--accent);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .hero-label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .hero-title {
+      margin: 12px 0 8px;
+      font-size: 28px;
+      line-height: 1.08;
+      letter-spacing: -.8px;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      max-width: 310px;
+      margin: 0;
+      color: var(--dim);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .hero-stat {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.04);
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .hero-stat span {
+      display: block;
+      margin-top: 2px;
+      color: var(--dim);
+      font-size: 8px;
+    }
+
+
+    /* SECTION HEADER */
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 11px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: -.2px;
+    }
+
+    .section-subtitle {
+      margin-top: 3px;
+      color: var(--dim);
+      font-size: 9px;
+    }
+
+    .view-all {
+      padding: 7px 10px;
+      border-radius: 9px;
+      font-size: 9px;
+      text-decoration: none;
+    }
+
+
+    /* MARKET CARDS */
+
+    #home-market-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    #home-market-list .coin-card {
+      margin: 0;
+      min-height: 62px;
+      padding: 11px 12px;
+      border-radius: 15px;
+      border: 1px solid rgba(255,255,255,.045);
+      transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+    }
+
+    #home-market-list .coin-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(66,245,167,.18);
+    }
+
+    #home-market-list .coin-card img {
+      width: 36px !important;
+      height: 36px !important;
+    }
+
+    .home-rank {
+      width: 20px;
+      color: var(--faint);
+      font-size: 8px;
+      text-align: center;
+    }
+
+
+    /* MARKET PULSE */
+
+    .pulse-card {
+      position: relative;
+      overflow: hidden;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(66,245,167,.08);
+      background: var(--card-bg);
+    }
+
+    .pulse-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pulse-title {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .pulse-description {
+      margin-top: 3px;
+      color: var(--dim);
+      font-size: 8px;
+    }
+
+    .pulse-value {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .pulse-track {
+      height: 7px;
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--input-bg);
+    }
+
+    .pulse-bar {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        var(--accent),
+        #20cfff
+      );
+      transition: width .5s ease;
+    }
+
+    .pulse-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 7px;
+      color: var(--faint);
+      font-size: 8px;
+    }
+
+
+    /* EXPLORE */
+
+    .explore-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 9px;
+    }
+
+    .explore-card {
+      position: relative;
+      min-height: 108px;
+      margin: 0 !important;
+      padding: 15px !important;
+      overflow: hidden;
+      border-radius: 17px !important;
+      text-decoration: none;
+      transition:
+        transform .18s ease,
+        border-color .18s ease;
+    }
+
+    .explore-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(66,245,167,.2);
+    }
+
+    .explore-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      margin-bottom: 12px;
+      border-radius: 11px;
+      background: rgba(66,245,167,.08);
+      font-size: 17px;
+    }
+
+    .explore-name {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .explore-desc {
+      margin-top: 4px;
+      color: var(--dim);
+      font-size: 8px;
+      line-height: 1.4;
+    }
+
+    .explore-arrow {
+      position: absolute;
+      right: 13px;
+      bottom: 12px;
+      color: var(--faint);
+      font-size: 11px;
+    }
+
+
+    /* FOOTER */
+
+    .home-footer {
+      margin-top: 32px;
+      padding: 5px 0 22px;
+      color: var(--faint);
+      font-size: 8px;
+      text-align: center;
+      letter-spacing: .2px;
+    }
+
+  </style>
+
 </head>
 
 
@@ -25,9 +333,7 @@
   <main class="container">
 
 
-    <!-- =================================
-         HEADER
-    ================================== -->
+    <!-- HEADER -->
 
     <header class="topbar">
 
@@ -56,95 +362,63 @@
 
 
 
-    <!-- =================================
-         HERO
-    ================================== -->
+    <!-- HERO -->
 
-    <section
-      class="highlight-box"
-      style="
-        padding:20px;
-        margin-bottom:16px;
-      "
-    >
+    <section class="home-hero">
 
-      <div
-        style="
-          font-size:10px;
-          color:var(--accent);
-          font-weight:700;
-          letter-spacing:1px;
-          text-transform:uppercase;
-        "
-      >
-        MARKET INTELLIGENCE
+      <div class="hero-label">
+        Market Intelligence
       </div>
 
-
-      <h2
-        style="
-          margin:7px 0 5px;
-          font-size:24px;
-          line-height:1.15;
-        "
-      >
-        Understand the market.
-        <br>
-        Trade with intelligence.
+      <h2 class="hero-title">
+        Understand the market.<br>
+        <span>Trade with intelligence.</span>
       </h2>
 
-
-      <p
-        style="
-          margin:0;
-          color:var(--dim);
-          font-size:11px;
-          line-height:1.6;
-        "
-      >
-        Data market crypto real-time
-        dengan insight yang lebih mudah
-        dipahami.
+      <p class="hero-description">
+        Pantau pergerakan crypto secara real-time
+        dan pahami market tanpa harus melihat
+        data yang rumit.
       </p>
+
+
+      <div class="hero-stats">
+
+        <div class="hero-stat">
+          <strong>LIVE</strong>
+          <span>Market Data</span>
+        </div>
+
+        <div class="hero-stat">
+          <strong>24H</strong>
+          <span>Price Movement</span>
+        </div>
+
+        <div class="hero-stat">
+          <strong>AI</strong>
+          <span>Intelligence</span>
+        </div>
+
+      </div>
 
     </section>
 
 
 
-    <!-- =================================
-         MARKET OVERVIEW
-    ================================== -->
+    <!-- MARKET OVERVIEW -->
 
     <section>
 
-      <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          margin-bottom:10px;
-        "
-      >
+      <div class="section-header">
 
         <div>
 
-          <h2
-            style="
-              margin:0;
-              font-size:16px;
-            "
-          >
+          <h2 class="section-title">
             Market Overview
           </h2>
 
-          <div
-            class="dim"
-            style="
-              font-size:9px;
-              margin-top:3px;
-            "
-          >
-            Live market data
+          <div class="section-subtitle">
+            Live crypto market
           </div>
 
         </div>
@@ -152,20 +426,15 @@
 
         <a
           href="markets.html"
-          class="icon-btn"
-          style="
-            font-size:10px;
-          "
+          class="icon-btn view-all"
         >
-          View all
+          View all →
         </a>
 
       </div>
 
 
-      <div
-        id="home-market-list"
-      >
+      <div id="home-market-list">
 
         <div class="loading">
           Memuat market...
@@ -177,51 +446,22 @@
 
 
 
-    <!-- =================================
-         MARKET SENTIMENT
-    ================================== -->
+    <!-- MARKET PULSE -->
 
-    <section
-      style="
-        margin-top:22px;
-      "
-    >
+    <section style="margin-top:22px;">
 
-      <div
-        class="coin-card"
-        style="
-          display:block;
-          cursor:default;
-        "
-      >
+      <div class="pulse-card">
 
-        <div
-          style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-          "
-        >
+        <div class="pulse-top">
 
           <div>
 
-            <div
-              style="
-                font-size:12px;
-                font-weight:700;
-              "
-            >
+            <div class="pulse-title">
               Market Pulse
             </div>
 
-            <div
-              class="dim"
-              style="
-                font-size:9px;
-                margin-top:3px;
-              "
-            >
-              Berdasarkan market yang dimuat
+            <div class="pulse-description">
+              Persentase market yang sedang naik
             </div>
 
           </div>
@@ -229,11 +469,7 @@
 
           <div
             id="market-pulse"
-            style="
-              font-size:18px;
-              font-weight:800;
-              color:var(--accent);
-            "
+            class="pulse-value"
           >
             —
           </div>
@@ -241,26 +477,23 @@
         </div>
 
 
-        <div
-          style="
-            height:6px;
-            margin-top:14px;
-            border-radius:999px;
-            background:var(--input-bg);
-            overflow:hidden;
-          "
-        >
+        <div class="pulse-track">
 
           <div
             id="market-pulse-bar"
-            style="
-              width:0%;
-              height:100%;
-              background:var(--accent);
-              border-radius:999px;
-              transition:width .4s ease;
-            "
+            class="pulse-bar"
           ></div>
+
+        </div>
+
+
+        <div class="pulse-labels">
+
+          <span>Bearish</span>
+
+          <span>Neutral</span>
+
+          <span>Bullish</span>
 
         </div>
 
@@ -270,173 +503,128 @@
 
 
 
-    <!-- =================================
-         QUICK ACCESS
-    ================================== -->
+    <!-- EXPLORE -->
 
-    <section
-      style="
-        margin-top:22px;
-      "
-    >
+    <section style="margin-top:22px;">
 
-      <h2
-        style="
-          margin:0 0 10px;
-          font-size:16px;
-        "
-      >
-        Explore NEXTRA
-      </h2>
+      <div class="section-header">
+
+        <div>
+
+          <h2 class="section-title">
+            Explore NEXTRA
+          </h2>
+
+          <div class="section-subtitle">
+            Tools untuk trader
+          </div>
+
+        </div>
+
+      </div>
 
 
-      <div
-        style="
-          display:grid;
-          grid-template-columns:
-            repeat(2,1fr);
-          gap:8px;
-        "
-      >
+      <div class="explore-grid">
+
 
         <a
           href="markets.html"
-          class="coin-card"
-          style="
-            display:block;
-            margin:0;
-          "
+          class="coin-card explore-card"
         >
 
-          <div
-            style="
-              font-size:20px;
-              margin-bottom:7px;
-            "
-          >
+          <div class="explore-icon">
             ◈
           </div>
 
-          <strong>
+          <div class="explore-name">
             Markets
-          </strong>
+          </div>
 
-          <div
-            class="dim"
-            style="
-              font-size:9px;
-              margin-top:3px;
-            "
-          >
+          <div class="explore-desc">
             Explore crypto market
           </div>
 
+          <div class="explore-arrow">
+            →
+          </div>
+
         </a>
+
 
 
         <a
           href="trending.html"
-          class="coin-card"
-          style="
-            display:block;
-            margin:0;
-          "
+          class="coin-card explore-card"
         >
 
-          <div
-            style="
-              font-size:20px;
-              margin-bottom:7px;
-            "
-          >
+          <div class="explore-icon">
             🔥
           </div>
 
-          <strong>
+          <div class="explore-name">
             Trending
-          </strong>
+          </div>
 
-          <div
-            class="dim"
-            style="
-              font-size:9px;
-              margin-top:3px;
-            "
-          >
+          <div class="explore-desc">
             Coins yang sedang ramai
           </div>
 
+          <div class="explore-arrow">
+            →
+          </div>
+
         </a>
+
 
 
         <a
           href="tools.html"
-          class="coin-card"
-          style="
-            display:block;
-            margin:0;
-          "
+          class="coin-card explore-card"
         >
 
-          <div
-            style="
-              font-size:20px;
-              margin-bottom:7px;
-            "
-          >
+          <div class="explore-icon">
             🧰
           </div>
 
-          <strong>
+          <div class="explore-name">
             Tools
-          </strong>
+          </div>
 
-          <div
-            class="dim"
-            style="
-              font-size:9px;
-              margin-top:3px;
-            "
-          >
+          <div class="explore-desc">
             Trading utilities
           </div>
 
+          <div class="explore-arrow">
+            →
+          </div>
+
         </a>
+
 
 
         <a
           href="education.html"
-          class="coin-card"
-          style="
-            display:block;
-            margin:0;
-          "
+          class="coin-card explore-card"
         >
 
-          <div
-            style="
-              font-size:20px;
-              margin-bottom:7px;
-            "
-          >
+          <div class="explore-icon">
             🧠
           </div>
 
-          <strong>
+          <div class="explore-name">
             Learn
-          </strong>
+          </div>
 
-          <div
-            class="dim"
-            style="
-              font-size:9px;
-              margin-top:3px;
-            "
-          >
+          <div class="explore-desc">
             Belajar crypto
           </div>
 
+          <div class="explore-arrow">
+            →
+          </div>
+
         </a>
+
 
       </div>
 
@@ -444,22 +632,11 @@
 
 
 
-    <!-- =================================
-         FOOTER
-    ================================== -->
+    <!-- FOOTER -->
 
-    <footer
-      style="
-        text-align:center;
-        margin-top:30px;
-        padding-bottom:20px;
-        color:var(--faint);
-        font-size:9px;
-      "
-    >
+    <footer class="home-footer">
 
-      NEXTRA · Your Market.
-      Your Intelligence.
+      NEXTRA · Your Market. Your Intelligence.
 
     </footer>
 
@@ -468,17 +645,13 @@
 
 
 
-  <!-- =================================
-       NAV
-  ================================== -->
+  <!-- NAV -->
 
   <div id="bottom-nav"></div>
 
 
 
-  <!-- =================================
-       SCRIPTS
-  ================================== -->
+  <!-- SCRIPTS -->
 
   <script src="js/app.js"></script>
 
@@ -519,10 +692,10 @@
 
         homeContainer.innerHTML =
           coins
-            .map(coin => {
+            .map((coin, index) => {
 
               const change =
-                coin.change24h;
+                Number(coin.change24h) || 0;
 
 
               const changeClass =
@@ -544,18 +717,24 @@
                   class="coin-card"
                 >
 
+                  <div class="home-rank">
+                    ${String(index + 1).padStart(2,"0")}
+                  </div>
+
+
                   ${
                     coin.image
                       ? `
                         <img
                           src="${coin.image}"
-                          width="34"
-                          height="34"
+                          width="36"
+                          height="36"
                           style="
                             border-radius:50%;
                             flex-shrink:0;
                           "
                           alt="${coin.name}"
+                          loading="lazy"
                         >
                       `
                       : ""
@@ -566,6 +745,7 @@
                     style="
                       flex:1;
                       min-width:0;
+                      padding-left:4px;
                     "
                   >
 
@@ -583,17 +763,12 @@
                   <div
                     style="
                       text-align:right;
+                      padding-left:8px;
                     "
                   >
 
                     <div class="coin-price">
-
-                      ${
-                        formatHomePrice(
-                          coin.price
-                        )
-                      }
-
+                      ${formatHomePrice(coin.price)}
                     </div>
 
 
@@ -603,10 +778,7 @@
                         ${changeClass}
                       "
                     >
-
-                      ${sign}
-                      ${change.toFixed(2)}%
-
+                      ${sign}${change.toFixed(2)}%
                     </div>
 
                   </div>
@@ -642,9 +814,7 @@
 
             <button
               class="icon-btn"
-              style="
-                margin-top:10px;
-              "
+              style="margin-top:10px;"
               onclick="loadHomeMarkets()"
             >
               Coba lagi
@@ -659,15 +829,18 @@
     }
 
 
-    function formatHomePrice(
-      price
-    ) {
+    function formatHomePrice(price) {
 
       if (
-        !Number.isFinite(price)
+        !Number.isFinite(Number(price))
       ) {
+
         return "-";
+
       }
+
+
+      price = Number(price);
 
 
       if (price >= 1000) {
@@ -676,7 +849,7 @@
           price.toLocaleString(
             "en-US",
             {
-              maximumFractionDigits:0
+              maximumFractionDigits: 0
             }
           );
 
@@ -705,9 +878,7 @@
     }
 
 
-    function updateMarketPulse(
-      coins
-    ) {
+    function updateMarketPulse(coins) {
 
       const pulse =
         document.getElementById(
@@ -722,14 +893,36 @@
 
 
       if (!pulse || !bar) {
+
         return;
+
+      }
+
+
+      const validCoins =
+        coins.filter(
+          coin =>
+            Number.isFinite(
+              Number(coin.change24h)
+            )
+        );
+
+
+      if (!validCoins.length) {
+
+        pulse.textContent = "—";
+
+        bar.style.width = "0%";
+
+        return;
+
       }
 
 
       const gainers =
-        coins.filter(
+        validCoins.filter(
           coin =>
-            coin.change24h >= 0
+            Number(coin.change24h) >= 0
         ).length;
 
 
@@ -737,7 +930,7 @@
         Math.round(
           (
             gainers /
-            coins.length
+            validCoins.length
           ) * 100
         );
 
