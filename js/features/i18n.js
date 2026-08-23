@@ -1,15 +1,21 @@
 /* =========================================================
-   NEXTRA i18n — MULTI LANGUAGE SYSTEM V1
+   NEXTRA i18n — MULTI LANGUAGE SYSTEM V2
+   20 LANGUAGES + PROFILE
 ========================================================= */
 
 (() => {
 
   const LANGUAGE_KEY = "nextra_settings";
 
+
+  /* =====================================================
+     LANGUAGES
+  ====================================================== */
+
   const LANGUAGES = {
 
     id: {
-      name: "Bahasa Indonesia",
+      name: "Indonesian",
       native: "Bahasa Indonesia"
     },
 
@@ -111,7 +117,16 @@
   };
 
 
+  /* =====================================================
+     TRANSLATIONS
+  ====================================================== */
+
   const TRANSLATIONS = {
+
+
+    /* ===================================================
+       INDONESIAN
+    =================================================== */
 
     id: {
 
@@ -132,19 +147,73 @@
       dark: "Gelap",
       light: "Terang",
 
-      priceAlerts: "Peringatan Harga",
-      marketAlerts: "Peringatan Market",
-      futuresAlerts: "Peringatan Futures",
-
-      on: "Aktif",
-      off: "Nonaktif",
-
       save: "Simpan",
       cancel: "Batal",
-      close: "Tutup"
+      close: "Tutup",
+
+      profileTitle: "Profil",
+      profileSubtitle: "Identitas NEXTRA kamu",
+      editProfile: "Edit Profil",
+
+      active: "Aktif",
+
+      traderLevel: "LEVEL TRADER",
+      rookieTrader: "Rookie Trader",
+      currentPlan: "PAKET SAAT INI",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Inteligensi market inti",
+      upgrade: "Upgrade",
+
+      watchlist: "Watchlist",
+      alerts: "Alert",
+      marketsCount: "Markets",
+
+      achievements: "PENCAPAIAN",
+      firstLook: "First Look",
+      exploredNextra: "Menjelajahi NEXTRA",
+      watcher: "Watcher",
+      buildWatchlist: "Buat watchlist",
+      futuresAchievement: "Futures",
+      openFutures: "Buka futures",
+      marketHunter: "Market Hunter",
+      trackMarkets: "Pantau market",
+
+      account: "AKUN",
+      email: "Email",
+      notConnected: "Belum terhubung",
+      accountStatus: "Status Akun",
+      activeAccount: "Akun aktif",
+
+      quickActions: "AKSI CEPAT",
+      manageFavoriteAssets: "Kelola aset favorit",
+      binanceFuturesMarket: "Market Binance Futures",
+      manageMarketAlerts: "Kelola alert market",
+
+      preferences: "PREFERENSI",
+      darkMode: "Mode gelap",
+
+      aboutNextra: "TENTANG NEXTRA",
+      yourMarketIntelligence: "Your Market. Your Intelligence.",
+
+      displayName: "Nama tampilan",
+      username: "Username",
+      yourName: "Nama kamu",
+      saveChanges: "Simpan perubahan",
+
+      languageTitle: "Bahasa",
+      selectLanguage: "Pilih bahasa",
+
+      traderDescription:
+        "Terus jelajahi NEXTRA untuk membuka level berikutnya.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       ENGLISH
+    =================================================== */
 
     en: {
 
@@ -165,19 +234,73 @@
       dark: "Dark",
       light: "Light",
 
-      priceAlerts: "Price Alerts",
-      marketAlerts: "Market Alerts",
-      futuresAlerts: "Futures Alerts",
-
-      on: "On",
-      off: "Off",
-
       save: "Save",
       cancel: "Cancel",
-      close: "Close"
+      close: "Close",
+
+      profileTitle: "Profile",
+      profileSubtitle: "Your NEXTRA identity",
+      editProfile: "Edit Profile",
+
+      active: "Active",
+
+      traderLevel: "TRADER LEVEL",
+      rookieTrader: "Rookie Trader",
+      currentPlan: "CURRENT PLAN",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Core market intelligence",
+      upgrade: "Upgrade",
+
+      watchlist: "Watchlist",
+      alerts: "Alerts",
+      marketsCount: "Markets",
+
+      achievements: "ACHIEVEMENTS",
+      firstLook: "First Look",
+      exploredNextra: "Explored NEXTRA",
+      watcher: "Watcher",
+      buildWatchlist: "Build watchlist",
+      futuresAchievement: "Futures",
+      openFutures: "Open futures",
+      marketHunter: "Market Hunter",
+      trackMarkets: "Track markets",
+
+      account: "ACCOUNT",
+      email: "Email",
+      notConnected: "Not connected",
+      accountStatus: "Account Status",
+      activeAccount: "Active account",
+
+      quickActions: "QUICK ACTIONS",
+      manageFavoriteAssets: "Manage favorite assets",
+      binanceFuturesMarket: "Binance Futures market",
+      manageMarketAlerts: "Manage market alerts",
+
+      preferences: "PREFERENCES",
+      darkMode: "Dark mode",
+
+      aboutNextra: "ABOUT NEXTRA",
+      yourMarketIntelligence: "Your Market. Your Intelligence.",
+
+      displayName: "Display name",
+      username: "Username",
+      yourName: "Your name",
+      saveChanges: "Save changes",
+
+      languageTitle: "Language",
+      selectLanguage: "Select language",
+
+      traderDescription:
+        "Keep exploring NEXTRA to unlock your next level.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       SPANISH
+    =================================================== */
 
     es: {
 
@@ -198,12 +321,74 @@
       dark: "Oscuro",
       light: "Claro",
 
-      priceAlerts: "Alertas de precio",
-      marketAlerts: "Alertas del mercado",
-      futuresAlerts: "Alertas de futuros"
+      save: "Guardar",
+      cancel: "Cancelar",
+      close: "Cerrar",
+
+      profileTitle: "Perfil",
+      profileSubtitle: "Tu identidad NEXTRA",
+      editProfile: "Editar perfil",
+
+      active: "Activo",
+
+      traderLevel: "NIVEL DE TRADER",
+      rookieTrader: "Trader principiante",
+      currentPlan: "PLAN ACTUAL",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Inteligencia de mercado",
+      upgrade: "Mejorar",
+
+      watchlist: "Lista de seguimiento",
+      alerts: "Alertas",
+      marketsCount: "Mercados",
+
+      achievements: "LOGROS",
+      firstLook: "Primera mirada",
+      exploredNextra: "Exploraste NEXTRA",
+      watcher: "Observador",
+      buildWatchlist: "Crear lista",
+      futuresAchievement: "Futuros",
+      openFutures: "Abrir futuros",
+      marketHunter: "Cazador de mercados",
+      trackMarkets: "Seguir mercados",
+
+      account: "CUENTA",
+      email: "Correo",
+      notConnected: "No conectado",
+      accountStatus: "Estado de cuenta",
+      activeAccount: "Cuenta activa",
+
+      quickActions: "ACCIONES RÁPIDAS",
+      manageFavoriteAssets: "Gestionar activos favoritos",
+      binanceFuturesMarket: "Mercado Binance Futures",
+      manageMarketAlerts: "Gestionar alertas",
+
+      preferences: "PREFERENCIAS",
+      darkMode: "Modo oscuro",
+
+      aboutNextra: "ACERCA DE NEXTRA",
+      yourMarketIntelligence:
+        "Tu mercado. Tu inteligencia.",
+
+      displayName: "Nombre para mostrar",
+      username: "Nombre de usuario",
+      yourName: "Tu nombre",
+      saveChanges: "Guardar cambios",
+
+      languageTitle: "Idioma",
+      selectLanguage: "Seleccionar idioma",
+
+      traderDescription:
+        "Sigue explorando NEXTRA para desbloquear tu próximo nivel.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       FRENCH
+    =================================================== */
 
     fr: {
 
@@ -222,10 +407,76 @@
       appearance: "Apparence",
 
       dark: "Sombre",
-      light: "Clair"
+      light: "Clair",
+
+      save: "Enregistrer",
+      cancel: "Annuler",
+      close: "Fermer",
+
+      profileTitle: "Profil",
+      profileSubtitle: "Votre identité NEXTRA",
+      editProfile: "Modifier le profil",
+
+      active: "Actif",
+
+      traderLevel: "NIVEAU TRADER",
+      rookieTrader: "Trader débutant",
+      currentPlan: "FORFAIT ACTUEL",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Intelligence du marché",
+      upgrade: "Améliorer",
+
+      watchlist: "Liste de suivi",
+      alerts: "Alertes",
+      marketsCount: "Marchés",
+
+      achievements: "SUCCÈS",
+      firstLook: "Premier regard",
+      exploredNextra: "NEXTRA exploré",
+      watcher: "Observateur",
+      buildWatchlist: "Créer une liste",
+      futuresAchievement: "Futures",
+      openFutures: "Ouvrir les futures",
+      marketHunter: "Chasseur de marchés",
+      trackMarkets: "Suivre les marchés",
+
+      account: "COMPTE",
+      email: "E-mail",
+      notConnected: "Non connecté",
+      accountStatus: "État du compte",
+      activeAccount: "Compte actif",
+
+      quickActions: "ACTIONS RAPIDES",
+      manageFavoriteAssets: "Gérer les actifs favoris",
+      binanceFuturesMarket: "Marché Binance Futures",
+      manageMarketAlerts: "Gérer les alertes",
+
+      preferences: "PRÉFÉRENCES",
+      darkMode: "Mode sombre",
+
+      aboutNextra: "À PROPOS DE NEXTRA",
+      yourMarketIntelligence:
+        "Votre marché. Votre intelligence.",
+
+      displayName: "Nom affiché",
+      username: "Nom d'utilisateur",
+      yourName: "Votre nom",
+      saveChanges: "Enregistrer les modifications",
+
+      languageTitle: "Langue",
+      selectLanguage: "Choisir la langue",
+
+      traderDescription:
+        "Continuez à explorer NEXTRA pour débloquer votre prochain niveau.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       GERMAN
+    =================================================== */
 
     de: {
 
@@ -244,10 +495,76 @@
       appearance: "Darstellung",
 
       dark: "Dunkel",
-      light: "Hell"
+      light: "Hell",
+
+      save: "Speichern",
+      cancel: "Abbrechen",
+      close: "Schließen",
+
+      profileTitle: "Profil",
+      profileSubtitle: "Deine NEXTRA-Identität",
+      editProfile: "Profil bearbeiten",
+
+      active: "Aktiv",
+
+      traderLevel: "TRADER-LEVEL",
+      rookieTrader: "Anfänger-Trader",
+      currentPlan: "AKTUELLER TARIF",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Kern-Marktintelligenz",
+      upgrade: "Upgrade",
+
+      watchlist: "Watchlist",
+      alerts: "Alarme",
+      marketsCount: "Märkte",
+
+      achievements: "ERFOLGE",
+      firstLook: "Erster Blick",
+      exploredNextra: "NEXTRA erkundet",
+      watcher: "Beobachter",
+      buildWatchlist: "Watchlist erstellen",
+      futuresAchievement: "Futures",
+      openFutures: "Futures öffnen",
+      marketHunter: "Marktjäger",
+      trackMarkets: "Märkte verfolgen",
+
+      account: "KONTO",
+      email: "E-Mail",
+      notConnected: "Nicht verbunden",
+      accountStatus: "Kontostatus",
+      activeAccount: "Aktives Konto",
+
+      quickActions: "SCHNELLZUGRIFFE",
+      manageFavoriteAssets: "Favoriten verwalten",
+      binanceFuturesMarket: "Binance Futures Markt",
+      manageMarketAlerts: "Marktalarme verwalten",
+
+      preferences: "EINSTELLUNGEN",
+      darkMode: "Dunkelmodus",
+
+      aboutNextra: "ÜBER NEXTRA",
+      yourMarketIntelligence:
+        "Dein Markt. Deine Intelligenz.",
+
+      displayName: "Anzeigename",
+      username: "Benutzername",
+      yourName: "Dein Name",
+      saveChanges: "Änderungen speichern",
+
+      languageTitle: "Sprache",
+      selectLanguage: "Sprache auswählen",
+
+      traderDescription:
+        "Erkunde NEXTRA weiter, um dein nächstes Level freizuschalten.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       ITALIAN
+    =================================================== */
 
     it: {
 
@@ -263,10 +580,79 @@
       settings: "Impostazioni",
       notifications: "Notifiche",
       language: "Lingua",
-      appearance: "Aspetto"
+      appearance: "Aspetto",
+
+      dark: "Scuro",
+      light: "Chiaro",
+
+      save: "Salva",
+      cancel: "Annulla",
+      close: "Chiudi",
+
+      profileTitle: "Profilo",
+      profileSubtitle: "La tua identità NEXTRA",
+      editProfile: "Modifica profilo",
+
+      active: "Attivo",
+
+      traderLevel: "LIVELLO TRADER",
+      rookieTrader: "Trader principiante",
+      currentPlan: "PIANO ATTUALE",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Intelligenza di mercato",
+      upgrade: "Upgrade",
+
+      watchlist: "Watchlist",
+      alerts: "Avvisi",
+      marketsCount: "Mercati",
+
+      achievements: "OBIETTIVI",
+      firstLook: "Primo sguardo",
+      exploredNextra: "Hai esplorato NEXTRA",
+      watcher: "Osservatore",
+      buildWatchlist: "Crea watchlist",
+      futuresAchievement: "Futures",
+      openFutures: "Apri futures",
+      marketHunter: "Cacciatore di mercati",
+      trackMarkets: "Segui i mercati",
+
+      account: "ACCOUNT",
+      email: "Email",
+      notConnected: "Non connesso",
+      accountStatus: "Stato account",
+      activeAccount: "Account attivo",
+
+      quickActions: "AZIONI RAPIDE",
+      manageFavoriteAssets: "Gestisci asset preferiti",
+      binanceFuturesMarket: "Mercato Binance Futures",
+      manageMarketAlerts: "Gestisci avvisi",
+
+      preferences: "PREFERENZE",
+      darkMode: "Modalità scura",
+
+      aboutNextra: "INFORMAZIONI SU NEXTRA",
+      yourMarketIntelligence:
+        "Il tuo mercato. La tua intelligenza.",
+
+      displayName: "Nome visualizzato",
+      username: "Nome utente",
+      yourName: "Il tuo nome",
+      saveChanges: "Salva modifiche",
+
+      languageTitle: "Lingua",
+      selectLanguage: "Seleziona lingua",
+
+      traderDescription:
+        "Continua a esplorare NEXTRA per sbloccare il prossimo livello.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       PORTUGUESE
+    =================================================== */
 
     pt: {
 
@@ -282,7 +668,72 @@
       settings: "Configurações",
       notifications: "Notificações",
       language: "Idioma",
-      appearance: "Aparência"
+      appearance: "Aparência",
+
+      dark: "Escuro",
+      light: "Claro",
+
+      save: "Salvar",
+      cancel: "Cancelar",
+      close: "Fechar",
+
+      profileTitle: "Perfil",
+      profileSubtitle: "Sua identidade NEXTRA",
+      editProfile: "Editar perfil",
+
+      active: "Ativo",
+
+      traderLevel: "NÍVEL DO TRADER",
+      rookieTrader: "Trader iniciante",
+      currentPlan: "PLANO ATUAL",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Inteligência de mercado",
+      upgrade: "Atualizar",
+
+      watchlist: "Lista de observação",
+      alerts: "Alertas",
+      marketsCount: "Mercados",
+
+      achievements: "CONQUISTAS",
+      firstLook: "Primeiro olhar",
+      exploredNextra: "Explorou o NEXTRA",
+      watcher: "Observador",
+      buildWatchlist: "Criar lista",
+      futuresAchievement: "Futuros",
+      openFutures: "Abrir futuros",
+      marketHunter: "Caçador de mercados",
+      trackMarkets: "Acompanhar mercados",
+
+      account: "CONTA",
+      email: "E-mail",
+      notConnected: "Não conectado",
+      accountStatus: "Status da conta",
+      activeAccount: "Conta ativa",
+
+      quickActions: "AÇÕES RÁPIDAS",
+      manageFavoriteAssets: "Gerenciar ativos favoritos",
+      binanceFuturesMarket: "Mercado Binance Futures",
+      manageMarketAlerts: "Gerenciar alertas",
+
+      preferences: "PREFERÊNCIAS",
+      darkMode: "Modo escuro",
+
+      aboutNextra: "SOBRE O NEXTRA",
+      yourMarketIntelligence:
+        "Seu mercado. Sua inteligência.",
+
+      displayName: "Nome de exibição",
+      username: "Nome de usuário",
+      yourName: "Seu nome",
+      saveChanges: "Salvar alterações",
+
+      languageTitle: "Idioma",
+      selectLanguage: "Selecionar idioma",
+
+      traderDescription:
+        "Continue explorando o NEXTRA para desbloquear seu próximo nível.",
+
+      xp: "XP"
 
     },
 
@@ -301,10 +752,79 @@
       settings: "Configurações",
       notifications: "Notificações",
       language: "Idioma",
-      appearance: "Aparência"
+      appearance: "Aparência",
+
+      dark: "Escuro",
+      light: "Claro",
+
+      save: "Salvar",
+      cancel: "Cancelar",
+      close: "Fechar",
+
+      profileTitle: "Perfil",
+      profileSubtitle: "Sua identidade NEXTRA",
+      editProfile: "Editar perfil",
+
+      active: "Ativo",
+
+      traderLevel: "NÍVEL DO TRADER",
+      rookieTrader: "Trader iniciante",
+      currentPlan: "PLANO ATUAL",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Inteligência de mercado",
+      upgrade: "Atualizar",
+
+      watchlist: "Lista de observação",
+      alerts: "Alertas",
+      marketsCount: "Mercados",
+
+      achievements: "CONQUISTAS",
+      firstLook: "Primeiro olhar",
+      exploredNextra: "Explorou o NEXTRA",
+      watcher: "Observador",
+      buildWatchlist: "Criar lista",
+      futuresAchievement: "Futuros",
+      openFutures: "Abrir futuros",
+      marketHunter: "Caçador de mercados",
+      trackMarkets: "Acompanhar mercados",
+
+      account: "CONTA",
+      email: "E-mail",
+      notConnected: "Não conectado",
+      accountStatus: "Status da conta",
+      activeAccount: "Conta ativa",
+
+      quickActions: "AÇÕES RÁPIDAS",
+      manageFavoriteAssets: "Gerenciar ativos favoritos",
+      binanceFuturesMarket: "Mercado Binance Futures",
+      manageMarketAlerts: "Gerenciar alertas",
+
+      preferences: "PREFERÊNCIAS",
+      darkMode: "Modo escuro",
+
+      aboutNextra: "SOBRE O NEXTRA",
+      yourMarketIntelligence:
+        "Seu mercado. Sua inteligência.",
+
+      displayName: "Nome de exibição",
+      username: "Nome de usuário",
+      yourName: "Seu nome",
+      saveChanges: "Salvar alterações",
+
+      languageTitle: "Idioma",
+      selectLanguage: "Selecionar idioma",
+
+      traderDescription:
+        "Continue explorando o NEXTRA para desbloquear seu próximo nível.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       RUSSIAN
+    =================================================== */
 
     ru: {
 
@@ -320,10 +840,79 @@
       settings: "Настройки",
       notifications: "Уведомления",
       language: "Язык",
-      appearance: "Внешний вид"
+      appearance: "Внешний вид",
+
+      dark: "Темная",
+      light: "Светлая",
+
+      save: "Сохранить",
+      cancel: "Отмена",
+      close: "Закрыть",
+
+      profileTitle: "Профиль",
+      profileSubtitle: "Ваша идентичность NEXTRA",
+      editProfile: "Изменить профиль",
+
+      active: "Активен",
+
+      traderLevel: "УРОВЕНЬ ТРЕЙДЕРА",
+      rookieTrader: "Начинающий трейдер",
+      currentPlan: "ТЕКУЩИЙ ПЛАН",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Рыночная аналитика",
+      upgrade: "Обновить",
+
+      watchlist: "Избранное",
+      alerts: "Оповещения",
+      marketsCount: "Рынки",
+
+      achievements: "ДОСТИЖЕНИЯ",
+      firstLook: "Первый взгляд",
+      exploredNextra: "NEXTRA изучен",
+      watcher: "Наблюдатель",
+      buildWatchlist: "Создать список",
+      futuresAchievement: "Фьючерсы",
+      openFutures: "Открыть фьючерсы",
+      marketHunter: "Охотник за рынком",
+      trackMarkets: "Отслеживать рынки",
+
+      account: "АККАУНТ",
+      email: "Электронная почта",
+      notConnected: "Не подключено",
+      accountStatus: "Статус аккаунта",
+      activeAccount: "Активный аккаунт",
+
+      quickActions: "БЫСТРЫЕ ДЕЙСТВИЯ",
+      manageFavoriteAssets: "Управление избранными активами",
+      binanceFuturesMarket: "Рынок Binance Futures",
+      manageMarketAlerts: "Управление оповещениями",
+
+      preferences: "ПРЕДПОЧТЕНИЯ",
+      darkMode: "Темный режим",
+
+      aboutNextra: "О NEXTRA",
+      yourMarketIntelligence:
+        "Ваш рынок. Ваш интеллект.",
+
+      displayName: "Отображаемое имя",
+      username: "Имя пользователя",
+      yourName: "Ваше имя",
+      saveChanges: "Сохранить изменения",
+
+      languageTitle: "Язык",
+      selectLanguage: "Выберите язык",
+
+      traderDescription:
+        "Продолжайте изучать NEXTRA, чтобы открыть следующий уровень.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       CHINESE
+    =================================================== */
 
     zh: {
 
@@ -339,7 +928,72 @@
       settings: "设置",
       notifications: "通知",
       language: "语言",
-      appearance: "外观"
+      appearance: "外观",
+
+      dark: "深色",
+      light: "浅色",
+
+      save: "保存",
+      cancel: "取消",
+      close: "关闭",
+
+      profileTitle: "个人资料",
+      profileSubtitle: "你的 NEXTRA 身份",
+      editProfile: "编辑资料",
+
+      active: "活跃",
+
+      traderLevel: "交易员等级",
+      rookieTrader: "新手交易员",
+      currentPlan: "当前方案",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "核心市场情报",
+      upgrade: "升级",
+
+      watchlist: "自选列表",
+      alerts: "提醒",
+      marketsCount: "市场",
+
+      achievements: "成就",
+      firstLook: "初次探索",
+      exploredNextra: "探索 NEXTRA",
+      watcher: "观察者",
+      buildWatchlist: "建立自选列表",
+      futuresAchievement: "期货",
+      openFutures: "打开期货",
+      marketHunter: "市场猎手",
+      trackMarkets: "追踪市场",
+
+      account: "账户",
+      email: "邮箱",
+      notConnected: "未连接",
+      accountStatus: "账户状态",
+      activeAccount: "账户活跃",
+
+      quickActions: "快捷操作",
+      manageFavoriteAssets: "管理收藏资产",
+      binanceFuturesMarket: "Binance Futures 市场",
+      manageMarketAlerts: "管理市场提醒",
+
+      preferences: "偏好设置",
+      darkMode: "深色模式",
+
+      aboutNextra: "关于 NEXTRA",
+      yourMarketIntelligence:
+        "你的市场，你的智能。",
+
+      displayName: "显示名称",
+      username: "用户名",
+      yourName: "你的名字",
+      saveChanges: "保存更改",
+
+      languageTitle: "语言",
+      selectLanguage: "选择语言",
+
+      traderDescription:
+        "继续探索 NEXTRA，解锁下一个等级。",
+
+      xp: "XP"
 
     },
 
@@ -358,10 +1012,79 @@
       settings: "設定",
       notifications: "通知",
       language: "語言",
-      appearance: "外觀"
+      appearance: "外觀",
+
+      dark: "深色",
+      light: "淺色",
+
+      save: "儲存",
+      cancel: "取消",
+      close: "關閉",
+
+      profileTitle: "個人資料",
+      profileSubtitle: "你的 NEXTRA 身份",
+      editProfile: "編輯個人資料",
+
+      active: "啟用",
+
+      traderLevel: "交易員等級",
+      rookieTrader: "新手交易員",
+      currentPlan: "目前方案",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "核心市場情報",
+      upgrade: "升級",
+
+      watchlist: "自選清單",
+      alerts: "提醒",
+      marketsCount: "市場",
+
+      achievements: "成就",
+      firstLook: "初次探索",
+      exploredNextra: "探索 NEXTRA",
+      watcher: "觀察者",
+      buildWatchlist: "建立自選清單",
+      futuresAchievement: "期貨",
+      openFutures: "開啟期貨",
+      marketHunter: "市場獵人",
+      trackMarkets: "追蹤市場",
+
+      account: "帳戶",
+      email: "電子郵件",
+      notConnected: "未連接",
+      accountStatus: "帳戶狀態",
+      activeAccount: "帳戶啟用",
+
+      quickActions: "快速操作",
+      manageFavoriteAssets: "管理收藏資產",
+      binanceFuturesMarket: "Binance Futures 市場",
+      manageMarketAlerts: "管理市場提醒",
+
+      preferences: "偏好設定",
+      darkMode: "深色模式",
+
+      aboutNextra: "關於 NEXTRA",
+      yourMarketIntelligence:
+        "你的市場，你的智慧。",
+
+      displayName: "顯示名稱",
+      username: "使用者名稱",
+      yourName: "你的名字",
+      saveChanges: "儲存變更",
+
+      languageTitle: "語言",
+      selectLanguage: "選擇語言",
+
+      traderDescription:
+        "繼續探索 NEXTRA，解鎖下一個等級。",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       JAPANESE
+    =================================================== */
 
     ja: {
 
@@ -377,10 +1100,79 @@
       settings: "設定",
       notifications: "通知",
       language: "言語",
-      appearance: "外観"
+      appearance: "外観",
+
+      dark: "ダーク",
+      light: "ライト",
+
+      save: "保存",
+      cancel: "キャンセル",
+      close: "閉じる",
+
+      profileTitle: "プロフィール",
+      profileSubtitle: "あなたのNEXTRAアイデンティティ",
+      editProfile: "プロフィールを編集",
+
+      active: "アクティブ",
+
+      traderLevel: "トレーダーレベル",
+      rookieTrader: "ルーキートレーダー",
+      currentPlan: "現在のプラン",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "市場インテリジェンス",
+      upgrade: "アップグレード",
+
+      watchlist: "ウォッチリスト",
+      alerts: "アラート",
+      marketsCount: "市場",
+
+      achievements: "実績",
+      firstLook: "ファーストルック",
+      exploredNextra: "NEXTRAを探索",
+      watcher: "ウォッチャー",
+      buildWatchlist: "ウォッチリストを作成",
+      futuresAchievement: "先物",
+      openFutures: "先物を開く",
+      marketHunter: "マーケットハンター",
+      trackMarkets: "市場を追跡",
+
+      account: "アカウント",
+      email: "メール",
+      notConnected: "未接続",
+      accountStatus: "アカウント状態",
+      activeAccount: "アクティブ",
+
+      quickActions: "クイックアクション",
+      manageFavoriteAssets: "お気に入り資産を管理",
+      binanceFuturesMarket: "Binance Futures市場",
+      manageMarketAlerts: "市場アラートを管理",
+
+      preferences: "環境設定",
+      darkMode: "ダークモード",
+
+      aboutNextra: "NEXTRAについて",
+      yourMarketIntelligence:
+        "あなたの市場。あなたのインテリジェンス。",
+
+      displayName: "表示名",
+      username: "ユーザー名",
+      yourName: "あなたの名前",
+      saveChanges: "変更を保存",
+
+      languageTitle: "言語",
+      selectLanguage: "言語を選択",
+
+      traderDescription:
+        "NEXTRAを探索して次のレベルを解除しましょう。",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       KOREAN
+    =================================================== */
 
     ko: {
 
@@ -396,10 +1188,79 @@
       settings: "설정",
       notifications: "알림",
       language: "언어",
-      appearance: "화면"
+      appearance: "화면",
+
+      dark: "어둡게",
+      light: "밝게",
+
+      save: "저장",
+      cancel: "취소",
+      close: "닫기",
+
+      profileTitle: "프로필",
+      profileSubtitle: "나의 NEXTRA 아이덴티티",
+      editProfile: "프로필 수정",
+
+      active: "활성",
+
+      traderLevel: "트레이더 레벨",
+      rookieTrader: "초보 트레이더",
+      currentPlan: "현재 플랜",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "핵심 시장 인텔리전스",
+      upgrade: "업그레이드",
+
+      watchlist: "관심 목록",
+      alerts: "알림",
+      marketsCount: "시장",
+
+      achievements: "업적",
+      firstLook: "첫 탐색",
+      exploredNextra: "NEXTRA 탐색",
+      watcher: "워처",
+      buildWatchlist: "관심 목록 만들기",
+      futuresAchievement: "선물",
+      openFutures: "선물 열기",
+      marketHunter: "마켓 헌터",
+      trackMarkets: "시장 추적",
+
+      account: "계정",
+      email: "이메일",
+      notConnected: "연결되지 않음",
+      accountStatus: "계정 상태",
+      activeAccount: "활성 계정",
+
+      quickActions: "빠른 작업",
+      manageFavoriteAssets: "즐겨찾기 자산 관리",
+      binanceFuturesMarket: "Binance Futures 시장",
+      manageMarketAlerts: "시장 알림 관리",
+
+      preferences: "환경설정",
+      darkMode: "다크 모드",
+
+      aboutNextra: "NEXTRA 정보",
+      yourMarketIntelligence:
+        "당신의 시장. 당신의 인텔리전스.",
+
+      displayName: "표시 이름",
+      username: "사용자 이름",
+      yourName: "이름",
+      saveChanges: "변경사항 저장",
+
+      languageTitle: "언어",
+      selectLanguage: "언어 선택",
+
+      traderDescription:
+        "NEXTRA를 계속 탐색하여 다음 레벨을 잠금 해제하세요.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       TURKISH
+    =================================================== */
 
     tr: {
 
@@ -415,10 +1276,79 @@
       settings: "Ayarlar",
       notifications: "Bildirimler",
       language: "Dil",
-      appearance: "Görünüm"
+      appearance: "Görünüm",
+
+      dark: "Koyu",
+      light: "Açık",
+
+      save: "Kaydet",
+      cancel: "İptal",
+      close: "Kapat",
+
+      profileTitle: "Profil",
+      profileSubtitle: "NEXTRA kimliğiniz",
+      editProfile: "Profili düzenle",
+
+      active: "Aktif",
+
+      traderLevel: "TRADER SEVİYESİ",
+      rookieTrader: "Acemi Trader",
+      currentPlan: "MEVCUT PLAN",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Temel piyasa istihbaratı",
+      upgrade: "Yükselt",
+
+      watchlist: "İzleme Listesi",
+      alerts: "Uyarılar",
+      marketsCount: "Piyasalar",
+
+      achievements: "BAŞARILAR",
+      firstLook: "İlk Bakış",
+      exploredNextra: "NEXTRA keşfedildi",
+      watcher: "İzleyici",
+      buildWatchlist: "Liste oluştur",
+      futuresAchievement: "Vadeli İşlemler",
+      openFutures: "Vadeli işlemleri aç",
+      marketHunter: "Piyasa Avcısı",
+      trackMarkets: "Piyasaları takip et",
+
+      account: "HESAP",
+      email: "E-posta",
+      notConnected: "Bağlı değil",
+      accountStatus: "Hesap Durumu",
+      activeAccount: "Aktif hesap",
+
+      quickActions: "HIZLI İŞLEMLER",
+      manageFavoriteAssets: "Favori varlıkları yönet",
+      binanceFuturesMarket: "Binance Futures piyasası",
+      manageMarketAlerts: "Piyasa uyarılarını yönet",
+
+      preferences: "TERCİHLER",
+      darkMode: "Koyu mod",
+
+      aboutNextra: "NEXTRA HAKKINDA",
+      yourMarketIntelligence:
+        "Piyasanız. İstihbaratınız.",
+
+      displayName: "Görünen ad",
+      username: "Kullanıcı adı",
+      yourName: "Adınız",
+      saveChanges: "Değişiklikleri kaydet",
+
+      languageTitle: "Dil",
+      selectLanguage: "Dil seç",
+
+      traderDescription:
+        "Sonraki seviyenin kilidini açmak için NEXTRA'yı keşfetmeye devam edin.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       VIETNAMESE
+    =================================================== */
 
     vi: {
 
@@ -434,10 +1364,79 @@
       settings: "Cài đặt",
       notifications: "Thông báo",
       language: "Ngôn ngữ",
-      appearance: "Giao diện"
+      appearance: "Giao diện",
+
+      dark: "Tối",
+      light: "Sáng",
+
+      save: "Lưu",
+      cancel: "Hủy",
+      close: "Đóng",
+
+      profileTitle: "Hồ sơ",
+      profileSubtitle: "Danh tính NEXTRA của bạn",
+      editProfile: "Chỉnh sửa hồ sơ",
+
+      active: "Đang hoạt động",
+
+      traderLevel: "CẤP ĐỘ TRADER",
+      rookieTrader: "Trader mới",
+      currentPlan: "GÓI HIỆN TẠI",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Thông tin thị trường cốt lõi",
+      upgrade: "Nâng cấp",
+
+      watchlist: "Danh sách theo dõi",
+      alerts: "Cảnh báo",
+      marketsCount: "Thị trường",
+
+      achievements: "THÀNH TÍCH",
+      firstLook: "Khám phá đầu tiên",
+      exploredNextra: "Đã khám phá NEXTRA",
+      watcher: "Người theo dõi",
+      buildWatchlist: "Tạo danh sách",
+      futuresAchievement: "Futures",
+      openFutures: "Mở Futures",
+      marketHunter: "Thợ săn thị trường",
+      trackMarkets: "Theo dõi thị trường",
+
+      account: "TÀI KHOẢN",
+      email: "Email",
+      notConnected: "Chưa kết nối",
+      accountStatus: "Trạng thái tài khoản",
+      activeAccount: "Tài khoản hoạt động",
+
+      quickActions: "THAO TÁC NHANH",
+      manageFavoriteAssets: "Quản lý tài sản yêu thích",
+      binanceFuturesMarket: "Thị trường Binance Futures",
+      manageMarketAlerts: "Quản lý cảnh báo",
+
+      preferences: "TÙY CHỌN",
+      darkMode: "Chế độ tối",
+
+      aboutNextra: "VỀ NEXTRA",
+      yourMarketIntelligence:
+        "Thị trường của bạn. Trí tuệ của bạn.",
+
+      displayName: "Tên hiển thị",
+      username: "Tên người dùng",
+      yourName: "Tên của bạn",
+      saveChanges: "Lưu thay đổi",
+
+      languageTitle: "Ngôn ngữ",
+      selectLanguage: "Chọn ngôn ngữ",
+
+      traderDescription:
+        "Tiếp tục khám phá NEXTRA để mở khóa cấp độ tiếp theo.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       THAI
+    =================================================== */
 
     th: {
 
@@ -453,10 +1452,79 @@
       settings: "การตั้งค่า",
       notifications: "การแจ้งเตือน",
       language: "ภาษา",
-      appearance: "รูปลักษณ์"
+      appearance: "รูปลักษณ์",
+
+      dark: "มืด",
+      light: "สว่าง",
+
+      save: "บันทึก",
+      cancel: "ยกเลิก",
+      close: "ปิด",
+
+      profileTitle: "โปรไฟล์",
+      profileSubtitle: "ตัวตน NEXTRA ของคุณ",
+      editProfile: "แก้ไขโปรไฟล์",
+
+      active: "ใช้งานอยู่",
+
+      traderLevel: "ระดับเทรดเดอร์",
+      rookieTrader: "เทรดเดอร์มือใหม่",
+      currentPlan: "แพ็กเกจปัจจุบัน",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "ข้อมูลตลาดหลัก",
+      upgrade: "อัปเกรด",
+
+      watchlist: "รายการติดตาม",
+      alerts: "การแจ้งเตือน",
+      marketsCount: "ตลาด",
+
+      achievements: "ความสำเร็จ",
+      firstLook: "เริ่มต้นสำรวจ",
+      exploredNextra: "สำรวจ NEXTRA",
+      watcher: "ผู้ติดตาม",
+      buildWatchlist: "สร้างรายการติดตาม",
+      futuresAchievement: "ฟิวเจอร์ส",
+      openFutures: "เปิดฟิวเจอร์ส",
+      marketHunter: "นักล่าตลาด",
+      trackMarkets: "ติดตามตลาด",
+
+      account: "บัญชี",
+      email: "อีเมล",
+      notConnected: "ไม่ได้เชื่อมต่อ",
+      accountStatus: "สถานะบัญชี",
+      activeAccount: "บัญชีใช้งานอยู่",
+
+      quickActions: "การดำเนินการด่วน",
+      manageFavoriteAssets: "จัดการสินทรัพย์โปรด",
+      binanceFuturesMarket: "ตลาด Binance Futures",
+      manageMarketAlerts: "จัดการการแจ้งเตือน",
+
+      preferences: "การตั้งค่า",
+      darkMode: "โหมดมืด",
+
+      aboutNextra: "เกี่ยวกับ NEXTRA",
+      yourMarketIntelligence:
+        "ตลาดของคุณ ปัญญาของคุณ",
+
+      displayName: "ชื่อที่แสดง",
+      username: "ชื่อผู้ใช้",
+      yourName: "ชื่อของคุณ",
+      saveChanges: "บันทึกการเปลี่ยนแปลง",
+
+      languageTitle: "ภาษา",
+      selectLanguage: "เลือกภาษา",
+
+      traderDescription:
+        "สำรวจ NEXTRA ต่อไปเพื่อปลดล็อกระดับถัดไป",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       ARABIC
+    =================================================== */
 
     ar: {
 
@@ -472,10 +1540,79 @@
       settings: "الإعدادات",
       notifications: "الإشعارات",
       language: "اللغة",
-      appearance: "المظهر"
+      appearance: "المظهر",
+
+      dark: "داكن",
+      light: "فاتح",
+
+      save: "حفظ",
+      cancel: "إلغاء",
+      close: "إغلاق",
+
+      profileTitle: "الملف الشخصي",
+      profileSubtitle: "هويتك في NEXTRA",
+      editProfile: "تعديل الملف الشخصي",
+
+      active: "نشط",
+
+      traderLevel: "مستوى المتداول",
+      rookieTrader: "متداول مبتدئ",
+      currentPlan: "الخطة الحالية",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "ذكاء السوق الأساسي",
+      upgrade: "ترقية",
+
+      watchlist: "قائمة المراقبة",
+      alerts: "التنبيهات",
+      marketsCount: "الأسواق",
+
+      achievements: "الإنجازات",
+      firstLook: "النظرة الأولى",
+      exploredNextra: "استكشفت NEXTRA",
+      watcher: "مراقب",
+      buildWatchlist: "إنشاء قائمة",
+      futuresAchievement: "العقود الآجلة",
+      openFutures: "فتح العقود الآجلة",
+      marketHunter: "صياد السوق",
+      trackMarkets: "تتبع الأسواق",
+
+      account: "الحساب",
+      email: "البريد الإلكتروني",
+      notConnected: "غير متصل",
+      accountStatus: "حالة الحساب",
+      activeAccount: "حساب نشط",
+
+      quickActions: "إجراءات سريعة",
+      manageFavoriteAssets: "إدارة الأصول المفضلة",
+      binanceFuturesMarket: "سوق Binance Futures",
+      manageMarketAlerts: "إدارة تنبيهات السوق",
+
+      preferences: "التفضيلات",
+      darkMode: "الوضع الداكن",
+
+      aboutNextra: "حول NEXTRA",
+      yourMarketIntelligence:
+        "سوقك. ذكاؤك.",
+
+      displayName: "الاسم المعروض",
+      username: "اسم المستخدم",
+      yourName: "اسمك",
+      saveChanges: "حفظ التغييرات",
+
+      languageTitle: "اللغة",
+      selectLanguage: "اختر اللغة",
+
+      traderDescription:
+        "استمر في استكشاف NEXTRA لفتح المستوى التالي.",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       HINDI
+    =================================================== */
 
     hi: {
 
@@ -491,10 +1628,79 @@
       settings: "सेटिंग्स",
       notifications: "सूचनाएं",
       language: "भाषा",
-      appearance: "रूप"
+      appearance: "रूप",
+
+      dark: "डार्क",
+      light: "लाइट",
+
+      save: "सहेजें",
+      cancel: "रद्द करें",
+      close: "बंद करें",
+
+      profileTitle: "प्रोफ़ाइल",
+      profileSubtitle: "आपकी NEXTRA पहचान",
+      editProfile: "प्रोफ़ाइल संपादित करें",
+
+      active: "सक्रिय",
+
+      traderLevel: "ट्रेडर स्तर",
+      rookieTrader: "नए ट्रेडर",
+      currentPlan: "वर्तमान प्लान",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "मुख्य मार्केट इंटेलिजेंस",
+      upgrade: "अपग्रेड",
+
+      watchlist: "वॉचलिस्ट",
+      alerts: "अलर्ट",
+      marketsCount: "बाज़ार",
+
+      achievements: "उपलब्धियां",
+      firstLook: "पहली नज़र",
+      exploredNextra: "NEXTRA एक्सप्लोर किया",
+      watcher: "वॉचर",
+      buildWatchlist: "वॉचलिस्ट बनाएं",
+      futuresAchievement: "फ्यूचर्स",
+      openFutures: "फ्यूचर्स खोलें",
+      marketHunter: "मार्केट हंटर",
+      trackMarkets: "मार्केट ट्रैक करें",
+
+      account: "खाता",
+      email: "ईमेल",
+      notConnected: "कनेक्ट नहीं है",
+      accountStatus: "खाता स्थिति",
+      activeAccount: "सक्रिय खाता",
+
+      quickActions: "त्वरित कार्य",
+      manageFavoriteAssets: "पसंदीदा एसेट प्रबंधित करें",
+      binanceFuturesMarket: "Binance Futures मार्केट",
+      manageMarketAlerts: "मार्केट अलर्ट प्रबंधित करें",
+
+      preferences: "प्राथमिकताएं",
+      darkMode: "डार्क मोड",
+
+      aboutNextra: "NEXTRA के बारे में",
+      yourMarketIntelligence:
+        "आपका बाज़ार। आपकी बुद्धिमत्ता।",
+
+      displayName: "प्रदर्शित नाम",
+      username: "उपयोगकर्ता नाम",
+      yourName: "आपका नाम",
+      saveChanges: "परिवर्तन सहेजें",
+
+      languageTitle: "भाषा",
+      selectLanguage: "भाषा चुनें",
+
+      traderDescription:
+        "अगले स्तर को अनलॉक करने के लिए NEXTRA को एक्सप्लोर करते रहें।",
+
+      xp: "XP"
 
     },
 
+
+    /* ===================================================
+       DUTCH
+    =================================================== */
 
     nl: {
 
@@ -510,144 +1716,38 @@
       settings: "Instellingen",
       notifications: "Meldingen",
       language: "Taal",
-      appearance: "Weergave"
+      appearance: "Weergave",
 
-    },
+      dark: "Donker",
+      light: "Licht",
 
+      save: "Opslaan",
+      cancel: "Annuleren",
+      close: "Sluiten",
 
-    pl: {
+      profileTitle: "Profiel",
+      profileSubtitle: "Jouw NEXTRA-identiteit",
+      editProfile: "Profiel bewerken",
 
-      home: "Strona główna",
-      markets: "Rynki",
-      trending: "Trendy",
-      futures: "Kontrakty terminowe",
-      tools: "Narzędzia",
-      education: "Edukacja",
-      profile: "Profil",
+      active: "Actief",
 
-      search: "Szukaj",
-      settings: "Ustawienia",
-      notifications: "Powiadomienia",
-      language: "Język",
-      appearance: "Wygląd"
+      traderLevel: "TRADER-NIVEAU",
+      rookieTrader: "Beginnende trader",
+      currentPlan: "HUIDIG PLAN",
+      freePlan: "NEXTRA Free",
+      coreIntelligence: "Marktintelligentie",
+      upgrade: "Upgraden",
 
-    }
+      watchlist: "Volglijst",
+      alerts: "Meldingen",
+      marketsCount: "Markten",
 
-  };
-
-
-  function getSettings() {
-
-    try {
-
-      return JSON.parse(
-        localStorage.getItem(LANGUAGE_KEY) || "{}"
-      );
-
-    } catch {
-
-      return {};
-
-    }
-
-  }
-
-
-  function getLanguage() {
-
-    const settings = getSettings();
-
-    return LANGUAGES[settings.language]
-      ? settings.language
-      : "en";
-
-  }
-
-
-  function t(key) {
-
-    const language = getLanguage();
-
-    return (
-      TRANSLATIONS[language]?.[key] ??
-      TRANSLATIONS.en[key] ??
-      key
-    );
-
-  }
-
-
-  function translatePage() {
-
-    document
-      .querySelectorAll("[data-i18n]")
-      .forEach(element => {
-
-        const key =
-          element.dataset.i18n;
-
-        const translated =
-          t(key);
-
-        if (
-          element.tagName === "INPUT" ||
-          element.tagName === "TEXTAREA"
-        ) {
-
-          element.placeholder =
-            translated;
-
-        } else {
-
-          element.textContent =
-            translated;
-
-        }
-
-      });
-
-
-    document.documentElement.lang =
-      getLanguage();
-
-  }
-
-
-  window.NEXTRA_I18N = {
-
-    languages: LANGUAGES,
-
-    translations: TRANSLATIONS,
-
-    getLanguage,
-
-    t,
-
-    translatePage
-
-  };
-
-
-  window.addEventListener(
-    "nextra:languageChanged",
-    translatePage
-  );
-
-
-  if (
-    document.readyState === "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      translatePage
-    );
-
-  } else {
-
-    translatePage();
-
-  }
-
-
-})();
+      achievements: "PRESTATIES",
+      firstLook: "Eerste blik",
+      exploredNextra: "NEXTRA verkend",
+      watcher: "Watcher",
+      buildWatchlist: "Volglijst maken",
+      futuresAchievement: "Futures",
+      openFutures: "Futures openen",
+      marketHunter: "Marktjager",
+      trackMarkets
