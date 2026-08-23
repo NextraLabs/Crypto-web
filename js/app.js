@@ -126,9 +126,8 @@ function renderError(
   }
 }
 
-
 /* =========================================
-   NEXTRA NAVIGATION
+   NEXTRA NAVIGATION — PREMIUM
 ========================================= */
 
 function renderNav() {
@@ -137,52 +136,103 @@ function renderNav() {
 
     {
       href: "index.html",
-      icon: "⌂",
-      label: "Home"
+      label: "Home",
+      icon: `
+        <svg viewBox="0 0 24 24">
+          <path d="M3.5 10.7 12 3.8l8.5 6.9v9.1
+                   a1.7 1.7 0 0 1-1.7 1.7H5.2
+                   a1.7 1.7 0 0 1-1.7-1.7z"/>
+          <path d="M9 21.5v-6.8h6v6.8"/>
+        </svg>
+      `
     },
 
     {
       href: "markets.html",
-      icon: "◈",
-      label: "Markets"
+      label: "Markets",
+      icon: `
+        <svg viewBox="0 0 24 24">
+          <path d="M4 19V9"/>
+          <path d="M9.3 19V5"/>
+          <path d="M14.7 19v-8"/>
+          <path d="M20 19V3"/>
+          <path d="M2.5 19.5h19"/>
+        </svg>
+      `
     },
 
     {
       href: "radar.html",
-      icon: "⌁",
-      label: "Radar"
+      label: "Radar",
+      icon: `
+        <svg viewBox="0 0 24 24">
+          <path d="M12 20a8 8 0 1 0-8-8"/>
+          <path d="M12 16a4 4 0 1 0-4-4"/>
+          <path d="M12 12 19.5 4.5"/>
+          <circle
+            cx="12"
+            cy="12"
+            r="1.3"
+            fill="currentColor"
+            stroke="none"
+          />
+        </svg>
+      `
     },
 
     {
       href: "futures.html",
-      icon: "↗",
-      label: "Futures"
+      label: "Futures",
+      icon: `
+        <svg viewBox="0 0 24 24">
+          <path d="M5 18 18.5 4.5"/>
+          <path d="M10 4.5h8.5V13"/>
+          <path d="M4 9.5V19h9.5"/>
+        </svg>
+      `
     },
 
     {
       href: "more.html",
-      icon: "☷",
-      label: "More"
+      label: "More",
+      icon: `
+        <svg viewBox="0 0 24 24">
+          <circle cx="5" cy="12" r="1.5"/>
+          <circle cx="12" cy="12" r="1.5"/>
+          <circle cx="19" cy="12" r="1.5"/>
+        </svg>
+      `
     }
 
   ];
 
+
   const mount =
-    document.getElementById(
-      "bottom-nav"
-    );
+    document.getElementById("bottom-nav");
+
 
   if (!mount) return;
+
 
   const current =
     location.pathname
       .split("/")
       .pop() || "index.html";
 
+
   const nav =
     document.createElement("nav");
 
-  nav.className = "bottom-nav";
+
+  nav.className =
+    "bottom-nav";
+
+
+  nav.setAttribute(
+    "aria-label",
+    "Main navigation"
+  );
+
 
   nav.innerHTML =
     NAV_ITEMS
@@ -193,29 +243,34 @@ function renderNav() {
             ? "active"
             : "";
 
+
         return `
+
           <a
             href="${item.href}"
             class="nav-item ${active}"
+            aria-label="${item.label}"
           >
 
             <span class="nav-icon">
               ${item.icon}
             </span>
 
-            <span>
+            <span class="nav-label">
               ${item.label}
             </span>
 
           </a>
+
         `;
 
       })
       .join("");
 
-  mount.replaceWith(nav);
-}
 
+  mount.replaceWith(nav);
+
+}
 
 /* =========================================
    WATCHLIST
