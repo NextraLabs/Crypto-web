@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Login — NEXTRA</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,167 +22,381 @@
 
     body {
       min-height: 100vh;
-      font-family: Arial, sans-serif;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       background: #05070a;
+
       color: #fff;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       padding: 20px;
     }
 
+
     .login-box {
+
       width: 100%;
+
       max-width: 400px;
+
       background: #0c1013;
-      border: 1px solid rgba(255,255,255,.08);
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
       border-radius: 22px;
+
       padding: 30px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.45);
+
+      box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.45);
     }
 
+
+    /* LOGO */
+
     .logo {
+
       text-align: center;
+
       margin-bottom: 28px;
     }
 
+
     .logo h1 {
+
       font-size: 34px;
+
       letter-spacing: -1px;
     }
 
+
     .logo span {
+
       color: #42f5a7;
     }
 
+
     .logo p {
+
       color: #7f8a91;
+
       font-size: 12px;
+
       margin-top: 6px;
     }
 
+
+    /* TITLE */
+
     h2 {
+
       font-size: 22px;
+
       margin-bottom: 7px;
     }
 
+
     .subtitle {
+
       color: #7f8a91;
+
       font-size: 12px;
+
       margin-bottom: 22px;
     }
 
+
+    /* LABEL */
+
     label {
+
       display: block;
+
       font-size: 12px;
+
       margin-bottom: 7px;
     }
 
+
+    /* INPUT */
+
     input {
+
       width: 100%;
+
       height: 46px;
+
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
       background: #12171a;
+
       color: white;
+
       padding: 0 14px;
+
       outline: none;
+
       margin-bottom: 16px;
+
+      transition: .2s ease;
     }
+
 
     input:focus {
+
       border-color: #42f5a7;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(66,245,167,.06);
     }
+
+
+    input::placeholder {
+
+      color: #59636a;
+    }
+
+
+    /* BUTTON */
 
     button {
+
       width: 100%;
+
       height: 46px;
+
       border: none;
+
       border-radius: 12px;
+
       background: #42f5a7;
+
       color: #06100b;
+
       font-weight: bold;
+
       cursor: pointer;
+
       margin-top: 4px;
+
+      transition: .2s ease;
     }
 
+
+    button:hover {
+
+      filter: brightness(1.05);
+    }
+
+
     button:active {
+
       transform: scale(.98);
     }
 
-    .message {
-      display: none;
-      padding: 11px;
-      border-radius: 10px;
-      font-size: 12px;
-      margin-bottom: 15px;
+
+    button:disabled {
+
+      opacity: .6;
+
+      cursor: not-allowed;
+
+      transform: none;
     }
 
+
+    /* MESSAGE */
+
+    .message {
+
+      display: none;
+
+      padding: 11px;
+
+      border-radius: 10px;
+
+      font-size: 12px;
+
+      margin-bottom: 15px;
+
+      line-height: 1.5;
+    }
+
+
     .message.show {
+
       display: block;
     }
 
+
     .error {
-      background: rgba(255,70,70,.1);
+
+      background:
+        rgba(255,70,70,.1);
+
       color: #ff8585;
     }
 
+
     .success {
-      background: rgba(66,245,167,.1);
+
+      background:
+        rgba(66,245,167,.1);
+
       color: #42f5a7;
     }
 
+
+    /* LINKS */
+
     .links {
+
       text-align: center;
+
       margin-top: 18px;
+
       font-size: 12px;
+
       color: #7f8a91;
     }
 
+
     a {
+
       color: #42f5a7;
+
       text-decoration: none;
+
+      transition: .2s ease;
     }
 
+
+    a:hover {
+
+      text-decoration: underline;
+    }
+
+
+    /* DIVIDER */
+
     .divider {
+
       display: flex;
+
       align-items: center;
+
       gap: 10px;
+
       margin: 22px 0;
+
       color: #555;
+
       font-size: 10px;
     }
 
+
     .divider::before,
     .divider::after {
+
       content: "";
+
       height: 1px;
-      background: rgba(255,255,255,.08);
+
+      background:
+        rgba(255,255,255,.08);
+
       flex: 1;
     }
+
+
+    /* MOBILE */
+
+    @media (max-width: 360px) {
+
+      .login-box {
+
+        padding: 24px;
+      }
+
+      .logo h1 {
+
+        font-size: 30px;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="login-box">
 
+
+    <!-- LOGO -->
+
     <div class="logo">
-      <h1>NEXTRA<span>.</span></h1>
-      <p>Your Market. Your Intelligence.</p>
+
+      <h1>
+        NEXTRA<span>.</span>
+      </h1>
+
+      <p>
+        Your Market. Your Intelligence.
+      </p>
+
     </div>
 
-    <h2>Masuk</h2>
+
+    <!-- TITLE -->
+
+    <h2>
+      Masuk
+    </h2>
+
 
     <p class="subtitle">
       Masuk ke akun NEXTRA kamu.
     </p>
 
-    <div id="message" class="message"></div>
+
+    <!-- MESSAGE -->
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <!-- FORM -->
 
     <form id="loginForm">
 
-      <label for="email">Email</label>
+
+      <!-- EMAIL -->
+
+      <label for="email">
+        Email
+      </label>
+
 
       <input
         type="email"
@@ -185,7 +406,13 @@
         required
       >
 
-      <label for="password">Password</label>
+
+      <!-- PASSWORD -->
+
+      <label for="password">
+        Password
+      </label>
+
 
       <input
         type="password"
@@ -195,41 +422,87 @@
         required
       >
 
-      <button type="submit">
+
+      <!-- LOGIN BUTTON -->
+
+      <button
+        id="loginButton"
+        type="submit"
+      >
         Masuk
       </button>
 
+
     </form>
 
+
+    <!-- FORGOT PASSWORD -->
+
     <div class="links">
-      <a href="#">Lupa password?</a>
+
+      <a href="forgot-password.html">
+        Lupa password?
+      </a>
+
     </div>
+
+
+    <!-- DIVIDER -->
 
     <div class="divider">
       ATAU
     </div>
 
-    <div class="links">
-      Belum punya akun?
-      <a href="register.html">Buat akun</a>
-    </div>
+
+    <!-- REGISTER -->
 
     <div class="links">
-      <a href="index.html">← Kembali ke NEXTRA</a>
+
+      Belum punya akun?
+
+      <a href="register.html">
+        Buat akun
+      </a>
+
     </div>
+
+
+    <!-- HOME -->
+
+    <div class="links">
+
+      <a href="index.html">
+        ← Kembali ke NEXTRA
+      </a>
+
+    </div>
+
 
   </div>
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- SUPABASE -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
 
   <script>
+
+
+    /* =====================================
+       SUPABASE CONFIG
+    ===================================== */
+
 
     const SUPABASE_URL =
       "https://uvtbntwgooxqjbyjkvkd.supabase.co";
 
+
     const SUPABASE_KEY =
-      ""sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO;
+      "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+
 
     const supabaseClient =
       window.supabase.createClient(
@@ -237,66 +510,184 @@
         SUPABASE_KEY
       );
 
+
+    /* =====================================
+       ELEMENTS
+    ===================================== */
+
+
     const form =
-      document.getElementById("loginForm");
+      document.getElementById(
+        "loginForm"
+      );
+
 
     const message =
-      document.getElementById("message");
+      document.getElementById(
+        "message"
+      );
 
-    function showMessage(text, type) {
 
-      message.textContent = text;
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
+
+
+    /* =====================================
+       MESSAGE
+    ===================================== */
+
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      message.textContent =
+        text;
 
       message.className =
         "message show " + type;
 
     }
 
-    form.addEventListener("submit", async function(e) {
 
-      e.preventDefault();
+    /* =====================================
+       LOGIN
+    ===================================== */
 
-      const email =
-        document.getElementById("email").value.trim();
 
-      const password =
-        document.getElementById("password").value;
+    form.addEventListener(
+      "submit",
+      async function(e) {
 
-      showMessage(
-        "Sedang masuk...",
-        "success"
-      );
+        e.preventDefault();
 
-      const { error } =
-        await supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        });
 
-      if (error) {
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        /* BUTTON STATE */
+
+        loginButton.disabled =
+          true;
+
+        loginButton.textContent =
+          "Memproses...";
+
 
         showMessage(
-          "Email atau password salah.",
-          "error"
+          "Sedang masuk...",
+          "success"
         );
 
-        return;
+
+        try {
+
+
+          /* SUPABASE LOGIN */
+
+          const {
+            error
+          } =
+            await supabaseClient
+              .auth
+              .signInWithPassword({
+
+                email:
+                  email,
+
+                password:
+                  password
+
+              });
+
+
+          /* ERROR */
+
+          if (error) {
+
+            console.error(
+              "Login error:",
+              error
+            );
+
+
+            showMessage(
+              "Email atau password salah.",
+              "error"
+            );
+
+
+            return;
+          }
+
+
+          /* SUCCESS */
+
+          showMessage(
+            "Login berhasil! Mengarahkan...",
+            "success"
+          );
+
+
+          /* REDIRECT */
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "index.html";
+
+            },
+            500
+          );
+
+
+        } catch (error) {
+
+
+          console.error(
+            error
+          );
+
+
+          showMessage(
+            "Terjadi kesalahan. Coba lagi.",
+            "error"
+          );
+
+
+        } finally {
+
+
+          loginButton.disabled =
+            false;
+
+
+          loginButton.textContent =
+            "Masuk";
+
+        }
+
       }
+    );
 
-      showMessage(
-        "Login berhasil! Mengarahkan...",
-        "success"
-      );
-
-      setTimeout(() => {
-
-        window.location.href = "index.html";
-
-      }, 500);
-
-    });
 
   </script>
 
+
 </body>
+
 </html>
