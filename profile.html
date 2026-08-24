@@ -30,27 +30,23 @@
   <style>
 
     /* =====================================================
-       NEXTRA LANGUAGE MODAL
+       LANGUAGE MODAL
     ====================================================== */
 
     .language-modal {
 
       position: fixed;
-
       inset: 0;
-
       z-index: 9999;
 
       display: none;
 
       align-items: flex-end;
-
       justify-content: center;
 
       background: rgba(0,0,0,.72);
 
       backdrop-filter: blur(10px);
-
       -webkit-backdrop-filter: blur(10px);
 
       padding: 16px;
@@ -68,7 +64,6 @@
     .language-panel {
 
       width: 100%;
-
       max-width: 520px;
 
       max-height: 82vh;
@@ -77,7 +72,8 @@
 
       background: #0b0f11;
 
-      border: 1px solid rgba(255,255,255,.08);
+      border: 1px solid
+        rgba(255,255,255,.08);
 
       border-radius: 24px;
 
@@ -140,7 +136,6 @@
     .language-close {
 
       width: 38px;
-
       height: 38px;
 
       border: 0;
@@ -221,7 +216,6 @@
     .language-flag {
 
       width: 38px;
-
       height: 38px;
 
       display: grid;
@@ -288,6 +282,86 @@
     }
 
 
+    /* =====================================================
+       AUTH LOADING
+    ====================================================== */
+
+    .auth-loading {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 10000;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background: #070909;
+
+      color: var(--text, #fff);
+
+      font-size: 12px;
+
+      letter-spacing: .4px;
+
+    }
+
+
+    .auth-loading.hidden {
+
+      display: none;
+
+    }
+
+
+    .auth-loading-inner {
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 12px;
+
+    }
+
+
+    .auth-spinner {
+
+      width: 28px;
+      height: 28px;
+
+      border: 2px solid
+        rgba(255,255,255,.1);
+
+      border-top-color:
+        #42f5a7;
+
+      border-radius: 50%;
+
+      animation:
+        authSpin .7s linear infinite;
+
+    }
+
+
+    @keyframes authSpin {
+
+      to {
+
+        transform:
+          rotate(360deg);
+
+      }
+
+    }
+
+
     @media (min-width: 700px) {
 
       .language-modal {
@@ -306,7 +380,34 @@
 <body>
 
 
-<main class="container">
+<!-- =====================================================
+     AUTH LOADING
+====================================================== -->
+
+<div
+  id="authLoading"
+  class="auth-loading"
+>
+
+  <div class="auth-loading-inner">
+
+    <div class="auth-spinner"></div>
+
+    <span>
+      Checking account...
+    </span>
+
+  </div>
+
+</div>
+
+
+
+<main
+  class="container"
+  id="profilePage"
+  hidden
+>
 
 
   <!-- =====================================================
@@ -772,8 +873,8 @@
           Email
         </strong>
 
-        <span>
-          Not connected
+        <span id="accountEmail">
+          Loading...
         </span>
 
       </div>
@@ -806,6 +907,40 @@
       </span>
 
     </div>
+
+
+    <button
+      type="button"
+      class="profile-item"
+      id="logoutButton"
+      style="
+        width:100%;
+        border:0;
+        color:inherit;
+        text-align:left;
+        font:inherit;
+        cursor:pointer;
+      "
+    >
+
+      <div>
+
+        <strong style="color:#ff6b6b;">
+          🚪 Logout
+        </strong>
+
+        <span>
+          Keluar dari akun NEXTRA
+        </span>
+
+      </div>
+
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </button>
 
 
   </section>
@@ -935,7 +1070,7 @@
 
 
 
-    <!-- LANGUAGE BUTTON -->
+    <!-- LANGUAGE -->
 
     <button
       class="profile-item"
@@ -1075,7 +1210,9 @@
 
 
 
-<!-- BOTTOM NAV -->
+<!-- =====================================================
+     BOTTOM NAV
+====================================================== -->
 
 <div id="bottom-nav"></div>
 
@@ -1084,6 +1221,8 @@
 <!-- =====================================================
      GLOBAL JS
 ====================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="js/api.js"></script>
 
@@ -1096,17 +1235,39 @@
 
 
 <!-- =====================================================
-     PROFILE JS
+     NEXTRA PROFILE + SUPABASE
 ====================================================== -->
 
 <script>
 
 (() => {
 
+  "use strict";
 
-  const PROFILE_KEY =
-    "nextra_profile";
 
+  /* =====================================================
+     SUPABASE CONFIG
+  ====================================================== */
+
+  const SUPABASE_URL =
+    "https://uvtbntwgooxqjbyjkvkd.supabase.co";
+
+
+  const SUPABASE_KEY =
+    "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+
+  /* =====================================================
+     KEYS
+  ====================================================== */
 
   const AVATAR_KEY =
     "nextra_avatar";
@@ -1116,34 +1277,22 @@
     "nextra_settings";
 
 
-  const defaults = {
-
-    name:
-      "NEXTRA User",
-
-    username:
-      "nextra_user"
-
-  };
-
-
-  let profile = {
-
-    ...defaults,
-
-    ...(JSON.parse(
-      localStorage.getItem(
-        PROFILE_KEY
-      ) || "{}"
-    ))
-
-  };
-
-
 
   /* =====================================================
      ELEMENTS
-  ====================================================== */
+  ===================================================== */
+
+  const authLoading =
+    document.getElementById(
+      "authLoading"
+    );
+
+
+  const profilePage =
+    document.getElementById(
+      "profilePage"
+    );
+
 
   const nameEl =
     document.getElementById(
@@ -1154,6 +1303,12 @@
   const usernameEl =
     document.getElementById(
       "profileUsername"
+    );
+
+
+  const accountEmail =
+    document.getElementById(
+      "accountEmail"
     );
 
 
@@ -1181,7 +1336,13 @@
     );
 
 
-  const panel =
+  const editProfileBtn =
+    document.getElementById(
+      "editProfileBtn"
+    );
+
+
+  const editProfilePanel =
     document.getElementById(
       "editProfilePanel"
     );
@@ -1198,6 +1359,29 @@
       "usernameInput"
     );
 
+
+  const saveProfileBtn =
+    document.getElementById(
+      "saveProfileBtn"
+    );
+
+
+  const cancelProfileBtn =
+    document.getElementById(
+      "cancelProfileBtn"
+    );
+
+
+  const logoutButton =
+    document.getElementById(
+      "logoutButton"
+    );
+
+
+
+  /* =====================================================
+     LANGUAGE ELEMENTS
+  ====================================================== */
 
   const languageButton =
     document.getElementById(
@@ -1231,6 +1415,26 @@
 
 
   /* =====================================================
+     PROFILE STATE
+  ====================================================== */
+
+  let currentUser =
+    null;
+
+
+  let profile = {
+
+    name:
+      "NEXTRA User",
+
+    username:
+      "nextra_user"
+
+  };
+
+
+
+  /* =====================================================
      SETTINGS
   ====================================================== */
 
@@ -1255,43 +1459,23 @@
   }
 
 
-  function saveSettings(settings) {
+  function saveSettings(
+    settings
+  ) {
 
     localStorage.setItem(
       SETTINGS_KEY,
-      JSON.stringify(settings)
+      JSON.stringify(
+        settings
+      )
     );
-
-  }
-
-
-  function getCurrentLanguage() {
-
-    const settings =
-      getSettings();
-
-
-    if (
-      window.NEXTRA_I18N &&
-      window.NEXTRA_I18N.languages &&
-      window.NEXTRA_I18N.languages[
-        settings.language
-      ]
-    ) {
-
-      return settings.language;
-
-    }
-
-
-    return "id";
 
   }
 
 
 
   /* =====================================================
-     LANGUAGE LIST
+     LANGUAGE DATA
   ====================================================== */
 
   const LANGUAGE_DATA = [
@@ -1340,7 +1524,54 @@
 
 
 
+  function getCurrentLanguage() {
+
+    const settings =
+      getSettings();
+
+
+    if (
+      window.NEXTRA_I18N &&
+      window.NEXTRA_I18N.languages &&
+      window.NEXTRA_I18N.languages[
+        settings.language
+      ]
+    ) {
+
+      return settings.language;
+
+    }
+
+
+    return "id";
+
+  }
+
+
+
+  function getLanguageName(
+    code
+  ) {
+
+    const found =
+      LANGUAGE_DATA.find(
+        language =>
+          language[0] === code
+      );
+
+
+    return found
+      ? found[2]
+      : "Bahasa Indonesia";
+
+  }
+
+
+
   function renderLanguages() {
+
+    if (!languageList)
+      return;
 
 
     const selected =
@@ -1353,7 +1584,6 @@
 
     LANGUAGE_DATA.forEach(
       language => {
-
 
         const [
           code,
@@ -1436,12 +1666,9 @@
 
 
 
-  /* =====================================================
-     SELECT LANGUAGE
-  ====================================================== */
-
-  function selectLanguage(code) {
-
+  function selectLanguage(
+    code
+  ) {
 
     const settings =
       getSettings();
@@ -1456,8 +1683,14 @@
     );
 
 
-    currentLanguage.textContent =
-      getLanguageName(code);
+    if (currentLanguage) {
+
+      currentLanguage.textContent =
+        getLanguageName(
+          code
+        );
+
+    }
 
 
     document.documentElement.lang =
@@ -1467,11 +1700,12 @@
     if (
       window.NEXTRA_I18N &&
       typeof
-        window.NEXTRA_I18N.translatePage ===
-        "function"
+        window.NEXTRA_I18N.translatePage
+        === "function"
     ) {
 
-      window.NEXTRA_I18N.translatePage();
+      window.NEXTRA_I18N
+        .translatePage();
 
     }
 
@@ -1490,52 +1724,33 @@
 
     renderLanguages();
 
-
     closeLanguage();
 
   }
 
 
 
-  function getLanguageName(code) {
-
-
-    const found =
-      LANGUAGE_DATA.find(
-        language =>
-          language[0] === code
-      );
-
-
-    return found
-      ? found[2]
-      : "Bahasa Indonesia";
-
-  }
-
-
-
-  /* =====================================================
-     LANGUAGE MODAL
-  ====================================================== */
-
   function openLanguage() {
 
     renderLanguages();
 
+
     languageModal.classList.add(
       "show"
     );
+
 
     languageModal.setAttribute(
       "aria-hidden",
       "false"
     );
 
+
     document.body.style.overflow =
       "hidden";
 
   }
+
 
 
   function closeLanguage() {
@@ -1544,10 +1759,12 @@
       "show"
     );
 
+
     languageModal.setAttribute(
       "aria-hidden",
       "true"
     );
+
 
     document.body.style.overflow =
       "";
@@ -1555,19 +1772,19 @@
   }
 
 
-  languageButton.addEventListener(
+  languageButton?.addEventListener(
     "click",
     openLanguage
   );
 
 
-  languageClose.addEventListener(
+  languageClose?.addEventListener(
     "click",
     closeLanguage
   );
 
 
-  languageModal.addEventListener(
+  languageModal?.addEventListener(
     "click",
     event => {
 
@@ -1600,24 +1817,156 @@
   );
 
 
+  if (currentLanguage) {
+
+    currentLanguage.textContent =
+      getLanguageName(
+        getCurrentLanguage()
+      );
+
+  }
+
+
 
   /* =====================================================
-     INITIAL LANGUAGE
+     AVATAR
   ====================================================== */
 
-  currentLanguage.textContent =
-    getLanguageName(
-      getCurrentLanguage()
-    );
+  function renderAvatar() {
+
+    const savedAvatar =
+      localStorage.getItem(
+        AVATAR_KEY
+      );
+
+
+    if (savedAvatar) {
+
+      avatarImage.src =
+        savedAvatar;
+
+
+      avatarImage.classList.add(
+        "visible"
+      );
+
+
+      avatarInitial.style.display =
+        "none";
+
+    }
+
+    else {
+
+      avatarImage.classList.remove(
+        "visible"
+      );
+
+
+      avatarInitial.style.display =
+        "block";
+
+    }
+
+  }
+
+
+
+  avatarButton?.addEventListener(
+    "click",
+    () => {
+
+      avatarInput?.click();
+
+    }
+  );
+
+
+  avatarInput?.addEventListener(
+    "change",
+    event => {
+
+      const file =
+        event.target.files?.[0];
+
+
+      if (!file)
+        return;
+
+
+      if (
+        !file.type.startsWith(
+          "image/"
+        )
+      ) {
+
+        alert(
+          "File harus berupa gambar."
+        );
+
+        return;
+
+      }
+
+
+      if (
+        file.size >
+        2 * 1024 * 1024
+      ) {
+
+        alert(
+          "Ukuran foto maksimal 2 MB."
+        );
+
+        return;
+
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        () => {
+
+          try {
+
+            localStorage.setItem(
+              AVATAR_KEY,
+              reader.result
+            );
+
+
+            renderAvatar();
+
+          }
+
+          catch {
+
+            alert(
+              "Foto terlalu besar."
+            );
+
+          }
+
+        };
+
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
 
 
 
   /* =====================================================
-     PROFILE RENDER
+     RENDER PROFILE
   ====================================================== */
 
   function renderProfile() {
-
 
     nameEl.textContent =
       profile.name;
@@ -1636,127 +1985,14 @@
       ).toUpperCase();
 
 
-
-    const savedAvatar =
-      localStorage.getItem(
-        AVATAR_KEY
-      );
+    accountEmail.textContent =
+      currentUser?.email ||
+      "Email tidak tersedia";
 
 
-    if (savedAvatar) {
-
-
-      avatarImage.src =
-        savedAvatar;
-
-
-      avatarImage.classList.add(
-        "visible"
-      );
-
-
-      avatarInitial.style.display =
-        "none";
-
-
-    }
-
-    else {
-
-
-      avatarImage.classList.remove(
-        "visible"
-      );
-
-
-      avatarInitial.style.display =
-        "block";
-
-
-    }
+    renderAvatar();
 
   }
-
-
-
-  /* =====================================================
-     AVATAR
-  ====================================================== */
-
-  avatarButton.addEventListener(
-    "click",
-    () => {
-
-      avatarInput.click();
-
-    }
-  );
-
-
-  avatarInput.addEventListener(
-    "change",
-    event => {
-
-
-      const file =
-        event.target.files[0];
-
-
-      if (!file)
-        return;
-
-
-      if (
-        !file.type.startsWith(
-          "image/"
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        () => {
-
-
-          try {
-
-
-            localStorage.setItem(
-              AVATAR_KEY,
-              reader.result
-            );
-
-
-            renderProfile();
-
-
-          }
-
-          catch {
-
-
-            alert(
-              "Foto terlalu besar. Gunakan foto yang lebih kecil."
-            );
-
-          }
-
-        };
-
-
-      reader.readAsDataURL(
-        file
-      );
-
-    }
-  );
 
 
 
@@ -1764,108 +2000,183 @@
      EDIT PROFILE
   ====================================================== */
 
-  function openEditor() {
+  editProfileBtn?.addEventListener(
+    "click",
+    () => {
+
+      nameInput.value =
+        profile.name;
 
 
-    nameInput.value =
-      profile.name;
+      usernameInput.value =
+        profile.username;
 
 
-    usernameInput.value =
-      profile.username;
+      editProfilePanel.hidden =
+        false;
 
 
-    panel.hidden =
-      false;
+      nameInput.focus();
+
+    }
+  );
 
 
-    nameInput.focus();
+  cancelProfileBtn?.addEventListener(
+    "click",
+    () => {
 
-  }
+      editProfilePanel.hidden =
+        true;
 
-
-  document
-    .getElementById(
-      "editProfileBtn"
-    )
-    .addEventListener(
-      "click",
-      openEditor
-    );
+    }
+  );
 
 
-  document
-    .getElementById(
-      "cancelProfileBtn"
-    )
-    .addEventListener(
-      "click",
-      () => {
+  saveProfileBtn?.addEventListener(
+    "click",
+    async () => {
 
-        panel.hidden =
-          true;
-
-      }
-    );
-
-
-  document
-    .getElementById(
-      "saveProfileBtn"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-
-        const name =
-          nameInput.value.trim()
-          || defaults.name;
-
-
-        const username =
-          (
-            usernameInput.value
-              .trim()
-              .replace(
-                /[^a-zA-Z0-9_]/g,
-                ""
-              )
-            || defaults.username
-          )
+      const newName =
+        nameInput.value
+          .trim()
           .slice(
-            0,
-            20
-          );
-
-
-        profile.name =
-          name.slice(
             0,
             30
           );
 
 
-        profile.username =
-          username;
+      const newUsername =
+        nameInput
+          ? usernameInput.value
+              .trim()
+              .replace(
+                /[^a-zA-Z0-9_]/g,
+                ""
+              )
+              .slice(
+                0,
+                20
+              )
+          : "";
 
 
-        localStorage.setItem(
-          PROFILE_KEY,
-          JSON.stringify(
-            profile
-          )
+      if (!newName) {
+
+        alert(
+          "Display name tidak boleh kosong."
         );
+
+        return;
+
+      }
+
+
+      if (!newUsername) {
+
+        alert(
+          "Username tidak boleh kosong."
+        );
+
+        return;
+
+      }
+
+
+      saveProfileBtn.disabled =
+        true;
+
+
+      saveProfileBtn.textContent =
+        "Saving...";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .auth
+            .updateUser({
+
+              data: {
+
+                display_name:
+                  newName,
+
+                username:
+                  newUsername
+
+              }
+
+            });
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        profile.name =
+          newName;
+
+
+        profile.username =
+          newUsername;
+
+
+        if (
+          data?.user
+        ) {
+
+          currentUser =
+            data.user;
+
+        }
 
 
         renderProfile();
 
 
-        panel.hidden =
+        editProfilePanel.hidden =
           true;
 
+
       }
-    );
+
+      catch(error) {
+
+        console.error(
+          "Profile update error:",
+          error
+        );
+
+
+        alert(
+          "Gagal menyimpan profile:\n" +
+          error.message
+        );
+
+      }
+
+
+      finally {
+
+        saveProfileBtn.disabled =
+          false;
+
+
+        saveProfileBtn.textContent =
+          "Save changes";
+
+      }
+
+    }
+  );
 
 
 
@@ -1873,90 +2184,339 @@
      WATCHLIST
   ====================================================== */
 
-  try {
+  function loadStats() {
+
+    try {
+
+      const watchlist =
+        JSON.parse(
+          localStorage.getItem(
+            "nextra_watchlist"
+          ) || "[]"
+        );
 
 
-    const watchlist =
-      JSON.parse(
-        localStorage.getItem(
-          "nextra_watchlist"
-        ) || "[]"
-      );
+      document.getElementById(
+        "watchlistCount"
+      ).textContent =
+        Array.isArray(
+          watchlist
+        )
+          ? watchlist.length
+          : 0;
+
+    }
+
+    catch {
+
+      document.getElementById(
+        "watchlistCount"
+      ).textContent =
+        "0";
+
+    }
+
+
+
+    try {
+
+      const alerts =
+        JSON.parse(
+          localStorage.getItem(
+            "nextra_alerts"
+          ) || "[]"
+        );
+
+
+      document.getElementById(
+        "alertCount"
+      ).textContent =
+        Array.isArray(
+          alerts
+        )
+          ? alerts.length
+          : 0;
+
+    }
+
+    catch {
+
+      document.getElementById(
+        "alertCount"
+      ).textContent =
+        "0";
+
+    }
 
 
     document.getElementById(
-      "watchlistCount"
+      "marketCount"
     ).textContent =
-      Array.isArray(
-        watchlist
-      )
-        ? watchlist.length
-        : 0;
-
-  }
-
-  catch {
-
-
-    document.getElementById(
-      "watchlistCount"
-    ).textContent =
-      "0";
+      "Live";
 
   }
 
 
 
   /* =====================================================
-     ALERT COUNT
+     LOGOUT
   ====================================================== */
 
-  try {
+  logoutButton?.addEventListener(
+    "click",
+    async () => {
+
+      const confirmed =
+        confirm(
+          "Yakin ingin logout dari NEXTRA?"
+        );
 
 
-    const alerts =
-      JSON.parse(
-        localStorage.getItem(
-          "nextra_alerts"
-        ) || "[]"
+      if (!confirmed)
+        return;
+
+
+      logoutButton.disabled =
+        true;
+
+
+      logoutButton.querySelector(
+        "strong"
+      ).textContent =
+        "Logging out...";
+
+
+      try {
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .auth
+            .signOut({
+              scope: "local"
+            });
+
+
+        if (error) {
+
+          throw error;
+
+        }
+
+
+        window.location.href =
+          "index.html";
+
+      }
+
+      catch(error) {
+
+        console.error(
+          "Logout error:",
+          error
+        );
+
+
+        alert(
+          "Gagal logout:\n" +
+          error.message
+        );
+
+
+        logoutButton.disabled =
+          false;
+
+
+        logoutButton.querySelector(
+          "strong"
+        ).textContent =
+          "🚪 Logout";
+
+      }
+
+    }
+  );
+
+
+
+  /* =====================================================
+     AUTH INIT
+  ====================================================== */
+
+  async function initAuth() {
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      const session =
+        data?.session;
+
+
+      /* ================================================
+         BELUM LOGIN
+      ================================================= */
+
+      if (!session) {
+
+        window.location.replace(
+          "login.html"
+        );
+
+        return;
+
+      }
+
+
+      currentUser =
+        session.user;
+
+
+      const metadata =
+        currentUser.user_metadata ||
+        {};
+
+
+      const emailUsername =
+        currentUser.email
+          ? currentUser.email
+              .split("@")[0]
+          : "nextra_user";
+
+
+      profile.name =
+        String(
+          metadata.display_name ||
+          metadata.name ||
+          emailUsername ||
+          "NEXTRA User"
+        ).slice(
+          0,
+          30
+        );
+
+
+      profile.username =
+        String(
+          metadata.username ||
+          emailUsername ||
+          "nextra_user"
+        )
+        .replace(
+          /[^a-zA-Z0-9_]/g,
+          ""
+        )
+        .slice(
+          0,
+          20
+        );
+
+
+      renderProfile();
+
+      loadStats();
+
+
+      profilePage.hidden =
+        false;
+
+
+      authLoading.classList.add(
+        "hidden"
       );
 
 
-    document.getElementById(
-      "alertCount"
-    ).textContent =
-      Array.isArray(
-        alerts
-      )
-        ? alerts.length
-        : 0;
+    }
 
-  }
+    catch(error) {
 
-  catch {
+      console.error(
+        "NEXTRA Auth error:",
+        error
+      );
 
 
-    document.getElementById(
-      "alertCount"
-    ).textContent =
-      "0";
+      window.location.replace(
+        "login.html"
+      );
+
+    }
 
   }
 
 
 
   /* =====================================================
-     MARKET COUNTER
+     AUTH STATE LISTENER
   ====================================================== */
 
-  document.getElementById(
-    "marketCount"
-  ).textContent =
-    "Live";
+  supabaseClient
+    .auth
+    .onAuthStateChange(
+      (
+        event,
+        session
+      ) => {
+
+        if (
+          event ===
+          "SIGNED_OUT"
+        ) {
+
+          window.location.replace(
+            "login.html"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          event ===
+          "TOKEN_REFRESHED"
+        ) {
+
+          return;
+
+        }
+
+
+        if (
+          !session
+        ) {
+
+          window.location.replace(
+            "login.html"
+          );
+
+        }
+
+      }
+    );
 
 
 
-  renderProfile();
+  /* =====================================================
+     START
+  ====================================================== */
+
+  initAuth();
 
 
 })();
