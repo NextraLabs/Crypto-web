@@ -1,5 +1,6 @@
-// market.js — NEXTRA Markets V6
+// market.js — NEXTRA Markets V7
 // SEARCH HOME + SEARCH MARKET + FILTER + SORT + WATCHLIST + XP
+// WATCHLIST SYNC UPGRADE
 
 const MARKET_STATE = {
 
@@ -35,6 +36,99 @@ const MARKET_STATE = {
 function marketEl(id) {
 
   return document.getElementById(id);
+
+}
+
+
+/* =========================================
+   WATCHLIST HELPERS
+========================================= */
+
+function getNormalizedWatchlist() {
+
+  if (
+    typeof loadWatchlist !==
+    "function"
+  ) {
+
+    return [];
+
+  }
+
+
+  const list =
+    loadWatchlist();
+
+
+  if (!Array.isArray(list)) {
+
+    return [];
+
+  }
+
+
+  return list
+    .map(
+      symbol =>
+        String(symbol || "")
+          .trim()
+          .toUpperCase()
+    )
+    .filter(Boolean);
+
+}
+
+
+function isCoinInWatchlist(
+  symbol
+) {
+
+  const normalized =
+    String(symbol || "")
+      .trim()
+      .toUpperCase();
+
+
+  return getNormalizedWatchlist()
+    .includes(
+      normalized
+    );
+
+}
+
+
+/* =========================================
+   WATCHLIST SYNC EVENT
+========================================= */
+
+function emitWatchlistChanged(
+  symbol,
+  action
+) {
+
+  window.dispatchEvent(
+
+    new CustomEvent(
+      "nextra:watchlist-changed",
+      {
+        detail: {
+
+          symbol:
+            String(symbol || "")
+              .trim()
+              .toUpperCase(),
+
+          action:
+            action || "toggle",
+
+          timestamp:
+            Date.now()
+
+        }
+      }
+    )
+
+  );
 
 }
 
@@ -189,14 +283,18 @@ function applyMarketFilters() {
   ) {
 
     const watchlist =
-      loadWatchlist();
+      getNormalizedWatchlist();
 
 
     data =
       data.filter(
         coin =>
           watchlist.includes(
-            coin.symbol
+            String(
+              coin.symbol || ""
+            )
+              .trim()
+              .toUpperCase()
           )
       );
 
@@ -246,7 +344,7 @@ function applyMarketFilters() {
 
     data =
       [...data].sort(
-        (a,b) =>
+        (a, b) =>
           Math.abs(
             Number(
               b.change24h
@@ -272,9 +370,10 @@ function applyMarketFilters() {
 
 
   data.sort(
-    (a,b) => {
+    (a, b) => {
 
       let valueA = 0;
+
       let valueB = 0;
 
 
@@ -515,12 +614,8 @@ function renderMarketCard(
       : "";
 
 
-  const watchlist =
-    loadWatchlist();
-
-
   const isFavorite =
-    watchlist.includes(
+    isCoinInWatchlist(
       coin.symbol
     );
 
@@ -583,6 +678,7 @@ function renderMarketCard(
           ${coin.symbol}
         </div>
 
+
         <div class="coin-pair">
           ${coin.name}
         </div>
@@ -621,10 +717,28 @@ function renderMarketCard(
 
 
       <button
+        type="button"
         class="watch-btn"
         data-symbol="${coin.symbol}"
-        title="Watchlist"
-        aria-label="Watchlist ${coin.symbol}"
+        title="${
+          isFavorite
+            ? "Hapus dari Watchlist"
+            : "Tambah ke Watchlist"
+        }"
+        aria-label="${
+          isFavorite
+            ? "Hapus "
+            : "Tambah "
+        }${coin.symbol} ${
+          isFavorite
+            ? "dari"
+            : "ke"
+        } Watchlist"
+        aria-pressed="${
+          isFavorite
+            ? "true"
+            : "false"
+        }"
         style="
           border:0;
           background:none;
@@ -859,6 +973,7 @@ function renderPagination(
           : ""
       }
     >
+
       ›
 
     </button>
@@ -926,13 +1041,21 @@ function initMarketEvents() {
 
 
         const symbol =
-          watch.dataset.symbol;
+          String(
+            watch.dataset.symbol ||
+            ""
+          )
+            .trim()
+            .toUpperCase();
+
+
+        if (!symbol) return;
 
 
         /* STATUS SEBELUM */
 
         const beforeWatchlist =
-          loadWatchlist();
+          getNormalizedWatchlist();
 
 
         const wasFavorite =
@@ -951,7 +1074,7 @@ function initMarketEvents() {
         /* STATUS SESUDAH */
 
         const afterWatchlist =
-          loadWatchlist();
+          getNormalizedWatchlist();
 
 
         const isFavoriteNow =
@@ -978,6 +1101,24 @@ function initMarketEvents() {
 
         }
 
+
+        /* WATCHLIST EVENT */
+
+        emitWatchlistChanged(
+
+          symbol,
+
+          isFavoriteNow
+            ? "added"
+            : "removed"
+
+        );
+
+
+        /*
+         * Render ulang agar
+         * bintang langsung berubah.
+         */
 
         applyMarketFilters();
 
@@ -1031,11 +1172,14 @@ function initMarketEvents() {
 
 
         const maxPage =
-          Math.ceil(
-            MARKET_STATE
-              .filtered
-              .length /
-            MARKET_STATE.perPage
+          Math.max(
+            1,
+            Math.ceil(
+              MARKET_STATE
+                .filtered
+                .length /
+              MARKET_STATE.perPage
+            )
           );
 
 
@@ -1245,6 +1389,45 @@ function initMarketEvents() {
 
 
       applyMarketFilters();
+
+    }
+  );
+
+
+  /* =========================================
+     WATCHLIST EXTERNAL SYNC
+  ========================================= */
+
+  window.addEventListener(
+    "nextra:watchlist-changed",
+    event => {
+
+      const detail =
+        event.detail || {};
+
+
+      const symbol =
+        String(
+          detail.symbol || ""
+        )
+          .trim()
+          .toUpperCase();
+
+
+      /*
+       * Kalau Watchlist berubah
+       * dari halaman lain,
+       * refresh filter dan bintang.
+       */
+
+      if (
+        symbol ||
+        MARKET_STATE.watchlistOnly
+      ) {
+
+        applyMarketFilters();
+
+      }
 
     }
   );
