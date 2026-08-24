@@ -2,11 +2,22 @@
 <html lang="id">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#05070a"
+  >
+
+  <meta
+    name="description"
+    content="NEXTRA — Your Market. Your Intelligence."
   >
 
   <title>NEXTRA — More</title>
@@ -23,14 +34,18 @@
     ================================================= */
 
     .more-hero {
+
       position: relative;
+
       overflow: hidden;
 
       padding: 20px;
 
       margin-bottom: 24px;
 
-      border: 1px solid var(--line);
+      border:
+        1px solid var(--line);
+
       border-radius: 20px;
 
       background:
@@ -45,26 +60,37 @@
           transparent 50%
         ),
         var(--surface);
+
     }
 
+
     .more-hero-label {
+
       display: flex;
+
       align-items: center;
+
       gap: 7px;
 
       color: var(--green);
 
       font-size: 9px;
+
       font-weight: 800;
 
       letter-spacing: 1.3px;
+
       text-transform: uppercase;
+
     }
 
+
     .more-hero-label::before {
+
       content: "";
 
       width: 6px;
+
       height: 6px;
 
       border-radius: 50%;
@@ -74,18 +100,26 @@
       box-shadow:
         0 0 10px
         rgba(57,242,160,.7);
+
     }
 
+
     .more-title {
-      margin: 10px 0 6px;
+
+      margin:
+        10px 0 6px;
 
       font-size: 25px;
+
       line-height: 1.1;
 
       letter-spacing: -.05em;
+
     }
 
+
     .more-description {
+
       margin: 0;
 
       max-width: 300px;
@@ -93,7 +127,9 @@
       color: var(--muted);
 
       font-size: 10px;
+
       line-height: 1.65;
+
     }
 
 
@@ -102,32 +138,47 @@
     ================================================= */
 
     .more-section {
+
       margin-top: 23px;
+
     }
+
 
     .more-section:first-of-type {
+
       margin-top: 0;
+
     }
+
 
     .more-section-header {
+
       margin-bottom: 10px;
+
     }
 
+
     .more-section-title {
+
       margin: 0;
 
       font-size: 15px;
+
       font-weight: 800;
 
       letter-spacing: -.02em;
+
     }
 
+
     .more-section-subtitle {
+
       margin-top: 3px;
 
       color: var(--muted);
 
       font-size: 8px;
+
     }
 
 
@@ -136,19 +187,25 @@
     ================================================= */
 
     .more-list {
+
       display: flex;
+
       flex-direction: column;
 
-      border: 1px solid var(--line);
+      border:
+        1px solid var(--line);
 
       border-radius: 17px;
 
       overflow: hidden;
 
       background: var(--surface);
+
     }
 
+
     .more-item {
+
       position: relative;
 
       display: flex;
@@ -159,45 +216,63 @@
 
       min-height: 68px;
 
-      padding: 10px 13px;
+      padding:
+        10px 13px;
 
-      border-bottom: 1px solid var(--line);
+      border-bottom:
+        1px solid var(--line);
 
       text-decoration: none;
 
       transition:
         background .18s ease,
         transform .18s ease;
+
     }
+
 
     .more-item:last-child {
+
       border-bottom: 0;
+
     }
+
 
     .more-item:hover {
+
       background:
         rgba(255,255,255,.025);
+
     }
 
+
     .more-item:active {
+
       background:
         rgba(57,242,160,.045);
 
-      transform: scale(.99);
+      transform:
+        scale(.99);
+
     }
 
 
-    /* ICON BOX */
+    /* =================================================
+       ICON BOX
+    ================================================= */
 
     .more-icon {
+
       flex-shrink: 0;
 
       width: 39px;
+
       height: 39px;
 
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       border-radius: 12px;
@@ -210,10 +285,14 @@
       border:
         1px solid
         rgba(57,242,160,.08);
+
     }
 
+
     .more-icon svg {
+
       width: 19px;
+
       height: 19px;
 
       fill: none;
@@ -223,25 +302,36 @@
       stroke-width: 1.8;
 
       stroke-linecap: round;
+
       stroke-linejoin: round;
+
     }
 
 
-    /* TEXT */
+    /* =================================================
+       TEXT
+    ================================================= */
 
     .more-item-content {
+
       flex: 1;
 
       min-width: 0;
+
     }
 
+
     .more-item-title {
+
       font-size: 11px;
 
       font-weight: 800;
+
     }
 
+
     .more-item-description {
+
       margin-top: 4px;
 
       color: var(--muted);
@@ -249,12 +339,16 @@
       font-size: 8px;
 
       line-height: 1.35;
+
     }
 
 
-    /* ARROW */
+    /* =================================================
+       ARROW
+    ================================================= */
 
     .more-arrow {
+
       color: var(--subtle);
 
       font-size: 17px;
@@ -262,13 +356,77 @@
       transition:
         transform .18s ease,
         color .18s ease;
+
     }
 
+
     .more-item:hover .more-arrow {
+
       color: var(--green);
 
       transform:
         translateX(2px);
+
+    }
+
+
+    /* =================================================
+       WATCHLIST HIGHLIGHT
+    ================================================= */
+
+    .watchlist-menu-item
+    .more-icon {
+
+      color: var(--green);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(57,242,160,.12),
+          rgba(53,207,255,.08)
+        );
+
+    }
+
+
+    .watchlist-menu-item
+    .more-item-title {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+    }
+
+
+    .watchlist-badge {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-width: 18px;
+
+      height: 17px;
+
+      padding:
+        0 5px;
+
+      border-radius: 20px;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.08);
+
+      font-size: 8px;
+
+      font-weight: 900;
+
     }
 
 
@@ -277,15 +435,19 @@
     ================================================= */
 
     .quick-grid {
+
       display: grid;
 
       grid-template-columns:
         repeat(2, 1fr);
 
       gap: 9px;
+
     }
 
+
     .quick-card {
+
       position: relative;
 
       min-height: 105px;
@@ -309,28 +471,39 @@
         transform .18s ease,
         border-color .18s ease,
         background .18s ease;
+
     }
 
+
     .quick-card:hover {
+
       transform:
         translateY(-2px);
 
       border-color:
         rgba(57,242,160,.22);
+
     }
+
 
     .quick-card:active {
+
       transform:
         scale(.98);
+
     }
 
+
     .quick-icon {
+
       width: 34px;
+
       height: 34px;
 
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       margin-bottom: 12px;
@@ -341,10 +514,14 @@
 
       background:
         rgba(57,242,160,.07);
+
     }
 
+
     .quick-icon svg {
+
       width: 18px;
+
       height: 18px;
 
       fill: none;
@@ -354,16 +531,23 @@
       stroke-width: 1.8;
 
       stroke-linecap: round;
+
       stroke-linejoin: round;
+
     }
 
+
     .quick-name {
+
       font-size: 10px;
 
       font-weight: 800;
+
     }
 
+
     .quick-description {
+
       margin-top: 4px;
 
       color: var(--muted);
@@ -371,17 +555,22 @@
       font-size: 7.5px;
 
       line-height: 1.4;
+
     }
 
+
     .quick-arrow {
+
       position: absolute;
 
       right: 12px;
+
       bottom: 11px;
 
       color: var(--subtle);
 
       font-size: 11px;
+
     }
 
 
@@ -390,32 +579,43 @@
     ================================================= */
 
     .more-footer {
+
       margin-top: 30px;
 
       padding:
         8px 0 22px;
 
       text-align: center;
+
     }
 
+
     .more-footer-logo {
+
       font-size: 12px;
 
       font-weight: 900;
 
       letter-spacing: -.04em;
+
     }
+
 
     .more-footer-logo span {
+
       color: var(--green);
+
     }
 
+
     .more-footer-text {
+
       margin-top: 4px;
 
       color: var(--subtle);
 
       font-size: 7px;
+
     }
 
 
@@ -426,21 +626,30 @@
     @media (max-width: 360px) {
 
       .more-item {
+
         min-height: 64px;
 
         padding:
           9px 11px;
+
       }
+
 
       .more-icon {
+
         width: 36px;
+
         height: 36px;
+
       }
 
+
       .quick-card {
+
         min-height: 100px;
 
         padding: 12px;
+
       }
 
     }
@@ -451,6 +660,7 @@
 
 
 <body>
+
 
 <main class="container">
 
@@ -479,6 +689,7 @@
       id="theme-toggle"
       title="Ganti tema"
       aria-label="Ganti tema"
+      type="button"
     >
       ◐
     </button>
@@ -497,14 +708,17 @@
       NEXTRA HUB
     </div>
 
+
     <h2 class="more-title">
       Everything you need.
     </h2>
 
+
     <p class="more-description">
-      Akses tools, intelligence, community,
-      education, dan pengaturan akun NEXTRA
-      dari satu tempat.
+      Akses tools, intelligence,
+      community, education,
+      watchlist, dan pengaturan
+      akun NEXTRA dari satu tempat.
     </p>
 
   </section>
@@ -523,6 +737,7 @@
         Explore
       </h2>
 
+
       <div class="more-section-subtitle">
         Tools & features untuk trader
       </div>
@@ -531,6 +746,65 @@
 
 
     <div class="more-list">
+
+
+      <!-- WATCHLIST -->
+
+      <a
+        href="watchlist.html"
+        class="more-item watchlist-menu-item"
+      >
+
+        <div class="more-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path
+              d="
+                M20 8.5
+                c0-2.2-1.8-4-4-4
+                -1.5 0-3.1.9-4 2.2
+                -.9-1.3-2.5-2.2-4-2.2
+                -2.2 0-4 1.8-4 4
+                0 5 8 10.5 8 10.5
+                s8-5.5 8-10.5Z
+              "
+            />
+
+          </svg>
+
+        </div>
+
+
+        <div class="more-item-content">
+
+          <div class="more-item-title">
+
+            Watchlist
+
+            <span
+              class="watchlist-badge"
+              id="more-watchlist-count"
+            >
+              0
+            </span>
+
+          </div>
+
+
+          <div class="more-item-description">
+            Pantau crypto favoritmu
+          </div>
+
+        </div>
+
+
+        <div class="more-arrow">
+          ›
+        </div>
+
+      </a>
+
 
 
       <!-- TOOLS -->
@@ -544,7 +818,15 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M14.7 6.3a4.2 4.2 0 0 0-5.6 5.6L4 17v3h3l5.1-5.1a4.2 4.2 0 0 0 5.6-5.6l-2.1 2.1-2.8-.8-.8-2.8z"/>
+            <path
+              d="
+                M14.7 6.3
+                a4.2 4.2 0 0 0-5.6 5.6
+                L4 17v3h3l5.1-5.1
+                a4.2 4.2 0 0 0 5.6-5.6
+                l-2.1 2.1-2.8-.8-.8-2.8z
+              "
+            />
 
           </svg>
 
@@ -556,6 +838,7 @@
           <div class="more-item-title">
             Tools
           </div>
+
 
           <div class="more-item-description">
             Position Size · R/R · P&L · Liquidation
@@ -583,7 +866,14 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M9 4.5a6 6 0 0 0-2 11.7V19h10v-2.8A6 6 0 0 0 15 4.5"/>
+            <path
+              d="
+                M9 4.5
+                a6 6 0 0 0-2 11.7
+                V19h10v-2.8
+                A6 6 0 0 0 15 4.5
+              "
+            />
 
             <path d="M9 22h6"/>
 
@@ -601,6 +891,7 @@
           <div class="more-item-title">
             Intelligence
           </div>
+
 
           <div class="more-item-description">
             AI Market Analysis & Insights
@@ -628,7 +919,16 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20"/>
+            <path
+              d="
+                M16 20
+                v-1.5
+                a4 4 0 0 0-4-4
+                H7
+                a4 4 0 0 0-4 4
+                V20
+              "
+            />
 
             <circle
               cx="9.5"
@@ -636,9 +936,20 @@
               r="3"
             />
 
-            <path d="M16 11a3 3 0 1 0 0-6"/>
+            <path
+              d="
+                M16 11
+                a3 3 0 1 0 0-6
+              "
+            />
 
-            <path d="M17 14.5a4 4 0 0 1 4 4V20"/>
+            <path
+              d="
+                M17 14.5
+                a4 4 0 0 1 4 4
+                V20
+              "
+            />
 
           </svg>
 
@@ -650,6 +961,7 @@
           <div class="more-item-title">
             Community
           </div>
+
 
           <div class="more-item-description">
             Discuss · Share · Learn with traders
@@ -677,7 +989,16 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/>
+            <path
+              d="
+                M4 5.5
+                A2.5 2.5 0 0 1 6.5 3
+                H20
+                v16
+                H6.5
+                A2.5 2.5 0 0 0 4 21z
+              "
+            />
 
             <path d="M4 5.5v15"/>
 
@@ -695,6 +1016,7 @@
           <div class="more-item-title">
             Learn
           </div>
+
 
           <div class="more-item-description">
             Crypto Education Hub
@@ -729,7 +1051,10 @@
             />
 
             <path
-              d="M5 21a7 7 0 0 1 14 0"
+              d="
+                M5 21
+                a7 7 0 0 1 14 0
+              "
             />
 
           </svg>
@@ -742,6 +1067,7 @@
           <div class="more-item-title">
             Profile
           </div>
+
 
           <div class="more-item-description">
             Account & Preferences
@@ -774,6 +1100,7 @@
       <h2 class="more-section-title">
         Quick Access
       </h2>
+
 
       <div class="more-section-subtitle">
         Jump langsung ke market
@@ -810,13 +1137,16 @@
 
         </div>
 
+
         <div class="quick-name">
           Markets
         </div>
 
+
         <div class="quick-description">
           Explore crypto markets
         </div>
+
 
         <div class="quick-arrow">
           →
@@ -837,11 +1167,26 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M12 20a8 8 0 1 0-8-8"/>
+            <path
+              d="
+                M12 20
+                a8 8 0 1 0-8-8
+              "
+            />
 
-            <path d="M12 16a4 4 0 1 0-4-4"/>
+            <path
+              d="
+                M12 16
+                a4 4 0 1 0-4-4
+              "
+            />
 
-            <path d="M12 12 19.5 4.5"/>
+            <path
+              d="
+                M12 12
+                19.5 4.5
+              "
+            />
 
             <circle
               cx="12"
@@ -855,13 +1200,16 @@
 
         </div>
 
+
         <div class="quick-name">
           Radar
         </div>
 
+
         <div class="quick-description">
           Find market opportunities
         </div>
+
 
         <div class="quick-arrow">
           →
@@ -892,13 +1240,16 @@
 
         </div>
 
+
         <div class="quick-name">
           Futures
         </div>
 
+
         <div class="quick-description">
           Futures market & data
         </div>
+
 
         <div class="quick-arrow">
           →
@@ -919,90 +1270,7 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M3.5 10.7 12 3.8l8.5 6.9v9.1a1.7 1.7 0 0 1-1.7 1.7H5.2a1.7 1.7 0 0 1-1.7-1.7z"/>
-
-            <path d="M9 21.5v-6.8h6v6.8"/>
-
-          </svg>
-
-        </div>
-
-        <div class="quick-name">
-          Home
-        </div>
-
-        <div class="quick-description">
-          Back to dashboard
-        </div>
-
-        <div class="quick-arrow">
-          →
-        </div>
-
-      </a>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =================================================
-       FOOTER
-  ================================================= -->
-
-  <footer class="more-footer">
-
-    <div class="more-footer-logo">
-      NEXTRA<span>.</span>
-    </div>
-
-    <div class="more-footer-text">
-      Your Market. Your Intelligence.
-    </div>
-
-  </footer>
-
-
-</main>
-
-
-
-<!-- =================================================
-     BOTTOM NAV
-================================================= -->
-
-<div id="bottom-nav"></div>
-
-
-
-<script src="js/app.js"></script>
-
-
-<script>
-
-  document
-    .getElementById("theme-toggle")
-    ?.addEventListener(
-      "click",
-      () => {
-
-        if (
-          typeof toggleTheme ===
-          "function"
-        ) {
-
-          toggleTheme();
-
-        }
-
-      }
-    );
-
-</script>
-
-
-</body>
-
-</html>
+            <path
+              d="
+                M3.5 10.7
+                12 3.
