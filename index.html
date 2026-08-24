@@ -360,6 +360,158 @@
       text-align: center;
     }
 
+    /* =====================================================
+       NEXTRA INFO
+    ===================================================== */
+
+    .nextra-info {
+      margin-top: 28px;
+    }
+
+    .nextra-info-header {
+      margin-bottom: 11px;
+    }
+
+    .nextra-info-title {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .nextra-info-subtitle {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .nextra-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .nextra-info-card {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease;
+    }
+
+    .nextra-info-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(57,242,160,.25);
+      background: rgba(57,242,160,.025);
+    }
+
+    .nextra-info-icon {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9px;
+      background: rgba(57,242,160,.07);
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .nextra-info-icon.warning {
+      color: #ffb84d;
+      background: rgba(255,184,77,.08);
+    }
+
+    .nextra-info-card span:nth-child(2) {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .nextra-info-card strong {
+      display: block;
+      font-size: 8.5px;
+      font-weight: 800;
+    }
+
+    .nextra-info-card small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 6.8px;
+      line-height: 1.3;
+    }
+
+    .nextra-info-card b {
+      color: var(--subtle);
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    /* =====================================================
+       AUTH BUTTON
+    ===================================================== */
+
+    .nextra-auth-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+
+      min-width: 72px;
+      height: 34px;
+
+      padding: 0 11px;
+
+      border: 1px solid var(--line);
+      border-radius: 10px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      transition:
+        .18s ease;
+    }
+
+    .nextra-auth-btn:hover {
+      color: var(--green);
+      border-color: rgba(57,242,160,.3);
+      background: rgba(57,242,160,.04);
+    }
+
+    .nextra-auth-icon {
+      width: 15px;
+      height: 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: rgba(57,242,160,.08);
+      color: var(--green);
+
+      font-size: 8px;
+    }
+
     @media (max-width: 360px) {
 
       .hero-title {
@@ -382,186 +534,22 @@
         padding: 0 12px;
       }
 
+      .nextra-info-grid {
+        gap: 6px;
+      }
+
+      .nextra-info-card {
+        padding: 8px;
+        gap: 7px;
+      }
+
+      .nextra-info-icon {
+        width: 27px;
+        height: 27px;
+      }
+
     }
-/* =====================================================
-   NEXTRA INFO
-===================================================== */
 
-.nextra-info {
-  margin-top: 28px;
-}
-
-
-.nextra-info-header {
-  margin-bottom: 11px;
-}
-
-
-.nextra-info-title {
-  margin: 0;
-
-  font-size: 16px;
-  font-weight: 800;
-
-  letter-spacing: -.03em;
-}
-
-
-.nextra-info-subtitle {
-  margin: 3px 0 0;
-
-  color: var(--muted);
-
-  font-size: 8px;
-}
-
-
-.nextra-info-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 8px;
-}
-
-
-.nextra-info-card {
-  min-height: 66px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 9px;
-
-  padding: 10px;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius: 14px;
-
-  background:
-    var(--surface);
-
-  color: var(--text);
-
-  text-decoration: none;
-
-  transition:
-    transform .18s ease,
-    border-color .18s ease,
-    background .18s ease;
-}
-
-
-.nextra-info-card:hover {
-
-  transform:
-    translateY(-2px);
-
-  border-color:
-    rgba(57,242,160,.25);
-
-  background:
-    rgba(57,242,160,.025);
-
-}
-
-
-.nextra-info-icon {
-  width: 30px;
-  height: 30px;
-
-  flex-shrink: 0;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 9px;
-
-  background:
-    rgba(57,242,160,.07);
-
-  color:
-    var(--green);
-
-  font-size: 13px;
-
-  font-weight: 900;
-}
-
-
-.nextra-info-icon.warning {
-  color: #ffb84d;
-
-  background:
-    rgba(255,184,77,.08);
-}
-
-
-.nextra-info-card span:nth-child(2) {
-  min-width: 0;
-
-  flex: 1;
-}
-
-
-.nextra-info-card strong {
-  display: block;
-
-  font-size: 8.5px;
-
-  font-weight: 800;
-}
-
-
-.nextra-info-card small {
-  display: block;
-
-  margin-top: 3px;
-
-  color:
-    var(--muted);
-
-  font-size: 6.8px;
-
-  line-height: 1.3;
-}
-
-
-.nextra-info-card b {
-  color:
-    var(--subtle);
-
-  font-size: 10px;
-
-  font-weight: 500;
-}
-
-
-@media (max-width: 360px) {
-
-  .nextra-info-grid {
-    gap: 6px;
-  }
-
-  .nextra-info-card {
-    padding: 8px;
-
-    gap: 7px;
-  }
-
-  .nextra-info-icon {
-    width: 27px;
-    height: 27px;
-  }
-
-}
   </style>
 
 </head>
@@ -585,14 +573,49 @@
 
     </div>
 
-    <button
-      class="icon-btn"
-      id="theme-toggle"
-      title="Ganti tema"
-      aria-label="Ganti tema"
+
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        gap:7px;
+      "
     >
-      ◐
-    </button>
+
+      <!-- AUTH BUTTON -->
+
+      <a
+        href="login.html"
+        id="auth-button"
+        class="nextra-auth-btn"
+      >
+
+        <span
+          class="nextra-auth-icon"
+          id="auth-icon"
+        >
+          ↪
+        </span>
+
+        <span id="auth-text">
+          Login
+        </span>
+
+      </a>
+
+
+      <!-- THEME -->
+
+      <button
+        class="icon-btn"
+        id="theme-toggle"
+        title="Ganti tema"
+        aria-label="Ganti tema"
+      >
+        ◐
+      </button>
+
+    </div>
 
   </header>
 
@@ -904,9 +927,8 @@
 
   </section>
 
-    <!-- =====================================================
-       NEXTRA INFO
-  ====================================================== -->
+
+  <!-- NEXTRA INFO -->
 
   <section class="nextra-info">
 
@@ -1086,6 +1108,7 @@
 
   </section>
 
+
   <footer class="home-footer">
 
     NEXTRA · Your Market. Your Intelligence.
@@ -1099,11 +1122,173 @@
 <div id="bottom-nav"></div>
 
 
+<!-- =====================================================
+     NEXTRA APP
+===================================================== -->
+
 <script src="js/app.js"></script>
 <script src="js/api.js"></script>
 
 
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script>
+
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
+
+const SUPABASE_URL =
+  "https://uvtbntwgooxqjbyjkvkd.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* =====================================================
+   AUTH UI
+===================================================== */
+
+async function updateAuthButton() {
+
+  const button =
+    document.getElementById(
+      "auth-button"
+    );
+
+  const text =
+    document.getElementById(
+      "auth-text"
+    );
+
+  const icon =
+    document.getElementById(
+      "auth-icon"
+    );
+
+
+  if (
+    !button ||
+    !text ||
+    !icon
+  ) {
+    return;
+  }
+
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
+
+
+    if (error) {
+
+      console.error(
+        "Session error:",
+        error
+      );
+
+      return;
+
+    }
+
+
+    const session =
+      data?.session;
+
+
+    if (session) {
+
+      /*
+       * USER SUDAH LOGIN
+       */
+
+      button.href =
+        "profile.html";
+
+
+      text.textContent =
+        "Profile";
+
+
+      icon.textContent =
+        "●";
+
+
+      button.title =
+        "Buka profile";
+
+
+    } else {
+
+      /*
+       * USER BELUM LOGIN
+       */
+
+      button.href =
+        "login.html";
+
+
+      text.textContent =
+        "Login";
+
+
+      icon.textContent =
+        "↪";
+
+
+      button.title =
+        "Masuk ke NEXTRA";
+
+    }
+
+
+  } catch(error) {
+
+    console.error(
+      "Auth UI error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   AUTH STATE LISTENER
+===================================================== */
+
+supabaseClient
+  .auth
+  .onAuthStateChange(
+    (
+      event,
+      session
+    ) => {
+
+      updateAuthButton();
+
+    }
+  );
+
 
 /* =====================================================
    HOME MARKET
@@ -1505,6 +1690,8 @@ document.addEventListener(
   () => {
 
     loadHomeMarkets();
+
+    updateAuthButton();
 
   }
 );
