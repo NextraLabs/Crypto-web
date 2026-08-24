@@ -1,160 +1,508 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#05070a"
+  >
 
   <title>Daftar — NEXTRA</title>
 
+
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+
     body {
+
       min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #05070a;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background:
+        #05070a;
+
+      color:
+        #fff;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      padding:
+        20px;
+
     }
+
 
     .register-box {
-      width: 100%;
-      max-width: 400px;
-      background: #0c1013;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 22px;
-      padding: 30px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.45);
+
+      width:
+        100%;
+
+      max-width:
+        400px;
+
+      background:
+        #0c1013;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius:
+        22px;
+
+      padding:
+        30px;
+
+      box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.45);
+
     }
+
 
     .logo {
-      text-align: center;
-      margin-bottom: 26px;
+
+      text-align:
+        center;
+
+      margin-bottom:
+        26px;
+
     }
+
 
     .logo h1 {
-      font-size: 34px;
+
+      font-size:
+        34px;
+
+      letter-spacing:
+        -1px;
+
     }
+
 
     .logo span {
-      color: #42f5a7;
+
+      color:
+        #42f5a7;
+
     }
+
 
     .logo p {
-      color: #7f8a91;
-      font-size: 12px;
-      margin-top: 6px;
+
+      color:
+        #7f8a91;
+
+      font-size:
+        12px;
+
+      margin-top:
+        6px;
+
     }
+
 
     h2 {
-      font-size: 22px;
-      margin-bottom: 7px;
+
+      font-size:
+        22px;
+
+      margin-bottom:
+        7px;
+
     }
+
 
     .subtitle {
-      color: #7f8a91;
-      font-size: 12px;
-      margin-bottom: 22px;
+
+      color:
+        #7f8a91;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        22px;
+
+      line-height:
+        1.5;
+
     }
+
 
     label {
-      display: block;
-      font-size: 12px;
-      margin-bottom: 7px;
+
+      display:
+        block;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        7px;
+
     }
+
 
     input {
-      width: 100%;
-      height: 46px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: #12171a;
-      color: white;
-      padding: 0 14px;
-      outline: none;
-      margin-bottom: 16px;
+
+      width:
+        100%;
+
+      height:
+        46px;
+
+      border-radius:
+        12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
+      background:
+        #12171a;
+
+      color:
+        white;
+
+      padding:
+        0 14px;
+
+      outline:
+        none;
+
+      margin-bottom:
+        16px;
+
+      transition:
+        .2s ease;
+
     }
+
 
     input:focus {
-      border-color: #42f5a7;
+
+      border-color:
+        #42f5a7;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(66,245,167,.06);
+
     }
+
+
+    input::placeholder {
+
+      color:
+        #59636a;
+
+    }
+
 
     button {
-      width: 100%;
-      height: 46px;
-      border: none;
-      border-radius: 12px;
-      background: #42f5a7;
-      color: #06100b;
-      font-weight: bold;
-      cursor: pointer;
+
+      width:
+        100%;
+
+      height:
+        46px;
+
+      border:
+        none;
+
+      border-radius:
+        12px;
+
+      background:
+        #42f5a7;
+
+      color:
+        #06100b;
+
+      font-weight:
+        bold;
+
+      cursor:
+        pointer;
+
+      transition:
+        .2s ease;
+
     }
+
+
+    button:hover {
+
+      filter:
+        brightness(1.05);
+
+    }
+
+
+    button:active {
+
+      transform:
+        scale(.98);
+
+    }
+
+
+    button:disabled {
+
+      opacity:
+        .6;
+
+      cursor:
+        not-allowed;
+
+      transform:
+        none;
+
+    }
+
 
     .message {
-      display: none;
-      padding: 11px;
-      border-radius: 10px;
-      font-size: 12px;
-      margin-bottom: 15px;
+
+      display:
+        none;
+
+      padding:
+        12px;
+
+      border-radius:
+        10px;
+
+      font-size:
+        12px;
+
+      margin-bottom:
+        15px;
+
+      line-height:
+        1.55;
+
     }
+
 
     .message.show {
-      display: block;
+
+      display:
+        block;
+
     }
+
 
     .error {
-      background: rgba(255,70,70,.1);
-      color: #ff8585;
+
+      background:
+        rgba(255,70,70,.1);
+
+      color:
+        #ff8585;
+
+      border:
+        1px solid
+        rgba(255,70,70,.12);
+
     }
+
 
     .success {
-      background: rgba(66,245,167,.1);
-      color: #42f5a7;
+
+      background:
+        rgba(66,245,167,.1);
+
+      color:
+        #42f5a7;
+
+      border:
+        1px solid
+        rgba(66,245,167,.12);
+
     }
+
 
     .links {
-      text-align: center;
-      margin-top: 18px;
-      font-size: 12px;
-      color: #7f8a91;
+
+      text-align:
+        center;
+
+      margin-top:
+        18px;
+
+      font-size:
+        12px;
+
+      color:
+        #7f8a91;
+
     }
 
+
     a {
-      color: #42f5a7;
-      text-decoration: none;
+
+      color:
+        #42f5a7;
+
+      text-decoration:
+        none;
+
     }
+
+
+    a:hover {
+
+      text-decoration:
+        underline;
+
+    }
+
+
+    .back-home {
+
+      margin-top:
+        14px;
+
+    }
+
+
+    .password-hint {
+
+      margin-top:
+        -9px;
+
+      margin-bottom:
+        16px;
+
+      color:
+        #59636a;
+
+      font-size:
+        10px;
+
+    }
+
+
+    @media (max-width: 360px) {
+
+      .register-box {
+
+        padding:
+          24px;
+
+      }
+
+
+      .logo h1 {
+
+        font-size:
+          30px;
+
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <div class="register-box">
 
+
+    <!-- LOGO -->
+
     <div class="logo">
-      <h1>NEXTRA<span>.</span></h1>
-      <p>Your Market. Your Intelligence.</p>
+
+      <h1>
+
+        NEXTRA<span>.</span>
+
+      </h1>
+
+
+      <p>
+
+        Your Market. Your Intelligence.
+
+      </p>
+
     </div>
 
-    <h2>Buat akun</h2>
+
+
+    <!-- TITLE -->
+
+    <h2>
+
+      Buat akun
+
+    </h2>
+
 
     <p class="subtitle">
+
       Bergabung dengan NEXTRA sekarang.
+
     </p>
 
-    <div id="message" class="message"></div>
 
-    <form id="registerForm">
+
+    <!-- MESSAGE -->
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+
+    <!-- FORM -->
+
+    <form
+      id="registerForm"
+      novalidate
+    >
+
+
+      <!-- USERNAME -->
 
       <label for="username">
+
         Username
+
       </label>
+
 
       <input
         type="text"
@@ -162,12 +510,20 @@
         placeholder="contoh: mankami"
         autocomplete="username"
         minlength="3"
+        maxlength="20"
         required
       >
 
+
+
+      <!-- EMAIL -->
+
       <label for="email">
+
         Email
+
       </label>
+
 
       <input
         type="email"
@@ -177,9 +533,16 @@
         required
       >
 
+
+
+      <!-- PASSWORD -->
+
       <label for="password">
+
         Password
+
       </label>
+
 
       <input
         type="password"
@@ -190,9 +553,23 @@
         required
       >
 
+
+      <div class="password-hint">
+
+        Gunakan minimal 6 karakter.
+
+      </div>
+
+
+
+      <!-- CONFIRM PASSWORD -->
+
       <label for="confirmPassword">
+
         Konfirmasi Password
+
       </label>
+
 
       <input
         type="password"
@@ -203,29 +580,78 @@
         required
       >
 
-      <button type="submit">
+
+
+      <!-- BUTTON -->
+
+      <button
+        id="registerButton"
+        type="submit"
+      >
+
         Buat Akun
+
       </button>
+
 
     </form>
 
+
+
+    <!-- LOGIN -->
+
     <div class="links">
+
       Sudah punya akun?
-      <a href="login.html">Masuk</a>
+
+      <a href="login.html">
+
+        Masuk
+
+      </a>
+
     </div>
+
+
+
+    <!-- HOME -->
+
+    <div class="links back-home">
+
+      <a href="index.html">
+
+        ← Kembali ke NEXTRA
+
+      </a>
+
+    </div>
+
 
   </div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- SUPABASE -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+
 
   <script>
+
+    /* =====================================================
+       SUPABASE CONFIG
+    ====================================================== */
 
     const SUPABASE_URL =
       "https://uvtbntwgooxqjbyjkvkd.supabase.co";
 
+
     const SUPABASE_KEY =
       "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+
 
     const supabaseClient =
       window.supabase.createClient(
@@ -234,8 +660,523 @@
       );
 
 
+
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
+
     const form =
-      document.getElementById("registerForm");
+      document.getElementById(
+        "registerForm"
+      );
+
+
+    const usernameInput =
+      document.getElementById(
+        "username"
+      );
+
+
+    const emailInput =
+      document.getElementById(
+        "email"
+      );
+
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+
+    const confirmPasswordInput =
+      document.getElementById(
+        "confirmPassword"
+      );
+
+
+    const registerButton =
+      document.getElementById(
+        "registerButton"
+      );
+
 
     const message =
-      document
+      document.getElementById(
+        "message"
+      );
+
+
+
+    /* =====================================================
+       MESSAGE
+    ====================================================== */
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      message.textContent =
+        text;
+
+      message.className =
+        "message show " +
+        type;
+
+    }
+
+
+
+    function clearMessage() {
+
+      message.textContent =
+        "";
+
+      message.className =
+        "message";
+
+    }
+
+
+
+    /* =====================================================
+       USERNAME CLEANER
+    ====================================================== */
+
+    function cleanUsername(
+      value
+    ) {
+
+      return value
+        .trim()
+        .toLowerCase()
+        .replace(
+          /[^a-z0-9_]/g,
+          ""
+        )
+        .slice(
+          0,
+          20
+        );
+
+    }
+
+
+
+    /* =====================================================
+       REGISTER
+    ====================================================== */
+
+    form.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        clearMessage();
+
+
+
+        /* ---------------------------------------------
+           GET VALUES
+        --------------------------------------------- */
+
+        const username =
+          cleanUsername(
+            usernameInput.value
+          );
+
+
+        const email =
+          emailInput.value
+            .trim()
+            .toLowerCase();
+
+
+        const password =
+          passwordInput.value;
+
+
+        const confirmPassword =
+          confirmPasswordInput.value;
+
+
+
+        /* ---------------------------------------------
+           VALIDATION
+        --------------------------------------------- */
+
+        if (
+          username.length < 3
+        ) {
+
+          showMessage(
+            "Username minimal 3 karakter.",
+            "error"
+          );
+
+          usernameInput.focus();
+
+          return;
+
+        }
+
+
+
+        if (
+          !email
+        ) {
+
+          showMessage(
+            "Masukkan email kamu.",
+            "error"
+          );
+
+          emailInput.focus();
+
+          return;
+
+        }
+
+
+
+        if (
+          password.length < 6
+        ) {
+
+          showMessage(
+            "Password minimal 6 karakter.",
+            "error"
+          );
+
+          passwordInput.focus();
+
+          return;
+
+        }
+
+
+
+        if (
+          password !==
+          confirmPassword
+        ) {
+
+          showMessage(
+            "Konfirmasi password tidak cocok.",
+            "error"
+          );
+
+          confirmPasswordInput.focus();
+
+          return;
+
+        }
+
+
+
+        /* ---------------------------------------------
+           BUTTON STATE
+        --------------------------------------------- */
+
+        registerButton.disabled =
+          true;
+
+        registerButton.textContent =
+          "Membuat akun...";
+
+
+
+        try {
+
+
+          console.log(
+            "NEXTRA signup:",
+            email
+          );
+
+
+
+          /* -------------------------------------------
+             SUPABASE SIGN UP
+          ------------------------------------------- */
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient
+              .auth
+              .signUp({
+
+                email:
+                  email,
+
+                password:
+                  password,
+
+                options: {
+
+                  data: {
+
+                    username:
+                      username,
+
+                    display_name:
+                      username
+
+                  },
+
+
+                  emailRedirectTo:
+                    "https://mankamigurusinga-glitch.github.io/Crypto-web/login.html"
+
+                }
+
+              });
+
+
+
+          /* -------------------------------------------
+             ERROR
+          ------------------------------------------- */
+
+          if (error) {
+
+            console.error(
+              "NEXTRA signup error:",
+              error
+            );
+
+
+            const errorMessage =
+              error.message
+              || "";
+
+
+            if (
+              errorMessage
+                .toLowerCase()
+                .includes(
+                  "already registered"
+                )
+            ) {
+
+              showMessage(
+                "Email ini sudah terdaftar. Silakan masuk.",
+                "error"
+              );
+
+            }
+
+            else if (
+              errorMessage
+                .toLowerCase()
+                .includes(
+                  "password"
+                )
+            ) {
+
+              showMessage(
+                errorMessage,
+                "error"
+              );
+
+            }
+
+            else {
+
+              showMessage(
+                errorMessage ||
+                "Gagal membuat akun. Coba lagi.",
+                "error"
+              );
+
+            }
+
+
+            return;
+
+          }
+
+
+
+          /* -------------------------------------------
+             SUCCESS
+          ------------------------------------------- */
+
+          console.log(
+            "NEXTRA signup success:",
+            data
+          );
+
+
+
+          /*
+             Supabase dengan Confirm Email ON
+             biasanya menghasilkan user tetapi
+             session masih null.
+          */
+
+          if (
+            data.user &&
+            !data.session
+          ) {
+
+
+            showMessage(
+              "Akun berhasil dibuat! Cek email kamu untuk verifikasi akun NEXTRA.",
+              "success"
+            );
+
+
+            form.reset();
+
+
+            registerButton.textContent =
+              "Email Verifikasi Terkirim";
+
+
+            return;
+
+          }
+
+
+
+          /*
+             Jika Confirm Email ternyata OFF,
+             user langsung mendapatkan session.
+          */
+
+          if (
+            data.session
+          ) {
+
+
+            showMessage(
+              "Akun berhasil dibuat! Mengarahkan...",
+              "success"
+            );
+
+
+            setTimeout(
+              () => {
+
+                window.location.href =
+                  "index.html";
+
+              },
+              800
+            );
+
+
+            return;
+
+          }
+
+
+
+          /* -------------------------------------------
+             FALLBACK
+          ------------------------------------------- */
+
+          showMessage(
+            "Akun berhasil dibuat. Silakan cek email kamu.",
+            "success"
+          );
+
+
+          form.reset();
+
+
+        }
+
+        catch(error) {
+
+
+          console.error(
+            "NEXTRA unexpected error:",
+            error
+          );
+
+
+          showMessage(
+            "Terjadi kesalahan saat membuat akun. Coba lagi.",
+            "error"
+          );
+
+
+        }
+
+        finally {
+
+
+          /*
+             Jangan langsung aktifkan kembali
+             tombol jika signup berhasil dan
+             email confirmation sedang menunggu.
+          */
+
+          if (
+            !message.classList.contains(
+              "success"
+            )
+          ) {
+
+            registerButton.disabled =
+              false;
+
+            registerButton.textContent =
+              "Buat Akun";
+
+          }
+
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       PASSWORD ENTER
+    ====================================================== */
+
+    confirmPasswordInput.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          form.requestSubmit();
+
+        }
+
+      }
+    );
+
+
+
+    /* =====================================================
+       INITIAL CHECK
+    ====================================================== */
+
+    console.log(
+      "NEXTRA Auth ready."
+    );
+
+    console.log(
+      "Supabase:",
+      SUPABASE_URL
+    );
+
+  </script>
+
+
+</body>
+
+</html>
