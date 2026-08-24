@@ -1,8 +1,132 @@
-// app.js — Global helpers NEXTRA V4
-// Tidak pakai ES module, langsung global namespace
+// app.js — NEXTRA Global Core V5
 
-const THEME_KEY = "pantau_theme";
-const WATCHLIST_KEY = "pantau_favorites";
+const THEME_KEY = "nextra_theme";
+const WATCHLIST_KEY = "nextra_watchlist";
+
+const LEGACY_THEME_KEY = "pantau_theme";
+const LEGACY_WATCHLIST_KEY = "pantau_favorites";
+
+
+/* =========================================
+   SAFE STORAGE
+========================================= */
+
+function safeStorageGet(key, fallback = null) {
+
+  try {
+
+    const value = localStorage.getItem(key);
+
+    return value === null
+      ? fallback
+      : value;
+
+  } catch (error) {
+
+    console.warn(
+      "NEXTRA storage read failed:",
+      error
+    );
+
+    return fallback;
+
+  }
+
+}
+
+
+function safeStorageSet(key, value) {
+
+  try {
+
+    localStorage.setItem(
+      key,
+      value
+    );
+
+    return true;
+
+  } catch (error) {
+
+    console.warn(
+      "NEXTRA storage write failed:",
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================
+   STORAGE MIGRATION
+========================================= */
+
+function migrateLegacyStorage() {
+
+  try {
+
+    /* THEME */
+
+    if (
+      !localStorage.getItem(
+        THEME_KEY
+      )
+    ) {
+
+      const oldTheme =
+        localStorage.getItem(
+          LEGACY_THEME_KEY
+        );
+
+      if (oldTheme) {
+
+        localStorage.setItem(
+          THEME_KEY,
+          oldTheme
+        );
+
+      }
+
+    }
+
+
+    /* WATCHLIST */
+
+    if (
+      !localStorage.getItem(
+        WATCHLIST_KEY
+      )
+    ) {
+
+      const oldWatchlist =
+        localStorage.getItem(
+          LEGACY_WATCHLIST_KEY
+        );
+
+      if (oldWatchlist) {
+
+        localStorage.setItem(
+          WATCHLIST_KEY,
+          oldWatchlist
+        );
+
+      }
+
+    }
+
+  } catch (error) {
+
+    console.warn(
+      "NEXTRA migration failed:",
+      error
+    );
+
+  }
+
+}
 
 
 /* =========================================
@@ -11,122 +135,162 @@ const WATCHLIST_KEY = "pantau_favorites";
 
 function initTheme() {
 
-  const saved =
-    localStorage.getItem(THEME_KEY) || "dark";
+  migrateLegacyStorage();
 
-  document.documentElement.setAttribute(
-    "data-theme",
+  const saved =
+    safeStorageGet(
+      THEME_KEY,
+      "dark"
+    ) === "light"
+      ? "light"
+      : "dark";
+
+
+  document.documentElement
+    .setAttribute(
+      "data-theme",
+      saved
+    );
+
+
+  updateThemeButtons(
     saved
   );
 
-  updateThemeButtons(saved);
 
   return saved;
+
 }
 
 
 function toggleTheme() {
 
   const current =
-    document.documentElement.getAttribute(
-      "data-theme"
-    ) || "dark";
+    document.documentElement
+      .getAttribute(
+        "data-theme"
+      ) || "dark";
+
 
   const next =
     current === "dark"
       ? "light"
       : "dark";
 
-  document.documentElement.setAttribute(
-    "data-theme",
-    next
-  );
 
-  localStorage.setItem(
+  document.documentElement
+    .setAttribute(
+      "data-theme",
+      next
+    );
+
+
+  safeStorageSet(
     THEME_KEY,
     next
   );
 
-  updateThemeButtons(next);
+
+  updateThemeButtons(
+    next
+  );
+
 
   return next;
+
 }
 
 
-function updateThemeButtons(theme) {
+function updateThemeButtons(
+  theme
+) {
 
   const buttons =
     document.querySelectorAll(
       "#theme-toggle, [data-theme-toggle]"
     );
 
-  buttons.forEach(button => {
 
-    button.innerHTML =
-      theme === "dark"
+  buttons.forEach(
+    button => {
 
-        ? `
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="4"
-            />
+      button.innerHTML =
+        theme === "dark"
 
-            <path d="M12 2v2"/>
+          ? `
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
 
-            <path d="M12 20v2"/>
+              <circle
+                cx="12"
+                cy="12"
+                r="4"
+              />
 
-            <path d="m4.93 4.93 1.41 1.41"/>
+              <path d="M12 2v2"/>
+              <path d="M12 20v2"/>
 
-            <path d="m17.66 17.66 1.41 1.41"/>
+              <path
+                d="m4.93 4.93 1.41 1.41"
+              />
 
-            <path d="M2 12h2"/>
+              <path
+                d="m17.66 17.66 1.41 1.41"
+              />
 
-            <path d="M20 12h2"/>
+              <path d="M2 12h2"/>
+              <path d="M20 12h2"/>
 
-            <path d="m6.34 17.66-1.41 1.41"/>
+              <path
+                d="m6.34 17.66-1.41 1.41"
+              />
 
-            <path d="m19.07 4.93-1.41 1.41"/>
-          </svg>
-        `
+              <path
+                d="m19.07 4.93-1.41 1.41"
+              />
 
-        : `
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              d="
-                M21 12.8
-                A8.5 8.5 0 1 1
-                11.2 3
-                A6.7 6.7 0 0 0
-                21 12.8Z
-              "
-            />
-          </svg>
-        `;
+            </svg>
+          `
+
+          : `
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <path
+                d="
+                  M21 12.8
+                  A8.5 8.5 0 1 1
+                  11.2 3
+                  A6.7 6.7 0 0 0
+                  21 12.8Z
+                "
+              />
+
+            </svg>
+          `;
 
 
-    button.setAttribute(
-      "aria-label",
-      theme === "dark"
-        ? "Aktifkan mode terang"
-        : "Aktifkan mode gelap"
-    );
+      button.setAttribute(
+        "aria-label",
+        theme === "dark"
+          ? "Aktifkan mode terang"
+          : "Aktifkan mode gelap"
+      );
 
-    button.setAttribute(
-      "title",
-      theme === "dark"
-        ? "Mode terang"
-        : "Mode gelap"
-    );
 
-  });
+      button.setAttribute(
+        "title",
+        theme === "dark"
+          ? "Mode terang"
+          : "Mode gelap"
+      );
+
+    }
+  );
 
 }
 
@@ -135,7 +299,10 @@ function updateThemeButtons(theme) {
    NUMBER FORMAT
 ========================================= */
 
-function formatNum(n, currency) {
+function formatNum(
+  n,
+  currency
+) {
 
   if (
     typeof n !== "number" ||
@@ -147,13 +314,17 @@ function formatNum(n, currency) {
   }
 
 
-  if (currency === "IDR") {
+  if (
+    currency === "IDR"
+  ) {
 
     return n.toLocaleString(
       "id-ID",
       {
         maximumFractionDigits:
-          n >= 1000 ? 0 : 2
+          n >= 1000
+            ? 0
+            : 2
       }
     );
 
@@ -185,7 +356,7 @@ function formatNum(n, currency) {
 
 
 /* =========================================
-   ERROR
+   ERROR HANDLER
 ========================================= */
 
 function renderError(
@@ -197,9 +368,16 @@ function renderError(
   if (!container) return;
 
 
+  const retryId =
+    `nextra-retry-${Date.now()}`;
+
+
   container.innerHTML = `
 
-    <div class="error-box">
+    <div
+      class="error-box"
+      role="alert"
+    >
 
       <div>
         ⚠️ ${message}
@@ -209,16 +387,22 @@ function renderError(
         onRetry
 
           ? `
+
             <button
               class="icon-btn"
               style="margin-top:10px;"
-              id="retryBtn"
+              id="${retryId}"
+              type="button"
             >
+
               Coba lagi
+
             </button>
+
           `
 
           : ""
+
       }
 
     </div>
@@ -228,17 +412,20 @@ function renderError(
 
   if (onRetry) {
 
-    const retryBtn =
+    const button =
       document.getElementById(
-        "retryBtn"
+        retryId
       );
 
 
-    if (retryBtn) {
+    if (button) {
 
-      retryBtn.addEventListener(
+      button.addEventListener(
         "click",
-        onRetry
+        onRetry,
+        {
+          once: true
+        }
       );
 
     }
@@ -249,7 +436,287 @@ function renderError(
 
 
 /* =========================================
-   NEXTRA NAVIGATION V4
+   DEBOUNCE
+========================================= */
+
+function debounce(
+  callback,
+  delay = 250
+) {
+
+  let timer;
+
+
+  return function (...args) {
+
+    clearTimeout(timer);
+
+
+    timer =
+      setTimeout(
+        () => {
+
+          callback.apply(
+            this,
+            args
+          );
+
+        },
+        delay
+      );
+
+  };
+
+}
+
+
+/* =========================================
+   DATA FRESHNESS
+========================================= */
+
+function formatUpdatedTime(
+  timestamp = Date.now()
+) {
+
+  const date =
+    new Date(timestamp);
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "-";
+
+  }
+
+
+  return date.toLocaleTimeString(
+    "id-ID",
+    {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    }
+  );
+
+}
+
+
+function setDataFreshness(
+  timestamp = Date.now()
+) {
+
+  document
+    .querySelectorAll(
+      "[data-last-updated]"
+    )
+    .forEach(
+      element => {
+
+        element.textContent =
+          `Diperbarui ${formatUpdatedTime(timestamp)}`;
+
+        element.setAttribute(
+          "datetime",
+          new Date(
+            timestamp
+          ).toISOString()
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================
+   WATCHLIST
+========================================= */
+
+function loadWatchlist() {
+
+  migrateLegacyStorage();
+
+
+  try {
+
+    const data =
+      JSON.parse(
+        safeStorageGet(
+          WATCHLIST_KEY,
+          "[]"
+        )
+      );
+
+
+    if (
+      !Array.isArray(data)
+    ) {
+
+      return [];
+
+    }
+
+
+    return [
+      ...new Set(
+
+        data
+
+          .filter(
+            value =>
+              typeof value ===
+              "string"
+          )
+
+          .map(
+            value =>
+              value
+                .trim()
+                .toUpperCase()
+          )
+
+          .filter(Boolean)
+
+      )
+    ];
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+
+function saveWatchlist(
+  list
+) {
+
+  const clean = [
+
+    ...new Set(
+
+      (
+        Array.isArray(list)
+          ? list
+          : []
+
+      )
+
+        .filter(
+          value =>
+            typeof value ===
+            "string"
+        )
+
+        .map(
+          value =>
+            value
+              .trim()
+              .toUpperCase()
+        )
+
+        .filter(Boolean)
+
+    )
+
+  ];
+
+
+  safeStorageSet(
+    WATCHLIST_KEY,
+    JSON.stringify(clean)
+  );
+
+
+  window.dispatchEvent(
+
+    new CustomEvent(
+      "nextra:watchlist-changed",
+      {
+        detail: {
+          watchlist: clean
+        }
+      }
+    )
+
+  );
+
+
+  return clean;
+
+}
+
+
+function toggleWatchlistItem(
+  symbol
+) {
+
+  const normalized =
+    String(symbol || "")
+      .trim()
+      .toUpperCase();
+
+
+  if (!normalized) {
+
+    return loadWatchlist();
+
+  }
+
+
+  const list =
+    loadWatchlist();
+
+
+  const next =
+    list.includes(
+      normalized
+    )
+
+      ? list.filter(
+          item =>
+            item !== normalized
+        )
+
+      : [
+          ...list,
+          normalized
+        ];
+
+
+  return saveWatchlist(
+    next
+  );
+
+}
+
+
+function isInWatchlist(
+  symbol
+) {
+
+  const normalized =
+    String(symbol || "")
+      .trim()
+      .toUpperCase();
+
+
+  return loadWatchlist()
+    .includes(
+      normalized
+    );
+
+}
+
+
+/* =========================================
+   NAVIGATION
 ========================================= */
 
 function renderNav() {
@@ -259,8 +726,10 @@ function renderNav() {
     {
       href: "index.html",
       label: "Home",
+
       icon: `
         <svg viewBox="0 0 24 24">
+
           <path
             d="
               M3.5 10.7
@@ -281,6 +750,7 @@ function renderNav() {
               v6.8
             "
           />
+
         </svg>
       `
     },
@@ -289,17 +759,14 @@ function renderNav() {
     {
       href: "markets.html",
       label: "Markets",
+
       icon: `
         <svg viewBox="0 0 24 24">
 
           <path d="M4 19V9"/>
-
           <path d="M9.3 19V5"/>
-
           <path d="M14.7 19v-8"/>
-
           <path d="M20 19V3"/>
-
           <path d="M2.5 19.5h19"/>
 
         </svg>
@@ -310,6 +777,7 @@ function renderNav() {
     {
       href: "radar.html",
       label: "Radar",
+
       icon: `
         <svg viewBox="0 0 24 24">
 
@@ -350,13 +818,12 @@ function renderNav() {
     {
       href: "futures.html",
       label: "Futures",
+
       icon: `
         <svg viewBox="0 0 24 24">
 
           <path d="M5 18 18.5 4.5"/>
-
           <path d="M10 4.5h8.5V13"/>
-
           <path d="M4 9.5V19h9.5"/>
 
         </svg>
@@ -367,6 +834,7 @@ function renderNav() {
     {
       href: "more.html",
       label: "More",
+
       icon: `
         <svg viewBox="0 0 24 24">
 
@@ -412,7 +880,9 @@ function renderNav() {
 
 
   const nav =
-    document.createElement("nav");
+    document.createElement(
+      "nav"
+    );
 
 
   nav.className =
@@ -427,125 +897,72 @@ function renderNav() {
 
   nav.innerHTML =
     NAV_ITEMS
-      .map(item => {
+      .map(
+        item => {
 
-        const active =
-          item.href === current
-            ? "active"
-            : "";
+          const active =
+            item.href === current
+              ? "active"
+              : "";
 
 
-        return `
+          return `
 
-          <a
-            href="${item.href}"
-            class="nav-item ${active}"
-            aria-label="${item.label}"
-            ${
-              active
-                ? 'aria-current="page"'
-                : ""
-            }
-          >
+            <a
+              href="${item.href}"
+              class="nav-item ${active}"
+              aria-label="${item.label}"
 
-            <span
-              class="nav-icon"
-              aria-hidden="true"
+              ${
+                active
+                  ? 'aria-current="page"'
+                  : ""
+              }
             >
-              ${item.icon}
-            </span>
+
+              <span
+                class="nav-icon"
+                aria-hidden="true"
+              >
+
+                ${item.icon}
+
+              </span>
 
 
-            <span class="nav-label">
+              <span
+                class="nav-label"
+              >
 
-              ${item.label}
+                ${item.label}
 
-            </span>
+              </span>
 
-          </a>
+            </a>
 
-        `;
+          `;
 
-      })
+        }
+      )
       .join("");
 
 
-  mount.replaceWith(nav);
+  mount.replaceWith(
+    nav
+  );
 
 }
 
 
 /* =========================================
-   WATCHLIST
-========================================= */
-
-function loadWatchlist() {
-
-  try {
-
-    return JSON.parse(
-      localStorage.getItem(
-        WATCHLIST_KEY
-      ) || "[]"
-    );
-
-  } catch {
-
-    return [];
-
-  }
-
-}
-
-
-function saveWatchlist(list) {
-
-  try {
-
-    localStorage.setItem(
-      WATCHLIST_KEY,
-      JSON.stringify(list)
-    );
-
-  } catch {}
-
-}
-
-
-function toggleWatchlistItem(symbol) {
-
-  const list =
-    loadWatchlist();
-
-
-  const next =
-    list.includes(symbol)
-
-      ? list.filter(
-          s => s !== symbol
-        )
-
-      : [
-          ...list,
-          symbol
-        ];
-
-
-  saveWatchlist(next);
-
-
-  return next;
-
-}
-
-
-/* =========================================
-   AUTO INIT
+   GLOBAL INIT
 ========================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   () => {
+
+    migrateLegacyStorage();
 
     initTheme();
 
