@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Daftar — NEXTRA</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #05070a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .register-box {
+      width: 100%;
+      max-width: 400px;
+      background: #0c1013;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.45);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .logo h1 {
+      font-size: 34px;
+    }
+
+    .logo span {
+      color: #42f5a7;
+    }
+
+    .logo p {
+      color: #7f8a91;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 7px;
+    }
+
+    .subtitle {
+      color: #7f8a91;
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      height: 46px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: #12171a;
+      color: white;
+      padding: 0 14px;
+      outline: none;
+      margin-bottom: 16px;
+    }
+
+    input:focus {
+      border-color: #42f5a7;
+    }
+
+    button {
+      width: 100%;
+      height: 46px;
+      border: none;
+      border-radius: 12px;
+      background: #42f5a7;
+      color: #06100b;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .message {
+      display: none;
+      padding: 11px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .error {
+      background: rgba(255,70,70,.1);
+      color: #ff8585;
+    }
+
+    .success {
+      background: rgba(66,245,167,.1);
+      color: #42f5a7;
+    }
+
+    .links {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 12px;
+      color: #7f8a91;
+    }
+
+    a {
+      color: #42f5a7;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="register-box">
+
+    <div class="logo">
+      <h1>NEXTRA<span>.</span></h1>
+      <p>Your Market. Your Intelligence.</p>
+    </div>
+
+    <h2>Buat akun</h2>
+
+    <p class="subtitle">
+      Bergabung dengan NEXTRA sekarang.
+    </p>
+
+    <div id="message" class="message"></div>
+
+    <form id="registerForm">
+
+      <label for="username">
+        Username
+      </label>
+
+      <input
+        type="text"
+        id="username"
+        placeholder="contoh: mankami"
+        autocomplete="username"
+        minlength="3"
+        required
+      >
+
+      <label for="email">
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="nama@email.com"
+        autocomplete="email"
+        required
+      >
+
+      <label for="password">
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Minimal 6 karakter"
+        autocomplete="new-password"
+        minlength="6"
+        required
+      >
+
+      <label for="confirmPassword">
+        Konfirmasi Password
+      </label>
+
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Ulangi password"
+        autocomplete="new-password"
+        minlength="6"
+        required
+      >
+
+      <button type="submit">
+        Buat Akun
+      </button>
+
+    </form>
+
+    <div class="links">
+      Sudah punya akun?
+      <a href="login.html">Masuk</a>
+    </div>
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://uvtbntwgooxqjbyjkvkd.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    const form =
+      document.getElementById("registerForm");
+
+    const message =
+      document
