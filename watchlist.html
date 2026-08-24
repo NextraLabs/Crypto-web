@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#05070a"
+  >
+
+  <meta
+    name="description"
+    content="NEXTRA Watchlist — Pantau crypto favoritmu."
+  >
+
+  <title>Watchlist — NEXTRA</title>
+
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <!-- NAVIGATION -->
+
+  <div id="bottom-nav"></div>
+
+
+  <main
+    class="page-container"
+    style="
+      padding-bottom:100px;
+      max-width:1100px;
+      margin:auto;
+      padding-left:16px;
+      padding-right:16px;
+    "
+  >
+
+
+    <!-- HEADER -->
+
+    <section
+      style="
+        padding-top:30px;
+        padding-bottom:20px;
+      "
+    >
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:flex-start;
+          gap:15px;
+        "
+      >
+
+        <div>
+
+          <div
+            style="
+              color:var(--green);
+              font-size:11px;
+              font-weight:800;
+              letter-spacing:1.5px;
+              text-transform:uppercase;
+              margin-bottom:7px;
+            "
+          >
+            NEXTRA
+          </div>
+
+
+          <h1
+            style="
+              margin:0;
+              font-size:30px;
+              font-weight:900;
+            "
+          >
+            My Watchlist
+          </h1>
+
+
+          <p
+            style="
+              margin:7px 0 0;
+              color:var(--muted);
+              font-size:13px;
+            "
+          >
+            Pantau crypto pilihanmu dalam satu tempat.
+          </p>
+
+        </div>
+
+
+        <button
+          id="watchlist-refresh"
+          class="icon-btn"
+          type="button"
+          aria-label="Refresh watchlist"
+          title="Refresh"
+        >
+          ↻
+        </button>
+
+      </div>
+
+
+      <div
+        style="
+          margin-top:18px;
+          color:var(--muted);
+          font-size:12px;
+        "
+      >
+
+        <span id="watchlist-count">
+          0 coin
+        </span>
+
+        <span
+          style="
+            margin:0 6px;
+            opacity:.4;
+          "
+        >
+          •
+        </span>
+
+        <span id="watchlist-updated">
+          Belum diperbarui
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTENT -->
+
+    <section>
+
+      <div
+        id="watchlist-loading"
+        class="loading"
+        style="display:none;"
+      >
+        Memuat watchlist...
+      </div>
+
+
+      <div
+        id="watchlist-empty"
+        class="empty-state"
+        style="
+          display:none;
+          padding:50px 20px;
+          text-align:center;
+        "
+      >
+
+        <div
+          style="
+            font-size:42px;
+            margin-bottom:15px;
+          "
+        >
+          ☆
+        </div>
+
+
+        <h2
+          style="
+            margin:0 0 8px;
+            font-size:20px;
+          "
+        >
+          Watchlist masih kosong
+        </h2>
+
+
+        <p
+          style="
+            color:var(--muted);
+            font-size:13px;
+            margin:0 auto 20px;
+            max-width:360px;
+          "
+        >
+          Tambahkan coin dari halaman Markets
+          untuk mulai memantaunya.
+        </p>
+
+
+        <a
+          href="markets.html"
+          class="primary-btn"
+        >
+          Jelajahi Markets
+        </a>
+
+      </div>
+
+
+      <div
+        id="watchlist-error"
+        style="display:none;"
+      ></div>
+
+
+      <div
+        id="watchlist-list"
+        style="
+          display:grid;
+          gap:10px;
+        "
+      ></div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- APP CORE -->
+
+  <script
+    src="js/app.js"
+  ></script>
+
+
+  <!-- API -->
+
+  <script
+    src="js/api.js"
+  ></script>
+
+
+  <!-- WATCHLIST -->
+
+  <script
+    src="js/features/watchlist.js"
+  ></script>
+
+
+</body>
+
+</html>
