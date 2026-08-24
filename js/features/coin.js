@@ -1,5 +1,5 @@
-// coin.js — NEXTRA Coin Detail V3
-// Full Coin Detail + Chart + Watchlist
+// coin.js — NEXTRA Coin Detail V4
+// Coin Detail + Chart + Watchlist Sync + ATH/ATL + Market Data
 
 const COIN_STATE = {
   id: null,
@@ -51,9 +51,11 @@ function safeNumber(value) {
 
 function formatCoinPrice(value) {
 
-  const price = safeNumber(value);
+  const price =
+    safeNumber(value);
 
   if (price === null) return "-";
+
 
   if (price >= 1000) {
 
@@ -67,12 +69,14 @@ function formatCoinPrice(value) {
 
   }
 
+
   if (price >= 1) {
 
     return "$" +
       price.toFixed(2);
 
   }
+
 
   if (price >= 0.01) {
 
@@ -81,6 +85,7 @@ function formatCoinPrice(value) {
 
   }
 
+
   return "$" +
     price.toPrecision(6);
 
@@ -88,16 +93,20 @@ function formatCoinPrice(value) {
 
 
 /* =========================================
-   FORMAT LARGE
+   FORMAT LARGE NUMBER
 ========================================= */
 
 function formatLargeNumber(value) {
 
-  const number = safeNumber(value);
+  const number =
+    safeNumber(value);
 
   if (number === null) return "-";
 
-  const absolute = Math.abs(number);
+
+  const absolute =
+    Math.abs(number);
+
 
   if (absolute >= 1e12) {
 
@@ -107,6 +116,7 @@ function formatLargeNumber(value) {
 
   }
 
+
   if (absolute >= 1e9) {
 
     return (
@@ -114,6 +124,7 @@ function formatLargeNumber(value) {
     ).toFixed(2) + "B";
 
   }
+
 
   if (absolute >= 1e6) {
 
@@ -123,6 +134,7 @@ function formatLargeNumber(value) {
 
   }
 
+
   if (absolute >= 1e3) {
 
     return (
@@ -130,6 +142,7 @@ function formatLargeNumber(value) {
     ).toFixed(2) + "K";
 
   }
+
 
   return number.toLocaleString(
     "en-US",
@@ -147,24 +160,32 @@ function formatLargeNumber(value) {
 
 function formatChange(value) {
 
-  const change = safeNumber(value);
+  const change =
+    safeNumber(value);
 
   if (change === null) return "-";
 
+
   return (
-    (change >= 0 ? "+" : "") +
-    change.toFixed(2) +
-    "%"
-  );
+    change >= 0
+      ? "+"
+      : ""
+  ) +
+  change.toFixed(2) +
+  "%";
 
 }
 
 
 function changeClass(value) {
 
-  const change = safeNumber(value);
+  const change =
+    safeNumber(value);
 
-  if (change === null) return "dim";
+  if (change === null) {
+    return "dim";
+  }
+
 
   return change >= 0
     ? "up"
@@ -175,6 +196,11 @@ function changeClass(value) {
 
 /* =========================================
    WATCHLIST
+   -----------------------------------------
+   IMPORTANT:
+   Watchlist utama menggunakan COINGECKO ID.
+   Markets akan disinkronkan melalui ID
+   jika tersedia.
 ========================================= */
 
 function getWatchlist() {
@@ -186,10 +212,13 @@ function getWatchlist() {
         "nextra_watchlist"
       );
 
+
     if (!saved) return [];
+
 
     const parsed =
       JSON.parse(saved);
+
 
     return Array.isArray(parsed)
       ? parsed
@@ -200,7 +229,7 @@ function getWatchlist() {
   catch (error) {
 
     console.warn(
-      "Watchlist error:",
+      "NEXTRA Watchlist:",
       error
     );
 
@@ -213,53 +242,193 @@ function getWatchlist() {
 
 function saveWatchlist(list) {
 
-  localStorage.setItem(
-    "nextra_watchlist",
-    JSON.stringify(list)
-  );
+  try {
+
+    localStorage.setItem(
+      "nextra_watchlist",
+      JSON.stringify(list)
+    );
+
+  }
+
+  catch (error) {
+
+    console.warn(
+      "Gagal menyimpan watchlist:",
+      error
+    );
+
+  }
 
 }
 
 
+/* =========================================
+   WATCHLIST STATUS
+========================================= */
+
+function checkWatchlistStatus() {
+
+  const data =
+    COIN_STATE.data;
+
+  if (!data?.id) {
+
+    COIN_STATE.watchlisted =
+      false;
+
+    return;
+
+  }
+
+
+  const watchlist =
+    getWatchlist();
+
+
+  /*
+   * Primary:
+   * CoinGecko ID
+   */
+
+  if (
+    watchlist.includes(
+      data.id
+    )
+  ) {
+
+    COIN_STATE.watchlisted =
+      true;
+
+    return;
+
+  }
+
+
+  /*
+   * Compatibility:
+   * Jika watchlist lama menggunakan
+   * symbol.
+   */
+
+  const symbol =
+    (
+      data.symbol ||
+      ""
+    ).toUpperCase();
+
+
+  COIN_STATE.watchlisted =
+    watchlist.some(
+      item =>
+        String(item)
+          .toUpperCase() ===
+        symbol
+    );
+
+}
+
+
+/* =========================================
+   UPDATE WATCH BUTTON
+========================================= */
+
 function updateCoinWatchButton() {
 
   const button =
-    coinEl("coin-watch");
+    coinEl(
+      "coin-watch"
+    );
+
 
   if (!button) return;
+
 
   button.textContent =
     COIN_STATE.watchlisted
       ? "★"
       : "☆";
 
+
   button.style.color =
     COIN_STATE.watchlisted
       ? "var(--accent)"
       : "";
+
 
   button.title =
     COIN_STATE.watchlisted
       ? "Hapus dari Watchlist"
       : "Tambah ke Watchlist";
 
+
+  button.setAttribute(
+    "aria-label",
+    COIN_STATE.watchlisted
+      ? "Hapus dari Watchlist"
+      : "Tambah dari Watchlist"
+  );
+
 }
 
+
+/* =========================================
+   TOGGLE WATCHLIST
+========================================= */
 
 function toggleCoinWatchlist() {
 
   const data =
     COIN_STATE.data;
 
+
   if (!data?.id) return;
 
-  const watchlist =
+
+  let watchlist =
     getWatchlist();
 
-  const index =
+
+  const id =
+    data.id;
+
+
+  const symbol =
+    (
+      data.symbol ||
+      ""
+    ).toUpperCase();
+
+
+  /*
+   * Cari berdasarkan ID
+   */
+
+  let index =
     watchlist.indexOf(
-      data.id
+      id
     );
+
+
+  /*
+   * Kalau tidak ditemukan,
+   * cek format lama symbol.
+   */
+
+  if (index < 0) {
+
+    index =
+      watchlist.findIndex(
+        item =>
+          String(item)
+            .toUpperCase() ===
+          symbol
+      );
+
+  }
+
+
+  /* REMOVE */
 
   if (index >= 0) {
 
@@ -268,25 +437,51 @@ function toggleCoinWatchlist() {
       1
     );
 
+
     COIN_STATE.watchlisted =
       false;
 
   }
 
+
+  /* ADD */
+
   else {
 
     watchlist.push(
-      data.id
+      id
     );
+
 
     COIN_STATE.watchlisted =
       true;
 
+
+    /*
+     * XP +25 hanya ketika
+     * benar-benar menambahkan.
+     */
+
+    if (
+      window.NEXTRA_XP &&
+      typeof
+        window.NEXTRA_XP.add ===
+        "function"
+    ) {
+
+      window.NEXTRA_XP.add(
+        25
+      );
+
+    }
+
   }
+
 
   saveWatchlist(
     watchlist
   );
+
 
   updateCoinWatchButton();
 
@@ -299,11 +494,19 @@ function toggleCoinWatchlist() {
 
 async function loadCoin() {
 
-  if (COIN_STATE.loading) return;
+  if (
+    COIN_STATE.loading
+  ) {
+
+    return;
+
+  }
+
 
   const id =
     COIN_STATE.id ||
     getCoinId();
+
 
   if (!id) {
 
@@ -315,10 +518,17 @@ async function loadCoin() {
 
   }
 
-  COIN_STATE.id = id;
-  COIN_STATE.loading = true;
+
+  COIN_STATE.id =
+    id;
+
+
+  COIN_STATE.loading =
+    true;
+
 
   showCoinLoading();
+
 
   try {
 
@@ -333,10 +543,12 @@ async function loadCoin() {
 
     }
 
+
     const data =
       await NEXTRA_API.fetchCoin(
         id
       );
+
 
     if (
       !data ||
@@ -349,16 +561,13 @@ async function loadCoin() {
 
     }
 
+
     COIN_STATE.data =
       data;
 
-    const watchlist =
-      getWatchlist();
 
-    COIN_STATE.watchlisted =
-      watchlist.includes(
-        data.id
-      );
+    checkWatchlistStatus();
+
 
     renderCoin();
 
@@ -370,6 +579,7 @@ async function loadCoin() {
       "NEXTRA Coin:",
       error
     );
+
 
     showCoinError(
       "Gagal memuat data coin."
@@ -394,25 +604,45 @@ async function loadCoin() {
 function showCoinLoading() {
 
   const loading =
-    coinEl("coin-loading");
+    coinEl(
+      "coin-loading"
+    );
+
 
   const content =
-    coinEl("coin-content");
+    coinEl(
+      "coin-content"
+    );
+
 
   const error =
-    coinEl("coin-error");
+    coinEl(
+      "coin-error"
+    );
 
-  if (loading)
+
+  if (loading) {
+
     loading.style.display =
       "block";
 
-  if (content)
+  }
+
+
+  if (content) {
+
     content.style.display =
       "none";
 
-  if (error)
+  }
+
+
+  if (error) {
+
     error.style.display =
       "none";
+
+  }
 
 }
 
@@ -421,39 +651,65 @@ function showCoinLoading() {
    ERROR
 ========================================= */
 
-function showCoinError(message) {
+function showCoinError(
+  message
+) {
 
   const loading =
-    coinEl("coin-loading");
+    coinEl(
+      "coin-loading"
+    );
+
 
   const content =
-    coinEl("coin-content");
+    coinEl(
+      "coin-content"
+    );
+
 
   const error =
-    coinEl("coin-error");
+    coinEl(
+      "coin-error"
+    );
 
-  if (loading)
+
+  if (loading) {
+
     loading.style.display =
       "none";
 
-  if (content)
+  }
+
+
+  if (content) {
+
     content.style.display =
       "none";
 
+  }
+
+
   if (!error) return;
+
 
   error.style.display =
     "block";
+
 
   const box =
     error.querySelector(
       ".error-box"
     );
 
+
   if (!box) return;
 
+
   box.innerHTML = `
-    ⚠️ ${escapeHTML(message)}
+
+    ⚠️ ${escapeHTML(
+      message
+    )}
 
     <br><br>
 
@@ -463,7 +719,9 @@ function showCoinError(message) {
     >
       Coba Lagi
     </button>
+
   `;
+
 
   coinEl(
     "coin-retry"
@@ -484,57 +742,116 @@ function renderCoin() {
   const data =
     COIN_STATE.data;
 
+
   if (!data) return;
+
 
   const market =
     data.market_data || {};
 
+
   const currentPrice =
-    market.current_price?.usd;
+    market
+      .current_price
+      ?.usd;
+
 
   const change1h =
     market
       .price_change_percentage_1h_in_currency
       ?.usd;
 
+
   const change24h =
     market
       .price_change_percentage_24h_in_currency
       ?.usd;
+
 
   const change7d =
     market
       .price_change_percentage_7d_in_currency
       ?.usd;
 
+
   const marketCap =
-    market.market_cap?.usd;
+    market
+      .market_cap
+      ?.usd;
+
+
+  const fullyDiluted =
+    market
+      .fully_diluted_valuation
+      ?.usd;
+
 
   const volume =
-    market.total_volume?.usd;
+    market
+      .total_volume
+      ?.usd;
+
 
   const high24h =
-    market.high_24h?.usd;
+    market
+      .high_24h
+      ?.usd;
+
 
   const low24h =
-    market.low_24h?.usd;
+    market
+      .low_24h
+      ?.usd;
+
 
   const circulating =
-    market.circulating_supply;
+    market
+      .circulating_supply;
+
 
   const totalSupply =
-    market.total_supply;
+    market
+      .total_supply;
+
 
   const maxSupply =
-    market.max_supply;
+    market
+      .max_supply;
 
 
-  /* HEADER */
+  const ath =
+    market
+      .ath
+      ?.usd;
+
+
+  const athChange =
+    market
+      .ath_change_percentage
+      ?.usd;
+
+
+  const atl =
+    market
+      .atl
+      ?.usd;
+
+
+  const atlChange =
+    market
+      .atl_change_percentage
+      ?.usd;
+
+
+  /* =====================================
+     HEADER
+  ===================================== */
 
   setHTML(
     "coin-title",
     `${escapeHTML(
-      data.name || "Coin"
+      data.name ||
+      "Coin"
     )}<span class="dot">.</span>`
   );
 
@@ -548,10 +865,15 @@ function renderCoin() {
   );
 
 
-  /* HERO */
+  /* =====================================
+     HERO
+  ===================================== */
 
   const image =
-    coinEl("coin-image");
+    coinEl(
+      "coin-image"
+    );
+
 
   if (image) {
 
@@ -561,15 +883,18 @@ function renderCoin() {
       data.image?.thumb ||
       "";
 
+
     image.alt =
-      data.name || "";
+      data.name ||
+      "";
 
   }
 
 
   setText(
     "coin-name",
-    data.name || "-"
+    data.name ||
+    "-"
   );
 
 
@@ -596,17 +921,21 @@ function renderCoin() {
   );
 
 
-  /* PERFORMANCE */
+  /* =====================================
+     PERFORMANCE
+  ===================================== */
 
   setChange(
     "change-1h",
     change1h
   );
 
+
   setChange(
     "change-24h",
     change24h
   );
+
 
   setChange(
     "change-7d",
@@ -614,7 +943,9 @@ function renderCoin() {
   );
 
 
-  /* MARKET */
+  /* =====================================
+     MARKET DATA
+  ===================================== */
 
   setText(
     "market-cap",
@@ -623,6 +954,7 @@ function renderCoin() {
     )
   );
 
+
   setText(
     "volume",
     formatLargeNumber(
@@ -630,12 +962,14 @@ function renderCoin() {
     )
   );
 
+
   setText(
     "high-24h",
     formatCoinPrice(
       high24h
     )
   );
+
 
   setText(
     "low-24h",
@@ -645,7 +979,21 @@ function renderCoin() {
   );
 
 
-  /* SUPPLY */
+  /* =====================================
+     OPTIONAL FDV
+  ===================================== */
+
+  setText(
+    "fdv",
+    formatLargeNumber(
+      fullyDiluted
+    )
+  );
+
+
+  /* =====================================
+     SUPPLY
+  ===================================== */
 
   setText(
     "circulating",
@@ -654,6 +1002,7 @@ function renderCoin() {
     )
   );
 
+
   setText(
     "total-supply",
     formatLargeNumber(
@@ -661,9 +1010,11 @@ function renderCoin() {
     )
   );
 
+
   setText(
     "max-supply",
-    maxSupply === null
+    maxSupply === null ||
+    maxSupply === undefined
       ? "∞ / N/A"
       : formatLargeNumber(
           maxSupply
@@ -671,7 +1022,41 @@ function renderCoin() {
   );
 
 
-  /* RANK */
+  /* =====================================
+     ATH / ATL
+  ===================================== */
+
+  setText(
+    "ath",
+    formatCoinPrice(
+      ath
+    )
+  );
+
+
+  setChange(
+    "ath-change",
+    athChange
+  );
+
+
+  setText(
+    "atl",
+    formatCoinPrice(
+      atl
+    )
+  );
+
+
+  setChange(
+    "atl-change",
+    atlChange
+  );
+
+
+  /* =====================================
+     RANK
+  ===================================== */
 
   setText(
     "coin-rank",
@@ -682,40 +1067,69 @@ function renderCoin() {
   );
 
 
-  /* CHART */
+  /* =====================================
+     CHART
+  ===================================== */
 
   renderChart(
     market
       .sparkline_7d
-      ?.price || []
+      ?.price ||
+    []
   );
 
+
+  /* =====================================
+     WATCHLIST
+  ===================================== */
 
   updateCoinWatchButton();
 
 
-  /* SHOW CONTENT */
+  /* =====================================
+     SHOW CONTENT
+  ===================================== */
 
   const loading =
-    coinEl("coin-loading");
+    coinEl(
+      "coin-loading"
+    );
+
 
   const content =
-    coinEl("coin-content");
+    coinEl(
+      "coin-content"
+    );
+
 
   const error =
-    coinEl("coin-error");
+    coinEl(
+      "coin-error"
+    );
 
-  if (loading)
+
+  if (loading) {
+
     loading.style.display =
       "none";
 
-  if (error)
+  }
+
+
+  if (error) {
+
     error.style.display =
       "none";
 
-  if (content)
+  }
+
+
+  if (content) {
+
     content.style.display =
       "block";
+
+  }
 
 }
 
@@ -724,12 +1138,17 @@ function renderCoin() {
    SETTERS
 ========================================= */
 
-function setText(id, value) {
+function setText(
+  id,
+  value
+) {
 
   const element =
     coinEl(id);
 
+
   if (!element) return;
+
 
   element.textContent =
     value;
@@ -737,12 +1156,17 @@ function setText(id, value) {
 }
 
 
-function setHTML(id, value) {
+function setHTML(
+  id,
+  value
+) {
 
   const element =
     coinEl(id);
 
+
   if (!element) return;
+
 
   element.innerHTML =
     value;
@@ -750,18 +1174,28 @@ function setHTML(id, value) {
 }
 
 
-function setChange(id, value) {
+function setChange(
+  id,
+  value
+) {
 
   const element =
     coinEl(id);
 
+
   if (!element) return;
 
+
   element.textContent =
-    formatChange(value);
+    formatChange(
+      value
+    );
+
 
   element.className =
-    changeClass(value);
+    changeClass(
+      value
+    );
 
 }
 
@@ -770,12 +1204,18 @@ function setChange(id, value) {
    CHART
 ========================================= */
 
-function renderChart(prices) {
+function renderChart(
+  prices
+) {
 
   const container =
-    coinEl("coin-chart");
+    coinEl(
+      "coin-chart"
+    );
+
 
   if (!container) return;
+
 
   const values =
     Array.isArray(prices)
@@ -786,9 +1226,13 @@ function renderChart(prices) {
           )
       : [];
 
-  if (values.length < 2) {
+
+  if (
+    values.length < 2
+  ) {
 
     container.innerHTML = `
+
       <div
         class="dim"
         style="
@@ -799,6 +1243,7 @@ function renderChart(prices) {
       >
         Chart tidak tersedia.
       </div>
+
     `;
 
     return;
@@ -812,18 +1257,26 @@ function renderChart(prices) {
       300
     );
 
+
   const height =
     170;
+
 
   const padding =
     8;
 
 
   const min =
-    Math.min(...values);
+    Math.min(
+      ...values
+    );
+
 
   const max =
-    Math.max(...values);
+    Math.max(
+      ...values
+    );
+
 
   const range =
     max - min || 1;
@@ -832,25 +1285,33 @@ function renderChart(prices) {
   const points =
     values
       .map(
-        (value, index) => {
+        (
+          value,
+          index
+        ) => {
 
           const x =
             padding +
             (
               index /
-              (values.length - 1)
+              (
+                values.length -
+                1
+              )
             ) *
             (
               width -
               padding * 2
             );
 
+
           const y =
             height -
             padding -
             (
               (
-                value - min
+                value -
+                min
               ) /
               range
             ) *
@@ -859,7 +1320,10 @@ function renderChart(prices) {
               padding * 2
             );
 
-          return `${x},${y}`;
+
+          return (
+            `${x},${y}`
+          );
 
         }
       )
@@ -868,6 +1332,7 @@ function renderChart(prices) {
 
   const first =
     values[0];
+
 
   const last =
     values[
@@ -884,6 +1349,10 @@ function renderChart(prices) {
       )
       .trim() ||
     "#42f5a7";
+
+
+  const gradientId =
+    "coinGradient";
 
 
   container.innerHTML = `
@@ -903,6 +1372,43 @@ function renderChart(prices) {
       "
     >
 
+      <defs>
+
+        <linearGradient
+          id="${gradientId}"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
+        >
+
+          <stop
+            offset="0%"
+            stop-color="${accent}"
+            stop-opacity="0.28"
+          />
+
+          <stop
+            offset="100%"
+            stop-color="${accent}"
+            stop-opacity="0"
+          />
+
+        </linearGradient>
+
+      </defs>
+
+
+      <polygon
+        points="
+          ${padding},${height - padding}
+          ${points}
+          ${width - padding},${height - padding}
+        "
+        fill="url(#${gradientId})"
+      />
+
+
       <polyline
         points="${points}"
         fill="none"
@@ -915,6 +1421,7 @@ function renderChart(prices) {
 
     </svg>
 
+
     <div
       class="dim"
       style="
@@ -926,6 +1433,7 @@ function renderChart(prices) {
     >
       ${formatCoinPrice(min)}
     </div>
+
 
     <div
       class="dim"
@@ -941,6 +1449,7 @@ function renderChart(prices) {
 
   `;
 
+
   container.dataset.direction =
     last >= first
       ? "up"
@@ -953,7 +1462,9 @@ function renderChart(prices) {
    ESCAPE HTML
 ========================================= */
 
-function escapeHTML(value) {
+function escapeHTML(
+  value
+) {
 
   return String(value)
 
@@ -997,12 +1508,6 @@ function initCoinEvents() {
     "click",
     () => {
 
-      /*
-       * Kembali ke halaman sebelumnya
-       * supaya kalau datang dari Home,
-       * tidak selalu dilempar ke Markets.
-       */
-
       if (
         document.referrer &&
         document.referrer.includes(
@@ -1030,6 +1535,10 @@ function initCoinEvents() {
   )?.addEventListener(
     "click",
     () => {
+
+      /*
+       * Paksa reload data.
+       */
 
       loadCoin();
 
@@ -1060,7 +1569,9 @@ function initCoin() {
   COIN_STATE.id =
     getCoinId();
 
+
   initCoinEvents();
+
 
   loadCoin();
 
