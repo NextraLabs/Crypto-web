@@ -1,1863 +1,800 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#05070a">
+<title>NEXTRA — Community</title>
 
-  <meta charset="UTF-8">
+<link rel="stylesheet" href="css/style.css">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<style>
+.community-tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.community-tabs::-webkit-scrollbar{display:none}
+.community-tab,.type-btn,.post-tool,.follow-btn{border:1px solid var(--border);background:transparent;color:inherit;cursor:pointer}
+.community-tab{padding:8px 12px;border-radius:999px;font-size:9px;font-weight:800;white-space:nowrap}
+.community-tab.active{background:var(--text);color:var(--bg);border-color:var(--text)}
 
-  <meta
-    name="theme-color"
-    content="#05070a"
-  >
+.create-post,.post{margin-top:9px;padding:13px}
+.post-input{width:100%;min-height:75px;resize:vertical;box-sizing:border-box;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:inherit;padding:11px;font-family:inherit;font-size:10px;outline:none}
+.post-input:focus{border-color:var(--text)}
+.post-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px}
+.post-type{display:flex;gap:6px;flex-wrap:wrap}
+.type-btn{padding:6px 8px;border-radius:8px;font-size:8px}
+.type-btn.active{border-color:var(--text)}
+.post-btn{border:0;background:var(--text);color:var(--bg);padding:8px 13px;border-radius:9px;font-size:9px;font-weight:900;cursor:pointer}
+.post-btn:disabled{opacity:.6}
 
-  <title>NEXTRA — Community</title>
+.post-header{display:flex;align-items:center;gap:9px}
+.profile-link{display:flex;align-items:center;gap:9px;flex:1;min-width:0;color:inherit;text-decoration:none}
+.avatar{width:32px;height:32px;min-width:32px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.post-user{flex:1;min-width:0}
+.post-user strong{font-size:10px}
+.post-meta{font-size:7px;margin-top:2px}
+.follow-btn{padding:6px 9px;border-radius:8px;font-size:7px;font-weight:800;white-space:nowrap}
+.follow-btn.following{font-weight:900}
+.post-content{font-size:10px;line-height:1.65;margin-top:10px;white-space:pre-wrap;word-break:break-word}
 
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+.post-footer{display:flex;gap:12px;flex-wrap:wrap;margin-top:11px;padding-top:9px;border-top:1px solid var(--border)}
+.post-action{border:0;background:transparent;color:inherit;padding:0;font-size:8px;cursor:pointer}
+.post-action:disabled{opacity:.5}
+.post-action.liked,.post-action.active{font-weight:900}
 
-  <style>
+.reaction-picker{display:none;gap:5px;margin-top:8px;padding:7px;border:1px solid var(--border);border-radius:9px}
+.reaction-picker.show{display:flex}
+.reaction-btn{border:0;background:transparent;font-size:15px;cursor:pointer}
+.reaction-summary{font-size:8px;margin-top:6px;min-height:10px}
 
-    .community-tabs {
-      display: flex;
-      gap: 7px;
-      overflow-x: auto;
-      padding: 2px 0 8px;
-      scrollbar-width: none;
-    }
+.comments{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.comments.show{display:block}
+.comment{display:flex;gap:7px;margin-bottom:8px}
+.comment-avatar{width:24px;height:24px;min-width:24px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px}
+.comment-body{background:var(--border);border-radius:9px;padding:7px 9px;font-size:8px;line-height:1.5}
+.comment-body strong{display:block;margin-bottom:2px}
+.comment-box{display:flex;gap:6px;margin-top:8px}
+.comment-input{flex:1;min-width:0;border:1px solid var(--border);background:var(--bg);color:inherit;border-radius:8px;padding:7px 8px;font-size:8px;outline:none}
+.comment-send{border:0;background:var(--text);color:var(--bg);border-radius:8px;padding:0 10px;font-size:8px;font-weight:800;cursor:pointer}
 
-    .community-tabs::-webkit-scrollbar {
-      display: none;
-    }
+.community-message{text-align:center;font-size:8px;margin-top:8px;min-height:12px}
+.loading-feed,.empty-feed{text-align:center;padding:25px 10px;font-size:9px;opacity:.7}
 
-    .community-tab {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: inherit;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 9px;
-      font-weight: 800;
-      white-space: nowrap;
-      cursor: pointer;
-    }
+.notification-panel{display:none;margin-top:10px;padding:10px}
+.notification-panel.show{display:block}
+.notification{padding:9px 0;border-bottom:1px solid var(--border);font-size:8px}
+.notification:last-child{border-bottom:0}
+.notification.unread{font-weight:800}
+.notification-time{font-size:7px;margin-top:3px;opacity:.6}
 
-    .community-tab.active {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
-    }
+.more-actions{display:flex;gap:7px;align-items:center}
+.icon-mini{border:1px solid var(--border);background:transparent;color:inherit;border-radius:8px;padding:6px 8px;font-size:10px;cursor:pointer;position:relative}
+.notification-badge{position:absolute;top:-5px;right:-5px;background:var(--text);color:var(--bg);border-radius:999px;min-width:14px;height:14px;display:none;align-items:center;justify-content:center;font-size:7px;font-weight:900}
 
-    .create-post {
-      margin-top: 8px;
-      padding: 13px;
-    }
+.report-box{display:none;margin-top:8px;padding:8px;border:1px solid var(--border);border-radius:9px}
+.report-box.show{display:block}
+.report-select{width:100%;background:var(--bg);color:inherit;border:1px solid var(--border);padding:7px;border-radius:8px;font-size:8px}
+.report-send{margin-top:6px;border:0;background:var(--text);color:var(--bg);padding:7px 10px;border-radius:8px;font-size:8px;font-weight:800}
 
-    .post-input {
-      width: 100%;
-      min-height: 75px;
-      resize: vertical;
-      box-sizing: border-box;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--bg);
-      color: inherit;
-      padding: 11px;
-      font-family: inherit;
-      font-size: 10px;
-      outline: none;
-    }
-
-    .post-input:focus {
-      border-color: var(--text);
-    }
-
-    .post-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 9px;
-    }
-
-    .post-type {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .type-btn {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: inherit;
-      padding: 6px 8px;
-      border-radius: 8px;
-      font-size: 8px;
-      cursor: pointer;
-    }
-
-    .type-btn.active {
-      border-color: var(--text);
-    }
-
-    .post-btn {
-      border: 0;
-      background: var(--text);
-      color: var(--bg);
-      padding: 8px 13px;
-      border-radius: 9px;
-      font-size: 9px;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    .post-btn:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    .post {
-      margin-top: 9px;
-      padding: 13px;
-    }
-
-    .post-header {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .profile-link {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      flex: 1;
-      min-width: 0;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .profile-link:hover {
-      text-decoration: none;
-    }
-
-    .avatar {
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      overflow: hidden;
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .post-user {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .post-user strong {
-      font-size: 10px;
-    }
-
-    .post-meta {
-      font-size: 7px;
-      margin-top: 2px;
-    }
-
-    .follow-btn {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: inherit;
-      padding: 6px 9px;
-      border-radius: 8px;
-      font-size: 7px;
-      font-weight: 800;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .follow-btn.following {
-      font-weight: 900;
-    }
-
-    .follow-btn:disabled {
-      opacity: .5;
-    }
-
-    .post-content {
-      font-size: 10px;
-      line-height: 1.65;
-      margin-top: 10px;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    .post-footer {
-      display: flex;
-      gap: 16px;
-      margin-top: 11px;
-      padding-top: 9px;
-      border-top: 1px solid var(--border);
-    }
-
-    .post-action {
-      border: 0;
-      background: transparent;
-      color: inherit;
-      padding: 0;
-      font-size: 8px;
-      cursor: pointer;
-    }
-
-    .post-action:disabled {
-      opacity: .5;
-    }
-
-    .post-action.liked {
-      font-weight: 900;
-    }
-
-    .comments {
-      display: none;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
-    }
-
-    .comments.show {
-      display: block;
-    }
-
-    .comments-list {
-      display: block;
-    }
-
-    .comment {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 8px;
-    }
-
-    .comment-avatar {
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-    }
-
-    .comment-body {
-      background: var(--border);
-      border-radius: 9px;
-      padding: 7px 9px;
-      font-size: 8px;
-      line-height: 1.5;
-    }
-
-    .comment-body strong {
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .comment-box {
-      display: flex;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .comment-input {
-      flex: 1;
-      min-width: 0;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: inherit;
-      border-radius: 8px;
-      padding: 7px 8px;
-      font-size: 8px;
-      outline: none;
-    }
-
-    .comment-send {
-      border: 0;
-      background: var(--text);
-      color: var(--bg);
-      border-radius: 8px;
-      padding: 0 10px;
-      font-size: 8px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .community-message {
-      text-align: center;
-      font-size: 8px;
-      margin-top: 8px;
-      min-height: 12px;
-    }
-
-    .loading-feed,
-    .empty-feed {
-      text-align: center;
-      padding: 25px 10px;
-      font-size: 9px;
-      opacity: .7;
-    }
-
-  </style>
-
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+</style>
 </head>
-
 
 <body>
 
-
 <main class="container">
 
+<header class="topbar">
+  <div>
+    <h1 class="title">Community<span class="dot">.</span></h1>
+    <p class="subtitle">Learn. Share. Trade smarter.</p>
+  </div>
 
-  <!-- HEADER -->
+  <div class="more-actions">
+    <button class="icon-mini" id="notification-btn" aria-label="Notifications">
+      🔔
+      <span id="notification-badge" class="notification-badge">0</span>
+    </button>
 
-  <header class="topbar">
+    <button class="icon-btn" id="theme-toggle" aria-label="Toggle theme">◐</button>
+  </div>
+</header>
 
-    <div>
+<section class="highlight-box" style="margin-bottom:14px;padding:16px">
+  <div style="font-size:18px;font-weight:900">👥 NEXTRA Community</div>
+  <div class="dim" style="font-size:9px;line-height:1.6;margin-top:6px">
+    Markas trader untuk berbagi insight, analisis, edukasi dan pengalaman market.
+  </div>
+</section>
 
-      <h1 class="title">
-        Community<span class="dot">.</span>
-      </h1>
+<section class="stat-grid">
 
-      <p class="subtitle">
-        Learn. Share. Trade smarter.
-      </p>
+  <div class="coin-card" style="display:block;text-align:center;margin:0">
+    <strong id="member-count" style="font-size:15px">—</strong>
+    <div class="dim" style="font-size:7px;margin-top:3px">Members</div>
+  </div>
+
+  <div class="coin-card" style="display:block;text-align:center;margin:0">
+    <strong id="discussion-count" style="font-size:15px">—</strong>
+    <div class="dim" style="font-size:7px;margin-top:3px">Discussions</div>
+  </div>
+
+  <div class="coin-card" style="display:block;text-align:center;margin:0">
+    <strong id="following-count" style="font-size:15px">0</strong>
+    <div class="dim" style="font-size:7px;margin-top:3px">Following</div>
+  </div>
+
+</section>
+
+<div class="community-tabs" style="margin-top:15px">
+
+  <button class="community-tab active" data-filter="latest">Latest</button>
+  <button class="community-tab" data-filter="trending">🔥 Trending</button>
+  <button class="community-tab" data-filter="following">👥 Following</button>
+  <button class="community-tab" data-filter="analysis">📊 Analysis</button>
+  <button class="community-tab" data-filter="education">📚 Education</button>
+  <button class="community-tab" data-filter="discussion">💬 Discussion</button>
+  <button class="community-tab" data-filter="saved">🔖 Saved</button>
+  <button class="community-tab" data-filter="reposts">🔁 Reposts</button>
+
+</div>
+
+<section class="coin-card create-post">
+
+  <div style="font-size:10px;font-weight:900;margin-bottom:9px">
+    ✍️ Share something
+  </div>
+
+  <textarea
+    id="post-input"
+    class="post-input"
+    maxlength="500"
+    placeholder="Apa yang sedang kamu lihat di market?"
+  ></textarea>
+
+  <div class="post-actions">
+
+    <div class="post-type">
+
+      <button class="type-btn active" data-type="discussion">💬 Discussion</button>
+      <button class="type-btn" data-type="analysis">📊 Analysis</button>
+      <button class="type-btn" data-type="education">📚 Education</button>
 
     </div>
 
-    <button
-      class="icon-btn"
-      id="theme-toggle"
-      aria-label="Toggle theme"
-    >
-      ◐
-    </button>
-
-  </header>
-
-
-  <!-- HERO -->
-
-  <section
-    class="highlight-box"
-    style="
-      margin-bottom:14px;
-      padding:16px;
-    "
-  >
-
-    <div
-      style="
-        font-size:18px;
-        font-weight:900;
-      "
-    >
-      👥 NEXTRA Community
-    </div>
-
-    <div
-      class="dim"
-      style="
-        font-size:9px;
-        line-height:1.6;
-        margin-top:6px;
-      "
-    >
-      Markas trader untuk berbagi insight,
-      analisis, edukasi dan pengalaman market.
-    </div>
-
-  </section>
-
-
-  <!-- STATS -->
-
-  <section
-    style="
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:7px;
-    "
-  >
-
-    <div
-      class="coin-card"
-      style="
-        display:block;
-        text-align:center;
-        margin:0;
-      "
-    >
-
-      <strong
-        id="member-count"
-        style="font-size:15px;"
-      >
-        —
-      </strong>
-
-      <div
-        class="dim"
-        style="
-          font-size:7px;
-          margin-top:3px;
-        "
-      >
-        Members
-      </div>
-
-    </div>
-
-
-    <div
-      class="coin-card"
-      style="
-        display:block;
-        text-align:center;
-        margin:0;
-      "
-    >
-
-      <strong
-        id="discussion-count"
-        style="font-size:15px;"
-      >
-        —
-      </strong>
-
-      <div
-        class="dim"
-        style="
-          font-size:7px;
-          margin-top:3px;
-        "
-      >
-        Discussions
-      </div>
-
-    </div>
-
-
-    <div
-      class="coin-card"
-      style="
-        display:block;
-        text-align:center;
-        margin:0;
-      "
-    >
-
-      <strong
-        id="following-count"
-        style="font-size:15px;"
-      >
-        0
-      </strong>
-
-      <div
-        class="dim"
-        style="
-          font-size:7px;
-          margin-top:3px;
-        "
-      >
-        Following
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- TABS -->
-
-  <div
-    class="community-tabs"
-    style="margin-top:15px;"
-  >
-
-    <button
-      class="community-tab active"
-      data-filter="latest"
-    >
-      Latest
-    </button>
-
-    <button
-      class="community-tab"
-      data-filter="trending"
-    >
-      🔥 Trending
-    </button>
-
-    <button
-      class="community-tab"
-      data-filter="following"
-    >
-      👥 Following
-    </button>
-
-    <button
-      class="community-tab"
-      data-filter="analysis"
-    >
-      📊 Analysis
-    </button>
-
-    <button
-      class="community-tab"
-      data-filter="education"
-    >
-      📚 Education
-    </button>
-
-    <button
-      class="community-tab"
-      data-filter="discussion"
-    >
-      💬 Discussion
-    </button>
+    <button class="post-btn" id="publish-btn">Post</button>
 
   </div>
 
+</section>
 
-  <!-- CREATE POST -->
+<div id="community-message" class="community-message dim"></div>
 
-  <section class="coin-card create-post">
-
-    <div
-      style="
-        font-size:10px;
-        font-weight:900;
-        margin-bottom:9px;
-      "
-    >
-      ✍️ Share something
-    </div>
-
-    <textarea
-      id="post-input"
-      class="post-input"
-      maxlength="500"
-      placeholder="Apa yang sedang kamu lihat di market?"
-    ></textarea>
-
-
-    <div class="post-actions">
-
-      <div class="post-type">
-
-        <button
-          class="type-btn active"
-          data-type="discussion"
-        >
-          💬 Discussion
-        </button>
-
-        <button
-          class="type-btn"
-          data-type="analysis"
-        >
-          📊 Analysis
-        </button>
-
-        <button
-          class="type-btn"
-          data-type="education"
-        >
-          📚 Education
-        </button>
-
-      </div>
-
-
-      <button
-        class="post-btn"
-        id="publish-btn"
-      >
-        Post
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <div
-    id="community-message"
-    class="community-message dim"
-  ></div>
-
-
-  <!-- FEED TITLE -->
-
-  <div
-    style="
-      font-size:10px;
-      font-weight:800;
-      margin:17px 0 7px;
-    "
-  >
-    Community Feed
+<section
+  id="notification-panel"
+  class="coin-card notification-panel"
+>
+  <div style="font-size:10px;font-weight:900;margin-bottom:5px">
+    🔔 Notifications
   </div>
+  <div id="notification-list"></div>
+</section>
 
+<div style="font-size:10px;font-weight:800;margin:17px 0 7px">
+  Community Feed
+</div>
 
-  <!-- FEED -->
+<section id="community-feed">
+  <div class="loading-feed">Loading community...</div>
+</section>
 
-  <section id="community-feed">
+<div style="font-size:10px;font-weight:800;margin:18px 0 8px">
+  Community Rules
+</div>
 
-    <div class="loading-feed">
-      Loading community...
-    </div>
-
-  </section>
-
-
-  <!-- COMMUNITY RULES -->
-
-  <div
-    style="
-      font-size:10px;
-      font-weight:800;
-      margin:18px 0 8px;
-    "
-  >
-    Community Rules
+<section class="coin-card" style="display:block">
+  <div class="dim" style="font-size:9px;line-height:1.7">
+    <div>🤝 Hormati member lain.</div>
+    <div>🚫 Jangan spam atau scam.</div>
+    <div>📚 Utamakan edukasi.</div>
+    <div>⚠️ Jangan memberikan jaminan profit.</div>
   </div>
-
-
-  <section
-    class="coin-card"
-    style="display:block;"
-  >
-
-    <div
-      class="dim"
-      style="
-        font-size:9px;
-        line-height:1.7;
-      "
-    >
-
-      <div>
-        🤝 Hormati member lain.
-      </div>
-
-      <div>
-        🚫 Jangan spam atau scam.
-      </div>
-
-      <div>
-        📚 Utamakan edukasi.
-      </div>
-
-      <div>
-        ⚠️ Jangan memberikan jaminan profit.
-      </div>
-
-    </div>
-
-  </section>
-
+</section>
 
 </main>
 
-
 <div id="bottom-nav"></div>
-
 
 <script src="js/app.js"></script>
 
-
 <script type="module">
 
-
-/* =====================================================
-   SUPABASE
-===================================================== */
-
-import {
-  supabase
-} from "./js/supabase.js";
-
-
-/* =====================================================
-   STATE
-===================================================== */
+import { supabase } from "./js/supabase.js";
 
 let currentUser = null;
 let currentProfile = null;
-
 let selectedPostType = "discussion";
 let currentFilter = "latest";
 
 let allPosts = [];
 let followingIds = new Set();
+let savedIds = new Set();
+let repostedIds = new Set();
+let reactionsByPost = new Map();
 
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const feed =
-  document.getElementById(
-    "community-feed"
-  );
-
-const input =
-  document.getElementById(
-    "post-input"
-  );
-
-const publishButton =
-  document.getElementById(
-    "publish-btn"
-  );
-
-const message =
-  document.getElementById(
-    "community-message"
-  );
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
+const feed = document.getElementById("community-feed");
+const input = document.getElementById("post-input");
+const publishButton = document.getElementById("publish-btn");
+const message = document.getElementById("community-message");
 
 function showMessage(text) {
+  if (!message) return;
 
-  if (!message)
-    return;
+  message.textContent = text;
 
-
-  message.textContent =
-    text;
-
-
-  setTimeout(
-    () => {
-
-      if (
-        message.textContent ===
-        text
-      ) {
-
-        message.textContent =
-          "";
-
-      }
-
-    },
-    3000
-  );
-
+  setTimeout(() => {
+    if (message.textContent === text) {
+      message.textContent = "";
+    }
+  }, 3000);
 }
-
-
-/* =====================================================
-   ESCAPE
-===================================================== */
 
 function escapeHTML(value) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-  div.textContent =
-    value ?? "";
-
+  const div = document.createElement("div");
+  div.textContent = value ?? "";
   return div.innerHTML;
-
 }
-
-
-/* =====================================================
-   TIME
-===================================================== */
 
 function timeAgo(date) {
 
-  const seconds =
-    Math.floor(
-      (
-        Date.now() -
-        new Date(date).getTime()
-      ) / 1000
-    );
-
-
-  if (seconds < 60)
-    return "Just now";
-
-
-  const minutes =
-    Math.floor(
-      seconds / 60
-    );
-
-
-  if (minutes < 60)
-    return `${minutes} min ago`;
-
-
-  const hours =
-    Math.floor(
-      minutes / 60
-    );
-
-
-  if (hours < 24) {
-
-    return `${hours} hour${
-      hours > 1
-        ? "s"
-        : ""
-    } ago`;
-
-  }
-
-
-  const days =
-    Math.floor(
-      hours / 24
-    );
-
-
-  if (days < 7) {
-
-    return `${days} day${
-      days > 1
-        ? "s"
-        : ""
-    } ago`;
-
-  }
-
-
-  return new Date(
-    date
-  ).toLocaleDateString(
-    "id-ID"
+  const seconds = Math.floor(
+    (Date.now() - new Date(date).getTime()) / 1000
   );
 
+  if (seconds < 60) return "Just now";
+
+  const minutes = Math.floor(seconds / 60);
+
+  if (minutes < 60) {
+    return `${minutes} min ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+
+  if (hours < 24) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+
+  if (days < 7) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  }
+
+  return new Date(date).toLocaleDateString("id-ID");
 }
-
-
-/* =====================================================
-   FORMAT NUMBER
-===================================================== */
 
 function formatNumber(number) {
 
-  number =
-    Number(
-      number || 0
-    );
+  number = Number(number || 0);
 
-
-  if (
-    number >=
-    1000000
-  ) {
-
-    return (
-      number /
-      1000000
-    )
+  if (number >= 1000000) {
+    return (number / 1000000)
       .toFixed(1)
-      .replace(
-        ".0",
-        ""
-      ) +
-      "M";
-
+      .replace(".0", "") + "M";
   }
 
-
-  if (
-    number >=
-    1000
-  ) {
-
-    return (
-      number /
-      1000
-    )
+  if (number >= 1000) {
+    return (number / 1000)
       .toFixed(1)
-      .replace(
-        ".0",
-        ""
-      ) +
-      "K";
-
+      .replace(".0", "") + "K";
   }
 
-
-  return String(
-    number
-  );
-
+  return String(number);
 }
-
-
-/* =====================================================
-   TYPE LABEL
-===================================================== */
 
 function typeLabel(type) {
 
   return {
-
-    discussion:
-      "💬 Discussion",
-
-    analysis:
-      "📊 Analysis",
-
-    education:
-      "📚 Education"
-
-  }[
-    type
-  ] ||
-    "💬 Discussion";
-
+    discussion: "💬 Discussion",
+    analysis: "📊 Analysis",
+    education: "📚 Education"
+  }[type] || "💬 Discussion";
 }
-
-
-/* =====================================================
-   AUTH
-===================================================== */
 
 async function loadAuth() {
 
-  const {
-    data,
-    error
-  } =
+  const { data, error } =
     await supabase.auth.getUser();
 
-
   if (error) {
-
-    console.error(
-      "AUTH ERROR:",
-      error
-    );
-
+    console.error("AUTH ERROR:", error);
   }
 
+  currentUser = data?.user || null;
 
-  currentUser =
-    data?.user ||
-    null;
-
-
-  if (
-    !currentUser
-  ) {
-
-    publishButton.textContent =
-      "Login";
-
+  if (!currentUser) {
+    publishButton.textContent = "Login";
     return;
-
   }
 
-
-  const {
-    data: profile,
-    error: profileError
-  } =
+  const { data: profile } =
     await supabase
       .from("profiles")
-      .select(
-        "id, username, display_name, avatar_url"
-      )
-      .eq(
-        "id",
-        currentUser.id
-      )
+      .select("id,username,display_name,avatar_url")
+      .eq("id", currentUser.id)
       .maybeSingle();
 
-
-  if (profileError) {
-
-    console.error(
-      "PROFILE ERROR:",
-      profileError
-    );
-
-  }
-
-
-  currentProfile =
-    profile ||
-    null;
-
+  currentProfile = profile || null;
 
   await loadFollowing();
-
+  await loadPersonalCommunityState();
 }
-
-
-/* =====================================================
-   FOLLOWING
-===================================================== */
 
 async function loadFollowing() {
 
-  followingIds =
-    new Set();
+  followingIds = new Set();
 
+  if (!currentUser) return;
 
-  if (
-    !currentUser
-  )
-    return;
-
-
-  const {
-    data,
-    error
-  } =
+  const { data, error } =
     await supabase
       .from("follows")
-      .select(
-        "following_id"
-      )
-      .eq(
-        "follower_id",
-        currentUser.id
-      );
-
+      .select("following_id")
+      .eq("follower_id", currentUser.id);
 
   if (error) {
-
-    console.error(
-      "FOLLOWING ERROR:",
-      error
-    );
-
+    console.error("FOLLOWING ERROR:", error);
     return;
-
   }
 
-
-  (
-    data || []
-  )
-    .forEach(
-      row => {
-
-        followingIds.add(
-          row.following_id
-        );
-
-      }
-    );
-
+  (data || []).forEach(row => {
+    followingIds.add(row.following_id);
+  });
 
   updateFollowingCount();
-
 }
 
+async function loadPersonalCommunityState() {
 
-/* =====================================================
-   STATS
-===================================================== */
+  if (!currentUser) return;
+
+  const [bookmarks, reposts, reactions] =
+    await Promise.all([
+
+      supabase
+        .from("community_bookmarks")
+        .select("post_id")
+        .eq("user_id", currentUser.id),
+
+      supabase
+        .from("community_reposts")
+        .select("post_id")
+        .eq("user_id", currentUser.id),
+
+      supabase
+        .from("community_reactions")
+        .select("post_id,reaction")
+        .eq("user_id", currentUser.id)
+
+    ]);
+
+  savedIds = new Set(
+    (bookmarks.data || []).map(x => x.post_id)
+  );
+
+  repostedIds = new Set(
+    (reposts.data || []).map(x => x.post_id)
+  );
+
+  reactionsByPost = new Map();
+
+  (reactions.data || []).forEach(row => {
+    reactionsByPost.set(
+      row.post_id,
+      row.reaction
+    );
+  });
+}
 
 async function loadStats() {
 
   const members =
     await supabase
       .from("profiles")
-      .select(
-        "id",
-        {
-          count:
-            "exact",
-          head:
-            true
-        }
-      );
-
+      .select("id", { count: "exact", head: true });
 
   const posts =
     await supabase
       .from("community_posts")
-      .select(
-        "id",
-        {
-          count:
-            "exact",
-          head:
-            true
-        }
-      );
+      .select("id", { count: "exact", head: true });
 
+  document.getElementById("member-count").textContent =
+    formatNumber(members.count || 0);
 
-  const memberElement =
-    document.getElementById(
-      "member-count"
-    );
-
-
-  const discussionElement =
-    document.getElementById(
-      "discussion-count"
-    );
-
-
-  if (
-    memberElement
-  ) {
-
-    memberElement.textContent =
-      formatNumber(
-        members.count ||
-        0
-      );
-
-  }
-
-
-  if (
-    discussionElement
-  ) {
-
-    discussionElement.textContent =
-      formatNumber(
-        posts.count ||
-        0
-      );
-
-  }
-
+  document.getElementById("discussion-count").textContent =
+    formatNumber(posts.count || 0);
 
   updateFollowingCount();
-
 }
-
-
-/* =====================================================
-   LOAD FEED
-===================================================== */
 
 async function loadFeed() {
 
-  feed.innerHTML = `
-    <div class="loading-feed">
-      Loading community...
-    </div>
-  `;
+  feed.innerHTML =
+    `<div class="loading-feed">Loading community...</div>`;
 
-
-  /*
-    STEP 1
-    POSTS ONLY
-
-    Tidak menggunakan nested relation.
-  */
-
-  const {
-    data: posts,
-    error
-  } =
+  const { data: posts, error } =
     await supabase
-      .from(
-        "community_posts"
-      )
+      .from("community_posts")
       .select(
-        "id, user_id, content, post_type, created_at, updated_at"
+        "id,user_id,content,post_type,created_at,updated_at"
       )
-      .order(
-        "created_at",
-        {
-          ascending:
-            false
-        }
-      )
-      .limit(
-        100
-      );
-
+      .order("created_at", { ascending: false })
+      .limit(100);
 
   if (error) {
 
-    console.error(
-      "COMMUNITY POSTS ERROR:",
-      error
-    );
+    console.error("COMMUNITY POSTS ERROR:", error);
 
+    feed.innerHTML =
+      `<div class="empty-feed">Gagal memuat Community.</div>`;
 
-    feed.innerHTML = `
-      <div class="empty-feed">
-        Gagal memuat Community.
-      </div>
-    `;
-
-
-    showMessage(
-      error.message ||
-      "Gagal memuat feed."
-    );
-
+    showMessage(error.message || "Gagal memuat feed.");
 
     return;
-
   }
 
+  allPosts = posts || [];
 
-  allPosts =
-    posts ||
-    [];
-
-
-  if (
-    !allPosts.length
-  ) {
-
+  if (!allPosts.length) {
     renderCurrentFeed();
-
     return;
-
   }
 
+  const userIds = [
+    ...new Set(
+      allPosts.map(post => post.user_id)
+    )
+  ];
 
-  /*
-    STEP 2
-    PROFILES
-  */
+  const postIds = allPosts.map(post => post.id);
 
-  const userIds =
-    [
-      ...new Set(
-        allPosts.map(
-          post =>
-            post.user_id
-        )
-      )
-    ];
+  const [
+    profileResult,
+    likesResult,
+    commentsResult,
+    repostResult,
+    reactionResult
+  ] = await Promise.all([
 
+    supabase
+      .from("profiles")
+      .select("id,username,display_name,avatar_url")
+      .in("id", userIds),
 
-  const {
-    data: profiles,
-    error:
-      profileError
-  } =
-    await supabase
-      .from(
-        "profiles"
-      )
-      .select(
-        "id, username, display_name, avatar_url"
-      )
-      .in(
-        "id",
-        userIds
-      );
+    supabase
+      .from("community_likes")
+      .select("post_id,user_id")
+      .in("post_id", postIds),
 
+    supabase
+      .from("community_comments")
+      .select("id,post_id,user_id,content,created_at")
+      .in("post_id", postIds)
+      .order("created_at", { ascending: true }),
 
-  if (
-    profileError
-  ) {
+    supabase
+      .from("community_reposts")
+      .select("post_id,user_id")
+      .in("post_id", postIds),
 
-    console.error(
-      "PROFILE FEED ERROR:",
-      profileError
-    );
+    supabase
+      .from("community_reactions")
+      .select("post_id,user_id,reaction")
+      .in("post_id", postIds)
 
-  }
+  ]);
 
+  const profileMap = new Map();
 
-  const profileMap =
-    new Map();
+  (profileResult.data || []).forEach(profile => {
+    profileMap.set(profile.id, profile);
+  });
 
+  const likeMap = new Map();
 
-  (
-    profiles ||
-    []
-  )
-    .forEach(
-      profile => {
+  (likesResult.data || []).forEach(like => {
 
-        profileMap.set(
-          profile.id,
-          profile
-        );
+    if (!likeMap.has(like.post_id)) {
+      likeMap.set(like.post_id, []);
+    }
 
-      }
-    );
+    likeMap.get(like.post_id).push(like);
+  });
 
+  const commentMap = new Map();
 
-  /*
-    STEP 3
-    LIKES
-  */
+  (commentsResult.data || []).forEach(comment => {
 
-  const postIds =
-    allPosts.map(
-      post =>
-        post.id
-    );
+    if (!commentMap.has(comment.post_id)) {
+      commentMap.set(comment.post_id, []);
+    }
 
+    commentMap.get(comment.post_id).push(comment);
+  });
 
-  const {
-    data: likes,
-    error:
-      likesError
-  } =
-    await supabase
-      .from(
-        "community_likes"
-      )
-      .select(
-        "post_id, user_id"
-      )
-      .in(
-        "post_id",
-        postIds
-      );
+  const repostMap = new Map();
 
+  (repostResult.data || []).forEach(row => {
 
-  if (
-    likesError
-  ) {
+    if (!repostMap.has(row.post_id)) {
+      repostMap.set(row.post_id, []);
+    }
 
-    console.error(
-      "LIKES ERROR:",
-      likesError
-    );
+    repostMap.get(row.post_id).push(row);
+  });
 
-  }
+  const reactionMap = new Map();
 
+  (reactionResult.data || []).forEach(row => {
 
-  /*
-    STEP 4
-    COMMENTS
-  */
+    if (!reactionMap.has(row.post_id)) {
+      reactionMap.set(row.post_id, []);
+    }
 
-  const {
-    data: comments,
-    error:
-      commentsError
-  } =
-    await supabase
-      .from(
-        "community_comments"
-      )
-      .select(
-        "id, post_id, user_id, content, created_at"
-      )
-      .in(
-        "post_id",
-        postIds
-      )
-      .order(
-        "created_at",
-        {
-          ascending:
-            true
-        }
-      );
+    reactionMap.get(row.post_id).push(row);
+  });
 
+  allPosts = allPosts.map(post => ({
 
-  if (
-    commentsError
-  ) {
+    ...post,
 
-    console.error(
-      "COMMENTS ERROR:",
-      commentsError
-    );
+    profiles:
+      profileMap.get(post.user_id) || {},
 
-  }
+    community_likes:
+      likeMap.get(post.id) || [],
 
+    community_comments:
+      commentMap.get(post.id) || [],
 
-  /*
-    GROUP LIKES
-  */
+    community_reposts:
+      repostMap.get(post.id) || [],
 
-  const likeMap =
-    new Map();
+    community_reactions:
+      reactionMap.get(post.id) || []
 
-
-  (
-    likes ||
-    []
-  )
-    .forEach(
-      like => {
-
-        if (
-          !likeMap.has(
-            like.post_id
-          )
-        ) {
-
-          likeMap.set(
-            like.post_id,
-            []
-          );
-
-        }
-
-
-        likeMap
-          .get(
-            like.post_id
-          )
-          .push(
-            like
-          );
-
-      }
-    );
-
-
-  /*
-    GROUP COMMENTS
-  */
-
-  const commentMap =
-    new Map();
-
-
-  (
-    comments ||
-    []
-  )
-    .forEach(
-      comment => {
-
-        if (
-          !commentMap.has(
-            comment.post_id
-          )
-        ) {
-
-          commentMap.set(
-            comment.post_id,
-            []
-          );
-
-        }
-
-
-        commentMap
-          .get(
-            comment.post_id
-          )
-          .push(
-            comment
-          );
-
-      }
-    );
-
-
-  /*
-    MERGE
-  */
-
-  allPosts =
-    allPosts.map(
-      post => ({
-
-        ...post,
-
-        profiles:
-          profileMap.get(
-            post.user_id
-          ) ||
-          {},
-
-        community_likes:
-          likeMap.get(
-            post.id
-          ) ||
-          [],
-
-        community_comments:
-          commentMap.get(
-            post.id
-          ) ||
-          []
-
-      })
-    );
-
+  }));
 
   renderCurrentFeed();
-
 }
-
-
-/* =====================================================
-   FILTER
-===================================================== */
 
 function getFilteredPosts() {
 
-  let posts =
-    [
-      ...allPosts
-    ];
+  let posts = [...allPosts];
 
+  if (currentFilter === "trending") {
 
-  if (
-    currentFilter ===
-    "trending"
-  ) {
+    posts.sort((a, b) => {
 
-    posts.sort(
-      (
-        a,
-        b
-      ) => {
+      const scoreA =
+        (a.community_likes?.length || 0) * 3 +
+        (a.community_comments?.length || 0) * 2 +
+        (a.community_reposts?.length || 0) * 4 +
+        (a.community_reactions?.length || 0) * 2;
 
-        const likesA =
-          a.community_likes
-            ?.length ||
-          0;
+      const scoreB =
+        (b.community_likes?.length || 0) * 3 +
+        (b.community_comments?.length || 0) * 2 +
+        (b.community_reposts?.length || 0) * 4 +
+        (b.community_reactions?.length || 0) * 2;
 
+      return scoreB - scoreA;
+    });
+  }
 
-        const likesB =
-          b.community_likes
-            ?.length ||
-          0;
+  if (currentFilter === "following") {
 
-
-        return (
-          likesB -
-          likesA
-        );
-
-      }
+    posts = posts.filter(post =>
+      currentUser &&
+      followingIds.has(post.user_id)
     );
-
   }
-
 
   if (
-    currentFilter ===
-    "following"
+    ["analysis", "education", "discussion"]
+      .includes(currentFilter)
   ) {
 
-    posts =
-      posts.filter(
-        post =>
-          currentUser &&
-          followingIds.has(
-            post.user_id
-          )
-      );
-
+    posts = posts.filter(
+      post => post.post_type === currentFilter
+    );
   }
 
+  if (currentFilter === "saved") {
 
-  if (
-    [
-      "analysis",
-      "education",
-      "discussion"
-    ].includes(
-      currentFilter
-    )
-  ) {
-
-    posts =
-      posts.filter(
-        post =>
-          post.post_type ===
-          currentFilter
-      );
-
+    posts = posts.filter(post =>
+      savedIds.has(post.id)
+    );
   }
 
+  if (currentFilter === "reposts") {
+
+    posts = posts.filter(post =>
+      repostedIds.has(post.id)
+    );
+  }
 
   return posts;
-
 }
-
-
-/* =====================================================
-   RENDER FEED
-===================================================== */
 
 function renderCurrentFeed() {
-
-  renderFeed(
-    getFilteredPosts()
-  );
-
+  renderFeed(getFilteredPosts());
 }
 
+function renderFeed(posts) {
 
-function renderFeed(
-  posts
-) {
+  if (!posts.length) {
 
-  if (
-    !posts.length
-  ) {
+    let text = "Belum ada post.";
 
-    let text =
-      "Belum ada post.";
+    if (currentFilter === "following") {
 
-
-    if (
-      currentFilter ===
-      "following"
-    ) {
-
-      text =
-        currentUser
-          ? "Kamu belum mengikuti trader manapun."
-          : "Login untuk melihat Following.";
-
+      text = currentUser
+        ? "Kamu belum mengikuti trader manapun."
+        : "Login untuk melihat Following.";
     }
 
+    if (currentFilter === "saved") {
+      text = currentUser
+        ? "Belum ada post yang disimpan."
+        : "Login untuk melihat Bookmark.";
+    }
 
-    feed.innerHTML = `
-      <div class="empty-feed">
-        ${text}
-      </div>
-    `;
+    if (currentFilter === "reposts") {
+      text = currentUser
+        ? "Belum ada repost."
+        : "Login untuk melihat Repost.";
+    }
 
+    feed.innerHTML =
+      `<div class="empty-feed">${escapeHTML(text)}</div>`;
 
     return;
-
   }
 
-
   feed.innerHTML =
-    posts
-      .map(
-        renderPost
-      )
-      .join("");
-
+    posts.map(renderPost).join("");
 
   feed
-    .querySelectorAll(
-      ".post"
-    )
-    .forEach(
-      attachPostEvents
-    );
-
+    .querySelectorAll(".post")
+    .forEach(attachPostEvents);
 }
 
+function renderPost(post) {
 
-/* =====================================================
-   POST HTML
-===================================================== */
-
-function renderPost(
-  post
-) {
-
-  const profile =
-    post.profiles ||
-    {};
-
+  const profile = post.profiles || {};
 
   const username =
-    profile.username ||
-    "user";
-
+    profile.username || "user";
 
   const displayName =
-    profile.display_name ||
-    username;
-
+    profile.display_name || username;
 
   const avatar =
     profile.avatar_url;
 
-
   const likes =
-    post.community_likes ||
-    [];
-
+    post.community_likes || [];
 
   const comments =
-    post.community_comments ||
-    [];
+    post.community_comments || [];
 
+  const reposts =
+    post.community_reposts || [];
+
+  const reactions =
+    post.community_reactions || [];
 
   const liked =
     !!(
       currentUser &&
       likes.some(
-        like =>
-          like.user_id ===
-          currentUser.id
+        like => like.user_id === currentUser.id
       )
     );
 
-
-  const ownPost =
-    !!(
-      currentUser &&
-      post.user_id ===
-      currentUser.id
-    );
-
-
   const following =
-    followingIds.has(
-      post.user_id
-    );
+    followingIds.has(post.user_id);
 
+  const saved =
+    savedIds.has(post.id);
+
+  const reposted =
+    repostedIds.has(post.id);
+
+  const myReaction =
+    reactionsByPost.get(post.id);
 
   const avatarHTML =
     avatar
-      ? `
-        <img
-          src="${escapeHTML(
-            avatar
-          )}"
-          alt=""
-        >
-      `
+      ? `<img src="${escapeHTML(avatar)}" alt="">`
       : "👤";
 
-
   const followHTML =
-    ownPost
-      ? ""
-      : `
+    currentUser &&
+    currentUser.id !== post.user_id
+      ? `
         <button
-          class="follow-btn ${
-            following
-              ? "following"
-              : ""
-          }"
-          data-user-id="${escapeHTML(
-            post.user_id
-          )}"
+          class="follow-btn ${following ? "following" : ""}"
+          data-user-id="${escapeHTML(post.user_id)}"
         >
-          ${
-            following
-              ? "✓ Following"
-              : "+ Follow"
-          }
+          ${following ? "✓ Following" : "+ Follow"}
         </button>
-      `;
-
+      `
+      : "";
 
   const commentsHTML =
-    comments
-      .map(
-        comment => {
+    comments.map(comment => {
 
-          return `
-            <div class="comment">
+      return `
+        <div class="comment">
 
-              <div class="comment-avatar">
-                👤
-              </div>
+          <div class="comment-avatar">👤</div>
 
-              <div class="comment-body">
+          <div class="comment-body">
 
-                <strong>
-                  User
-                </strong>
+            <strong>User</strong>
 
-                ${escapeHTML(
-                  comment.content
-                )}
+            ${escapeHTML(comment.content)}
 
-              </div>
+          </div>
 
-            </div>
-          `;
+        </div>
+      `;
 
-        }
-      )
-      .join("");
+    }).join("");
 
+  const reactionSummary =
+    reactions
+      .reduce((map, row) => {
+
+        map[row.reaction] =
+          (map[row.reaction] || 0) + 1;
+
+        return map;
+
+      }, {});
 
   return `
 
     <article
       class="coin-card post"
-      data-id="${escapeHTML(
-        post.id
-      )}"
-      data-user-id="${escapeHTML(
-        post.user_id
-      )}"
-      data-type="${escapeHTML(
-        post.post_type
-      )}"
-      data-likes="${likes.length}"
+      data-id="${escapeHTML(post.id)}"
+      data-user-id="${escapeHTML(post.user_id)}"
     >
 
       <div class="post-header">
 
         <a
           class="profile-link"
-          href="trader-profile.html?username=${encodeURIComponent(
-            username
-          )}"
+          href="trader-profile.html?username=${encodeURIComponent(username)}"
         >
 
           <div class="avatar">
-
             ${avatarHTML}
-
           </div>
 
           <div class="post-user">
 
             <strong>
-              ${escapeHTML(
-                displayName
-              )}
+              ${escapeHTML(displayName)}
             </strong>
 
             <div class="dim post-meta">
 
-              ${timeAgo(
-                post.created_at
-              )}
-
+              ${timeAgo(post.created_at)}
               ·
-
-              ${typeLabel(
-                post.post_type
-              )}
+              ${typeLabel(post.post_type)}
 
             </div>
 
@@ -1865,72 +802,97 @@ function renderPost(
 
         </a>
 
-
         ${followHTML}
 
       </div>
 
-
       <div class="post-content">
-
-        ${escapeHTML(
-          post.content
-        )}
-
+        ${escapeHTML(post.content)}
       </div>
 
+      <div class="reaction-summary">
+
+        ${Object.entries(reactionSummary)
+          .map(
+            ([emoji, count]) =>
+              `${emoji} ${count}`
+          )
+          .join(" · ")}
+
+      </div>
 
       <div class="post-footer">
 
         <button
-          class="post-action like-btn ${
-            liked
-              ? "liked"
-              : ""
-          }"
+          class="post-action like-btn ${liked ? "liked" : ""}"
         >
-
-          ❤️
-
-          <span>
-            ${likes.length}
-          </span>
-
+          ❤️ <span>${likes.length}</span>
         </button>
 
-
-        <button
-          class="post-action comment-btn"
-        >
-
-          💬
-
-          <span>
-            ${comments.length}
-          </span>
-
+        <button class="post-action comment-btn">
+          💬 <span>${comments.length}</span>
         </button>
 
+        <button class="post-action reaction-toggle">
+          ${myReaction || "😊"} React
+        </button>
 
         <button
-          class="post-action share-btn"
+          class="post-action repost-btn ${reposted ? "active" : ""}"
         >
+          🔁 ${reposted ? "Reposted" : "Repost"}
+          <span>${reposts.length}</span>
+        </button>
 
+        <button
+          class="post-action bookmark-btn ${saved ? "active" : ""}"
+        >
+          ${saved ? "🔖 Saved" : "🔖 Save"}
+        </button>
+
+        <button class="post-action share-btn">
           ↗ Share
+        </button>
 
+        <button class="post-action report-toggle">
+          🚨 Report
         </button>
 
       </div>
 
+      <div class="reaction-picker">
+
+        <button class="reaction-btn" data-reaction="🔥">🔥</button>
+        <button class="reaction-btn" data-reaction="🚀">🚀</button>
+        <button class="reaction-btn" data-reaction="🧠">🧠</button>
+        <button class="reaction-btn" data-reaction="👏">👏</button>
+        <button class="reaction-btn" data-reaction="😂">😂</button>
+
+      </div>
+
+      <div class="report-box">
+
+        <select class="report-select">
+
+          <option value="spam">Spam</option>
+          <option value="scam">Scam</option>
+          <option value="harassment">Harassment</option>
+          <option value="misinformation">Misleading information</option>
+          <option value="other">Other</option>
+
+        </select>
+
+        <button class="report-send">
+          Kirim Report
+        </button>
+
+      </div>
 
       <div class="comments">
 
         <div class="comments-list">
-
           ${commentsHTML}
-
         </div>
-
 
         <div class="comment-box">
 
@@ -1940,9 +902,7 @@ function renderPost(
             placeholder="Tulis komentar..."
           >
 
-          <button
-            class="comment-send"
-          >
+          <button class="comment-send">
             Send
           </button>
 
@@ -1953,428 +913,202 @@ function renderPost(
     </article>
 
   `;
-
 }
 
-
-/* =====================================================
-   CREATE POST
-===================================================== */
-
-publishButton?.addEventListener(
-  "click",
-  async () => {
-
-    if (
-      !currentUser
-    ) {
-
-      window.location.href =
-        "login.html";
-
-      return;
-
-    }
-
-
-    const text =
-      input.value.trim();
-
-
-    if (!text) {
-
-      showMessage(
-        "Tulis sesuatu terlebih dahulu."
-      );
-
-      return;
-
-    }
-
-
-    publishButton.disabled =
-      true;
-
-    publishButton.textContent =
-      "Posting...";
-
-
-    const {
-      error
-    } =
-      await supabase
-        .from(
-          "community_posts"
-        )
-        .insert({
-
-          user_id:
-            currentUser.id,
-
-          content:
-            text,
-
-          post_type:
-            selectedPostType
-
-        });
-
-
-    publishButton.disabled =
-      false;
-
-    publishButton.textContent =
-      "Post";
-
-
-    if (error) {
-
-      console.error(
-        "CREATE POST ERROR:",
-        error
-      );
-
-      showMessage(
-        error.message ||
-        "Post gagal dibuat."
-      );
-
-      return;
-
-    }
-
-
-    input.value = "";
-
-
-    showMessage(
-      "Post berhasil dibuat 🔥"
-    );
-
-
-    await loadFeed();
-
-    await loadStats();
-
-  }
-);
-
-
-/* =====================================================
-   POST TYPE
-===================================================== */
-
-document
-  .querySelectorAll(
-    ".type-btn"
-  )
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          document
-            .querySelectorAll(
-              ".type-btn"
-            )
-            .forEach(
-              item =>
-                item.classList.remove(
-                  "active"
-                )
-            );
-
-
-          button.classList.add(
-            "active"
-          );
-
-
-          selectedPostType =
-            button.dataset.type;
-
-        }
-      );
-
-    }
-  );
-
-
-/* =====================================================
-   LIKE
-===================================================== */
-
-async function toggleLike(
-  post
+async function createNotification(
+  userId,
+  type,
+  postId,
+  messageText
 ) {
 
   if (
-    !currentUser
+    !currentUser ||
+    !userId ||
+    userId === currentUser.id
   ) {
-
-    window.location.href =
-      "login.html";
-
     return;
-
   }
 
+  const { error } =
+    await supabase
+      .from("community_notifications")
+      .insert({
 
-  const postId =
-    post.dataset.id;
+        user_id: userId,
+        actor_id: currentUser.id,
+        post_id: postId || null,
+        type,
+        message: messageText
 
+      });
+
+  if (error) {
+    console.error(
+      "NOTIFICATION ERROR:",
+      error
+    );
+  }
+}
+
+async function toggleLike(post) {
+
+  if (!currentUser) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const postId = post.dataset.id;
 
   const button =
-    post.querySelector(
-      ".like-btn"
-    );
-
+    post.querySelector(".like-btn");
 
   const count =
-    button.querySelector(
-      "span"
-    );
-
+    button.querySelector("span");
 
   const liked =
-    button.classList.contains(
-      "liked"
-    );
+    button.classList.contains("liked");
 
+  button.disabled = true;
 
-  button.disabled =
-    true;
-
-
-  let error =
-    null;
-
+  let error = null;
 
   if (liked) {
 
-    ({
-      error
-    } =
+    ({ error } =
       await supabase
-        .from(
-          "community_likes"
-        )
+        .from("community_likes")
         .delete()
-        .eq(
-          "post_id",
-          postId
-        )
-        .eq(
-          "user_id",
-          currentUser.id
-        ));
+        .eq("post_id", postId)
+        .eq("user_id", currentUser.id));
 
   } else {
 
-    ({
-      error
-    } =
+    ({ error } =
       await supabase
-        .from(
-          "community_likes"
-        )
+        .from("community_likes")
         .insert({
-
-          post_id:
-            postId,
-
-          user_id:
-            currentUser.id
-
+          post_id: postId,
+          user_id: currentUser.id
         }));
 
   }
 
-
   if (error) {
 
-    console.error(
-      "LIKE ERROR:",
-      error
-    );
+    console.error("LIKE ERROR:", error);
 
-    showMessage(
-      error.message ||
-      "Like gagal."
-    );
+    showMessage(error.message || "Like gagal.");
 
   } else {
 
-    button.classList.toggle(
-      "liked"
-    );
-
+    button.classList.toggle("liked");
 
     count.textContent =
       Math.max(
         0,
-        Number(
-          count.textContent
-        ) +
-        (
-          liked
-            ? -1
-            : 1
-        )
+        Number(count.textContent) +
+        (liked ? -1 : 1)
       );
 
+    if (!liked) {
 
-    post.dataset.likes =
-      count.textContent;
+      const target =
+        allPosts.find(
+          p => p.id === postId
+        );
 
+      if (target) {
+
+        await createNotification(
+          target.user_id,
+          "like",
+          postId,
+          "member menyukai post kamu ❤️"
+        );
+      }
+    }
   }
 
-
-  button.disabled =
-    false;
-
+  button.disabled = false;
 }
 
+async function toggleFollow(button) {
 
-/* =====================================================
-   FOLLOW
-===================================================== */
-
-async function toggleFollow(
-  button
-) {
-
-  if (
-    !currentUser
-  ) {
-
-    window.location.href =
-      "login.html";
-
+  if (!currentUser) {
+    window.location.href = "login.html";
     return;
-
   }
-
 
   const followingId =
     button.dataset.userId;
 
-
   const isFollowing =
-    button.classList.contains(
-      "following"
-    );
+    button.classList.contains("following");
 
+  button.disabled = true;
 
-  button.disabled =
-    true;
+  let error = null;
 
+  if (isFollowing) {
 
-  let error =
-    null;
-
-
-  if (
-    isFollowing
-  ) {
-
-    ({
-      error
-    } =
+    ({ error } =
       await supabase
-        .from(
-          "follows"
-        )
+        .from("follows")
         .delete()
-        .eq(
-          "follower_id",
-          currentUser.id
-        )
-        .eq(
-          "following_id",
-          followingId
-        ));
+        .eq("follower_id", currentUser.id)
+        .eq("following_id", followingId));
 
   } else {
 
-    ({
-      error
-    } =
+    ({ error } =
       await supabase
-        .from(
-          "follows"
-        )
+        .from("follows")
         .insert({
-
-          follower_id:
-            currentUser.id,
-
-          following_id:
-            followingId
-
+          follower_id: currentUser.id,
+          following_id: followingId
         }));
 
   }
 
-
   if (error) {
 
-    console.error(
-      "FOLLOW ERROR:",
-      error
-    );
+    console.error("FOLLOW ERROR:", error);
 
-    showMessage(
-      error.message ||
-      "Follow gagal."
-    );
+    showMessage(error.message || "Follow gagal.");
 
   } else {
 
-    if (
-      isFollowing
-    ) {
+    if (isFollowing) {
 
-      followingIds.delete(
-        followingId
-      );
+      followingIds.delete(followingId);
 
     } else {
 
-      followingIds.add(
-        followingId
+      followingIds.add(followingId);
+
+      await createNotification(
+        followingId,
+        "follow",
+        null,
+        "member mulai mengikuti kamu 👥"
       );
-
     }
-
 
     button.classList.toggle(
       "following"
     );
-
 
     button.textContent =
       isFollowing
         ? "+ Follow"
         : "✓ Following";
 
-
     updateFollowingCount();
-
   }
 
-
-  button.disabled =
-    false;
-
+  button.disabled = false;
 }
-
-
-/* =====================================================
-   FOLLOW COUNT
-===================================================== */
 
 function updateFollowingCount() {
 
@@ -2383,10 +1117,7 @@ function updateFollowingCount() {
       "following-count"
     );
 
-
-  if (
-    element
-  ) {
+  if (element) {
 
     element.textContent =
       formatNumber(
@@ -2394,78 +1125,40 @@ function updateFollowingCount() {
       );
 
   }
-
 }
 
+async function sendComment(post) {
 
-/* =====================================================
-   COMMENT
-===================================================== */
-
-async function sendComment(
-  post
-) {
-
-  if (
-    !currentUser
-  ) {
-
-    window.location.href =
-      "login.html";
-
+  if (!currentUser) {
+    window.location.href = "login.html";
     return;
-
   }
 
-
   const commentInput =
-    post.querySelector(
-      ".comment-input"
-    );
-
+    post.querySelector(".comment-input");
 
   const text =
     commentInput.value.trim();
 
-
-  if (!text)
-    return;
-
+  if (!text) return;
 
   const sendButton =
-    post.querySelector(
-      ".comment-send"
-    );
+    post.querySelector(".comment-send");
 
+  sendButton.disabled = true;
 
-  sendButton.disabled =
-    true;
-
-
-  const {
-    error
-  } =
+  const { error } =
     await supabase
-      .from(
-        "community_comments"
-      )
+      .from("community_comments")
       .insert({
 
-        post_id:
-          post.dataset.id,
-
-        user_id:
-          currentUser.id,
-
-        content:
-          text
+        post_id: post.dataset.id,
+        user_id: currentUser.id,
+        content: text
 
       });
 
-
-  sendButton.disabled =
-    false;
-
+  sendButton.disabled = false;
 
   if (error) {
 
@@ -2480,41 +1173,366 @@ async function sendComment(
     );
 
     return;
+  }
+
+  const target =
+    allPosts.find(
+      p => p.id === post.dataset.id
+    );
+
+  if (target) {
+
+    await createNotification(
+      target.user_id,
+      "comment",
+      post.dataset.id,
+      "member mengomentari post kamu 💬"
+    );
 
   }
 
-
-  commentInput.value =
-    "";
-
-
-  await loadFeed();
-
+  commentInput.value = "";
 
   showMessage(
     "Komentar terkirim."
   );
 
+  await loadFeed();
 }
 
+async function toggleRepost(post) {
 
-/* =====================================================
-   SHARE
-===================================================== */
+  if (!currentUser) {
+    window.location.href = "login.html";
+    return;
+  }
 
-async function sharePost(
+  const postId =
+    post.dataset.id;
+
+  const active =
+    repostedIds.has(postId);
+
+  let error = null;
+
+  if (active) {
+
+    ({ error } =
+      await supabase
+        .from("community_reposts")
+        .delete()
+        .eq("post_id", postId)
+        .eq("user_id", currentUser.id));
+
+  } else {
+
+    ({ error } =
+      await supabase
+        .from("community_reposts")
+        .insert({
+          post_id: postId,
+          user_id: currentUser.id
+        }));
+
+  }
+
+  if (error) {
+
+    console.error(
+      "REPOST ERROR:",
+      error
+    );
+
+    showMessage(
+      error.message ||
+      "Repost gagal."
+    );
+
+    return;
+  }
+
+  if (active) {
+
+    repostedIds.delete(postId);
+
+    showMessage(
+      "Repost dibatalkan."
+    );
+
+  } else {
+
+    repostedIds.add(postId);
+
+    const target =
+      allPosts.find(
+        p => p.id === postId
+      );
+
+    if (target) {
+
+      await createNotification(
+        target.user_id,
+        "repost",
+        postId,
+        "member me-repost post kamu 🔁"
+      );
+    }
+
+    showMessage(
+      "Post berhasil di-repost 🔁"
+    );
+  }
+
+  await loadFeed();
+}
+
+async function toggleBookmark(post) {
+
+  if (!currentUser) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const postId =
+    post.dataset.id;
+
+  const active =
+    savedIds.has(postId);
+
+  let error = null;
+
+  if (active) {
+
+    ({ error } =
+      await supabase
+        .from("community_bookmarks")
+        .delete()
+        .eq("post_id", postId)
+        .eq("user_id", currentUser.id));
+
+  } else {
+
+    ({ error } =
+      await supabase
+        .from("community_bookmarks")
+        .insert({
+          post_id: postId,
+          user_id: currentUser.id
+        }));
+
+  }
+
+  if (error) {
+
+    console.error(
+      "BOOKMARK ERROR:",
+      error
+    );
+
+    showMessage(
+      error.message ||
+      "Bookmark gagal."
+    );
+
+    return;
+  }
+
+  if (active) {
+
+    savedIds.delete(postId);
+
+    showMessage(
+      "Bookmark dihapus."
+
+    );
+
+  } else {
+
+    savedIds.add(postId);
+
+    showMessage(
+      "Post disimpan 🔖"
+    );
+
+  }
+
+  renderCurrentFeed();
+}
+
+async function setReaction(post, reaction) {
+
+  if (!currentUser) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const postId =
+    post.dataset.id;
+
+  const existing =
+    reactionsByPost.get(postId);
+
+  let error = null;
+
+  if (existing === reaction) {
+
+    ({ error } =
+      await supabase
+        .from("community_reactions")
+        .delete()
+        .eq("post_id", postId)
+        .eq("user_id", currentUser.id));
+
+  } else {
+
+    if (existing) {
+
+      ({ error } =
+        await supabase
+          .from("community_reactions")
+          .update({
+            reaction
+          })
+          .eq("post_id", postId)
+          .eq("user_id", currentUser.id));
+
+    } else {
+
+      ({ error } =
+        await supabase
+          .from("community_reactions")
+          .insert({
+            post_id: postId,
+            user_id: currentUser.id,
+            reaction
+          }));
+
+    }
+  }
+
+  if (error) {
+
+    console.error(
+      "REACTION ERROR:",
+      error
+    );
+
+    showMessage(
+      error.message ||
+      "Reaction gagal."
+    );
+
+    return;
+  }
+
+  if (existing === reaction) {
+
+    reactionsByPost.delete(
+      postId
+    );
+
+  } else {
+
+    reactionsByPost.set(
+      postId,
+      reaction
+    );
+
+    const target =
+      allPosts.find(
+        p => p.id === postId
+      );
+
+    if (target) {
+
+      await createNotification(
+        target.user_id,
+        "reaction",
+        postId,
+        `member memberi reaction ${reaction}`
+      );
+    }
+  }
+
+  await loadFeed();
+}
+
+async function reportPost(post) {
+
+  if (!currentUser) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const reason =
+    post
+      .querySelector(".report-select")
+      ?.value ||
+    "other";
+
+  const { error } =
+    await supabase
+      .from("community_reports")
+      .insert({
+
+        post_id:
+          post.dataset.id,
+
+        reporter_id:
+          currentUser.id,
+
+        reason
+
+      });
+
+  if (error) {
+
+    console.error(
+      "REPORT ERROR:",
+      error
+    );
+
+    if (
+      error.code === "23505"
+    ) {
+
+      showMessage(
+        "Kamu sudah melaporkan post ini."
+      );
+
+    } else {
+
+      showMessage(
+        error.message ||
+        "Report gagal."
+      );
+
+    }
+
+    return;
+  }
+
+  showMessage(
+    "Report berhasil dikirim 🚨"
+  );
+
   post
-) {
+    .querySelector(
+      ".report-box"
+    )
+    ?.classList.remove(
+      "show"
+    );
+}
+
+async function sharePost(post) {
 
   const url =
     `${window.location.origin}${window.location.pathname}#post-${post.dataset.id}`;
 
-
   try {
 
-    if (
-      navigator.share
-    ) {
+    if (navigator.share) {
 
       await navigator.share({
 
@@ -2542,38 +1560,20 @@ async function sharePost(
 
   } catch {
 
-    /* User cancelled share */
-
   }
-
 }
 
-
-/* =====================================================
-   POST EVENTS
-===================================================== */
-
-function attachPostEvents(
-  post
-) {
+function attachPostEvents(post) {
 
   post
-    .querySelector(
-      ".like-btn"
-    )
+    .querySelector(".like-btn")
     ?.addEventListener(
       "click",
-      () =>
-        toggleLike(
-          post
-        )
+      () => toggleLike(post)
     );
 
-
   post
-    .querySelector(
-      ".follow-btn"
-    )
+    .querySelector(".follow-btn")
     ?.addEventListener(
       "click",
       event =>
@@ -2582,133 +1582,404 @@ function attachPostEvents(
         )
     );
 
-
   post
-    .querySelector(
-      ".comment-btn"
-    )
+    .querySelector(".comment-btn")
     ?.addEventListener(
       "click",
       () => {
 
         post
-          .querySelector(
-            ".comments"
-          )
-          ?.classList.toggle(
-            "show"
-          );
+          .querySelector(".comments")
+          ?.classList.toggle("show");
 
       }
     );
 
-
   post
-    .querySelector(
-      ".comment-send"
-    )
+    .querySelector(".comment-send")
     ?.addEventListener(
       "click",
-      () =>
-        sendComment(
-          post
-        )
+      () => sendComment(post)
     );
 
-
   post
-    .querySelector(
-      ".comment-input"
-    )
+    .querySelector(".comment-input")
     ?.addEventListener(
       "keydown",
       event => {
 
-        if (
-          event.key ===
-          "Enter"
-        ) {
+        if (event.key === "Enter") {
 
           event.preventDefault();
 
-          sendComment(
-            post
-          );
+          sendComment(post);
 
         }
+      }
+    );
+
+  post
+    .querySelector(".share-btn")
+    ?.addEventListener(
+      "click",
+      () => sharePost(post)
+    );
+
+  post
+    .querySelector(".repost-btn")
+    ?.addEventListener(
+      "click",
+      () => toggleRepost(post)
+    );
+
+  post
+    .querySelector(".bookmark-btn")
+    ?.addEventListener(
+      "click",
+      () => toggleBookmark(post)
+    );
+
+  post
+    .querySelector(".reaction-toggle")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        post
+          .querySelector(".reaction-picker")
+          ?.classList.toggle("show");
 
       }
     );
 
-
   post
-    .querySelector(
-      ".share-btn"
-    )
-    ?.addEventListener(
-      "click",
-      () =>
-        sharePost(
-          post
-        )
-    );
+    .querySelectorAll(".reaction-btn")
+    .forEach(button => {
 
-}
-
-
-/* =====================================================
-   TABS
-===================================================== */
-
-document
-  .querySelectorAll(
-    ".community-tab"
-  )
-  .forEach(
-    tab => {
-
-      tab.addEventListener(
+      button.addEventListener(
         "click",
         () => {
 
-          document
-            .querySelectorAll(
-              ".community-tab"
-            )
-            .forEach(
-              item =>
-                item.classList.remove(
-                  "active"
-                )
-            );
-
-
-          tab.classList.add(
-            "active"
+          setReaction(
+            post,
+            button.dataset.reaction
           );
-
-
-          currentFilter =
-            tab.dataset.filter;
-
-
-          renderCurrentFeed();
 
         }
       );
 
+    });
+
+  post
+    .querySelector(".report-toggle")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        post
+          .querySelector(".report-box")
+          ?.classList.toggle("show");
+
+      }
+    );
+
+  post
+    .querySelector(".report-send")
+    ?.addEventListener(
+      "click",
+      () => reportPost(post)
+    );
+}
+
+publishButton?.addEventListener(
+  "click",
+  async () => {
+
+    if (!currentUser) {
+
+      window.location.href =
+        "login.html";
+
+      return;
+    }
+
+    const text =
+      input.value.trim();
+
+    if (!text) {
+
+      showMessage(
+        "Tulis sesuatu terlebih dahulu."
+      );
+
+      return;
+    }
+
+    publishButton.disabled = true;
+    publishButton.textContent = "Posting...";
+
+    const { error } =
+      await supabase
+        .from("community_posts")
+        .insert({
+
+          user_id:
+            currentUser.id,
+
+          content:
+            text,
+
+          post_type:
+            selectedPostType
+
+        });
+
+    publishButton.disabled = false;
+    publishButton.textContent = "Post";
+
+    if (error) {
+
+      console.error(
+        "CREATE POST ERROR:",
+        error
+      );
+
+      showMessage(
+        error.message ||
+        "Post gagal dibuat."
+      );
+
+      return;
+    }
+
+    input.value = "";
+
+    showMessage(
+      "Post berhasil dibuat 🔥"
+    );
+
+    await loadFeed();
+    await loadStats();
+  }
+);
+
+document
+  .querySelectorAll(".type-btn")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".type-btn")
+          .forEach(item =>
+            item.classList.remove("active")
+          );
+
+        button.classList.add("active");
+
+        selectedPostType =
+          button.dataset.type;
+      }
+    );
+  });
+
+document
+  .querySelectorAll(".community-tab")
+  .forEach(tab => {
+
+    tab.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".community-tab")
+          .forEach(item =>
+            item.classList.remove("active")
+          );
+
+        tab.classList.add("active");
+
+        currentFilter =
+          tab.dataset.filter;
+
+        if (
+          ["following","saved","reposts"]
+            .includes(currentFilter) &&
+          !currentUser
+        ) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+        }
+
+        renderCurrentFeed();
+      }
+    );
+  });
+
+document
+  .getElementById("notification-btn")
+  ?.addEventListener(
+    "click",
+    async () => {
+
+      const panel =
+        document.getElementById(
+          "notification-panel"
+        );
+
+      panel.classList.toggle("show");
+
+      if (panel.classList.contains("show")) {
+
+        await loadNotifications();
+
+      }
     }
   );
 
+async function loadNotifications() {
 
-/* =====================================================
-   THEME
-===================================================== */
+  const list =
+    document.getElementById(
+      "notification-list"
+    );
+
+  if (!currentUser) {
+
+    list.innerHTML =
+      `<div class="notification">Login untuk melihat notifications.</div>`;
+
+    return;
+  }
+
+  const { data, error } =
+    await supabase
+      .from("community_notifications")
+      .select(
+        "id,type,message,is_read,created_at"
+      )
+      .eq(
+        "user_id",
+        currentUser.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(30);
+
+  if (error) {
+
+    console.error(
+      "NOTIFICATION ERROR:",
+      error
+    );
+
+    list.innerHTML =
+      `<div class="notification">Gagal memuat notifications.</div>`;
+
+    return;
+  }
+
+  if (!data?.length) {
+
+    list.innerHTML =
+      `<div class="notification dim">Belum ada notification.</div>`;
+
+    return;
+  }
+
+  list.innerHTML =
+    data.map(row => `
+
+      <div
+        class="notification ${row.is_read ? "" : "unread"}"
+      >
+
+        ${escapeHTML(row.message)}
+
+        <div class="notification-time">
+          ${timeAgo(row.created_at)}
+        </div>
+
+      </div>
+
+    `).join("");
+
+  await supabase
+    .from("community_notifications")
+    .update({
+      is_read:true
+    })
+    .eq(
+      "user_id",
+      currentUser.id
+    )
+    .eq(
+      "is_read",
+      false
+    );
+
+  updateNotificationBadge();
+}
+
+async function updateNotificationBadge() {
+
+  if (!currentUser) return;
+
+  const { count } =
+    await supabase
+      .from("community_notifications")
+      .select(
+        "id",
+        {
+          count:"exact",
+          head:true
+        }
+      )
+      .eq(
+        "user_id",
+        currentUser.id
+      )
+      .eq(
+        "is_read",
+        false
+      );
+
+  const badge =
+    document.getElementById(
+      "notification-badge"
+    );
+
+  if (!badge) return;
+
+  if (count > 0) {
+
+    badge.style.display =
+      "flex";
+
+    badge.textContent =
+      count > 99
+        ? "99+"
+        : count;
+
+  } else {
+
+    badge.style.display =
+      "none";
+
+  }
+}
 
 document
-  .getElementById(
-    "theme-toggle"
-  )
+  .getElementById("theme-toggle")
   ?.addEventListener(
     "click",
     () => {
@@ -2725,22 +1996,17 @@ document
     }
   );
 
-
-/* =====================================================
-   REALTIME
-===================================================== */
-
 supabase
   .channel(
-    "nextra-community-v10-1"
+    "nextra-community-v100"
   )
 
   .on(
     "postgres_changes",
     {
-      event: "*",
-      schema: "public",
-      table: "community_posts"
+      event:"*",
+      schema:"public",
+      table:"community_posts"
     },
     () => {
 
@@ -2753,37 +2019,49 @@ supabase
   .on(
     "postgres_changes",
     {
-      event: "*",
-      schema: "public",
-      table: "community_likes"
+      event:"*",
+      schema:"public",
+      table:"community_likes"
     },
-    () => {
-
-      loadFeed();
-
-    }
+    () => loadFeed()
   )
 
   .on(
     "postgres_changes",
     {
-      event: "*",
-      schema: "public",
-      table: "community_comments"
+      event:"*",
+      schema:"public",
+      table:"community_comments"
     },
-    () => {
-
-      loadFeed();
-
-    }
+    () => loadFeed()
   )
 
   .on(
     "postgres_changes",
     {
-      event: "*",
-      schema: "public",
-      table: "follows"
+      event:"*",
+      schema:"public",
+      table:"community_reposts"
+    },
+    () => loadFeed()
+  )
+
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"community_reactions"
+    },
+    () => loadFeed()
+  )
+
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"follows"
     },
     () => {
 
@@ -2793,12 +2071,21 @@ supabase
     }
   )
 
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"community_notifications"
+    },
+    () => {
+
+      updateNotificationBadge();
+
+    }
+  )
+
   .subscribe();
-
-
-/* =====================================================
-   INIT
-===================================================== */
 
 async function init() {
 
@@ -2806,42 +2093,27 @@ async function init() {
 
     await loadAuth();
 
-
     await Promise.all([
-
       loadFeed(),
-
-      loadStats()
-
+      loadStats(),
+      updateNotificationBadge()
     ]);
 
-  } catch (
-    error
-  ) {
+  } catch (error) {
 
     console.error(
       "COMMUNITY INIT ERROR:",
       error
     );
 
-
-    feed.innerHTML = `
-      <div class="empty-feed">
-        Gagal memuat Community.
-      </div>
-    `;
-
+    feed.innerHTML =
+      `<div class="empty-feed">Gagal memuat Community.</div>`;
   }
-
 }
-
 
 init();
 
-
 </script>
 
-
 </body>
-
 </html>
