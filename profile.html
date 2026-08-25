@@ -30,85 +30,246 @@
   <style>
 
     /* =====================================================
-       FINAL AVATAR FIX
+       NEXTRA PROFILE V100
     ====================================================== */
 
-    #profilePage,
-    #profilePage .profile-card,
-    #profilePage .profile-cover,
-    #profilePage .profile-main {
-      overflow: visible !important;
+    :root {
+      --nextra-bg: #070909;
+      --nextra-card: #0c1113;
+      --nextra-card-2: #101618;
+      --nextra-border: rgba(255,255,255,.07);
+      --nextra-text: #f5f7f7;
+      --nextra-muted: rgba(245,247,247,.55);
+      --nextra-green: #42f5a7;
+      --nextra-red: #ff6b6b;
     }
 
-    #profilePage .profile-card {
-      position: relative !important;
-      isolation: isolate;
-      z-index: 10 !important;
+
+    /* =====================================================
+       AUTH LOADING
+    ====================================================== */
+
+    .auth-loading {
+
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #070909;
+      color: #fff;
+
+      font-size: 12px;
+      letter-spacing: .4px;
+
     }
 
-    #profilePage .profile-cover {
-      position: relative !important;
-      z-index: 1 !important;
+
+    .auth-loading.hidden {
+      display: none;
     }
 
-    #profilePage .profile-avatar {
-      position: absolute !important;
 
-      z-index: 9999 !important;
+    .auth-loading-inner {
 
-      overflow: hidden !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
 
-      display: grid !important;
-      place-items: center !important;
+    }
+
+
+    .auth-spinner {
+
+      width: 28px;
+      height: 28px;
+
+      border: 2px solid rgba(255,255,255,.1);
+      border-top-color: #42f5a7;
+
+      border-radius: 50%;
+
+      animation:
+        authSpin .7s linear infinite;
+
+    }
+
+
+    @keyframes authSpin {
+
+      to {
+        transform: rotate(360deg);
+      }
+
+    }
+
+
+    /* =====================================================
+       PROFILE ITEM BUTTON FIX
+    ====================================================== */
+
+    .profile-item.profile-button {
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+
+      padding: 16px 18px;
+
+      margin: 0;
+
+      border: 1px solid var(--nextra-border) !important;
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.018)
+        ) !important;
+
+      color: var(--nextra-text) !important;
+
+      text-align: left;
+
+      font-family: inherit;
+      font-size: inherit;
+
+      box-shadow: none !important;
 
       cursor: pointer;
+
+      transition:
+        background .18s ease,
+        border-color .18s ease,
+        transform .18s ease;
+
     }
 
-    #profilePage #avatarImage {
-      position: absolute !important;
 
-      inset: 0 !important;
+    .profile-item.profile-button:hover {
 
-      width: 100% !important;
-      height: 100% !important;
+      background:
+        rgba(255,255,255,.055) !important;
 
-      max-width: none !important;
-      max-height: none !important;
+      border-color:
+        rgba(255,255,255,.12) !important;
 
-      object-fit: cover !important;
-
-      border-radius: 50% !important;
-
-      z-index: 2 !important;
     }
 
-    #profilePage #avatarInitial {
-      position: absolute !important;
 
-      inset: 0 !important;
+    .profile-item.profile-button:active {
 
-      display: grid;
-      place-items: center;
+      transform: scale(.99);
 
-      z-index: 1;
     }
 
-    #profilePage .avatar-camera {
-      position: absolute !important;
 
-      z-index: 5 !important;
+    .profile-item.profile-button > div {
+
+      min-width: 0;
+
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
     }
 
-    #profilePage .profile-card + * {
-      position: relative;
-      z-index: 1;
+
+    .profile-item.profile-button strong {
+
+      color: var(--nextra-text) !important;
+
     }
 
-    @media (max-width: 699px) {
 
-      #profilePage .profile-card {
-        margin-bottom: 58px !important;
-      }
+    .profile-item.profile-button .logout-title {
+
+      color: var(--nextra-red) !important;
+
+    }
+
+
+    .profile-item.profile-button span {
+
+      color: var(--nextra-muted);
+
+    }
+
+
+    .profile-item.profile-button .profile-arrow {
+
+      color: rgba(255,255,255,.45) !important;
+
+      font-size: 24px;
+      line-height: 1;
+
+    }
+
+
+    /* =====================================================
+       LANGUAGE BUTTON
+    ====================================================== */
+
+    #languageButton {
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.018)
+        ) !important;
+
+      color: var(--nextra-text) !important;
+
+      border: 1px solid var(--nextra-border) !important;
+
+      box-shadow: none !important;
+
+    }
+
+
+    #languageButton:hover {
+
+      background:
+        rgba(255,255,255,.055) !important;
+
+      border-color:
+        rgba(255,255,255,.12) !important;
+
+    }
+
+
+    #languageButton strong {
+
+      color: var(--nextra-text) !important;
+
+    }
+
+
+    #languageButton span {
+
+      color: var(--nextra-muted);
+
+    }
+
+
+    #languageButton .profile-arrow {
+
+      color: rgba(255,255,255,.45) !important;
 
     }
 
@@ -121,25 +282,28 @@
 
       position: fixed;
       inset: 0;
-      z-index: 99999;
+      z-index: 9999;
 
       display: none;
 
       align-items: flex-end;
       justify-content: center;
 
-      background: rgba(0,0,0,.72);
-
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-
       padding: 16px;
+
+      background:
+        rgba(0,0,0,.72);
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
 
     }
 
 
     .language-modal.show {
+
       display: flex;
+
     }
 
 
@@ -152,14 +316,15 @@
 
       overflow-y: auto;
 
-      background: #0b0f11;
+      padding: 20px;
 
-      border: 1px solid
-        rgba(255,255,255,.08);
+      background:
+        #0b0f11;
+
+      border:
+        1px solid rgba(255,255,255,.08);
 
       border-radius: 24px;
-
-      padding: 20px;
 
       box-shadow:
         0 25px 70px rgba(0,0,0,.55);
@@ -196,9 +361,7 @@
     .language-panel-header {
 
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
 
       margin-bottom: 18px;
@@ -207,24 +370,34 @@
 
 
     .language-panel-header h3 {
+
       margin: 0;
+
+      color: #fff;
+
       font-size: 20px;
+
     }
 
 
     .language-close {
 
+      appearance: none;
+      -webkit-appearance: none;
+
       width: 38px;
       height: 38px;
 
-      border: 0;
+      padding: 0;
+
+      border: 1px solid rgba(255,255,255,.07);
 
       border-radius: 50%;
 
       background:
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.07) !important;
 
-      color: inherit;
+      color: #fff !important;
 
       font-size: 22px;
 
@@ -243,27 +416,31 @@
 
     .language-option {
 
+      appearance: none;
+      -webkit-appearance: none;
+
       width: 100%;
 
       display: flex;
-
       align-items: center;
 
       gap: 13px;
 
       padding: 13px;
 
-      border: 1px solid
-        rgba(255,255,255,.06);
+      border:
+        1px solid rgba(255,255,255,.06) !important;
 
       border-radius: 15px;
 
       background:
-        rgba(255,255,255,.025);
+        rgba(255,255,255,.025) !important;
 
-      color: inherit;
+      color: #fff !important;
 
       text-align: left;
+
+      font-family: inherit;
 
       cursor: pointer;
 
@@ -275,7 +452,7 @@
     .language-option:hover {
 
       background:
-        rgba(255,255,255,.07);
+        rgba(255,255,255,.07) !important;
 
     }
 
@@ -283,10 +460,10 @@
     .language-option.selected {
 
       border-color:
-        rgba(66,245,167,.65);
+        rgba(66,245,167,.65) !important;
 
       background:
-        rgba(66,245,167,.08);
+        rgba(66,245,167,.08) !important;
 
     }
 
@@ -314,9 +491,7 @@
     .language-info {
 
       display: flex;
-
       flex-direction: column;
-
       gap: 3px;
 
       min-width: 0;
@@ -325,19 +500,29 @@
 
 
     .language-info strong {
+
+      color: #fff !important;
+
       font-size: 14px;
+
     }
 
 
     .language-info span {
+
+      color:
+        rgba(255,255,255,.5) !important;
+
       font-size: 12px;
-      opacity: .55;
+
     }
 
 
     .language-check {
 
       margin-left: auto;
+
+      color: var(--nextra-green) !important;
 
       font-size: 18px;
 
@@ -348,80 +533,22 @@
 
     .language-option.selected
     .language-check {
+
       opacity: 1;
+
     }
 
 
     /* =====================================================
-       AUTH LOADING
+       MOBILE
     ====================================================== */
 
-    .auth-loading {
+    @media (max-width: 699px) {
 
-      position: fixed;
-      inset: 0;
+      .language-modal {
 
-      z-index: 100000;
+        align-items: flex-end;
 
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      background: #070909;
-
-      color:
-        var(--text,#fff);
-
-      font-size: 12px;
-
-      letter-spacing: .4px;
-
-    }
-
-
-    .auth-loading.hidden {
-      display: none;
-    }
-
-
-    .auth-loading-inner {
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      gap: 12px;
-
-    }
-
-
-    .auth-spinner {
-
-      width: 28px;
-      height: 28px;
-
-      border: 2px solid
-        rgba(255,255,255,.1);
-
-      border-top-color:
-        #42f5a7;
-
-      border-radius: 50%;
-
-      animation:
-        authSpin .7s linear infinite;
-
-    }
-
-
-    @keyframes authSpin {
-
-      to {
-        transform:
-          rotate(360deg);
       }
 
     }
@@ -430,7 +557,9 @@
     @media (min-width: 700px) {
 
       .language-modal {
+
         align-items: center;
+
       }
 
     }
@@ -465,6 +594,11 @@
 </div>
 
 
+
+<!-- =====================================================
+     PROFILE PAGE
+====================================================== -->
+
 <main
   class="container"
   id="profilePage"
@@ -481,11 +615,15 @@
     <div>
 
       <h1 class="title">
+
         Profile<span class="dot">.</span>
+
       </h1>
 
       <p class="subtitle">
+
         Your NEXTRA identity
+
       </p>
 
     </div>
@@ -500,6 +638,7 @@
     </a>
 
   </header>
+
 
 
   <!-- =====================================================
@@ -538,6 +677,7 @@
       </button>
 
     </div>
+
 
 
     <div class="profile-main">
@@ -581,6 +721,7 @@
   </section>
 
 
+
   <!-- =====================================================
        AVATAR INPUT
   ====================================================== -->
@@ -591,6 +732,7 @@
     accept="image/*"
     hidden
   >
+
 
 
   <!-- =====================================================
@@ -660,6 +802,7 @@
   </section>
 
 
+
   <!-- =====================================================
        TRADER LEVEL
   ====================================================== -->
@@ -718,6 +861,7 @@
   </section>
 
 
+
   <!-- =====================================================
        ACCOUNT PLAN
   ====================================================== -->
@@ -754,6 +898,7 @@
     </button>
 
   </section>
+
 
 
   <!-- =====================================================
@@ -801,6 +946,7 @@
     </div>
 
   </section>
+
 
 
   <!-- =====================================================
@@ -888,6 +1034,7 @@
   </section>
 
 
+
   <!-- =====================================================
        ACCOUNT
   ====================================================== -->
@@ -943,23 +1090,19 @@
     </div>
 
 
+    <!-- =================================================
+         LOGOUT V100
+    ================================================== -->
+
     <button
       type="button"
-      class="profile-item"
+      class="profile-item profile-button"
       id="logoutButton"
-      style="
-        width:100%;
-        border:0;
-        color:inherit;
-        text-align:left;
-        font:inherit;
-        cursor:pointer;
-      "
     >
 
       <div>
 
-        <strong style="color:#ff6b6b;">
+        <strong class="logout-title">
           🚪 Logout
         </strong>
 
@@ -977,6 +1120,7 @@
     </button>
 
   </section>
+
 
 
   <!-- =====================================================
@@ -1064,6 +1208,7 @@
   </section>
 
 
+
   <!-- =====================================================
        PREFERENCES
   ====================================================== -->
@@ -1097,18 +1242,15 @@
     </div>
 
 
+
+    <!-- =================================================
+         LANGUAGE V100
+    ================================================== -->
+
     <button
-      class="profile-item"
+      class="profile-item profile-button"
       id="languageButton"
       type="button"
-      style="
-        width:100%;
-        border:0;
-        color:inherit;
-        text-align:left;
-        font:inherit;
-        cursor:pointer;
-      "
     >
 
       <div>
@@ -1131,6 +1273,7 @@
     </button>
 
   </section>
+
 
 
   <!-- =====================================================
@@ -1168,6 +1311,7 @@
   </section>
 
 
+
   <!-- =====================================================
        FOOTER
   ====================================================== -->
@@ -1178,6 +1322,7 @@
 
 
 </main>
+
 
 
 <!-- =====================================================
@@ -1221,11 +1366,13 @@
 </div>
 
 
+
 <!-- =====================================================
      BOTTOM NAV
 ====================================================== -->
 
 <div id="bottom-nav"></div>
+
 
 
 <!-- =====================================================
@@ -1243,8 +1390,9 @@
 <script src="js/features/profile-stats.js"></script>
 
 
+
 <!-- =====================================================
-     PROFILE + SUPABASE
+     NEXTRA PROFILE V100 JS
 ====================================================== -->
 
 <script>
@@ -1261,8 +1409,10 @@
   const SUPABASE_URL =
     "https://uvtbntwgooxqjbyjkvkd.supabase.co";
 
+
   const SUPABASE_KEY =
     "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+
 
   const supabaseClient =
     window.supabase.createClient(
@@ -1271,15 +1421,18 @@
     );
 
 
+
   /* =====================================================
-     KEYS
+     STORAGE KEYS
   ====================================================== */
 
   const AVATAR_KEY =
     "nextra_avatar";
 
+
   const SETTINGS_KEY =
     "nextra_settings";
+
 
 
   /* =====================================================
@@ -1287,72 +1440,130 @@
   ====================================================== */
 
   const authLoading =
-    document.getElementById("authLoading");
+    document.getElementById(
+      "authLoading"
+    );
+
 
   const profilePage =
-    document.getElementById("profilePage");
+    document.getElementById(
+      "profilePage"
+    );
+
 
   const nameEl =
-    document.getElementById("profileName");
+    document.getElementById(
+      "profileName"
+    );
+
 
   const usernameEl =
-    document.getElementById("profileUsername");
+    document.getElementById(
+      "profileUsername"
+    );
+
 
   const accountEmail =
-    document.getElementById("accountEmail");
+    document.getElementById(
+      "accountEmail"
+    );
+
 
   const avatarInitial =
-    document.getElementById("avatarInitial");
+    document.getElementById(
+      "avatarInitial"
+    );
+
 
   const avatarImage =
-    document.getElementById("avatarImage");
+    document.getElementById(
+      "avatarImage"
+    );
+
 
   const avatarButton =
-    document.getElementById("avatarButton");
+    document.getElementById(
+      "avatarButton"
+    );
+
 
   const avatarInput =
-    document.getElementById("avatarInput");
+    document.getElementById(
+      "avatarInput"
+    );
+
 
   const editProfileBtn =
-    document.getElementById("editProfileBtn");
+    document.getElementById(
+      "editProfileBtn"
+    );
+
 
   const editProfilePanel =
-    document.getElementById("editProfilePanel");
+    document.getElementById(
+      "editProfilePanel"
+    );
+
 
   const nameInput =
-    document.getElementById("nameInput");
+    document.getElementById(
+      "nameInput"
+    );
+
 
   const usernameInput =
-    document.getElementById("usernameInput");
+    document.getElementById(
+      "usernameInput"
+    );
+
 
   const saveProfileBtn =
-    document.getElementById("saveProfileBtn");
+    document.getElementById(
+      "saveProfileBtn"
+    );
+
 
   const cancelProfileBtn =
-    document.getElementById("cancelProfileBtn");
+    document.getElementById(
+      "cancelProfileBtn"
+    );
+
 
   const logoutButton =
-    document.getElementById("logoutButton");
+    document.getElementById(
+      "logoutButton"
+    );
 
-
-  /* =====================================================
-     LANGUAGE
-  ====================================================== */
 
   const languageButton =
-    document.getElementById("languageButton");
+    document.getElementById(
+      "languageButton"
+    );
+
 
   const languageModal =
-    document.getElementById("languageModal");
+    document.getElementById(
+      "languageModal"
+    );
+
 
   const languageClose =
-    document.getElementById("languageClose");
+    document.getElementById(
+      "languageClose"
+    );
+
 
   const languageList =
-    document.getElementById("languageList");
+    document.getElementById(
+      "languageList"
+    );
+
 
   const currentLanguage =
-    document.getElementById("currentLanguage");
+    document.getElementById(
+      "currentLanguage"
+    );
+
 
 
   /* =====================================================
@@ -1361,10 +1572,17 @@
 
   let currentUser = null;
 
+
   let profile = {
-    name: "NEXTRA User",
-    username: "nextra_user"
+
+    name:
+      "NEXTRA User",
+
+    username:
+      "nextra_user"
+
   };
+
 
 
   /* =====================================================
@@ -1381,7 +1599,9 @@
         ) || "{}"
       );
 
-    } catch {
+    }
+
+    catch {
 
       return {};
 
@@ -1400,40 +1620,43 @@
   }
 
 
+
   /* =====================================================
-     LANGUAGES
+     LANGUAGE
   ====================================================== */
 
   const LANGUAGE_DATA = [
 
-    ["id","🇮🇩","Bahasa Indonesia","Bahasa Indonesia"],
-    ["en","🇺🇸","English","English"],
-    ["es","🇪🇸","Español","Spanish"],
-    ["fr","🇫🇷","Français","French"],
-    ["de","🇩🇪","Deutsch","German"],
-    ["it","🇮🇹","Italiano","Italian"],
-    ["pt","🇵🇹","Português","Portuguese"],
-    ["pt-BR","🇧🇷","Português (Brasil)","Portuguese Brazil"],
-    ["ru","🇷🇺","Русский","Russian"],
-    ["zh","🇨🇳","简体中文","Chinese Simplified"],
-    ["zh-TW","🇹🇼","繁體中文","Chinese Traditional"],
-    ["ja","🇯🇵","日本語","Japanese"],
-    ["ko","🇰🇷","한국어","Korean"],
-    ["tr","🇹🇷","Türkçe","Turkish"],
-    ["vi","🇻🇳","Tiếng Việt","Vietnamese"],
-    ["th","🇹🇭","ไทย","Thai"],
-    ["ar","🇸🇦","العربية","Arabic"],
-    ["hi","🇮🇳","हिन्दी","Hindi"],
-    ["nl","🇳🇱","Nederlands","Dutch"],
-    ["pl","🇵🇱","Polski","Polish"]
+    ["id", "🇮🇩", "Bahasa Indonesia", "Bahasa Indonesia"],
+    ["en", "🇺🇸", "English", "English"],
+    ["es", "🇪🇸", "Español", "Spanish"],
+    ["fr", "🇫🇷", "Français", "French"],
+    ["de", "🇩🇪", "Deutsch", "German"],
+    ["it", "🇮🇹", "Italiano", "Italian"],
+    ["pt", "🇵🇹", "Português", "Portuguese"],
+    ["pt-BR", "🇧🇷", "Português (Brasil)", "Portuguese Brazil"],
+    ["ru", "🇷🇺", "Русский", "Russian"],
+    ["zh", "🇨🇳", "简体中文", "Chinese Simplified"],
+    ["zh-TW", "🇹🇼", "繁體中文", "Chinese Traditional"],
+    ["ja", "🇯🇵", "日本語", "Japanese"],
+    ["ko", "🇰🇷", "한국어", "Korean"],
+    ["tr", "🇹🇷", "Türkçe", "Turkish"],
+    ["vi", "🇻🇳", "Tiếng Việt", "Vietnamese"],
+    ["th", "🇹🇭", "ไทย", "Thai"],
+    ["ar", "🇸🇦", "العربية", "Arabic"],
+    ["hi", "🇮🇳", "हिन्दी", "Hindi"],
+    ["nl", "🇳🇱", "Nederlands", "Dutch"],
+    ["pl", "🇵🇱", "Polski", "Polish"]
 
   ];
+
 
 
   function getCurrentLanguage() {
 
     const settings =
       getSettings();
+
 
     if (
       window.NEXTRA_I18N &&
@@ -1447,9 +1670,11 @@
 
     }
 
+
     return "id";
 
   }
+
 
 
   function getLanguageName(code) {
@@ -1460,6 +1685,7 @@
           language[0] === code
       );
 
+
     return found
       ? found[2]
       : "Bahasa Indonesia";
@@ -1467,15 +1693,19 @@
   }
 
 
+
   function renderLanguages() {
 
     if (!languageList)
       return;
 
+
     const selected =
       getCurrentLanguage();
 
+
     languageList.innerHTML = "";
+
 
     LANGUAGE_DATA.forEach(
       language => {
@@ -1487,21 +1717,31 @@
           englishName
         ] = language;
 
-        const button =
-          document.createElement("button");
 
-        button.type = "button";
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type =
+          "button";
+
 
         button.className =
           "language-option";
 
-        if (code === selected) {
+
+        if (
+          code === selected
+        ) {
 
           button.classList.add(
             "selected"
           );
 
         }
+
 
         button.innerHTML = `
 
@@ -1527,12 +1767,20 @@
 
         `;
 
+
         button.addEventListener(
           "click",
-          () => selectLanguage(code)
+          () => {
+
+            selectLanguage(code);
+
+          }
         );
 
-        languageList.appendChild(button);
+
+        languageList.appendChild(
+          button
+        );
 
       }
     );
@@ -1540,14 +1788,19 @@
   }
 
 
+
   function selectLanguage(code) {
 
     const settings =
       getSettings();
 
-    settings.language = code;
+
+    settings.language =
+      code;
+
 
     saveSettings(settings);
+
 
     if (currentLanguage) {
 
@@ -1556,8 +1809,10 @@
 
     }
 
+
     document.documentElement.lang =
       code;
+
 
     if (
       window.NEXTRA_I18N &&
@@ -1570,6 +1825,7 @@
 
     }
 
+
     window.dispatchEvent(
       new CustomEvent(
         "nextra:languageChanged",
@@ -1581,6 +1837,7 @@
       )
     );
 
+
     renderLanguages();
 
     closeLanguage();
@@ -1588,16 +1845,22 @@
   }
 
 
+
   function openLanguage() {
 
     renderLanguages();
 
-    languageModal.classList.add("show");
+
+    languageModal.classList.add(
+      "show"
+    );
+
 
     languageModal.setAttribute(
       "aria-hidden",
       "false"
     );
+
 
     document.body.style.overflow =
       "hidden";
@@ -1605,14 +1868,19 @@
   }
 
 
+
   function closeLanguage() {
 
-    languageModal.classList.remove("show");
+    languageModal.classList.remove(
+      "show"
+    );
+
 
     languageModal.setAttribute(
       "aria-hidden",
       "true"
     );
+
 
     document.body.style.overflow =
       "";
@@ -1653,7 +1921,10 @@
     "keydown",
     event => {
 
-      if (event.key === "Escape") {
+      if (
+        event.key ===
+        "Escape"
+      ) {
 
         closeLanguage();
 
@@ -1673,6 +1944,7 @@
   }
 
 
+
   /* =====================================================
      AVATAR
   ====================================================== */
@@ -1684,30 +1956,40 @@
         AVATAR_KEY
       );
 
-    if (savedAvatar) {
+
+    if (
+      savedAvatar &&
+      avatarImage
+    ) {
 
       avatarImage.src =
         savedAvatar;
+
 
       avatarImage.classList.add(
         "visible"
       );
 
+
       avatarInitial.style.display =
         "none";
 
-    } else {
+    }
+
+    else {
 
       avatarImage.classList.remove(
         "visible"
       );
 
+
       avatarInitial.style.display =
-        "grid";
+        "block";
 
     }
 
   }
+
 
 
   avatarButton?.addEventListener(
@@ -1727,11 +2009,15 @@
       const file =
         event.target.files?.[0];
 
+
       if (!file)
         return;
 
+
       if (
-        !file.type.startsWith("image/")
+        !file.type.startsWith(
+          "image/"
+        )
       ) {
 
         alert(
@@ -1741,6 +2027,7 @@
         return;
 
       }
+
 
       if (
         file.size >
@@ -1755,29 +2042,36 @@
 
       }
 
+
       const reader =
         new FileReader();
 
-      reader.onload = () => {
 
-        try {
+      reader.onload =
+        () => {
 
-          localStorage.setItem(
-            AVATAR_KEY,
-            reader.result
-          );
+          try {
 
-          renderAvatar();
+            localStorage.setItem(
+              AVATAR_KEY,
+              reader.result
+            );
 
-        } catch {
 
-          alert(
-            "Foto terlalu besar."
-          );
+            renderAvatar();
 
-        }
+          }
 
-      };
+          catch {
+
+            alert(
+              "Foto terlalu besar."
+            );
+
+          }
+
+        };
+
 
       reader.readAsDataURL(file);
 
@@ -1785,8 +2079,9 @@
   );
 
 
+
   /* =====================================================
-     PROFILE
+     PROFILE RENDER
   ====================================================== */
 
   function renderProfile() {
@@ -1794,22 +2089,29 @@
     nameEl.textContent =
       profile.name;
 
+
     usernameEl.textContent =
-      "@" + profile.username;
+      "@" +
+      profile.username;
+
 
     avatarInitial.textContent =
       (
-        profile.name.trim()[0]
+        profile.name
+          .trim()[0]
         || "N"
       ).toUpperCase();
+
 
     accountEmail.textContent =
       currentUser?.email ||
       "Email tidak tersedia";
 
+
     renderAvatar();
 
   }
+
 
 
   /* =====================================================
@@ -1823,11 +2125,14 @@
       nameInput.value =
         profile.name;
 
+
       usernameInput.value =
         profile.username;
 
+
       editProfilePanel.hidden =
         false;
+
 
       nameInput.focus();
 
@@ -1853,7 +2158,8 @@
       const newName =
         nameInput.value
           .trim()
-          .slice(0,30);
+          .slice(0, 30);
+
 
       const newUsername =
         usernameInput.value
@@ -1862,7 +2168,8 @@
             /[^a-zA-Z0-9_]/g,
             ""
           )
-          .slice(0,20);
+          .slice(0, 20);
+
 
       if (!newName) {
 
@@ -1874,6 +2181,7 @@
 
       }
 
+
       if (!newUsername) {
 
         alert(
@@ -1884,11 +2192,14 @@
 
       }
 
+
       saveProfileBtn.disabled =
         true;
 
+
       saveProfileBtn.textContent =
         "Saving...";
+
 
       try {
 
@@ -1912,14 +2223,21 @@
 
             });
 
-        if (error)
+
+        if (error) {
+
           throw error;
+
+        }
+
 
         profile.name =
           newName;
 
+
         profile.username =
           newUsername;
+
 
         if (data?.user) {
 
@@ -1928,27 +2246,35 @@
 
         }
 
+
         renderProfile();
+
 
         editProfilePanel.hidden =
           true;
 
-      } catch (error) {
+      }
+
+      catch (error) {
 
         console.error(
           "Profile update error:",
           error
         );
 
+
         alert(
           "Gagal menyimpan profile:\n" +
           error.message
         );
 
-      } finally {
+      }
+
+      finally {
 
         saveProfileBtn.disabled =
           false;
+
 
         saveProfileBtn.textContent =
           "Save changes";
@@ -1957,6 +2283,7 @@
 
     }
   );
+
 
 
   /* =====================================================
@@ -1974,6 +2301,7 @@
           ) || "[]"
         );
 
+
       document.getElementById(
         "watchlistCount"
       ).textContent =
@@ -1981,11 +2309,14 @@
           ? watchlist.length
           : 0;
 
-    } catch {
+    }
+
+    catch {
 
       document.getElementById(
         "watchlistCount"
-      ).textContent = "0";
+      ).textContent =
+        "0";
 
     }
 
@@ -1999,6 +2330,7 @@
           ) || "[]"
         );
 
+
       document.getElementById(
         "alertCount"
       ).textContent =
@@ -2006,11 +2338,14 @@
           ? alerts.length
           : 0;
 
-    } catch {
+    }
+
+    catch {
 
       document.getElementById(
         "alertCount"
-      ).textContent = "0";
+      ).textContent =
+        "0";
 
     }
 
@@ -2021,6 +2356,7 @@
       "Live";
 
   }
+
 
 
   /* =====================================================
@@ -2036,16 +2372,28 @@
           "Yakin ingin logout dari NEXTRA?"
         );
 
+
       if (!confirmed)
         return;
+
 
       logoutButton.disabled =
         true;
 
-      logoutButton.querySelector(
-        "strong"
-      ).textContent =
-        "Logging out...";
+
+      const title =
+        logoutButton.querySelector(
+          ".logout-title"
+        );
+
+
+      if (title) {
+
+        title.textContent =
+          "Logging out...";
+
+      }
+
 
       try {
 
@@ -2058,36 +2406,49 @@
               scope: "local"
             });
 
-        if (error)
+
+        if (error) {
+
           throw error;
+
+        }
+
 
         window.location.href =
           "index.html";
 
-      } catch (error) {
+      }
+
+      catch (error) {
 
         console.error(
           "Logout error:",
           error
         );
 
+
         alert(
           "Gagal logout:\n" +
           error.message
         );
 
+
         logoutButton.disabled =
           false;
 
-        logoutButton.querySelector(
-          "strong"
-        ).textContent =
-          "🚪 Logout";
+
+        if (title) {
+
+          title.textContent =
+            "🚪 Logout";
+
+        }
 
       }
 
     }
   );
+
 
 
   /* =====================================================
@@ -2106,11 +2467,17 @@
           .auth
           .getSession();
 
-      if (error)
+
+      if (error) {
+
         throw error;
+
+      }
+
 
       const session =
         data?.session;
+
 
       if (!session) {
 
@@ -2122,17 +2489,22 @@
 
       }
 
+
       currentUser =
         session.user;
+
 
       const metadata =
         currentUser.user_metadata ||
         {};
 
+
       const emailUsername =
         currentUser.email
-          ? currentUser.email.split("@")[0]
+          ? currentUser.email
+              .split("@")[0]
           : "nextra_user";
+
 
       profile.name =
         String(
@@ -2140,7 +2512,8 @@
           metadata.name ||
           emailUsername ||
           "NEXTRA User"
-        ).slice(0,30);
+        ).slice(0, 30);
+
 
       profile.username =
         String(
@@ -2152,25 +2525,31 @@
           /[^a-zA-Z0-9_]/g,
           ""
         )
-        .slice(0,20);
+        .slice(0, 20);
+
 
       renderProfile();
 
       loadStats();
 
+
       profilePage.hidden =
         false;
+
 
       authLoading.classList.add(
         "hidden"
       );
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
       console.error(
         "NEXTRA Auth error:",
         error
       );
+
 
       window.location.replace(
         "login.html"
@@ -2181,8 +2560,9 @@
   }
 
 
+
   /* =====================================================
-     AUTH LISTENER
+     AUTH STATE
   ====================================================== */
 
   supabaseClient
@@ -2194,7 +2574,8 @@
       ) => {
 
         if (
-          event === "SIGNED_OUT"
+          event ===
+          "SIGNED_OUT"
         ) {
 
           window.location.replace(
@@ -2205,13 +2586,16 @@
 
         }
 
+
         if (
-          event === "TOKEN_REFRESHED"
+          event ===
+          "TOKEN_REFRESHED"
         ) {
 
           return;
 
         }
+
 
         if (!session) {
 
@@ -2223,6 +2607,7 @@
 
       }
     );
+
 
 
   /* =====================================================
@@ -2238,4 +2623,5 @@
 
 
 </body>
+
 </html>
