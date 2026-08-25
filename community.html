@@ -2,11 +2,17 @@
 <html lang="id">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#05070a"
   >
 
   <title>NEXTRA — Community</title>
@@ -15,11 +21,281 @@
     rel="stylesheet"
     href="css/style.css"
   >
+
+  <style>
+
+    .community-tabs {
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 2px 0 8px;
+      scrollbar-width: none;
+    }
+
+    .community-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .community-tab {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: inherit;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .community-tab.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .create-post {
+      margin-top: 8px;
+      padding: 13px;
+    }
+
+    .post-input {
+      width: 100%;
+      min-height: 75px;
+      resize: vertical;
+      box-sizing: border-box;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      color: inherit;
+      padding: 11px;
+      font-family: inherit;
+      font-size: 10px;
+      outline: none;
+    }
+
+    .post-input:focus {
+      border-color: var(--text);
+    }
+
+    .post-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .post-type {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .type-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: 8px;
+      cursor: pointer;
+    }
+
+    .type-btn.active {
+      border-color: var(--text);
+    }
+
+    .post-btn {
+      border: 0;
+      background: var(--text);
+      color: var(--bg);
+      padding: 8px 13px;
+      border-radius: 9px;
+      font-size: 9px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .post {
+      margin-top: 9px;
+      padding: 13px;
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+
+    .post-user {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .post-user strong {
+      font-size: 10px;
+    }
+
+    .post-meta {
+      font-size: 7px;
+      margin-top: 2px;
+    }
+
+    .follow-btn {
+      border: 1px solid var(--border);
+      background: transparent;
+      color: inherit;
+      padding: 6px 9px;
+      border-radius: 8px;
+      font-size: 7px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .post-content {
+      font-size: 10px;
+      line-height: 1.65;
+      margin-top: 10px;
+    }
+
+    .coin-tag {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: var(--border);
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .post-footer {
+      display: flex;
+      gap: 16px;
+      margin-top: 11px;
+      padding-top: 9px;
+      border-top: 1px solid var(--border);
+    }
+
+    .post-action {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      font-size: 8px;
+      cursor: pointer;
+    }
+
+    .post-action.liked {
+      font-weight: 900;
+    }
+
+    .comments {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .comments.show {
+      display: block;
+    }
+
+    .comment {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 8px;
+    }
+
+    .comment-avatar {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .comment-body {
+      background: var(--border);
+      border-radius: 9px;
+      padding: 7px 9px;
+      font-size: 8px;
+      line-height: 1.5;
+    }
+
+    .comment-body strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .comment-box {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .comment-input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: inherit;
+      border-radius: 8px;
+      padding: 7px 8px;
+      font-size: 8px;
+      outline: none;
+    }
+
+    .comment-send {
+      border: 0;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 8px;
+      padding: 0 10px;
+      font-size: 8px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 25px 12px;
+      font-size: 9px;
+    }
+
+    .community-message {
+      text-align: center;
+      font-size: 8px;
+      margin-top: 8px;
+      min-height: 12px;
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
+
 <main class="container">
+
 
   <!-- HEADER -->
 
@@ -40,6 +316,7 @@
     <button
       class="icon-btn"
       id="theme-toggle"
+      aria-label="Toggle theme"
     >
       ◐
     </button>
@@ -47,7 +324,7 @@
   </header>
 
 
-  <!-- COMMUNITY HERO -->
+  <!-- HERO -->
 
   <section
     class="highlight-box"
@@ -74,21 +351,19 @@
         margin-top:6px;
       "
     >
-      Tempat trader dan crypto enthusiast
-      berbagi insight, edukasi dan
-      pengalaman market.
+      Markas trader untuk berbagi insight,
+      analisis, edukasi dan pengalaman market.
     </div>
 
   </section>
 
 
-  <!-- COMMUNITY STATS -->
+  <!-- STATS -->
 
   <section
     style="
       display:grid;
-      grid-template-columns:
-        repeat(3,1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:7px;
     "
   >
@@ -103,6 +378,7 @@
     >
 
       <strong
+        id="member-count"
         style="font-size:15px;"
       >
         1.2K
@@ -131,6 +407,7 @@
     >
 
       <strong
+        id="discussion-count"
         style="font-size:15px;"
       >
         428
@@ -158,9 +435,7 @@
       "
     >
 
-      <strong
-        style="font-size:15px;"
-      >
+      <strong style="font-size:15px;">
         24/7
       </strong>
 
@@ -179,106 +454,227 @@
   </section>
 
 
-  <!-- DISCUSSIONS -->
+  <!-- TABS -->
+
+  <div
+    class="community-tabs"
+    style="margin-top:15px;"
+  >
+
+    <button
+      class="community-tab active"
+      data-filter="latest"
+    >
+      Latest
+    </button>
+
+    <button
+      class="community-tab"
+      data-filter="trending"
+    >
+      🔥 Trending
+    </button>
+
+    <button
+      class="community-tab"
+      data-filter="analysis"
+    >
+      📊 Analysis
+    </button>
+
+    <button
+      class="community-tab"
+      data-filter="education"
+    >
+      📚 Education
+    </button>
+
+  </div>
+
+
+  <!-- CREATE POST -->
+
+  <section class="coin-card create-post">
+
+    <div
+      style="
+        font-size:10px;
+        font-weight:900;
+        margin-bottom:9px;
+      "
+    >
+      ✍️ Share something
+    </div>
+
+    <textarea
+      id="post-input"
+      class="post-input"
+      maxlength="500"
+      placeholder="Apa yang sedang kamu lihat di market?"
+    ></textarea>
+
+
+    <div class="post-actions">
+
+      <div class="post-type">
+
+        <button
+          class="type-btn active"
+          data-type="discussion"
+        >
+          💬 Discussion
+        </button>
+
+        <button
+          class="type-btn"
+          data-type="analysis"
+        >
+          📊 Analysis
+        </button>
+
+        <button
+          class="type-btn"
+          data-type="education"
+        >
+          📚 Education
+        </button>
+
+      </div>
+
+
+      <button
+        class="post-btn"
+        id="publish-btn"
+      >
+        Post
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <div
+    id="community-message"
+    class="community-message dim"
+  ></div>
+
+
+  <!-- FEED TITLE -->
 
   <div
     style="
       font-size:10px;
       font-weight:800;
-      margin:18px 0 8px;
+      margin:17px 0 7px;
     "
   >
-    Latest Discussions
+    Community Feed
   </div>
 
 
-  <section>
+  <!-- FEED -->
+
+  <section id="community-feed">
 
 
     <!-- POST 1 -->
 
     <article
-      class="coin-card"
-      style="display:block;"
+      class="coin-card post"
+      data-type="analysis"
+      data-likes="24"
     >
 
-      <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:9px;
-        "
-      >
+      <div class="post-header">
 
-        <div
-          style="
-            width:30px;
-            height:30px;
-            border-radius:50%;
-            background:var(--border);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-          "
-        >
+        <div class="avatar">
           🧑
         </div>
 
-        <div style="flex:1;">
+        <div class="post-user">
 
-          <strong
-            style="font-size:10px;"
-          >
+          <strong>
             MarketWatcher
           </strong>
 
-          <div
-            class="dim"
-            style="font-size:7px;"
-          >
-            12 min ago
+          <div class="dim post-meta">
+            12 min ago · 📊 Analysis
           </div>
 
         </div>
 
+        <button class="follow-btn">
+          + Follow
+        </button>
+
       </div>
 
 
-      <div
-        style="
-          font-size:10px;
-          line-height:1.6;
-          margin-top:10px;
-        "
-      >
-        BTC kelihatan mulai
-        menunjukkan momentum bullish.
-        Menurut kalian apakah breakout
-        akan berlanjut?
+      <div class="post-content">
+
+        BTC kelihatan mulai menunjukkan
+        momentum bullish. Menurut kalian
+        apakah breakout akan berlanjut?
+
+        <div class="coin-tag">
+          ₿ BTC
+        </div>
+
       </div>
 
 
-      <div
-        class="dim"
-        style="
-          display:flex;
-          gap:14px;
-          margin-top:9px;
-          font-size:8px;
-        "
-      >
+      <div class="post-footer">
 
-        <span>
-          ❤️ 24
-        </span>
+        <button class="post-action like-btn">
+          ❤️ <span>24</span>
+        </button>
 
-        <span>
-          💬 8
-        </span>
+        <button class="post-action comment-btn">
+          💬 <span>8</span>
+        </button>
 
-        <span>
+        <button class="post-action share-btn">
           ↗ Share
-        </span>
+        </button>
+
+      </div>
+
+
+      <div class="comments">
+
+        <div class="comment">
+
+          <div class="comment-avatar">
+            👤
+          </div>
+
+          <div class="comment-body">
+
+            <strong>
+              CryptoLearner
+            </strong>
+
+            Menurutku masih perlu lihat
+            volume sebelum konfirmasi breakout.
+
+          </div>
+
+        </div>
+
+
+        <div class="comment-box">
+
+          <input
+            class="comment-input"
+            placeholder="Tulis komentar..."
+          >
+
+          <button class="comment-send">
+            Send
+          </button>
+
+        </div>
 
       </div>
 
@@ -288,86 +684,101 @@
     <!-- POST 2 -->
 
     <article
-      class="coin-card"
-      style="display:block;"
+      class="coin-card post"
+      data-type="education"
+      data-likes="17"
     >
 
-      <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:9px;
-        "
-      >
+      <div class="post-header">
 
-        <div
-          style="
-            width:30px;
-            height:30px;
-            border-radius:50%;
-            background:var(--border);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-          "
-        >
+        <div class="avatar">
           👩
         </div>
 
-        <div style="flex:1;">
+        <div class="post-user">
 
-          <strong
-            style="font-size:10px;"
-          >
+          <strong>
             CryptoLearner
           </strong>
 
-          <div
-            class="dim"
-            style="font-size:7px;"
-          >
-            38 min ago
+          <div class="dim post-meta">
+            38 min ago · 📚 Education
           </div>
 
         </div>
 
+        <button class="follow-btn">
+          + Follow
+        </button>
+
       </div>
 
 
-      <div
-        style="
-          font-size:10px;
-          line-height:1.6;
-          margin-top:10px;
-        "
-      >
-        Ada yang bisa jelasin
-        hubungan antara Open Interest
-        dan funding rate untuk futures?
+      <div class="post-content">
+
+        Ada yang bisa jelasin hubungan
+        antara Open Interest dan funding
+        rate untuk futures?
+
+        <div class="coin-tag">
+          📈 Futures
+        </div>
+
       </div>
 
 
-      <div
-        class="dim"
-        style="
-          display:flex;
-          gap:14px;
-          margin-top:9px;
-          font-size:8px;
-        "
-      >
+      <div class="post-footer">
 
-        <span>
-          ❤️ 17
-        </span>
+        <button class="post-action like-btn">
+          ❤️ <span>17</span>
+        </button>
 
-        <span>
-          💬 12
-        </span>
+        <button class="post-action comment-btn">
+          💬 <span>12</span>
+        </button>
 
-        <span>
+        <button class="post-action share-btn">
           ↗ Share
-        </span>
+        </button>
+
+      </div>
+
+
+      <div class="comments">
+
+        <div class="comment">
+
+          <div class="comment-avatar">
+            🧔
+          </div>
+
+          <div class="comment-body">
+
+            <strong>
+              FuturesPro
+            </strong>
+
+            OI menunjukkan posisi terbuka,
+            sedangkan funding membantu melihat
+            tekanan long dan short.
+
+          </div>
+
+        </div>
+
+
+        <div class="comment-box">
+
+          <input
+            class="comment-input"
+            placeholder="Tulis komentar..."
+          >
+
+          <button class="comment-send">
+            Send
+          </button>
+
+        </div>
 
       </div>
 
@@ -377,86 +788,80 @@
     <!-- POST 3 -->
 
     <article
-      class="coin-card"
-      style="display:block;"
+      class="coin-card post"
+      data-type="education"
+      data-likes="41"
     >
 
-      <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:9px;
-        "
-      >
+      <div class="post-header">
 
-        <div
-          style="
-            width:30px;
-            height:30px;
-            border-radius:50%;
-            background:var(--border);
-            display:flex;
-            align-items:center;
-            justify-content:center;
-          "
-        >
+        <div class="avatar">
           🧔
         </div>
 
-        <div style="flex:1;">
+        <div class="post-user">
 
-          <strong
-            style="font-size:10px;"
-          >
+          <strong>
             FuturesPro
           </strong>
 
-          <div
-            class="dim"
-            style="font-size:7px;"
-          >
-            1 hour ago
+          <div class="dim post-meta">
+            1 hour ago · 📚 Education
           </div>
 
         </div>
 
+        <button class="follow-btn">
+          + Follow
+        </button>
+
       </div>
 
 
-      <div
-        style="
-          font-size:10px;
-          line-height:1.6;
-          margin-top:10px;
-        "
-      >
+      <div class="post-content">
+
         Jangan lupa risk management.
         Leverage besar bukan berarti
         profit pasti lebih besar.
+
+        <div class="coin-tag">
+          ⚠️ Risk Management
+        </div>
+
       </div>
 
 
-      <div
-        class="dim"
-        style="
-          display:flex;
-          gap:14px;
-          margin-top:9px;
-          font-size:8px;
-        "
-      >
+      <div class="post-footer">
 
-        <span>
-          ❤️ 41
-        </span>
+        <button class="post-action like-btn">
+          ❤️ <span>41</span>
+        </button>
 
-        <span>
-          💬 5
-        </span>
+        <button class="post-action comment-btn">
+          💬 <span>5</span>
+        </button>
 
-        <span>
+        <button class="post-action share-btn">
           ↗ Share
-        </span>
+        </button>
+
+      </div>
+
+
+      <div class="comments">
+
+        <div class="comment-box">
+
+          <input
+            class="comment-input"
+            placeholder="Tulis komentar..."
+          >
+
+          <button class="comment-send">
+            Send
+          </button>
+
+        </div>
 
       </div>
 
@@ -513,31 +918,6 @@
   </section>
 
 
-  <!-- CTA -->
-
-  <button
-    id="join-btn"
-    class="primary-btn"
-    style="
-      width:100%;
-      margin-top:16px;
-    "
-  >
-    ✨ Join the Community
-  </button>
-
-
-  <div
-    id="community-message"
-    class="dim"
-    style="
-      text-align:center;
-      font-size:8px;
-      margin-top:8px;
-    "
-  ></div>
-
-
 </main>
 
 
@@ -550,6 +930,11 @@
 
 
 <script>
+
+
+/* =========================
+   THEME
+========================= */
 
 document
   .getElementById("theme-toggle")
@@ -570,24 +955,635 @@ document
   );
 
 
+/* =========================
+   POST TYPE
+========================= */
+
+let selectedPostType =
+  "discussion";
+
+
 document
-  .getElementById("join-btn")
+  .querySelectorAll(".type-btn")
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(".type-btn")
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+          button.classList.add(
+            "active"
+          );
+
+          selectedPostType =
+            button.dataset.type;
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================
+   CREATE POST
+========================= */
+
+document
+  .getElementById("publish-btn")
   ?.addEventListener(
     "click",
     () => {
+
+      const input =
+        document.getElementById(
+          "post-input"
+        );
 
       const message =
         document.getElementById(
           "community-message"
         );
 
+      const text =
+        input.value.trim();
+
+
+      if (!text) {
+
+        message.textContent =
+          "Tulis sesuatu terlebih dahulu.";
+
+        return;
+
+      }
+
+
+      const feed =
+        document.getElementById(
+          "community-feed"
+        );
+
+
+      const article =
+        document.createElement(
+          "article"
+        );
+
+
+      article.className =
+        "coin-card post";
+
+
+      article.dataset.type =
+        selectedPostType;
+
+
+      article.dataset.likes =
+        "0";
+
+
+      const typeLabel = {
+
+        discussion:
+          "💬 Discussion",
+
+        analysis:
+          "📊 Analysis",
+
+        education:
+          "📚 Education"
+
+      }[selectedPostType];
+
+
+      article.innerHTML = `
+
+        <div class="post-header">
+
+          <div class="avatar">
+            👤
+          </div>
+
+          <div class="post-user">
+
+            <strong>
+              You
+            </strong>
+
+            <div class="dim post-meta">
+              Just now · ${typeLabel}
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="post-content">
+
+          ${escapeHTML(text)}
+
+        </div>
+
+
+        <div class="post-footer">
+
+          <button class="post-action like-btn">
+            ❤️ <span>0</span>
+          </button>
+
+          <button class="post-action comment-btn">
+            💬 <span>0</span>
+          </button>
+
+          <button class="post-action share-btn">
+            ↗ Share
+          </button>
+
+        </div>
+
+
+        <div class="comments">
+
+          <div class="comment-box">
+
+            <input
+              class="comment-input"
+              placeholder="Tulis komentar..."
+            >
+
+            <button class="comment-send">
+              Send
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      feed.prepend(
+        article
+      );
+
+
+      input.value = "";
+
+
       message.textContent =
-        "Community account akan tersedia pada tahap berikutnya.";
+        "Post berhasil dibuat di feed demo.";
+
+
+      setTimeout(
+        () => {
+
+          message.textContent =
+            "";
+
+        },
+        2500
+      );
+
+
+      attachPostEvents(
+        article
+      );
 
     }
   );
 
+
+/* =========================
+   FILTER TABS
+========================= */
+
+document
+  .querySelectorAll(".community-tab")
+  .forEach(
+    tab => {
+
+      tab.addEventListener(
+        "click",
+        () => {
+
+          document
+            .querySelectorAll(
+              ".community-tab"
+            )
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+          tab.classList.add(
+            "active"
+          );
+
+
+          const filter =
+            tab.dataset.filter;
+
+
+          document
+            .querySelectorAll(
+              ".post"
+            )
+            .forEach(
+              post => {
+
+                if (
+                  filter ===
+                  "latest"
+                ) {
+
+                  post.style.display =
+                    "block";
+
+                  return;
+
+                }
+
+
+                if (
+                  filter ===
+                  "trending"
+                ) {
+
+                  const likes =
+                    Number(
+                      post.dataset.likes ||
+                      0
+                    );
+
+                  post.style.display =
+                    likes >= 20
+                      ? "block"
+                      : "none";
+
+                  return;
+
+                }
+
+
+                post.style.display =
+                  post.dataset.type ===
+                  filter
+                    ? "block"
+                    : "none";
+
+              }
+            );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================
+   POST EVENTS
+========================= */
+
+function attachPostEvents(
+  post
+) {
+
+
+  const likeButton =
+    post.querySelector(
+      ".like-btn"
+    );
+
+
+  likeButton?.addEventListener(
+    "click",
+    () => {
+
+      const count =
+        likeButton.querySelector(
+          "span"
+        );
+
+      let likes =
+        Number(
+          count.textContent
+        );
+
+
+      const liked =
+        likeButton.classList.contains(
+          "liked"
+        );
+
+
+      if (liked) {
+
+        likes--;
+
+        likeButton.classList.remove(
+          "liked"
+        );
+
+      } else {
+
+        likes++;
+
+        likeButton.classList.add(
+          "liked"
+        );
+
+      }
+
+
+      count.textContent =
+        likes;
+
+
+      post.dataset.likes =
+        likes;
+
+    }
+  );
+
+
+  const commentButton =
+    post.querySelector(
+      ".comment-btn"
+    );
+
+
+  commentButton?.addEventListener(
+    "click",
+    () => {
+
+      const comments =
+        post.querySelector(
+          ".comments"
+        );
+
+
+      comments?.classList.toggle(
+        "show"
+      );
+
+    }
+  );
+
+
+  const shareButton =
+    post.querySelector(
+      ".share-btn"
+    );
+
+
+  shareButton?.addEventListener(
+    "click",
+    async () => {
+
+      const message =
+        "Check this post on NEXTRA Community.";
+
+      try {
+
+        if (
+          navigator.share
+        ) {
+
+          await navigator.share({
+            title:
+              "NEXTRA Community",
+            text:
+              message,
+            url:
+              window.location.href
+          });
+
+        } else {
+
+          await navigator.clipboard.writeText(
+            window.location.href
+          );
+
+          showMessage(
+            "Link berhasil disalin."
+          );
+
+        }
+
+      } catch (
+        error
+      ) {
+
+        console.log(
+          "Share cancelled."
+        );
+
+      }
+
+    }
+  );
+
+
+  const followButton =
+    post.querySelector(
+      ".follow-btn"
+    );
+
+
+  followButton?.addEventListener(
+    "click",
+    () => {
+
+      followButton.textContent =
+        followButton.textContent.includes(
+          "Follow"
+        )
+          ? "✓ Following"
+          : "+ Follow";
+
+    }
+  );
+
+
+  const sendButton =
+    post.querySelector(
+      ".comment-send"
+    );
+
+
+  const commentInput =
+    post.querySelector(
+      ".comment-input"
+    );
+
+
+  sendButton?.addEventListener(
+    "click",
+    () => {
+
+      const text =
+        commentInput.value.trim();
+
+
+      if (!text)
+        return;
+
+
+      const comments =
+        post.querySelector(
+          ".comments"
+        );
+
+
+      const comment =
+        document.createElement(
+          "div"
+        );
+
+
+      comment.className =
+        "comment";
+
+
+      comment.innerHTML = `
+
+        <div class="comment-avatar">
+          👤
+        </div>
+
+        <div class="comment-body">
+
+          <strong>
+            You
+          </strong>
+
+          ${escapeHTML(text)}
+
+        </div>
+
+      `;
+
+
+      comments.insertBefore(
+        comment,
+        comments.querySelector(
+          ".comment-box"
+        )
+      );
+
+
+      commentInput.value =
+        "";
+
+
+      const count =
+        post.querySelector(
+          ".comment-btn span"
+        );
+
+
+      if (count) {
+
+        count.textContent =
+          Number(
+            count.textContent
+          ) + 1;
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(
+  value
+) {
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.textContent =
+    value;
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+  text
+) {
+
+  const message =
+    document.getElementById(
+      "community-message"
+    );
+
+  if (!message)
+    return;
+
+  message.textContent =
+    text;
+
+
+  setTimeout(
+    () => {
+
+      message.textContent =
+        "";
+
+    },
+    2500
+  );
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+document
+  .querySelectorAll(
+    ".post"
+  )
+  .forEach(
+    post =>
+      attachPostEvents(
+        post
+      )
+  );
+
+
 </script>
+
 
 </body>
 
