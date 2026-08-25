@@ -30,792 +30,407 @@
   <style>
 
     /* =====================================================
-       NEXTRA PROFILE UPGRADE
+       FINAL AVATAR FIX
     ====================================================== */
 
-    :root {
-      --nx-green: #42f5a7;
-      --nx-blue: #20cfff;
-      --nx-bg: #070909;
-      --nx-card: rgba(255,255,255,.035);
-      --nx-border: rgba(255,255,255,.08);
-      --nx-text: #f5f7f8;
-      --nx-muted: rgba(255,255,255,.52);
+    #profilePage,
+    #profilePage .profile-card,
+    #profilePage .profile-cover,
+    #profilePage .profile-main {
+      overflow: visible !important;
     }
 
-    body {
-      background:
-        radial-gradient(
-          circle at 50% -10%,
-          rgba(66,245,167,.08),
-          transparent 35%
-        ),
-        var(--nx-bg);
+    #profilePage .profile-card {
+      position: relative !important;
+      isolation: isolate;
+      z-index: 10 !important;
     }
 
-    .profile-page {
-      padding-bottom: 110px;
+    #profilePage .profile-cover {
+      position: relative !important;
+      z-index: 1 !important;
     }
 
-    /* =====================================================
-       TOPBAR
-    ====================================================== */
+    #profilePage .profile-avatar {
+      position: absolute !important;
 
-    .profile-topbar {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:20px;
-    }
-
-    .profile-topbar h1 {
-      margin:0;
-      font-size:28px;
-      letter-spacing:-.8px;
-    }
-
-    .profile-topbar p {
-      margin:5px 0 0;
-      color:var(--nx-muted);
-      font-size:13px;
-    }
-
-    .profile-back {
-      width:42px;
-      height:42px;
-      display:grid;
-      place-items:center;
-      border:1px solid var(--nx-border);
-      border-radius:14px;
-      color:inherit;
-      text-decoration:none;
-      background:rgba(255,255,255,.035);
-      font-size:20px;
-    }
-
-    /* =====================================================
-       HERO PROFILE
-    ====================================================== */
-
-    .profile-hero {
-      position:relative;
-      overflow:hidden;
-      border:1px solid var(--nx-border);
-      border-radius:28px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(66,245,167,.08),
-          rgba(32,207,255,.025) 45%,
-          rgba(255,255,255,.025)
-        );
-      box-shadow:
-        0 25px 70px rgba(0,0,0,.28);
-    }
-
-    .profile-hero::before {
-      content:"";
-      position:absolute;
-      width:220px;
-      height:220px;
-      right:-100px;
-      top:-120px;
-      border-radius:50%;
-      background:rgba(66,245,167,.09);
-      filter:blur(20px);
-    }
-
-    .profile-cover {
-      height:115px;
-      position:relative;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(66,245,167,.15),
-          rgba(32,207,255,.08),
-          transparent
-        );
-    }
-
-    .profile-cover-grid {
-      position:absolute;
-      inset:0;
-      opacity:.3;
-      background-image:
-        linear-gradient(
-          rgba(255,255,255,.045) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,.045) 1px,
-          transparent 1px
-        );
-      background-size:24px 24px;
-    }
-
-    .profile-avatar-wrap {
-      position:absolute;
-      left:22px;
-      bottom:-48px;
-      z-index:2;
-    }
-
-    .profile-avatar {
-      width:96px;
-      height:96px;
-      padding:0;
-      border-radius:50%;
-      border:4px solid #070909;
-      overflow:hidden;
-      position:relative;
-      display:grid;
-      place-items:center;
-      background:
-        linear-gradient(
-          135deg,
-          #13221c,
-          #0d1618
-        );
-      color:var(--nx-green);
-      font-size:32px;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow:
-        0 12px 35px rgba(0,0,0,.4);
-    }
-
-    .profile-avatar img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:none;
-    }
-
-    .profile-avatar img.visible {
-      display:block;
-    }
-
-    .avatar-camera {
-      position:absolute;
-      right:2px;
-      bottom:2px;
-      width:28px;
-      height:28px;
-      display:grid;
-      place-items:center;
-      border-radius:50%;
-      border:2px solid #070909;
-      background:var(--nx-green);
-      color:#06100b;
-      font-size:13px;
-    }
-
-    .profile-info {
-      padding:62px 22px 22px;
-    }
-
-    .profile-name-row {
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-    }
-
-    .profile-name {
-      margin:0;
-      font-size:23px;
-      letter-spacing:-.5px;
-    }
-
-    .profile-username {
-      margin:5px 0 0;
-      color:var(--nx-muted);
-      font-size:13px;
-    }
-
-    .profile-status {
-      display:flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 10px;
-      border-radius:999px;
-      background:rgba(66,245,167,.08);
-      border:1px solid rgba(66,245,167,.16);
-      color:var(--nx-green);
-      font-size:11px;
-      white-space:nowrap;
-    }
-
-    .profile-status i {
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:var(--nx-green);
-      box-shadow:0 0 10px var(--nx-green);
-    }
-
-    .profile-edit-btn {
-      margin-top:18px;
-      width:100%;
-      height:45px;
-      border:1px solid var(--nx-border);
-      border-radius:13px;
-      background:rgba(255,255,255,.045);
-      color:inherit;
-      font-weight:600;
-      cursor:pointer;
-    }
-
-    /* =====================================================
-       EDIT
-    ====================================================== */
-
-    .edit-panel {
-      margin-top:14px;
-      padding:18px;
-      border:1px solid var(--nx-border);
-      border-radius:22px;
-      background:var(--nx-card);
-    }
-
-    .edit-panel label {
-      display:block;
-      margin:13px 0 7px;
-      font-size:12px;
-      color:var(--nx-muted);
-    }
-
-    .edit-panel input {
-      width:100%;
-      box-sizing:border-box;
-      height:46px;
-      padding:0 13px;
-      border:1px solid var(--nx-border);
-      border-radius:13px;
-      outline:none;
-      background:rgba(255,255,255,.035);
-      color:inherit;
-    }
-
-    .edit-panel input:focus {
-      border-color:rgba(66,245,167,.5);
-    }
-
-    .edit-actions {
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:9px;
-      margin-top:16px;
-    }
-
-    .edit-actions button {
-      height:44px;
-      border-radius:12px;
-      border:1px solid var(--nx-border);
-      cursor:pointer;
-      font-weight:600;
-    }
-
-    .edit-cancel {
-      background:rgba(255,255,255,.035);
-      color:inherit;
-    }
-
-    .edit-save {
-      background:var(--nx-green);
-      color:#06100b;
-      border:0 !important;
-    }
-
-    /* =====================================================
-       LEVEL
-    ====================================================== */
-
-    .level-card {
-      margin-top:14px;
-      padding:20px;
-      border-radius:22px;
-      border:1px solid var(--nx-border);
-      background:var(--nx-card);
-    }
-
-    .level-head {
-      display:flex;
-      justify-content:space-between;
-      gap:15px;
-    }
-
-    .mini-label {
-      display:block;
-      color:var(--nx-muted);
-      font-size:10px;
-      letter-spacing:1.3px;
-      font-weight:700;
-      margin-bottom:6px;
-    }
-
-    .level-head h3 {
-      margin:0;
-      font-size:18px;
-    }
-
-    .level-badge {
-      color:var(--nx-green);
-      font-size:12px;
-      font-weight:800;
-    }
-
-    .xp-info {
-      display:flex;
-      justify-content:space-between;
-      margin-top:20px;
-      color:var(--nx-muted);
-      font-size:11px;
-    }
-
-    .xp-track {
-      height:7px;
-      margin-top:8px;
-      overflow:hidden;
-      border-radius:20px;
-      background:rgba(255,255,255,.07);
-    }
-
-    .xp-progress {
-      height:100%;
-      width:12%;
-      border-radius:20px;
-      background:
-        linear-gradient(
-          90deg,
-          var(--nx-green),
-          var(--nx-blue)
-        );
-      box-shadow:0 0 14px rgba(66,245,167,.25);
-    }
-
-    .level-desc {
-      margin:12px 0 0;
-      color:var(--nx-muted);
-      font-size:12px;
-      line-height:1.5;
-    }
-
-    /* =====================================================
-       PLAN
-    ====================================================== */
-
-    .plan-card {
-      margin-top:14px;
-      padding:17px;
-      display:flex;
-      align-items:center;
-      gap:13px;
-      border:1px solid rgba(66,245,167,.14);
-      border-radius:20px;
-      background:
-        linear-gradient(
-          120deg,
-          rgba(66,245,167,.07),
-          rgba(255,255,255,.025)
-        );
-    }
-
-    .plan-icon {
-      width:43px;
-      height:43px;
-      display:grid;
-      place-items:center;
-      flex:0 0 43px;
-      border-radius:13px;
-      background:rgba(66,245,167,.1);
-      color:var(--nx-green);
-      font-weight:900;
-    }
-
-    .plan-content {
-      min-width:0;
-      flex:1;
-    }
-
-    .plan-content strong {
-      display:block;
-      font-size:14px;
-    }
-
-    .plan-content span:last-child {
-      display:block;
-      margin-top:4px;
-      color:var(--nx-muted);
-      font-size:11px;
-    }
-
-    .plan-button {
-      padding:9px 12px;
-      border:0;
-      border-radius:10px;
-      background:var(--nx-green);
-      color:#06100b;
-      font-size:11px;
-      font-weight:800;
-    }
-
-    /* =====================================================
-       STATS
-    ====================================================== */
-
-    .stats-grid {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:9px;
-      margin-top:14px;
-    }
-
-    .stat-card {
-      padding:17px 8px;
-      text-align:center;
-      border:1px solid var(--nx-border);
-      border-radius:18px;
-      background:var(--nx-card);
-    }
-
-    .stat-card strong {
-      display:block;
-      font-size:19px;
-    }
-
-    .stat-card span {
-      display:block;
-      margin-top:5px;
-      color:var(--nx-muted);
-      font-size:10px;
-    }
+      z-index: 9999 !important;
 
-    /* =====================================================
-       SECTION
-    ====================================================== */
+      overflow: hidden !important;
 
-    .nx-section {
-      margin-top:25px;
-    }
+      display: grid !important;
+      place-items: center !important;
 
-    .nx-section-title {
-      margin-bottom:10px;
-      font-size:10px;
-      letter-spacing:1.5px;
-      color:var(--nx-muted);
-      font-weight:800;
+      cursor: pointer;
     }
 
-    /* =====================================================
-       ACHIEVEMENTS
-    ====================================================== */
-
-    .achievement-grid {
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:9px;
-    }
+    #profilePage #avatarImage {
+      position: absolute !important;
 
-    .achievement {
-      padding:16px;
-      border:1px solid var(--nx-border);
-      border-radius:18px;
-      background:var(--nx-card);
-    }
+      inset: 0 !important;
 
-    .achievement.active {
-      border-color:rgba(66,245,167,.2);
-      background:rgba(66,245,167,.045);
-    }
+      width: 100% !important;
+      height: 100% !important;
 
-    .achievement-icon {
-      width:38px;
-      height:38px;
-      display:grid;
-      place-items:center;
-      margin-bottom:12px;
-      border-radius:12px;
-      background:rgba(255,255,255,.05);
-      font-size:17px;
-    }
+      max-width: none !important;
+      max-height: none !important;
 
-    .achievement.active .achievement-icon {
-      background:rgba(66,245,167,.1);
-      color:var(--nx-green);
-    }
+      object-fit: cover !important;
 
-    .achievement strong {
-      display:block;
-      font-size:13px;
-    }
+      border-radius: 50% !important;
 
-    .achievement span {
-      display:block;
-      margin-top:4px;
-      color:var(--nx-muted);
-      font-size:10px;
-      line-height:1.4;
+      z-index: 2 !important;
     }
 
-    /* =====================================================
-       ITEMS
-    ====================================================== */
+    #profilePage #avatarInitial {
+      position: absolute !important;
 
-    .profile-list {
-      overflow:hidden;
-      border:1px solid var(--nx-border);
-      border-radius:20px;
-      background:var(--nx-card);
-    }
+      inset: 0 !important;
 
-    .profile-item {
-      width:100%;
-      min-height:67px;
-      padding:13px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      box-sizing:border-box;
-      border:0;
-      border-bottom:1px solid rgba(255,255,255,.055);
-      background:transparent;
-      color:inherit;
-      text-decoration:none;
-      text-align:left;
-      cursor:pointer;
-    }
+      display: grid;
+      place-items: center;
 
-    .profile-item:last-child {
-      border-bottom:0;
+      z-index: 1;
     }
 
-    .profile-item:hover {
-      background:rgba(255,255,255,.025);
-    }
+    #profilePage .avatar-camera {
+      position: absolute !important;
 
-    .item-left {
-      min-width:0;
+      z-index: 5 !important;
     }
 
-    .item-title {
-      display:block;
-      font-size:13px;
-      font-weight:650;
+    #profilePage .profile-card + * {
+      position: relative;
+      z-index: 1;
     }
 
-    .item-subtitle {
-      display:block;
-      margin-top:4px;
-      color:var(--nx-muted);
-      font-size:11px;
-    }
+    @media (max-width: 699px) {
 
-    .item-arrow {
-      color:rgba(255,255,255,.35);
-      font-size:21px;
-    }
+      #profilePage .profile-card {
+        margin-bottom: 58px !important;
+      }
 
-    .active-check {
-      color:var(--nx-green);
-      font-weight:800;
     }
 
-    .logout-title {
-      color:#ff7070;
-    }
 
     /* =====================================================
        LANGUAGE MODAL
     ====================================================== */
 
     .language-modal {
-      position:fixed;
-      inset:0;
-      z-index:9999;
-      display:none;
-      align-items:flex-end;
-      justify-content:center;
-      padding:15px;
-      background:rgba(0,0,0,.72);
-      backdrop-filter:blur(12px);
+
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+
+      display: none;
+
+      align-items: flex-end;
+      justify-content: center;
+
+      background: rgba(0,0,0,.72);
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+
+      padding: 16px;
+
     }
+
 
     .language-modal.show {
-      display:flex;
+      display: flex;
     }
+
 
     .language-panel {
-      width:100%;
-      max-width:520px;
-      max-height:82vh;
-      overflow:auto;
-      padding:19px;
-      box-sizing:border-box;
-      border:1px solid var(--nx-border);
-      border-radius:25px;
-      background:#0b0f11;
-      box-shadow:0 25px 80px rgba(0,0,0,.55);
-      animation:languageIn .22s ease;
+
+      width: 100%;
+      max-width: 520px;
+
+      max-height: 82vh;
+
+      overflow-y: auto;
+
+      background: #0b0f11;
+
+      border: 1px solid
+        rgba(255,255,255,.08);
+
+      border-radius: 24px;
+
+      padding: 20px;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.55);
+
+      animation:
+        languagePanelIn .22s ease;
+
     }
 
-    @keyframes languageIn {
+
+    @keyframes languagePanelIn {
+
       from {
-        transform:translateY(30px);
-        opacity:0;
+
+        transform:
+          translateY(30px);
+
+        opacity: 0;
+
       }
+
       to {
-        transform:translateY(0);
-        opacity:1;
+
+        transform:
+          translateY(0);
+
+        opacity: 1;
+
       }
+
     }
 
-    .language-header {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:15px;
+
+    .language-panel-header {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 18px;
+
     }
 
-    .language-header h3 {
-      margin:0;
-      font-size:19px;
+
+    .language-panel-header h3 {
+      margin: 0;
+      font-size: 20px;
     }
+
 
     .language-close {
-      width:37px;
-      height:37px;
-      border:0;
-      border-radius:50%;
-      background:rgba(255,255,255,.07);
-      color:inherit;
-      font-size:21px;
+
+      width: 38px;
+      height: 38px;
+
+      border: 0;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.07);
+
+      color: inherit;
+
+      font-size: 22px;
+
+      cursor: pointer;
+
     }
+
 
     .language-list {
-      display:grid;
-      gap:8px;
+
+      display: grid;
+      gap: 8px;
+
     }
+
 
     .language-option {
-      width:100%;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:12px;
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:15px;
-      background:rgba(255,255,255,.025);
-      color:inherit;
-      text-align:left;
+
+      width: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 13px;
+
+      border: 1px solid
+        rgba(255,255,255,.06);
+
+      border-radius: 15px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      color: inherit;
+
+      text-align: left;
+
+      cursor: pointer;
+
+      transition: .18s ease;
+
     }
+
+
+    .language-option:hover {
+
+      background:
+        rgba(255,255,255,.07);
+
+    }
+
 
     .language-option.selected {
-      border-color:rgba(66,245,167,.55);
-      background:rgba(66,245,167,.07);
+
+      border-color:
+        rgba(66,245,167,.65);
+
+      background:
+        rgba(66,245,167,.08);
+
     }
+
 
     .language-flag {
-      width:38px;
-      height:38px;
-      display:grid;
-      place-items:center;
-      border-radius:11px;
-      background:rgba(255,255,255,.06);
-      font-size:19px;
+
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      flex: 0 0 38px;
+
+      border-radius: 11px;
+
+      background:
+        rgba(255,255,255,.06);
+
+      font-size: 20px;
+
     }
+
 
     .language-info {
-      display:flex;
-      flex-direction:column;
-      gap:3px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 3px;
+
+      min-width: 0;
+
     }
+
 
     .language-info strong {
-      font-size:13px;
+      font-size: 14px;
     }
+
 
     .language-info span {
-      color:var(--nx-muted);
-      font-size:10px;
+      font-size: 12px;
+      opacity: .55;
     }
+
 
     .language-check {
-      margin-left:auto;
-      opacity:0;
-      color:var(--nx-green);
+
+      margin-left: auto;
+
+      font-size: 18px;
+
+      opacity: 0;
+
     }
 
-    .language-option.selected .language-check {
-      opacity:1;
+
+    .language-option.selected
+    .language-check {
+      opacity: 1;
     }
+
 
     /* =====================================================
        AUTH LOADING
     ====================================================== */
 
     .auth-loading {
-      position:fixed;
-      inset:0;
-      z-index:10000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#070909;
-      color:#fff;
+
+      position: fixed;
+      inset: 0;
+
+      z-index: 100000;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background: #070909;
+
+      color:
+        var(--text,#fff);
+
+      font-size: 12px;
+
+      letter-spacing: .4px;
+
     }
+
 
     .auth-loading.hidden {
-      display:none;
+      display: none;
     }
+
 
     .auth-loading-inner {
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:12px;
-      color:rgba(255,255,255,.6);
-      font-size:12px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 12px;
+
     }
+
 
     .auth-spinner {
-      width:28px;
-      height:28px;
-      border:2px solid rgba(255,255,255,.1);
-      border-top-color:var(--nx-green);
-      border-radius:50%;
-      animation:spin .7s linear infinite;
+
+      width: 28px;
+      height: 28px;
+
+      border: 2px solid
+        rgba(255,255,255,.1);
+
+      border-top-color:
+        #42f5a7;
+
+      border-radius: 50%;
+
+      animation:
+        authSpin .7s linear infinite;
+
     }
 
-    @keyframes spin {
+
+    @keyframes authSpin {
+
       to {
-        transform:rotate(360deg);
+        transform:
+          rotate(360deg);
       }
+
     }
 
-    .profile-footer {
-      margin:30px 0 10px;
-      text-align:center;
-      color:rgba(255,255,255,.25);
-      font-size:10px;
-    }
 
-    @media (min-width:700px) {
-
-      .profile-page {
-        max-width:760px;
-        margin:auto;
-      }
+    @media (min-width: 700px) {
 
       .language-modal {
-        align-items:center;
-      }
-
-      .achievement-grid {
-        grid-template-columns:repeat(4,1fr);
+        align-items: center;
       }
 
     }
@@ -841,7 +456,9 @@
 
     <div class="auth-spinner"></div>
 
-    <span>Checking account...</span>
+    <span>
+      Checking account...
+    </span>
 
   </div>
 
@@ -849,34 +466,35 @@
 
 
 <main
-  class="container profile-page"
+  class="container"
   id="profilePage"
   hidden
 >
 
 
-  <!-- ===================================================
+  <!-- =====================================================
        HEADER
-  ==================================================== -->
+  ====================================================== -->
 
-  <header class="profile-topbar">
+  <header class="topbar">
 
     <div>
 
-      <h1>
+      <h1 class="title">
         Profile<span class="dot">.</span>
       </h1>
 
-      <p>
+      <p class="subtitle">
         Your NEXTRA identity
       </p>
 
     </div>
 
+
     <a
       href="index.html"
-      class="profile-back"
-      aria-label="Back"
+      class="icon-btn"
+      aria-label="Back to Home"
     >
       ←
     </a>
@@ -884,62 +502,55 @@
   </header>
 
 
-  <!-- ===================================================
-       PROFILE HERO
-  ==================================================== -->
+  <!-- =====================================================
+       PROFILE CARD
+  ====================================================== -->
 
-  <section class="profile-hero">
+  <section class="profile-card">
 
     <div class="profile-cover">
 
-      <div class="profile-cover-grid"></div>
+      <div class="profile-glow"></div>
 
-      <div class="profile-avatar-wrap">
 
-        <button
-          class="profile-avatar"
-          id="avatarButton"
-          type="button"
-          aria-label="Change profile photo"
+      <button
+        class="profile-avatar"
+        id="avatarButton"
+        type="button"
+        aria-label="Change profile photo"
+      >
+
+        <span id="avatarInitial">
+          N
+        </span>
+
+
+        <img
+          id="avatarImage"
+          alt="Profile photo"
         >
 
-          <span id="avatarInitial">
-            N
-          </span>
 
-          <img
-            id="avatarImage"
-            alt="Profile photo"
-          >
+        <span class="avatar-camera">
+          📷
+        </span>
 
-          <span class="avatar-camera">
-            📷
-          </span>
-
-        </button>
-
-      </div>
+      </button>
 
     </div>
 
 
-    <div class="profile-info">
+    <div class="profile-main">
 
       <div class="profile-name-row">
 
         <div>
 
-          <h2
-            class="profile-name"
-            id="profileName"
-          >
+          <h2 id="profileName">
             NEXTRA User
           </h2>
 
-          <p
-            class="profile-username"
-            id="profileUsername"
-          >
+          <p id="profileUsername">
             @nextra_user
           </p>
 
@@ -970,6 +581,10 @@
   </section>
 
 
+  <!-- =====================================================
+       AVATAR INPUT
+  ====================================================== -->
+
   <input
     type="file"
     id="avatarInput"
@@ -978,70 +593,80 @@
   >
 
 
-  <!-- ===================================================
+  <!-- =====================================================
        EDIT PROFILE
-  ==================================================== -->
+  ====================================================== -->
 
   <section
-    class="edit-panel"
+    class="profile-section"
     id="editProfilePanel"
     hidden
   >
 
-    <label for="nameInput">
-      Display name
-    </label>
-
-    <input
-      id="nameInput"
-      type="text"
-      maxlength="30"
-      placeholder="Your name"
-    >
+    <div class="section-label">
+      EDIT PROFILE
+    </div>
 
 
-    <label for="usernameInput">
-      Username
-    </label>
+    <div class="profile-edit-card">
 
-    <input
-      id="usernameInput"
-      type="text"
-      maxlength="20"
-      placeholder="nextra_user"
-    >
+      <label for="nameInput">
+        Display name
+      </label>
 
-
-    <div class="edit-actions">
-
-      <button
-        id="cancelProfileBtn"
-        class="edit-cancel"
-        type="button"
+      <input
+        id="nameInput"
+        type="text"
+        maxlength="30"
+        placeholder="Your name"
       >
-        Cancel
-      </button>
 
-      <button
-        id="saveProfileBtn"
-        class="edit-save"
-        type="button"
+
+      <label for="usernameInput">
+        Username
+      </label>
+
+      <input
+        id="usernameInput"
+        type="text"
+        maxlength="20"
+        placeholder="nextra_user"
       >
-        Save changes
-      </button>
+
+
+      <div class="profile-edit-actions">
+
+        <button
+          id="cancelProfileBtn"
+          type="button"
+          class="profile-secondary-btn"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          id="saveProfileBtn"
+          type="button"
+          class="profile-primary-btn"
+        >
+          Save changes
+        </button>
+
+      </div>
 
     </div>
 
   </section>
 
 
-  <!-- ===================================================
+  <!-- =====================================================
        TRADER LEVEL
-  ==================================================== -->
+  ====================================================== -->
 
-  <section class="level-card">
+  <section class="trader-level-card">
 
-    <div class="level-head">
+    <div class="trader-level-top">
 
       <div>
 
@@ -1055,14 +680,15 @@
 
       </div>
 
-      <div class="level-badge">
+
+      <div class="level-number">
         LVL 01
       </div>
 
     </div>
 
 
-    <div class="xp-info">
+    <div class="xp-row">
 
       <span>
         120 XP
@@ -1077,27 +703,31 @@
 
     <div class="xp-track">
 
-      <div class="xp-progress"></div>
+      <div
+        class="xp-progress"
+        style="width:12%"
+      ></div>
 
     </div>
 
 
-    <p class="level-desc">
+    <p class="xp-description">
       Keep exploring NEXTRA to unlock your next level.
     </p>
 
   </section>
 
 
-  <!-- ===================================================
-       PLAN
-  ==================================================== -->
+  <!-- =====================================================
+       ACCOUNT PLAN
+  ====================================================== -->
 
   <section class="plan-card">
 
     <div class="plan-icon">
       N
     </div>
+
 
     <div class="plan-content">
 
@@ -1115,6 +745,7 @@
 
     </div>
 
+
     <button
       class="plan-button"
       type="button"
@@ -1125,13 +756,13 @@
   </section>
 
 
-  <!-- ===================================================
+  <!-- =====================================================
        STATS
-  ==================================================== -->
+  ====================================================== -->
 
-  <section class="stats-grid">
+  <section class="profile-stats">
 
-    <div class="stat-card">
+    <div class="profile-stat">
 
       <strong id="watchlistCount">
         0
@@ -1144,7 +775,7 @@
     </div>
 
 
-    <div class="stat-card">
+    <div class="profile-stat">
 
       <strong id="alertCount">
         0
@@ -1157,10 +788,10 @@
     </div>
 
 
-    <div class="stat-card">
+    <div class="profile-stat">
 
       <strong id="marketCount">
-        Live
+        0
       </strong>
 
       <span>
@@ -1172,20 +803,20 @@
   </section>
 
 
-  <!-- ===================================================
+  <!-- =====================================================
        ACHIEVEMENTS
-  ==================================================== -->
+  ====================================================== -->
 
-  <section class="nx-section">
+  <section class="profile-section">
 
-    <div class="nx-section-title">
+    <div class="section-label">
       ACHIEVEMENTS
     </div>
 
 
     <div class="achievement-grid">
 
-      <div class="achievement active">
+      <div class="achievement-card active">
 
         <div class="achievement-icon">
           ◈
@@ -1202,7 +833,7 @@
       </div>
 
 
-      <div class="achievement">
+      <div class="achievement-card">
 
         <div class="achievement-icon">
           ⭐
@@ -1219,7 +850,7 @@
       </div>
 
 
-      <div class="achievement">
+      <div class="achievement-card">
 
         <div class="achievement-icon">
           ⚡
@@ -1236,7 +867,7 @@
       </div>
 
 
-      <div class="achievement">
+      <div class="achievement-card">
 
         <div class="achievement-icon">
           🔥
@@ -1257,288 +888,289 @@
   </section>
 
 
-  <!-- ===================================================
+  <!-- =====================================================
        ACCOUNT
-  ==================================================== -->
+  ====================================================== -->
 
-  <section class="nx-section">
+  <section class="profile-section">
 
-    <div class="nx-section-title">
+    <div class="section-label">
       ACCOUNT
     </div>
 
 
-    <div class="profile-list">
+    <div class="profile-item">
 
-      <div class="profile-item">
+      <div>
 
-        <div class="item-left">
+        <strong>
+          Email
+        </strong>
 
-          <span class="item-title">
-            Email
-          </span>
-
-          <span
-            class="item-subtitle"
-            id="accountEmail"
-          >
-            Loading...
-          </span>
-
-        </div>
-
-        <span class="item-arrow">
-          ›
+        <span id="accountEmail">
+          Loading...
         </span>
 
       </div>
 
 
-      <div class="profile-item">
-
-        <div class="item-left">
-
-          <span class="item-title">
-            Account Status
-          </span>
-
-          <span class="item-subtitle">
-            Active account
-          </span>
-
-        </div>
-
-        <span class="active-check">
-          ✓
-        </span>
-
-      </div>
-
-
-      <button
-        type="button"
-        class="profile-item"
-        id="logoutButton"
-      >
-
-        <div class="item-left">
-
-          <span class="item-title logout-title">
-            🚪 Logout
-          </span>
-
-          <span class="item-subtitle">
-            Keluar dari akun NEXTRA
-          </span>
-
-        </div>
-
-        <span class="item-arrow">
-          ›
-        </span>
-
-      </button>
+      <span class="profile-arrow">
+        ›
+      </span>
 
     </div>
+
+
+    <div class="profile-item">
+
+      <div>
+
+        <strong>
+          Account Status
+        </strong>
+
+        <span class="up">
+          Active account
+        </span>
+
+      </div>
+
+
+      <span class="profile-check">
+        ✓
+      </span>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="profile-item"
+      id="logoutButton"
+      style="
+        width:100%;
+        border:0;
+        color:inherit;
+        text-align:left;
+        font:inherit;
+        cursor:pointer;
+      "
+    >
+
+      <div>
+
+        <strong style="color:#ff6b6b;">
+          🚪 Logout
+        </strong>
+
+        <span>
+          Keluar dari akun NEXTRA
+        </span>
+
+      </div>
+
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </button>
 
   </section>
 
 
-  <!-- ===================================================
+  <!-- =====================================================
        QUICK ACTIONS
-  ==================================================== -->
+  ====================================================== -->
 
-  <section class="nx-section">
+  <section class="profile-section">
 
-    <div class="nx-section-title">
+    <div class="section-label">
       QUICK ACTIONS
     </div>
 
 
-    <div class="profile-list">
+    <a
+      href="markets.html"
+      class="profile-item"
+    >
 
-      <a
-        href="markets.html"
-        class="profile-item"
-      >
+      <div>
 
-        <div class="item-left">
+        <strong>
+          ⭐ Watchlist
+        </strong>
 
-          <span class="item-title">
-            ⭐ Watchlist
-          </span>
-
-          <span class="item-subtitle">
-            Manage favorite assets
-          </span>
-
-        </div>
-
-        <span class="item-arrow">
-          ›
-        </span>
-
-      </a>
-
-
-      <a
-        href="futures.html"
-        class="profile-item"
-      >
-
-        <div class="item-left">
-
-          <span class="item-title">
-            ⚡ Futures
-          </span>
-
-          <span class="item-subtitle">
-            Binance Futures market
-          </span>
-
-        </div>
-
-        <span class="item-arrow">
-          ›
-        </span>
-
-      </a>
-
-
-      <button
-        type="button"
-        class="profile-item"
-      >
-
-        <div class="item-left">
-
-          <span class="item-title">
-            🔔 Notifications
-          </span>
-
-          <span class="item-subtitle">
-            Manage market alerts
-          </span>
-
-        </div>
-
-        <span class="item-arrow">
-          ›
-        </span>
-
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ===================================================
-       PREFERENCES
-  ==================================================== -->
-
-  <section class="nx-section">
-
-    <div class="nx-section-title">
-      PREFERENCES
-    </div>
-
-
-    <div class="profile-list">
-
-      <button
-        type="button"
-        class="profile-item"
-      >
-
-        <div class="item-left">
-
-          <span class="item-title">
-            Appearance
-          </span>
-
-          <span class="item-subtitle">
-            Dark mode
-          </span>
-
-        </div>
-
-        <span class="item-arrow">
-          ◐
-        </span>
-
-      </button>
-
-
-      <button
-        type="button"
-        class="profile-item"
-        id="languageButton"
-      >
-
-        <div class="item-left">
-
-          <span class="item-title">
-            Language
-          </span>
-
-          <span
-            class="item-subtitle"
-            id="currentLanguage"
-          >
-            Bahasa Indonesia
-          </span>
-
-        </div>
-
-        <span class="item-arrow">
-          ›
-        </span>
-
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ===================================================
-       ABOUT
-  ==================================================== -->
-
-  <section class="nx-section">
-
-    <div class="nx-section-title">
-      ABOUT NEXTRA
-    </div>
-
-
-    <div class="profile-list">
-
-      <div class="profile-item">
-
-        <div class="item-left">
-
-          <span class="item-title">
-            NEXTRA
-          </span>
-
-          <span class="item-subtitle">
-            Your Market. Your Intelligence.
-          </span>
-
-        </div>
-
-        <span class="item-subtitle">
-          v1.0
+        <span>
+          Manage favorite assets
         </span>
 
       </div>
 
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </a>
+
+
+    <a
+      href="futures.html"
+      class="profile-item"
+    >
+
+      <div>
+
+        <strong>
+          ⚡ Futures
+        </strong>
+
+        <span>
+          Binance Futures market
+        </span>
+
+      </div>
+
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </a>
+
+
+    <div class="profile-item">
+
+      <div>
+
+        <strong>
+          🔔 Notifications
+        </strong>
+
+        <span>
+          Manage market alerts
+        </span>
+
+      </div>
+
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
     </div>
 
   </section>
 
+
+  <!-- =====================================================
+       PREFERENCES
+  ====================================================== -->
+
+  <section class="profile-section">
+
+    <div class="section-label">
+      PREFERENCES
+    </div>
+
+
+    <div class="profile-item">
+
+      <div>
+
+        <strong>
+          Appearance
+        </strong>
+
+        <span>
+          Dark mode
+        </span>
+
+      </div>
+
+
+      <span>
+        ◐
+      </span>
+
+    </div>
+
+
+    <button
+      class="profile-item"
+      id="languageButton"
+      type="button"
+      style="
+        width:100%;
+        border:0;
+        color:inherit;
+        text-align:left;
+        font:inherit;
+        cursor:pointer;
+      "
+    >
+
+      <div>
+
+        <strong>
+          Language
+        </strong>
+
+        <span id="currentLanguage">
+          Bahasa Indonesia
+        </span>
+
+      </div>
+
+
+      <span class="profile-arrow">
+        ›
+      </span>
+
+    </button>
+
+  </section>
+
+
+  <!-- =====================================================
+       ABOUT
+  ====================================================== -->
+
+  <section class="profile-section">
+
+    <div class="section-label">
+      ABOUT NEXTRA
+    </div>
+
+
+    <div class="profile-item">
+
+      <div>
+
+        <strong>
+          NEXTRA
+        </strong>
+
+        <span>
+          Your Market. Your Intelligence.
+        </span>
+
+      </div>
+
+
+      <span>
+        v1.0
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <div class="profile-footer">
     NEXTRA © 2026
@@ -1560,16 +1192,18 @@
 
   <div class="language-panel">
 
-    <div class="language-header">
+    <div class="language-panel-header">
 
       <h3>
         🌍 Language
       </h3>
 
+
       <button
         type="button"
         class="language-close"
         id="languageClose"
+        aria-label="Close"
       >
         ×
       </button>
@@ -1610,7 +1244,7 @@
 
 
 <!-- =====================================================
-     NEXTRA PROFILE LOGIC
+     PROFILE + SUPABASE
 ====================================================== -->
 
 <script>
@@ -1638,7 +1272,7 @@
 
 
   /* =====================================================
-     STORAGE
+     KEYS
   ====================================================== */
 
   const AVATAR_KEY =
@@ -1653,84 +1287,52 @@
   ====================================================== */
 
   const authLoading =
-    document.getElementById(
-      "authLoading"
-    );
+    document.getElementById("authLoading");
 
   const profilePage =
-    document.getElementById(
-      "profilePage"
-    );
+    document.getElementById("profilePage");
 
   const nameEl =
-    document.getElementById(
-      "profileName"
-    );
+    document.getElementById("profileName");
 
   const usernameEl =
-    document.getElementById(
-      "profileUsername"
-    );
+    document.getElementById("profileUsername");
 
   const accountEmail =
-    document.getElementById(
-      "accountEmail"
-    );
+    document.getElementById("accountEmail");
 
   const avatarInitial =
-    document.getElementById(
-      "avatarInitial"
-    );
+    document.getElementById("avatarInitial");
 
   const avatarImage =
-    document.getElementById(
-      "avatarImage"
-    );
+    document.getElementById("avatarImage");
 
   const avatarButton =
-    document.getElementById(
-      "avatarButton"
-    );
+    document.getElementById("avatarButton");
 
   const avatarInput =
-    document.getElementById(
-      "avatarInput"
-    );
+    document.getElementById("avatarInput");
 
   const editProfileBtn =
-    document.getElementById(
-      "editProfileBtn"
-    );
+    document.getElementById("editProfileBtn");
 
   const editProfilePanel =
-    document.getElementById(
-      "editProfilePanel"
-    );
+    document.getElementById("editProfilePanel");
 
   const nameInput =
-    document.getElementById(
-      "nameInput"
-    );
+    document.getElementById("nameInput");
 
   const usernameInput =
-    document.getElementById(
-      "usernameInput"
-    );
+    document.getElementById("usernameInput");
 
   const saveProfileBtn =
-    document.getElementById(
-      "saveProfileBtn"
-    );
+    document.getElementById("saveProfileBtn");
 
   const cancelProfileBtn =
-    document.getElementById(
-      "cancelProfileBtn"
-    );
+    document.getElementById("cancelProfileBtn");
 
   const logoutButton =
-    document.getElementById(
-      "logoutButton"
-    );
+    document.getElementById("logoutButton");
 
 
   /* =====================================================
@@ -1738,33 +1340,23 @@
   ====================================================== */
 
   const languageButton =
-    document.getElementById(
-      "languageButton"
-    );
+    document.getElementById("languageButton");
 
   const languageModal =
-    document.getElementById(
-      "languageModal"
-    );
+    document.getElementById("languageModal");
 
   const languageClose =
-    document.getElementById(
-      "languageClose"
-    );
+    document.getElementById("languageClose");
 
   const languageList =
-    document.getElementById(
-      "languageList"
-    );
+    document.getElementById("languageList");
 
   const currentLanguage =
-    document.getElementById(
-      "currentLanguage"
-    );
+    document.getElementById("currentLanguage");
 
 
   /* =====================================================
-     STATE
+     PROFILE STATE
   ====================================================== */
 
   let currentUser = null;
@@ -1814,7 +1406,7 @@
 
   const LANGUAGE_DATA = [
 
-    ["id","🇮🇩","Bahasa Indonesia","Indonesian"],
+    ["id","🇮🇩","Bahasa Indonesia","Bahasa Indonesia"],
     ["en","🇺🇸","English","English"],
     ["es","🇪🇸","Español","Spanish"],
     ["fr","🇫🇷","Français","French"],
@@ -1864,7 +1456,8 @@
 
     const found =
       LANGUAGE_DATA.find(
-        item => item[0] === code
+        language =>
+          language[0] === code
       );
 
     return found
@@ -1895,18 +1488,14 @@
         ] = language;
 
         const button =
-          document.createElement(
-            "button"
-          );
+          document.createElement("button");
 
         button.type = "button";
 
         button.className =
           "language-option";
 
-        if (
-          code === selected
-        ) {
+        if (code === selected) {
 
           button.classList.add(
             "selected"
@@ -1943,9 +1532,7 @@
           () => selectLanguage(code)
         );
 
-        languageList.appendChild(
-          button
-        );
+        languageList.appendChild(button);
 
       }
     );
@@ -1979,8 +1566,7 @@
         === "function"
     ) {
 
-      window.NEXTRA_I18N
-        .translatePage();
+      window.NEXTRA_I18N.translatePage();
 
     }
 
@@ -2006,9 +1592,7 @@
 
     renderLanguages();
 
-    languageModal.classList.add(
-      "show"
-    );
+    languageModal.classList.add("show");
 
     languageModal.setAttribute(
       "aria-hidden",
@@ -2023,9 +1607,7 @@
 
   function closeLanguage() {
 
-    languageModal.classList.remove(
-      "show"
-    );
+    languageModal.classList.remove("show");
 
     languageModal.setAttribute(
       "aria-hidden",
@@ -2071,9 +1653,7 @@
     "keydown",
     event => {
 
-      if (
-        event.key === "Escape"
-      ) {
+      if (event.key === "Escape") {
 
         closeLanguage();
 
@@ -2083,10 +1663,14 @@
   );
 
 
-  currentLanguage.textContent =
-    getLanguageName(
-      getCurrentLanguage()
-    );
+  if (currentLanguage) {
+
+    currentLanguage.textContent =
+      getLanguageName(
+        getCurrentLanguage()
+      );
+
+  }
 
 
   /* =====================================================
@@ -2119,7 +1703,7 @@
       );
 
       avatarInitial.style.display =
-        "block";
+        "grid";
 
     }
 
@@ -2128,7 +1712,11 @@
 
   avatarButton?.addEventListener(
     "click",
-    () => avatarInput?.click()
+    () => {
+
+      avatarInput?.click();
+
+    }
   );
 
 
@@ -2143,9 +1731,7 @@
         return;
 
       if (
-        !file.type.startsWith(
-          "image/"
-        )
+        !file.type.startsWith("image/")
       ) {
 
         alert(
@@ -2200,7 +1786,7 @@
 
 
   /* =====================================================
-     PROFILE RENDER
+     PROFILE
   ====================================================== */
 
   function renderProfile() {
@@ -2347,7 +1933,7 @@
         editProfilePanel.hidden =
           true;
 
-      } catch(error) {
+      } catch (error) {
 
         console.error(
           "Profile update error:",
@@ -2399,8 +1985,7 @@
 
       document.getElementById(
         "watchlistCount"
-      ).textContent =
-        "0";
+      ).textContent = "0";
 
     }
 
@@ -2425,8 +2010,7 @@
 
       document.getElementById(
         "alertCount"
-      ).textContent =
-        "0";
+      ).textContent = "0";
 
     }
 
@@ -2458,17 +2042,10 @@
       logoutButton.disabled =
         true;
 
-      const title =
-        logoutButton.querySelector(
-          ".item-title"
-        );
-
-      if (title) {
-
-        title.textContent =
-          "Logging out...";
-
-      }
+      logoutButton.querySelector(
+        "strong"
+      ).textContent =
+        "Logging out...";
 
       try {
 
@@ -2478,7 +2055,7 @@
           await supabaseClient
             .auth
             .signOut({
-              scope:"local"
+              scope: "local"
             });
 
         if (error)
@@ -2487,7 +2064,7 @@
         window.location.href =
           "index.html";
 
-      } catch(error) {
+      } catch (error) {
 
         console.error(
           "Logout error:",
@@ -2502,12 +2079,10 @@
         logoutButton.disabled =
           false;
 
-        if (title) {
-
-          title.textContent =
-            "🚪 Logout";
-
-        }
+        logoutButton.querySelector(
+          "strong"
+        ).textContent =
+          "🚪 Logout";
 
       }
 
@@ -2556,8 +2131,7 @@
 
       const emailUsername =
         currentUser.email
-          ? currentUser.email
-              .split("@")[0]
+          ? currentUser.email.split("@")[0]
           : "nextra_user";
 
       profile.name =
@@ -2574,11 +2148,11 @@
           emailUsername ||
           "nextra_user"
         )
-          .replace(
-            /[^a-zA-Z0-9_]/g,
-            ""
-          )
-          .slice(0,20);
+        .replace(
+          /[^a-zA-Z0-9_]/g,
+          ""
+        )
+        .slice(0,20);
 
       renderProfile();
 
@@ -2591,7 +2165,7 @@
         "hidden"
       );
 
-    } catch(error) {
+    } catch (error) {
 
       console.error(
         "NEXTRA Auth error:",
@@ -2608,13 +2182,16 @@
 
 
   /* =====================================================
-     AUTH STATE
+     AUTH LISTENER
   ====================================================== */
 
   supabaseClient
     .auth
     .onAuthStateChange(
-      (event, session) => {
+      (
+        event,
+        session
+      ) => {
 
         if (
           event === "SIGNED_OUT"
@@ -2623,6 +2200,14 @@
           window.location.replace(
             "login.html"
           );
+
+          return;
+
+        }
+
+        if (
+          event === "TOKEN_REFRESHED"
+        ) {
 
           return;
 
@@ -2646,9 +2231,11 @@
 
   initAuth();
 
+
 })();
 
 </script>
+
 
 </body>
 </html>
