@@ -25,272 +25,296 @@
   <style>
 
     .community-tabs {
-      display: flex;
-      gap: 7px;
-      overflow-x: auto;
-      padding: 2px 0 8px;
-      scrollbar-width: none;
+      display:flex;
+      gap:7px;
+      overflow-x:auto;
+      padding:2px 0 8px;
+      scrollbar-width:none;
     }
 
     .community-tabs::-webkit-scrollbar {
-      display: none;
+      display:none;
     }
 
     .community-tab {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: inherit;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 9px;
-      font-weight: 800;
-      white-space: nowrap;
-      cursor: pointer;
+      border:1px solid var(--border);
+      background:transparent;
+      color:inherit;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:9px;
+      font-weight:800;
+      white-space:nowrap;
+      cursor:pointer;
     }
 
     .community-tab.active {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
+      background:var(--text);
+      color:var(--bg);
+      border-color:var(--text);
     }
 
     .create-post {
-      margin-top: 8px;
-      padding: 13px;
+      margin-top:8px;
+      padding:13px;
     }
 
     .post-input {
-      width: 100%;
-      min-height: 75px;
-      resize: vertical;
-      box-sizing: border-box;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--bg);
-      color: inherit;
-      padding: 11px;
-      font-family: inherit;
-      font-size: 10px;
-      outline: none;
+      width:100%;
+      min-height:75px;
+      resize:vertical;
+      box-sizing:border-box;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--bg);
+      color:inherit;
+      padding:11px;
+      font-family:inherit;
+      font-size:10px;
+      outline:none;
     }
 
     .post-input:focus {
-      border-color: var(--text);
+      border-color:var(--text);
     }
 
     .post-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 9px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      margin-top:9px;
     }
 
     .post-type {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
     }
 
     .type-btn {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: inherit;
-      padding: 6px 8px;
-      border-radius: 8px;
-      font-size: 8px;
-      cursor: pointer;
+      border:1px solid var(--border);
+      background:transparent;
+      color:inherit;
+      padding:6px 8px;
+      border-radius:8px;
+      font-size:8px;
+      cursor:pointer;
     }
 
     .type-btn.active {
-      border-color: var(--text);
+      border-color:var(--text);
     }
 
     .post-btn {
-      border: 0;
-      background: var(--text);
-      color: var(--bg);
-      padding: 8px 13px;
-      border-radius: 9px;
-      font-size: 9px;
-      font-weight: 900;
-      cursor: pointer;
+      border:0;
+      background:var(--text);
+      color:var(--bg);
+      padding:8px 13px;
+      border-radius:9px;
+      font-size:9px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .post-btn:disabled {
+      opacity:.5;
+      cursor:not-allowed;
     }
 
     .post {
-      margin-top: 9px;
-      padding: 13px;
+      margin-top:9px;
+      padding:13px;
     }
 
     .post-header {
-      display: flex;
-      align-items: center;
-      gap: 9px;
+      display:flex;
+      align-items:center;
+      gap:9px;
     }
 
     .avatar {
-      width: 32px;
-      height: 32px;
-      min-width: 32px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
+      width:32px;
+      height:32px;
+      min-width:32px;
+      border-radius:50%;
+      background:var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:15px;
+      overflow:hidden;
+    }
+
+    .avatar img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
     .post-user {
-      flex: 1;
-      min-width: 0;
+      flex:1;
+      min-width:0;
     }
 
     .post-user strong {
-      font-size: 10px;
+      font-size:10px;
     }
 
     .post-user a {
-      color: inherit;
-      text-decoration: none;
+      color:inherit;
+      text-decoration:none;
     }
 
     .post-user a:hover {
-      text-decoration: underline;
+      text-decoration:underline;
     }
 
     .post-meta {
-      font-size: 7px;
-      margin-top: 2px;
+      font-size:7px;
+      margin-top:2px;
     }
 
     .follow-btn {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: inherit;
-      padding: 6px 9px;
-      border-radius: 8px;
-      font-size: 7px;
-      font-weight: 800;
-      cursor: pointer;
+      border:1px solid var(--border);
+      background:transparent;
+      color:inherit;
+      padding:6px 9px;
+      border-radius:8px;
+      font-size:7px;
+      font-weight:800;
+      cursor:pointer;
     }
 
     .follow-btn.following {
-      font-weight: 900;
+      font-weight:900;
     }
 
     .post-content {
-      font-size: 10px;
-      line-height: 1.65;
-      margin-top: 10px;
-    }
-
-    .coin-tag {
-      display: inline-block;
-      margin-top: 9px;
-      padding: 5px 8px;
-      border-radius: 7px;
-      background: var(--border);
-      font-size: 8px;
-      font-weight: 800;
+      font-size:10px;
+      line-height:1.65;
+      margin-top:10px;
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
     }
 
     .post-footer {
-      display: flex;
-      gap: 16px;
-      margin-top: 11px;
-      padding-top: 9px;
-      border-top: 1px solid var(--border);
+      display:flex;
+      gap:16px;
+      margin-top:11px;
+      padding-top:9px;
+      border-top:1px solid var(--border);
     }
 
     .post-action {
-      border: 0;
-      background: transparent;
-      color: inherit;
-      padding: 0;
-      font-size: 8px;
-      cursor: pointer;
+      border:0;
+      background:transparent;
+      color:inherit;
+      padding:0;
+      font-size:8px;
+      cursor:pointer;
     }
 
     .post-action.liked {
-      font-weight: 900;
+      font-weight:900;
     }
 
     .comments {
-      display: none;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
+      display:none;
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid var(--border);
     }
 
     .comments.show {
-      display: block;
+      display:block;
     }
 
     .comment {
-      display: flex;
-      gap: 7px;
-      margin-bottom: 8px;
+      display:flex;
+      gap:7px;
+      margin-bottom:8px;
     }
 
     .comment-avatar {
-      width: 24px;
-      height: 24px;
-      min-width: 24px;
-      border-radius: 50%;
-      background: var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
+      width:24px;
+      height:24px;
+      min-width:24px;
+      border-radius:50%;
+      background:var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:11px;
+      overflow:hidden;
+    }
+
+    .comment-avatar img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
     .comment-body {
-      background: var(--border);
-      border-radius: 9px;
-      padding: 7px 9px;
-      font-size: 8px;
-      line-height: 1.5;
+      background:var(--border);
+      border-radius:9px;
+      padding:7px 9px;
+      font-size:8px;
+      line-height:1.5;
+      overflow-wrap:anywhere;
     }
 
     .comment-body strong {
-      display: block;
-      margin-bottom: 2px;
+      display:block;
+      margin-bottom:2px;
     }
 
     .comment-box {
-      display: flex;
-      gap: 6px;
-      margin-top: 8px;
+      display:flex;
+      gap:6px;
+      margin-top:8px;
     }
 
     .comment-input {
-      flex: 1;
-      min-width: 0;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: inherit;
-      border-radius: 8px;
-      padding: 7px 8px;
-      font-size: 8px;
-      outline: none;
+      flex:1;
+      min-width:0;
+      border:1px solid var(--border);
+      background:var(--bg);
+      color:inherit;
+      border-radius:8px;
+      padding:7px 8px;
+      font-size:8px;
+      outline:none;
     }
 
     .comment-send {
-      border: 0;
-      background: var(--text);
-      color: var(--bg);
-      border-radius: 8px;
-      padding: 0 10px;
-      font-size: 8px;
-      font-weight: 800;
-      cursor: pointer;
+      border:0;
+      background:var(--text);
+      color:var(--bg);
+      border-radius:8px;
+      padding:0 10px;
+      font-size:8px;
+      font-weight:800;
+      cursor:pointer;
     }
 
     .community-message {
-      text-align: center;
-      font-size: 8px;
-      margin-top: 8px;
-      min-height: 12px;
+      text-align:center;
+      font-size:8px;
+      margin-top:8px;
+      min-height:12px;
+    }
+
+    .loading-feed {
+      text-align:center;
+      padding:25px 10px;
+      font-size:9px;
+    }
+
+    .empty-feed {
+      text-align:center;
+      padding:30px 10px;
+      font-size:9px;
     }
 
   </style>
@@ -303,8 +327,6 @@
 
 <main class="container">
 
-
-  <!-- HEADER -->
 
   <header class="topbar">
 
@@ -330,8 +352,6 @@
 
   </header>
 
-
-  <!-- HERO -->
 
   <section
     class="highlight-box"
@@ -365,8 +385,6 @@
   </section>
 
 
-  <!-- STATS -->
-
   <section
     style="
       display:grid;
@@ -388,7 +406,7 @@
         id="member-count"
         style="font-size:15px;"
       >
-        1.2K
+        —
       </strong>
 
       <div
@@ -417,7 +435,7 @@
         id="discussion-count"
         style="font-size:15px;"
       >
-        428
+        —
       </strong>
 
       <div
@@ -461,8 +479,6 @@
   </section>
 
 
-  <!-- TABS -->
-
   <div
     class="community-tabs"
     style="margin-top:15px;"
@@ -496,10 +512,15 @@
       📚 Education
     </button>
 
+    <button
+      class="community-tab"
+      data-filter="discussion"
+    >
+      💬 Discussion
+    </button>
+
   </div>
 
-
-  <!-- CREATE POST -->
 
   <section class="coin-card create-post">
 
@@ -567,8 +588,6 @@
   ></div>
 
 
-  <!-- FEED TITLE -->
-
   <div
     style="
       font-size:10px;
@@ -580,300 +599,14 @@
   </div>
 
 
-  <!-- FEED -->
-
   <section id="community-feed">
 
-
-    <!-- MARKETWATCHER -->
-
-    <article
-      class="coin-card post"
-      data-type="analysis"
-      data-likes="24"
-    >
-
-      <div class="post-header">
-
-        <div class="avatar">
-          🧑
-        </div>
-
-        <div class="post-user">
-
-          <a
-            href="trader-profile.html?username=marketwatcher"
-          >
-            <strong>
-              MarketWatcher
-            </strong>
-          </a>
-
-          <div class="dim post-meta">
-            12 min ago · 📊 Analysis
-          </div>
-
-        </div>
-
-        <button class="follow-btn">
-          + Follow
-        </button>
-
-      </div>
-
-
-      <div class="post-content">
-
-        BTC kelihatan mulai menunjukkan
-        momentum bullish. Menurut kalian
-        apakah breakout akan berlanjut?
-
-        <div class="coin-tag">
-          ₿ BTC
-        </div>
-
-      </div>
-
-
-      <div class="post-footer">
-
-        <button class="post-action like-btn">
-          ❤️ <span>24</span>
-        </button>
-
-        <button class="post-action comment-btn">
-          💬 <span>8</span>
-        </button>
-
-        <button class="post-action share-btn">
-          ↗ Share
-        </button>
-
-      </div>
-
-
-      <div class="comments">
-
-        <div class="comment">
-
-          <div class="comment-avatar">
-            👤
-          </div>
-
-          <div class="comment-body">
-
-            <strong>
-              CryptoLearner
-            </strong>
-
-            Menurutku masih perlu lihat
-            volume sebelum konfirmasi breakout.
-
-          </div>
-
-        </div>
-
-
-        <div class="comment-box">
-
-          <input
-            class="comment-input"
-            placeholder="Tulis komentar..."
-          >
-
-          <button class="comment-send">
-            Send
-          </button>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <!-- CRYPTOLEARNER -->
-
-    <article
-      class="coin-card post"
-      data-type="education"
-      data-likes="17"
-    >
-
-      <div class="post-header">
-
-        <div class="avatar">
-          👩
-        </div>
-
-        <div class="post-user">
-
-          <a
-            href="trader-profile.html?username=cryptolearner"
-          >
-            <strong>
-              CryptoLearner
-            </strong>
-          </a>
-
-          <div class="dim post-meta">
-            38 min ago · 📚 Education
-          </div>
-
-        </div>
-
-        <button class="follow-btn">
-          + Follow
-        </button>
-
-      </div>
-
-
-      <div class="post-content">
-
-        Ada yang bisa jelasin hubungan
-        antara Open Interest dan funding
-        rate untuk futures?
-
-        <div class="coin-tag">
-          📈 Futures
-        </div>
-
-      </div>
-
-
-      <div class="post-footer">
-
-        <button class="post-action like-btn">
-          ❤️ <span>17</span>
-        </button>
-
-        <button class="post-action comment-btn">
-          💬 <span>12</span>
-        </button>
-
-        <button class="post-action share-btn">
-          ↗ Share
-        </button>
-
-      </div>
-
-
-      <div class="comments">
-
-        <div class="comment">
-
-          <div class="comment-box">
-
-            <input
-              class="comment-input"
-              placeholder="Tulis komentar..."
-            >
-
-            <button class="comment-send">
-              Send
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-    <!-- FUTURESPRO -->
-
-    <article
-      class="coin-card post"
-      data-type="education"
-      data-likes="41"
-    >
-
-      <div class="post-header">
-
-        <div class="avatar">
-          🧔
-        </div>
-
-        <div class="post-user">
-
-          <a
-            href="trader-profile.html?username=futurespro"
-          >
-            <strong>
-              FuturesPro
-            </strong>
-          </a>
-
-          <div class="dim post-meta">
-            1 hour ago · 📚 Education
-          </div>
-
-        </div>
-
-        <button class="follow-btn">
-          + Follow
-        </button>
-
-      </div>
-
-
-      <div class="post-content">
-
-        Jangan lupa risk management.
-        Leverage besar bukan berarti
-        profit pasti lebih besar.
-
-        <div class="coin-tag">
-          ⚠️ Risk Management
-        </div>
-
-      </div>
-
-
-      <div class="post-footer">
-
-        <button class="post-action like-btn">
-          ❤️ <span>41</span>
-        </button>
-
-        <button class="post-action comment-btn">
-          💬 <span>5</span>
-        </button>
-
-        <button class="post-action share-btn">
-          ↗ Share
-        </button>
-
-      </div>
-
-
-      <div class="comments">
-
-        <div class="comment-box">
-
-          <input
-            class="comment-input"
-            placeholder="Tulis komentar..."
-          >
-
-          <button class="comment-send">
-            Send
-          </button>
-
-        </div>
-
-      </div>
-
-    </article>
-
+    <div class="loading-feed">
+      Loading community...
+    </div>
 
   </section>
 
-
-  <!-- COMMUNITY RULES -->
 
   <div
     style="
@@ -929,27 +662,752 @@
 <script src="js/app.js"></script>
 
 
-<script>
+<script type="module">
+
+import {
+  supabase
+} from "./js/supabase.js";
 
 
 /* =========================
-   THEME
+   STATE
 ========================= */
 
-document
-  .getElementById("theme-toggle")
-  ?.addEventListener(
-    "click",
+let currentUser = null;
+
+let currentProfile = null;
+
+let selectedPostType =
+  "discussion";
+
+let allPosts = [];
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const feed =
+  document.getElementById(
+    "community-feed"
+  );
+
+const input =
+  document.getElementById(
+    "post-input"
+  );
+
+const publishButton =
+  document.getElementById(
+    "publish-btn"
+  );
+
+const message =
+  document.getElementById(
+    "community-message"
+  );
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+  text
+) {
+
+  if (!message)
+    return;
+
+  message.textContent =
+    text;
+
+  setTimeout(
     () => {
 
       if (
-        typeof toggleTheme ===
-        "function"
+        message.textContent ===
+        text
       ) {
 
-        toggleTheme();
+        message.textContent =
+          "";
 
       }
+
+    },
+    3000
+  );
+
+}
+
+
+/* =========================
+   TIME
+========================= */
+
+function timeAgo(
+  date
+) {
+
+  const seconds =
+    Math.floor(
+      (
+        Date.now() -
+        new Date(date).getTime()
+      ) / 1000
+    );
+
+  if (seconds < 60)
+    return "Just now";
+
+  const minutes =
+    Math.floor(
+      seconds / 60
+    );
+
+  if (minutes < 60)
+    return `${minutes} min ago`;
+
+  const hours =
+    Math.floor(
+      minutes / 60
+    );
+
+  if (hours < 24)
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+
+  const days =
+    Math.floor(
+      hours / 24
+    );
+
+  if (days < 7)
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+
+  return new Date(date)
+    .toLocaleDateString(
+      "id-ID"
+    );
+
+}
+
+
+/* =========================
+   TYPE LABEL
+========================= */
+
+function getTypeLabel(
+  type
+) {
+
+  return {
+
+    discussion:
+      "💬 Discussion",
+
+    analysis:
+      "📊 Analysis",
+
+    education:
+      "📚 Education"
+
+  }[type] || "💬 Discussion";
+
+}
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function escapeHTML(
+  value
+) {
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.textContent =
+    value ?? "";
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================
+   AUTH
+========================= */
+
+async function loadAuth() {
+
+  const {
+    data
+  } =
+    await supabase.auth.getUser();
+
+  currentUser =
+    data?.user || null;
+
+
+  if (!currentUser) {
+
+    publishButton.disabled =
+      false;
+
+    publishButton.textContent =
+      "Login";
+
+    return;
+
+  }
+
+
+  const {
+    data: profile
+  } =
+    await supabase
+      .from("profiles")
+      .select(
+        "id, username, display_name, avatar_url"
+      )
+      .eq(
+        "id",
+        currentUser.id
+      )
+      .maybeSingle();
+
+
+  currentProfile =
+    profile || null;
+
+}
+
+
+/* =========================
+   LOAD STATS
+========================= */
+
+async function loadStats() {
+
+  const {
+    count: members
+  } =
+    await supabase
+      .from("profiles")
+      .select(
+        "id",
+        {
+          count:"exact",
+          head:true
+        }
+      );
+
+
+  const {
+    count: discussions
+  } =
+    await supabase
+      .from("community_posts")
+      .select(
+        "id",
+        {
+          count:"exact",
+          head:true
+        }
+      );
+
+
+  const memberElement =
+    document.getElementById(
+      "member-count"
+    );
+
+  const discussionElement =
+    document.getElementById(
+      "discussion-count"
+    );
+
+
+  if (memberElement) {
+
+    memberElement.textContent =
+      formatNumber(
+        members || 0
+      );
+
+  }
+
+
+  if (discussionElement) {
+
+    discussionElement.textContent =
+      formatNumber(
+        discussions || 0
+      );
+
+  }
+
+}
+
+
+function formatNumber(
+  number
+) {
+
+  if (number >= 1000000)
+    return (
+      (number / 1000000)
+        .toFixed(1)
+        .replace(".0","")
+      + "M"
+    );
+
+  if (number >= 1000)
+    return (
+      (number / 1000)
+        .toFixed(1)
+        .replace(".0","")
+      + "K"
+    );
+
+  return number;
+
+}
+
+
+/* =========================
+   LOAD FEED
+========================= */
+
+async function loadFeed() {
+
+  feed.innerHTML = `
+    <div class="loading-feed">
+      Loading community...
+    </div>
+  `;
+
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("community_posts")
+      .select(`
+        id,
+        user_id,
+        content,
+        post_type,
+        created_at,
+        profiles (
+          id,
+          username,
+          display_name,
+          avatar_url
+        ),
+        community_likes (
+          user_id
+        ),
+        community_comments (
+          id,
+          user_id,
+          content,
+          created_at,
+          profiles (
+            username,
+            display_name,
+            avatar_url
+          )
+        )
+      `)
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      )
+      .limit(50);
+
+
+  if (error) {
+
+    console.error(error);
+
+    feed.innerHTML = `
+      <div class="empty-feed">
+        Gagal memuat Community.
+      </div>
+    `;
+
+    showMessage(
+      "Gagal memuat data Community."
+    );
+
+    return;
+
+  }
+
+
+  allPosts =
+    data || [];
+
+  renderFeed(
+    allPosts
+  );
+
+}
+
+
+/* =========================
+   RENDER FEED
+========================= */
+
+function renderFeed(
+  posts
+) {
+
+  if (!posts.length) {
+
+    feed.innerHTML = `
+      <div class="empty-feed">
+        Belum ada post.<br>
+        Jadilah yang pertama berbagi insight 🚀
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  feed.innerHTML =
+    posts
+      .map(
+        post =>
+          renderPost(
+            post
+          )
+      )
+      .join("");
+
+
+  feed
+    .querySelectorAll(
+      ".post"
+    )
+    .forEach(
+      post =>
+        attachPostEvents(
+          post
+        )
+    );
+
+}
+
+
+function renderPost(
+  post
+) {
+
+  const profile =
+    post.profiles || {};
+
+  const username =
+    profile.username ||
+    "user";
+
+  const displayName =
+    profile.display_name ||
+    username;
+
+  const avatar =
+    profile.avatar_url;
+
+
+  const likes =
+    post.community_likes ||
+    [];
+
+  const comments =
+    post.community_comments ||
+    [];
+
+
+  const liked =
+    currentUser &&
+    likes.some(
+      like =>
+        like.user_id ===
+        currentUser.id
+    );
+
+
+  const avatarHTML =
+    avatar
+      ? `<img src="${escapeHTML(avatar)}" alt="">`
+      : "👤";
+
+
+  const commentsHTML =
+    comments
+      .map(
+        comment => {
+
+          const cp =
+            comment.profiles ||
+            {};
+
+          const cname =
+            cp.display_name ||
+            cp.username ||
+            "user";
+
+          const cavatar =
+            cp.avatar_url;
+
+
+          return `
+
+            <div class="comment">
+
+              <div class="comment-avatar">
+
+                ${
+                  cavatar
+                    ? `<img src="${escapeHTML(cavatar)}" alt="">`
+                    : "👤"
+                }
+
+              </div>
+
+              <div class="comment-body">
+
+                <strong>
+                  ${escapeHTML(cname)}
+                </strong>
+
+                ${escapeHTML(
+                  comment.content
+                )}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  return `
+
+    <article
+      class="coin-card post"
+      data-id="${post.id}"
+      data-type="${post.post_type}"
+      data-likes="${likes.length}"
+    >
+
+      <div class="post-header">
+
+        <div class="avatar">
+          ${avatarHTML}
+        </div>
+
+        <div class="post-user">
+
+          <a
+            href="trader-profile.html?username=${encodeURIComponent(username)}"
+          >
+
+            <strong>
+              ${escapeHTML(displayName)}
+            </strong>
+
+          </a>
+
+          <div class="dim post-meta">
+
+            ${timeAgo(post.created_at)}
+            ·
+            ${getTypeLabel(post.post_type)}
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="post-content">
+
+        ${escapeHTML(post.content)}
+
+      </div>
+
+
+      <div class="post-footer">
+
+        <button
+          class="post-action like-btn ${liked ? "liked" : ""}"
+        >
+
+          ❤️
+          <span>
+            ${likes.length}
+          </span>
+
+        </button>
+
+
+        <button class="post-action comment-btn">
+
+          💬
+          <span>
+            ${comments.length}
+          </span>
+
+        </button>
+
+
+        <button class="post-action share-btn">
+
+          ↗ Share
+
+        </button>
+
+      </div>
+
+
+      <div class="comments">
+
+        <div class="comments-list">
+
+          ${commentsHTML}
+
+        </div>
+
+
+        <div class="comment-box">
+
+          <input
+            class="comment-input"
+            placeholder="Tulis komentar..."
+            maxlength="500"
+          >
+
+          <button class="comment-send">
+            Send
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* =========================
+   CREATE POST
+========================= */
+
+publishButton
+  ?.addEventListener(
+    "click",
+    async () => {
+
+      if (!currentUser) {
+
+        window.location.href =
+          "login.html";
+
+        return;
+
+      }
+
+
+      const text =
+        input.value.trim();
+
+
+      if (!text) {
+
+        showMessage(
+          "Tulis sesuatu terlebih dahulu."
+        );
+
+        return;
+
+      }
+
+
+      publishButton.disabled =
+        true;
+
+      publishButton.textContent =
+        "Posting...";
+
+
+      const {
+        error
+      } =
+        await supabase
+          .from("community_posts")
+          .insert({
+
+            user_id:
+              currentUser.id,
+
+            content:
+              text,
+
+            post_type:
+              selectedPostType
+
+          });
+
+
+      publishButton.disabled =
+        false;
+
+      publishButton.textContent =
+        "Post";
+
+
+      if (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Post gagal dibuat."
+        );
+
+        return;
+
+      }
+
+
+      input.value = "";
+
+      showMessage(
+        "Post berhasil dibuat 🔥"
+      );
+
+
+      await loadFeed();
+
+      await loadStats();
 
     }
   );
@@ -959,12 +1417,10 @@ document
    POST TYPE
 ========================= */
 
-let selectedPostType =
-  "discussion";
-
-
 document
-  .querySelectorAll(".type-btn")
+  .querySelectorAll(
+    ".type-btn"
+  )
   .forEach(
     button => {
 
@@ -973,7 +1429,9 @@ document
         () => {
 
           document
-            .querySelectorAll(".type-btn")
+            .querySelectorAll(
+              ".type-btn"
+            )
             .forEach(
               item =>
                 item.classList.remove(
@@ -996,185 +1454,510 @@ document
 
 
 /* =========================
-   CREATE POST
+   LIKE
 ========================= */
 
-document
-  .getElementById("publish-btn")
-  ?.addEventListener(
-    "click",
-    () => {
+async function toggleLike(
+  postElement
+) {
 
-      const input =
-        document.getElementById(
-          "post-input"
+  if (!currentUser) {
+
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  const postId =
+    postElement.dataset.id;
+
+
+  const button =
+    postElement.querySelector(
+      ".like-btn"
+    );
+
+  const count =
+    button.querySelector(
+      "span"
+    );
+
+
+  const liked =
+    button.classList.contains(
+      "liked"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  if (liked) {
+
+    const {
+      error
+    } =
+      await supabase
+        .from("community_likes")
+        .delete()
+        .eq(
+          "post_id",
+          postId
+        )
+        .eq(
+          "user_id",
+          currentUser.id
         );
 
-      const message =
-        document.getElementById(
-          "community-message"
+
+    if (!error) {
+
+      button.classList.remove(
+        "liked"
+      );
+
+      count.textContent =
+        Math.max(
+          0,
+          Number(
+            count.textContent
+          ) - 1
         );
 
-      const text =
-        input.value.trim();
+    }
+
+  } else {
+
+    const {
+      error
+    } =
+      await supabase
+        .from("community_likes")
+        .insert({
+
+          post_id:
+            postId,
+
+          user_id:
+            currentUser.id
+
+        });
 
 
-      if (!text) {
+    if (!error) {
 
-        message.textContent =
-          "Tulis sesuatu terlebih dahulu.";
+      button.classList.add(
+        "liked"
+      );
 
-        return;
+      count.textContent =
+        Number(
+          count.textContent
+        ) + 1;
 
-      }
+    }
 
-
-      const feed =
-        document.getElementById(
-          "community-feed"
-        );
-
-
-      const article =
-        document.createElement(
-          "article"
-        );
+  }
 
 
-      article.className =
-        "coin-card post";
+  button.disabled =
+    false;
+
+}
 
 
-      article.dataset.type =
-        selectedPostType;
+/* =========================
+   COMMENTS
+========================= */
+
+async function loadComments(
+  postElement
+) {
+
+  const postId =
+    postElement.dataset.id;
 
 
-      article.dataset.likes =
-        "0";
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("community_comments")
+      .select(`
+        id,
+        content,
+        created_at,
+        user_id,
+        profiles (
+          username,
+          display_name,
+          avatar_url
+        )
+      `)
+      .eq(
+        "post_id",
+        postId
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
 
 
-      const typeLabel = {
+  if (error) {
 
-        discussion:
-          "💬 Discussion",
+    console.error(error);
 
-        analysis:
-          "📊 Analysis",
+    return;
 
-        education:
-          "📚 Education"
-
-      }[selectedPostType];
+  }
 
 
-      article.innerHTML = `
+  const list =
+    postElement.querySelector(
+      ".comments-list"
+    );
 
-        <div class="post-header">
 
-          <div class="avatar">
-            👤
-          </div>
+  list.innerHTML =
+    (data || [])
+      .map(
+        comment => {
 
-          <div class="post-user">
+          const p =
+            comment.profiles ||
+            {};
 
-            <a href="profile.html">
+          return `
 
-              <strong>
-                You
-              </strong>
+            <div class="comment">
 
-            </a>
+              <div class="comment-avatar">
 
-            <div class="dim post-meta">
-              Just now · ${typeLabel}
+                ${
+                  p.avatar_url
+                    ? `<img src="${escapeHTML(p.avatar_url)}" alt="">`
+                    : "👤"
+                }
+
+              </div>
+
+              <div class="comment-body">
+
+                <strong>
+                  ${escapeHTML(
+                    p.display_name ||
+                    p.username ||
+                    "user"
+                  )}
+                </strong>
+
+                ${escapeHTML(
+                  comment.content
+                )}
+
+              </div>
+
             </div>
 
-          </div>
+          `;
 
-        </div>
+        }
+      )
+      .join("");
 
-
-        <div class="post-content">
-
-          ${escapeHTML(text)}
-
-        </div>
+}
 
 
-        <div class="post-footer">
+/* =========================
+   SEND COMMENT
+========================= */
 
-          <button class="post-action like-btn">
-            ❤️ <span>0</span>
-          </button>
+async function sendComment(
+  postElement
+) {
 
-          <button class="post-action comment-btn">
-            💬 <span>0</span>
-          </button>
+  if (!currentUser) {
 
-          <button class="post-action share-btn">
-            ↗ Share
-          </button>
+    window.location.href =
+      "login.html";
 
-        </div>
+    return;
 
-
-        <div class="comments">
-
-          <div class="comment-box">
-
-            <input
-              class="comment-input"
-              placeholder="Tulis komentar..."
-            >
-
-            <button class="comment-send">
-              Send
-            </button>
-
-          </div>
-
-        </div>
-
-      `;
+  }
 
 
-      feed.prepend(
-        article
+  const input =
+    postElement.querySelector(
+      ".comment-input"
+    );
+
+
+  const text =
+    input.value.trim();
+
+
+  if (!text)
+    return;
+
+
+  const button =
+    postElement.querySelector(
+      ".comment-send"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  const {
+    error
+  } =
+    await supabase
+      .from("community_comments")
+      .insert({
+
+        post_id:
+          postElement.dataset.id,
+
+        user_id:
+          currentUser.id,
+
+        content:
+          text
+
+      });
+
+
+  button.disabled =
+    false;
+
+
+  if (error) {
+
+    console.error(error);
+
+    showMessage(
+      "Komentar gagal dikirim."
+    );
+
+    return;
+
+  }
+
+
+  input.value = "";
+
+  await loadComments(
+    postElement
+  );
+
+
+  const count =
+    postElement.querySelector(
+      ".comment-btn span"
+    );
+
+
+  if (count) {
+
+    count.textContent =
+      Number(
+        count.textContent
+      ) + 1;
+
+  }
+
+
+  showMessage(
+    "Komentar terkirim."
+  );
+
+}
+
+
+/* =========================
+   SHARE
+========================= */
+
+async function sharePost(
+  postElement
+) {
+
+  const url =
+    `${window.location.origin}${window.location.pathname}#post-${postElement.dataset.id}`;
+
+
+  try {
+
+    if (
+      navigator.share
+    ) {
+
+      await navigator.share({
+
+        title:
+          "NEXTRA Community",
+
+        text:
+          "Lihat post ini di NEXTRA Community.",
+
+        url
+
+      });
+
+    } else {
+
+      await navigator.clipboard.writeText(
+        url
+      );
+
+      showMessage(
+        "Link post berhasil disalin."
+      );
+
+    }
+
+  } catch {
+
+    console.log(
+      "Share cancelled."
+    );
+
+  }
+
+}
+
+
+/* =========================
+   POST EVENTS
+========================= */
+
+function attachPostEvents(
+  post
+) {
+
+  const like =
+    post.querySelector(
+      ".like-btn"
+    );
+
+  like?.addEventListener(
+    "click",
+    () =>
+      toggleLike(
+        post
+      )
+  );
+
+
+  const comment =
+    post.querySelector(
+      ".comment-btn"
+    );
+
+  comment?.addEventListener(
+    "click",
+    async () => {
+
+      const box =
+        post.querySelector(
+          ".comments"
+        );
+
+      box.classList.toggle(
+        "show"
       );
 
 
-      input.value = "";
+      if (
+        box.classList.contains(
+          "show"
+        )
+      ) {
 
+        await loadComments(
+          post
+        );
 
-      message.textContent =
-        "Post berhasil dibuat di feed demo.";
-
-
-      setTimeout(
-        () => {
-
-          message.textContent =
-            "";
-
-        },
-        2500
-      );
-
-
-      attachPostEvents(
-        article
-      );
+      }
 
     }
   );
 
 
+  const send =
+    post.querySelector(
+      ".comment-send"
+    );
+
+  send?.addEventListener(
+    "click",
+    () =>
+      sendComment(
+        post
+      )
+  );
+
+
+  const commentInput =
+    post.querySelector(
+      ".comment-input"
+    );
+
+  commentInput?.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key ===
+        "Enter"
+      ) {
+
+        event.preventDefault();
+
+        sendComment(
+          post
+        );
+
+      }
+
+    }
+  );
+
+
+  const share =
+    post.querySelector(
+      ".share-btn"
+    );
+
+  share?.addEventListener(
+    "click",
+    () =>
+      sharePost(
+        post
+      )
+  );
+
+}
+
+
 /* =========================
-   FILTER TABS
+   FILTER
 ========================= */
 
 document
-  .querySelectorAll(".community-tab")
+  .querySelectorAll(
+    ".community-tab"
+  )
   .forEach(
     tab => {
 
@@ -1202,56 +1985,57 @@ document
             tab.dataset.filter;
 
 
-          document
-            .querySelectorAll(
-              ".post"
-            )
-            .forEach(
-              post => {
-
-                if (
-                  filter ===
-                  "latest"
-                ) {
-
-                  post.style.display =
-                    "block";
-
-                  return;
-
-                }
+          let filtered =
+            [...allPosts];
 
 
-                if (
-                  filter ===
-                  "trending"
-                ) {
+          if (
+            filter ===
+            "trending"
+          ) {
 
-                  const likes =
-                    Number(
-                      post.dataset.likes ||
-                      0
-                    );
-
-                  post.style.display =
-                    likes >= 20
-                      ? "block"
-                      : "none";
-
-                  return;
-
-                }
-
-
-                post.style.display =
-                  post.dataset.type ===
-                  filter
-                    ? "block"
-                    : "none";
-
-              }
+            filtered.sort(
+              (
+                a,
+                b
+              ) =>
+                (
+                  b.community_likes?.length ||
+                  0
+                ) -
+                (
+                  a.community_likes?.length ||
+                  0
+                )
             );
 
+          }
+
+
+          if (
+            [
+              "analysis",
+              "education",
+              "discussion"
+            ].includes(
+              filter
+            )
+          ) {
+
+            filtered =
+              filtered.filter(
+                post =>
+                  post.post_type ===
+                  filter
+              );
+
+          }
+
+
+          renderFeed(
+            filtered
+          );
+
         }
       );
 
@@ -1260,143 +2044,23 @@ document
 
 
 /* =========================
-   POST EVENTS
+   THEME
 ========================= */
 
-function attachPostEvents(
-  post
-) {
-
-
-  const likeButton =
-    post.querySelector(
-      ".like-btn"
-    );
-
-
-  likeButton?.addEventListener(
+document
+  .getElementById(
+    "theme-toggle"
+  )
+  ?.addEventListener(
     "click",
     () => {
 
-      const count =
-        likeButton.querySelector(
-          "span"
-        );
-
-      let likes =
-        Number(
-          count.textContent
-        );
-
-
-      const liked =
-        likeButton.classList.contains(
-          "liked"
-        );
-
-
-      if (liked) {
-
-        likes--;
-
-        likeButton.classList.remove(
-          "liked"
-        );
-
-      } else {
-
-        likes++;
-
-        likeButton.classList.add(
-          "liked"
-        );
-
-      }
-
-
-      count.textContent =
-        likes;
-
-
-      post.dataset.likes =
-        likes;
-
-    }
-  );
-
-
-  const commentButton =
-    post.querySelector(
-      ".comment-btn"
-    );
-
-
-  commentButton?.addEventListener(
-    "click",
-    () => {
-
-      const comments =
-        post.querySelector(
-          ".comments"
-        );
-
-
-      comments?.classList.toggle(
-        "show"
-      );
-
-    }
-  );
-
-
-  const shareButton =
-    post.querySelector(
-      ".share-btn"
-    );
-
-
-  shareButton?.addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        if (
-          navigator.share
-        ) {
-
-          await navigator.share({
-
-            title:
-              "NEXTRA Community",
-
-            text:
-              "Check this post on NEXTRA Community.",
-
-            url:
-              window.location.href
-
-          });
-
-        } else {
-
-          await navigator.clipboard.writeText(
-            window.location.href
-          );
-
-          showMessage(
-            "Link berhasil disalin."
-          );
-
-        }
-
-      } catch (
-        error
+      if (
+        typeof toggleTheme ===
+        "function"
       ) {
 
-        console.log(
-          "Share cancelled."
-        );
+        toggleTheme();
 
       }
 
@@ -1404,198 +2068,74 @@ function attachPostEvents(
   );
 
 
-  const followButton =
-    post.querySelector(
-      ".follow-btn"
-    );
-
-
-  followButton?.addEventListener(
-    "click",
-    () => {
-
-      const following =
-        followButton.textContent.includes(
-          "Following"
-        );
-
-
-      followButton.textContent =
-        following
-          ? "+ Follow"
-          : "✓ Following";
-
-      followButton.classList.toggle(
-        "following",
-        !following
-      );
-
-    }
-  );
-
-
-  const sendButton =
-    post.querySelector(
-      ".comment-send"
-    );
-
-
-  const commentInput =
-    post.querySelector(
-      ".comment-input"
-    );
-
-
-  sendButton?.addEventListener(
-    "click",
-    () => {
-
-      const text =
-        commentInput.value.trim();
-
-
-      if (!text)
-        return;
-
-
-      const comments =
-        post.querySelector(
-          ".comments"
-        );
-
-
-      const comment =
-        document.createElement(
-          "div"
-        );
-
-
-      comment.className =
-        "comment";
-
-
-      comment.innerHTML = `
-
-        <div class="comment-avatar">
-          👤
-        </div>
-
-        <div class="comment-body">
-
-          <strong>
-            You
-          </strong>
-
-          ${escapeHTML(text)}
-
-        </div>
-
-      `;
-
-
-      comments.insertBefore(
-        comment,
-        comments.querySelector(
-          ".comment-box"
-        )
-      );
-
-
-      commentInput.value =
-        "";
-
-
-      const count =
-        post.querySelector(
-          ".comment-btn span"
-        );
-
-
-      if (count) {
-
-        count.textContent =
-          Number(
-            count.textContent
-          ) + 1;
-
-      }
-
-    }
-  );
-
-}
-
-
 /* =========================
-   ESCAPE HTML
+   REALTIME
 ========================= */
 
-function escapeHTML(
-  value
-) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-  div.textContent =
-    value;
-
-  return div.innerHTML;
-
-}
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function showMessage(
-  text
-) {
-
-  const message =
-    document.getElementById(
-      "community-message"
-    );
-
-  if (!message)
-    return;
-
-
-  message.textContent =
-    text;
-
-
-  setTimeout(
-    () => {
-
-      message.textContent =
-        "";
-
+supabase
+  .channel(
+    "community-live"
+  )
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"community_posts"
     },
-    2500
-  );
+    () => {
 
-}
+      loadFeed();
+      loadStats();
+
+    }
+  )
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"community_likes"
+    },
+    () => {
+
+      loadFeed();
+
+    }
+  )
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"community_comments"
+    },
+    () => {
+
+      loadFeed();
+
+    }
+  )
+  .subscribe();
 
 
 /* =========================
    INIT
 ========================= */
 
-document
-  .querySelectorAll(
-    ".post"
-  )
-  .forEach(
-    post =>
-      attachPostEvents(
-        post
-      )
-  );
+async function init() {
 
+  await loadAuth();
+
+  await Promise.all([
+    loadFeed(),
+    loadStats()
+  ]);
+
+}
+
+
+init();
 
 </script>
 
