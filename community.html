@@ -24,6 +24,10 @@
 
   <style>
 
+    /* =========================
+       COMMUNITY
+    ========================= */
+
     .community-tabs {
       display:flex;
       gap:7px;
@@ -53,6 +57,10 @@
       color:var(--bg);
       border-color:var(--text);
     }
+
+    /* =========================
+       CREATE POST
+    ========================= */
 
     .create-post {
       margin-top:8px;
@@ -122,6 +130,10 @@
       cursor:not-allowed;
     }
 
+    /* =========================
+       POST
+    ========================= */
+
     .post {
       margin-top:9px;
       padding:13px;
@@ -134,9 +146,9 @@
     }
 
     .avatar {
-      width:32px;
-      height:32px;
-      min-width:32px;
+      width:34px;
+      height:34px;
+      min-width:34px;
       border-radius:50%;
       background:var(--border);
       display:flex;
@@ -175,6 +187,10 @@
       margin-top:2px;
     }
 
+    /* =========================
+       FOLLOW
+    ========================= */
+
     .follow-btn {
       border:1px solid var(--border);
       background:transparent;
@@ -184,11 +200,21 @@
       font-size:7px;
       font-weight:800;
       cursor:pointer;
+      white-space:nowrap;
     }
 
     .follow-btn.following {
       font-weight:900;
+      border-color:var(--text);
     }
+
+    .follow-btn:disabled {
+      opacity:.5;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
 
     .post-content {
       font-size:10px;
@@ -218,6 +244,14 @@
     .post-action.liked {
       font-weight:900;
     }
+
+    .post-action:disabled {
+      opacity:.5;
+    }
+
+    /* =========================
+       COMMENTS
+    ========================= */
 
     .comments {
       display:none;
@@ -298,6 +332,10 @@
       cursor:pointer;
     }
 
+    /* =========================
+       STATUS
+    ========================= */
+
     .community-message {
       text-align:center;
       font-size:8px;
@@ -305,16 +343,24 @@
       min-height:12px;
     }
 
-    .loading-feed {
-      text-align:center;
-      padding:25px 10px;
-      font-size:9px;
-    }
-
+    .loading-feed,
     .empty-feed {
       text-align:center;
       padding:30px 10px;
       font-size:9px;
+    }
+
+    /* =========================
+       PROFILE LINK
+    ========================= */
+
+    .profile-link {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      color:inherit;
+      min-width:0;
     }
 
   </style>
@@ -327,6 +373,8 @@
 
 <main class="container">
 
+
+  <!-- HEADER -->
 
   <header class="topbar">
 
@@ -352,6 +400,8 @@
 
   </header>
 
+
+  <!-- HERO -->
 
   <section
     class="highlight-box"
@@ -384,6 +434,8 @@
 
   </section>
 
+
+  <!-- STATS -->
 
   <section
     style="
@@ -460,8 +512,11 @@
       "
     >
 
-      <strong style="font-size:15px;">
-        24/7
+      <strong
+        id="following-count"
+        style="font-size:15px;"
+      >
+        —
       </strong>
 
       <div
@@ -471,13 +526,15 @@
           margin-top:3px;
         "
       >
-        Market
+        Following
       </div>
 
     </div>
 
   </section>
 
+
+  <!-- TABS -->
 
   <div
     class="community-tabs"
@@ -496,6 +553,13 @@
       data-filter="trending"
     >
       🔥 Trending
+    </button>
+
+    <button
+      class="community-tab"
+      data-filter="following"
+    >
+      👥 Following
     </button>
 
     <button
@@ -521,6 +585,8 @@
 
   </div>
 
+
+  <!-- CREATE POST -->
 
   <section class="coin-card create-post">
 
@@ -588,6 +654,8 @@
   ></div>
 
 
+  <!-- FEED -->
+
   <div
     style="
       font-size:10px;
@@ -607,6 +675,8 @@
 
   </section>
 
+
+  <!-- RULES -->
 
   <div
     style="
@@ -669,9 +739,9 @@ import {
 } from "./js/supabase.js";
 
 
-/* =========================
+/* =====================================================
    STATE
-========================= */
+===================================================== */
 
 let currentUser = null;
 
@@ -682,10 +752,15 @@ let selectedPostType =
 
 let allPosts = [];
 
+let followingIds = new Set();
 
-/* =========================
+let currentFilter =
+  "latest";
+
+
+/* =====================================================
    ELEMENTS
-========================= */
+===================================================== */
 
 const feed =
   document.getElementById(
@@ -708,9 +783,9 @@ const message =
   );
 
 
-/* =========================
+/* =====================================================
    MESSAGE
-========================= */
+===================================================== */
 
 function showMessage(
   text
@@ -742,9 +817,30 @@ function showMessage(
 }
 
 
-/* =========================
-   TIME
-========================= */
+/* =====================================================
+   ESCAPE
+===================================================== */
+
+function escapeHTML(
+  value
+) {
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.textContent =
+    value ?? "";
+
+  return div.innerHTML;
+
+}
+
+
+/* =====================================================
+   TIME AGO
+===================================================== */
 
 function timeAgo(
   date
@@ -793,15 +889,15 @@ function timeAgo(
 }
 
 
-/* =========================
+/* =====================================================
    TYPE LABEL
-========================= */
+===================================================== */
 
-function getTypeLabel(
+function typeLabel(
   type
 ) {
 
-  return {
+  const labels = {
 
     discussion:
       "💬 Discussion",
@@ -812,35 +908,64 @@ function getTypeLabel(
     education:
       "📚 Education"
 
-  }[type] || "💬 Discussion";
+  };
+
+  return labels[type] ||
+    labels.discussion;
 
 }
 
 
-/* =========================
-   ESCAPE
-========================= */
+/* =====================================================
+   FORMAT NUMBER
+===================================================== */
 
-function escapeHTML(
-  value
+function formatNumber(
+  number
 ) {
 
-  const div =
-    document.createElement(
-      "div"
-    );
+  if (
+    number >=
+    1000000
+  ) {
 
-  div.textContent =
-    value ?? "";
+    return (
+      number / 1000000
+    )
+      .toFixed(1)
+      .replace(
+        ".0",
+        ""
+      ) + "M";
 
-  return div.innerHTML;
+  }
+
+
+  if (
+    number >=
+    1000
+  ) {
+
+    return (
+      number / 1000
+    )
+      .toFixed(1)
+      .replace(
+        ".0",
+        ""
+      ) + "K";
+
+  }
+
+
+  return number;
 
 }
 
 
-/* =========================
+/* =====================================================
    AUTH
-========================= */
+===================================================== */
 
 async function loadAuth() {
 
@@ -849,14 +974,14 @@ async function loadAuth() {
   } =
     await supabase.auth.getUser();
 
+
   currentUser =
     data?.user || null;
 
 
-  if (!currentUser) {
-
-    publishButton.disabled =
-      false;
+  if (
+    !currentUser
+  ) {
 
     publishButton.textContent =
       "Login";
@@ -884,12 +1009,87 @@ async function loadAuth() {
   currentProfile =
     profile || null;
 
+
+  await loadFollowing();
+
 }
 
 
-/* =========================
+/* =====================================================
+   LOAD FOLLOWING
+===================================================== */
+
+async function loadFollowing() {
+
+  followingIds =
+    new Set();
+
+
+  if (
+    !currentUser
+  )
+    return;
+
+
+  const {
+    data,
+    error
+  } =
+    await supabase
+      .from("follows")
+      .select(
+        "following_id"
+      )
+      .eq(
+        "follower_id",
+        currentUser.id
+      );
+
+
+  if (error) {
+
+    console.error(
+      "Following error:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  (
+    data || []
+  )
+    .forEach(
+      row =>
+        followingIds.add(
+          row.following_id
+        )
+    );
+
+
+  const count =
+    document.getElementById(
+      "following-count"
+    );
+
+
+  if (count) {
+
+    count.textContent =
+      formatNumber(
+        followingIds.size
+      );
+
+  }
+
+}
+
+
+/* =====================================================
    LOAD STATS
-========================= */
+===================================================== */
 
 async function loadStats() {
 
@@ -908,7 +1108,7 @@ async function loadStats() {
 
 
   const {
-    count: discussions
+    count: posts
   } =
     await supabase
       .from("community_posts")
@@ -921,67 +1121,50 @@ async function loadStats() {
       );
 
 
-  const memberElement =
-    document.getElementById(
+  document
+    .getElementById(
       "member-count"
+    )
+    ?.replaceChildren(
+      document.createTextNode(
+        formatNumber(
+          members || 0
+        )
+      )
     );
 
-  const discussionElement =
-    document.getElementById(
+
+  document
+    .getElementById(
       "discussion-count"
+    )
+    ?.replaceChildren(
+      document.createTextNode(
+        formatNumber(
+          posts || 0
+        )
+      )
     );
 
 
-  if (memberElement) {
-
-    memberElement.textContent =
-      formatNumber(
-        members || 0
-      );
-
-  }
-
-
-  if (discussionElement) {
-
-    discussionElement.textContent =
-      formatNumber(
-        discussions || 0
-      );
-
-  }
+  document
+    .getElementById(
+      "following-count"
+    )
+    ?.replaceChildren(
+      document.createTextNode(
+        formatNumber(
+          followingIds.size
+        )
+      )
+    );
 
 }
 
 
-function formatNumber(
-  number
-) {
-
-  if (number >= 1000000)
-    return (
-      (number / 1000000)
-        .toFixed(1)
-        .replace(".0","")
-      + "M"
-    );
-
-  if (number >= 1000)
-    return (
-      (number / 1000)
-        .toFixed(1)
-        .replace(".0","")
-      + "K"
-    );
-
-  return number;
-
-}
-
-
-/* =========================
-   LOAD FEED
-========================= */
+/* =====================================================
+   LOAD POSTS
+===================================================== */
 
 async function loadFeed() {
 
@@ -1004,20 +1187,24 @@ async function loadFeed() {
         content,
         post_type,
         created_at,
+
         profiles (
           id,
           username,
           display_name,
           avatar_url
         ),
+
         community_likes (
           user_id
         ),
+
         community_comments (
           id,
           user_id,
           content,
           created_at,
+
           profiles (
             username,
             display_name,
@@ -1031,12 +1218,15 @@ async function loadFeed() {
           ascending:false
         }
       )
-      .limit(50);
+      .limit(100);
 
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "Feed error:",
+      error
+    );
 
     feed.innerHTML = `
       <div class="empty-feed">
@@ -1045,7 +1235,7 @@ async function loadFeed() {
     `;
 
     showMessage(
-      "Gagal memuat data Community."
+      "Gagal memuat feed."
     );
 
     return;
@@ -1056,16 +1246,103 @@ async function loadFeed() {
   allPosts =
     data || [];
 
+
+  renderCurrentFeed();
+
+}
+
+
+/* =====================================================
+   FILTER FEED
+===================================================== */
+
+function getFilteredPosts() {
+
+  let posts =
+    [...allPosts];
+
+
+  if (
+    currentFilter ===
+    "trending"
+  ) {
+
+    posts.sort(
+      (
+        a,
+        b
+      ) =>
+        (
+          b.community_likes?.length ||
+          0
+        ) -
+        (
+          a.community_likes?.length ||
+          0
+        )
+    );
+
+  }
+
+
+  if (
+    currentFilter ===
+    "following"
+  ) {
+
+    posts =
+      posts.filter(
+        post =>
+          currentUser &&
+          followingIds.has(
+            post.user_id
+          )
+      );
+
+  }
+
+
+  if (
+    [
+      "analysis",
+      "education",
+      "discussion"
+    ].includes(
+      currentFilter
+    )
+  ) {
+
+    posts =
+      posts.filter(
+        post =>
+          post.post_type ===
+          currentFilter
+      );
+
+  }
+
+
+  return posts;
+
+}
+
+
+/* =====================================================
+   RENDER CURRENT FEED
+===================================================== */
+
+function renderCurrentFeed() {
+
   renderFeed(
-    allPosts
+    getFilteredPosts()
   );
 
 }
 
 
-/* =========================
+/* =====================================================
    RENDER FEED
-========================= */
+===================================================== */
 
 function renderFeed(
   posts
@@ -1073,10 +1350,26 @@ function renderFeed(
 
   if (!posts.length) {
 
+    let text =
+      "Belum ada post.";
+
+
+    if (
+      currentFilter ===
+      "following"
+    ) {
+
+      text =
+        currentUser
+          ? "Kamu belum mengikuti trader manapun."
+          : "Login untuk melihat Following.";
+
+    }
+
+
     feed.innerHTML = `
       <div class="empty-feed">
-        Belum ada post.<br>
-        Jadilah yang pertama berbagi insight 🚀
+        ${text}
       </div>
     `;
 
@@ -1088,10 +1381,7 @@ function renderFeed(
   feed.innerHTML =
     posts
       .map(
-        post =>
-          renderPost(
-            post
-          )
+        renderPost
       )
       .join("");
 
@@ -1101,29 +1391,34 @@ function renderFeed(
       ".post"
     )
     .forEach(
-      post =>
-        attachPostEvents(
-          post
-        )
+      attachPostEvents
     );
 
 }
 
+
+/* =====================================================
+   RENDER POST
+===================================================== */
 
 function renderPost(
   post
 ) {
 
   const profile =
-    post.profiles || {};
+    post.profiles ||
+    {};
+
 
   const username =
     profile.username ||
     "user";
 
+
   const displayName =
     profile.display_name ||
     username;
+
 
   const avatar =
     profile.avatar_url;
@@ -1132,6 +1427,7 @@ function renderPost(
   const likes =
     post.community_likes ||
     [];
+
 
   const comments =
     post.community_comments ||
@@ -1147,10 +1443,48 @@ function renderPost(
     );
 
 
+  const isOwn =
+    currentUser &&
+    post.user_id ===
+    currentUser.id;
+
+
+  const isFollowing =
+    followingIds.has(
+      post.user_id
+    );
+
+
   const avatarHTML =
     avatar
-      ? `<img src="${escapeHTML(avatar)}" alt="">`
+      ? `
+        <img
+          src="${escapeHTML(avatar)}"
+          alt=""
+        >
+      `
       : "👤";
+
+
+  const followHTML =
+    !isOwn
+      ? `
+        <button
+          class="follow-btn ${
+            isFollowing
+              ? "following"
+              : ""
+          }"
+          data-user-id="${post.user_id}"
+        >
+          ${
+            isFollowing
+              ? "✓ Following"
+              : "+ Follow"
+          }
+        </button>
+      `
+      : "";
 
 
   const commentsHTML =
@@ -1162,14 +1496,6 @@ function renderPost(
             comment.profiles ||
             {};
 
-          const cname =
-            cp.display_name ||
-            cp.username ||
-            "user";
-
-          const cavatar =
-            cp.avatar_url;
-
 
           return `
 
@@ -1178,8 +1504,13 @@ function renderPost(
               <div class="comment-avatar">
 
                 ${
-                  cavatar
-                    ? `<img src="${escapeHTML(cavatar)}" alt="">`
+                  cp.avatar_url
+                    ? `
+                      <img
+                        src="${escapeHTML(cp.avatar_url)}"
+                        alt=""
+                      >
+                    `
                     : "👤"
                 }
 
@@ -1188,7 +1519,11 @@ function renderPost(
               <div class="comment-body">
 
                 <strong>
-                  ${escapeHTML(cname)}
+                  ${escapeHTML(
+                    cp.display_name ||
+                    cp.username ||
+                    "user"
+                  )}
                 </strong>
 
                 ${escapeHTML(
@@ -1211,44 +1546,61 @@ function renderPost(
     <article
       class="coin-card post"
       data-id="${post.id}"
+      data-user-id="${post.user_id}"
       data-type="${post.post_type}"
       data-likes="${likes.length}"
     >
 
       <div class="post-header">
 
-        <div class="avatar">
-          ${avatarHTML}
-        </div>
+        <a
+          class="profile-link"
+          href="trader-profile.html?username=${encodeURIComponent(username)}"
+        >
 
-        <div class="post-user">
+          <div class="avatar">
 
-          <a
-            href="trader-profile.html?username=${encodeURIComponent(username)}"
-          >
-
-            <strong>
-              ${escapeHTML(displayName)}
-            </strong>
-
-          </a>
-
-          <div class="dim post-meta">
-
-            ${timeAgo(post.created_at)}
-            ·
-            ${getTypeLabel(post.post_type)}
+            ${avatarHTML}
 
           </div>
 
-        </div>
+          <div class="post-user">
+
+            <strong>
+              ${escapeHTML(
+                displayName
+              )}
+            </strong>
+
+            <div class="dim post-meta">
+
+              ${timeAgo(
+                post.created_at
+              )}
+
+              ·
+
+              ${typeLabel(
+                post.post_type
+              )}
+
+            </div>
+
+          </div>
+
+        </a>
+
+
+        ${followHTML}
 
       </div>
 
 
       <div class="post-content">
 
-        ${escapeHTML(post.content)}
+        ${escapeHTML(
+          post.content
+        )}
 
       </div>
 
@@ -1256,10 +1608,15 @@ function renderPost(
       <div class="post-footer">
 
         <button
-          class="post-action like-btn ${liked ? "liked" : ""}"
+          class="post-action like-btn ${
+            liked
+              ? "liked"
+              : ""
+          }"
         >
 
           ❤️
+
           <span>
             ${likes.length}
           </span>
@@ -1267,9 +1624,12 @@ function renderPost(
         </button>
 
 
-        <button class="post-action comment-btn">
+        <button
+          class="post-action comment-btn"
+        >
 
           💬
+
           <span>
             ${comments.length}
           </span>
@@ -1277,7 +1637,9 @@ function renderPost(
         </button>
 
 
-        <button class="post-action share-btn">
+        <button
+          class="post-action share-btn"
+        >
 
           ↗ Share
 
@@ -1299,8 +1661,8 @@ function renderPost(
 
           <input
             class="comment-input"
-            placeholder="Tulis komentar..."
             maxlength="500"
+            placeholder="Tulis komentar..."
           >
 
           <button class="comment-send">
@@ -1318,9 +1680,9 @@ function renderPost(
 }
 
 
-/* =========================
+/* =====================================================
    CREATE POST
-========================= */
+===================================================== */
 
 publishButton
   ?.addEventListener(
@@ -1387,7 +1749,10 @@ publishButton
 
       if (error) {
 
-        console.error(error);
+        console.error(
+          "Create post:",
+          error
+        );
 
         showMessage(
           "Post gagal dibuat."
@@ -1413,9 +1778,9 @@ publishButton
   );
 
 
-/* =========================
+/* =====================================================
    POST TYPE
-========================= */
+===================================================== */
 
 document
   .querySelectorAll(
@@ -1439,9 +1804,11 @@ document
                 )
             );
 
+
           button.classList.add(
             "active"
           );
+
 
           selectedPostType =
             button.dataset.type;
@@ -1453,12 +1820,12 @@ document
   );
 
 
-/* =========================
+/* =====================================================
    LIKE
-========================= */
+===================================================== */
 
 async function toggleLike(
-  postElement
+  post
 ) {
 
   if (!currentUser) {
@@ -1472,13 +1839,14 @@ async function toggleLike(
 
 
   const postId =
-    postElement.dataset.id;
+    post.dataset.id;
 
 
   const button =
-    postElement.querySelector(
+    post.querySelector(
       ".like-btn"
     );
+
 
   const count =
     button.querySelector(
@@ -1570,17 +1938,184 @@ async function toggleLike(
 }
 
 
-/* =========================
-   COMMENTS
-========================= */
+/* =====================================================
+   FOLLOW / UNFOLLOW
+===================================================== */
 
-async function loadComments(
-  postElement
+async function toggleFollow(
+  button
 ) {
 
-  const postId =
-    postElement.dataset.id;
+  if (!currentUser) {
 
+    window.location.href =
+      "login.html";
+
+    return;
+
+  }
+
+
+  const followingId =
+    button.dataset.userId;
+
+
+  if (
+    followingId ===
+    currentUser.id
+  ) {
+
+    return;
+
+  }
+
+
+  const isFollowing =
+    button.classList.contains(
+      "following"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  if (isFollowing) {
+
+    const {
+      error
+    } =
+      await supabase
+        .from("follows")
+        .delete()
+        .eq(
+          "follower_id",
+          currentUser.id
+        )
+        .eq(
+          "following_id",
+          followingId
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Unfollow:",
+        error
+      );
+
+      showMessage(
+        "Gagal berhenti mengikuti."
+      );
+
+    } else {
+
+      followingIds.delete(
+        followingId
+      );
+
+      button.classList.remove(
+        "following"
+      );
+
+      button.textContent =
+        "+ Follow";
+
+      updateFollowingCount();
+
+      showMessage(
+        "Berhenti mengikuti."
+      );
+
+    }
+
+  } else {
+
+    const {
+      error
+    } =
+      await supabase
+        .from("follows")
+        .insert({
+
+          follower_id:
+            currentUser.id,
+
+          following_id:
+            followingId
+
+        });
+
+
+    if (error) {
+
+      console.error(
+        "Follow:",
+        error
+      );
+
+      showMessage(
+        "Gagal mengikuti user."
+      );
+
+    } else {
+
+      followingIds.add(
+        followingId
+      );
+
+      button.classList.add(
+        "following"
+      );
+
+      button.textContent =
+        "✓ Following";
+
+      updateFollowingCount();
+
+      showMessage(
+        "Sekarang kamu mengikuti trader ini 🔥"
+      );
+
+    }
+
+  }
+
+
+  button.disabled =
+    false;
+
+}
+
+
+function updateFollowingCount() {
+
+  const element =
+    document.getElementById(
+      "following-count"
+    );
+
+
+  if (element) {
+
+    element.textContent =
+      formatNumber(
+        followingIds.size
+      );
+
+  }
+
+}
+
+
+/* =====================================================
+   COMMENTS
+===================================================== */
+
+async function loadComments(
+  post
+) {
 
   const {
     data,
@@ -1590,9 +2125,10 @@ async function loadComments(
       .from("community_comments")
       .select(`
         id,
+        user_id,
         content,
         created_at,
-        user_id,
+
         profiles (
           username,
           display_name,
@@ -1601,7 +2137,7 @@ async function loadComments(
       `)
       .eq(
         "post_id",
-        postId
+        post.dataset.id
       )
       .order(
         "created_at",
@@ -1613,7 +2149,10 @@ async function loadComments(
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "Comments:",
+      error
+    );
 
     return;
 
@@ -1621,7 +2160,7 @@ async function loadComments(
 
 
   const list =
-    postElement.querySelector(
+    post.querySelector(
       ".comments-list"
     );
 
@@ -1635,6 +2174,7 @@ async function loadComments(
             comment.profiles ||
             {};
 
+
           return `
 
             <div class="comment">
@@ -1643,7 +2183,12 @@ async function loadComments(
 
                 ${
                   p.avatar_url
-                    ? `<img src="${escapeHTML(p.avatar_url)}" alt="">`
+                    ? `
+                      <img
+                        src="${escapeHTML(p.avatar_url)}"
+                        alt=""
+                      >
+                    `
                     : "👤"
                 }
 
@@ -1676,12 +2221,12 @@ async function loadComments(
 }
 
 
-/* =========================
+/* =====================================================
    SEND COMMENT
-========================= */
+===================================================== */
 
 async function sendComment(
-  postElement
+  post
 ) {
 
   if (!currentUser) {
@@ -1695,7 +2240,7 @@ async function sendComment(
 
 
   const input =
-    postElement.querySelector(
+    post.querySelector(
       ".comment-input"
     );
 
@@ -1709,7 +2254,7 @@ async function sendComment(
 
 
   const button =
-    postElement.querySelector(
+    post.querySelector(
       ".comment-send"
     );
 
@@ -1726,7 +2271,7 @@ async function sendComment(
       .insert({
 
         post_id:
-          postElement.dataset.id,
+          post.dataset.id,
 
         user_id:
           currentUser.id,
@@ -1743,7 +2288,10 @@ async function sendComment(
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "Comment:",
+      error
+    );
 
     showMessage(
       "Komentar gagal dikirim."
@@ -1757,12 +2305,12 @@ async function sendComment(
   input.value = "";
 
   await loadComments(
-    postElement
+    post
   );
 
 
   const count =
-    postElement.querySelector(
+    post.querySelector(
       ".comment-btn span"
     );
 
@@ -1784,16 +2332,16 @@ async function sendComment(
 }
 
 
-/* =========================
+/* =====================================================
    SHARE
-========================= */
+===================================================== */
 
 async function sharePost(
-  postElement
+  post
 ) {
 
   const url =
-    `${window.location.origin}${window.location.pathname}#post-${postElement.dataset.id}`;
+    `${window.location.origin}${window.location.pathname}#post-${post.dataset.id}`;
 
 
   try {
@@ -1837,9 +2385,9 @@ async function sharePost(
 }
 
 
-/* =========================
+/* =====================================================
    POST EVENTS
-========================= */
+===================================================== */
 
 function attachPostEvents(
   post
@@ -1849,6 +2397,7 @@ function attachPostEvents(
     post.querySelector(
       ".like-btn"
     );
+
 
   like?.addEventListener(
     "click",
@@ -1864,6 +2413,7 @@ function attachPostEvents(
       ".comment-btn"
     );
 
+
   comment?.addEventListener(
     "click",
     async () => {
@@ -1872,6 +2422,7 @@ function attachPostEvents(
         post.querySelector(
           ".comments"
         );
+
 
       box.classList.toggle(
         "show"
@@ -1899,6 +2450,7 @@ function attachPostEvents(
       ".comment-send"
     );
 
+
   send?.addEventListener(
     "click",
     () =>
@@ -1912,6 +2464,7 @@ function attachPostEvents(
     post.querySelector(
       ".comment-input"
     );
+
 
   commentInput?.addEventListener(
     "keydown",
@@ -1939,6 +2492,7 @@ function attachPostEvents(
       ".share-btn"
     );
 
+
   share?.addEventListener(
     "click",
     () =>
@@ -1947,12 +2501,27 @@ function attachPostEvents(
       )
   );
 
+
+  const follow =
+    post.querySelector(
+      ".follow-btn"
+    );
+
+
+  follow?.addEventListener(
+    "click",
+    () =>
+      toggleFollow(
+        follow
+      )
+  );
+
 }
 
 
-/* =========================
-   FILTER
-========================= */
+/* =====================================================
+   TABS
+===================================================== */
 
 document
   .querySelectorAll(
@@ -1976,65 +2545,17 @@ document
                 )
             );
 
+
           tab.classList.add(
             "active"
           );
 
 
-          const filter =
+          currentFilter =
             tab.dataset.filter;
 
 
-          let filtered =
-            [...allPosts];
-
-
-          if (
-            filter ===
-            "trending"
-          ) {
-
-            filtered.sort(
-              (
-                a,
-                b
-              ) =>
-                (
-                  b.community_likes?.length ||
-                  0
-                ) -
-                (
-                  a.community_likes?.length ||
-                  0
-                )
-            );
-
-          }
-
-
-          if (
-            [
-              "analysis",
-              "education",
-              "discussion"
-            ].includes(
-              filter
-            )
-          ) {
-
-            filtered =
-              filtered.filter(
-                post =>
-                  post.post_type ===
-                  filter
-              );
-
-          }
-
-
-          renderFeed(
-            filtered
-          );
+          renderCurrentFeed();
 
         }
       );
@@ -2043,9 +2564,9 @@ document
   );
 
 
-/* =========================
+/* =====================================================
    THEME
-========================= */
+===================================================== */
 
 document
   .getElementById(
@@ -2068,14 +2589,15 @@ document
   );
 
 
-/* =========================
+/* =====================================================
    REALTIME
-========================= */
+===================================================== */
 
 supabase
   .channel(
-    "community-live"
+    "nextra-community-v10"
   )
+
   .on(
     "postgres_changes",
     {
@@ -2083,13 +2605,15 @@ supabase
       schema:"public",
       table:"community_posts"
     },
-    () => {
+    async () => {
 
-      loadFeed();
-      loadStats();
+      await loadFeed();
+
+      await loadStats();
 
     }
   )
+
   .on(
     "postgres_changes",
     {
@@ -2097,12 +2621,13 @@ supabase
       schema:"public",
       table:"community_likes"
     },
-    () => {
+    async () => {
 
-      loadFeed();
+      await loadFeed();
 
     }
   )
+
   .on(
     "postgres_changes",
     {
@@ -2110,27 +2635,63 @@ supabase
       schema:"public",
       table:"community_comments"
     },
-    () => {
+    async () => {
 
-      loadFeed();
+      await loadFeed();
 
     }
   )
+
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"follows"
+    },
+    async () => {
+
+      await loadFollowing();
+
+      await loadFeed();
+
+    }
+  )
+
   .subscribe();
 
 
-/* =========================
+/* =====================================================
    INIT
-========================= */
+===================================================== */
 
 async function init() {
 
-  await loadAuth();
+  try {
 
-  await Promise.all([
-    loadFeed(),
-    loadStats()
-  ]);
+    await loadAuth();
+
+    await Promise.all([
+      loadFeed(),
+      loadStats()
+    ]);
+
+  } catch (
+    error
+  ) {
+
+    console.error(
+      "Community init:",
+      error
+    );
+
+    feed.innerHTML = `
+      <div class="empty-feed">
+        Community gagal dimuat.
+      </div>
+    `;
+
+  }
 
 }
 
