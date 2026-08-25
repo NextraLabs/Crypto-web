@@ -30,344 +30,792 @@
   <style>
 
     /* =====================================================
+       NEXTRA PROFILE UPGRADE
+    ====================================================== */
+
+    :root {
+      --nx-green: #42f5a7;
+      --nx-blue: #20cfff;
+      --nx-bg: #070909;
+      --nx-card: rgba(255,255,255,.035);
+      --nx-border: rgba(255,255,255,.08);
+      --nx-text: #f5f7f8;
+      --nx-muted: rgba(255,255,255,.52);
+    }
+
+    body {
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(66,245,167,.08),
+          transparent 35%
+        ),
+        var(--nx-bg);
+    }
+
+    .profile-page {
+      padding-bottom: 110px;
+    }
+
+    /* =====================================================
+       TOPBAR
+    ====================================================== */
+
+    .profile-topbar {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .profile-topbar h1 {
+      margin:0;
+      font-size:28px;
+      letter-spacing:-.8px;
+    }
+
+    .profile-topbar p {
+      margin:5px 0 0;
+      color:var(--nx-muted);
+      font-size:13px;
+    }
+
+    .profile-back {
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--nx-border);
+      border-radius:14px;
+      color:inherit;
+      text-decoration:none;
+      background:rgba(255,255,255,.035);
+      font-size:20px;
+    }
+
+    /* =====================================================
+       HERO PROFILE
+    ====================================================== */
+
+    .profile-hero {
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--nx-border);
+      border-radius:28px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(66,245,167,.08),
+          rgba(32,207,255,.025) 45%,
+          rgba(255,255,255,.025)
+        );
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.28);
+    }
+
+    .profile-hero::before {
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-100px;
+      top:-120px;
+      border-radius:50%;
+      background:rgba(66,245,167,.09);
+      filter:blur(20px);
+    }
+
+    .profile-cover {
+      height:115px;
+      position:relative;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(66,245,167,.15),
+          rgba(32,207,255,.08),
+          transparent
+        );
+    }
+
+    .profile-cover-grid {
+      position:absolute;
+      inset:0;
+      opacity:.3;
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.045) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.045) 1px,
+          transparent 1px
+        );
+      background-size:24px 24px;
+    }
+
+    .profile-avatar-wrap {
+      position:absolute;
+      left:22px;
+      bottom:-48px;
+      z-index:2;
+    }
+
+    .profile-avatar {
+      width:96px;
+      height:96px;
+      padding:0;
+      border-radius:50%;
+      border:4px solid #070909;
+      overflow:hidden;
+      position:relative;
+      display:grid;
+      place-items:center;
+      background:
+        linear-gradient(
+          135deg,
+          #13221c,
+          #0d1618
+        );
+      color:var(--nx-green);
+      font-size:32px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:
+        0 12px 35px rgba(0,0,0,.4);
+    }
+
+    .profile-avatar img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:none;
+    }
+
+    .profile-avatar img.visible {
+      display:block;
+    }
+
+    .avatar-camera {
+      position:absolute;
+      right:2px;
+      bottom:2px;
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      border:2px solid #070909;
+      background:var(--nx-green);
+      color:#06100b;
+      font-size:13px;
+    }
+
+    .profile-info {
+      padding:62px 22px 22px;
+    }
+
+    .profile-name-row {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+    }
+
+    .profile-name {
+      margin:0;
+      font-size:23px;
+      letter-spacing:-.5px;
+    }
+
+    .profile-username {
+      margin:5px 0 0;
+      color:var(--nx-muted);
+      font-size:13px;
+    }
+
+    .profile-status {
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(66,245,167,.08);
+      border:1px solid rgba(66,245,167,.16);
+      color:var(--nx-green);
+      font-size:11px;
+      white-space:nowrap;
+    }
+
+    .profile-status i {
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--nx-green);
+      box-shadow:0 0 10px var(--nx-green);
+    }
+
+    .profile-edit-btn {
+      margin-top:18px;
+      width:100%;
+      height:45px;
+      border:1px solid var(--nx-border);
+      border-radius:13px;
+      background:rgba(255,255,255,.045);
+      color:inherit;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    /* =====================================================
+       EDIT
+    ====================================================== */
+
+    .edit-panel {
+      margin-top:14px;
+      padding:18px;
+      border:1px solid var(--nx-border);
+      border-radius:22px;
+      background:var(--nx-card);
+    }
+
+    .edit-panel label {
+      display:block;
+      margin:13px 0 7px;
+      font-size:12px;
+      color:var(--nx-muted);
+    }
+
+    .edit-panel input {
+      width:100%;
+      box-sizing:border-box;
+      height:46px;
+      padding:0 13px;
+      border:1px solid var(--nx-border);
+      border-radius:13px;
+      outline:none;
+      background:rgba(255,255,255,.035);
+      color:inherit;
+    }
+
+    .edit-panel input:focus {
+      border-color:rgba(66,245,167,.5);
+    }
+
+    .edit-actions {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:9px;
+      margin-top:16px;
+    }
+
+    .edit-actions button {
+      height:44px;
+      border-radius:12px;
+      border:1px solid var(--nx-border);
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .edit-cancel {
+      background:rgba(255,255,255,.035);
+      color:inherit;
+    }
+
+    .edit-save {
+      background:var(--nx-green);
+      color:#06100b;
+      border:0 !important;
+    }
+
+    /* =====================================================
+       LEVEL
+    ====================================================== */
+
+    .level-card {
+      margin-top:14px;
+      padding:20px;
+      border-radius:22px;
+      border:1px solid var(--nx-border);
+      background:var(--nx-card);
+    }
+
+    .level-head {
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+    }
+
+    .mini-label {
+      display:block;
+      color:var(--nx-muted);
+      font-size:10px;
+      letter-spacing:1.3px;
+      font-weight:700;
+      margin-bottom:6px;
+    }
+
+    .level-head h3 {
+      margin:0;
+      font-size:18px;
+    }
+
+    .level-badge {
+      color:var(--nx-green);
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .xp-info {
+      display:flex;
+      justify-content:space-between;
+      margin-top:20px;
+      color:var(--nx-muted);
+      font-size:11px;
+    }
+
+    .xp-track {
+      height:7px;
+      margin-top:8px;
+      overflow:hidden;
+      border-radius:20px;
+      background:rgba(255,255,255,.07);
+    }
+
+    .xp-progress {
+      height:100%;
+      width:12%;
+      border-radius:20px;
+      background:
+        linear-gradient(
+          90deg,
+          var(--nx-green),
+          var(--nx-blue)
+        );
+      box-shadow:0 0 14px rgba(66,245,167,.25);
+    }
+
+    .level-desc {
+      margin:12px 0 0;
+      color:var(--nx-muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    /* =====================================================
+       PLAN
+    ====================================================== */
+
+    .plan-card {
+      margin-top:14px;
+      padding:17px;
+      display:flex;
+      align-items:center;
+      gap:13px;
+      border:1px solid rgba(66,245,167,.14);
+      border-radius:20px;
+      background:
+        linear-gradient(
+          120deg,
+          rgba(66,245,167,.07),
+          rgba(255,255,255,.025)
+        );
+    }
+
+    .plan-icon {
+      width:43px;
+      height:43px;
+      display:grid;
+      place-items:center;
+      flex:0 0 43px;
+      border-radius:13px;
+      background:rgba(66,245,167,.1);
+      color:var(--nx-green);
+      font-weight:900;
+    }
+
+    .plan-content {
+      min-width:0;
+      flex:1;
+    }
+
+    .plan-content strong {
+      display:block;
+      font-size:14px;
+    }
+
+    .plan-content span:last-child {
+      display:block;
+      margin-top:4px;
+      color:var(--nx-muted);
+      font-size:11px;
+    }
+
+    .plan-button {
+      padding:9px 12px;
+      border:0;
+      border-radius:10px;
+      background:var(--nx-green);
+      color:#06100b;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    /* =====================================================
+       STATS
+    ====================================================== */
+
+    .stats-grid {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:9px;
+      margin-top:14px;
+    }
+
+    .stat-card {
+      padding:17px 8px;
+      text-align:center;
+      border:1px solid var(--nx-border);
+      border-radius:18px;
+      background:var(--nx-card);
+    }
+
+    .stat-card strong {
+      display:block;
+      font-size:19px;
+    }
+
+    .stat-card span {
+      display:block;
+      margin-top:5px;
+      color:var(--nx-muted);
+      font-size:10px;
+    }
+
+    /* =====================================================
+       SECTION
+    ====================================================== */
+
+    .nx-section {
+      margin-top:25px;
+    }
+
+    .nx-section-title {
+      margin-bottom:10px;
+      font-size:10px;
+      letter-spacing:1.5px;
+      color:var(--nx-muted);
+      font-weight:800;
+    }
+
+    /* =====================================================
+       ACHIEVEMENTS
+    ====================================================== */
+
+    .achievement-grid {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:9px;
+    }
+
+    .achievement {
+      padding:16px;
+      border:1px solid var(--nx-border);
+      border-radius:18px;
+      background:var(--nx-card);
+    }
+
+    .achievement.active {
+      border-color:rgba(66,245,167,.2);
+      background:rgba(66,245,167,.045);
+    }
+
+    .achievement-icon {
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      margin-bottom:12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.05);
+      font-size:17px;
+    }
+
+    .achievement.active .achievement-icon {
+      background:rgba(66,245,167,.1);
+      color:var(--nx-green);
+    }
+
+    .achievement strong {
+      display:block;
+      font-size:13px;
+    }
+
+    .achievement span {
+      display:block;
+      margin-top:4px;
+      color:var(--nx-muted);
+      font-size:10px;
+      line-height:1.4;
+    }
+
+    /* =====================================================
+       ITEMS
+    ====================================================== */
+
+    .profile-list {
+      overflow:hidden;
+      border:1px solid var(--nx-border);
+      border-radius:20px;
+      background:var(--nx-card);
+    }
+
+    .profile-item {
+      width:100%;
+      min-height:67px;
+      padding:13px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      box-sizing:border-box;
+      border:0;
+      border-bottom:1px solid rgba(255,255,255,.055);
+      background:transparent;
+      color:inherit;
+      text-decoration:none;
+      text-align:left;
+      cursor:pointer;
+    }
+
+    .profile-item:last-child {
+      border-bottom:0;
+    }
+
+    .profile-item:hover {
+      background:rgba(255,255,255,.025);
+    }
+
+    .item-left {
+      min-width:0;
+    }
+
+    .item-title {
+      display:block;
+      font-size:13px;
+      font-weight:650;
+    }
+
+    .item-subtitle {
+      display:block;
+      margin-top:4px;
+      color:var(--nx-muted);
+      font-size:11px;
+    }
+
+    .item-arrow {
+      color:rgba(255,255,255,.35);
+      font-size:21px;
+    }
+
+    .active-check {
+      color:var(--nx-green);
+      font-weight:800;
+    }
+
+    .logout-title {
+      color:#ff7070;
+    }
+
+    /* =====================================================
        LANGUAGE MODAL
     ====================================================== */
 
     .language-modal {
-
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-
-      display: none;
-
-      align-items: flex-end;
-      justify-content: center;
-
-      background: rgba(0,0,0,.72);
-
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-
-      padding: 16px;
-
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:flex-end;
+      justify-content:center;
+      padding:15px;
+      background:rgba(0,0,0,.72);
+      backdrop-filter:blur(12px);
     }
-
 
     .language-modal.show {
-
-      display: flex;
-
+      display:flex;
     }
-
 
     .language-panel {
-
-      width: 100%;
-      max-width: 520px;
-
-      max-height: 82vh;
-
-      overflow-y: auto;
-
-      background: #0b0f11;
-
-      border: 1px solid
-        rgba(255,255,255,.08);
-
-      border-radius: 24px;
-
-      padding: 20px;
-
-      box-shadow:
-        0 25px 70px rgba(0,0,0,.55);
-
-      animation:
-        languagePanelIn .22s ease;
-
+      width:100%;
+      max-width:520px;
+      max-height:82vh;
+      overflow:auto;
+      padding:19px;
+      box-sizing:border-box;
+      border:1px solid var(--nx-border);
+      border-radius:25px;
+      background:#0b0f11;
+      box-shadow:0 25px 80px rgba(0,0,0,.55);
+      animation:languageIn .22s ease;
     }
 
-
-    @keyframes languagePanelIn {
-
+    @keyframes languageIn {
       from {
-
-        transform:
-          translateY(30px);
-
-        opacity: 0;
-
+        transform:translateY(30px);
+        opacity:0;
       }
-
       to {
-
-        transform:
-          translateY(0);
-
-        opacity: 1;
-
+        transform:translateY(0);
+        opacity:1;
       }
-
     }
 
-
-    .language-panel-header {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      margin-bottom: 18px;
-
+    .language-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:15px;
     }
 
-
-    .language-panel-header h3 {
-
-      margin: 0;
-
-      font-size: 20px;
-
+    .language-header h3 {
+      margin:0;
+      font-size:19px;
     }
-
 
     .language-close {
-
-      width: 38px;
-      height: 38px;
-
-      border: 0;
-
-      border-radius: 50%;
-
-      background:
-        rgba(255,255,255,.07);
-
-      color: inherit;
-
-      font-size: 22px;
-
-      cursor: pointer;
-
+      width:37px;
+      height:37px;
+      border:0;
+      border-radius:50%;
+      background:rgba(255,255,255,.07);
+      color:inherit;
+      font-size:21px;
     }
-
 
     .language-list {
-
-      display: grid;
-
-      gap: 8px;
-
+      display:grid;
+      gap:8px;
     }
-
 
     .language-option {
-
-      width: 100%;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 13px;
-
-      padding: 13px;
-
-      border: 1px solid
-        rgba(255,255,255,.06);
-
-      border-radius: 15px;
-
-      background:
-        rgba(255,255,255,.025);
-
-      color: inherit;
-
-      text-align: left;
-
-      cursor: pointer;
-
-      transition: .18s ease;
-
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:15px;
+      background:rgba(255,255,255,.025);
+      color:inherit;
+      text-align:left;
     }
-
-
-    .language-option:hover {
-
-      background:
-        rgba(255,255,255,.07);
-
-    }
-
 
     .language-option.selected {
-
-      border-color:
-        rgba(66,245,167,.65);
-
-      background:
-        rgba(66,245,167,.08);
-
+      border-color:rgba(66,245,167,.55);
+      background:rgba(66,245,167,.07);
     }
-
 
     .language-flag {
-
-      width: 38px;
-      height: 38px;
-
-      display: grid;
-
-      place-items: center;
-
-      flex: 0 0 38px;
-
-      border-radius: 11px;
-
-      background:
-        rgba(255,255,255,.06);
-
-      font-size: 20px;
-
+      width:38px;
+      height:38px;
+      display:grid;
+      place-items:center;
+      border-radius:11px;
+      background:rgba(255,255,255,.06);
+      font-size:19px;
     }
-
 
     .language-info {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 3px;
-
-      min-width: 0;
-
+      display:flex;
+      flex-direction:column;
+      gap:3px;
     }
-
 
     .language-info strong {
-
-      font-size: 14px;
-
+      font-size:13px;
     }
-
 
     .language-info span {
-
-      font-size: 12px;
-
-      opacity: .55;
-
+      color:var(--nx-muted);
+      font-size:10px;
     }
-
 
     .language-check {
-
-      margin-left: auto;
-
-      font-size: 18px;
-
-      opacity: 0;
-
+      margin-left:auto;
+      opacity:0;
+      color:var(--nx-green);
     }
 
-
-    .language-option.selected
-    .language-check {
-
-      opacity: 1;
-
+    .language-option.selected .language-check {
+      opacity:1;
     }
-
 
     /* =====================================================
        AUTH LOADING
     ====================================================== */
 
     .auth-loading {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 10000;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      background: #070909;
-
-      color: var(--text, #fff);
-
-      font-size: 12px;
-
-      letter-spacing: .4px;
-
+      position:fixed;
+      inset:0;
+      z-index:10000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#070909;
+      color:#fff;
     }
-
 
     .auth-loading.hidden {
-
-      display: none;
-
+      display:none;
     }
-
 
     .auth-loading-inner {
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      gap: 12px;
-
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      color:rgba(255,255,255,.6);
+      font-size:12px;
     }
-
 
     .auth-spinner {
-
-      width: 28px;
-      height: 28px;
-
-      border: 2px solid
-        rgba(255,255,255,.1);
-
-      border-top-color:
-        #42f5a7;
-
-      border-radius: 50%;
-
-      animation:
-        authSpin .7s linear infinite;
-
+      width:28px;
+      height:28px;
+      border:2px solid rgba(255,255,255,.1);
+      border-top-color:var(--nx-green);
+      border-radius:50%;
+      animation:spin .7s linear infinite;
     }
 
-
-    @keyframes authSpin {
-
+    @keyframes spin {
       to {
+        transform:rotate(360deg);
+      }
+    }
 
-        transform:
-          rotate(360deg);
+    .profile-footer {
+      margin:30px 0 10px;
+      text-align:center;
+      color:rgba(255,255,255,.25);
+      font-size:10px;
+    }
 
+    @media (min-width:700px) {
+
+      .profile-page {
+        max-width:760px;
+        margin:auto;
       }
 
-    }
-
-
-    @media (min-width: 700px) {
-
       .language-modal {
+        align-items:center;
+      }
 
-        align-items: center;
-
+      .achievement-grid {
+        grid-template-columns:repeat(4,1fr);
       }
 
     }
@@ -393,50 +841,42 @@
 
     <div class="auth-spinner"></div>
 
-    <span>
-      Checking account...
-    </span>
+    <span>Checking account...</span>
 
   </div>
 
 </div>
 
 
-
 <main
-  class="container"
+  class="container profile-page"
   id="profilePage"
   hidden
 >
 
 
-  <!-- =====================================================
+  <!-- ===================================================
        HEADER
-  ====================================================== -->
+  ==================================================== -->
 
-  <header class="topbar">
+  <header class="profile-topbar">
 
     <div>
 
-      <h1 class="title">
-
+      <h1>
         Profile<span class="dot">.</span>
-
       </h1>
 
-      <p class="subtitle">
-
+      <p>
         Your NEXTRA identity
-
       </p>
 
     </div>
 
-
     <a
       href="index.html"
-      class="icon-btn"
-      aria-label="Back to Home"
+      class="profile-back"
+      aria-label="Back"
     >
       ←
     </a>
@@ -444,59 +884,62 @@
   </header>
 
 
+  <!-- ===================================================
+       PROFILE HERO
+  ==================================================== -->
 
-  <!-- =====================================================
-       PROFILE CARD
-  ====================================================== -->
-
-  <section class="profile-card">
-
+  <section class="profile-hero">
 
     <div class="profile-cover">
 
-      <div class="profile-glow"></div>
+      <div class="profile-cover-grid"></div>
 
+      <div class="profile-avatar-wrap">
 
-      <button
-        class="profile-avatar"
-        id="avatarButton"
-        type="button"
-        aria-label="Change profile photo"
-      >
-
-        <span id="avatarInitial">
-          N
-        </span>
-
-
-        <img
-          id="avatarImage"
-          alt="Profile photo"
+        <button
+          class="profile-avatar"
+          id="avatarButton"
+          type="button"
+          aria-label="Change profile photo"
         >
 
+          <span id="avatarInitial">
+            N
+          </span>
 
-        <span class="avatar-camera">
-          📷
-        </span>
+          <img
+            id="avatarImage"
+            alt="Profile photo"
+          >
 
-      </button>
+          <span class="avatar-camera">
+            📷
+          </span>
+
+        </button>
+
+      </div>
 
     </div>
 
 
-
-    <div class="profile-main">
-
+    <div class="profile-info">
 
       <div class="profile-name-row">
 
         <div>
 
-          <h2 id="profileName">
+          <h2
+            class="profile-name"
+            id="profileName"
+          >
             NEXTRA User
           </h2>
 
-          <p id="profileUsername">
+          <p
+            class="profile-username"
+            id="profileUsername"
+          >
             @nextra_user
           </p>
 
@@ -514,7 +957,6 @@
       </div>
 
 
-
       <button
         class="profile-edit-btn"
         id="editProfileBtn"
@@ -523,17 +965,10 @@
         ✏️ Edit Profile
       </button>
 
-
     </div>
-
 
   </section>
 
-
-
-  <!-- =====================================================
-       AVATAR INPUT
-  ====================================================== -->
 
   <input
     type="file"
@@ -543,87 +978,70 @@
   >
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        EDIT PROFILE
-  ====================================================== -->
+  ==================================================== -->
 
   <section
-    class="profile-section"
+    class="edit-panel"
     id="editProfilePanel"
     hidden
   >
 
-    <div class="section-label">
-      EDIT PROFILE
-    </div>
+    <label for="nameInput">
+      Display name
+    </label>
+
+    <input
+      id="nameInput"
+      type="text"
+      maxlength="30"
+      placeholder="Your name"
+    >
 
 
-    <div class="profile-edit-card">
+    <label for="usernameInput">
+      Username
+    </label>
+
+    <input
+      id="usernameInput"
+      type="text"
+      maxlength="20"
+      placeholder="nextra_user"
+    >
 
 
-      <label for="nameInput">
-        Display name
-      </label>
+    <div class="edit-actions">
 
-
-      <input
-        id="nameInput"
-        type="text"
-        maxlength="30"
-        placeholder="Your name"
+      <button
+        id="cancelProfileBtn"
+        class="edit-cancel"
+        type="button"
       >
+        Cancel
+      </button>
 
-
-      <label for="usernameInput">
-        Username
-      </label>
-
-
-      <input
-        id="usernameInput"
-        type="text"
-        maxlength="20"
-        placeholder="nextra_user"
+      <button
+        id="saveProfileBtn"
+        class="edit-save"
+        type="button"
       >
-
-
-      <div class="profile-edit-actions">
-
-
-        <button
-          id="cancelProfileBtn"
-          type="button"
-          class="profile-secondary-btn"
-        >
-          Cancel
-        </button>
-
-
-        <button
-          id="saveProfileBtn"
-          type="button"
-          class="profile-primary-btn"
-        >
-          Save changes
-        </button>
-
-
-      </div>
+        Save changes
+      </button>
 
     </div>
 
   </section>
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        TRADER LEVEL
-  ====================================================== -->
+  ==================================================== -->
 
-  <section class="trader-level-card">
+  <section class="level-card">
 
-    <div class="trader-level-top">
+    <div class="level-head">
 
       <div>
 
@@ -637,15 +1055,14 @@
 
       </div>
 
-
-      <div class="level-number">
+      <div class="level-badge">
         LVL 01
       </div>
 
     </div>
 
 
-    <div class="xp-row">
+    <div class="xp-info">
 
       <span>
         120 XP
@@ -660,32 +1077,27 @@
 
     <div class="xp-track">
 
-      <div
-        class="xp-progress"
-        style="width:12%"
-      ></div>
+      <div class="xp-progress"></div>
 
     </div>
 
 
-    <p class="xp-description">
+    <p class="level-desc">
       Keep exploring NEXTRA to unlock your next level.
     </p>
 
   </section>
 
 
-
-  <!-- =====================================================
-       ACCOUNT PLAN
-  ====================================================== -->
+  <!-- ===================================================
+       PLAN
+  ==================================================== -->
 
   <section class="plan-card">
 
     <div class="plan-icon">
       N
     </div>
-
 
     <div class="plan-content">
 
@@ -703,7 +1115,6 @@
 
     </div>
 
-
     <button
       class="plan-button"
       type="button"
@@ -714,15 +1125,13 @@
   </section>
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        STATS
-  ====================================================== -->
+  ==================================================== -->
 
-  <section class="profile-stats">
+  <section class="stats-grid">
 
-
-    <div class="profile-stat">
+    <div class="stat-card">
 
       <strong id="watchlistCount">
         0
@@ -735,7 +1144,7 @@
     </div>
 
 
-    <div class="profile-stat">
+    <div class="stat-card">
 
       <strong id="alertCount">
         0
@@ -748,10 +1157,10 @@
     </div>
 
 
-    <div class="profile-stat">
+    <div class="stat-card">
 
       <strong id="marketCount">
-        0
+        Live
       </strong>
 
       <span>
@@ -760,26 +1169,23 @@
 
     </div>
 
-
   </section>
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        ACHIEVEMENTS
-  ====================================================== -->
+  ==================================================== -->
 
-  <section class="profile-section">
+  <section class="nx-section">
 
-    <div class="section-label">
+    <div class="nx-section-title">
       ACHIEVEMENTS
     </div>
 
 
     <div class="achievement-grid">
 
-
-      <div class="achievement-card active">
+      <div class="achievement active">
 
         <div class="achievement-icon">
           ◈
@@ -796,7 +1202,7 @@
       </div>
 
 
-      <div class="achievement-card">
+      <div class="achievement">
 
         <div class="achievement-icon">
           ⭐
@@ -813,7 +1219,7 @@
       </div>
 
 
-      <div class="achievement-card">
+      <div class="achievement">
 
         <div class="achievement-icon">
           ⚡
@@ -830,7 +1236,7 @@
       </div>
 
 
-      <div class="achievement-card">
+      <div class="achievement">
 
         <div class="achievement-icon">
           🔥
@@ -846,322 +1252,300 @@
 
       </div>
 
-
     </div>
 
   </section>
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        ACCOUNT
-  ====================================================== -->
+  ==================================================== -->
 
-  <section class="profile-section">
+  <section class="nx-section">
 
-
-    <div class="section-label">
+    <div class="nx-section-title">
       ACCOUNT
     </div>
 
 
-    <div class="profile-item">
+    <div class="profile-list">
 
-      <div>
+      <div class="profile-item">
 
-        <strong>
-          Email
-        </strong>
+        <div class="item-left">
 
-        <span id="accountEmail">
-          Loading...
+          <span class="item-title">
+            Email
+          </span>
+
+          <span
+            class="item-subtitle"
+            id="accountEmail"
+          >
+            Loading...
+          </span>
+
+        </div>
+
+        <span class="item-arrow">
+          ›
         </span>
 
       </div>
 
 
-      <span class="profile-arrow">
-        ›
-      </span>
+      <div class="profile-item">
+
+        <div class="item-left">
+
+          <span class="item-title">
+            Account Status
+          </span>
+
+          <span class="item-subtitle">
+            Active account
+          </span>
+
+        </div>
+
+        <span class="active-check">
+          ✓
+        </span>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="profile-item"
+        id="logoutButton"
+      >
+
+        <div class="item-left">
+
+          <span class="item-title logout-title">
+            🚪 Logout
+          </span>
+
+          <span class="item-subtitle">
+            Keluar dari akun NEXTRA
+          </span>
+
+        </div>
+
+        <span class="item-arrow">
+          ›
+        </span>
+
+      </button>
 
     </div>
-
-
-    <div class="profile-item">
-
-      <div>
-
-        <strong>
-          Account Status
-        </strong>
-
-        <span class="up">
-          Active account
-        </span>
-
-      </div>
-
-
-      <span class="profile-check">
-        ✓
-      </span>
-
-    </div>
-
-
-    <button
-      type="button"
-      class="profile-item"
-      id="logoutButton"
-      style="
-        width:100%;
-        border:0;
-        color:inherit;
-        text-align:left;
-        font:inherit;
-        cursor:pointer;
-      "
-    >
-
-      <div>
-
-        <strong style="color:#ff6b6b;">
-          🚪 Logout
-        </strong>
-
-        <span>
-          Keluar dari akun NEXTRA
-        </span>
-
-      </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
-    </button>
-
 
   </section>
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        QUICK ACTIONS
-  ====================================================== -->
+  ==================================================== -->
 
-  <section class="profile-section">
+  <section class="nx-section">
 
-
-    <div class="section-label">
+    <div class="nx-section-title">
       QUICK ACTIONS
     </div>
 
 
-    <a
-      href="markets.html"
-      class="profile-item"
-    >
+    <div class="profile-list">
 
-      <div>
+      <a
+        href="markets.html"
+        class="profile-item"
+      >
 
-        <strong>
-          ⭐ Watchlist
-        </strong>
+        <div class="item-left">
 
-        <span>
-          Manage favorite assets
+          <span class="item-title">
+            ⭐ Watchlist
+          </span>
+
+          <span class="item-subtitle">
+            Manage favorite assets
+          </span>
+
+        </div>
+
+        <span class="item-arrow">
+          ›
         </span>
 
-      </div>
+      </a>
 
 
-      <span class="profile-arrow">
-        ›
-      </span>
+      <a
+        href="futures.html"
+        class="profile-item"
+      >
 
-    </a>
+        <div class="item-left">
 
+          <span class="item-title">
+            ⚡ Futures
+          </span>
 
-    <a
-      href="futures.html"
-      class="profile-item"
-    >
+          <span class="item-subtitle">
+            Binance Futures market
+          </span>
 
-      <div>
+        </div>
 
-        <strong>
-          ⚡ Futures
-        </strong>
-
-        <span>
-          Binance Futures market
+        <span class="item-arrow">
+          ›
         </span>
 
-      </div>
+      </a>
 
 
-      <span class="profile-arrow">
-        ›
-      </span>
+      <button
+        type="button"
+        class="profile-item"
+      >
 
-    </a>
+        <div class="item-left">
 
+          <span class="item-title">
+            🔔 Notifications
+          </span>
 
-    <div class="profile-item">
+          <span class="item-subtitle">
+            Manage market alerts
+          </span>
 
-      <div>
+        </div>
 
-        <strong>
-          🔔 Notifications
-        </strong>
-
-        <span>
-          Manage market alerts
+        <span class="item-arrow">
+          ›
         </span>
 
-      </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
+      </button>
 
     </div>
-
 
   </section>
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        PREFERENCES
-  ====================================================== -->
+  ==================================================== -->
 
-  <section class="profile-section">
+  <section class="nx-section">
 
-
-    <div class="section-label">
+    <div class="nx-section-title">
       PREFERENCES
     </div>
 
 
-    <div class="profile-item">
+    <div class="profile-list">
 
-      <div>
+      <button
+        type="button"
+        class="profile-item"
+      >
 
-        <strong>
-          Appearance
-        </strong>
+        <div class="item-left">
 
-        <span>
-          Dark mode
+          <span class="item-title">
+            Appearance
+          </span>
+
+          <span class="item-subtitle">
+            Dark mode
+          </span>
+
+        </div>
+
+        <span class="item-arrow">
+          ◐
         </span>
 
-      </div>
+      </button>
 
 
-      <span>
-        ◐
-      </span>
+      <button
+        type="button"
+        class="profile-item"
+        id="languageButton"
+      >
+
+        <div class="item-left">
+
+          <span class="item-title">
+            Language
+          </span>
+
+          <span
+            class="item-subtitle"
+            id="currentLanguage"
+          >
+            Bahasa Indonesia
+          </span>
+
+        </div>
+
+        <span class="item-arrow">
+          ›
+        </span>
+
+      </button>
 
     </div>
-
-
-
-    <!-- LANGUAGE -->
-
-    <button
-      class="profile-item"
-      id="languageButton"
-      type="button"
-      style="
-        width:100%;
-        border:0;
-        color:inherit;
-        text-align:left;
-        font:inherit;
-        cursor:pointer;
-      "
-    >
-
-      <div>
-
-        <strong>
-          Language
-        </strong>
-
-        <span id="currentLanguage">
-          Bahasa Indonesia
-        </span>
-
-      </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
-    </button>
-
 
   </section>
 
 
-
-  <!-- =====================================================
+  <!-- ===================================================
        ABOUT
-  ====================================================== -->
+  ==================================================== -->
 
-  <section class="profile-section">
+  <section class="nx-section">
 
-
-    <div class="section-label">
+    <div class="nx-section-title">
       ABOUT NEXTRA
     </div>
 
 
-    <div class="profile-item">
+    <div class="profile-list">
 
+      <div class="profile-item">
 
-      <div>
+        <div class="item-left">
 
-        <strong>
-          NEXTRA
-        </strong>
+          <span class="item-title">
+            NEXTRA
+          </span>
 
-        <span>
-          Your Market. Your Intelligence.
+          <span class="item-subtitle">
+            Your Market. Your Intelligence.
+          </span>
+
+        </div>
+
+        <span class="item-subtitle">
+          v1.0
         </span>
 
       </div>
 
-
-      <span>
-        v1.0
-      </span>
-
     </div>
-
 
   </section>
 
 
-
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-
   <div class="profile-footer">
-
     NEXTRA © 2026
-
   </div>
 
 
 </main>
-
 
 
 <!-- =====================================================
@@ -1174,22 +1558,18 @@
   aria-hidden="true"
 >
 
-
   <div class="language-panel">
 
-
-    <div class="language-panel-header">
+    <div class="language-header">
 
       <h3>
         🌍 Language
       </h3>
 
-
       <button
         type="button"
         class="language-close"
         id="languageClose"
-        aria-label="Close"
       >
         ×
       </button>
@@ -1202,12 +1582,9 @@
       id="languageList"
     ></div>
 
-
   </div>
 
-
 </div>
-
 
 
 <!-- =====================================================
@@ -1215,7 +1592,6 @@
 ====================================================== -->
 
 <div id="bottom-nav"></div>
-
 
 
 <!-- =====================================================
@@ -1233,9 +1609,8 @@
 <script src="js/features/profile-stats.js"></script>
 
 
-
 <!-- =====================================================
-     NEXTRA PROFILE + SUPABASE
+     NEXTRA PROFILE LOGIC
 ====================================================== -->
 
 <script>
@@ -1246,16 +1621,14 @@
 
 
   /* =====================================================
-     SUPABASE CONFIG
+     SUPABASE
   ====================================================== */
 
   const SUPABASE_URL =
     "https://uvtbntwgooxqjbyjkvkd.supabase.co";
 
-
   const SUPABASE_KEY =
     "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
-
 
   const supabaseClient =
     window.supabase.createClient(
@@ -1264,113 +1637,95 @@
     );
 
 
-
   /* =====================================================
-     KEYS
+     STORAGE
   ====================================================== */
 
   const AVATAR_KEY =
     "nextra_avatar";
 
-
   const SETTINGS_KEY =
     "nextra_settings";
 
 
-
   /* =====================================================
      ELEMENTS
-  ===================================================== */
+  ====================================================== */
 
   const authLoading =
     document.getElementById(
       "authLoading"
     );
 
-
   const profilePage =
     document.getElementById(
       "profilePage"
     );
-
 
   const nameEl =
     document.getElementById(
       "profileName"
     );
 
-
   const usernameEl =
     document.getElementById(
       "profileUsername"
     );
-
 
   const accountEmail =
     document.getElementById(
       "accountEmail"
     );
 
-
   const avatarInitial =
     document.getElementById(
       "avatarInitial"
     );
-
 
   const avatarImage =
     document.getElementById(
       "avatarImage"
     );
 
-
   const avatarButton =
     document.getElementById(
       "avatarButton"
     );
-
 
   const avatarInput =
     document.getElementById(
       "avatarInput"
     );
 
-
   const editProfileBtn =
     document.getElementById(
       "editProfileBtn"
     );
-
 
   const editProfilePanel =
     document.getElementById(
       "editProfilePanel"
     );
 
-
   const nameInput =
     document.getElementById(
       "nameInput"
     );
-
 
   const usernameInput =
     document.getElementById(
       "usernameInput"
     );
 
-
   const saveProfileBtn =
     document.getElementById(
       "saveProfileBtn"
     );
 
-
   const cancelProfileBtn =
     document.getElementById(
       "cancelProfileBtn"
     );
-
 
   const logoutButton =
     document.getElementById(
@@ -1378,9 +1733,8 @@
     );
 
 
-
   /* =====================================================
-     LANGUAGE ELEMENTS
+     LANGUAGE
   ====================================================== */
 
   const languageButton =
@@ -1388,24 +1742,20 @@
       "languageButton"
     );
 
-
   const languageModal =
     document.getElementById(
       "languageModal"
     );
-
 
   const languageClose =
     document.getElementById(
       "languageClose"
     );
 
-
   const languageList =
     document.getElementById(
       "languageList"
     );
-
 
   const currentLanguage =
     document.getElementById(
@@ -1413,25 +1763,16 @@
     );
 
 
-
   /* =====================================================
-     PROFILE STATE
+     STATE
   ====================================================== */
 
-  let currentUser =
-    null;
-
+  let currentUser = null;
 
   let profile = {
-
-    name:
-      "NEXTRA User",
-
-    username:
-      "nextra_user"
-
+    name: "NEXTRA User",
+    username: "nextra_user"
   };
-
 
 
   /* =====================================================
@@ -1448,9 +1789,7 @@
         ) || "{}"
       );
 
-    }
-
-    catch {
+    } catch {
 
       return {};
 
@@ -1459,76 +1798,50 @@
   }
 
 
-  function saveSettings(
-    settings
-  ) {
+  function saveSettings(settings) {
 
     localStorage.setItem(
       SETTINGS_KEY,
-      JSON.stringify(
-        settings
-      )
+      JSON.stringify(settings)
     );
 
   }
 
 
-
   /* =====================================================
-     LANGUAGE DATA
+     LANGUAGES
   ====================================================== */
 
   const LANGUAGE_DATA = [
 
-    ["id", "🇮🇩", "Bahasa Indonesia", "Bahasa Indonesia"],
-
-    ["en", "🇺🇸", "English", "English"],
-
-    ["es", "🇪🇸", "Español", "Spanish"],
-
-    ["fr", "🇫🇷", "Français", "French"],
-
-    ["de", "🇩🇪", "Deutsch", "German"],
-
-    ["it", "🇮🇹", "Italiano", "Italian"],
-
-    ["pt", "🇵🇹", "Português", "Portuguese"],
-
-    ["pt-BR", "🇧🇷", "Português (Brasil)", "Portuguese Brazil"],
-
-    ["ru", "🇷🇺", "Русский", "Russian"],
-
-    ["zh", "🇨🇳", "简体中文", "Chinese Simplified"],
-
-    ["zh-TW", "🇹🇼", "繁體中文", "Chinese Traditional"],
-
-    ["ja", "🇯🇵", "日本語", "Japanese"],
-
-    ["ko", "🇰🇷", "한국어", "Korean"],
-
-    ["tr", "🇹🇷", "Türkçe", "Turkish"],
-
-    ["vi", "🇻🇳", "Tiếng Việt", "Vietnamese"],
-
-    ["th", "🇹🇭", "ไทย", "Thai"],
-
-    ["ar", "🇸🇦", "العربية", "Arabic"],
-
-    ["hi", "🇮🇳", "हिन्दी", "Hindi"],
-
-    ["nl", "🇳🇱", "Nederlands", "Dutch"],
-
-    ["pl", "🇵🇱", "Polski", "Polish"]
+    ["id","🇮🇩","Bahasa Indonesia","Indonesian"],
+    ["en","🇺🇸","English","English"],
+    ["es","🇪🇸","Español","Spanish"],
+    ["fr","🇫🇷","Français","French"],
+    ["de","🇩🇪","Deutsch","German"],
+    ["it","🇮🇹","Italiano","Italian"],
+    ["pt","🇵🇹","Português","Portuguese"],
+    ["pt-BR","🇧🇷","Português (Brasil)","Portuguese Brazil"],
+    ["ru","🇷🇺","Русский","Russian"],
+    ["zh","🇨🇳","简体中文","Chinese Simplified"],
+    ["zh-TW","🇹🇼","繁體中文","Chinese Traditional"],
+    ["ja","🇯🇵","日本語","Japanese"],
+    ["ko","🇰🇷","한국어","Korean"],
+    ["tr","🇹🇷","Türkçe","Turkish"],
+    ["vi","🇻🇳","Tiếng Việt","Vietnamese"],
+    ["th","🇹🇭","ไทย","Thai"],
+    ["ar","🇸🇦","العربية","Arabic"],
+    ["hi","🇮🇳","हिन्दी","Hindi"],
+    ["nl","🇳🇱","Nederlands","Dutch"],
+    ["pl","🇵🇱","Polski","Polish"]
 
   ];
-
 
 
   function getCurrentLanguage() {
 
     const settings =
       getSettings();
-
 
     if (
       window.NEXTRA_I18N &&
@@ -1542,23 +1855,17 @@
 
     }
 
-
     return "id";
 
   }
 
 
-
-  function getLanguageName(
-    code
-  ) {
+  function getLanguageName(code) {
 
     const found =
       LANGUAGE_DATA.find(
-        language =>
-          language[0] === code
+        item => item[0] === code
       );
-
 
     return found
       ? found[2]
@@ -1567,20 +1874,15 @@
   }
 
 
-
   function renderLanguages() {
 
     if (!languageList)
       return;
 
-
     const selected =
       getCurrentLanguage();
 
-
-    languageList.innerHTML =
-      "";
-
+    languageList.innerHTML = "";
 
     LANGUAGE_DATA.forEach(
       language => {
@@ -1592,20 +1894,15 @@
           englishName
         ] = language;
 
-
         const button =
           document.createElement(
             "button"
           );
 
-
-        button.type =
-          "button";
-
+        button.type = "button";
 
         button.className =
           "language-option";
-
 
         if (
           code === selected
@@ -1616,7 +1913,6 @@
           );
 
         }
-
 
         button.innerHTML = `
 
@@ -1642,18 +1938,10 @@
 
         `;
 
-
         button.addEventListener(
           "click",
-          () => {
-
-            selectLanguage(
-              code
-            );
-
-          }
+          () => selectLanguage(code)
         );
-
 
         languageList.appendChild(
           button
@@ -1665,37 +1953,24 @@
   }
 
 
-
-  function selectLanguage(
-    code
-  ) {
+  function selectLanguage(code) {
 
     const settings =
       getSettings();
 
+    settings.language = code;
 
-    settings.language =
-      code;
-
-
-    saveSettings(
-      settings
-    );
-
+    saveSettings(settings);
 
     if (currentLanguage) {
 
       currentLanguage.textContent =
-        getLanguageName(
-          code
-        );
+        getLanguageName(code);
 
     }
 
-
     document.documentElement.lang =
       code;
-
 
     if (
       window.NEXTRA_I18N &&
@@ -1709,7 +1984,6 @@
 
     }
 
-
     window.dispatchEvent(
       new CustomEvent(
         "nextra:languageChanged",
@@ -1721,7 +1995,6 @@
       )
     );
 
-
     renderLanguages();
 
     closeLanguage();
@@ -1729,28 +2002,23 @@
   }
 
 
-
   function openLanguage() {
 
     renderLanguages();
 
-
     languageModal.classList.add(
       "show"
     );
-
 
     languageModal.setAttribute(
       "aria-hidden",
       "false"
     );
 
-
     document.body.style.overflow =
       "hidden";
 
   }
-
 
 
   function closeLanguage() {
@@ -1759,12 +2027,10 @@
       "show"
     );
 
-
     languageModal.setAttribute(
       "aria-hidden",
       "true"
     );
-
 
     document.body.style.overflow =
       "";
@@ -1817,15 +2083,10 @@
   );
 
 
-  if (currentLanguage) {
-
-    currentLanguage.textContent =
-      getLanguageName(
-        getCurrentLanguage()
-      );
-
-  }
-
+  currentLanguage.textContent =
+    getLanguageName(
+      getCurrentLanguage()
+    );
 
 
   /* =====================================================
@@ -1839,29 +2100,23 @@
         AVATAR_KEY
       );
 
-
     if (savedAvatar) {
 
       avatarImage.src =
         savedAvatar;
 
-
       avatarImage.classList.add(
         "visible"
       );
 
-
       avatarInitial.style.display =
         "none";
 
-    }
-
-    else {
+    } else {
 
       avatarImage.classList.remove(
         "visible"
       );
-
 
       avatarInitial.style.display =
         "block";
@@ -1871,14 +2126,9 @@
   }
 
 
-
   avatarButton?.addEventListener(
     "click",
-    () => {
-
-      avatarInput?.click();
-
-    }
+    () => avatarInput?.click()
   );
 
 
@@ -1889,10 +2139,8 @@
       const file =
         event.target.files?.[0];
 
-
       if (!file)
         return;
-
 
       if (
         !file.type.startsWith(
@@ -1908,7 +2156,6 @@
 
       }
 
-
       if (
         file.size >
         2 * 1024 * 1024
@@ -1922,48 +2169,38 @@
 
       }
 
-
       const reader =
         new FileReader();
 
+      reader.onload = () => {
 
-      reader.onload =
-        () => {
+        try {
 
-          try {
+          localStorage.setItem(
+            AVATAR_KEY,
+            reader.result
+          );
 
-            localStorage.setItem(
-              AVATAR_KEY,
-              reader.result
-            );
+          renderAvatar();
 
+        } catch {
 
-            renderAvatar();
+          alert(
+            "Foto terlalu besar."
+          );
 
-          }
+        }
 
-          catch {
+      };
 
-            alert(
-              "Foto terlalu besar."
-            );
-
-          }
-
-        };
-
-
-      reader.readAsDataURL(
-        file
-      );
+      reader.readAsDataURL(file);
 
     }
   );
 
 
-
   /* =====================================================
-     RENDER PROFILE
+     PROFILE RENDER
   ====================================================== */
 
   function renderProfile() {
@@ -1971,29 +2208,22 @@
     nameEl.textContent =
       profile.name;
 
-
     usernameEl.textContent =
-      "@" +
-      profile.username;
-
+      "@" + profile.username;
 
     avatarInitial.textContent =
       (
-        profile.name
-          .trim()[0]
+        profile.name.trim()[0]
         || "N"
       ).toUpperCase();
-
 
     accountEmail.textContent =
       currentUser?.email ||
       "Email tidak tersedia";
 
-
     renderAvatar();
 
   }
-
 
 
   /* =====================================================
@@ -2007,14 +2237,11 @@
       nameInput.value =
         profile.name;
 
-
       usernameInput.value =
         profile.username;
 
-
       editProfilePanel.hidden =
         false;
-
 
       nameInput.focus();
 
@@ -2040,26 +2267,16 @@
       const newName =
         nameInput.value
           .trim()
-          .slice(
-            0,
-            30
-          );
-
+          .slice(0,30);
 
       const newUsername =
-        nameInput
-          ? usernameInput.value
-              .trim()
-              .replace(
-                /[^a-zA-Z0-9_]/g,
-                ""
-              )
-              .slice(
-                0,
-                20
-              )
-          : "";
-
+        usernameInput.value
+          .trim()
+          .replace(
+            /[^a-zA-Z0-9_]/g,
+            ""
+          )
+          .slice(0,20);
 
       if (!newName) {
 
@@ -2071,7 +2288,6 @@
 
       }
 
-
       if (!newUsername) {
 
         alert(
@@ -2082,14 +2298,11 @@
 
       }
 
-
       saveProfileBtn.disabled =
         true;
 
-
       saveProfileBtn.textContent =
         "Saving...";
-
 
       try {
 
@@ -2113,62 +2326,43 @@
 
             });
 
-
-        if (error) {
-
+        if (error)
           throw error;
-
-        }
-
 
         profile.name =
           newName;
 
-
         profile.username =
           newUsername;
 
-
-        if (
-          data?.user
-        ) {
+        if (data?.user) {
 
           currentUser =
             data.user;
 
         }
 
-
         renderProfile();
-
 
         editProfilePanel.hidden =
           true;
 
-
-      }
-
-      catch(error) {
+      } catch(error) {
 
         console.error(
           "Profile update error:",
           error
         );
 
-
         alert(
           "Gagal menyimpan profile:\n" +
           error.message
         );
 
-      }
-
-
-      finally {
+      } finally {
 
         saveProfileBtn.disabled =
           false;
-
 
         saveProfileBtn.textContent =
           "Save changes";
@@ -2179,9 +2373,8 @@
   );
 
 
-
   /* =====================================================
-     WATCHLIST
+     STATS
   ====================================================== */
 
   function loadStats() {
@@ -2195,19 +2388,14 @@
           ) || "[]"
         );
 
-
       document.getElementById(
         "watchlistCount"
       ).textContent =
-        Array.isArray(
-          watchlist
-        )
+        Array.isArray(watchlist)
           ? watchlist.length
           : 0;
 
-    }
-
-    catch {
+    } catch {
 
       document.getElementById(
         "watchlistCount"
@@ -2215,7 +2403,6 @@
         "0";
 
     }
-
 
 
     try {
@@ -2227,19 +2414,14 @@
           ) || "[]"
         );
 
-
       document.getElementById(
         "alertCount"
       ).textContent =
-        Array.isArray(
-          alerts
-        )
+        Array.isArray(alerts)
           ? alerts.length
           : 0;
 
-    }
-
-    catch {
+    } catch {
 
       document.getElementById(
         "alertCount"
@@ -2257,7 +2439,6 @@
   }
 
 
-
   /* =====================================================
      LOGOUT
   ====================================================== */
@@ -2271,20 +2452,23 @@
           "Yakin ingin logout dari NEXTRA?"
         );
 
-
       if (!confirmed)
         return;
-
 
       logoutButton.disabled =
         true;
 
+      const title =
+        logoutButton.querySelector(
+          ".item-title"
+        );
 
-      logoutButton.querySelector(
-        "strong"
-      ).textContent =
-        "Logging out...";
+      if (title) {
 
+        title.textContent =
+          "Logging out...";
+
+      }
 
       try {
 
@@ -2294,50 +2478,41 @@
           await supabaseClient
             .auth
             .signOut({
-              scope: "local"
+              scope:"local"
             });
 
-
-        if (error) {
-
+        if (error)
           throw error;
-
-        }
-
 
         window.location.href =
           "index.html";
 
-      }
-
-      catch(error) {
+      } catch(error) {
 
         console.error(
           "Logout error:",
           error
         );
 
-
         alert(
           "Gagal logout:\n" +
           error.message
         );
 
-
         logoutButton.disabled =
           false;
 
+        if (title) {
 
-        logoutButton.querySelector(
-          "strong"
-        ).textContent =
-          "🚪 Logout";
+          title.textContent =
+            "🚪 Logout";
+
+        }
 
       }
 
     }
   );
-
 
 
   /* =====================================================
@@ -2356,21 +2531,11 @@
           .auth
           .getSession();
 
-
-      if (error) {
-
+      if (error)
         throw error;
-
-      }
-
 
       const session =
         data?.session;
-
-
-      /* ================================================
-         BELUM LOGIN
-      ================================================= */
 
       if (!session) {
 
@@ -2382,15 +2547,12 @@
 
       }
 
-
       currentUser =
         session.user;
-
 
       const metadata =
         currentUser.user_metadata ||
         {};
-
 
       const emailUsername =
         currentUser.email
@@ -2398,18 +2560,13 @@
               .split("@")[0]
           : "nextra_user";
 
-
       profile.name =
         String(
           metadata.display_name ||
           metadata.name ||
           emailUsername ||
           "NEXTRA User"
-        ).slice(
-          0,
-          30
-        );
-
+        ).slice(0,30);
 
       profile.username =
         String(
@@ -2417,39 +2574,29 @@
           emailUsername ||
           "nextra_user"
         )
-        .replace(
-          /[^a-zA-Z0-9_]/g,
-          ""
-        )
-        .slice(
-          0,
-          20
-        );
-
+          .replace(
+            /[^a-zA-Z0-9_]/g,
+            ""
+          )
+          .slice(0,20);
 
       renderProfile();
 
       loadStats();
 
-
       profilePage.hidden =
         false;
-
 
       authLoading.classList.add(
         "hidden"
       );
 
-
-    }
-
-    catch(error) {
+    } catch(error) {
 
       console.error(
         "NEXTRA Auth error:",
         error
       );
-
 
       window.location.replace(
         "login.html"
@@ -2460,22 +2607,17 @@
   }
 
 
-
   /* =====================================================
-     AUTH STATE LISTENER
+     AUTH STATE
   ====================================================== */
 
   supabaseClient
     .auth
     .onAuthStateChange(
-      (
-        event,
-        session
-      ) => {
+      (event, session) => {
 
         if (
-          event ===
-          "SIGNED_OUT"
+          event === "SIGNED_OUT"
         ) {
 
           window.location.replace(
@@ -2486,20 +2628,7 @@
 
         }
 
-
-        if (
-          event ===
-          "TOKEN_REFRESHED"
-        ) {
-
-          return;
-
-        }
-
-
-        if (
-          !session
-        ) {
+        if (!session) {
 
           window.location.replace(
             "login.html"
@@ -2511,19 +2640,15 @@
     );
 
 
-
   /* =====================================================
      START
   ====================================================== */
 
   initAuth();
 
-
 })();
 
 </script>
 
-
 </body>
-
 </html>
