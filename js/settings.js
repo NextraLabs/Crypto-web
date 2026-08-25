@@ -1,369 +1,614 @@
 /* =========================================================
    NEXTRA SETTINGS V10
-   Appearance Engine
-   ========================================================= */
+   File: js/settings.js
+========================================================= */
 
-(function () {
-
-  "use strict";
-
-  const STORAGE_KEY = "nextra_appearance";
+"use strict";
 
 
-  /* =======================================================
-     GET SAVED APPEARANCE
-     ======================================================= */
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
 
-  function getSavedAppearance() {
+function getSetting(key, fallback) {
 
-    const saved =
-      localStorage.getItem(STORAGE_KEY);
+  const value = localStorage.getItem(key);
 
-    if (
-      saved === "dark" ||
-      saved === "light" ||
-      saved === "system"
-    ) {
-      return saved;
-    }
+  if (value === null) {
+    return fallback;
+  }
 
-    return "dark";
+  return value;
+}
+
+
+function setSetting(key, value) {
+
+  localStorage.setItem(key, value);
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+const themeSelect =
+  document.getElementById("theme-select");
+
+
+function applyTheme(theme) {
+
+  if (theme === "dark") {
+
+    document.documentElement.setAttribute(
+      "data-theme",
+      "dark"
+    );
+
+    return;
   }
 
 
-  /* =======================================================
-     GET SYSTEM THEME
-     ======================================================= */
+  if (theme === "light") {
 
-  function getSystemTheme() {
+    document.documentElement.setAttribute(
+      "data-theme",
+      "light"
+    );
 
-    if (
-      window.matchMedia &&
-      window.matchMedia(
-        "(prefers-color-scheme: light)"
-      ).matches
-    ) {
-      return "light";
-    }
-
-    return "dark";
+    return;
   }
 
 
-  /* =======================================================
-     APPLY APPEARANCE
-     ======================================================= */
+  document.documentElement.removeAttribute(
+    "data-theme"
+  );
 
-  function applyAppearance(mode) {
-
-    const theme =
-      mode === "system"
-        ? getSystemTheme()
-        : mode;
+}
 
 
-    document.documentElement
-      .setAttribute(
-        "data-theme",
-        theme
-      );
+if (themeSelect) {
 
-
-    document.body
-      .setAttribute(
-        "data-theme",
-        theme
-      );
-
-
-    if (theme === "light") {
-
-      document.documentElement
-        .classList
-        .add("light");
-
-      document.body
-        .classList
-        .add("light");
-
-    } else {
-
-      document.documentElement
-        .classList
-        .remove("light");
-
-      document.body
-        .classList
-        .remove("light");
-
-    }
-
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      mode
+  themeSelect.value =
+    getSetting(
+      "nextra_theme",
+      "dark"
     );
 
 
-    updateAppearanceControls(mode);
+  applyTheme(
+    themeSelect.value
+  );
 
+
+  themeSelect.addEventListener(
+    "change",
+    function () {
+
+      setSetting(
+        "nextra_theme",
+        this.value
+      );
+
+      applyTheme(
+        this.value
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+const languageSelect =
+  document.getElementById(
+    "language-select"
+  );
+
+
+if (languageSelect) {
+
+  languageSelect.value =
+    getSetting(
+      "nextra_language",
+      "id"
+    );
+
+
+  languageSelect.addEventListener(
+    "change",
+    function () {
+
+      setSetting(
+        "nextra_language",
+        this.value
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+const currencySelect =
+  document.getElementById(
+    "currency-select"
+  );
+
+
+if (currencySelect) {
+
+  currencySelect.value =
+    getSetting(
+      "nextra_currency",
+      "usd"
+    );
+
+
+  currencySelect.addEventListener(
+    "change",
+    function () {
+
+      setSetting(
+        "nextra_currency",
+        this.value
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   TRADING MODE
+========================================================= */
+
+const tradingModeSelect =
+  document.getElementById(
+    "trading-mode-select"
+  );
+
+
+if (tradingModeSelect) {
+
+  tradingModeSelect.value =
+    getSetting(
+      "nextra_trading_mode",
+      "spot"
+    );
+
+
+  tradingModeSelect.addEventListener(
+    "change",
+    function () {
+
+      setSetting(
+        "nextra_trading_mode",
+        this.value
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   TOGGLE SYSTEM
+========================================================= */
+
+function setupToggle(
+  elementId,
+  storageKey,
+  defaultValue
+) {
+
+  const element =
+    document.getElementById(
+      elementId
+    );
+
+
+  if (!element) {
+    return;
   }
 
 
-  /* =======================================================
-     UPDATE APPEARANCE CONTROLS
-     ======================================================= */
-
-  function updateAppearanceControls(mode) {
-
-    const controls =
-      document.querySelectorAll(
-        "[data-appearance]"
-      );
+  const saved =
+    getSetting(
+      storageKey,
+      String(defaultValue)
+    );
 
 
-    controls.forEach(function (control) {
+  updateToggleUI(
+    element,
+    saved === "true"
+  );
 
-      const value =
-        control.getAttribute(
-          "data-appearance"
-        );
 
+  element.addEventListener(
+    "click",
+    function () {
 
       const active =
-        value === mode;
-
-
-      control.classList.toggle(
-        "active",
-        active
-      );
-
-
-      control.setAttribute(
-        "aria-selected",
-        active
-          ? "true"
-          : "false"
-      );
-
-
-      if (
-        control.tagName ===
-        "INPUT"
-      ) {
-
-        control.checked =
-          active;
-
-      }
-
-    });
-
-  }
-
-
-  /* =======================================================
-     BIND APPEARANCE CONTROLS
-     ======================================================= */
-
-  function bindAppearanceControls() {
-
-    const controls =
-      document.querySelectorAll(
-        "[data-appearance]"
-      );
-
-
-    controls.forEach(function (control) {
-
-      control.addEventListener(
-        "click",
-        function () {
-
-          const mode =
-            control.getAttribute(
-              "data-appearance"
-            );
-
-
-          if (
-            mode === "dark" ||
-            mode === "light" ||
-            mode === "system"
-          ) {
-
-            applyAppearance(mode);
-
-          }
-
-        }
-      );
-
-    });
-
-  }
-
-
-  /* =======================================================
-     SYSTEM THEME LISTENER
-     ======================================================= */
-
-  function watchSystemTheme() {
-
-    if (!window.matchMedia) {
-      return;
-    }
-
-
-    const mediaQuery =
-      window.matchMedia(
-        "(prefers-color-scheme: light)"
-      );
-
-
-    function handleChange() {
-
-      const saved =
-        getSavedAppearance();
-
-
-      if (saved === "system") {
-
-        applyAppearance(
-          "system"
+        !this.classList.contains(
+          "active"
         );
 
-      }
 
-    }
-
-
-    if (
-      typeof mediaQuery.addEventListener ===
-      "function"
-    ) {
-
-      mediaQuery.addEventListener(
-        "change",
-        handleChange
-      );
-
-    } else if (
-      typeof mediaQuery.addListener ===
-      "function"
-    ) {
-
-      mediaQuery.addListener(
-        handleChange
-      );
-
-    }
-
-  }
-
-
-  /* =======================================================
-     THEME TOGGLE
-     ======================================================= */
-
-  function bindThemeToggle() {
-
-    const button =
-      document.getElementById(
-        "theme-toggle"
+      updateToggleUI(
+        this,
+        active
       );
 
 
-    if (!button) {
-      return;
+      setSetting(
+        storageKey,
+        String(active)
+      );
+
     }
+  );
+
+}
 
 
-    button.addEventListener(
-      "click",
-      function () {
+/* =========================================================
+   TOGGLE UI
+========================================================= */
 
-        const current =
-          getSavedAppearance();
+function updateToggleUI(
+  element,
+  active
+) {
 
+  if (active) {
 
-        const next =
-          current === "dark"
-            ? "light"
-            : "dark";
-
-
-        applyAppearance(next);
-
-      }
+    element.classList.add(
+      "active"
     );
 
-  }
-
-
-  /* =======================================================
-     INITIALIZE
-     ======================================================= */
-
-  function initSettings() {
-
-    const saved =
-      getSavedAppearance();
-
-
-    applyAppearance(
-      saved
-    );
-
-
-    bindAppearanceControls();
-
-
-    watchSystemTheme();
-
-
-    bindThemeToggle();
-
-  }
-
-
-  /* =======================================================
-     PUBLIC API
-     ======================================================= */
-
-  window.NEXTRASettings = {
-
-    getAppearance:
-      getSavedAppearance,
-
-    setAppearance:
-      applyAppearance,
-
-    getSystemTheme:
-      getSystemTheme
-
-  };
-
-
-  /* =======================================================
-     START
-     ======================================================= */
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      initSettings
+    element.setAttribute(
+      "aria-pressed",
+      "true"
     );
 
   } else {
 
-    initSettings();
+    element.classList.remove(
+      "active"
+    );
+
+    element.setAttribute(
+      "aria-pressed",
+      "false"
+    );
 
   }
 
-})();
+}
+
+
+/* =========================================================
+   COMPACT MODE
+========================================================= */
+
+setupToggle(
+  "compact-toggle",
+  "nextra_compact_mode",
+  false
+);
+
+
+/* =========================================================
+   PRICE ALERTS
+========================================================= */
+
+setupToggle(
+  "price-alert-toggle",
+  "nextra_price_alerts",
+  true
+);
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+setupToggle(
+  "refresh-toggle",
+  "nextra_auto_refresh",
+  true
+);
+
+
+/* =========================================================
+   RISK DISPLAY
+========================================================= */
+
+setupToggle(
+  "risk-toggle",
+  "nextra_risk_display",
+  true
+);
+
+
+/* =========================================================
+   MARKET ALERTS
+========================================================= */
+
+setupToggle(
+  "market-alert-toggle",
+  "nextra_market_alerts",
+  true
+);
+
+
+/* =========================================================
+   COMMUNITY UPDATES
+========================================================= */
+
+setupToggle(
+  "community-toggle",
+  "nextra_community_updates",
+  true
+);
+
+
+/* =========================================================
+   LEARN UPDATES
+========================================================= */
+
+setupToggle(
+  "learn-toggle",
+  "nextra_learn_updates",
+  true
+);
+
+
+/* =========================================================
+   SECURE MODE
+========================================================= */
+
+setupToggle(
+  "secure-toggle",
+  "nextra_secure_mode",
+  false
+);
+
+
+/* =========================================================
+   SAVE PREFERENCES
+========================================================= */
+
+setupToggle(
+  "save-toggle",
+  "nextra_save_preferences",
+  true
+);
+
+
+/* =========================================================
+   RESET SETTINGS
+========================================================= */
+
+const resetButton =
+  document.getElementById(
+    "reset-settings"
+  );
+
+
+if (resetButton) {
+
+  resetButton.addEventListener(
+    "click",
+    function () {
+
+      const confirmed =
+        confirm(
+          "Reset semua pengaturan NEXTRA?"
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      const keys = [
+
+        "nextra_theme",
+
+        "nextra_language",
+
+        "nextra_currency",
+
+        "nextra_trading_mode",
+
+        "nextra_compact_mode",
+
+        "nextra_price_alerts",
+
+        "nextra_auto_refresh",
+
+        "nextra_risk_display",
+
+        "nextra_market_alerts",
+
+        "nextra_community_updates",
+
+        "nextra_learn_updates",
+
+        "nextra_secure_mode",
+
+        "nextra_save_preferences"
+
+      ];
+
+
+      keys.forEach(
+        function (key) {
+
+          localStorage.removeItem(
+            key
+          );
+
+        }
+      );
+
+
+      location.reload();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   PRIVACY
+========================================================= */
+
+const privacyLink =
+  document.getElementById(
+    "privacy-link"
+  );
+
+
+if (privacyLink) {
+
+  privacyLink.addEventListener(
+    "click",
+    function (event) {
+
+      event.preventDefault();
+
+      alert(
+        "Privacy settings NEXTRA akan tersedia pada modul Privacy."
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+const aboutLink =
+  document.getElementById(
+    "about-link"
+  );
+
+
+if (aboutLink) {
+
+  aboutLink.addEventListener(
+    "click",
+    function (event) {
+
+      event.preventDefault();
+
+      alert(
+        "NEXTRA — Your Market. Your Intelligence."
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   EXPORT SETTINGS API
+   Bisa dipakai halaman NEXTRA lainnya
+========================================================= */
+
+window.NEXTRA_SETTINGS = {
+
+  get: function (key, fallback) {
+
+    return getSetting(
+      key,
+      fallback
+    );
+
+  },
+
+
+  set: function (key, value) {
+
+    setSetting(
+      key,
+      value
+    );
+
+  },
+
+
+  remove: function (key) {
+
+    localStorage.removeItem(
+      key
+    );
+
+  },
+
+
+  reset: function () {
+
+    const keys = [
+
+      "nextra_theme",
+      "nextra_language",
+      "nextra_currency",
+      "nextra_trading_mode",
+      "nextra_compact_mode",
+      "nextra_price_alerts",
+      "nextra_auto_refresh",
+      "nextra_risk_display",
+      "nextra_market_alerts",
+      "nextra_community_updates",
+      "nextra_learn_updates",
+      "nextra_secure_mode",
+      "nextra_save_preferences"
+
+    ];
+
+
+    keys.forEach(
+      function (key) {
+
+        localStorage.removeItem(
+          key
+        );
+
+      }
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   READY
+========================================================= */
+
+document.documentElement.setAttribute(
+  "data-settings-ready",
+  "true"
+);
