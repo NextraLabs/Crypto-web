@@ -1,8 +1,10 @@
-// api.js — NEXTRA Market + Futures API V5
-// SPEED OPTIMIZED
-// Market: sampai 250 coins
+// api.js — NEXTRA Market + Futures API V6
+// DUAL-PHASE MARKET LOADING
+// Phase 1: Binance Futures → FAST
+// Phase 2: CoinGecko → Background enrichment
 // Futures: Binance Futures
 // Coin Detail: Chart / History
+
 
 const COINGECKO_API =
   "https://api.coingecko.com/api/v3";
@@ -10,7 +12,8 @@ const COINGECKO_API =
 const BINANCE_FUTURES_API =
   "https://fapi.binance.com";
 
-const MARKET_CURRENCY = "usd";
+const MARKET_CURRENCY =
+  "usd";
 
 
 /* =========================================
@@ -22,17 +25,20 @@ async function apiFetch(
   options = {}
 ) {
 
-  const response = await fetch(
-    `${COINGECKO_API}${endpoint}`,
-    {
-      ...options,
+  const response =
+    await fetch(
+      `${COINGECKO_API}${endpoint}`,
+      {
+        ...options,
 
-      headers: {
-        Accept: "application/json",
-        ...(options.headers || {})
+        headers: {
+          Accept:
+            "application/json",
+
+          ...(options.headers || {})
+        }
       }
-    }
-  );
+    );
 
 
   if (!response.ok) {
@@ -87,9 +93,11 @@ async function fetchMarkets({
 
   perPage = 100,
 
-  currency = MARKET_CURRENCY,
+  currency =
+    MARKET_CURRENCY,
 
-  order = "market_cap_desc",
+  order =
+    "market_cap_desc",
 
   sparkline = false
 
@@ -111,14 +119,10 @@ async function fetchMarkets({
 
       page,
 
-      /*
-       * FALSE = jauh lebih ringan
-       * Coin Detail tetap menggunakan
-       * sparkline sendiri.
-       */
-
       sparkline:
-        sparkline ? "true" : "false",
+        sparkline
+          ? "true"
+          : "false",
 
       price_change_percentage:
         "1h,24h,7d"
@@ -134,26 +138,13 @@ async function fetchMarkets({
 
 
 /* =========================================
-   FAST MARKET LOADER
-   =========================================
-   Maksimum 250 coin.
-
-   Sebelumnya:
-   1000 coin
-   10 request
-   sequential
-   + delay 350ms
-
-   Sekarang:
-   250 coin
-   3 request
-   parallel
-   tanpa delay
+   COINGECKO FAST MARKET LOADER
 ========================================= */
 
 async function fetchFastMarkets({
 
-  currency = MARKET_CURRENCY,
+  currency =
+    MARKET_CURRENCY,
 
   total = 250,
 
@@ -191,7 +182,8 @@ async function fetchFastMarkets({
   const requests =
     Array.from(
       {
-        length: pages
+        length:
+          pages
       },
       (_, index) => {
 
@@ -207,10 +199,6 @@ async function fetchFastMarkets({
 
           order:
             "market_cap_desc",
-
-          /*
-           * IMPORTANT
-           */
 
           sparkline:
             false
@@ -239,11 +227,12 @@ async function fetchFastMarkets({
 
 /* =========================================
    LEGACY 1000 COINS
-======================================== */
+========================================= */
 
 async function fetch1000Markets({
 
-  currency = MARKET_CURRENCY,
+  currency =
+    MARKET_CURRENCY,
 
   total = 1000,
 
@@ -269,11 +258,6 @@ async function fetch1000Markets({
 
   const results = [];
 
-
-  /*
-   * Batch 3 request sekaligus
-   * supaya tidak membebani API.
-   */
 
   const batchSize = 3;
 
@@ -337,11 +321,6 @@ async function fetch1000Markets({
       }
     );
 
-
-    /*
-     * Delay opsional.
-     * Default 0.
-     */
 
     if (
       delay > 0 &&
@@ -583,13 +562,7 @@ function normalizeMarketCoin(
     maxSupply:
       coin.max_supply ?? 0,
 
-    /*
-     * Markets tidak perlu sparkline.
-     * Ini membuat response jauh lebih ringan.
-     */
-
-    sparkline:
-      []
+    sparkline: []
 
   };
 
@@ -597,38 +570,388 @@ function normalizeMarketCoin(
 
 
 /* =========================================
+   BINANCE — FAST MARKET DATA
+========================================= */
+
+async function fetchBinanceMarkets({
+
+  total = 100
+
+} = {}) {
+
+  const data =
+    await binanceFetch(
+      "/fapi/v1/ticker/24hr"
+    );
+
+
+  if (
+    !Array.isArray(data)
+  ) {
+
+    throw new Error(
+      "Binance market data tidak valid"
+    );
+
+  }
+
+
+  const markets =
+    data
+      .filter(item => {
+
+        return (
+
+          item &&
+
+          typeof item.symbol ===
+            "string" &&
+
+          item.symbol.endsWith(
+            "USDT"
+          ) &&
+
+          Number(
+            item.lastPrice
+          ) > 0
+
+        );
+
+      })
+
+
+      /*
+       * Volume terbesar
+       * supaya market yang muncul
+       * paling relevan.
+       */
+
+      .sort(
+        (a, b) =>
+          Number(
+            b.quoteVolume || 0
+          ) -
+          Number(
+            a.quoteVolume || 0
+          )
+      )
+
+
+      .slice(
+        0,
+        Math.min(
+          Number(total) || 100,
+          250
+        )
+      );
+
+
+  return markets.map(
+    item => {
+
+      const symbol =
+        item.symbol
+          .replace(
+            /USDT$/,
+            ""
+          )
+          .toUpperCase();
+
+
+      return {
+
+        /*
+         * Temporary ID.
+         *
+         * Akan diganti dengan
+         * CoinGecko ID saat
+         * enrichment selesai.
+         */
+
+        id:
+          `binance-${symbol.toLowerCase()}`,
+
+        rank:
+          "-",
+
+        name:
+          symbol,
+
+        symbol,
+
+        image:
+          "",
+
+        price:
+          Number(
+            item.lastPrice
+          ) || 0,
+
+        marketCap:
+          0,
+
+        volume:
+          Number(
+            item.quoteVolume
+          ) || 0,
+
+        change1h:
+          0,
+
+        change24h:
+          Number(
+            item.priceChangePercent
+          ) || 0,
+
+        change7d:
+          0,
+
+        high24h:
+          Number(
+            item.highPrice
+          ) || 0,
+
+        low24h:
+          Number(
+            item.lowPrice
+          ) || 0,
+
+        circulatingSupply:
+          0,
+
+        totalSupply:
+          0,
+
+        maxSupply:
+          0,
+
+        sparkline: [],
+
+        source:
+          "binance",
+
+        enriched:
+          false
+
+      };
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   COINGECKO ENRICHMENT
+========================================= */
+
+async function enrichMarketsWithCoinGecko(
+  coins,
+  {
+    currency =
+      MARKET_CURRENCY,
+
+    limit = 250
+
+  } = {}
+) {
+
+  if (
+    !Array.isArray(coins) ||
+    !coins.length
+  ) {
+
+    return coins;
+
+  }
+
+
+  try {
+
+    /*
+     * Ambil 250 coin berdasarkan
+     * market cap dari CoinGecko.
+     */
+
+    const data =
+      await fetchMarkets({
+
+        page: 1,
+
+        perPage:
+          Math.min(
+            Number(limit) || 250,
+            250
+          ),
+
+        currency,
+
+        order:
+          "market_cap_desc",
+
+        sparkline:
+          false
+
+      });
+
+
+    if (
+      !Array.isArray(data)
+    ) {
+
+      return coins;
+
+    }
+
+
+    const bySymbol =
+      new Map();
+
+
+    data.forEach(
+      coin => {
+
+        const symbol =
+          String(
+            coin.symbol || ""
+          )
+            .trim()
+            .toUpperCase();
+
+
+        if (!symbol) return;
+
+
+        /*
+         * Hindari duplicate symbol.
+         */
+
+        if (
+          !bySymbol.has(symbol)
+        ) {
+
+          bySymbol.set(
+            symbol,
+            coin
+          );
+
+        }
+
+      }
+    );
+
+
+    return coins.map(
+      coin => {
+
+        const symbol =
+          String(
+            coin.symbol || ""
+          )
+            .trim()
+            .toUpperCase();
+
+
+        const cg =
+          bySymbol.get(
+            symbol
+          );
+
+
+        if (!cg) {
+
+          return coin;
+
+        }
+
+
+        const normalized =
+          normalizeMarketCoin(
+            cg
+          );
+
+
+        return {
+
+          ...coin,
+
+          ...normalized,
+
+          /*
+           * Binance tetap menjadi
+           * sumber realtime.
+           */
+
+          price:
+            coin.price,
+
+          change24h:
+            coin.change24h,
+
+          volume:
+            coin.volume,
+
+          high24h:
+            coin.high24h,
+
+          low24h:
+            coin.low24h,
+
+          source:
+            "binance+coingecko",
+
+          enriched:
+            true
+
+        };
+
+      }
+    );
+
+  }
+
+  catch (error) {
+
+    console.warn(
+      "NEXTRA: CoinGecko enrichment gagal:",
+      error
+    );
+
+
+    /*
+     * SANGAT PENTING:
+     *
+     * Jangan throw error.
+     *
+     * Binance data tetap
+     * dikembalikan.
+     */
+
+    return coins;
+
+  }
+
+}
+
+
+/* =========================================
    NORMALIZED MARKETS
+   =========================================
+   PHASE 1:
+   Binance first.
 ========================================= */
 
 async function fetchNormalizedMarkets(
   options = {}
 ) {
 
-  /*
-   * DEFAULT SEKARANG 250
-   */
+  return fetchBinanceMarkets({
 
-  const data =
-    await fetchFastMarkets({
+    total:
+      options.total ||
+      100
 
-      currency:
-        options.currency ||
-        MARKET_CURRENCY,
-
-      total:
-        options.total ||
-        250,
-
-      perPage:
-        options.perPage ||
-        100
-
-    });
-
-
-  return data.map(
-    normalizeMarketCoin
-  );
+  });
 
 }
 
@@ -652,8 +975,10 @@ function getMarketChange(
     return (
       coin
         .price_change_percentage_1h_in_currency
-      ?? coin.change1h
-      ?? 0
+      ??
+      coin.change1h
+      ??
+      0
     );
 
   }
@@ -666,8 +991,10 @@ function getMarketChange(
     return (
       coin
         .price_change_percentage_7d_in_currency
-      ?? coin.change7d
-      ?? 0
+      ??
+      coin.change7d
+      ??
+      0
     );
 
   }
@@ -676,8 +1003,10 @@ function getMarketChange(
   return (
     coin
       .price_change_percentage_24h_in_currency
-    ?? coin.change24h
-    ?? 0
+    ??
+    coin.change24h
+    ??
+    0
   );
 
 }
@@ -835,7 +1164,9 @@ async function fetchOpenInterestHistory(
       return {
 
         current: null,
+
         previous: null,
+
         change: null
 
       };
@@ -859,15 +1190,21 @@ async function fetchOpenInterestHistory(
 
 
     if (
-      !Number.isFinite(current) ||
-      !Number.isFinite(previous) ||
+      !Number.isFinite(
+        current
+      ) ||
+      !Number.isFinite(
+        previous
+      ) ||
       previous === 0
     ) {
 
       return {
 
         current: null,
+
         previous: null,
+
         change: null
 
       };
@@ -888,7 +1225,9 @@ async function fetchOpenInterestHistory(
     return {
 
       current,
+
       previous,
+
       change
 
     };
@@ -906,7 +1245,9 @@ async function fetchOpenInterestHistory(
     return {
 
       current: null,
+
       previous: null,
+
       change: null
 
     };
@@ -926,9 +1267,13 @@ async function fetchFuturesData(
 
   const [
     ticker,
+
     funding,
+
     oi,
+
     oiHistory
+
   ] = await Promise.all([
 
     fetchFuturesTicker(
@@ -978,19 +1323,19 @@ async function fetchFuturesData(
 
 async function fetchFuturesMarkets(
   symbols = [
+
     "BTCUSDT",
+
     "ETHUSDT",
+
     "SOLUSDT"
+
   ]
 ) {
 
-  /*
-   * Jalankan semua symbol bersamaan.
-   * Sebelumnya satu-satu.
-   */
-
   const results =
     await Promise.all(
+
       symbols.map(
         async symbol => {
 
@@ -1015,6 +1360,7 @@ async function fetchFuturesMarkets(
 
         }
       )
+
     );
 
 
@@ -1239,6 +1585,10 @@ window.NEXTRA_API = {
   searchCoins,
 
   fetchNormalizedMarkets,
+
+  fetchBinanceMarkets,
+
+  enrichMarketsWithCoinGecko,
 
   normalizeMarketCoin,
 
