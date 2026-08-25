@@ -17,10 +17,132 @@
 
   <title>NEXTRA — Your Market. Your Intelligence.</title>
 
+
+  <!-- =====================================================
+       SEO
+  ====================================================== -->
+
+  <meta
+    name="description"
+    content="NEXTRA adalah platform crypto market intelligence untuk memantau harga, pergerakan market, trending coins, futures, trading tools, dan edukasi crypto secara real-time."
+  >
+
+  <meta
+    name="keywords"
+    content="NEXTRA, crypto, cryptocurrency, crypto market, Bitcoin, Ethereum, crypto trading, crypto intelligence, futures, crypto tools"
+  >
+
+  <meta
+    name="author"
+    content="NEXTRA"
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <link
+    rel="canonical"
+    href="https://nextralabs.github.io/Crypto-web/"
+  >
+
+
+  <!-- =====================================================
+       OPEN GRAPH
+  ====================================================== -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:title"
+    content="NEXTRA — Your Market. Your Intelligence."
+  >
+
+  <meta
+    property="og:description"
+    content="Pantau crypto market secara real-time dengan NEXTRA."
+  >
+
+  <meta
+    property="og:url"
+    content="https://nextralabs.github.io/Crypto-web/"
+  >
+
+  <meta
+    property="og:site_name"
+    content="NEXTRA"
+  >
+
+  <meta
+    property="og:locale"
+    content="id_ID"
+  >
+
+
+  <!-- =====================================================
+       TWITTER / X
+  ====================================================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
+
+  <meta
+    name="twitter:title"
+    content="NEXTRA — Your Market. Your Intelligence."
+  >
+
+  <meta
+    name="twitter:description"
+    content="Real-time crypto market intelligence, trading tools, futures, trending coins, dan crypto education."
+  >
+
+
+  <!-- =====================================================
+       STRUCTURED DATA
+  ====================================================== -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NEXTRA",
+    "alternateName": "NEXTRA Crypto",
+    "url": "https://nextralabs.github.io/Crypto-web/",
+    "description": "Crypto market intelligence platform untuk memantau market secara real-time.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://nextralabs.github.io/Crypto-web/markets.html?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NEXTRA",
+    "url": "https://nextralabs.github.io/Crypto-web/",
+    "description": "Your Market. Your Intelligence."
+  }
+  </script>
+
+
   <link
     rel="stylesheet"
     href="css/style.css"
   >
+
 
   <style>
 
@@ -72,8 +194,13 @@
     }
 
     @keyframes pulse {
-      0%,100% { opacity: 1; }
-      50% { opacity: .35; }
+      0%,100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: .35;
+      }
     }
 
     .hero-title {
@@ -301,7 +428,9 @@
       border: 1px solid var(--line) !important;
       border-radius: 16px !important;
       background: var(--surface) !important;
-      transition: transform .18s ease,border-color .18s ease;
+      transition:
+        transform .18s ease,
+        border-color .18s ease;
     }
 
     .explore-card:hover {
@@ -362,7 +491,7 @@
 
     /* =====================================================
        NEXTRA INFO
-    ===================================================== */
+    ====================================================== */
 
     .nextra-info {
       margin-top: 28px;
@@ -460,34 +589,25 @@
 
     /* =====================================================
        AUTH BUTTON
-    ===================================================== */
+    ====================================================== */
 
     .nextra-auth-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-
       min-width: 72px;
       height: 34px;
-
       padding: 0 11px;
-
       border: 1px solid var(--line);
       border-radius: 10px;
-
       background: var(--surface);
       color: var(--text);
-
       font-size: 9px;
       font-weight: 800;
-
       text-decoration: none;
-
       cursor: pointer;
-
-      transition:
-        .18s ease;
+      transition: .18s ease;
     }
 
     .nextra-auth-btn:hover {
@@ -499,16 +619,12 @@
     .nextra-auth-icon {
       width: 15px;
       height: 15px;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       border-radius: 50%;
-
       background: rgba(57,242,160,.08);
       color: var(--green);
-
       font-size: 8px;
     }
 
@@ -582,8 +698,6 @@
       "
     >
 
-      <!-- AUTH BUTTON -->
-
       <a
         href="login.html"
         id="auth-button"
@@ -603,8 +717,6 @@
 
       </a>
 
-
-      <!-- THEME -->
 
       <button
         class="icon-btn"
@@ -650,8 +762,6 @@
 
     </p>
 
-
-    <!-- SEARCH -->
 
     <div class="home-search">
 
@@ -1139,10 +1249,6 @@
 
 <script>
 
-/* =====================================================
-   SUPABASE CONFIG
-===================================================== */
-
 const SUPABASE_URL =
   "https://uvtbntwgooxqjbyjkvkd.supabase.co";
 
@@ -1216,43 +1322,30 @@ async function updateAuthButton() {
 
     if (session) {
 
-      /*
-       * USER SUDAH LOGIN
-       */
-
       button.href =
         "profile.html";
-
 
       text.textContent =
         "Profile";
 
-
       icon.textContent =
         "●";
-
 
       button.title =
         "Buka profile";
 
+    }
 
-    } else {
-
-      /*
-       * USER BELUM LOGIN
-       */
+    else {
 
       button.href =
         "login.html";
 
-
       text.textContent =
         "Login";
 
-
       icon.textContent =
         "↪";
-
 
       button.title =
         "Masuk ke NEXTRA";
@@ -1260,7 +1353,9 @@ async function updateAuthButton() {
     }
 
 
-  } catch(error) {
+  }
+
+  catch(error) {
 
     console.error(
       "Auth UI error:",
@@ -1357,10 +1452,8 @@ async function loadHomeMarkets() {
             >
 
               <div class="market-rank">
-
                 ${String(index + 1)
                   .padStart(2,"0")}
-
               </div>
 
 
@@ -1441,7 +1534,9 @@ async function loadHomeMarkets() {
     );
 
 
-  } catch(error) {
+  }
+
+  catch(error) {
 
     console.error(
       "Home market error:",
@@ -1546,7 +1641,10 @@ function updateMarketPulse(coins) {
     );
 
 
-  if (!pulse || !bar) {
+  if (
+    !pulse ||
+    !bar
+  ) {
     return;
   }
 
@@ -1564,8 +1662,11 @@ function updateMarketPulse(coins) {
 
   if (!valid.length) {
 
-    pulse.textContent = "—";
-    bar.style.width = "0%";
+    pulse.textContent =
+      "—";
+
+    bar.style.width =
+      "0%";
 
     return;
 
