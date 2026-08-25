@@ -1,143 +1,154 @@
-// NEXTRA Intelligence V2
+/* =====================================================
+   NEXTRA INTELLIGENCE V100
+   Market Intelligence Engine
+===================================================== */
 
-const INTELLIGENCE_V2 = {
+const INTELLIGENCE_STATE = {
 
   symbols: [
     "BTCUSDT",
     "ETHUSDT",
-    "SOLUSDT"
+    "BNBUSDT",
+    "XRPUSDT",
+    "SOLUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "AVAXUSDT",
+    "LINKUSDT",
+    "SUIUSDT",
+    "TONUSDT"
   ],
 
   data: [],
 
-  updated: null
+  loading: false,
+
+  lastUpdate: null
 
 };
 
 
-/* =========================================
-   LOAD DATA
-========================================= */
-
-async function loadIntelligenceV2() {
-
-  const container =
-    document.getElementById(
-      "intel-assets"
-    );
-
-  const status =
-    document.getElementById(
-      "intel-status"
-    );
+window.NEXTRA_INTELLIGENCE_FILTER =
+  "all";
 
 
-  if (status) {
+function inum(value) {
 
-    status.textContent =
-      "SCANNING";
+  const n = Number(value);
 
-  }
-
-
-  if (container) {
-
-    container.innerHTML = `
-      <div class="loading">
-        NEXTRA sedang menganalisis
-        market...
-      </div>
-    `;
-
-  }
-
-
-  try {
-
-    const data =
-      await NEXTRA_API
-        .fetchFuturesMarkets(
-          INTELLIGENCE_V2.symbols
-        );
-
-
-    INTELLIGENCE_V2.data =
-      data || [];
-
-
-    INTELLIGENCE_V2.updated =
-      new Date();
-
-
-    renderIntelligenceV2();
-
-
-    if (status) {
-
-      status.textContent =
-        "LIVE";
-
-    }
-
-  } catch (error) {
-
-    console.error(
-      "Intelligence V2:",
-      error
-    );
-
-
-    if (status) {
-
-      status.textContent =
-        "ERROR";
-
-    }
-
-
-    if (container) {
-
-      container.innerHTML = `
-        <div class="error-box">
-          ⚠️ Gagal memuat Intelligence.
-          <br><br>
-          <button
-            class="primary-btn"
-            onclick="loadIntelligenceV2()"
-          >
-            Coba Lagi
-          </button>
-        </div>
-      `;
-
-    }
-
-  }
+  return Number.isFinite(n)
+    ? n
+    : 0;
 
 }
 
 
-/* =========================================
-   SCORE ENGINE
-========================================= */
+function iprice(value) {
 
-function calculateAssetScore(item) {
+  const n = inum(value);
+
+  if (n >= 1000)
+    return "$" +
+      n.toLocaleString(
+        "en-US",
+        {
+          maximumFractionDigits:2
+        }
+      );
+
+  if (n >= 1)
+    return "$" +
+      n.toFixed(2);
+
+  return "$" +
+    n.toPrecision(6);
+
+}
+
+
+function ipercent(value) {
+
+  const n = inum(value);
+
+  return (
+    n >= 0 ? "+" : ""
+  ) +
+  n.toFixed(2) +
+  "%";
+
+}
+
+
+function ilarge(value) {
+
+  const n = inum(value);
+
+  if (n >= 1e12)
+    return (
+      n / 1e12
+    ).toFixed(2) + "T";
+
+  if (n >= 1e9)
+    return (
+      n / 1e9
+    ).toFixed(2) + "B";
+
+  if (n >= 1e6)
+    return (
+      n / 1e6
+    ).toFixed(2) + "M";
+
+  return (
+    n / 1e3
+  ).toFixed(1) + "K";
+
+}
+
+
+function analyzeIntelligence(item) {
+
+  const change =
+    inum(item.change24h);
+
+  const oi =
+    inum(item.oiChange);
+
+  const funding =
+    inum(item.fundingRate) * 100;
+
+  const volume =
+    inum(item.volumeSpike);
+
 
   let score = 50;
 
 
-  /* PRICE MOMENTUM */
+  /* MOMENTUM */
+
+  if (change >= 5)
+    score += 15;
+
+  else if (change >= 3)
+    score += 10;
+
+  else if (change >= 1)
+    score += 5;
+
+  else if (change <= -5)
+    score -= 15;
+
+  else if (change <= -3)
+    score -= 10;
+
+  else if (change <= -1)
+    score -= 5;
+
+
+  /* OPEN INTEREST */
 
   if (
-    item.change24h >= 5
-  ) {
-
-    score += 20;
-
-  }
-
-  else if (
-    item.change24h >= 2
+    change > 0 &&
+    oi > 0
   ) {
 
     score += 12;
@@ -145,562 +156,321 @@ function calculateAssetScore(item) {
   }
 
   else if (
-    item.change24h > 0
-  ) {
-
-    score += 6;
-
-  }
-
-  else if (
-    item.change24h <= -5
-  ) {
-
-    score -= 20;
-
-  }
-
-  else if (
-    item.change24h <= -2
+    change < 0 &&
+    oi > 0
   ) {
 
     score -= 12;
 
   }
 
-  else if (
-    item.change24h < 0
-  ) {
 
-    score -= 6;
+  /* VOLUME */
+
+  if (volume >= 3) {
+
+    if (change > 0)
+      score += 10;
+
+    else if (change < 0)
+      score -= 10;
+
+  }
+
+  else if (volume >= 2) {
+
+    if (change > 0)
+      score += 6;
+
+    else if (change < 0)
+      score -= 6;
 
   }
 
 
   /* FUNDING */
 
+  if (funding >= 0.10)
+    score -= 6;
+
+  else if (funding <= -0.10)
+    score += 6;
+
+
+  score =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Math.round(score)
+      )
+    );
+
+
+  let bias =
+    "NEUTRAL";
+
+
+  if (score >= 60)
+    bias = "BULLISH";
+
+  else if (score <= 40)
+    bias = "BEARISH";
+
+
+  /* MARKET REGIME */
+
+  let regime =
+    "RANGE";
+
+
   if (
-    item.fundingRate > 0.001
+    Math.abs(change) >= 5 &&
+    volume >= 2
   ) {
 
-    score -= 8;
+    regime =
+      change > 0
+        ? "BULL TREND"
+        : "BEAR TREND";
 
   }
 
   else if (
-    item.fundingRate > 0
+    Math.abs(change) <= 1
   ) {
 
-    score += 3;
+    regime =
+      "LOW VOLATILITY";
+
+  }
+
+
+  /* RISK */
+
+  let risk =
+    "LOW";
+
+
+  if (
+    Math.abs(change) >= 8 ||
+    Math.abs(funding) >= 0.10 ||
+    volume >= 4
+  ) {
+
+    risk =
+      "HIGH";
 
   }
 
   else if (
-    item.fundingRate < -0.001
+    Math.abs(change) >= 4 ||
+    Math.abs(funding) >= 0.05 ||
+    volume >= 2
   ) {
 
-    score += 8;
+    risk =
+      "MODERATE";
+
+  }
+
+
+  /* SIGNAL */
+
+  let signal =
+    "WAIT";
+
+
+  if (
+    bias === "BULLISH" &&
+    score >= 80
+  ) {
+
+    signal =
+      "STRONG BULLISH";
 
   }
 
   else if (
-    item.fundingRate < 0
+    bias === "BEARISH" &&
+    score <= 20
   ) {
 
-    score -= 3;
+    signal =
+      "STRONG BEARISH";
+
+  }
+
+  else if (
+    bias === "BULLISH"
+  ) {
+
+    signal =
+      "BULLISH";
+
+  }
+
+  else if (
+    bias === "BEARISH"
+  ) {
+
+    signal =
+      "BEARISH";
 
   }
 
 
-  return Math.max(
-    0,
-    Math.min(
-      100,
-      score
-    )
-  );
+  /* INSIGHT */
 
-}
+  let insight =
+    "Market masih membutuhkan konfirmasi.";
 
 
-/* =========================================
-   TREND
-========================================= */
+  if (
+    bias === "BULLISH" &&
+    oi > 0 &&
+    volume >= 2
+  ) {
 
-function getTrendV2(item) {
-
-  const change =
-    item.change24h;
-
-
-  if (change >= 5) {
-
-    return {
-      label: "STRONG BULLISH",
-      className: "up"
-    };
+    insight =
+      "Momentum bullish mendapat konfirmasi dari Open Interest dan aktivitas volume.";
 
   }
 
+  else if (
+    bias === "BEARISH" &&
+    oi > 0 &&
+    volume >= 2
+  ) {
 
-  if (change >= 2) {
-
-    return {
-      label: "BULLISH",
-      className: "up"
-    };
-
-  }
-
-
-  if (change <= -5) {
-
-    return {
-      label: "STRONG BEARISH",
-      className: "down"
-    };
+    insight =
+      "Tekanan bearish mendapat konfirmasi dari kenaikan Open Interest dan volume.";
 
   }
 
+  else if (
+    volume >= 3
+  ) {
 
-  if (change <= -2) {
+    insight =
+      "Volume mengalami lonjakan. Perhatikan potensi pergerakan besar.";
 
-    return {
-      label: "BEARISH",
-      className: "down"
-    };
+  }
+
+  else if (
+    Math.abs(funding) >= 0.10
+  ) {
+
+    insight =
+      "Funding berada pada level ekstrem. Positioning market mulai crowded.";
+
+  }
+
+  else if (
+    regime === "LOW VOLATILITY"
+  ) {
+
+    insight =
+      "Volatilitas rendah. Breakout dapat terjadi setelah periode konsolidasi.";
 
   }
 
 
   return {
-    label: "NEUTRAL",
-    className: "dim"
+
+    ...item,
+
+    score,
+
+    bias,
+
+    regime,
+
+    risk,
+
+    signal,
+
+    insight
+
   };
 
 }
 
 
-/* =========================================
-   MOMENTUM
-========================================= */
-
-function getMomentum(item) {
-
-  const change =
-    Math.abs(
-      item.change24h
-    );
-
-
-  if (change >= 5) {
-
-    return {
-      label: "VERY HIGH",
-      className:
-        item.change24h >= 0
-          ? "up"
-          : "down"
-    };
-
-  }
-
-
-  if (change >= 2) {
-
-    return {
-      label: "HIGH",
-      className:
-        item.change24h >= 0
-          ? "up"
-          : "down"
-    };
-
-  }
-
-
-  if (change >= 0.5) {
-
-    return {
-      label: "MODERATE",
-      className:
-        item.change24h >= 0
-          ? "up"
-          : "down"
-    };
-
-  }
-
-
-  return {
-    label: "LOW",
-    className: "dim"
-  };
-
-}
-
-
-/* =========================================
-   FUNDING SENTIMENT
-========================================= */
-
-function getFundingSentiment(item) {
-
-  const funding =
-    item.fundingRate * 100;
-
-
-  if (funding >= 0.05) {
-
-    return {
-      label: "LONG CROWDED",
-      className: "down"
-    };
-
-  }
-
-
-  if (funding > 0) {
-
-    return {
-      label: "LONG BIAS",
-      className: "up"
-    };
-
-  }
-
-
-  if (funding <= -0.05) {
-
-    return {
-      label: "SHORT CROWDED",
-      className: "up"
-    };
-
-  }
-
-
-  if (funding < 0) {
-
-    return {
-      label: "SHORT BIAS",
-      className: "down"
-    };
-
-  }
-
-
-  return {
-    label: "NEUTRAL",
-    className: "dim"
-  };
-
-}
-
-
-/* =========================================
-   RISK
-========================================= */
-
-function getRiskV2(item) {
-
-  const move =
-    Math.abs(
-      item.change24h
-    );
-
-
-  const funding =
-    Math.abs(
-      item.fundingRate * 100
-    );
-
-
-  if (
-    move >= 8 ||
-    funding >= 0.08
-  ) {
-
-    return {
-      label: "HIGH",
-      className: "down"
-    };
-
-  }
-
-
-  if (
-    move >= 4 ||
-    funding >= 0.04
-  ) {
-
-    return {
-      label: "MODERATE",
-      className: ""
-    };
-
-  }
-
-
-  return {
-    label: "LOW",
-    className: "up"
-  };
-
-}
-
-
-/* =========================================
-   REASONING
-========================================= */
-
-function generateReasoning(
-  item,
-  score
-) {
-
-  const reasons = [];
-
-
-  if (
-    item.change24h >= 2
-  ) {
-
-    reasons.push(
-      "harga menunjukkan momentum positif"
-    );
-
-  }
-
-
-  if (
-    item.change24h <= -2
-  ) {
-
-    reasons.push(
-      "harga menunjukkan tekanan bearish"
-    );
-
-  }
-
-
-  if (
-    item.fundingRate > 0.0005
-  ) {
-
-    reasons.push(
-      "funding positif menunjukkan dominasi long"
-    );
-
-  }
-
-
-  if (
-    item.fundingRate < -0.0005
-  ) {
-
-    reasons.push(
-      "funding negatif menunjukkan dominasi short"
-    );
-
-  }
-
-
-  if (!reasons.length) {
-
-    reasons.push(
-      "momentum belum menunjukkan dominasi yang kuat"
-    );
-
-  }
-
-
-  let conclusion;
-
-
-  if (score >= 65) {
-
-    conclusion =
-      "Bias keseluruhan cenderung bullish.";
-
-  }
-
-  else if (score <= 35) {
-
-    conclusion =
-      "Bias keseluruhan cenderung bearish.";
-
-  }
-
-  else {
-
-    conclusion =
-      "Bias keseluruhan masih netral.";
-
-  }
-
-
-  return (
-    reasons.join(". ") +
-    ". " +
-    conclusion
-  );
-
-}
-
-
-/* =========================================
-   MARKET SCORE
-========================================= */
-
-function calculateMarketScore(
-  data
-) {
-
-  if (!data.length) {
-
-    return 50;
-
-  }
-
-
-  const scores =
-    data.map(
-      calculateAssetScore
-    );
-
-
-  return (
-    scores.reduce(
-      (a, b) => a + b,
-      0
-    ) /
-    scores.length
-  );
-
-}
-
-
-/* =========================================
-   RENDER MARKET
-========================================= */
-
-function renderMarketScoreV2() {
-
-  const data =
-    INTELLIGENCE_V2.data;
-
-
-  const score =
-    calculateMarketScore(
-      data
-    );
-
-
-  const scoreElement =
-    document.getElementById(
-      "market-score"
-    );
-
-
-  const sentiment =
-    document.getElementById(
-      "market-sentiment"
-    );
-
-
-  const bar =
-    document.getElementById(
-      "sentiment-bar"
-    );
-
-
-  if (scoreElement) {
-
-    scoreElement.textContent =
-      `${Math.round(score)}/100`;
-
-  }
-
-
-  if (bar) {
-
-    bar.style.width =
-      `${score}%`;
-
-  }
-
-
-  if (sentiment) {
-
-    sentiment.className = "";
-
-
-    if (score >= 65) {
-
-      sentiment.textContent =
-        "BULLISH";
-
-      sentiment.classList.add(
-        "up"
-      );
-
-    }
-
-    else if (score <= 35) {
-
-      sentiment.textContent =
-        "BEARISH";
-
-      sentiment.classList.add(
-        "down"
-      );
-
-    }
-
-    else {
-
-      sentiment.textContent =
-        "NEUTRAL";
-
-      sentiment.classList.add(
-        "dim"
-      );
-
-    }
-
-  }
-
-}
-
-
-/* =========================================
-   RENDER ASSETS
-========================================= */
-
-function renderIntelligenceV2() {
-
-  renderMarketScoreV2();
-
+function renderIntelligenceV100() {
 
   const container =
     document.getElementById(
-      "intel-assets"
+      "intelligence-content"
     );
 
+  if (!container)
+    return;
 
-  if (!container) return;
+
+  let data =
+    INTELLIGENCE_STATE.data;
 
 
-  const data =
-    INTELLIGENCE_V2.data;
+  const filter =
+    window.NEXTRA_INTELLIGENCE_FILTER ||
+    "all";
+
+
+  if (filter === "bullish") {
+
+    data =
+      data.filter(
+        x =>
+          x.bias === "BULLISH"
+      );
+
+  }
+
+  else if (filter === "bearish") {
+
+    data =
+      data.filter(
+        x =>
+          x.bias === "BEARISH"
+      );
+
+  }
+
+  else if (filter === "strong") {
+
+    data =
+      data.filter(
+        x =>
+          x.score >= 80
+      );
+
+  }
+
+  else if (filter === "risk") {
+
+    data =
+      data.filter(
+        x =>
+          x.risk === "HIGH"
+      );
+
+  }
+
+
+  data =
+    [...data].sort(
+      (a,b) =>
+        b.score - a.score
+    );
 
 
   if (!data.length) {
 
     container.innerHTML = `
-      <div class="empty-state">
-        Tidak ada data.
+      <div class="intel-empty">
+        Tidak ada intelligence
+        untuk filter ini.
       </div>
     `;
 
@@ -716,118 +486,168 @@ function renderIntelligenceV2() {
       )
       .join("");
 
+
+  updateIntelligenceSummary();
+
 }
 
 
-/* =========================================
-   CARD
-========================================= */
+function renderIntelligenceCard(item) {
 
-function renderIntelligenceCard(
-  item
-) {
-
-  const score =
-    calculateAssetScore(
-      item
-    );
+  const biasClass =
+    item.bias === "BULLISH"
+      ? "up"
+      : item.bias === "BEARISH"
+        ? "down"
+        : "neutral";
 
 
-  const trend =
-    getTrendV2(item);
+  const riskClass =
+    item.risk === "HIGH"
+      ? "down"
+      : item.risk === "LOW"
+        ? "up"
+        : "neutral";
 
 
-  const momentum =
-    getMomentum(item);
+  const change =
+    inum(item.change24h);
 
 
   const funding =
-    getFundingSentiment(
-      item
-    );
-
-
-  const risk =
-    getRiskV2(item);
-
-
-  const bullish =
-    Math.round(
-      score
-    );
-
-
-  const bearish =
-    100 - bullish;
+    inum(item.fundingRate) * 100;
 
 
   return `
 
-    <article
-      class="coin-card"
-      style="
-        display:block;
-        margin-bottom:12px;
-      "
-    >
+    <article class="intel-card">
 
-      <div
-        style="
-          display:flex;
-          justify-content:
-            space-between;
-          align-items:center;
-        "
-      >
+      <div class="intel-card-head">
 
         <div>
 
-          <strong
-            style="
-              font-size:15px;
-            "
-          >
-            ${item.symbol
+          <div class="intel-symbol">
+            ${String(item.symbol)
               .replace(
                 "USDT",
                 "/USDT"
               )}
-          </strong>
+          </div>
+
+          <div class="intel-price">
+            ${iprice(item.price)}
+          </div>
 
           <div
-            class="dim"
-            style="
-              font-size:8px;
-              margin-top:3px;
+            class="
+              intel-change
+              ${change >= 0
+                ? "up"
+                : "down"}
             "
           >
-            Intelligence Score
+            ${ipercent(change)}
           </div>
 
         </div>
 
 
         <div
-          style="
-            text-align:right;
+          class="
+            intel-badge
+            ${biasClass}
           "
         >
 
-          <strong
-            style="
-              font-size:20px;
-            "
-          >
-            ${score}
+          ${item.bias}
+
+          <br>
+
+          ${item.score}/100
+
+        </div>
+
+      </div>
+
+
+      <div class="intel-score">
+
+        <div class="intel-score-row">
+
+          <span>
+            INTELLIGENCE SCORE
+          </span>
+
+          <strong>
+            ${item.score}/100
           </strong>
 
+        </div>
+
+
+        <div class="intel-bar">
+
           <div
-            class="dim"
+            class="intel-fill"
             style="
-              font-size:7px;
+              width:${item.score}%
             "
-          >
-            /100
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="intel-metrics">
+
+        <div class="intel-metric">
+
+          <div class="intel-metric-label">
+            MARKET REGIME
+          </div>
+
+          <div class="intel-metric-value">
+            ${item.regime}
+          </div>
+
+        </div>
+
+
+        <div class="intel-metric">
+
+          <div class="intel-metric-label">
+            OI CHANGE
+          </div>
+
+          <div class="intel-metric-value">
+            ${ipercent(item.oiChange)}
+          </div>
+
+        </div>
+
+
+        <div class="intel-metric">
+
+          <div class="intel-metric-label">
+            FUNDING
+          </div>
+
+          <div class="intel-metric-value">
+            ${funding.toFixed(4)}%
+          </div>
+
+        </div>
+
+
+        <div class="intel-metric">
+
+          <div class="intel-metric-label">
+            VOLUME
+          </div>
+
+          <div class="intel-metric-value">
+            ${ilarge(item.quoteVolume)}
           </div>
 
         </div>
@@ -835,147 +655,23 @@ function renderIntelligenceCard(
       </div>
 
 
-      <!-- BULL / BEAR -->
+      <div class="intel-insight">
 
-      <div
-        style="
-          display:flex;
-          justify-content:
-            space-between;
-          margin-top:12px;
-          font-size:8px;
-        "
-      >
+        🧠
+        ${item.insight}
 
-        <span class="up">
-          Bullish ${bullish}%
+      </div>
+
+
+      <div class="intel-bottom">
+
+        <span class="${biasClass}">
+          🎯 ${item.signal}
         </span>
 
-        <span class="down">
-          Bearish ${bearish}%
+        <span class="${riskClass}">
+          RISK: ${item.risk}
         </span>
-
-      </div>
-
-
-      <div
-        style="
-          display:flex;
-          height:5px;
-          margin-top:5px;
-          background:
-            var(--border);
-          border-radius:10px;
-          overflow:hidden;
-        "
-      >
-
-        <div
-          style="
-            width:${bullish}%;
-            background:
-              var(--accent);
-          "
-        ></div>
-
-      </div>
-
-
-      <!-- METRICS -->
-
-      <div
-        style="
-          display:grid;
-          grid-template-columns:
-            repeat(2,1fr);
-          gap:7px;
-          margin-top:12px;
-        "
-      >
-
-        <div class="mini-stat">
-
-          <span>Trend</span>
-
-          <strong
-            class="${trend.className}"
-          >
-            ${trend.label}
-          </strong>
-
-        </div>
-
-
-        <div class="mini-stat">
-
-          <span>Momentum</span>
-
-          <strong
-            class="${momentum.className}"
-          >
-            ${momentum.label}
-          </strong>
-
-        </div>
-
-
-        <div class="mini-stat">
-
-          <span>Funding</span>
-
-          <strong
-            class="${funding.className}"
-          >
-            ${funding.label}
-          </strong>
-
-        </div>
-
-
-        <div class="mini-stat">
-
-          <span>Risk</span>
-
-          <strong
-            class="${risk.className}"
-          >
-            ${risk.label}
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <!-- REASONING -->
-
-      <div
-        style="
-          margin-top:11px;
-          padding:10px;
-          border:
-            1px solid var(--border);
-          border-radius:10px;
-          font-size:8px;
-          line-height:1.6;
-        "
-      >
-
-        <strong>
-          🧠 Reasoning
-        </strong>
-
-        <div
-          class="dim"
-          style="
-            margin-top:4px;
-          "
-        >
-          ${generateReasoning(
-            item,
-            score
-          )}
-        </div>
 
       </div>
 
@@ -986,41 +682,296 @@ function renderIntelligenceCard(
 }
 
 
-/* =========================================
-   GLOBAL
-========================================= */
+function updateIntelligenceSummary() {
+
+  const data =
+    INTELLIGENCE_STATE.data;
+
+
+  const bullish =
+    data.filter(
+      x =>
+        x.bias === "BULLISH"
+    ).length;
+
+
+  const bearish =
+    data.filter(
+      x =>
+        x.bias === "BEARISH"
+    ).length;
+
+
+  const strong =
+    data.filter(
+      x =>
+        x.score >= 80
+    ).length;
+
+
+  const risk =
+    data.filter(
+      x =>
+        x.risk === "HIGH"
+    ).length;
+
+
+  document.getElementById(
+    "intel-bullish"
+  ).textContent =
+    bullish;
+
+
+  document.getElementById(
+    "intel-bearish"
+  ).textContent =
+    bearish;
+
+
+  document.getElementById(
+    "intel-strong"
+  ).textContent =
+    strong;
+
+
+  document.getElementById(
+    "intel-risk"
+  ).textContent =
+    risk;
+
+
+  document.getElementById(
+    "intel-update"
+  ).textContent =
+    INTELLIGENCE_STATE
+      .lastUpdate
+      ?.toLocaleTimeString(
+        "id-ID"
+      ) ||
+      "--";
+
+}
+
+
+async function loadIntelligence() {
+
+  if (
+    INTELLIGENCE_STATE.loading
+  )
+    return;
+
+
+  const container =
+    document.getElementById(
+      "intelligence-content"
+    );
+
+
+  const status =
+    document.getElementById(
+      "intel-status"
+    );
+
+
+  if (!container)
+    return;
+
+
+  INTELLIGENCE_STATE.loading =
+    true;
+
+
+  status.textContent =
+    "ANALYZING...";
+
+
+  container.innerHTML = `
+    <div class="intel-empty">
+      🧠 Analyzing market data...
+    </div>
+  `;
+
+
+  try {
+
+    let raw = [];
+
+
+    /*
+      Pakai API NEXTRA jika tersedia.
+      Fallback langsung ke Binance Futures.
+    */
+
+    if (
+      window.NEXTRA_API &&
+      typeof
+      NEXTRA_API.fetchFuturesMarkets ===
+      "function"
+    ) {
+
+      raw =
+        await NEXTRA_API.fetchFuturesMarkets(
+          INTELLIGENCE_STATE.symbols
+        );
+
+    }
+
+
+    /*
+      Jika API utama tidak menghasilkan data,
+      ambil data dasar Binance.
+    */
+
+    if (
+      !Array.isArray(raw) ||
+      !raw.length
+    ) {
+
+      const responses =
+        await Promise.all(
+          INTELLIGENCE_STATE
+            .symbols
+            .map(
+              async symbol => {
+
+                try {
+
+                  const response =
+                    await fetch(
+                      "https://fapi.binance.com" +
+                      "/fapi/v1/ticker/24hr?symbol=" +
+                      symbol
+                    );
+
+
+                  const data =
+                    await response.json();
+
+
+                  return {
+
+                    symbol,
+
+                    price:
+                      inum(
+                        data.lastPrice
+                      ),
+
+                    change24h:
+                      inum(
+                        data.priceChangePercent
+                      ),
+
+                    quoteVolume:
+                      inum(
+                        data.quoteVolume
+                      ),
+
+                    oiChange: 0,
+
+                    fundingRate: 0,
+
+                    volumeSpike: 1
+
+                  };
+
+                }
+
+                catch {
+
+                  return null;
+
+                }
+
+              }
+            )
+        );
+
+
+      raw =
+        responses.filter(
+          Boolean
+        );
+
+    }
+
+
+    INTELLIGENCE_STATE.data =
+      raw
+        .map(
+          analyzeIntelligence
+        );
+
+
+    INTELLIGENCE_STATE.lastUpdate =
+      new Date();
+
+
+    renderIntelligenceV100();
+
+
+    status.textContent =
+      "LIVE";
+
+  }
+
+  catch(error) {
+
+    console.error(
+      "NEXTRA Intelligence V100:",
+      error
+    );
+
+
+    status.textContent =
+      "ERROR";
+
+
+    container.innerHTML = `
+      <div class="intel-empty">
+        ⚠️ Intelligence gagal
+        memuat data.
+        <br><br>
+        Coba refresh kembali.
+      </div>
+    `;
+
+  }
+
+  finally {
+
+    INTELLIGENCE_STATE.loading =
+      false;
+
+  }
+
+}
+
 
 window.NEXTRA_INTELLIGENCE = {
 
+  state:
+    INTELLIGENCE_STATE,
+
   load:
-    loadIntelligenceV2,
+    loadIntelligence,
 
   refresh:
-    loadIntelligenceV2,
-
-  state:
-    INTELLIGENCE_V2
+    loadIntelligence
 
 };
 
-
-/* =========================================
-   INIT
-========================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   () => {
 
-    if (
-      document.getElementById(
-        "intel-assets"
-      )
-    ) {
+    loadIntelligence();
 
-      loadIntelligenceV2();
-
-    }
+    setInterval(
+      loadIntelligence,
+      60000
+    );
 
   }
 );
