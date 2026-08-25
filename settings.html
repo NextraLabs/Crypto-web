@@ -30,22 +30,16 @@
   <style>
 
     /* =================================================
-       NEXTRA SETTINGS V10
+       NEXTRA SETTINGS V11
     ================================================= */
 
     .settings-hero {
-
       position: relative;
       overflow: hidden;
-
       padding: 20px;
       margin-bottom: 24px;
-
-      border:
-        1px solid var(--line);
-
+      border: 1px solid var(--line);
       border-radius: 20px;
-
       background:
         radial-gradient(
           circle at 100% 0%,
@@ -58,630 +52,252 @@
           transparent 50%
         ),
         var(--surface);
-
     }
 
-
     .settings-hero-label {
-
       display: flex;
       align-items: center;
       gap: 7px;
-
       color: var(--green);
-
       font-size: 9px;
       font-weight: 800;
-
       letter-spacing: 1.3px;
       text-transform: uppercase;
-
     }
-
 
     .settings-hero-label::before {
-
       content: "";
-
       width: 6px;
       height: 6px;
-
       border-radius: 50%;
-
       background: var(--green);
-
-      box-shadow:
-        0 0 10px
-        rgba(57,242,160,.7);
-
+      box-shadow: 0 0 10px rgba(57,242,160,.7);
     }
-
 
     .settings-title {
-
-      margin:
-        10px 0 6px;
-
+      margin: 10px 0 6px;
       font-size: 25px;
       line-height: 1.1;
-
       letter-spacing: -.05em;
-
     }
-
 
     .settings-hero-description {
-
       margin: 0;
-
       color: var(--muted);
-
       font-size: 10px;
       line-height: 1.65;
-
     }
-
-
-    /* =================================================
-       SECTION
-    ================================================= */
 
     .settings-section {
-
       margin-top: 24px;
-
     }
-
 
     .settings-section-header {
-
       margin-bottom: 10px;
-
     }
-
 
     .settings-section-title {
-
       margin: 0;
-
       font-size: 15px;
       font-weight: 800;
-
       letter-spacing: -.02em;
-
     }
-
 
     .settings-section-subtitle {
-
       margin-top: 3px;
-
       color: var(--muted);
-
       font-size: 8px;
-
     }
-
-
-    /* =================================================
-       LIST
-    ================================================= */
 
     .settings-list {
-
       overflow: hidden;
-
-      border:
-        1px solid var(--line);
-
+      border: 1px solid var(--line);
       border-radius: 17px;
-
       background: var(--surface);
-
     }
 
-
-    .settings-item {
-
+    .settings-item,
+    .settings-link {
       display: flex;
       align-items: center;
-
       gap: 12px;
-
       min-height: 68px;
-
-      padding:
-        10px 13px;
-
-      border-bottom:
-        1px solid var(--line);
-
+      padding: 10px 13px;
+      border-bottom: 1px solid var(--line);
     }
-
-
-    .settings-item:last-child {
-
-      border-bottom: 0;
-
-    }
-
-
-    .settings-item:active {
-
-      background:
-        rgba(57,242,160,.035);
-
-    }
-
-
-    /* =================================================
-       ICON
-    ================================================= */
-
-    .settings-icon {
-
-      flex-shrink: 0;
-
-      width: 39px;
-      height: 39px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 12px;
-
-      color: var(--green);
-
-      background:
-        rgba(57,242,160,.075);
-
-      border:
-        1px solid
-        rgba(57,242,160,.08);
-
-    }
-
-
-    .settings-icon svg {
-
-      width: 19px;
-      height: 19px;
-
-      fill: none;
-
-      stroke: currentColor;
-
-      stroke-width: 1.8;
-
-      stroke-linecap: round;
-      stroke-linejoin: round;
-
-    }
-
-
-    /* =================================================
-       CONTENT
-    ================================================= */
-
-    .settings-content {
-
-      flex: 1;
-
-      min-width: 0;
-
-    }
-
-
-    .settings-name {
-
-      font-size: 11px;
-      font-weight: 800;
-
-    }
-
-
-    .settings-description {
-
-      margin-top: 4px;
-
-      color: var(--muted);
-
-      font-size: 8px;
-
-      line-height: 1.4;
-
-    }
-
-
-    /* =================================================
-       SELECT
-    ================================================= */
-
-    .settings-select {
-
-      min-width: 86px;
-
-      padding:
-        8px 10px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 10px;
-
-      color: var(--text);
-
-      background:
-        var(--surface);
-
-      font-size: 9px;
-
-      outline: none;
-
-    }
-
-
-    .settings-select:focus {
-
-      border-color:
-        rgba(57,242,160,.35);
-
-    }
-
-
-    /* =================================================
-       TOGGLE
-    ================================================= */
-
-    .settings-toggle {
-
-      position: relative;
-
-      flex-shrink: 0;
-
-      width: 42px;
-      height: 24px;
-
-      padding: 0;
-
-      border: 0;
-
-      border-radius: 30px;
-
-      background:
-        rgba(255,255,255,.10);
-
-      cursor: pointer;
-
-      transition:
-        background .2s ease;
-
-    }
-
-
-    .settings-toggle::after {
-
-      content: "";
-
-      position: absolute;
-
-      top: 3px;
-      left: 3px;
-
-      width: 18px;
-      height: 18px;
-
-      border-radius: 50%;
-
-      background: #fff;
-
-      transition:
-        transform .2s ease;
-
-    }
-
-
-    .settings-toggle.active {
-
-      background:
-        var(--green);
-
-    }
-
-
-    .settings-toggle.active::after {
-
-      transform:
-        translateX(18px);
-
-    }
-
-
-    /* =================================================
-       LINK ROW
-    ================================================= */
 
     .settings-link {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-      min-height: 68px;
-
-      padding:
-        10px 13px;
-
       color: inherit;
-
       text-decoration: none;
-
-      border-bottom:
-        1px solid var(--line);
-
     }
 
-
+    .settings-item:last-child,
     .settings-link:last-child {
-
       border-bottom: 0;
-
     }
 
+    .settings-item:active,
+    .settings-link:active {
+      background: rgba(57,242,160,.035);
+    }
+
+    .settings-icon {
+      flex-shrink: 0;
+      width: 39px;
+      height: 39px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      color: var(--green);
+      background: rgba(57,242,160,.075);
+      border: 1px solid rgba(57,242,160,.08);
+    }
+
+    .settings-icon svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .settings-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .settings-name {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .settings-description {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 8px;
+      line-height: 1.4;
+    }
+
+    .settings-select {
+      min-width: 86px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text);
+      background: var(--surface);
+      font-size: 9px;
+      outline: none;
+    }
+
+    .settings-select:focus {
+      border-color: rgba(57,242,160,.35);
+    }
+
+    .settings-toggle {
+      position: relative;
+      flex-shrink: 0;
+      width: 42px;
+      height: 24px;
+      padding: 0;
+      border: 0;
+      border-radius: 30px;
+      background: rgba(255,255,255,.10);
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .settings-toggle::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .2s ease;
+    }
+
+    .settings-toggle.active {
+      background: var(--green);
+    }
+
+    .settings-toggle.active::after {
+      transform: translateX(18px);
+    }
 
     .settings-arrow {
-
       color: var(--subtle);
-
       font-size: 18px;
-
     }
-
-
-    /* =================================================
-       VALUE
-    ================================================= */
 
     .settings-value {
-
       flex-shrink: 0;
-
       color: var(--muted);
-
       font-size: 8px;
-
     }
-
-
-    /* =================================================
-       ACCOUNT CARD
-    ================================================= */
-
-    .account-card {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-      padding: 14px;
-
-    }
-
-
-    .account-avatar {
-
-      width: 44px;
-      height: 44px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      flex-shrink: 0;
-
-      border-radius: 50%;
-
-      color: var(--green);
-
-      background:
-        rgba(57,242,160,.10);
-
-      border:
-        1px solid
-        rgba(57,242,160,.16);
-
-      font-size: 16px;
-      font-weight: 900;
-
-    }
-
-
-    .account-info {
-
-      flex: 1;
-
-      min-width: 0;
-
-    }
-
-
-    .account-name {
-
-      font-size: 12px;
-
-      font-weight: 900;
-
-    }
-
-
-    .account-status {
-
-      margin-top: 4px;
-
-      color: var(--green);
-
-      font-size: 8px;
-
-    }
-
-
-    .account-link {
-
-      color: var(--green);
-
-      font-size: 8px;
-
-      font-weight: 800;
-
-      text-decoration: none;
-
-    }
-
-
-    /* =================================================
-       DANGER
-    ================================================= */
 
     .danger-item {
-
       color: #ff7777;
-
     }
-
 
     .danger-item .settings-icon {
-
       color: #ff7777;
-
-      background:
-        rgba(255,80,80,.07);
-
-      border-color:
-        rgba(255,80,80,.10);
-
+      background: rgba(255,80,80,.07);
+      border-color: rgba(255,80,80,.10);
     }
-
-
-    /* =================================================
-       RESET BUTTON
-    ================================================= */
 
     .reset-button {
-
       width: 100%;
-
       margin-top: 12px;
-
       padding: 13px;
-
-      border:
-        1px solid
-        rgba(255,80,80,.18);
-
+      border: 1px solid rgba(255,80,80,.18);
       border-radius: 14px;
-
       color: #ff7777;
-
-      background:
-        rgba(255,80,80,.045);
-
+      background: rgba(255,80,80,.045);
       font-size: 9px;
-
       font-weight: 800;
-
       cursor: pointer;
-
     }
-
-
-    .reset-button:active {
-
-      transform: scale(.98);
-
-    }
-
-
-    /* =================================================
-       BACK
-    ================================================= */
 
     .settings-back {
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       width: 100%;
-
       margin-top: 24px;
-
       padding: 13px;
-
-      border:
-        1px solid var(--line);
-
+      border: 1px solid var(--line);
       border-radius: 14px;
-
       color: var(--text);
-
-      background:
-        var(--surface);
-
+      background: var(--surface);
       text-decoration: none;
-
       font-size: 10px;
-
       font-weight: 800;
-
     }
-
-
-    /* =================================================
-       FOOTER
-    ================================================= */
 
     .settings-footer {
-
-      padding:
-        24px 0 32px;
-
+      padding: 24px 0 32px;
       text-align: center;
-
       color: var(--subtle);
-
       font-size: 7px;
-
       line-height: 1.6;
-
     }
-
 
     @media (max-width: 360px) {
 
       .settings-item,
       .settings-link {
-
         min-height: 64px;
-
-        padding:
-          9px 11px;
-
+        padding: 9px 11px;
       }
 
-
       .settings-icon {
-
         width: 36px;
         height: 36px;
-
       }
 
     }
@@ -692,7 +308,6 @@
 
 
 <body>
-
 
 <main class="container">
 
@@ -715,7 +330,6 @@
 
     </div>
 
-
     <button
       class="icon-btn"
       id="theme-toggle"
@@ -729,7 +343,6 @@
   </header>
 
 
-
   <!-- =================================================
        HERO
   ================================================= -->
@@ -737,7 +350,7 @@
   <section class="settings-hero">
 
     <div class="settings-hero-label">
-      NEXTRA SETTINGS V10
+      NEXTRA SETTINGS V11
     </div>
 
     <h2 class="settings-title">
@@ -745,12 +358,11 @@
     </h2>
 
     <p class="settings-hero-description">
-      Atur pengalaman NEXTRA sesuai
-      gaya trading dan kebutuhanmu.
+      Semua preferensi NEXTRA tersimpan
+      otomatis di perangkatmu.
     </p>
 
   </section>
-
 
 
   <!-- =================================================
@@ -770,7 +382,6 @@
       </div>
 
     </div>
-
 
     <div class="settings-list">
 
@@ -797,7 +408,6 @@
 
         </div>
 
-
         <div class="settings-content">
 
           <div class="settings-name">
@@ -810,7 +420,6 @@
 
         </div>
 
-
         <div class="settings-arrow">
           ›
         </div>
@@ -818,10 +427,7 @@
       </a>
 
 
-      <a
-        href="profile.html"
-        class="settings-link"
-      >
+      <div class="settings-item">
 
         <div class="settings-icon">
 
@@ -843,7 +449,6 @@
 
         </div>
 
-
         <div class="settings-content">
 
           <div class="settings-name">
@@ -851,22 +456,20 @@
           </div>
 
           <div class="settings-description">
-            Status dan informasi akun
+            Status akun saat ini
           </div>
 
         </div>
-
 
         <div class="settings-value">
           Active
         </div>
 
-      </a>
+      </div>
 
     </div>
 
   </section>
-
 
 
   <!-- =================================================
@@ -887,7 +490,6 @@
 
     </div>
 
-
     <div class="settings-list">
 
       <div class="settings-item">
@@ -903,21 +505,15 @@
             />
 
             <path d="M12 2v2"/>
-
             <path d="M12 20v2"/>
-
             <path d="M4.93 4.93l1.41 1.41"/>
-
             <path d="M17.66 17.66l1.41 1.41"/>
-
             <path d="M2 12h2"/>
-
             <path d="M20 12h2"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -930,7 +526,6 @@
           </div>
 
         </div>
-
 
         <select
           class="settings-select"
@@ -961,19 +556,14 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 5h16"/>
-
             <path d="M7 5v3"/>
-
             <path d="M17 5v3"/>
-
             <path d="M5 9h14"/>
-
             <path d="M12 9v10"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -986,7 +576,6 @@
           </div>
 
         </div>
-
 
         <select
           class="settings-select"
@@ -1013,17 +602,13 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 19V9"/>
-
             <path d="M9 19V5"/>
-
             <path d="M14 19v-8"/>
-
             <path d="M20 19V3"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1037,7 +622,6 @@
 
         </div>
 
-
         <button
           class="settings-toggle"
           id="compact-toggle"
@@ -1050,7 +634,6 @@
     </div>
 
   </section>
-
 
 
   <!-- =================================================
@@ -1070,7 +653,6 @@
       </div>
 
     </div>
-
 
     <div class="settings-list">
 
@@ -1092,7 +674,6 @@
 
         </div>
 
-
         <div class="settings-content">
 
           <div class="settings-name">
@@ -1104,7 +685,6 @@
           </div>
 
         </div>
-
 
         <select
           class="settings-select"
@@ -1142,7 +722,6 @@
 
         </div>
 
-
         <div class="settings-content">
 
           <div class="settings-name">
@@ -1150,11 +729,10 @@
           </div>
 
           <div class="settings-description">
-            Aktifkan peringatan perubahan harga
+            Peringatan perubahan harga
           </div>
 
         </div>
-
 
         <button
           class="settings-toggle"
@@ -1173,15 +751,12 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 18V6"/>
-
             <path d="M4 18h16"/>
-
             <path d="M7 15l3-4 3 2 5-7"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1195,7 +770,6 @@
 
         </div>
 
-
         <button
           class="settings-toggle"
           id="refresh-toggle"
@@ -1208,7 +782,6 @@
     </div>
 
   </section>
-
 
 
   <!-- =================================================
@@ -1229,7 +802,6 @@
 
     </div>
 
-
     <div class="settings-list">
 
       <div class="settings-item">
@@ -1239,15 +811,12 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M5 19L19 5"/>
-
             <path d="M6 6h6"/>
-
             <path d="M12 18h6"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1260,7 +829,6 @@
           </div>
 
         </div>
-
 
         <button
           class="settings-toggle"
@@ -1285,13 +853,11 @@
             />
 
             <path d="M8 12h8"/>
-
             <path d="M12 8v8"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1304,7 +870,6 @@
           </div>
 
         </div>
-
 
         <select
           class="settings-select"
@@ -1328,7 +893,6 @@
   </section>
 
 
-
   <!-- =================================================
        NOTIFICATIONS
   ================================================= -->
@@ -1346,7 +910,6 @@
       </div>
 
     </div>
-
 
     <div class="settings-list">
 
@@ -1371,7 +934,6 @@
 
         </div>
 
-
         <div class="settings-content">
 
           <div class="settings-name">
@@ -1379,11 +941,10 @@
           </div>
 
           <div class="settings-description">
-            Notifikasi peluang dan pergerakan market
+            Peluang dan pergerakan market
           </div>
 
         </div>
-
 
         <button
           class="settings-toggle"
@@ -1402,15 +963,12 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 5h16v14H4z"/>
-
             <path d="M8 9h8"/>
-
             <path d="M8 13h5"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1423,7 +981,6 @@
           </div>
 
         </div>
-
 
         <button
           class="settings-toggle"
@@ -1442,17 +999,13 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 4h16v16H4z"/>
-
             <path d="M8 8h8"/>
-
             <path d="M8 12h8"/>
-
             <path d="M8 16h5"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1465,7 +1018,6 @@
           </div>
 
         </div>
-
 
         <button
           class="settings-toggle"
@@ -1481,9 +1033,8 @@
   </section>
 
 
-
   <!-- =================================================
-       PRIVACY & SECURITY
+       PRIVACY
   ================================================= -->
 
   <section class="settings-section">
@@ -1499,7 +1050,6 @@
       </div>
 
     </div>
-
 
     <div class="settings-list">
 
@@ -1532,7 +1082,6 @@
 
         </div>
 
-
         <div class="settings-content">
 
           <div class="settings-name">
@@ -1544,7 +1093,6 @@
           </div>
 
         </div>
-
 
         <div class="settings-arrow">
           ›
@@ -1560,13 +1108,11 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/>
-
             <path d="M9 12l2 2 4-4"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1575,11 +1121,10 @@
           </div>
 
           <div class="settings-description">
-            Perlindungan tambahan untuk sesi akun
+            Perlindungan tambahan sesi akun
           </div>
 
         </div>
-
 
         <button
           class="settings-toggle"
@@ -1593,7 +1138,6 @@
     </div>
 
   </section>
-
 
 
   <!-- =================================================
@@ -1614,7 +1158,6 @@
 
     </div>
 
-
     <div class="settings-list">
 
       <div class="settings-item">
@@ -1624,19 +1167,14 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 6h16"/>
-
             <path d="M7 6v14h10V6"/>
-
             <path d="M9 3h6"/>
-
             <path d="M9 10v6"/>
-
             <path d="M15 10v6"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1645,14 +1183,13 @@
           </div>
 
           <div class="settings-description">
-            Data preferensi tersimpan di perangkat
+            Preferensi tersimpan di perangkat
           </div>
 
         </div>
 
-
         <div class="settings-value">
-          Local
+          Active
         </div>
 
       </div>
@@ -1665,17 +1202,13 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 4h16v16H4z"/>
-
             <path d="M8 8h8"/>
-
             <path d="M8 12h8"/>
-
             <path d="M8 16h5"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1689,7 +1222,6 @@
 
         </div>
 
-
         <button
           class="settings-toggle"
           id="save-toggle"
@@ -1702,7 +1234,6 @@
     </div>
 
   </section>
-
 
 
   <!-- =================================================
@@ -1722,7 +1253,6 @@
       </div>
 
     </div>
-
 
     <div class="settings-list">
 
@@ -1752,7 +1282,6 @@
 
         </div>
 
-
         <div class="settings-content">
 
           <div class="settings-name">
@@ -1765,9 +1294,8 @@
 
         </div>
 
-
         <div class="settings-value">
-          V10
+          V11
         </div>
 
       </div>
@@ -1790,13 +1318,11 @@
             />
 
             <path d="M8 12h8"/>
-
             <path d="M12 8v8"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1810,7 +1336,6 @@
 
         </div>
 
-
         <div class="settings-arrow">
           ›
         </div>
@@ -1822,9 +1347,8 @@
   </section>
 
 
-
   <!-- =================================================
-       RESET
+       ADVANCED
   ================================================= -->
 
   <section class="settings-section">
@@ -1841,7 +1365,6 @@
 
     </div>
 
-
     <div class="settings-list">
 
       <div class="settings-item danger-item">
@@ -1851,19 +1374,14 @@
           <svg viewBox="0 0 24 24">
 
             <path d="M4 7h16"/>
-
             <path d="M10 11v6"/>
-
             <path d="M14 11v6"/>
-
             <path d="M6 7l1 14h10l1-14"/>
-
             <path d="M9 7V4h6v3"/>
 
           </svg>
 
         </div>
-
 
         <div class="settings-content">
 
@@ -1881,7 +1399,6 @@
 
     </div>
 
-
     <button
       class="reset-button"
       id="reset-settings"
@@ -1891,7 +1408,6 @@
     </button>
 
   </section>
-
 
 
   <!-- =================================================
@@ -1910,7 +1426,7 @@
 
     NEXTRA · Your Market. Your Intelligence.<br>
 
-    Settings V10
+    Settings V11
 
   </div>
 
@@ -1921,7 +1437,44 @@
 <script>
 
   /* =================================================
-     STORAGE HELPERS
+     NEXTRA SETTINGS V11
+     CENTRAL SETTINGS ENGINE
+  ================================================= */
+
+
+  const NEXTRA_SETTINGS = {
+
+    theme: "nextra_theme",
+
+    language: "nextra_language",
+
+    currency: "nextra_currency",
+
+    tradingMode: "nextra_trading_mode",
+
+    compactMode: "nextra_compact_mode",
+
+    priceAlerts: "nextra_price_alerts",
+
+    autoRefresh: "nextra_auto_refresh",
+
+    riskDisplay: "nextra_risk_display",
+
+    marketAlerts: "nextra_market_alerts",
+
+    communityUpdates: "nextra_community_updates",
+
+    learnUpdates: "nextra_learn_updates",
+
+    secureMode: "nextra_secure_mode",
+
+    savePreferences: "nextra_save_preferences"
+
+  };
+
+
+  /* =================================================
+     STORAGE
   ================================================= */
 
   function getSetting(
@@ -1929,16 +1482,22 @@
     fallback
   ) {
 
-    const value =
-      localStorage.getItem(key);
+    try {
 
-    if (value === null) {
+      const value =
+        localStorage.getItem(key);
+
+      return value === null
+        ? fallback
+        : value;
+
+    }
+
+    catch (error) {
 
       return fallback;
 
     }
-
-    return value;
 
   }
 
@@ -1948,17 +1507,29 @@
     value
   ) {
 
-    localStorage.setItem(
-      key,
-      value
-    );
+    try {
+
+      localStorage.setItem(
+        key,
+        value
+      );
+
+    }
+
+    catch (error) {
+
+      console.warn(
+        "NEXTRA Settings:",
+        error
+      );
+
+    }
 
   }
 
 
-
   /* =================================================
-     THEME
+     THEME ENGINE
   ================================================= */
 
   const themeSelect =
@@ -1967,16 +1538,20 @@
     );
 
 
-  themeSelect.value =
-    getSetting(
-      "nextra_theme",
-      "dark"
-    );
+  function applyTheme(theme) {
 
+    if (theme === "light") {
 
-  function applyTheme(
-    theme
-  ) {
+      document.documentElement
+        .setAttribute(
+          "data-theme",
+          "light"
+        );
+
+      return;
+
+    }
+
 
     if (theme === "dark") {
 
@@ -1986,32 +1561,32 @@
           "dark"
         );
 
-    }
-
-    else if (theme === "light") {
-
-      document.documentElement
-        .setAttribute(
-          "data-theme",
-          "light"
-        );
+      return;
 
     }
 
-    else {
 
-      document.documentElement
-        .removeAttribute(
-          "data-theme"
-        );
-
-    }
+    document.documentElement
+      .removeAttribute(
+        "data-theme"
+      );
 
   }
 
 
+  const savedTheme =
+    getSetting(
+      NEXTRA_SETTINGS.theme,
+      "dark"
+    );
+
+
+  themeSelect.value =
+    savedTheme;
+
+
   applyTheme(
-    themeSelect.value
+    savedTheme
   );
 
 
@@ -2019,18 +1594,68 @@
     "change",
     function () {
 
+      const value =
+        this.value;
+
       setSetting(
-        "nextra_theme",
-        this.value
+        NEXTRA_SETTINGS.theme,
+        value
       );
 
       applyTheme(
-        this.value
+        value
       );
 
     }
   );
 
+
+  /* =================================================
+     TOP THEME BUTTON
+  ================================================= */
+
+  const themeToggle =
+    document.getElementById(
+      "theme-toggle"
+    );
+
+
+  if (themeToggle) {
+
+    themeToggle.addEventListener(
+      "click",
+      function () {
+
+        const current =
+          getSetting(
+            NEXTRA_SETTINGS.theme,
+            "dark"
+          );
+
+        const next =
+          current === "dark"
+            ? "light"
+            : "dark";
+
+
+        setSetting(
+          NEXTRA_SETTINGS.theme,
+          next
+        );
+
+
+        themeSelect.value =
+          next;
+
+
+        applyTheme(
+          next
+        );
+
+      }
+    );
+
+  }
 
 
   /* =================================================
@@ -2045,7 +1670,7 @@
 
   languageSelect.value =
     getSetting(
-      "nextra_language",
+      NEXTRA_SETTINGS.language,
       "id"
     );
 
@@ -2055,13 +1680,12 @@
     function () {
 
       setSetting(
-        "nextra_language",
+        NEXTRA_SETTINGS.language,
         this.value
       );
 
     }
   );
-
 
 
   /* =================================================
@@ -2076,7 +1700,7 @@
 
   currencySelect.value =
     getSetting(
-      "nextra_currency",
+      NEXTRA_SETTINGS.currency,
       "usd"
     );
 
@@ -2086,13 +1710,12 @@
     function () {
 
       setSetting(
-        "nextra_currency",
+        NEXTRA_SETTINGS.currency,
         this.value
       );
 
     }
   );
-
 
 
   /* =================================================
@@ -2107,7 +1730,7 @@
 
   tradingModeSelect.value =
     getSetting(
-      "nextra_trading_mode",
+      NEXTRA_SETTINGS.tradingMode,
       "spot"
     );
 
@@ -2117,7 +1740,7 @@
     function () {
 
       setSetting(
-        "nextra_trading_mode",
+        NEXTRA_SETTINGS.tradingMode,
         this.value
       );
 
@@ -2125,9 +1748,8 @@
   );
 
 
-
   /* =================================================
-     TOGGLE SYSTEM
+     TOGGLE ENGINE
   ================================================= */
 
   function setupToggle(
@@ -2156,13 +1778,20 @@
       );
 
 
-    if (saved === "true") {
+    const isActive =
+      saved === "true";
 
-      element.classList.add(
-        "active"
-      );
 
-    }
+    element.classList.toggle(
+      "active",
+      isActive
+    );
+
+
+    element.setAttribute(
+      "aria-pressed",
+      String(isActive)
+    );
 
 
     element.addEventListener(
@@ -2173,6 +1802,12 @@
           this.classList.toggle(
             "active"
           );
+
+
+        this.setAttribute(
+          "aria-pressed",
+          String(active)
+        );
 
 
         setSetting(
@@ -2186,73 +1821,71 @@
   }
 
 
-
   setupToggle(
     "compact-toggle",
-    "nextra_compact_mode",
+    NEXTRA_SETTINGS.compactMode,
     false
   );
 
 
   setupToggle(
     "price-alert-toggle",
-    "nextra_price_alerts",
+    NEXTRA_SETTINGS.priceAlerts,
     true
   );
 
 
   setupToggle(
     "refresh-toggle",
-    "nextra_auto_refresh",
+    NEXTRA_SETTINGS.autoRefresh,
     true
   );
 
 
   setupToggle(
     "risk-toggle",
-    "nextra_risk_display",
+    NEXTRA_SETTINGS.riskDisplay,
     true
   );
 
 
   setupToggle(
     "market-alert-toggle",
-    "nextra_market_alerts",
+    NEXTRA_SETTINGS.marketAlerts,
     true
   );
 
 
   setupToggle(
     "community-toggle",
-    "nextra_community_updates",
+    NEXTRA_SETTINGS.communityUpdates,
     true
   );
 
 
   setupToggle(
     "learn-toggle",
-    "nextra_learn_updates",
+    NEXTRA_SETTINGS.learnUpdates,
     true
   );
 
 
   setupToggle(
     "secure-toggle",
-    "nextra_secure_mode",
+    NEXTRA_SETTINGS.secureMode,
     false
   );
 
 
   setupToggle(
     "save-toggle",
-    "nextra_save_preferences",
+    NEXTRA_SETTINGS.savePreferences,
     true
   );
 
 
-
   /* =================================================
-     RESET SETTINGS
+     RESET
   ================================================= */
 
   const resetButton =
@@ -2266,8 +1899,8 @@
     function () {
 
       const confirmed =
-        confirm(
-          "Reset semua pengaturan NEXTRA?"
+        window.confirm(
+          "Reset semua pengaturan NEXTRA ke default?"
         );
 
 
@@ -2278,38 +1911,9 @@
       }
 
 
-      const keys = [
-
-        "nextra_theme",
-
-        "nextra_language",
-
-        "nextra_currency",
-
-        "nextra_trading_mode",
-
-        "nextra_compact_mode",
-
-        "nextra_price_alerts",
-
-        "nextra_auto_refresh",
-
-        "nextra_risk_display",
-
-        "nextra_market_alerts",
-
-        "nextra_community_updates",
-
-        "nextra_learn_updates",
-
-        "nextra_secure_mode",
-
-        "nextra_save_preferences"
-
-      ];
-
-
-      keys.forEach(
+      Object.values(
+        NEXTRA_SETTINGS
+      ).forEach(
         function (key) {
 
           localStorage.removeItem(
@@ -2326,41 +1930,193 @@
   );
 
 
-
   /* =================================================
-     INFO LINKS
+     PRIVACY
   ================================================= */
 
-  document
-    .getElementById("privacy-link")
-    .addEventListener(
+  const privacyLink =
+    document.getElementById(
+      "privacy-link"
+    );
+
+
+  privacyLink.addEventListener(
+    "click",
+    function (event) {
+
+      event.preventDefault();
+
+      alert(
+        "Privacy settings NEXTRA akan tersedia pada modul Privacy."
+      );
+
+    }
+  );
+
+
+  /* =================================================
+     ABOUT
+  ================================================= */
+
+  const aboutLink =
+    document.getElementById(
+      "about-link"
+    );
+
+
+  aboutLink.addEventListener(
+    "click",
+    function (event) {
+
+      event.preventDefault();
+
+      alert(
+        "NEXTRA — Your Market. Your Intelligence."
+      );
+
+    }
+  );
+
+
+  /* =================================================
+     COMPACT MODE
+  ================================================= */
+
+  function applyCompactMode() {
+
+    const enabled =
+      getSetting(
+        NEXTRA_SETTINGS.compactMode,
+        "false"
+      ) === "true";
+
+
+    document.documentElement
+      .classList.toggle(
+        "nextra-compact",
+        enabled
+      );
+
+  }
+
+
+  applyCompactMode();
+
+
+  const compactToggle =
+    document.getElementById(
+      "compact-toggle"
+    );
+
+
+  if (compactToggle) {
+
+    compactToggle.addEventListener(
       "click",
-      function (event) {
+      function () {
 
-        event.preventDefault();
-
-        alert(
-          "Privacy settings NEXTRA akan tersedia pada modul Privacy."
+        setTimeout(
+          applyCompactMode,
+          0
         );
 
       }
     );
 
+  }
 
-  document
-    .getElementById("about-link")
-    .addEventListener(
-      "click",
-      function (event) {
 
-        event.preventDefault();
+  /* =================================================
+     GLOBAL SETTINGS EVENT
+     Bisa dipakai halaman lain nantinya.
+  ================================================= */
 
-        alert(
-          "NEXTRA — Your Market. Your Intelligence."
-        );
+  window.NEXTRASettings = {
 
-      }
-    );
+    get: function (
+      name,
+      fallback
+    ) {
+
+      return getSetting(
+        name,
+        fallback
+      );
+
+    },
+
+
+    set: function (
+      name,
+      value
+    ) {
+
+      setSetting(
+        name,
+        value
+      );
+
+    },
+
+
+    getAll: function () {
+
+      return {
+
+        theme:
+          getSetting(
+            NEXTRA_SETTINGS.theme,
+            "dark"
+          ),
+
+        language:
+          getSetting(
+            NEXTRA_SETTINGS.language,
+            "id"
+          ),
+
+        currency:
+          getSetting(
+            NEXTRA_SETTINGS.currency,
+            "usd"
+          ),
+
+        tradingMode:
+          getSetting(
+            NEXTRA_SETTINGS.tradingMode,
+            "spot"
+          ),
+
+        compactMode:
+          getSetting(
+            NEXTRA_SETTINGS.compactMode,
+            "false"
+          ),
+
+        priceAlerts:
+          getSetting(
+            NEXTRA_SETTINGS.priceAlerts,
+            "true"
+          ),
+
+        autoRefresh:
+          getSetting(
+            NEXTRA_SETTINGS.autoRefresh,
+            "true"
+          ),
+
+        riskDisplay:
+          getSetting(
+            NEXTRA_SETTINGS.riskDisplay,
+            "true"
+          )
+
+      };
+
+    }
+
+  };
+
 
 </script>
 
