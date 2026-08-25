@@ -237,9 +237,11 @@
     }
 
     .path-progress-fill {
+      width: 0%;
       height: 100%;
       border-radius: inherit;
       background: var(--green);
+      transition: width .3s ease;
     }
 
     .path-bottom {
@@ -259,11 +261,13 @@
       border: 1px solid var(--line);
       border-radius: 12px;
       background: var(--surface);
+      color: inherit;
+      text-decoration: none;
     }
 
     .lesson-number {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       display: grid;
       place-items: center;
       flex-shrink: 0;
@@ -276,6 +280,7 @@
 
     .lesson-content {
       flex: 1;
+      min-width: 0;
     }
 
     .lesson-name {
@@ -291,8 +296,12 @@
 
     .lesson-status {
       color: var(--green);
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 900;
+    }
+
+    .locked {
+      opacity: .55;
     }
 
     .disclaimer {
@@ -328,7 +337,7 @@
       </h1>
 
       <p class="subtitle">
-        Learn crypto. Understand the market.
+        Master the market.
       </p>
 
     </div>
@@ -356,7 +365,7 @@
     </h2>
 
     <p class="learn-description">
-      Pelajari crypto dari dasar sampai
+      Belajar crypto dari dasar sampai
       memahami market, technical analysis,
       futures dan risk management.
     </p>
@@ -364,7 +373,7 @@
   </section>
 
 
-  <!-- PROGRESS -->
+  <!-- GLOBAL PROGRESS -->
 
   <section class="progress-card">
 
@@ -413,13 +422,16 @@
     Continue Learning
   </div>
 
-
   <a
-    href="lesson.html?lesson=bitcoin-basics"
+    href="lesson.html?lesson=1"
     class="continue-card"
+    id="continue-card"
   >
 
-    <div class="continue-icon">
+    <div
+      class="continue-icon"
+      id="continue-icon"
+    >
       ₿
     </div>
 
@@ -429,11 +441,17 @@
         Next Lesson
       </div>
 
-      <div class="continue-name">
+      <div
+        class="continue-name"
+        id="continue-name"
+      >
         Bitcoin & Blockchain
       </div>
 
-      <div class="continue-meta">
+      <div
+        class="continue-meta"
+        id="continue-meta"
+      >
         Crypto Basics • 8 min
       </div>
 
@@ -454,7 +472,7 @@
 
 
   <a
-    href="lesson.html?path=basics"
+    href="lesson.html?lesson=1"
     class="path-card"
   >
 
@@ -487,7 +505,6 @@
       <div
         class="path-progress-fill"
         id="basics-progress"
-        style="width:0%;"
       ></div>
 
     </div>
@@ -495,7 +512,7 @@
     <div class="path-bottom">
 
       <span id="basics-count">
-        0 / 5 lessons
+        0 / 2 lessons
       </span>
 
       <span>
@@ -508,7 +525,7 @@
 
 
   <a
-    href="lesson.html?path=technical"
+    href="lesson.html?lesson=3"
     class="path-card"
   >
 
@@ -525,7 +542,7 @@
         </div>
 
         <div class="path-description">
-          Belajar membaca chart dan price action.
+          Belajar membaca chart dan struktur market.
         </div>
 
       </div>
@@ -540,15 +557,15 @@
 
       <div
         class="path-progress-fill"
-        style="width:0%;"
+        id="technical-progress"
       ></div>
 
     </div>
 
     <div class="path-bottom">
 
-      <span>
-        0 / 6 lessons
+      <span id="technical-count">
+        0 / 3 lessons
       </span>
 
       <span>
@@ -561,60 +578,7 @@
 
 
   <a
-    href="lesson.html?path=futures"
-    class="path-card"
-  >
-
-    <div class="path-top">
-
-      <div class="path-icon">
-        ⚡
-      </div>
-
-      <div class="path-content">
-
-        <div class="path-name">
-          Futures Trading
-        </div>
-
-        <div class="path-description">
-          Pahami leverage, funding dan liquidation.
-        </div>
-
-      </div>
-
-      <div class="path-number">
-        03
-      </div>
-
-    </div>
-
-    <div class="path-progress">
-
-      <div
-        class="path-progress-fill"
-        style="width:0%;"
-      ></div>
-
-    </div>
-
-    <div class="path-bottom">
-
-      <span>
-        0 / 6 lessons
-      </span>
-
-      <span>
-        Advanced
-      </span>
-
-    </div>
-
-  </a>
-
-
-  <a
-    href="lesson.html?path=risk"
+    href="lesson.html?lesson=6"
     class="path-card"
   >
 
@@ -637,7 +601,7 @@
       </div>
 
       <div class="path-number">
-        04
+        03
       </div>
 
     </div>
@@ -646,15 +610,15 @@
 
       <div
         class="path-progress-fill"
-        style="width:0%;"
+        id="risk-progress"
       ></div>
 
     </div>
 
     <div class="path-bottom">
 
-      <span>
-        0 / 5 lessons
+      <span id="risk-count">
+        0 / 1 lessons
       </span>
 
       <span>
@@ -667,7 +631,60 @@
 
 
   <a
-    href="lesson.html?path=onchain"
+    href="lesson.html?lesson=7"
+    class="path-card"
+  >
+
+    <div class="path-top">
+
+      <div class="path-icon">
+        ⚡
+      </div>
+
+      <div class="path-content">
+
+        <div class="path-name">
+          Futures Trading
+        </div>
+
+        <div class="path-description">
+          Pahami leverage dan funding rate.
+        </div>
+
+      </div>
+
+      <div class="path-number">
+        04
+      </div>
+
+    </div>
+
+    <div class="path-progress">
+
+      <div
+        class="path-progress-fill"
+        id="futures-progress"
+      ></div>
+
+    </div>
+
+    <div class="path-bottom">
+
+      <span id="futures-count">
+        0 / 2 lessons
+      </span>
+
+      <span>
+        Advanced
+      </span>
+
+    </div>
+
+  </a>
+
+
+  <a
+    href="lesson.html?lesson=9"
     class="path-card"
   >
 
@@ -680,11 +697,11 @@
       <div class="path-content">
 
         <div class="path-name">
-          On-Chain & Market Data
+          Market Intelligence
         </div>
 
         <div class="path-description">
-          Pahami data yang menggerakkan market.
+          Pahami volume, open interest dan trading plan.
         </div>
 
       </div>
@@ -699,15 +716,15 @@
 
       <div
         class="path-progress-fill"
-        style="width:0%;"
+        id="market-progress"
       ></div>
 
     </div>
 
     <div class="path-bottom">
 
-      <span>
-        0 / 5 lessons
+      <span id="market-count">
+        0 / 2 lessons
       </span>
 
       <span>
@@ -719,146 +736,14 @@
   </a>
 
 
-  <!-- FEATURED LESSONS -->
+  <!-- ALL LESSONS -->
 
   <div class="section-title">
-    Featured Lessons
+    All Lessons
   </div>
 
 
-  <a
-    href="lesson.html?lesson=bitcoin-basics"
-    class="lesson-card"
-    style="text-decoration:none;color:inherit;"
-  >
-
-    <div class="lesson-number">
-      01
-    </div>
-
-    <div class="lesson-content">
-
-      <div class="lesson-name">
-        Bitcoin & Blockchain
-      </div>
-
-      <div class="lesson-meta">
-        Crypto Basics • 8 min
-      </div>
-
-    </div>
-
-    <div
-      class="lesson-status"
-      id="lesson-01-status"
-    >
-      →
-    </div>
-
-  </a>
-
-
-  <div class="lesson-card">
-
-    <div class="lesson-number">
-      02
-    </div>
-
-    <div class="lesson-content">
-
-      <div class="lesson-name">
-        Cara Kerja Blockchain
-      </div>
-
-      <div class="lesson-meta">
-        Crypto Basics • 7 min
-      </div>
-
-    </div>
-
-    <div class="lesson-status">
-      🔒
-    </div>
-
-  </div>
-
-
-  <div class="lesson-card">
-
-    <div class="lesson-number">
-      03
-    </div>
-
-    <div class="lesson-content">
-
-      <div class="lesson-name">
-        Membaca Candlestick
-      </div>
-
-      <div class="lesson-meta">
-        Technical Analysis • 8 min
-      </div>
-
-    </div>
-
-    <div class="lesson-status">
-      🔒
-    </div>
-
-  </div>
-
-
-  <div class="lesson-card">
-
-    <div class="lesson-number">
-      04
-    </div>
-
-    <div class="lesson-content">
-
-      <div class="lesson-name">
-        Apa itu Leverage?
-      </div>
-
-      <div class="lesson-meta">
-        Futures Trading • 6 min
-      </div>
-
-    </div>
-
-    <div class="lesson-status">
-      🔒
-    </div>
-
-  </div>
-
-
-  <!-- RECOMMENDED -->
-
-  <div class="section-title">
-    Recommended Path
-  </div>
-
-
-  <section class="progress-card">
-
-    <div class="progress-title">
-      🌱 Baru mulai crypto?
-    </div>
-
-    <p
-      class="learn-description"
-      style="margin-bottom:0;"
-    >
-      Mulai dari Crypto Basics →
-      Technical Analysis →
-      Risk Management →
-      Futures.
-      Jangan buru-buru menggunakan
-      leverage sebelum memahami risikonya.
-    </p>
-
-  </section>
+  <div id="lessons-list"></div>
 
 
   <!-- DISCLAIMER -->
@@ -875,8 +760,6 @@
 </main>
 
 
-<!-- BOTTOM NAV -->
-
 <div id="bottom-nav"></div>
 
 
@@ -885,162 +768,455 @@
 
 <script>
 
-  /*
-   * NEXTRA LEARNING PROGRESS
-   */
 
-  const totalLessons = 10;
-
-  const lessonStatus = {
-
-    bitcoinBasics:
-      localStorage.getItem(
-        "nextra_lesson_bitcoin_basics"
-      ) === "completed"
-
-  };
+/* =================================
+   LESSON DATA
+================================= */
 
 
-  /*
-   * COUNT COMPLETED
-   */
+const lessons = [
 
-  let completed = 0;
+  {
+    id: 1,
+    title: "Bitcoin & Blockchain",
+    category: "Crypto Basics",
+    time: "8 min",
+    icon: "₿"
+  },
 
-  if (lessonStatus.bitcoinBasics) {
+  {
+    id: 2,
+    title: "Cara Kerja Blockchain",
+    category: "Crypto Basics",
+    time: "7 min",
+    icon: "🔗"
+  },
 
-    completed++;
+  {
+    id: 3,
+    title: "Membaca Candlestick",
+    category: "Technical Analysis",
+    time: "8 min",
+    icon: "🕯️"
+  },
 
+  {
+    id: 4,
+    title: "Support & Resistance",
+    category: "Technical Analysis",
+    time: "7 min",
+    icon: "📊"
+  },
+
+  {
+    id: 5,
+    title: "Trend & Market Structure",
+    category: "Technical Analysis",
+    time: "9 min",
+    icon: "📈"
+  },
+
+  {
+    id: 6,
+    title: "Risk Management",
+    category: "Risk Management",
+    time: "8 min",
+    icon: "🛡️"
+  },
+
+  {
+    id: 7,
+    title: "Apa itu Leverage?",
+    category: "Futures Trading",
+    time: "8 min",
+    icon: "⚡"
+  },
+
+  {
+    id: 8,
+    title: "Funding Rate",
+    category: "Futures Trading",
+    time: "7 min",
+    icon: "💸"
+  },
+
+  {
+    id: 9,
+    title: "Volume & Open Interest",
+    category: "Market Data",
+    time: "9 min",
+    icon: "📊"
+  },
+
+  {
+    id: 10,
+    title: "Membangun Trading Plan",
+    category: "Trader Intelligence",
+    time: "10 min",
+    icon: "🧠"
   }
 
+];
 
-  /*
-   * GLOBAL PROGRESS
-   */
+
+/* =================================
+   CHECK COMPLETED
+================================= */
+
+
+function isCompleted(id) {
+
+  return (
+    localStorage.getItem(
+      "nextra_lesson_" + id
+    ) === "completed"
+  );
+
+}
+
+
+function completedCount() {
+
+  return lessons.filter(
+    lesson => isCompleted(
+      lesson.id
+    )
+  ).length;
+
+}
+
+
+/* =================================
+   GLOBAL PROGRESS
+================================= */
+
+
+function updateGlobalProgress() {
+
+  const completed =
+    completedCount();
+
+  const total =
+    lessons.length;
 
   const percent =
     Math.round(
-      (completed / totalLessons) * 100
+      (completed / total) * 100
     );
 
 
-  const percentElement =
+  document.getElementById(
+    "learning-percent"
+  ).textContent =
+    percent + "%";
+
+
+  document.getElementById(
+    "learning-fill"
+  ).style.width =
+    percent + "%";
+
+
+  document.getElementById(
+    "learning-count"
+  ).textContent =
+    completed +
+    " of " +
+    total +
+    " lessons";
+
+}
+
+
+/* =================================
+   RENDER LESSONS
+================================= */
+
+
+function renderLessons() {
+
+  const container =
     document.getElementById(
-      "learning-percent"
-    );
-
-  const fillElement =
-    document.getElementById(
-      "learning-fill"
-    );
-
-  const countElement =
-    document.getElementById(
-      "learning-count"
+      "lessons-list"
     );
 
 
-  if (percentElement) {
-
-    percentElement.textContent =
-      percent + "%";
-
-  }
+  container.innerHTML = "";
 
 
-  if (fillElement) {
+  lessons.forEach(
+    (lesson) => {
 
-    fillElement.style.width =
-      percent + "%";
-
-  }
-
-
-  if (countElement) {
-
-    countElement.textContent =
-      completed +
-      " of " +
-      totalLessons +
-      " lessons";
-
-  }
+      const completed =
+        isCompleted(
+          lesson.id
+        );
 
 
-  /*
-   * CRYPTO BASICS PROGRESS
-   */
+      const card =
+        document.createElement(
+          "a"
+        );
 
-  if (lessonStatus.bitcoinBasics) {
 
-    const basicsProgress =
-      document.getElementById(
-        "basics-progress"
+      card.href =
+        "lesson.html?lesson=" +
+        lesson.id;
+
+
+      card.className =
+        "lesson-card";
+
+
+      card.innerHTML = `
+
+        <div class="lesson-number">
+
+          ${lesson.icon}
+
+        </div>
+
+
+        <div class="lesson-content">
+
+          <div class="lesson-name">
+
+            ${lesson.id}.
+            ${lesson.title}
+
+          </div>
+
+          <div class="lesson-meta">
+
+            ${lesson.category}
+            •
+            ${lesson.time}
+
+          </div>
+
+        </div>
+
+
+        <div class="lesson-status">
+
+          ${
+            completed
+              ? "✓"
+              : "→"
+          }
+
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        card
       );
 
-    const basicsCount =
-      document.getElementById(
-        "basics-count"
-      );
-
-    if (basicsProgress) {
-
-      basicsProgress.style.width =
-        "20%";
-
     }
+  );
 
-    if (basicsCount) {
+}
 
-      basicsCount.textContent =
-        "1 / 5 lessons";
 
-    }
+/* =================================
+   CONTINUE LEARNING
+================================= */
+
+
+function updateContinue() {
+
+  let nextLesson =
+    lessons.find(
+      lesson =>
+        !isCompleted(
+          lesson.id
+        )
+    );
+
+
+  if (!nextLesson) {
+
+    nextLesson =
+      lessons[
+        lessons.length - 1
+      ];
 
   }
 
 
-  /*
-   * LESSON STATUS
-   */
+  const card =
+    document.getElementById(
+      "continue-card"
+    );
 
-  if (lessonStatus.bitcoinBasics) {
 
-    const status =
-      document.getElementById(
-        "lesson-01-status"
-      );
+  card.href =
+    "lesson.html?lesson=" +
+    nextLesson.id;
 
-    if (status) {
 
-      status.textContent = "✓";
+  document.getElementById(
+    "continue-icon"
+  ).textContent =
+    nextLesson.icon;
 
-    }
+
+  document.getElementById(
+    "continue-name"
+  ).textContent =
+    nextLesson.id +
+    ". " +
+    nextLesson.title;
+
+
+  document.getElementById(
+    "continue-meta"
+  ).textContent =
+    nextLesson.category +
+    " • " +
+    nextLesson.time;
+
+
+  const label =
+    card.querySelector(
+      ".continue-label"
+    );
+
+
+  if (
+    completedCount() >=
+    lessons.length
+  ) {
+
+    label.textContent =
+      "Academy Complete";
+
+  } else {
+
+    label.textContent =
+      "Next Lesson";
 
   }
 
+}
 
-  /*
-   * THEME BUTTON
-   */
 
-  document
-    .getElementById("theme-toggle")
-    ?.addEventListener(
-      "click",
-      () => {
+/* =================================
+   LEARNING PATHS
+================================= */
 
-        if (
-          typeof toggleTheme ===
-          "function"
-        ) {
 
-          toggleTheme();
+function updatePath(
+  ids,
+  progressId,
+  countId
+) {
 
-        }
+  const completed =
+    ids.filter(
+      id =>
+        isCompleted(id)
+    ).length;
+
+
+  const percent =
+    Math.round(
+      (completed / ids.length) *
+      100
+    );
+
+
+  document.getElementById(
+    progressId
+  ).style.width =
+    percent + "%";
+
+
+  document.getElementById(
+    countId
+  ).textContent =
+    completed +
+    " / " +
+    ids.length +
+    " lessons";
+
+}
+
+
+updatePath(
+  [1, 2],
+  "basics-progress",
+  "basics-count"
+);
+
+
+updatePath(
+  [3, 4, 5],
+  "technical-progress",
+  "technical-count"
+);
+
+
+updatePath(
+  [6],
+  "risk-progress",
+  "risk-count"
+);
+
+
+updatePath(
+  [7, 8],
+  "futures-progress",
+  "futures-count"
+);
+
+
+updatePath(
+  [9, 10],
+  "market-progress",
+  "market-count"
+);
+
+
+/* =================================
+   INIT
+================================= */
+
+
+updateGlobalProgress();
+
+renderLessons();
+
+updateContinue();
+
+
+/* =================================
+   THEME
+================================= */
+
+
+document
+  .getElementById(
+    "theme-toggle"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      if (
+        typeof toggleTheme ===
+        "function"
+      ) {
+
+        toggleTheme();
 
       }
-    );
+
+    }
+  );
+
 
 </script>
 
