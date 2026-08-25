@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
+  <title>Trader Profile — NEXTRA</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+
+  <style>
+
+    /* =====================================================
+       TRADER PROFILE
+    ====================================================== */
+
+    .trader-cover {
+
+      position: relative;
+
+      height: 130px;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(66,245,167,.12),
+          rgba(32,207,255,.08),
+          rgba(255,255,255,.02)
+        );
+
+      border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    }
+
+
+    .trader-cover::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(66,245,167,.12);
+
+      filter: blur(35px);
+
+      top: -90px;
+      left: 10%;
+
+    }
+
+
+    .trader-cover::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 160px;
+      height: 160px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(32,207,255,.10);
+
+      filter: blur(35px);
+
+      right: 5%;
+      bottom: -100px;
+
+    }
+
+
+    .trader-profile-card {
+
+      margin-top: -42px;
+
+      position: relative;
+
+      z-index: 2;
+
+      padding: 0 14px 16px;
+
+    }
+
+
+    .trader-avatar {
+
+      width: 78px;
+      height: 78px;
+
+      border-radius: 50%;
+
+      border: 4px solid
+        var(--bg, #070909);
+
+      background:
+        linear-gradient(
+          135deg,
+          #42f5a7,
+          #20cfff
+        );
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 30px;
+
+      box-shadow:
+        0 10px 35px
+        rgba(0,0,0,.35);
+
+    }
+
+
+    .trader-name-row {
+
+      display: flex;
+
+      align-items: flex-start;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-top: 9px;
+
+    }
+
+
+    .trader-name {
+
+      margin: 0;
+
+      font-size: 20px;
+
+      font-weight: 900;
+
+    }
+
+
+    .trader-username {
+
+      margin-top: 3px;
+
+      font-size: 9px;
+
+      opacity: .55;
+
+    }
+
+
+    .verified {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      width: 17px;
+      height: 17px;
+
+      border-radius: 50%;
+
+      margin-left: 3px;
+
+      background: #42f5a7;
+
+      color: #070909;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+    }
+
+
+    .online-badge {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      margin-top: 7px;
+
+      font-size: 8px;
+
+      opacity: .7;
+
+    }
+
+
+    .online-dot {
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #42f5a7;
+
+      box-shadow:
+        0 0 8px
+        rgba(66,245,167,.7);
+
+    }
+
+
+    .trader-bio {
+
+      margin-top: 12px;
+
+      font-size: 10px;
+
+      line-height: 1.65;
+
+      opacity: .78;
+
+    }
+
+
+    .follow-button {
+
+      border: 0;
+
+      background:
+        var(--text, #fff);
+
+      color:
+        var(--bg, #070909);
+
+      padding: 9px 15px;
+
+      border-radius: 10px;
+
+      font-size: 9px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      white-space: nowrap;
+
+    }
+
+
+    .follow-button.following {
+
+      background:
+        rgba(255,255,255,.08);
+
+      color: inherit;
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    }
+
+
+    /* =====================================================
+       STATS
+    ====================================================== */
+
+    .trader-stats {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 7px;
+
+      margin-top: 15px;
+
+    }
+
+
+    .trader-stat {
+
+      padding: 11px 5px;
+
+      text-align: center;
+
+      border:
+        1px solid
+        rgba(255,255,255,.07);
+
+      border-radius: 12px;
+
+      background:
+        rgba(255,255,255,.025);
+
+    }
+
+
+    .trader-stat strong {
+
+      display: block;
+
+      font-size: 14px;
+
+    }
+
+
+    .trader-stat span {
+
+      display: block;
+
+      margin-top: 3px;
+
+      font-size: 7px;
+
+      opacity: .5;
+
+    }
+
+
+    /* =====================================================
+       LEVEL
+    ====================================================== */
+
+    .level-card {
+
+      margin-top: 12px;
+
+      padding: 13px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.07);
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(66,245,167,.07),
+          rgba(32,207,255,.04)
+        );
+
+    }
+
+
+    .level-top {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+    }
+
+
+    .level-label {
+
+      font-size: 7px;
+
+      letter-spacing: .8px;
+
+      opacity: .5;
+
+    }
+
+
+    .level-name {
+
+      margin-top: 3px;
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+    }
+
+
+    .level-number {
+
+      font-size: 9px;
+
+      font-weight: 900;
+
+      opacity: .65;
+
+    }
+
+
+    .xp-track {
+
+      height: 5px;
+
+      margin-top: 10px;
+
+      border-radius: 999px;
+
+      overflow: hidden;
+
+      background:
+        rgba(255,255,255,.08);
+
+    }
+
+
+    .xp-fill {
+
+      height: 100%;
+
+      width: 67%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          #42f5a7,
+          #20cfff
+        );
+
+    }
+
+
+    .xp-text {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      margin-top: 5px;
+
+      font-size: 7px;
+
+      opacity: .45;
+
+    }
+
+
+    /* =====================================================
+       TABS
+    ====================================================== */
+
+    .trader-tabs {
+
+      display: flex;
+
+      gap: 6px;
+
+      margin-top: 16px;
+
+      overflow-x: auto;
+
+      scrollbar-width: none;
+
+    }
+
+
+    .trader-tabs::-webkit-scrollbar {
+
+      display: none;
+
+    }
+
+
+    .trader-tab {
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      background:
+        transparent;
+
+      color: inherit;
+
+      padding: 8px 12px;
+
+      border-radius: 999px;
+
+      font-size: 8px;
+
+      font-weight: 800;
+
+      white-space: nowrap;
+
+      cursor: pointer;
+
+    }
+
+
+    .trader-tab.active {
+
+      background:
+        var(--text, #fff);
+
+      color:
+        var(--bg, #070909);
+
+      border-color:
+        var(--text, #fff);
+
+    }
+
+
+    /* =====================================================
+       POSTS
+    ====================================================== */
+
+    .section-title {
+
+      margin-top: 16px;
+
+      margin-bottom: 8px;
+
+      font-size: 10px;
+
+      font-weight: 900;
+
+    }
+
+
+    .trader-post {
+
+      padding: 13px;
+
+      margin-top: 8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.07);
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,.025);
+
+    }
+
+
+    .post-time {
+
+      font-size: 7px;
+
+      opacity: .45;
+
+    }
+
+
+    .post-text {
+
+      margin-top: 9px;
+
+      font-size: 10px;
+
+      line-height: 1.65;
+
+    }
+
+
+    .post-coin {
+
+      display: inline-block;
+
+      margin-top: 9px;
+
+      padding: 5px 8px;
+
+      border-radius: 7px;
+
+      font-size: 7px;
+
+      font-weight: 900;
+
+      background:
+        rgba(66,245,167,.08);
+
+      color:
+        #42f5a7;
+
+    }
+
+
+    .post-footer {
+
+      display: flex;
+
+      gap: 17px;
+
+      margin-top: 11px;
+
+      padding-top: 9px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.06);
+
+    }
+
+
+    .post-action {
+
+      border: 0;
+
+      background: transparent;
+
+      color: inherit;
+
+      padding: 0;
+
+      font-size: 8px;
+
+      cursor: pointer;
+
+    }
+
+
+    /* =====================================================
+       ANALYSIS
+    ====================================================== */
+
+    .analysis-card {
+
+      padding: 13px;
+
+      margin-top: 8px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.07);
+
+      border-radius: 14px;
+
+    }
+
+
+    .analysis-header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+    }
+
+
+    .analysis-coin {
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+    }
+
+
+    .bullish {
+
+      font-size: 8px;
+
+      font-weight: 900;
+
+      padding: 5px 8px;
+
+      border-radius: 7px;
+
+      background:
+        rgba(66,245,167,.1);
+
+      color:
+        #42f5a7;
+
+    }
+
+
+    .analysis-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 6px;
+
+      margin-top: 12px;
+
+    }
+
+
+    .analysis-item {
+
+      padding: 9px 5px;
+
+      text-align: center;
+
+      border-radius: 9px;
+
+      background:
+        rgba(255,255,255,.035);
+
+    }
+
+
+    .analysis-item span {
+
+      display: block;
+
+      font-size: 7px;
+
+      opacity: .45;
+
+    }
+
+
+    .analysis-item strong {
+
+      display: block;
+
+      margin-top: 3px;
+
+      font-size: 9px;
+
+    }
+
+
+    /* =====================================================
+       EMPTY
+    ====================================================== */
+
+    .empty {
+
+      padding: 30px 15px;
+
+      text-align: center;
+
+      font-size: 9px;
+
+      opacity: .55;
+
+    }
+
+
+    @media (max-width: 360px) {
+
+      .trader-stats {
+
+        grid-template-columns:
+          repeat(2,1fr);
+
+      }
+
+      .trader-name-row {
+
+        align-items: flex-start;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<main class="container">
+
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+
+        Trader Profile<span
+          class="dot"
+        >.</span>
+
+      </h1>
+
+      <p class="subtitle">
+
+        NEXTRA Community
+
+      </p>
+
+    </div>
+
+
+    <a
+      href="community.html"
+      class="icon-btn"
+      aria-label="Back"
+    >
+      ←
+    </a>
+
+  </header>
+
+
+
+  <!-- COVER -->
+
+  <section class="trader-cover"></section>
+
+
+
+  <!-- PROFILE -->
+
+  <section class="trader-profile-card">
+
+
+    <div class="trader-avatar">
+
+      🧑‍💻
+
+    </div>
+
+
+    <div class="trader-name-row">
+
+      <div>
+
+        <h2 class="trader-name">
+
+          MarketWatcher
+
+          <span class="verified">
+            ✓
+          </span>
+
+        </h2>
+
+
+        <div class="trader-username">
+
+          @marketwatcher
+
+        </div>
+
+
+        <div class="online-badge">
+
+          <span class="online-dot"></span>
+
+          Active now
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="follow-button"
+        id="followButton"
+      >
+
+        + Follow
+
+      </button>
+
+    </div>
+
+
+    <div class="trader-bio">
+
+      Crypto market observer.
+      Fokus pada BTC, ETH, futures,
+      price action dan risk management.
+      Bukan financial advice.
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="trader-stats">
+
+
+      <div class="trader-stat">
+
+        <strong>
+          128
+        </strong>
+
+        <span>
+          Posts
+        </span>
+
+      </div>
+
+
+      <div class="trader-stat">
+
+        <strong>
+          2.4K
+        </strong>
+
+        <span>
+          Followers
+        </span>
+
+      </div>
+
+
+      <div class="trader-stat">
+
+        <strong>
+          184
+        </strong>
+
+        <span>
+          Following
+        </span>
+
+      </div>
+
+
+      <div class="trader-stat">
+
+        <strong>
+          86%
+        </strong>
+
+        <span>
+          Accuracy
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- LEVEL -->
+
+    <div class="level-card">
+
+      <div class="level-top">
+
+        <div>
+
+          <div class="level-label">
+            TRADER LEVEL
+          </div>
+
+          <div class="level-name">
+            🔥 Analyst
+          </div>
+
+        </div>
+
+
+        <div class="level-number">
+          LVL 08
+        </div>
+
+      </div>
+
+
+      <div class="xp-track">
+
+        <div class="xp-fill"></div>
+
+      </div>
+
+
+      <div class="xp-text">
+
+        <span>
+          6,720 XP
+        </span>
+
+        <span>
+          10,000 XP
+        </span>
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- TABS -->
+
+  <div class="trader-tabs">
+
+    <button
+      class="trader-tab active"
+      data-tab="posts"
+    >
+      Posts
+    </button>
+
+
+    <button
+      class="trader-tab"
+      data-tab="analysis"
+    >
+      📊 Analysis
+    </button>
+
+
+    <button
+      class="trader-tab"
+      data-tab="about"
+    >
+      About
+    </button>
+
+  </div>
+
+
+
+  <!-- POSTS -->
+
+  <section
+    id="postsSection"
+  >
+
+    <div class="section-title">
+
+      Recent Posts
+
+    </div>
+
+
+    <article class="trader-post">
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+        "
+      >
+
+        <strong
+          style="font-size:9px;"
+        >
+          MarketWatcher
+        </strong>
+
+        <span class="post-time">
+          12 min ago
+        </span>
+
+      </div>
+
+
+      <div class="post-text">
+
+        BTC mulai menunjukkan momentum
+        bullish. Menurut kalian apakah
+        breakout resistance ini akan
+        berlanjut?
+
+      </div>
+
+
+      <div class="post-coin">
+
+        ₿ BTC · 1H
+
+      </div>
+
+
+      <div class="post-footer">
+
+        <button
+          class="post-action"
+          data-like
+        >
+          ❤️ <span>84</span>
+        </button>
+
+
+        <button
+          class="post-action"
+        >
+          💬 21
+        </button>
+
+
+        <button
+          class="post-action"
+        >
+          ↗ Share
+        </button>
+
+      </div>
+
+    </article>
+
+
+    <article class="trader-post">
+
+
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+        "
+      >
+
+        <strong
+          style="font-size:9px;"
+        >
+          MarketWatcher
+        </strong>
+
+        <span class="post-time">
+          2 hours ago
+        </span>
+
+      </div>
+
+
+      <div class="post-text">
+
+        Jangan terlalu fokus pada candle.
+        Volume dan struktur market juga
+        perlu diperhatikan sebelum mengambil
+        keputusan.
+
+      </div>
+
+
+      <div class="post-coin">
+
+        📚 EDUCATION
+
+      </div>
+
+
+      <div class="post-footer">
+
+        <button
+          class="post-action"
+          data-like
+        >
+          ❤️ <span>52</span>
+        </button>
+
+
+        <button
+          class="post-action"
+        >
+          💬 14
+        </button>
+
+
+        <button
+          class="post-action"
+        >
+          ↗ Share
+        </button>
+
+      </div>
+
+    </article>
+
+
+  </section>
+
+
+
+  <!-- ANALYSIS -->
+
+  <section
+    id="analysisSection"
+    style="display:none;"
+  >
+
+    <div class="section-title">
+
+      Published Analysis
+
+    </div>
+
+
+    <article class="analysis-card">
+
+
+      <div class="analysis-header">
+
+        <div class="analysis-coin">
+
+          ₿ BTC
+
+        </div>
+
+
+        <div class="bullish">
+
+          BULLISH
+
+        </div>
+
+      </div>
+
+
+      <div class="analysis-grid">
+
+
+        <div class="analysis-item">
+
+          <span>
+            Timeframe
+          </span>
+
+          <strong>
+            1H
+          </strong>
+
+        </div>
+
+
+        <div class="analysis-item">
+
+          <span>
+            Entry
+          </span>
+
+          <strong>
+            $117.8K
+          </strong>
+
+        </div>
+
+
+        <div class="analysis-item">
+
+          <span>
+            Target
+          </span>
+
+          <strong>
+            $121K
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      <div
+        class="post-time"
+        style="margin-top:10px;"
+      >
+
+        Published 3 hours ago
+
+      </div>
+
+    </article>
+
+
+    <article class="analysis-card">
+
+
+      <div class="analysis-header">
+
+        <div class="analysis-coin">
+
+          Ξ ETH
+
+        </div>
+
+
+        <div class="bullish">
+
+          BULLISH
+
+        </div>
+
+      </div>
+
+
+      <div class="analysis-grid">
+
+
+        <div class="analysis-item">
+
+          <span>
+            Timeframe
+          </span>
+
+          <strong>
+            4H
+          </strong>
+
+        </div>
+
+
+        <div class="analysis-item">
+
+          <span>
+            Entry
+          </span>
+
+          <strong>
+            $4.3K
+          </strong>
+
+        </div>
+
+
+        <div class="analysis-item">
+
+          <span>
+            Target
+          </span>
+
+          <strong>
+            $4.6K
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="post-time"
+        style="margin-top:10px;"
+      >
+
+        Published yesterday
+
+      </div>
+
+    </article>
+
+
+  </section>
+
+
+
+  <!-- ABOUT -->
+
+  <section
+    id="aboutSection"
+    style="display:none;"
+  >
+
+    <div class="section-title">
+
+      About Trader
+
+    </div>
+
+
+    <div
+      class="trader-post"
+      style="line-height:1.7;"
+    >
+
+      <div
+        style="
+          font-size:10px;
+          font-weight:800;
+        "
+      >
+        MarketWatcher
+      </div>
+
+
+      <div
+        style="
+          margin-top:8px;
+          font-size:9px;
+          opacity:.65;
+        "
+      >
+
+        Trader sejak 2023.
+        Fokus pada technical analysis,
+        futures dan market structure.
+
+        <br><br>
+
+        Risk management selalu menjadi
+        prioritas sebelum mencari profit.
+
+      </div>
+
+    </div>
+
+
+    <div class="section-title">
+
+      Achievements
+
+    </div>
+
+
+    <div
+      class="trader-stats"
+      style="
+        grid-template-columns:
+        repeat(2,1fr);
+      "
+    >
+
+      <div class="trader-stat">
+
+        <strong>
+          🏆
+        </strong>
+
+        <span>
+          Top Analyst
+        </span>
+
+      </div>
+
+
+      <div class="trader-stat">
+
+        <strong>
+          🔥
+        </strong>
+
+        <span>
+          100 Predictions
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+</main>
+
+
+
+<div id="bottom-nav"></div>
+
+
+
+<script src="js/app.js"></script>
+
+
+<script>
+
+
+/* =====================================================
+   FOLLOW
+===================================================== */
+
+const followButton =
+  document.getElementById(
+    "followButton"
+  );
+
+
+followButton?.addEventListener(
+  "click",
+  () => {
+
+    const following =
+      followButton.classList.toggle(
+        "following"
+      );
+
+
+    followButton.textContent =
+      following
+        ? "✓ Following"
+        : "+ Follow";
+
+  }
+);
+
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+const tabs =
+  document.querySelectorAll(
+    ".trader-tab"
+  );
+
+
+const sections = {
+
+  posts:
+    document.getElementById(
+      "postsSection"
+    ),
+
+  analysis:
+    document.getElementById(
+      "analysisSection"
+    ),
+
+  about:
+    document.getElementById(
+      "aboutSection"
+    )
+
+};
+
+
+tabs.forEach(
+  tab => {
+
+    tab.addEventListener(
+      "click",
+      () => {
+
+        tabs.forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+
+        tab.classList.add(
+          "active"
+        );
+
+
+        Object.values(
+          sections
+        ).forEach(
+          section => {
+
+            if (section)
+              section.style.display =
+                "none";
+
+          }
+        );
+
+
+        const selected =
+          sections[
+            tab.dataset.tab
+          ];
+
+
+        if (selected)
+          selected.style.display =
+            "block";
+
+      }
+    );
+
+  }
+);
+
+
+
+/* =====================================================
+   LIKE
+===================================================== */
+
+document
+  .querySelectorAll(
+    "[data-like]"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const count =
+            button.querySelector(
+              "span"
+            );
+
+          let value =
+            Number(
+              count.textContent
+            );
+
+
+          if (
+            button.dataset.liked ===
+            "true"
+          ) {
+
+            value--;
+
+            button.dataset.liked =
+              "false";
+
+          } else {
+
+            value++;
+
+            button.dataset.liked =
+              "true";
+
+          }
+
+
+          count.textContent =
+            value;
+
+        }
+      );
+
+    }
+  );
+
+
+</script>
+
+
+</body>
+
+</html>
