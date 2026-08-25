@@ -1,5 +1,6 @@
 /* =========================================================
-   NEXTRA PROFILE — V4
+   NEXTRA — PROFILE PAGE
+   Full Profile UI + Avatar Fix
 ========================================================= */
 
 
@@ -8,178 +9,216 @@
 ========================================================= */
 
 .profile-card {
-
-  overflow: hidden;
-
-  margin-top: 18px;
-
-  border: 1px solid var(--line);
-
-  border-radius: 22px;
-
+  position: relative;
+  width: 100%;
+  overflow: visible !important;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 24px;
   background:
     linear-gradient(
       145deg,
-      rgba(57,242,160,.055),
-      rgba(32,207,255,.035) 45%,
-      rgba(255,255,255,.015)
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.018)
     );
-
   box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.22);
-
+    0 20px 60px rgba(0,0,0,.28);
 }
 
+
+/* =========================================================
+   COVER
+========================================================= */
 
 .profile-cover {
-
   position: relative;
-
-  height: 92px;
-
-  overflow: hidden;
+  height: 150px;
+  overflow: visible !important;
+  border-radius: 24px 24px 0 0;
 
   background:
     radial-gradient(
-      circle at 15% 20%,
-      rgba(57,242,160,.16),
-      transparent 38%
+      circle at 20% 20%,
+      rgba(66,245,167,.18),
+      transparent 35%
     ),
     radial-gradient(
-      circle at 85% 10%,
-      rgba(32,207,255,.15),
-      transparent 42%
+      circle at 85% 20%,
+      rgba(32,207,255,.16),
+      transparent 35%
     ),
-    #080d0d;
-
+    linear-gradient(
+      135deg,
+      #0b1213,
+      #080b0d
+    );
 }
 
+
+/* =========================================================
+   COVER GLOW
+========================================================= */
 
 .profile-glow {
-
   position: absolute;
+  inset: 0;
 
-  width: 190px;
-
-  height: 190px;
-
-  right: -80px;
-
-  top: -110px;
-
-  border-radius: 50%;
+  pointer-events: none;
 
   background:
-    rgba(57,242,160,.09);
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(66,245,167,.12),
+      transparent 42%
+    );
 
-  filter: blur(25px);
-
+  border-radius: inherit;
 }
 
 
-.profile-avatar {
+/* =========================================================
+   AVATAR
+========================================================= */
 
+.profile-avatar {
   position: absolute;
 
-  left: 20px;
+  left: 24px;
+  bottom: -52px;
 
-  bottom: -29px;
-
-  width: 74px;
-
-  height: 74px;
+  width: 104px;
+  height: 104px;
 
   padding: 0;
 
-  display: flex;
+  display: grid;
+  place-items: center;
 
-  align-items: center;
-
-  justify-content: center;
-
-  overflow: hidden;
-
-  border: 4px solid #080d0d;
-
-  border-radius: 22px;
+  border: 4px solid #080b0d;
+  border-radius: 50%;
 
   background:
     linear-gradient(
       135deg,
-      var(--green),
-      var(--blue)
+      #42f5a7,
+      #20cfff
     );
 
-  color: #04110b;
+  color: #06100c;
 
-  font-size: 27px;
-
-  font-weight: 850;
+  overflow: hidden !important;
 
   cursor: pointer;
 
-  z-index: 2;
+  z-index: 20;
 
   box-shadow:
-    0 10px 30px
-    rgba(0,0,0,.3);
+    0 10px 35px rgba(0,0,0,.45),
+    0 0 0 1px rgba(255,255,255,.08);
 
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
 }
 
 
-.profile-avatar img {
+.profile-avatar:hover {
+  transform: scale(1.04);
 
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.5),
+    0 0 0 1px rgba(66,245,167,.3);
+}
+
+
+.profile-avatar:active {
+  transform: scale(.97);
+}
+
+
+/* =========================================================
+   AVATAR INITIAL
+========================================================= */
+
+#avatarInitial {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 38px;
+  font-weight: 800;
+
+  line-height: 1;
+
+  color: #06100c;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   AVATAR IMAGE
+========================================================= */
+
+#avatarImage {
   position: absolute;
 
   inset: 0;
 
   width: 100%;
-
   height: 100%;
-
-  object-fit: cover;
-
-  display: none;
-
-}
-
-
-.profile-avatar img.visible {
 
   display: block;
 
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  z-index: 2;
+
+  transition: opacity .2s ease;
 }
 
 
-.avatar-camera {
+#avatarImage.visible {
+  opacity: 1;
+}
 
+
+/* =========================================================
+   CAMERA BUTTON
+========================================================= */
+
+.avatar-camera {
   position: absolute;
 
   right: 3px;
-
   bottom: 3px;
 
-  width: 24px;
+  width: 30px;
+  height: 30px;
 
-  height: 24px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
+  display: grid;
+  place-items: center;
 
   border-radius: 50%;
 
   background:
-    rgba(5,7,10,.92);
+    rgba(5,7,10,.9);
 
-  border: 1px solid
-    rgba(255,255,255,.12);
+  border: 2px solid #080b0d;
 
-  font-size: 12px;
+  font-size: 13px;
 
+  z-index: 5;
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.35);
 }
 
 
@@ -188,759 +227,158 @@
 ========================================================= */
 
 .profile-main {
+  position: relative;
+
+  z-index: 5;
 
   padding:
-    40px 18px 18px;
-
+    68px
+    22px
+    22px;
 }
 
 
-.profile-name-row {
+/* =========================================================
+   NAME ROW
+========================================================= */
 
+.profile-name-row {
   display: flex;
 
   align-items: flex-start;
-
   justify-content: space-between;
 
   gap: 12px;
-
 }
 
 
 .profile-name-row h2 {
-
   margin: 0;
 
-  color: var(--text);
-
-  font-size: 20px;
-
+  font-size: 23px;
   font-weight: 800;
 
-  letter-spacing: -.035em;
+  letter-spacing: -.4px;
 
+  color:
+    var(--text, #fff);
 }
 
 
-.profile-name-row p {
-
-  margin: 5px 0 0;
-
-  color: var(--muted);
-
-  font-size: 12px;
-
+.profile-username {
+  margin-top: 5px;
 }
 
+
+#profileUsername {
+  margin:
+    5px
+    0
+    0;
+
+  font-size: 13px;
+
+  color:
+    var(--muted,
+    rgba(255,255,255,.5));
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
 
 .profile-status {
+  flex-shrink: 0;
 
   display: inline-flex;
 
   align-items: center;
 
-  gap: 5px;
-
-  flex-shrink: 0;
+  gap: 6px;
 
   padding:
-    5px 8px;
+    7px
+    10px;
 
   border-radius: 999px;
 
   background:
-    rgba(57,242,160,.07);
+    rgba(66,245,167,.08);
 
-  color: var(--green);
+  border: 1px solid
+    rgba(66,245,167,.18);
 
-  font-size: 10px;
+  color:
+    #42f5a7;
 
+  font-size: 11px;
   font-weight: 700;
-
 }
 
 
 .profile-status i {
-
   width: 6px;
-
   height: 6px;
 
   border-radius: 50%;
 
-  background: var(--green);
+  background:
+    #42f5a7;
 
   box-shadow:
     0 0 8px
-    rgba(57,242,160,.7);
-
+    rgba(66,245,167,.8);
 }
 
 
-.profile-edit-btn {
+/* =========================================================
+   EDIT PROFILE BUTTON
+========================================================= */
 
+.profile-edit-btn {
   width: 100%;
 
   margin-top: 18px;
 
-  padding: 11px 14px;
+  padding:
+    12px
+    15px;
 
-  border: 1px solid var(--line);
+  border: 1px solid
+    rgba(255,255,255,.08);
 
-  border-radius: 11px;
+  border-radius: 14px;
 
   background:
     rgba(255,255,255,.035);
 
-  color: var(--text);
+  color:
+    var(--text,#fff);
 
-  font-family: inherit;
-
-  font-size: 12px;
-
+  font-size: 13px;
   font-weight: 700;
 
   cursor: pointer;
 
   transition:
-    background .16s ease,
-    transform .16s ease;
-
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
 }
 
 
 .profile-edit-btn:hover {
-
   background:
-    rgba(255,255,255,.06);
+    rgba(255,255,255,.07);
 
+  border-color:
+    rgba(66,245,167,.25);
 }
 
 
 .profile-edit-btn:active {
-
-  transform:
-    scale(.98);
-
-}
-
-
-/* =========================================================
-   EDIT PROFILE
-========================================================= */
-
-.profile-edit-card {
-
-  padding: 18px;
-
-  border: 1px solid var(--line);
-
-  border-radius: 16px;
-
-  background:
-    rgba(255,255,255,.018);
-
-}
-
-
-.profile-edit-card label {
-
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: var(--muted);
-
-  font-size: 11px;
-
-  font-weight: 600;
-
-}
-
-
-.profile-edit-card input {
-
-  width: 100%;
-
-  box-sizing: border-box;
-
-  margin-bottom: 15px;
-
-  padding: 12px 13px;
-
-  border: 1px solid var(--line);
-
-  border-radius: 10px;
-
-  outline: none;
-
-  background:
-    rgba(0,0,0,.2);
-
-  color: var(--text);
-
-  font-family: inherit;
-
-  font-size: 13px;
-
-}
-
-
-.profile-edit-card input::placeholder {
-
-  color:
-    var(--subtle);
-
-}
-
-
-.profile-edit-card input:focus {
-
-  border-color:
-    rgba(57,242,160,.45);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(57,242,160,.07);
-
-}
-
-
-.profile-edit-actions {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 8px;
-
-}
-
-
-.profile-secondary-btn,
-.profile-primary-btn {
-
-  padding: 10px;
-
-  border: 0;
-
-  border-radius: 10px;
-
-  font-family: inherit;
-
-  font-size: 12px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-}
-
-
-.profile-secondary-btn {
-
-  background:
-    rgba(255,255,255,.05);
-
-  color: var(--muted);
-
-}
-
-
-.profile-primary-btn {
-
-  background:
-    var(--green);
-
-  color: #04110b;
-
-}
-
-
-/* =========================================================
-   TRADER LEVEL
-========================================================= */
-
-.trader-level-card {
-
-  position: relative;
-
-  overflow: hidden;
-
-  margin-top: 14px;
-
-  padding: 18px;
-
-  border: 1px solid
-    rgba(57,242,160,.13);
-
-  border-radius: 18px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(57,242,160,.055),
-      rgba(32,207,255,.025)
-    );
-
-}
-
-
-.trader-level-card::after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 150px;
-
-  height: 150px;
-
-  right: -80px;
-
-  bottom: -100px;
-
-  border-radius: 50%;
-
-  background:
-    rgba(32,207,255,.07);
-
-  filter: blur(20px);
-
-}
-
-
-.trader-level-top {
-
-  position: relative;
-
-  z-index: 1;
-
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content: space-between;
-
-}
-
-
-.mini-label {
-
-  display: block;
-
-  margin-bottom: 5px;
-
-  color: var(--subtle);
-
-  font-size: 9px;
-
-  font-weight: 800;
-
-  letter-spacing: .1em;
-
-}
-
-
-.trader-level-top h3 {
-
-  margin: 0;
-
-  color: var(--text);
-
-  font-size: 16px;
-
-  font-weight: 750;
-
-}
-
-
-.level-number {
-
-  padding:
-    6px 9px;
-
-  border:
-    1px solid
-    rgba(57,242,160,.18);
-
-  border-radius: 8px;
-
-  color: var(--green);
-
-  background:
-    rgba(57,242,160,.05);
-
-  font-size: 9px;
-
-  font-weight: 800;
-
-}
-
-
-.xp-row {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  margin-top: 18px;
-
-  color: var(--muted);
-
-  font-size: 10px;
-
-}
-
-
-.xp-track {
-
-  height: 6px;
-
-  margin-top: 7px;
-
-  overflow: hidden;
-
-  border-radius: 999px;
-
-  background:
-    rgba(255,255,255,.06);
-
-}
-
-
-.xp-progress {
-
-  height: 100%;
-
-  border-radius: inherit;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--green),
-      var(--blue)
-    );
-
-  box-shadow:
-    0 0 12px
-    rgba(57,242,160,.25);
-
-}
-
-
-.xp-description {
-
-  margin:
-    10px 0 0;
-
-  color: var(--subtle);
-
-  font-size: 10px;
-
-}
-
-
-/* =========================================================
-   PLAN
-========================================================= */
-
-.plan-card {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  margin-top: 12px;
-
-  padding: 14px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 16px;
-
-  background:
-    rgba(255,255,255,.018);
-
-}
-
-
-.plan-icon {
-
-  width: 38px;
-
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  border-radius: 11px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--green),
-      var(--blue)
-    );
-
-  color: #04110b;
-
-  font-size: 15px;
-
-  font-weight: 900;
-
-}
-
-
-.plan-content {
-
-  min-width: 0;
-
-  flex: 1;
-
-}
-
-
-.plan-content strong {
-
-  display: block;
-
-  color: var(--text);
-
-  font-size: 13px;
-
-}
-
-
-.plan-content > span:last-child {
-
-  display: block;
-
-  margin-top: 3px;
-
-  color: var(--muted);
-
-  font-size: 10px;
-
-}
-
-
-.plan-button {
-
-  flex-shrink: 0;
-
-  padding:
-    8px 11px;
-
-  border: 0;
-
-  border-radius: 9px;
-
-  background:
-    var(--green);
-
-  color: #04110b;
-
-  font-family: inherit;
-
-  font-size: 10px;
-
-  font-weight: 800;
-
-  cursor: pointer;
-
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.profile-stats {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  margin-top: 12px;
-
-  overflow: hidden;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 16px;
-
-  background:
-    rgba(255,255,255,.015);
-
-}
-
-
-.profile-stat {
-
-  padding:
-    15px 8px;
-
-  text-align: center;
-
-}
-
-
-.profile-stat + .profile-stat {
-
-  border-left:
-    1px solid var(--line);
-
-}
-
-
-.profile-stat strong {
-
-  display: block;
-
-  color: var(--text);
-
-  font-size: 16px;
-
-  font-weight: 800;
-
-}
-
-
-.profile-stat span {
-
-  display: block;
-
-  margin-top: 4px;
-
-  color: var(--muted);
-
-  font-size: 10px;
-
-}
-
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-.achievement-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 9px;
-
-}
-
-
-.achievement-card {
-
-  min-height: 105px;
-
-  padding: 13px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 14px;
-
-  background:
-    rgba(255,255,255,.012);
-
-  opacity: .48;
-
-}
-
-
-.achievement-card.active {
-
-  opacity: 1;
-
-  border-color:
-    rgba(57,242,160,.14);
-
-  background:
-    rgba(57,242,160,.025);
-
-}
-
-
-.achievement-icon {
-
-  width: 31px;
-
-  height: 31px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  margin-bottom: 9px;
-
-  border-radius: 9px;
-
-  background:
-    rgba(255,255,255,.05);
-
-  color: var(--muted);
-
-  font-size: 14px;
-
-}
-
-
-.achievement-card.active
-.achievement-icon {
-
-  background:
-    rgba(57,242,160,.08);
-
-  color:
-    var(--green);
-
-}
-
-
-.achievement-card strong {
-
-  display: block;
-
-  color: var(--text);
-
-  font-size: 11px;
-
-  font-weight: 700;
-
-}
-
-
-.achievement-card span {
-
-  display: block;
-
-  margin-top: 3px;
-
-  color: var(--subtle);
-
-  font-size: 9px;
-
+  transform: scale(.98);
 }
 
 
@@ -949,30 +387,500 @@
 ========================================================= */
 
 .profile-section {
-
-  margin-top: 28px;
-
+  margin-top: 24px;
 }
 
 
 .section-label {
-
-  margin-bottom: 8px;
-
-  color: var(--subtle);
+  margin:
+    0
+    0
+    10px
+    4px;
 
   font-size: 10px;
 
-  font-weight: 750;
+  font-weight: 800;
 
-  letter-spacing: .09em;
+  letter-spacing: 1.5px;
 
+  color:
+    rgba(255,255,255,.38);
 }
 
 
-.profile-item {
+/* =========================================================
+   EDIT CARD
+========================================================= */
 
-  min-height: 62px;
+.profile-edit-card {
+  padding: 18px;
+
+  border: 1px solid
+    rgba(255,255,255,.07);
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+
+.profile-edit-card label {
+  display: block;
+
+  margin:
+    0
+    0
+    7px;
+
+  font-size: 12px;
+
+  color:
+    rgba(255,255,255,.55);
+}
+
+
+.profile-edit-card input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  margin:
+    0
+    0
+    14px;
+
+  padding:
+    12px
+    13px;
+
+  border: 1px solid
+    rgba(255,255,255,.08);
+
+  border-radius: 13px;
+
+  outline: none;
+
+  background:
+    rgba(0,0,0,.22);
+
+  color:
+    #fff;
+
+  font-size: 13px;
+}
+
+
+.profile-edit-card input:focus {
+  border-color:
+    rgba(66,245,167,.5);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(66,245,167,.07);
+}
+
+
+.profile-edit-actions {
+  display: flex;
+
+  gap: 9px;
+
+  margin-top: 4px;
+}
+
+
+.profile-secondary-btn,
+.profile-primary-btn {
+  flex: 1;
+
+  padding: 12px;
+
+  border-radius: 13px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.profile-secondary-btn {
+  border: 1px solid
+    rgba(255,255,255,.08);
+
+  background:
+    rgba(255,255,255,.035);
+
+  color: #fff;
+}
+
+
+.profile-primary-btn {
+  border: 0;
+
+  background:
+    #42f5a7;
+
+  color:
+    #06100c;
+}
+
+
+/* =========================================================
+   TRADER LEVEL
+========================================================= */
+
+.trader-level-card {
+  margin-top: 24px;
+
+  padding: 20px;
+
+  border: 1px solid
+    rgba(66,245,167,.13);
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(66,245,167,.075),
+      rgba(32,207,255,.035)
+    );
+}
+
+
+.trader-level-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.mini-label {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+
+  color:
+    rgba(255,255,255,.4);
+}
+
+
+.trader-level-top h3 {
+  margin: 0;
+
+  font-size: 17px;
+}
+
+
+.level-number {
+  padding:
+    7px
+    10px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(66,245,167,.1);
+
+  color:
+    #42f5a7;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+.xp-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 20px;
+
+  font-size: 11px;
+
+  color:
+    rgba(255,255,255,.55);
+}
+
+
+.xp-track {
+  height: 7px;
+
+  margin-top: 8px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,.07);
+}
+
+
+.xp-progress {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #42f5a7,
+      #20cfff
+    );
+}
+
+
+.xp-description {
+  margin:
+    12px
+    0
+    0;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  color:
+    rgba(255,255,255,.45);
+}
+
+
+/* =========================================================
+   PLAN
+========================================================= */
+
+.plan-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin-top: 14px;
+
+  padding: 16px;
+
+  border: 1px solid
+    rgba(255,255,255,.07);
+
+  border-radius: 19px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+
+.plan-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 13px;
+
+  background:
+    rgba(66,245,167,.1);
+
+  color:
+    #42f5a7;
+
+  font-weight: 900;
+}
+
+
+.plan-content {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  gap: 3px;
+}
+
+
+.plan-content strong {
+  font-size: 13px;
+}
+
+
+.plan-content > span:last-child {
+  font-size: 11px;
+
+  color:
+    rgba(255,255,255,.45);
+}
+
+
+.plan-button {
+  margin-left: auto;
+
+  padding:
+    9px
+    12px;
+
+  border: 1px solid
+    rgba(66,245,167,.25);
+
+  border-radius: 11px;
+
+  background:
+    rgba(66,245,167,.07);
+
+  color:
+    #42f5a7;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.profile-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap: 10px;
+
+  margin-top: 14px;
+}
+
+
+.profile-stat {
+  padding:
+    17px
+    10px;
+
+  text-align: center;
+
+  border: 1px solid
+    rgba(255,255,255,.07);
+
+  border-radius: 17px;
+
+  background:
+    rgba(255,255,255,.025);
+}
+
+
+.profile-stat strong {
+  display: block;
+
+  font-size: 20px;
+}
+
+
+.profile-stat span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  color:
+    rgba(255,255,255,.42);
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+.achievement-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap: 10px;
+}
+
+
+.achievement-card {
+  padding: 16px;
+
+  border: 1px solid
+    rgba(255,255,255,.06);
+
+  border-radius: 17px;
+
+  background:
+    rgba(255,255,255,.02);
+
+  opacity: .42;
+}
+
+
+.achievement-card.active {
+  opacity: 1;
+
+  border-color:
+    rgba(66,245,167,.18);
+
+  background:
+    rgba(66,245,167,.045);
+}
+
+
+.achievement-icon {
+  font-size: 22px;
+
+  margin-bottom: 10px;
+}
+
+
+.achievement-card strong {
+  display: block;
+
+  font-size: 12px;
+}
+
+
+.achievement-card span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  color:
+    rgba(255,255,255,.42);
+}
+
+
+/* =========================================================
+   PROFILE ITEMS
+========================================================= */
+
+.profile-item {
+  width: 100%;
+
+  box-sizing: border-box;
 
   display: flex;
 
@@ -980,103 +888,93 @@
 
   justify-content: space-between;
 
-  gap: 15px;
+  gap: 12px;
 
-  padding: 12px 2px;
+  padding:
+    15px
+    16px;
 
-  border-bottom:
-    1px solid var(--line);
+  margin-bottom: 8px;
 
-  color: inherit;
+  border: 1px solid
+    rgba(255,255,255,.06);
+
+  border-radius: 16px;
+
+  background:
+    rgba(255,255,255,.025);
+
+  color:
+    inherit;
 
   text-decoration: none;
 
   transition:
-    background .16s ease;
-
+    background .18s ease,
+    transform .18s ease;
 }
 
 
 .profile-item:hover {
-
   background:
-    rgba(255,255,255,.02);
+    rgba(255,255,255,.055);
+}
 
+
+.profile-item:active {
+  transform: scale(.99);
 }
 
 
 .profile-item > div {
-
   min-width: 0;
-
 }
 
 
 .profile-item strong {
-
   display: block;
 
-  color: var(--text);
-
-  font-size: 14px;
-
-  line-height: 1.3;
-
-  font-weight: 650;
-
+  font-size: 12px;
 }
 
 
 .profile-item span {
-
   display: block;
 
   margin-top: 4px;
 
-  color: var(--muted);
+  font-size: 10px;
 
-  font-size: 11px;
-
-  line-height: 1.3;
-
+  color:
+    rgba(255,255,255,.43);
 }
 
 
 .profile-arrow {
+  margin: 0 !important;
+
+  flex-shrink: 0;
+
+  font-size: 22px !important;
 
   color:
-    var(--subtle) !important;
-
-  font-size:
-    22px !important;
-
-  line-height: 1;
-
-}
-
-
-.profile-item .up {
-
-  color:
-    var(--green) !important;
-
-  font-weight:
-    650;
-
+    rgba(255,255,255,.3) !important;
 }
 
 
 .profile-check {
+  margin: 0 !important;
 
   color:
-    var(--green) !important;
+    #42f5a7 !important;
 
-  font-size:
-    15px !important;
+  font-size: 17px !important;
+}
 
-  font-weight:
-    800;
 
+.up {
+  color:
+    #42f5a7 !important;
 }
 
 
@@ -1085,19 +983,26 @@
 ========================================================= */
 
 .profile-footer {
-
   padding:
-    42px 0 15px;
+    30px
+    0
+    100px;
 
-  text-align:
-    center;
+  text-align: center;
+
+  font-size: 10px;
 
   color:
-    var(--subtle);
+    rgba(255,255,255,.25);
+}
 
-  font-size:
-    10px;
 
+/* =========================================================
+   LANGUAGE MODAL COMPATIBILITY
+========================================================= */
+
+.language-modal {
+  z-index: 9999;
 }
 
 
@@ -1105,603 +1010,95 @@
    MOBILE
 ========================================================= */
 
-@media (max-width: 699px) {
-
-
-  .profile-card {
-
-    border-radius:
-      18px;
-
-  }
-
+@media (max-width: 600px) {
 
   .profile-cover {
-
-    height:
-      84px;
-
+    height: 135px;
   }
-
 
   .profile-avatar {
+    left: 20px;
+    bottom: -48px;
 
-    left:
-      16px;
-
-    width:
-      68px;
-
-    height:
-      68px;
-
-    bottom:
-      -27px;
-
-    border-radius:
-      19px;
-
+    width: 96px;
+    height: 96px;
   }
-
 
   .profile-main {
-
     padding:
-      37px 15px 15px;
-
+      62px
+      18px
+      18px;
   }
-
 
   .profile-name-row h2 {
-
-    font-size:
-      18px;
-
+    font-size: 20px;
   }
-
 
   .profile-status {
-
-    font-size:
-      9px;
-
-  }
-
-
-  .trader-level-card {
-
     padding:
-      15px;
-
-  }
-
-
-  .plan-card {
-
-    padding:
-      13px;
-
-  }
-
-
-  .profile-item {
-
-    min-height:
-      64px;
-
-  }
-
-
-  .achievement-grid {
-
-    gap:
+      6px
       8px;
 
-  }
-
-
-  .achievement-card {
-
-    min-height:
-      100px;
-
+    font-size: 10px;
   }
 
 }
 
 
 /* =========================================================
-   REDUCED MOTION
+   VERY SMALL SCREEN
 ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 380px) {
 
-  * {
+  .profile-avatar {
+    left: 16px;
 
-    transition:
-      none !important;
+    width: 88px;
+    height: 88px;
 
+    bottom: -44px;
+  }
 
+  .profile-main {
+    padding-top: 58px;
+  }
 
-/* =========================================================
-   PROFILE V5 — SETTINGS
-========================================================= */
-
-
-/* =========================================================
-   SETTINGS CARD
-========================================================= */
-
-.settings-card {
-
-  overflow: hidden;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 16px;
-
-  background:
-    rgba(255,255,255,.015);
-
-}
-
-
-.setting-row {
-
-  min-height: 64px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 15px;
-
-  padding:
-    12px 14px;
-
-}
-
-
-.setting-row + .setting-row {
-
-  border-top:
-    1px solid var(--line);
-
-}
-
-
-.setting-row > div {
-
-  min-width: 0;
-
-  flex: 1;
-
-}
-
-
-.setting-row strong {
-
-  display: block;
-
-  color: var(--text);
-
-  font-size: 13px;
-
-  font-weight: 650;
-
-}
-
-
-.setting-row span {
-
-  display: block;
-
-  margin-top: 4px;
-
-  color: var(--muted);
-
-  font-size: 10px;
-
-  line-height: 1.3;
+  .profile-status {
+    display: none;
+  }
 
 }
 
 
 /* =========================================================
-   TOGGLE
+   DESKTOP
 ========================================================= */
 
-.setting-toggle {
+@media (min-width: 700px) {
 
-  position: relative;
+  .profile-card {
+    border-radius: 28px;
+  }
 
-  width: 42px;
+  .profile-cover {
+    height: 180px;
+  }
 
-  height: 24px;
+  .profile-avatar {
+    width: 116px;
+    height: 116px;
 
-  flex-shrink: 0;
+    left: 28px;
+    bottom: -58px;
+  }
 
-  padding: 0;
-
-  border: 0;
-
-  border-radius: 999px;
-
-  background:
-    rgba(255,255,255,.12);
-
-  cursor: pointer;
-
-  transition:
-    background .2s ease,
-    box-shadow .2s ease;
-
-}
-
-
-.setting-toggle span {
-
-  position: absolute;
-
-  top: 3px;
-
-  left: 3px;
-
-  width: 18px;
-
-  height: 18px;
-
-  margin: 0;
-
-  border-radius: 50%;
-
-  background: #fff;
-
-  box-shadow:
-    0 2px 7px
-    rgba(0,0,0,.3);
-
-  transition:
-    transform .2s ease;
-
-}
-
-
-.setting-toggle.is-on {
-
-  background:
-    var(--green);
-
-  box-shadow:
-    0 0 12px
-    rgba(57,242,160,.16);
-
-}
-
-
-.setting-toggle.is-on span {
-
-  transform:
-    translateX(18px);
-
-}
-
-
-.setting-toggle:active {
-
-  transform:
-    scale(.94);
-
-}
-
-
-/* =========================================================
-   SETTINGS LABEL
-========================================================= */
-
-.settings-label {
-
-  margin-top:
-    28px;
-
-}
-
-
-/* =========================================================
-   CHOICE CARDS
-========================================================= */
-
-.settings-choice {
-
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 8px;
-
-}
-
-
-.settings-choice button {
-
-  min-height: 68px;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 11px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 13px;
-
-  background:
-    rgba(255,255,255,.012);
-
-  color: var(--text);
-
-  text-align: left;
-
-  font-family: inherit;
-
-  cursor: pointer;
-
-  transition:
-    border-color .18s ease,
-    background .18s ease,
-    transform .18s ease;
-
-}
-
-
-.settings-choice button:hover {
-
-  background:
-    rgba(255,255,255,.025);
-
-}
-
-
-.settings-choice button:active {
-
-  transform:
-    scale(.98);
-
-}
-
-
-.settings-choice button.selected {
-
-  border-color:
-    rgba(57,242,160,.35);
-
-  background:
-    rgba(57,242,160,.045);
-
-  box-shadow:
-    inset 0 0 0 1px
-    rgba(57,242,160,.04);
-
-}
-
-
-.choice-icon {
-
-  width: 32px;
-
-  height: 32px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  margin: 0 !important;
-
-  border-radius: 9px;
-
-  background:
-    rgba(255,255,255,.05);
-
-  color: var(--muted);
-
-  font-size: 10px;
-
-  font-weight: 800;
-
-}
-
-
-.settings-choice button.selected
-.choice-icon {
-
-  background:
-    rgba(57,242,160,.1);
-
-  color:
-    var(--green);
-
-}
-
-
-.settings-choice button span:last-child {
-
-  min-width: 0;
-
-}
-
-
-.settings-choice strong {
-
-  display: block;
-
-  color: var(--text);
-
-  font-size: 11px;
-
-  font-weight: 700;
-
-}
-
-
-.settings-choice small {
-
-  display: block;
-
-  margin-top: 3px;
-
-  color: var(--muted);
-
-  font-size: 9px;
-
-}
-
-
-/* =========================================================
-   LIGHT MODE PREPARATION
-========================================================= */
-
-html[data-theme="light"] {
-
-  --bg: #f5f7f8;
-
-  --card: #ffffff;
-
-  --text: #111618;
-
-  --muted: #667276;
-
-  --subtle: #8b9699;
-
-  --line: rgba(0,0,0,.09);
-
-}
-
-
-html[data-theme="light"] body {
-
-  background:
-    var(--bg);
-
-}
-
-
-html[data-theme="light"]
-.profile-card,
-html[data-theme="light"]
-.trader-level-card,
-html[data-theme="light"]
-.plan-card,
-html[data-theme="light"]
-.profile-stats,
-html[data-theme="light"]
-.settings-card,
-html[data-theme="light"]
-.settings-choice button {
-
-  background-color:
-    var(--card);
-
-}
-
-
-html[data-theme="light"]
-.profile-cover {
-
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(57,242,160,.12),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 85% 10%,
-      rgba(32,207,255,.12),
-      transparent 42%
-    ),
-    #e9eff0;
-
-}
-
-
-html[data-theme="light"]
-.profile-avatar {
-
-  border-color:
-    #e9eff0;
-
-}
-
-
-html[data-theme="light"]
-.profile-edit-card input {
-
-  background:
-    #f4f6f6;
-
-}
-
-
-html[data-theme="light"]
-.profile-item:hover {
-
-  background:
-    rgba(0,0,0,.025);
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 699px) {
-
-  .setting-row {
-
-    min-height:
-      66px;
-
+  .profile-main {
     padding:
-      12px;
-
-  }
-
-
-  .settings-choice {
-
-    grid-template-columns:
-      1fr;
-
-  }
-
-
-  .settings-choice button {
-
-    min-height:
-      62px;
-
+      76px
+      28px
+      28px;
   }
 
 }
-     
-
-  }
-
-}
-
-
-
-
-
