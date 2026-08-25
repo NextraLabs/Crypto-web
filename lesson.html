@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
+  <title>NEXTRA — Lesson</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <style>
+
+    .lesson-header {
+      margin-bottom: 16px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .lesson-category {
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .lesson-title {
+      margin: 5px 0 0;
+      font-size: 24px;
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+
+    .lesson-subtitle {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .lesson-meta {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 11px;
+    }
+
+    .meta-pill {
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .article-card {
+      padding: 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--surface);
+    }
+
+    .article-card h2 {
+      margin: 0 0 9px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .article-card h3 {
+      margin: 15px 0 7px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .article-card p {
+      margin: 0 0 9px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.75;
+    }
+
+    .article-card ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .article-card li {
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      padding: 12px;
+      margin-top: 11px;
+      border-left: 3px solid var(--green);
+      border-radius: 8px;
+      background: rgba(57,242,160,.06);
+      color: var(--text);
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+    .example-box {
+      padding: 13px;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface-soft);
+    }
+
+    .example-label {
+      margin-bottom: 5px;
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .example-text {
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+    .quiz-option {
+      width: 100%;
+      padding: 11px;
+      margin-top: 7px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface-soft);
+      color: var(--text);
+      text-align: left;
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--green);
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 9px;
+      background: rgba(57,242,160,.08);
+      color: var(--green);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .complete-box {
+      padding: 16px;
+      margin: 18px 0;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .complete-icon {
+      font-size: 28px;
+    }
+
+    .complete-title {
+      margin-top: 7px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .complete-text {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .complete-button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--green);
+      color: #07100c;
+      font-size: 9px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .disclaimer {
+      margin: 18px 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--subtle);
+      font-size: 8px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<main class="container">
+
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+        Learn<span class="dot">.</span>
+      </h1>
+
+      <p class="subtitle">
+        NEXTRA Academy
+      </p>
+
+    </div>
+
+    <button
+      class="icon-btn"
+      id="theme-toggle"
+    >
+      ◐
+    </button>
+
+  </header>
+
+
+  <!-- LESSON HEADER -->
+
+  <section class="lesson-header">
+
+    <a
+      href="learn.html"
+      class="back-link"
+    >
+      ← Back to Learn
+    </a>
+
+    <div class="lesson-category">
+      Crypto Basics
+    </div>
+
+    <h1 class="lesson-title">
+      Bitcoin & Blockchain
+    </h1>
+
+    <p class="lesson-subtitle">
+      Memahami apa itu Bitcoin dan bagaimana
+      teknologi blockchain bekerja.
+    </p>
+
+    <div class="lesson-meta">
+
+      <span class="meta-pill">
+        🌱 Beginner
+      </span>
+
+      <span class="meta-pill">
+        ⏱ 8 min
+      </span>
+
+      <span class="meta-pill">
+        Lesson 01
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- INTRO -->
+
+  <article class="article-card">
+
+    <h2>
+      Apa itu Bitcoin?
+    </h2>
+
+    <p>
+      Bitcoin adalah aset digital yang dapat
+      digunakan untuk mengirim dan menerima
+      nilai tanpa membutuhkan pihak pusat
+      seperti bank.
+    </p>
+
+    <p>
+      Bitcoin diperkenalkan pada tahun 2009
+      dan menggunakan jaringan komputer
+      terdesentralisasi untuk mencatat
+      transaksi.
+    </p>
+
+    <div class="highlight">
+      💡 Intinya: Bitcoin adalah aset digital,
+      sedangkan blockchain adalah teknologi
+      yang digunakan untuk mencatat transaksinya.
+    </div>
+
+  </article>
+
+
+  <!-- BLOCKCHAIN -->
+
+  <article class="article-card">
+
+    <h2>
+      Apa itu Blockchain?
+    </h2>
+
+    <p>
+      Blockchain adalah buku catatan digital
+      yang menyimpan data transaksi dalam
+      kumpulan blok yang saling terhubung.
+    </p>
+
+    <p>
+      Setiap blok berisi data transaksi dan
+      terhubung dengan blok sebelumnya.
+      Karena data disimpan oleh banyak komputer,
+      sistemnya tidak bergantung pada satu
+      server pusat.
+    </p>
+
+    <h3>
+      Karakteristik utama
+    </h3>
+
+    <ul>
+
+      <li>
+        Terdesentralisasi
+      </li>
+
+      <li>
+        Transparan
+      </li>
+
+      <li>
+        Sulit diubah setelah tercatat
+      </li>
+
+      <li>
+        Divalidasi oleh jaringan komputer
+      </li>
+
+    </ul>
+
+  </article>
+
+
+  <!-- HOW IT WORKS -->
+
+  <article class="article-card">
+
+    <h2>
+      Bagaimana transaksi Bitcoin bekerja?
+    </h2>
+
+    <p>
+      Ketika seseorang mengirim Bitcoin,
+      transaksi tersebut disiarkan ke jaringan.
+      Komputer dalam jaringan kemudian
+      memverifikasi transaksi tersebut.
+    </p>
+
+    <div class="example-box">
+
+      <div class="example-label">
+        Contoh sederhana
+      </div>
+
+      <div class="example-text">
+
+        Mankami mengirim Bitcoin →
+        transaksi disiarkan →
+        jaringan memverifikasi →
+        transaksi dimasukkan ke blockchain.
+
+      </div>
+
+    </div>
+
+  </article>
+
+
+  <!-- IMPORTANT TERMS -->
+
+  <article class="article-card">
+
+    <h2>
+      Istilah penting
+    </h2>
+
+    <h3>
+      Wallet
+    </h3>
+
+    <p>
+      Tempat untuk mengelola akses terhadap
+      aset crypto. Wallet menggunakan
+      cryptographic keys untuk mengotorisasi
+      transaksi.
+    </p>
+
+    <h3>
+      Address
+    </h3>
+
+    <p>
+      Identitas tujuan yang digunakan untuk
+      menerima aset crypto.
+    </p>
+
+    <h3>
+      Private Key
+    </h3>
+
+    <p>
+      Informasi rahasia yang digunakan untuk
+      mengotorisasi transaksi. Jangan pernah
+      membagikannya kepada orang lain.
+    </p>
+
+  </article>
+
+
+  <!-- QUICK QUIZ -->
+
+  <article class="article-card">
+
+    <h2>
+      🧠 Quick Quiz
+    </h2>
+
+    <p>
+      Apa fungsi utama blockchain dalam
+      ekosistem Bitcoin?
+    </p>
+
+    <button
+      class="quiz-option"
+      onclick="checkAnswer(false)"
+    >
+      A. Menentukan harga Bitcoin
+    </button>
+
+    <button
+      class="quiz-option"
+      onclick="checkAnswer(true)"
+    >
+      B. Mencatat dan memverifikasi transaksi
+    </button>
+
+    <button
+      class="quiz-option"
+      onclick="checkAnswer(false)"
+    >
+      C. Menentukan keuntungan trader
+    </button>
+
+    <div
+      class="quiz-result"
+      id="quiz-result"
+    ></div>
+
+  </article>
+
+
+  <!-- COMPLETE -->
+
+  <section class="complete-box">
+
+    <div class="complete-icon">
+      🎯
+    </div>
+
+    <div class="complete-title">
+      Selesai membaca?
+    </div>
+
+    <div class="complete-text">
+      Tandai lesson ini selesai untuk
+      melanjutkan progress belajar kamu.
+    </div>
+
+    <button
+      class="complete-button"
+      id="complete-button"
+      onclick="completeLesson()"
+    >
+      ✓ Mark as Completed
+    </button>
+
+  </section>
+
+
+  <!-- DISCLAIMER -->
+
+  <div class="disclaimer">
+
+    Materi edukasi NEXTRA hanya untuk
+    tujuan pembelajaran dan bukan
+    nasihat keuangan.
+
+  </div>
+
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<div id="bottom-nav"></div>
+
+
+<script src="js/app.js"></script>
+
+
+<script>
+
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        if (
+          typeof toggleTheme ===
+          "function"
+        ) {
+
+          toggleTheme();
+
+        }
+
+      }
+    );
+
+
+  function checkAnswer(correct) {
+
+    const result =
+      document.getElementById(
+        "quiz-result"
+      );
+
+    result.style.display = "block";
+
+    if (correct) {
+
+      result.textContent =
+        "✓ Benar! Blockchain mencatat dan membantu memverifikasi transaksi.";
+
+    } else {
+
+      result.textContent =
+        "✕ Belum tepat. Coba ingat kembali fungsi utama blockchain.";
+
+    }
+
+  }
+
+
+  function completeLesson() {
+
+    localStorage.setItem(
+      "nextra_lesson_bitcoin_basics",
+      "completed"
+    );
+
+    const button =
+      document.getElementById(
+        "complete-button"
+      );
+
+    button.textContent =
+      "✓ Lesson Completed";
+
+    button.style.opacity = ".65";
+
+    button.disabled = true;
+
+  }
+
+
+  if (
+    localStorage.getItem(
+      "nextra_lesson_bitcoin_basics"
+    ) === "completed"
+  ) {
+
+    const button =
+      document.getElementById(
+        "complete-button"
+      );
+
+    if (button) {
+
+      button.textContent =
+        "✓ Lesson Completed";
+
+      button.style.opacity = ".65";
+
+      button.disabled = true;
+
+    }
+
+  }
+
+</script>
+
+
+</body>
+
+</html>
