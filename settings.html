@@ -17,7 +17,7 @@
 
   <meta
     name="description"
-    content="NEXTRA Settings — Pengaturan aplikasi"
+    content="NEXTRA Settings — Your Market. Your Intelligence."
   >
 
   <title>NEXTRA — Settings</title>
@@ -29,10 +29,16 @@
 
   <style>
 
+    /* =================================================
+       NEXTRA SETTINGS V10
+    ================================================= */
+
     .settings-hero {
 
-      padding: 20px;
+      position: relative;
+      overflow: hidden;
 
+      padding: 20px;
       margin-bottom: 24px;
 
       border:
@@ -56,17 +62,37 @@
     }
 
 
-    .settings-label {
+    .settings-hero-label {
+
+      display: flex;
+      align-items: center;
+      gap: 7px;
 
       color: var(--green);
 
       font-size: 9px;
-
       font-weight: 800;
 
       letter-spacing: 1.3px;
-
       text-transform: uppercase;
+
+    }
+
+
+    .settings-hero-label::before {
+
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 10px
+        rgba(57,242,160,.7);
 
     }
 
@@ -77,7 +103,6 @@
         10px 0 6px;
 
       font-size: 25px;
-
       line-height: 1.1;
 
       letter-spacing: -.05em;
@@ -85,36 +110,62 @@
     }
 
 
-    .settings-description {
+    .settings-hero-description {
 
       margin: 0;
 
       color: var(--muted);
 
       font-size: 10px;
-
-      line-height: 1.6;
+      line-height: 1.65;
 
     }
 
 
+    /* =================================================
+       SECTION
+    ================================================= */
+
     .settings-section {
 
-      margin-top: 23px;
+      margin-top: 24px;
+
+    }
+
+
+    .settings-section-header {
+
+      margin-bottom: 10px;
 
     }
 
 
     .settings-section-title {
 
-      margin: 0 0 10px;
+      margin: 0;
 
       font-size: 15px;
-
       font-weight: 800;
+
+      letter-spacing: -.02em;
 
     }
 
+
+    .settings-section-subtitle {
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+    }
+
+
+    /* =================================================
+       LIST
+    ================================================= */
 
     .settings-list {
 
@@ -133,7 +184,6 @@
     .settings-item {
 
       display: flex;
-
       align-items: center;
 
       gap: 12px;
@@ -156,18 +206,28 @@
     }
 
 
+    .settings-item:active {
+
+      background:
+        rgba(57,242,160,.035);
+
+    }
+
+
+    /* =================================================
+       ICON
+    ================================================= */
+
     .settings-icon {
 
       flex-shrink: 0;
 
       width: 39px;
-
       height: 39px;
 
       display: flex;
 
       align-items: center;
-
       justify-content: center;
 
       border-radius: 12px;
@@ -187,7 +247,6 @@
     .settings-icon svg {
 
       width: 19px;
-
       height: 19px;
 
       fill: none;
@@ -197,11 +256,14 @@
       stroke-width: 1.8;
 
       stroke-linecap: round;
-
       stroke-linejoin: round;
 
     }
 
+
+    /* =================================================
+       CONTENT
+    ================================================= */
 
     .settings-content {
 
@@ -215,7 +277,6 @@
     .settings-name {
 
       font-size: 11px;
-
       font-weight: 800;
 
     }
@@ -234,16 +295,13 @@
     }
 
 
-    .settings-control {
-
-      flex-shrink: 0;
-
-    }
-
+    /* =================================================
+       SELECT
+    ================================================= */
 
     .settings-select {
 
-      min-width: 85px;
+      min-width: 86px;
 
       padding:
         8px 10px;
@@ -255,7 +313,8 @@
 
       color: var(--text);
 
-      background: var(--surface);
+      background:
+        var(--surface);
 
       font-size: 9px;
 
@@ -272,13 +331,20 @@
     }
 
 
+    /* =================================================
+       TOGGLE
+    ================================================= */
+
     .settings-toggle {
 
       position: relative;
 
-      width: 42px;
+      flex-shrink: 0;
 
+      width: 42px;
       height: 24px;
+
+      padding: 0;
 
       border: 0;
 
@@ -302,11 +368,9 @@
       position: absolute;
 
       top: 3px;
-
       left: 3px;
 
       width: 18px;
-
       height: 18px;
 
       border-radius: 50%;
@@ -321,7 +385,8 @@
 
     .settings-toggle.active {
 
-      background: var(--green);
+      background:
+        var(--green);
 
     }
 
@@ -334,17 +399,229 @@
     }
 
 
-    .settings-back {
+    /* =================================================
+       LINK ROW
+    ================================================= */
+
+    .settings-link {
 
       display: flex;
 
       align-items: center;
 
+      gap: 12px;
+
+      min-height: 68px;
+
+      padding:
+        10px 13px;
+
+      color: inherit;
+
+      text-decoration: none;
+
+      border-bottom:
+        1px solid var(--line);
+
+    }
+
+
+    .settings-link:last-child {
+
+      border-bottom: 0;
+
+    }
+
+
+    .settings-arrow {
+
+      color: var(--subtle);
+
+      font-size: 18px;
+
+    }
+
+
+    /* =================================================
+       VALUE
+    ================================================= */
+
+    .settings-value {
+
+      flex-shrink: 0;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+    }
+
+
+    /* =================================================
+       ACCOUNT CARD
+    ================================================= */
+
+    .account-card {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 14px;
+
+    }
+
+
+    .account-avatar {
+
+      width: 44px;
+      height: 44px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      color: var(--green);
+
+      background:
+        rgba(57,242,160,.10);
+
+      border:
+        1px solid
+        rgba(57,242,160,.16);
+
+      font-size: 16px;
+      font-weight: 900;
+
+    }
+
+
+    .account-info {
+
+      flex: 1;
+
+      min-width: 0;
+
+    }
+
+
+    .account-name {
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+    }
+
+
+    .account-status {
+
+      margin-top: 4px;
+
+      color: var(--green);
+
+      font-size: 8px;
+
+    }
+
+
+    .account-link {
+
+      color: var(--green);
+
+      font-size: 8px;
+
+      font-weight: 800;
+
+      text-decoration: none;
+
+    }
+
+
+    /* =================================================
+       DANGER
+    ================================================= */
+
+    .danger-item {
+
+      color: #ff7777;
+
+    }
+
+
+    .danger-item .settings-icon {
+
+      color: #ff7777;
+
+      background:
+        rgba(255,80,80,.07);
+
+      border-color:
+        rgba(255,80,80,.10);
+
+    }
+
+
+    /* =================================================
+       RESET BUTTON
+    ================================================= */
+
+    .reset-button {
+
+      width: 100%;
+
+      margin-top: 12px;
+
+      padding: 13px;
+
+      border:
+        1px solid
+        rgba(255,80,80,.18);
+
+      border-radius: 14px;
+
+      color: #ff7777;
+
+      background:
+        rgba(255,80,80,.045);
+
+      font-size: 9px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+    }
+
+
+    .reset-button:active {
+
+      transform: scale(.98);
+
+    }
+
+
+    /* =================================================
+       BACK
+    ================================================= */
+
+    .settings-back {
+
+      display: flex;
+
+      align-items: center;
       justify-content: center;
 
       width: 100%;
 
-      margin-top: 25px;
+      margin-top: 24px;
 
       padding: 13px;
 
@@ -355,7 +632,8 @@
 
       color: var(--text);
 
-      background: var(--surface);
+      background:
+        var(--surface);
 
       text-decoration: none;
 
@@ -366,23 +644,45 @@
     }
 
 
-    .settings-back:active {
-
-      transform: scale(.98);
-
-    }
-
+    /* =================================================
+       FOOTER
+    ================================================= */
 
     .settings-footer {
 
       padding:
-        25px 0 30px;
+        24px 0 32px;
 
       text-align: center;
 
       color: var(--subtle);
 
       font-size: 7px;
+
+      line-height: 1.6;
+
+    }
+
+
+    @media (max-width: 360px) {
+
+      .settings-item,
+      .settings-link {
+
+        min-height: 64px;
+
+        padding:
+          9px 11px;
+
+      }
+
+
+      .settings-icon {
+
+        width: 36px;
+        height: 36px;
+
+      }
 
     }
 
@@ -393,8 +693,13 @@
 
 <body>
 
+
 <main class="container">
 
+
+  <!-- =================================================
+       HEADER
+  ================================================= -->
 
   <header class="topbar">
 
@@ -425,36 +730,165 @@
 
 
 
+  <!-- =================================================
+       HERO
+  ================================================= -->
+
   <section class="settings-hero">
 
-    <div class="settings-label">
-      NEXTRA SETTINGS
+    <div class="settings-hero-label">
+      NEXTRA SETTINGS V10
     </div>
 
     <h2 class="settings-title">
-      Personalize your experience.
+      Make NEXTRA yours.
     </h2>
 
-    <p class="settings-description">
-      Atur tampilan, bahasa,
-      notifikasi, dan privasi
-      aplikasi NEXTRA.
+    <p class="settings-hero-description">
+      Atur pengalaman NEXTRA sesuai
+      gaya trading dan kebutuhanmu.
     </p>
 
   </section>
 
 
 
-  <!-- APPEARANCE -->
+  <!-- =================================================
+       ACCOUNT
+  ================================================= -->
 
   <section class="settings-section">
 
-    <h2 class="settings-section-title">
-      Appearance
-    </h2>
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Account
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Kelola akun NEXTRA
+      </div>
+
+    </div>
+
 
     <div class="settings-list">
 
+      <a
+        href="profile.html"
+        class="settings-link"
+      >
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="8"
+              r="3.5"
+            />
+
+            <path
+              d="M5 21a7 7 0 0 1 14 0"
+            />
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Profile
+          </div>
+
+          <div class="settings-description">
+            Nama, avatar, dan informasi akun
+          </div>
+
+        </div>
+
+
+        <div class="settings-arrow">
+          ›
+        </div>
+
+      </a>
+
+
+      <a
+        href="profile.html"
+        class="settings-link"
+      >
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <rect
+              x="3"
+              y="5"
+              width="18"
+              height="14"
+              rx="2"
+            />
+
+            <path d="M7 10h4"/>
+
+            <path d="M7 14h7"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Account Status
+          </div>
+
+          <div class="settings-description">
+            Status dan informasi akun
+          </div>
+
+        </div>
+
+
+        <div class="settings-value">
+          Active
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       APPEARANCE
+  ================================================= -->
+
+  <section class="settings-section">
+
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Appearance
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Tampilan aplikasi
+      </div>
+
+    </div>
+
+
+    <div class="settings-list">
 
       <div class="settings-item">
 
@@ -492,53 +926,32 @@
           </div>
 
           <div class="settings-description">
-            Pilih tampilan aplikasi
+            Dark, Light, atau mengikuti sistem
           </div>
 
         </div>
 
 
-        <div class="settings-control">
+        <select
+          class="settings-select"
+          id="theme-select"
+        >
 
-          <select
-            class="settings-select"
-            id="theme-select"
-          >
+          <option value="dark">
+            Dark
+          </option>
 
-            <option value="dark">
-              Dark
-            </option>
+          <option value="light">
+            Light
+          </option>
 
-            <option value="light">
-              Light
-            </option>
+          <option value="system">
+            System
+          </option>
 
-            <option value="system">
-              System
-            </option>
-
-          </select>
-
-        </div>
+        </select>
 
       </div>
-
-
-    </div>
-
-  </section>
-
-
-
-  <!-- LANGUAGE -->
-
-  <section class="settings-section">
-
-    <h2 class="settings-section-title">
-      Language
-    </h2>
-
-    <div class="settings-list">
 
 
       <div class="settings-item">
@@ -555,8 +968,6 @@
 
             <path d="M5 9h14"/>
 
-            <path d="M8 13h8"/>
-
             <path d="M12 9v10"/>
 
           </svg>
@@ -571,33 +982,70 @@
           </div>
 
           <div class="settings-description">
-            Bahasa aplikasi NEXTRA
+            Bahasa antarmuka NEXTRA
           </div>
 
         </div>
 
 
-        <div class="settings-control">
+        <select
+          class="settings-select"
+          id="language-select"
+        >
 
-          <select
-            class="settings-select"
-            id="language-select"
-          >
+          <option value="id">
+            Indonesia
+          </option>
 
-            <option value="id">
-              Indonesia
-            </option>
+          <option value="en">
+            English
+          </option>
 
-            <option value="en">
-              English
-            </option>
-
-          </select>
-
-        </div>
+        </select>
 
       </div>
 
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 19V9"/>
+
+            <path d="M9 19V5"/>
+
+            <path d="M14 19v-8"/>
+
+            <path d="M20 19V3"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Compact Mode
+          </div>
+
+          <div class="settings-description">
+            Buat tampilan lebih padat
+          </div>
+
+        </div>
+
+
+        <button
+          class="settings-toggle"
+          id="compact-toggle"
+          type="button"
+          aria-label="Compact Mode"
+        ></button>
+
+      </div>
 
     </div>
 
@@ -605,16 +1053,302 @@
 
 
 
-  <!-- NOTIFICATIONS -->
+  <!-- =================================================
+       MARKET
+  ================================================= -->
 
   <section class="settings-section">
 
-    <h2 class="settings-section-title">
-      Notifications
-    </h2>
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Market
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Preferensi market & trading
+      </div>
+
+    </div>
+
 
     <div class="settings-list">
 
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="12"
+              r="8"
+            />
+
+            <path d="M12 7v5l3 2"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Default Currency
+          </div>
+
+          <div class="settings-description">
+            Mata uang untuk menampilkan harga
+          </div>
+
+        </div>
+
+
+        <select
+          class="settings-select"
+          id="currency-select"
+        >
+
+          <option value="usd">
+            USD
+          </option>
+
+          <option value="idr">
+            IDR
+          </option>
+
+          <option value="eur">
+            EUR
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 18L9 12l4 4 7-9"/>
+
+            <path d="M16 7h4v4"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Price Alerts
+          </div>
+
+          <div class="settings-description">
+            Aktifkan peringatan perubahan harga
+          </div>
+
+        </div>
+
+
+        <button
+          class="settings-toggle"
+          id="price-alert-toggle"
+          type="button"
+          aria-label="Price Alerts"
+        ></button>
+
+      </div>
+
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 18V6"/>
+
+            <path d="M4 18h16"/>
+
+            <path d="M7 15l3-4 3 2 5-7"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Auto Refresh
+          </div>
+
+          <div class="settings-description">
+            Perbarui data market otomatis
+          </div>
+
+        </div>
+
+
+        <button
+          class="settings-toggle"
+          id="refresh-toggle"
+          type="button"
+          aria-label="Auto Refresh"
+        ></button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       TRADING
+  ================================================= -->
+
+  <section class="settings-section">
+
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Trading
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Preferensi untuk trader
+      </div>
+
+    </div>
+
+
+    <div class="settings-list">
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M5 19L19 5"/>
+
+            <path d="M6 6h6"/>
+
+            <path d="M12 18h6"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Risk Display
+          </div>
+
+          <div class="settings-description">
+            Tampilkan informasi risiko pada tools
+          </div>
+
+        </div>
+
+
+        <button
+          class="settings-toggle"
+          id="risk-toggle"
+          type="button"
+          aria-label="Risk Display"
+        ></button>
+
+      </div>
+
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="12"
+              r="8"
+            />
+
+            <path d="M8 12h8"/>
+
+            <path d="M12 8v8"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Trading Mode
+          </div>
+
+          <div class="settings-description">
+            Mode tampilan trading
+          </div>
+
+        </div>
+
+
+        <select
+          class="settings-select"
+          id="trading-mode-select"
+        >
+
+          <option value="spot">
+            Spot
+          </option>
+
+          <option value="futures">
+            Futures
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       NOTIFICATIONS
+  ================================================= -->
+
+  <section class="settings-section">
+
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Notifications
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Atur pemberitahuan NEXTRA
+      </div>
+
+    </div>
+
+
+    <div class="settings-list">
 
       <div class="settings-item">
 
@@ -645,22 +1379,18 @@
           </div>
 
           <div class="settings-description">
-            Terima notifikasi peluang market
+            Notifikasi peluang dan pergerakan market
           </div>
 
         </div>
 
 
-        <div class="settings-control">
-
-          <button
-            class="settings-toggle"
-            id="market-alert-toggle"
-            type="button"
-            aria-label="Market Alerts"
-          ></button>
-
-        </div>
+        <button
+          class="settings-toggle"
+          id="market-alert-toggle"
+          type="button"
+          aria-label="Market Alerts"
+        ></button>
 
       </div>
 
@@ -689,25 +1419,62 @@
           </div>
 
           <div class="settings-description">
-            Update terbaru dari community
+            Update dari komunitas trader
           </div>
 
         </div>
 
 
-        <div class="settings-control">
-
-          <button
-            class="settings-toggle"
-            id="community-toggle"
-            type="button"
-            aria-label="Community Updates"
-          ></button>
-
-        </div>
+        <button
+          class="settings-toggle"
+          id="community-toggle"
+          type="button"
+          aria-label="Community Updates"
+        ></button>
 
       </div>
 
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 4h16v16H4z"/>
+
+            <path d="M8 8h8"/>
+
+            <path d="M8 12h8"/>
+
+            <path d="M8 16h5"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Learn Updates
+          </div>
+
+          <div class="settings-description">
+            Materi dan edukasi terbaru
+          </div>
+
+        </div>
+
+
+        <button
+          class="settings-toggle"
+          id="learn-toggle"
+          type="button"
+          aria-label="Learn Updates"
+        ></button>
+
+      </div>
 
     </div>
 
@@ -715,18 +1482,32 @@
 
 
 
-  <!-- PRIVACY -->
+  <!-- =================================================
+       PRIVACY & SECURITY
+  ================================================= -->
 
   <section class="settings-section">
 
-    <h2 class="settings-section-title">
-      Privacy
-    </h2>
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Privacy & Security
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Kontrol keamanan dan data
+      </div>
+
+    </div>
+
 
     <div class="settings-list">
 
-
-      <div class="settings-item">
+      <a
+        href="#"
+        class="settings-link"
+        id="privacy-link"
+      >
 
         <div class="settings-icon">
 
@@ -742,10 +1523,8 @@
 
             <path
               d="
-                M8 10
-                V7
-                a4 4 0 0 1 8 0
-                v3
+                M8 10V7
+                a4 4 0 0 1 8 0v3
               "
             />
 
@@ -761,24 +1540,363 @@
           </div>
 
           <div class="settings-description">
-            Kelola preferensi privasi akun
+            Kelola preferensi privasi
           </div>
 
         </div>
 
 
-        <div class="settings-control">
-          <span class="more-arrow">›</span>
+        <div class="settings-arrow">
+          ›
         </div>
 
-      </div>
+      </a>
 
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/>
+
+            <path d="M9 12l2 2 4-4"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Secure Mode
+          </div>
+
+          <div class="settings-description">
+            Perlindungan tambahan untuk sesi akun
+          </div>
+
+        </div>
+
+
+        <button
+          class="settings-toggle"
+          id="secure-toggle"
+          type="button"
+          aria-label="Secure Mode"
+        ></button>
+
+      </div>
 
     </div>
 
   </section>
 
 
+
+  <!-- =================================================
+       DATA
+  ================================================= -->
+
+  <section class="settings-section">
+
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Data & Storage
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Kelola data lokal aplikasi
+      </div>
+
+    </div>
+
+
+    <div class="settings-list">
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 6h16"/>
+
+            <path d="M7 6v14h10V6"/>
+
+            <path d="M9 3h6"/>
+
+            <path d="M9 10v6"/>
+
+            <path d="M15 10v6"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Local Storage
+          </div>
+
+          <div class="settings-description">
+            Data preferensi tersimpan di perangkat
+          </div>
+
+        </div>
+
+
+        <div class="settings-value">
+          Local
+        </div>
+
+      </div>
+
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 4h16v16H4z"/>
+
+            <path d="M8 8h8"/>
+
+            <path d="M8 12h8"/>
+
+            <path d="M8 16h5"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Save Preferences
+          </div>
+
+          <div class="settings-description">
+            Simpan pengaturan secara otomatis
+          </div>
+
+        </div>
+
+
+        <button
+          class="settings-toggle"
+          id="save-toggle"
+          type="button"
+          aria-label="Save Preferences"
+        ></button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       ABOUT
+  ================================================= -->
+
+  <section class="settings-section">
+
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        About NEXTRA
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Informasi aplikasi
+      </div>
+
+    </div>
+
+
+    <div class="settings-list">
+
+      <div class="settings-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+            />
+
+            <path d="M12 10v6"/>
+
+            <circle
+              cx="12"
+              cy="7"
+              r=".8"
+              fill="currentColor"
+              stroke="none"
+            />
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Version
+          </div>
+
+          <div class="settings-description">
+            NEXTRA application version
+          </div>
+
+        </div>
+
+
+        <div class="settings-value">
+          V10
+        </div>
+
+      </div>
+
+
+      <a
+        href="#"
+        class="settings-link"
+        id="about-link"
+      >
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+            />
+
+            <path d="M8 12h8"/>
+
+            <path d="M12 8v8"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            About
+          </div>
+
+          <div class="settings-description">
+            Tentang NEXTRA dan platform
+          </div>
+
+        </div>
+
+
+        <div class="settings-arrow">
+          ›
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       RESET
+  ================================================= -->
+
+  <section class="settings-section">
+
+    <div class="settings-section-header">
+
+      <h2 class="settings-section-title">
+        Advanced
+      </h2>
+
+      <div class="settings-section-subtitle">
+        Pengaturan lanjutan
+      </div>
+
+    </div>
+
+
+    <div class="settings-list">
+
+      <div class="settings-item danger-item">
+
+        <div class="settings-icon">
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M4 7h16"/>
+
+            <path d="M10 11v6"/>
+
+            <path d="M14 11v6"/>
+
+            <path d="M6 7l1 14h10l1-14"/>
+
+            <path d="M9 7V4h6v3"/>
+
+          </svg>
+
+        </div>
+
+
+        <div class="settings-content">
+
+          <div class="settings-name">
+            Reset Settings
+          </div>
+
+          <div class="settings-description">
+            Kembalikan semua preferensi ke default
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="reset-button"
+      id="reset-settings"
+      type="button"
+    >
+      Reset Semua Pengaturan
+    </button>
+
+  </section>
+
+
+
+  <!-- =================================================
+       BACK
+  ================================================= -->
 
   <a
     href="more.html"
@@ -789,7 +1907,11 @@
 
 
   <div class="settings-footer">
-    NEXTRA · Your Market. Your Intelligence.
+
+    NEXTRA · Your Market. Your Intelligence.<br>
+
+    Settings V10
+
   </div>
 
 
@@ -798,96 +1920,141 @@
 
 <script>
 
-  const themeSelect =
-    document.getElementById("theme-select");
+  /* =================================================
+     STORAGE HELPERS
+  ================================================= */
 
-  const languageSelect =
-    document.getElementById("language-select");
+  function getSetting(
+    key,
+    fallback
+  ) {
 
-  const marketAlertToggle =
-    document.getElementById("market-alert-toggle");
+    const value =
+      localStorage.getItem(key);
 
-  const communityToggle =
-    document.getElementById("community-toggle");
+    if (value === null) {
 
+      return fallback;
 
-  /* THEME */
+    }
 
-  const savedTheme =
-    localStorage.getItem("nextra_theme");
-
-  if (savedTheme) {
-
-    themeSelect.value =
-      savedTheme;
+    return value;
 
   }
+
+
+  function setSetting(
+    key,
+    value
+  ) {
+
+    localStorage.setItem(
+      key,
+      value
+    );
+
+  }
+
+
+
+  /* =================================================
+     THEME
+  ================================================= */
+
+  const themeSelect =
+    document.getElementById(
+      "theme-select"
+    );
+
+
+  themeSelect.value =
+    getSetting(
+      "nextra_theme",
+      "dark"
+    );
+
+
+  function applyTheme(
+    theme
+  ) {
+
+    if (theme === "dark") {
+
+      document.documentElement
+        .setAttribute(
+          "data-theme",
+          "dark"
+        );
+
+    }
+
+    else if (theme === "light") {
+
+      document.documentElement
+        .setAttribute(
+          "data-theme",
+          "light"
+        );
+
+    }
+
+    else {
+
+      document.documentElement
+        .removeAttribute(
+          "data-theme"
+        );
+
+    }
+
+  }
+
+
+  applyTheme(
+    themeSelect.value
+  );
 
 
   themeSelect.addEventListener(
     "change",
     function () {
 
-      localStorage.setItem(
+      setSetting(
         "nextra_theme",
         this.value
       );
 
-      if (
-        this.value === "dark"
-      ) {
-
-        document.documentElement
-          .setAttribute(
-            "data-theme",
-            "dark"
-          );
-
-      }
-
-      else if (
-        this.value === "light"
-      ) {
-
-        document.documentElement
-          .setAttribute(
-            "data-theme",
-            "light"
-          );
-
-      }
-
-      else {
-
-        document.documentElement
-          .removeAttribute(
-            "data-theme"
-          );
-
-      }
+      applyTheme(
+        this.value
+      );
 
     }
   );
 
 
-  /* LANGUAGE */
 
-  const savedLanguage =
-    localStorage.getItem("nextra_language");
+  /* =================================================
+     LANGUAGE
+  ================================================= */
 
-  if (savedLanguage) {
+  const languageSelect =
+    document.getElementById(
+      "language-select"
+    );
 
-    languageSelect.value =
-      savedLanguage;
 
-  }
+  languageSelect.value =
+    getSetting(
+      "nextra_language",
+      "id"
+    );
 
 
   languageSelect.addEventListener(
     "change",
     function () {
 
-      localStorage.setItem(
+      setSetting(
         "nextra_language",
         this.value
       );
@@ -896,17 +2063,98 @@
   );
 
 
-  /* TOGGLE HELPER */
+
+  /* =================================================
+     CURRENCY
+  ================================================= */
+
+  const currencySelect =
+    document.getElementById(
+      "currency-select"
+    );
+
+
+  currencySelect.value =
+    getSetting(
+      "nextra_currency",
+      "usd"
+    );
+
+
+  currencySelect.addEventListener(
+    "change",
+    function () {
+
+      setSetting(
+        "nextra_currency",
+        this.value
+      );
+
+    }
+  );
+
+
+
+  /* =================================================
+     TRADING MODE
+  ================================================= */
+
+  const tradingModeSelect =
+    document.getElementById(
+      "trading-mode-select"
+    );
+
+
+  tradingModeSelect.value =
+    getSetting(
+      "nextra_trading_mode",
+      "spot"
+    );
+
+
+  tradingModeSelect.addEventListener(
+    "change",
+    function () {
+
+      setSetting(
+        "nextra_trading_mode",
+        this.value
+      );
+
+    }
+  );
+
+
+
+  /* =================================================
+     TOGGLE SYSTEM
+  ================================================= */
 
   function setupToggle(
-    element,
-    storageKey
+    elementId,
+    storageKey,
+    defaultValue
   ) {
 
-    const saved =
-      localStorage.getItem(
-        storageKey
+    const element =
+      document.getElementById(
+        elementId
       );
+
+
+    if (!element) {
+
+      return;
+
+    }
+
+
+    const saved =
+      getSetting(
+        storageKey,
+        String(defaultValue)
+      );
+
 
     if (saved === "true") {
 
@@ -926,9 +2174,10 @@
             "active"
           );
 
-        localStorage.setItem(
+
+        setSetting(
           storageKey,
-          active
+          String(active)
         );
 
       }
@@ -937,18 +2186,184 @@
   }
 
 
+
   setupToggle(
-    marketAlertToggle,
-    "nextra_market_alerts"
+    "compact-toggle",
+    "nextra_compact_mode",
+    false
   );
 
 
   setupToggle(
-    communityToggle,
-    "nextra_community_updates"
+    "price-alert-toggle",
+    "nextra_price_alerts",
+    true
   );
+
+
+  setupToggle(
+    "refresh-toggle",
+    "nextra_auto_refresh",
+    true
+  );
+
+
+  setupToggle(
+    "risk-toggle",
+    "nextra_risk_display",
+    true
+  );
+
+
+  setupToggle(
+    "market-alert-toggle",
+    "nextra_market_alerts",
+    true
+  );
+
+
+  setupToggle(
+    "community-toggle",
+    "nextra_community_updates",
+    true
+  );
+
+
+  setupToggle(
+    "learn-toggle",
+    "nextra_learn_updates",
+    true
+  );
+
+
+  setupToggle(
+    "secure-toggle",
+    "nextra_secure_mode",
+    false
+  );
+
+
+  setupToggle(
+    "save-toggle",
+    "nextra_save_preferences",
+    true
+  );
+
+
+
+  /* =================================================
+     RESET SETTINGS
+  ================================================= */
+
+  const resetButton =
+    document.getElementById(
+      "reset-settings"
+    );
+
+
+  resetButton.addEventListener(
+    "click",
+    function () {
+
+      const confirmed =
+        confirm(
+          "Reset semua pengaturan NEXTRA?"
+        );
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+      const keys = [
+
+        "nextra_theme",
+
+        "nextra_language",
+
+        "nextra_currency",
+
+        "nextra_trading_mode",
+
+        "nextra_compact_mode",
+
+        "nextra_price_alerts",
+
+        "nextra_auto_refresh",
+
+        "nextra_risk_display",
+
+        "nextra_market_alerts",
+
+        "nextra_community_updates",
+
+        "nextra_learn_updates",
+
+        "nextra_secure_mode",
+
+        "nextra_save_preferences"
+
+      ];
+
+
+      keys.forEach(
+        function (key) {
+
+          localStorage.removeItem(
+            key
+          );
+
+        }
+      );
+
+
+      location.reload();
+
+    }
+  );
+
+
+
+  /* =================================================
+     INFO LINKS
+  ================================================= */
+
+  document
+    .getElementById("privacy-link")
+    .addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+        alert(
+          "Privacy settings NEXTRA akan tersedia pada modul Privacy."
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById("about-link")
+    .addEventListener(
+      "click",
+      function (event) {
+
+        event.preventDefault();
+
+        alert(
+          "NEXTRA — Your Market. Your Intelligence."
+        );
+
+      }
+    );
 
 </script>
+
 
 </body>
 
