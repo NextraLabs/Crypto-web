@@ -1,6 +1,8 @@
-// market.js — NEXTRA Markets V7
-// SEARCH HOME + SEARCH MARKET + FILTER + SORT + WATCHLIST + XP
-// WATCHLIST SYNC UPGRADE
+// market.js — NEXTRA Markets V8
+// DUAL-PHASE LOADING
+// BINANCE FIRST + COINGECKO BACKGROUND
+// SEARCH + FILTER + SORT + WATCHLIST + XP
+
 
 const MARKET_STATE = {
 
@@ -12,7 +14,7 @@ const MARKET_STATE = {
 
   perPage: 25,
 
-  dataLimit: 250,
+  dataLimit: 100,
 
   search: "",
 
@@ -24,7 +26,9 @@ const MARKET_STATE = {
 
   watchlistOnly: false,
 
-  loading: false
+  loading: false,
+
+  enriching: false
 
 };
 
@@ -33,9 +37,13 @@ const MARKET_STATE = {
    ELEMENTS
 ========================================= */
 
-function marketEl(id) {
+function marketEl(
+  id
+) {
 
-  return document.getElementById(id);
+  return document.getElementById(
+    id
+  );
 
 }
 
@@ -60,7 +68,9 @@ function getNormalizedWatchlist() {
     loadWatchlist();
 
 
-  if (!Array.isArray(list)) {
+  if (
+    !Array.isArray(list)
+  ) {
 
     return [];
 
@@ -70,7 +80,9 @@ function getNormalizedWatchlist() {
   return list
     .map(
       symbol =>
-        String(symbol || "")
+        String(
+          symbol || ""
+        )
           .trim()
           .toUpperCase()
     )
@@ -84,7 +96,9 @@ function isCoinInWatchlist(
 ) {
 
   const normalized =
-    String(symbol || "")
+    String(
+      symbol || ""
+    )
       .trim()
       .toUpperCase();
 
@@ -111,10 +125,13 @@ function emitWatchlistChanged(
     new CustomEvent(
       "nextra:watchlist-changed",
       {
+
         detail: {
 
           symbol:
-            String(symbol || "")
+            String(
+              symbol || ""
+            )
               .trim()
               .toUpperCase(),
 
@@ -125,7 +142,9 @@ function emitWatchlistChanged(
             Date.now()
 
         }
+
       }
+
     )
 
   );
@@ -140,10 +159,17 @@ function emitWatchlistChanged(
 async function loadMarkets() {
 
   const container =
-    marketEl("market-list");
+    marketEl(
+      "market-list"
+    );
 
 
-  MARKET_STATE.loading = true;
+  MARKET_STATE.loading =
+    true;
+
+
+  MARKET_STATE.enriching =
+    false;
 
 
   if (container) {
@@ -161,22 +187,30 @@ async function loadMarkets() {
 
   try {
 
+    /*
+     * =====================================
+     * PHASE 1
+     * BINANCE FIRST
+     * =====================================
+     *
+     * Hanya tunggu Binance.
+     *
+     * Tidak ada CoinGecko di sini.
+     */
+
     const coins =
-      await NEXTRA_API.fetchNormalizedMarkets({
+      await NEXTRA_API
+        .fetchNormalizedMarkets({
 
-        total:
-          MARKET_STATE.dataLimit,
+          total:
+            MARKET_STATE.dataLimit
 
-        perPage:
-          100,
-
-        delay:
-          350
-
-      });
+        });
 
 
-    if (!Array.isArray(coins)) {
+    if (
+      !Array.isArray(coins)
+    ) {
 
       throw new Error(
         "Data market tidak valid"
@@ -193,7 +227,28 @@ async function loadMarkets() {
       1;
 
 
+    MARKET_STATE.loading =
+      false;
+
+
+    /*
+     * RENDER SEKARANG.
+     *
+     * User tidak perlu menunggu
+     * CoinGecko.
+     */
+
     applyMarketFilters();
+
+
+    /*
+     * =====================================
+     * PHASE 2
+     * COINGECKO BACKGROUND
+     * =====================================
+     */
+
+    enrichMarketsInBackground();
 
 
   }
@@ -206,21 +261,225 @@ async function loadMarkets() {
     );
 
 
+    MARKET_STATE.loading =
+      false;
+
+
     if (container) {
 
       renderError(
+
         container,
+
         "Gagal memuat market. Coba lagi.",
+
         loadMarkets
+
       );
 
     }
 
   }
 
+}
+
+
+/* =========================================
+   COINGECKO BACKGROUND ENRICHMENT
+========================================= */
+
+async function enrichMarketsInBackground() {
+
+  if (
+    MARKET_STATE.enriching
+  ) {
+
+    return;
+
+  }
+
+
+  if (
+    !MARKET_STATE.coins.length
+  ) {
+
+    return;
+
+  }
+
+
+  MARKET_STATE.enriching =
+    true;
+
+
+  /*
+   * Berikan browser waktu untuk
+   * menyelesaikan first render.
+   */
+
+  await new Promise(
+    resolve =>
+      setTimeout(
+        resolve,
+        50
+      )
+  );
+
+
+  try {
+
+    const currentCoins =
+      MARKET_STATE.coins;
+
+
+    const enriched =
+      await NEXTRA_API
+        .enrichMarketsWithCoinGecko(
+
+          currentCoins,
+
+          {
+
+            limit:
+              250
+
+          }
+
+        );
+
+
+    if (
+      !Array.isArray(
+        enriched
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+     * Buat map berdasarkan symbol.
+     */
+
+    const enrichedMap =
+      new Map();
+
+
+    enriched.forEach(
+      coin => {
+
+        const symbol =
+          String(
+            coin.symbol || ""
+          )
+            .trim()
+            .toUpperCase();
+
+
+        if (!symbol) {
+          return;
+        }
+
+
+        enrichedMap.set(
+          symbol,
+          coin
+        );
+
+      }
+    );
+
+
+    /*
+     * Merge ke state.
+     */
+
+    MARKET_STATE.coins =
+      MARKET_STATE.coins.map(
+        coin => {
+
+          const symbol =
+            String(
+              coin.symbol || ""
+            )
+              .trim()
+              .toUpperCase();
+
+
+          const updated =
+            enrichedMap.get(
+              symbol
+            );
+
+
+          if (!updated) {
+
+            return coin;
+
+          }
+
+
+          return {
+
+            ...coin,
+
+            ...updated,
+
+            /*
+             * Harga realtime tetap
+             * dari Binance.
+             */
+
+            price:
+              coin.price,
+
+            change24h:
+              coin.change24h,
+
+            volume:
+              coin.volume,
+
+            high24h:
+              coin.high24h,
+
+            low24h:
+              coin.low24h
+
+          };
+
+        }
+
+      );
+
+
+    /*
+     * Render ulang setelah
+     * CoinGecko selesai.
+     */
+
+    applyMarketFilters();
+
+  }
+
+  catch (error) {
+
+    /*
+     * CoinGecko error tidak boleh
+     * merusak Markets.
+     */
+
+    console.warn(
+      "NEXTRA CoinGecko enrichment skipped:",
+      error
+    );
+
+  }
+
   finally {
 
-    MARKET_STATE.loading =
+    MARKET_STATE.enriching =
       false;
 
   }
@@ -235,7 +494,9 @@ async function loadMarkets() {
 function applyMarketFilters() {
 
   let data = [
+
     ...MARKET_STATE.coins
+
   ];
 
 
@@ -256,21 +517,31 @@ function applyMarketFilters() {
           const name =
             String(
               coin.name || ""
-            ).toLowerCase();
+            )
+              .toLowerCase();
 
 
           const symbol =
             String(
               coin.symbol || ""
-            ).toLowerCase();
+            )
+              .toLowerCase();
 
 
           return (
-            name.includes(query) ||
-            symbol.includes(query)
+
+            name.includes(
+              query
+            ) ||
+
+            symbol.includes(
+              query
+            )
+
           );
 
         }
+
       );
 
   }
@@ -290,12 +561,15 @@ function applyMarketFilters() {
       data.filter(
         coin =>
           watchlist.includes(
+
             String(
               coin.symbol || ""
             )
               .trim()
               .toUpperCase()
+
           )
+
       );
 
   }
@@ -344,17 +618,21 @@ function applyMarketFilters() {
 
     data =
       [...data].sort(
+
         (a, b) =>
+
           Math.abs(
             Number(
               b.change24h
             )
           ) -
+
           Math.abs(
             Number(
               a.change24h
             )
           )
+
       );
 
   }
@@ -365,7 +643,9 @@ function applyMarketFilters() {
   const direction =
     MARKET_STATE.sortDirection ===
     "asc"
+
       ? 1
+
       : -1;
 
 
@@ -479,6 +759,7 @@ function applyMarketFilters() {
       ) * direction;
 
     }
+
   );
 
 
@@ -490,11 +771,16 @@ function applyMarketFilters() {
 
   const maxPage =
     Math.max(
+
       1,
+
       Math.ceil(
+
         data.length /
         MARKET_STATE.perPage
+
       )
+
     );
 
 
@@ -528,7 +814,9 @@ function renderMarkets() {
     );
 
 
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
 
   const total =
@@ -554,7 +842,9 @@ function renderMarkets() {
     );
 
 
-  if (!visible.length) {
+  if (
+    !visible.length
+  ) {
 
     container.innerHTML = `
 
@@ -568,7 +858,10 @@ function renderMarkets() {
     `;
 
 
-    renderPagination(0);
+    renderPagination(
+      0
+    );
+
 
     return;
 
@@ -583,7 +876,9 @@ function renderMarkets() {
       .join("");
 
 
-  renderPagination(total);
+  renderPagination(
+    total
+  );
 
 }
 
@@ -620,11 +915,20 @@ function renderMarketCard(
     );
 
 
+  const enriched =
+    coin.enriched === true;
+
+
   return `
 
     <article
       class="coin-card market-card"
       data-coin-id="${coin.id}"
+      data-enriched="${
+        enriched
+          ? "true"
+          : "false"
+      }"
       role="link"
       tabindex="0"
       style="cursor:pointer;"
@@ -794,6 +1098,7 @@ function formatMarketPrice(
   ) {
 
     return "$" +
+
       price.toLocaleString(
         "en-US",
         {
@@ -913,7 +1218,9 @@ function renderPagination(
     );
 
 
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
 
   const pages =
@@ -923,7 +1230,9 @@ function renderPagination(
     );
 
 
-  if (pages <= 1) {
+  if (
+    pages <= 1
+  ) {
 
     container.innerHTML =
       "";
@@ -944,7 +1253,9 @@ function renderPagination(
           : ""
       }
     >
+
       ‹
+
     </button>
 
 
@@ -1049,10 +1360,10 @@ function initMarketEvents() {
             .toUpperCase();
 
 
-        if (!symbol) return;
+        if (!symbol) {
+          return;
+        }
 
-
-        /* STATUS SEBELUM */
 
         const beforeWatchlist =
           getNormalizedWatchlist();
@@ -1064,14 +1375,10 @@ function initMarketEvents() {
           );
 
 
-        /* TOGGLE */
-
         toggleWatchlistItem(
           symbol
         );
 
-
-        /* STATUS SESUDAH */
 
         const afterWatchlist =
           getNormalizedWatchlist();
@@ -1082,9 +1389,6 @@ function initMarketEvents() {
             symbol
           );
 
-
-        /* XP +25 HANYA SAAT
-           MENAMBAHKAN */
 
         if (
           !wasFavorite &&
@@ -1102,8 +1406,6 @@ function initMarketEvents() {
         }
 
 
-        /* WATCHLIST EVENT */
-
         emitWatchlistChanged(
 
           symbol,
@@ -1114,11 +1416,6 @@ function initMarketEvents() {
 
         );
 
-
-        /*
-         * Render ulang agar
-         * bintang langsung berubah.
-         */
 
         applyMarketFilters();
 
@@ -1141,7 +1438,21 @@ function initMarketEvents() {
           card.dataset.coinId;
 
 
-        if (coinId) {
+        const enriched =
+          card.dataset.enriched ===
+          "true";
+
+
+        /*
+         * Sebelum CoinGecko selesai,
+         * jangan buka Coin Detail
+         * dengan temporary Binance ID.
+         */
+
+        if (
+          coinId &&
+          enriched
+        ) {
 
           window.location.href =
             "coin.html?id=" +
@@ -1173,13 +1484,18 @@ function initMarketEvents() {
 
         const maxPage =
           Math.max(
+
             1,
+
             Math.ceil(
+
               MARKET_STATE
                 .filtered
                 .length /
               MARKET_STATE.perPage
+
             )
+
           );
 
 
@@ -1210,6 +1526,7 @@ function initMarketEvents() {
       }
 
     }
+
   );
 
 
@@ -1235,13 +1552,25 @@ function initMarketEvents() {
         );
 
 
-      if (!card) return;
+      if (!card) {
+        return;
+      }
 
 
       if (
         event.target.closest(
           ".watch-btn"
         )
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        card.dataset.enriched !==
+        "true"
       ) {
 
         return;
@@ -1267,6 +1596,7 @@ function initMarketEvents() {
       }
 
     }
+
   );
 
 
@@ -1282,7 +1612,9 @@ function initMarketEvents() {
         );
 
 
-      if (!button) return;
+      if (!button) {
+        return;
+      }
 
 
       const filter =
@@ -1336,6 +1668,7 @@ function initMarketEvents() {
       applyMarketFilters();
 
     }
+
   );
 
 
@@ -1351,7 +1684,9 @@ function initMarketEvents() {
         );
 
 
-      if (!button) return;
+      if (!button) {
+        return;
+      }
 
 
       const sort =
@@ -1365,10 +1700,13 @@ function initMarketEvents() {
       ) {
 
         MARKET_STATE.sortDirection =
+
           MARKET_STATE
             .sortDirection ===
           "asc"
+
             ? "desc"
+
             : "asc";
 
       }
@@ -1391,6 +1729,7 @@ function initMarketEvents() {
       applyMarketFilters();
 
     }
+
   );
 
 
@@ -1414,12 +1753,6 @@ function initMarketEvents() {
           .toUpperCase();
 
 
-      /*
-       * Kalau Watchlist berubah
-       * dari halaman lain,
-       * refresh filter dan bintang.
-       */
-
       if (
         symbol ||
         MARKET_STATE.watchlistOnly
@@ -1430,6 +1763,7 @@ function initMarketEvents() {
       }
 
     }
+
   );
 
 }
@@ -1445,7 +1779,8 @@ function initMarkets() {
 
 
   /*
-   * Baca search dari Home:
+   * Home search:
+   *
    * markets.html?search=bitcoin
    */
 
@@ -1456,7 +1791,9 @@ function initMarkets() {
 
 
   const searchParam =
-    params.get("search");
+    params.get(
+      "search"
+    );
 
 
   if (searchParam) {
@@ -1523,4 +1860,5 @@ document.addEventListener(
     }
 
   }
+
 );
