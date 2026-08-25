@@ -2,7 +2,6 @@
 <html lang="id">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -10,24 +9,297 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>NEXTRA — Radar V4</title>
+  <meta
+    name="theme-color"
+    content="#05070a"
+  >
+
+  <title>NEXTRA — Radar V100</title>
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
 
+  <style>
+
+    .radar-v100 {
+      display: grid;
+      gap: 10px;
+    }
+
+    .radar-hero {
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+    }
+
+    .radar-title {
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .radar-subtitle {
+      margin-top: 4px;
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    .radar-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .radar-status {
+      font-size: 8px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .radar-score {
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .radar-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .radar-stat {
+      padding: 10px 5px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+    }
+
+    .radar-stat-label {
+      font-size: 6px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .radar-stat-value {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .radar-filters {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0 4px;
+    }
+
+    .radar-filter {
+      flex: 0 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: var(--card);
+      color: var(--text);
+      font-size: 8px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .radar-filter.active {
+      background: var(--accent);
+      color: #05070a;
+      border-color: var(--accent);
+    }
+
+    .radar-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .radar-card {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--card);
+    }
+
+    .radar-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .radar-symbol {
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .radar-direction {
+      font-size: 7px;
+      font-weight: 950;
+      padding: 5px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+    }
+
+    .radar-direction.long {
+      color: var(--accent);
+    }
+
+    .radar-direction.short {
+      color: var(--danger);
+    }
+
+    .radar-direction.neutral {
+      color: var(--muted);
+    }
+
+    .radar-price {
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 950;
+    }
+
+    .radar-change {
+      margin-top: 2px;
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .radar-change.up {
+      color: var(--accent);
+    }
+
+    .radar-change.down {
+      color: var(--danger);
+    }
+
+    .radar-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .radar-metric {
+      padding: 7px 4px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.025);
+      text-align: center;
+    }
+
+    .radar-metric-label {
+      font-size: 5px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .radar-metric-value {
+      margin-top: 3px;
+      font-size: 8px;
+      font-weight: 950;
+    }
+
+    .radar-score-bar {
+      height: 5px;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .radar-score-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+    }
+
+    .radar-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 9px;
+    }
+
+    .radar-signal {
+      font-size: 7px;
+      font-weight: 900;
+    }
+
+    .radar-risk {
+      font-size: 7px;
+      font-weight: 900;
+    }
+
+    .risk-low {
+      color: var(--accent);
+    }
+
+    .risk-medium {
+      color: #ffd166;
+    }
+
+    .risk-high {
+      color: var(--danger);
+    }
+
+    .radar-empty {
+      padding: 25px 12px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 9px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .radar-logic {
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+    }
+
+    .radar-logic-title {
+      font-size: 10px;
+      font-weight: 950;
+    }
+
+    .radar-logic-text {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 7px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 420px) {
+
+      .radar-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .radar-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+  </style>
+
 </head>
 
 
 <body>
 
-<main class="container">
+<main class="container radar-v100">
 
 
-  <!-- =========================================
-       HEADER
-  ========================================== -->
+  <!-- HEADER -->
 
   <header class="topbar">
 
@@ -38,11 +310,10 @@
       </h1>
 
       <p class="subtitle">
-        Futures market intelligence
+        NEXTRA Market Intelligence V100
       </p>
 
     </div>
-
 
     <div
       style="
@@ -59,7 +330,6 @@
         ↻
       </button>
 
-
       <button
         class="icon-btn"
         id="theme-toggle"
@@ -73,60 +343,102 @@
   </header>
 
 
+  <!-- HERO -->
 
-  <!-- =========================================
-       RADAR STATUS
-  ========================================== -->
+  <section class="radar-hero">
 
-  <section
-    class="highlight-box"
-    style="
-      margin-bottom:12px;
-    "
-  >
+    <div class="radar-title">
+      🔥 RADAR V100
+    </div>
 
-    <div
-      style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        gap:10px;
-      "
-    >
+    <div class="radar-subtitle">
+      Multi-signal futures market scanner
+    </div>
 
-      <div>
+    <div class="radar-status-row">
 
-        <div
-          style="
-            font-size:13px;
-            font-weight:900;
-          "
-        >
-          🔥 NEXTRA Radar V4
-        </div>
-
-        <div
-          class="dim"
-          style="
-            font-size:8px;
-            margin-top:4px;
-          "
-        >
-          Price + Open Interest + Funding
-        </div>
-
-      </div>
-
-
-      <div
+      <span
         id="radar-status"
-        style="
-          font-size:8px;
-          font-weight:900;
-          color:var(--accent);
-        "
+        class="radar-status"
       >
         READY
+      </span>
+
+      <span
+        id="radar-updated"
+        class="radar-score"
+      >
+        --
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- SUMMARY -->
+
+  <section class="radar-summary">
+
+    <div class="radar-stat">
+
+      <div class="radar-stat-label">
+        BULLISH
+      </div>
+
+      <div
+        id="radar-bullish"
+        class="radar-stat-value up"
+      >
+        --
+      </div>
+
+    </div>
+
+
+    <div class="radar-stat">
+
+      <div class="radar-stat-label">
+        BEARISH
+      </div>
+
+      <div
+        id="radar-bearish"
+        class="radar-stat-value down"
+      >
+        --
+      </div>
+
+    </div>
+
+
+    <div class="radar-stat">
+
+      <div class="radar-stat-label">
+        BREAKOUT
+      </div>
+
+      <div
+        id="radar-breakout"
+        class="radar-stat-value"
+      >
+        --
+      </div>
+
+    </div>
+
+
+    <div class="radar-stat">
+
+      <div class="radar-stat-label">
+        SPIKE
+      </div>
+
+      <div
+        id="radar-spike"
+        class="radar-stat-value"
+      >
+        --
       </div>
 
     </div>
@@ -134,305 +446,101 @@
   </section>
 
 
+  <!-- FILTER -->
 
-  <!-- =========================================
-       SUMMARY
-  ========================================== -->
-
-  <section
-    style="
-      display:grid;
-      grid-template-columns:
-        repeat(4,1fr);
-      gap:6px;
-    "
-  >
-
-    <div
-      class="coin-card"
-      style="
-        margin:0;
-        display:block;
-        text-align:center;
-      "
-    >
-
-      <div
-        class="dim"
-        style="font-size:6px;"
-      >
-        LONG
-      </div>
-
-      <strong
-        id="radar-long"
-        class="up"
-        style="
-          display:block;
-          font-size:15px;
-          margin-top:4px;
-        "
-      >
-        --
-      </strong>
-
-    </div>
-
-
-    <div
-      class="coin-card"
-      style="
-        margin:0;
-        display:block;
-        text-align:center;
-      "
-    >
-
-      <div
-        class="dim"
-        style="font-size:6px;"
-      >
-        SHORT
-      </div>
-
-      <strong
-        id="radar-short"
-        class="down"
-        style="
-          display:block;
-          font-size:15px;
-          margin-top:4px;
-        "
-      >
-        --
-      </strong>
-
-    </div>
-
-
-    <div
-      class="coin-card"
-      style="
-        margin:0;
-        display:block;
-        text-align:center;
-      "
-    >
-
-      <div
-        class="dim"
-        style="font-size:6px;"
-      >
-        CONFIRMED
-      </div>
-
-      <strong
-        id="radar-confirmed"
-        style="
-          display:block;
-          font-size:15px;
-          margin-top:4px;
-        "
-      >
-        --
-      </strong>
-
-    </div>
-
-
-    <div
-      class="coin-card"
-      style="
-        margin:0;
-        display:block;
-        text-align:center;
-      "
-    >
-
-      <div
-        class="dim"
-        style="font-size:6px;"
-      >
-        SCANNED
-      </div>
-
-      <strong
-        id="radar-scanned"
-        style="
-          display:block;
-          font-size:15px;
-          margin-top:4px;
-        "
-      >
-        --
-      </strong>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- =========================================
-       FILTER
-  ========================================== -->
-
-  <div
-    style="
-      display:flex;
-      gap:6px;
-      overflow-x:auto;
-      margin:14px 0 10px;
-      padding-bottom:3px;
-    "
-  >
+  <div class="radar-filters">
 
     <button
       class="radar-filter active"
       data-filter="all"
     >
-      All
-    </button>
-
-    <button
-      class="radar-filter"
-      data-filter="long-confirmed"
-    >
-      🟢 Long Confirmed
+      ALL
     </button>
 
     <button
       class="radar-filter"
       data-filter="long"
     >
-      Long
-    </button>
-
-    <button
-      class="radar-filter"
-      data-filter="neutral"
-    >
-      Neutral
+      🟢 LONG
     </button>
 
     <button
       class="radar-filter"
       data-filter="short"
     >
-      Short
+      🔴 SHORT
     </button>
 
     <button
       class="radar-filter"
-      data-filter="short-confirmed"
+      data-filter="breakout"
     >
-      🔴 Short Confirmed
+      🚀 BREAKOUT
+    </button>
+
+    <button
+      class="radar-filter"
+      data-filter="volume"
+    >
+      ⚡ VOLUME
+    </button>
+
+    <button
+      class="radar-filter"
+      data-filter="highscore"
+    >
+      🎯 80+
     </button>
 
   </div>
 
 
+  <!-- RESULTS -->
 
-  <!-- =========================================
-       UPDATE
-  ========================================== -->
-
-  <div
-    style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:8px;
-    "
+  <section
+    id="radar-results"
+    class="radar-list"
   >
 
-    <span
-      class="dim"
-      style="font-size:8px;"
-    >
-      Ranked by confirmation strength
-    </span>
-
-    <span
-      id="radar-updated"
-      class="dim"
-      style="font-size:7px;"
-    >
-      --
-    </span>
-
-  </div>
-
-
-
-  <!-- =========================================
-       RESULTS
-  ========================================== -->
-
-  <section id="radar-results">
-
-    <div class="loading">
+    <div class="radar-empty">
       Scanning futures market...
     </div>
 
   </section>
 
 
+  <!-- LOGIC -->
 
-  <!-- =========================================
-       RADAR LOGIC
-  ========================================== -->
+  <section class="radar-logic">
 
-  <section
-    class="coin-card"
-    style="
-      display:block;
-      margin-top:16px;
-    "
-  >
-
-    <div
-      style="
-        font-size:10px;
-        font-weight:900;
-      "
-    >
-      🧠 Radar Logic
+    <div class="radar-logic-title">
+      🧠 Radar Intelligence
     </div>
 
-
-    <div
-      class="dim"
-      style="
-        font-size:8px;
-        line-height:1.7;
-        margin-top:7px;
-      "
-    >
+    <div class="radar-logic-text">
 
       <div>
-        📈 Price ↑ + OI ↑ =
-        <b>Long Confirmation</b>
+        📈 Price ↑ + OI ↑ → Long confirmation
       </div>
 
       <div>
-        📉 Price ↓ + OI ↑ =
-        <b>Short Confirmation</b>
+        📉 Price ↓ + OI ↑ → Short confirmation
       </div>
 
       <div>
-        📈 Price ↑ + OI ↓ =
-        <b>Short Covering</b>
+        ⚡ Volume spike → unusual market activity
       </div>
 
       <div>
-        📉 Price ↓ + OI ↓ =
-        <b>Long Reduction</b>
+        🚀 Breakout → price breaks recent structure
       </div>
 
       <div>
-        💰 Funding ekstrem =
-        crowded positioning warning
+        💰 Funding extreme → crowded positioning
+      </div>
+
+      <div>
+        🎯 Radar Score → combined signal strength
       </div>
 
     </div>
@@ -440,15 +548,12 @@
   </section>
 
 
-
-  <!-- =========================================
-       DISCLAIMER
-  ========================================== -->
+  <!-- DISCLAIMER -->
 
   <div
     style="
-      margin-top:14px;
-      padding:11px;
+      margin-top:4px;
+      padding:10px;
       border:1px solid var(--border);
       border-radius:12px;
       color:var(--faint);
@@ -458,9 +563,8 @@
     "
   >
 
-    Radar menunjukkan kondisi market
-    berdasarkan data yang tersedia.
-    Bukan jaminan arah harga atau profit.
+    Radar adalah alat analisis market.
+    Signal bukan jaminan profit atau arah harga.
 
   </div>
 
@@ -468,32 +572,20 @@
 </main>
 
 
-
-<!-- =========================================
-     NAV
-========================================== -->
-
 <div id="bottom-nav"></div>
 
 
-
-<!-- =========================================
-     SCRIPTS
-========================================== -->
-
 <script src="js/app.js"></script>
-
 <script src="js/api.js"></script>
-
 
 
 <script>
 
 /* =====================================================
-   NEXTRA RADAR V4
+   NEXTRA RADAR V100
 ===================================================== */
 
-const RADAR = {
+const RADAR_V100 = {
 
   symbols: [
     "BTCUSDT",
@@ -518,474 +610,755 @@ const RADAR = {
 };
 
 
+/* =====================================================
+   API
+===================================================== */
+
+const BINANCE = "https://fapi.binance.com";
+
+
+async function radarFetch(
+  endpoint
+) {
+
+  const response =
+    await fetch(
+      BINANCE + endpoint
+    );
+
+  if (!response.ok) {
+
+    throw new Error(
+      "API " + response.status
+    );
+
+  }
+
+  return response.json();
+
+}
+
 
 /* =====================================================
    HELPERS
 ===================================================== */
 
-function radarNum(value) {
+function num(value) {
 
-  const n = Number(value);
+  const n =
+    Number(value);
 
   return Number.isFinite(n)
     ? n
-    : null;
+    : 0;
 
 }
 
 
-function radarPrice(item) {
+function formatPrice(value) {
 
-  return radarNum(
-    item?.price ??
-    item?.markPrice
+  const n = num(value);
+
+  if (n >= 1000)
+    return n.toLocaleString(
+      "en-US",
+      {
+        maximumFractionDigits: 2
+      }
+    );
+
+  if (n >= 1)
+    return n.toLocaleString(
+      "en-US",
+      {
+        maximumFractionDigits: 4
+      }
+    );
+
+  return n.toLocaleString(
+    "en-US",
+    {
+      maximumFractionDigits: 6
+    }
   );
 
 }
 
 
-function radarChange(item) {
+function formatPercent(value) {
 
-  return radarNum(
-    item?.change24h
-  );
+  const n = num(value);
 
-}
-
-
-function radarOI(item) {
-
-  return radarNum(
-    item?.oiChange24h
-  );
+  return (
+    n >= 0
+      ? "+"
+      : ""
+  ) +
+    n.toFixed(2) +
+    "%";
 
 }
 
 
-function radarFunding(item) {
+function formatVolume(value) {
 
-  return radarNum(
-    item?.fundingRate
-  );
+  const n = num(value);
+
+  if (n >= 1e9)
+    return (
+      n / 1e9
+    ).toFixed(2) + "B";
+
+  if (n >= 1e6)
+    return (
+      n / 1e6
+    ).toFixed(2) + "M";
+
+  if (n >= 1e3)
+    return (
+      n / 1e3
+    ).toFixed(2) + "K";
+
+  return n.toFixed(0);
 
 }
 
 
-function radarVolume(item) {
+function escapeHTML(value) {
 
-  return radarNum(
-    item?.quoteVolume ??
-    item?.volume
-  );
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 }
-
 
 
 /* =====================================================
-   CONFIRMATION ENGINE
+   FETCH MARKET
 ===================================================== */
 
-function getConfirmation(item) {
-
-  const change =
-    radarChange(item);
-
-  const oi =
-    radarOI(item);
-
-
-  if (
-    change === null ||
-    oi === null
-  ) {
-
-    return {
-
-      type: "neutral",
-
-      label: "INSUFFICIENT DATA",
-
-      score: 0
-
-    };
-
-  }
-
-
-  /* LONG CONFIRMATION */
-
-  if (
-    change > 0 &&
-    oi > 0
-  ) {
-
-    return {
-
-      type: "long-confirmed",
-
-      label: "LONG CONFIRMATION",
-
-      score:
-        Math.min(
-          100,
-          50 +
-          Math.abs(change) * 4 +
-          Math.abs(oi) * 2
-        )
-
-    };
-
-  }
-
-
-  /* SHORT CONFIRMATION */
-
-  if (
-    change < 0 &&
-    oi > 0
-  ) {
-
-    return {
-
-      type: "short-confirmed",
-
-      label: "SHORT CONFIRMATION",
-
-      score:
-        Math.min(
-          100,
-          50 +
-          Math.abs(change) * 4 +
-          Math.abs(oi) * 2
-        )
-
-    };
-
-  }
-
-
-  /* SHORT COVERING */
-
-  if (
-    change > 0 &&
-    oi < 0
-  ) {
-
-    return {
-
-      type: "long",
-
-      label: "SHORT COVERING",
-
-      score:
-        Math.min(
-          100,
-          50 +
-          Math.abs(change) * 3
-        )
-
-    };
-
-  }
-
-
-  /* LONG REDUCTION */
-
-  if (
-    change < 0 &&
-    oi < 0
-  ) {
-
-    return {
-
-      type: "short",
-
-      label: "LONG REDUCTION",
-
-      score:
-        Math.min(
-          100,
-          50 +
-          Math.abs(change) * 3
-        )
-
-    };
-
-  }
-
-
-  return {
-
-    type: "neutral",
-
-    label: "NEUTRAL",
-
-    score: 50
-
-  };
-
-}
-
-
-
-/* =====================================================
-   FUNDING
-===================================================== */
-
-function getFundingAnalysis(item) {
-
-  const rate =
-    radarFunding(item);
-
-
-  if (
-    rate === null
-  ) {
-
-    return {
-
-      percent: null,
-
-      label: "N/A",
-
-      adjustment: 0
-
-    };
-
-  }
-
-
-  const percent =
-    rate * 100;
-
-
-  if (
-    percent >= 0.10
-  ) {
-
-    return {
-
-      percent,
-
-      label: "CROWDED LONG",
-
-      adjustment: -10
-
-    };
-
-  }
-
-
-  if (
-    percent >= 0.05
-  ) {
-
-    return {
-
-      percent,
-
-      label: "LONG HEAVY",
-
-      adjustment: -4
-
-    };
-
-  }
-
-
-  if (
-    percent <= -0.10
-  ) {
-
-    return {
-
-      percent,
-
-      label: "CROWDED SHORT",
-
-      adjustment: 10
-
-    };
-
-  }
-
-
-  if (
-    percent <= -0.05
-  ) {
-
-    return {
-
-      percent,
-
-      label: "SHORT HEAVY",
-
-      adjustment: 4
-
-    };
-
-  }
-
-
-  return {
-
-    percent,
-
-    label: "BALANCED",
-
-    adjustment: 0
-
-  };
-
-}
-
-
-
-/* =====================================================
-   SCORE
-===================================================== */
-
-function calculateScore(item) {
-
-  const confirmation =
-    getConfirmation(item);
-
-  const funding =
-    getFundingAnalysis(item);
-
-
-  let score =
-    confirmation.score;
-
-
-  score +=
-    funding.adjustment;
+async function fetchMarket(
+  symbol
+) {
+
+  const [
+    ticker,
+    funding,
+    oi,
+    oiHistory,
+    candles
+  ] = await Promise.allSettled([
+
+    radarFetch(
+      "/fapi/v1/ticker/24hr?symbol=" +
+      symbol
+    ),
+
+    radarFetch(
+      "/fapi/v1/premiumIndex?symbol=" +
+      symbol
+    ),
+
+    radarFetch(
+      "/fapi/v1/openInterest?symbol=" +
+      symbol
+    ),
+
+    radarFetch(
+      "/futures/data/openInterestHist" +
+      "?symbol=" +
+      symbol +
+      "&period=5m&limit=2"
+    ),
+
+    radarFetch(
+      "/fapi/v1/klines" +
+      "?symbol=" +
+      symbol +
+      "&interval=5m&limit=25"
+    )
+
+  ]);
+
+
+  const tickerData =
+    ticker.status === "fulfilled"
+      ? ticker.value
+      : {};
+
+
+  const fundingData =
+    funding.status === "fulfilled"
+      ? funding.value
+      : {};
+
+
+  const oiData =
+    oi.status === "fulfilled"
+      ? oi.value
+      : {};
+
+
+  const oiHistoryData =
+    oiHistory.status === "fulfilled"
+      ? oiHistory.value
+      : [];
+
+
+  const candleData =
+    candles.status === "fulfilled"
+      ? candles.value
+      : [];
+
+
+  const price =
+    num(
+      tickerData.lastPrice
+    );
 
 
   const change =
-    radarChange(item);
+    num(
+      tickerData.priceChangePercent
+    );
+
+
+  const volume =
+    num(
+      tickerData.quoteVolume
+    );
+
+
+  const fundingRate =
+    num(
+      fundingData.lastFundingRate
+    );
+
+
+  const currentOI =
+    num(
+      oiData.openInterest
+    );
+
+
+  let oiChange = 0;
 
 
   if (
-    change !== null
+    oiHistoryData.length >= 2
   ) {
+
+    const previous =
+      num(
+        oiHistoryData[0].sumOpenInterest
+      );
+
+    const latest =
+      num(
+        oiHistoryData[
+          oiHistoryData.length - 1
+        ].sumOpenInterest
+      );
+
+    if (previous > 0) {
+
+      oiChange =
+        (
+          (latest - previous) /
+          previous
+        ) * 100;
+
+    }
+
+  }
+
+
+  /* =========================================
+     VOLUME SPIKE
+  ========================================= */
+
+  let volumeSpike = 0;
+
+
+  if (
+    candleData.length >= 10
+  ) {
+
+    const volumes =
+      candleData
+        .slice(0, -1)
+        .map(
+          candle =>
+            num(candle[5])
+        );
+
+
+    const average =
+      volumes.reduce(
+        (sum, value) =>
+          sum + value,
+        0
+      ) /
+      volumes.length;
+
+
+    const latest =
+      num(
+        candleData[
+          candleData.length - 1
+        ][5]
+      );
+
+
+    if (average > 0) {
+
+      volumeSpike =
+        latest / average;
+
+    }
+
+  }
+
+
+  /* =========================================
+     BREAKOUT
+  ========================================= */
+
+  let breakout = "none";
+
+
+  if (
+    candleData.length >= 21
+  ) {
+
+    const recent =
+      candleData.slice(
+        0,
+        -1
+      );
+
+
+    const highs =
+      recent.map(
+        candle =>
+          num(candle[2])
+      );
+
+
+    const lows =
+      recent.map(
+        candle =>
+          num(candle[3])
+      );
+
+
+    const highest =
+      Math.max(...highs);
+
+
+    const lowest =
+      Math.min(...lows);
+
 
     if (
-      Math.abs(change) >= 5
+      price > highest
     ) {
 
-      score += 8;
+      breakout = "up";
 
     }
 
     else if (
-      Math.abs(change) >= 3
+      price < lowest
     ) {
 
-      score += 5;
+      breakout = "down";
 
     }
 
   }
 
 
-  return Math.max(
-    0,
-    Math.min(
-      100,
-      Math.round(score)
-    )
-  );
-
-}
-
-
-
-/* =====================================================
-   RISK
-===================================================== */
-
-function getRisk(item) {
-
-  const change =
-    Math.abs(
-      radarChange(item) || 0
-    );
-
-
-  const funding =
-    Math.abs(
-      radarFunding(item) || 0
-    ) * 100;
-
-
-  if (
-    change >= 8 ||
-    funding >= 0.10
-  ) {
-
-    return {
-
-      label: "HIGH",
-
-      className: "risk-high"
-
-    };
-
-  }
-
-
-  if (
-    change >= 4 ||
-    funding >= 0.05
-  ) {
-
-    return {
-
-      label: "MODERATE",
-
-      className: "risk-medium"
-
-    };
-
-  }
-
-
   return {
 
-    label: "LOW",
+    symbol,
 
-    className: "risk-low"
+    price,
+
+    change,
+
+    volume,
+
+    fundingRate,
+
+    currentOI,
+
+    oiChange,
+
+    volumeSpike,
+
+    breakout
 
   };
 
 }
 
 
-
 /* =====================================================
-   LOAD RADAR
+   SIGNAL ENGINE
 ===================================================== */
 
-async function loadRadar() {
+function analyzeMarket(
+  item
+) {
+
+  let score = 50;
+
+  let direction =
+    "neutral";
+
+  let signal =
+    "NEUTRAL";
+
+
+  const change =
+    item.change;
+
+
+  const oi =
+    item.oiChange;
+
+
+  const funding =
+    item.fundingRate * 100;
+
+
+  /* =========================================
+     PRICE MOMENTUM
+  ========================================= */
 
   if (
-    RADAR.loading
+    change >= 5
   ) {
 
-    return;
+    score += 14;
+
+  }
+
+  else if (
+    change >= 3
+  ) {
+
+    score += 9;
+
+  }
+
+  else if (
+    change >= 1
+  ) {
+
+    score += 4;
+
+  }
+
+  else if (
+    change <= -5
+  ) {
+
+    score -= 14;
+
+  }
+
+  else if (
+    change <= -3
+  ) {
+
+    score -= 9;
+
+  }
+
+  else if (
+    change <= -1
+  ) {
+
+    score -= 4;
 
   }
 
 
-  RADAR.loading = true;
+  /* =========================================
+     OI CONFIRMATION
+  ========================================= */
+
+  if (
+    change > 0 &&
+    oi > 0.5
+  ) {
+
+    score += 14;
+
+    direction =
+      "long";
+
+    signal =
+      "LONG CONFIRMATION";
+
+  }
+
+  else if (
+    change < 0 &&
+    oi > 0.5
+  ) {
+
+    score -= 14;
+
+    direction =
+      "short";
+
+    signal =
+      "SHORT CONFIRMATION";
+
+  }
+
+  else if (
+    change > 0 &&
+    oi < -0.5
+  ) {
+
+    score += 5;
+
+    direction =
+      "long";
+
+    signal =
+      "SHORT COVERING";
+
+  }
+
+  else if (
+    change < 0 &&
+    oi < -0.5
+  ) {
+
+    score -= 5;
+
+    direction =
+      "short";
+
+    signal =
+      "LONG REDUCTION";
+
+  }
 
 
-  const results =
-    document.getElementById(
-      "radar-results"
+  /* =========================================
+     VOLUME
+  ========================================= */
+
+  if (
+    item.volumeSpike >= 3
+  ) {
+
+    if (
+      direction === "long"
+    )
+      score += 10;
+
+    else if (
+      direction === "short"
+    )
+      score -= 10;
+
+  }
+
+  else if (
+    item.volumeSpike >= 2
+  ) {
+
+    if (
+      direction === "long"
+    )
+      score += 6;
+
+    else if (
+      direction === "short"
+    )
+      score -= 6;
+
+  }
+
+
+  /* =========================================
+     BREAKOUT
+  ========================================= */
+
+  if (
+    item.breakout === "up"
+  ) {
+
+    score += 10;
+
+    direction =
+      "long";
+
+    signal =
+      "BULLISH BREAKOUT";
+
+  }
+
+
+  if (
+    item.breakout === "down"
+  ) {
+
+    score -= 10;
+
+    direction =
+      "short";
+
+    signal =
+      "BEARISH BREAKDOWN";
+
+  }
+
+
+  /* =========================================
+     FUNDING
+  ========================================= */
+
+  if (
+    funding >= 0.10
+  ) {
+
+    score -= 6;
+
+  }
+
+  else if (
+    funding <= -0.10
+  ) {
+
+    score += 6;
+
+  }
+
+
+  score =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        Math.round(score)
+      )
     );
+
+
+  if (
+    score >= 60 &&
+    direction === "neutral"
+  ) {
+
+    direction =
+      "long";
+
+  }
+
+  if (
+    score <= 40 &&
+    direction === "neutral"
+  ) {
+
+    direction =
+      "short";
+
+  }
+
+
+  if (
+    direction === "long" &&
+    signal === "NEUTRAL"
+  ) {
+
+    signal =
+      "BULLISH";
+
+  }
+
+  if (
+    direction === "short" &&
+    signal === "NEUTRAL"
+  ) {
+
+    signal =
+      "BEARISH";
+
+  }
+
+
+  /* =========================================
+     RISK
+  ========================================= */
+
+  let risk =
+    "LOW";
+
+
+  if (
+    Math.abs(change) >= 8 ||
+    Math.abs(funding) >= 0.10 ||
+    item.volumeSpike >= 4
+  ) {
+
+    risk =
+      "HIGH";
+
+  }
+
+  else if (
+    Math.abs(change) >= 4 ||
+    Math.abs(funding) >= 0.05 ||
+    item.volumeSpike >= 2
+  ) {
+
+    risk =
+      "MEDIUM";
+
+  }
+
+
+  return {
+
+    ...item,
+
+    score,
+
+    direction,
+
+    signal,
+
+    risk
+
+  };
+
+}
+
+
+/* =====================================================
+   SCAN
+===================================================== */
+
+async function scanRadar() {
+
+  if (
+    RADAR_V100.loading
+  ) return;
+
+
+  RADAR_V100.loading =
+    true;
 
 
   const status =
@@ -994,328 +1367,8 @@ async function loadRadar() {
     );
 
 
-  if (status) {
-
-    status.textContent =
-      "SCANNING";
-
-  }
-
-
-  if (results) {
-
-    results.innerHTML = `
-      <div class="loading">
-        Loading futures intelligence...
-      </div>
-    `;
-
-  }
-
-
-  try {
-
-    if (
-      typeof NEXTRA_API ===
-      "undefined"
-    ) {
-
-      throw new Error(
-        "NEXTRA_API unavailable"
-      );
-
-    }
-
-
-    const data =
-      await NEXTRA_API
-        .fetchFuturesMarkets(
-          RADAR.symbols
-        );
-
-
-    RADAR.data =
-      Array.isArray(data)
-        ? data
-        : [];
-
-
-    renderRadar();
-
-
-    if (status) {
-
-      status.textContent =
-        "LIVE";
-
-    }
-
-
-    const updated =
-      document.getElementById(
-        "radar-updated"
-      );
-
-
-    if (updated) {
-
-      updated.textContent =
-        "Updated " +
-        new Date()
-          .toLocaleTimeString(
-            "id-ID",
-            {
-              hour: "2-digit",
-              minute: "2-digit"
-            }
-          );
-
-    }
-
-  }
-
-  catch (error) {
-
-    console.error(
-      "NEXTRA Radar V4:",
-      error
-    );
-
-
-    if (status) {
-
-      status.textContent =
-        "ERROR";
-
-    }
-
-
-    if (results) {
-
-      results.innerHTML = `
-        <div class="error-box">
-
-          ⚠️ Gagal memuat Radar.
-
-          <br><br>
-
-          <span
-            style="
-              font-size:8px;
-              color:var(--faint);
-            "
-          >
-            Periksa koneksi internet
-            atau coba refresh.
-          </span>
-
-          <br><br>
-
-          <button
-            class="primary-btn"
-            onclick="loadRadar()"
-          >
-            Coba Lagi
-          </button>
-
-        </div>
-      `;
-
-    }
-
-  }
-
-  finally {
-
-    RADAR.loading = false;
-
-  }
-
-}
-
-
-
-/* =====================================================
-   FILTER
-===================================================== */
-
-function filterData(data) {
-
-  if (
-    RADAR.filter ===
-    "all"
-  ) {
-
-    return data;
-
-  }
-
-
-  return data.filter(
-    item => {
-
-      const confirmation =
-        getConfirmation(item);
-
-
-      return (
-        confirmation.type ===
-        RADAR.filter
-      );
-
-    }
-  );
-
-}
-
-
-
-/* =====================================================
-   SORT
-===================================================== */
-
-function sortData(data) {
-
-  return [...data].sort(
-    (a, b) => {
-
-      return (
-        calculateScore(b) -
-        calculateScore(a)
-      );
-
-    }
-  );
-
-}
-
-
-
-/* =====================================================
-   SUMMARY
-===================================================== */
-
-function updateSummary() {
-
-  let long = 0;
-
-  let short = 0;
-
-  let confirmed = 0;
-
-
-  RADAR.data.forEach(
-    item => {
-
-      const signal =
-        getConfirmation(item);
-
-
-      if (
-        signal.type ===
-          "long" ||
-        signal.type ===
-          "long-confirmed"
-      ) {
-
-        long++;
-
-      }
-
-
-      if (
-        signal.type ===
-          "short" ||
-        signal.type ===
-          "short-confirmed"
-      ) {
-
-        short++;
-
-      }
-
-
-      if (
-        signal.type ===
-          "long-confirmed" ||
-        signal.type ===
-          "short-confirmed"
-      ) {
-
-        confirmed++;
-
-      }
-
-    }
-  );
-
-
-  const longEl =
-    document.getElementById(
-      "radar-long"
-    );
-
-
-  const shortEl =
-    document.getElementById(
-      "radar-short"
-    );
-
-
-  const confirmedEl =
-    document.getElementById(
-      "radar-confirmed"
-    );
-
-
-  const scannedEl =
-    document.getElementById(
-      "radar-scanned"
-    );
-
-
-  if (longEl) {
-
-    longEl.textContent =
-      long;
-
-  }
-
-
-  if (shortEl) {
-
-    shortEl.textContent =
-      short;
-
-  }
-
-
-  if (confirmedEl) {
-
-    confirmedEl.textContent =
-      confirmed;
-
-  }
-
-
-  if (scannedEl) {
-
-    scannedEl.textContent =
-      RADAR.data.length;
-
-  }
-
-}
-
-
-
-/* =====================================================
-   RENDER
-===================================================== */
-
-function renderRadar() {
-
-  updateSummary();
+  status.textContent =
+    "SCANNING...";
 
 
   const results =
@@ -1324,28 +1377,267 @@ function renderRadar() {
     );
 
 
-  if (!results) return;
+  results.innerHTML = `
+
+    <div class="radar-empty">
+      🔎 Scanning
+      ${RADAR_V100.symbols.length}
+      futures markets...
+    </div>
+
+  `;
 
 
-  let data =
-    sortData(
-      RADAR.data
+  try {
+
+    const raw =
+      await Promise.all(
+        RADAR_V100.symbols.map(
+          symbol =>
+            fetchMarket(symbol)
+              .catch(
+                () => null
+              )
+        )
+      );
+
+
+    RADAR_V100.data =
+      raw
+        .filter(Boolean)
+        .map(analyzeMarket)
+        .sort(
+          (a, b) =>
+            b.score - a.score
+        );
+
+
+    renderRadar();
+
+
+    status.textContent =
+      "LIVE";
+
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "Radar V100:",
+      error
     );
 
 
-  data =
-    filterData(
-      data
-    );
+    status.textContent =
+      "ERROR";
 
-
-  if (!data.length) {
 
     results.innerHTML = `
-      <div class="empty-state">
-        Tidak ada aset yang cocok
-        dengan filter ini.
+
+      <div class="radar-empty">
+        Radar gagal mengambil data.
+        Coba refresh kembali.
       </div>
+
+    `;
+
+  }
+
+
+  RADAR_V100.loading =
+    false;
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function filteredData() {
+
+  const filter =
+    RADAR_V100.filter;
+
+
+  if (
+    filter === "all"
+  ) {
+
+    return RADAR_V100.data;
+
+  }
+
+
+  if (
+    filter === "long"
+  ) {
+
+    return RADAR_V100.data
+      .filter(
+        item =>
+          item.direction === "long"
+      );
+
+  }
+
+
+  if (
+    filter === "short"
+  ) {
+
+    return RADAR_V100.data
+      .filter(
+        item =>
+          item.direction === "short"
+      );
+
+  }
+
+
+  if (
+    filter === "breakout"
+  ) {
+
+    return RADAR_V100.data
+      .filter(
+        item =>
+          item.breakout !== "none"
+      );
+
+  }
+
+
+  if (
+    filter === "volume"
+  ) {
+
+    return RADAR_V100.data
+      .filter(
+        item =>
+          item.volumeSpike >= 2
+      );
+
+  }
+
+
+  if (
+    filter === "highscore"
+  ) {
+
+    return RADAR_V100.data
+      .filter(
+        item =>
+          item.score >= 80
+      );
+
+  }
+
+
+  return RADAR_V100.data;
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderRadar() {
+
+  const data =
+    filteredData();
+
+
+  const results =
+    document.getElementById(
+      "radar-results"
+    );
+
+
+  /* SUMMARY */
+
+  const bullish =
+    RADAR_V100.data
+      .filter(
+        item =>
+          item.direction === "long"
+      )
+      .length;
+
+
+  const bearish =
+    RADAR_V100.data
+      .filter(
+        item =>
+          item.direction === "short"
+      )
+      .length;
+
+
+  const breakout =
+    RADAR_V100.data
+      .filter(
+        item =>
+          item.breakout !== "none"
+      )
+      .length;
+
+
+  const spike =
+    RADAR_V100.data
+      .filter(
+        item =>
+          item.volumeSpike >= 2
+      )
+      .length;
+
+
+  document.getElementById(
+    "radar-bullish"
+  ).textContent =
+    bullish;
+
+
+  document.getElementById(
+    "radar-bearish"
+  ).textContent =
+    bearish;
+
+
+  document.getElementById(
+    "radar-breakout"
+  ).textContent =
+    breakout;
+
+
+  document.getElementById(
+    "radar-spike"
+  ).textContent =
+    spike;
+
+
+  document.getElementById(
+    "radar-updated"
+  ).textContent =
+    new Date()
+      .toLocaleTimeString(
+        "id-ID"
+      );
+
+
+  if (
+    !data.length
+  ) {
+
+    results.innerHTML = `
+
+      <div class="radar-empty">
+        Tidak ada signal
+        untuk filter ini.
+      </div>
+
     `;
 
     return;
@@ -1363,236 +1655,200 @@ function renderRadar() {
 }
 
 
-
-/* =====================================================
-   BIAS LABEL
-===================================================== */
-
-function biasLabel(type) {
-
-  if (
-    type ===
-    "long-confirmed"
-  ) {
-
-    return `
-      <span class="up">
-        🟢 LONG CONFIRMED
-      </span>
-    `;
-
-  }
-
-
-  if (
-    type ===
-    "short-confirmed"
-  ) {
-
-    return `
-      <span class="down">
-        🔴 SHORT CONFIRMED
-      </span>
-    `;
-
-  }
-
-
-  if (
-    type ===
-    "long"
-  ) {
-
-    return `
-      <span class="up">
-        LONG
-      </span>
-    `;
-
-  }
-
-
-  if (
-    type ===
-    "short"
-  ) {
-
-    return `
-      <span class="down">
-        SHORT
-      </span>
-    `;
-
-  }
-
-
-  return `
-    <span class="dim">
-      NEUTRAL
-    </span>
-  `;
-
-}
-
-
-
 /* =====================================================
    CARD
 ===================================================== */
 
-function renderCard(item) {
+function renderCard(
+  item,
+  index
+) {
 
-  const confirmation =
-    getConfirmation(item);
-
-
-  const fundingData =
-    getFundingAnalysis(item);
-
-
-  const score =
-    calculateScore(item);
-
-
-  const risk =
-    getRisk(item);
+  const directionClass =
+    item.direction === "long"
+      ? "long"
+      : item.direction === "short"
+        ? "short"
+        : "neutral";
 
 
-  const change =
-    radarChange(item);
+  const changeClass =
+    item.change >= 0
+      ? "up"
+      : "down";
 
 
-  const oi =
-    radarOI(item);
-
-
-  const p =
-    radarPrice(item);
-
-
-  const vol =
-    radarVolume(item);
-
-
-  const symbol =
-    String(
-      item.symbol ||
-      "UNKNOWN"
-    ).replace(
-      "USDT",
-      "/USDT"
+  const scoreWidth =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        item.score
+      )
     );
 
 
-  const changeText =
-    change === null
-      ? "N/A"
-      :
-        (
-          change >= 0
-            ? "+"
-            : ""
-        ) +
-        change.toFixed(2) +
-        "%";
-
-
-  const oiText =
-    oi === null
-      ? "N/A"
-      :
-        (
-          oi >= 0
-            ? "+"
-            : ""
-        ) +
-        oi.toFixed(2) +
-        "%";
+  const volumeText =
+    item.volumeSpike > 0
+      ? item.volumeSpike.toFixed(1) +
+        "x"
+      : "N/A";
 
 
   const fundingText =
-    fundingData.percent === null
-      ? "N/A"
-      :
-        (
-          fundingData.percent >= 0
-            ? "+"
-            : ""
-        ) +
-        fundingData.percent.toFixed(4) +
-        "%";
+    (
+      item.fundingRate *
+      100
+    ).toFixed(4) +
+    "%";
+
+
+  const breakoutText =
+    item.breakout === "up"
+      ? "↑ BREAKOUT"
+      : item.breakout === "down"
+        ? "↓ BREAKDOWN"
+        : "NONE";
 
 
   return `
 
     <article
-      class="coin-card"
-      style="
-        display:block;
-        margin-bottom:10px;
-      "
+      class="radar-card"
     >
 
-
-      <!-- HEADER -->
-
       <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-        "
+        class="radar-card-top"
       >
 
         <div>
 
-          <strong
-            style="
-              font-size:15px;
-            "
+          <div
+            class="radar-symbol"
           >
-            ${symbol}
-          </strong>
-
+            #${index + 1}
+            ${escapeHTML(
+              item.symbol
+                .replace(
+                  "USDT",
+                  ""
+                )
+            )}
+          </div>
 
           <div
-            style="
-              margin-top:5px;
-              font-size:8px;
+            class="radar-price"
+          >
+            ${formatPrice(
+              item.price
+            )}
+          </div>
+
+          <div
+            class="
+              radar-change
+              ${changeClass}
             "
           >
-
-            ${biasLabel(
-              confirmation.type
+            ${formatPercent(
+              item.change
             )}
-
           </div>
 
         </div>
 
 
         <div
-          style="
-            text-align:right;
+          class="
+            radar-direction
+            ${directionClass}
           "
         >
+          ${escapeHTML(
+            item.signal
+          )}
+        </div>
 
-          <strong
-            style="
-              font-size:22px;
-            "
-          >
-            ${score}
-          </strong>
+      </div>
 
+
+      <div
+        class="radar-metrics"
+      >
+
+        <div
+          class="radar-metric"
+        >
 
           <div
-            class="dim"
-            style="
-              font-size:6px;
-            "
+            class="radar-metric-label"
           >
-            SCORE
+            RADAR
+          </div>
+
+          <div
+            class="radar-metric-value"
+          >
+            ${item.score}/100
+          </div>
+
+        </div>
+
+
+        <div
+          class="radar-metric"
+        >
+
+          <div
+            class="radar-metric-label"
+          >
+            OI CHANGE
+          </div>
+
+          <div
+            class="radar-metric-value"
+          >
+            ${formatPercent(
+              item.oiChange
+            )}
+          </div>
+
+        </div>
+
+
+        <div
+          class="radar-metric"
+        >
+
+          <div
+            class="radar-metric-label"
+          >
+            VOLUME
+          </div>
+
+          <div
+            class="radar-metric-value"
+          >
+            ${volumeText}
+          </div>
+
+        </div>
+
+
+        <div
+          class="radar-metric"
+        >
+
+          <div
+            class="radar-metric-label"
+          >
+            FUNDING
+          </div>
+
+          <div
+            class="radar-metric-value"
+          >
+            ${fundingText}
           </div>
 
         </div>
@@ -1600,215 +1856,56 @@ function renderCard(item) {
       </div>
 
 
-
-      <!-- SCORE BAR -->
-
       <div
-        style="
-          height:5px;
-          background:var(--border);
-          border-radius:20px;
-          overflow:hidden;
-          margin-top:10px;
-        "
+        class="radar-score-bar"
       >
 
         <div
+          class="radar-score-fill"
           style="
-            width:${score}%;
-            height:100%;
-            background:var(--accent);
+            width:${scoreWidth}%;
           "
         ></div>
 
       </div>
 
 
-
-      <!-- METRICS -->
-
       <div
-        style="
-          display:grid;
-          grid-template-columns:
-            repeat(2,1fr);
-          gap:7px;
-          margin-top:11px;
-        "
-      >
-
-        <div class="mini-stat">
-
-          <span>
-            Price 24H
-          </span>
-
-          <strong
-            class="${
-              change === null
-                ? "dim"
-                : change >= 0
-                  ? "up"
-                  : "down"
-            }"
-          >
-            ${changeText}
-          </strong>
-
-        </div>
-
-
-        <div class="mini-stat">
-
-          <span>
-            OI Change
-          </span>
-
-          <strong
-            class="${
-              oi === null
-                ? "dim"
-                : oi >= 0
-                  ? "up"
-                  : "down"
-            }"
-          >
-            ${oiText}
-          </strong>
-
-        </div>
-
-
-        <div class="mini-stat">
-
-          <span>
-            Funding
-          </span>
-
-          <strong>
-            ${fundingText}
-          </strong>
-
-        </div>
-
-
-        <div class="mini-stat">
-
-          <span>
-            Volume
-          </span>
-
-          <strong>
-            ${formatCompact(vol)}
-          </strong>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- MARKET STRUCTURE -->
-
-      <div
-        style="
-          margin-top:10px;
-          padding:10px;
-          border-radius:10px;
-          background:
-            rgba(127,127,127,0.06);
-        "
-      >
-
-        <div
-          style="
-            font-size:8px;
-            font-weight:800;
-          "
-        >
-          🧠 Market Structure
-        </div>
-
-
-        <div
-          style="
-            font-size:8px;
-            margin-top:5px;
-          "
-        >
-
-          ${confirmation.label}
-
-        </div>
-
-
-        <div
-          class="dim"
-          style="
-            font-size:7px;
-            margin-top:4px;
-            line-height:1.5;
-          "
-        >
-
-          ${getReason(
-            item,
-            confirmation,
-            fundingData
-          )}
-
-        </div>
-
-      </div>
-
-
-
-      <!-- RISK -->
-
-      <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          margin-top:10px;
-          padding-top:9px;
-          border-top:
-            1px solid var(--border);
-        "
+        class="radar-bottom"
       >
 
         <span
-          class="dim"
-          style="font-size:8px;"
+          class="radar-signal"
         >
-          Risk Level
+
+          ${
+            item.breakout === "none"
+              ? "📊 Structure normal"
+              : item.breakout === "up"
+                ? "🚀 Bullish breakout"
+                : "🔻 Bearish breakdown"
+          }
+
         </span>
 
 
-        <strong
-          class="${risk.className}"
-          style="font-size:8px;"
+        <span
+          class="
+            radar-risk
+            ${
+              item.risk === "HIGH"
+                ? "risk-high"
+                : item.risk === "MEDIUM"
+                  ? "risk-medium"
+                  : "risk-low"
+            }
+          "
         >
-          ${risk.label}
-        </strong>
 
-      </div>
+          RISK:
+          ${item.risk}
 
-
-
-      <!-- PRICE -->
-
-      <div
-        class="dim"
-        style="
-          text-align:right;
-          font-size:7px;
-          margin-top:6px;
-        "
-      >
-
-        Price:
-        ${formatPrice(p)}
+        </span>
 
       </div>
 
@@ -1819,261 +1916,8 @@ function renderCard(item) {
 }
 
 
-
 /* =====================================================
-   REASON
-===================================================== */
-
-function getReason(
-  item,
-  confirmation,
-  fundingData
-) {
-
-  const change =
-    radarChange(item);
-
-
-  if (
-    confirmation.type ===
-    "long-confirmed"
-  ) {
-
-    if (
-      fundingData.percent !== null &&
-      fundingData.percent >= 0.10
-    ) {
-
-      return `
-        Harga naik dan OI naik,
-        tetapi funding sangat tinggi.
-        Momentum bullish terkonfirmasi,
-        namun long mulai crowded.
-      `;
-
-    }
-
-
-    return `
-      Harga naik bersamaan dengan
-      Open Interest yang meningkat.
-      Posisi baru ikut masuk ke
-      pergerakan bullish.
-    `;
-
-  }
-
-
-  if (
-    confirmation.type ===
-    "short-confirmed"
-  ) {
-
-    if (
-      fundingData.percent !== null &&
-      fundingData.percent <= -0.10
-    ) {
-
-      return `
-        Harga turun dan OI naik,
-        tetapi funding sangat negatif.
-        Tekanan bearish terkonfirmasi,
-        namun short mulai crowded.
-      `;
-
-    }
-
-
-    return `
-      Harga turun sementara
-      Open Interest meningkat.
-      Posisi baru masuk ketika
-      market bergerak bearish.
-    `;
-
-  }
-
-
-  if (
-    confirmation.label ===
-    "SHORT COVERING"
-  ) {
-
-    return `
-      Harga naik sementara OI turun.
-      Kondisi ini lebih konsisten
-      dengan short yang ditutup
-      daripada long baru.
-    `;
-
-  }
-
-
-  if (
-    confirmation.label ===
-    "LONG REDUCTION"
-  ) {
-
-    return `
-      Harga turun sementara OI turun.
-      Kondisi ini lebih konsisten
-      dengan long yang ditutup
-      atau berkurang.
-    `;
-
-  }
-
-
-  if (
-    change !== null &&
-    Math.abs(change) < 1
-  ) {
-
-    return `
-      Perubahan harga relatif kecil.
-      Belum ada konfirmasi arah
-      yang kuat.
-    `;
-
-  }
-
-
-  return `
-    Data belum memberikan
-    konfirmasi yang cukup kuat.
-  `;
-
-}
-
-
-
-/* =====================================================
-   FORMAT
-===================================================== */
-
-function formatCompact(value) {
-
-  const n =
-    Number(value);
-
-
-  if (
-    !Number.isFinite(n)
-  ) {
-
-    return "N/A";
-
-  }
-
-
-  if (
-    Math.abs(n) >= 1e12
-  ) {
-
-    return (
-      n / 1e12
-    ).toFixed(2) + "T";
-
-  }
-
-
-  if (
-    Math.abs(n) >= 1e9
-  ) {
-
-    return (
-      n / 1e9
-    ).toFixed(2) + "B";
-
-  }
-
-
-  if (
-    Math.abs(n) >= 1e6
-  ) {
-
-    return (
-      n / 1e6
-    ).toFixed(2) + "M";
-
-  }
-
-
-  if (
-    Math.abs(n) >= 1e3
-  ) {
-
-    return (
-      n / 1e3
-    ).toFixed(2) + "K";
-
-  }
-
-
-  return n.toFixed(0);
-
-}
-
-
-function formatPrice(value) {
-
-  const n =
-    Number(value);
-
-
-  if (
-    !Number.isFinite(n)
-  ) {
-
-    return "N/A";
-
-  }
-
-
-  if (
-    n >= 1000
-  ) {
-
-    return "$" +
-      n.toLocaleString(
-        "en-US",
-        {
-          maximumFractionDigits:2
-        }
-      );
-
-  }
-
-
-  if (
-    n >= 1
-  ) {
-
-    return "$" +
-      n.toFixed(2);
-
-  }
-
-
-  if (
-    n >= 0.01
-  ) {
-
-    return "$" +
-      n.toFixed(4);
-
-  }
-
-
-  return "$" +
-    n.toPrecision(5);
-
-}
-
-
-
-/* =====================================================
-   FILTER BUTTONS
+   FILTER EVENTS
 ===================================================== */
 
 document
@@ -2092,22 +1936,21 @@ document
               ".radar-filter"
             )
             .forEach(
-              btn => {
-
-                btn.classList
+              item =>
+                item.classList
                   .remove(
                     "active"
-                  );
-
-              }
+                  )
             );
 
 
           button.classList
-            .add("active");
+            .add(
+              "active"
+            );
 
 
-          RADAR.filter =
+          RADAR_V100.filter =
             button.dataset.filter;
 
 
@@ -2120,7 +1963,6 @@ document
   );
 
 
-
 /* =====================================================
    REFRESH
 ===================================================== */
@@ -2131,52 +1973,31 @@ document
   )
   ?.addEventListener(
     "click",
-    loadRadar
+    scanRadar
   );
 
 
-
 /* =====================================================
-   THEME
+   AUTO REFRESH
 ===================================================== */
 
-document
-  .getElementById(
-    "theme-toggle"
-  )
-  ?.addEventListener(
-    "click",
-    () => {
-
-      if (
-        typeof toggleTheme ===
-        "function"
-      ) {
-
-        toggleTheme();
-
-      }
-
-    }
-  );
-
-
-
-/* =====================================================
-   INIT
-===================================================== */
-
-document.addEventListener(
-  "DOMContentLoaded",
+setInterval(
   () => {
 
-    loadRadar();
+    scanRadar();
 
-  }
+  },
+  60000
 );
 
-</script>
 
+/* =====================================================
+   START
+===================================================== */
+
+scanRadar();
+
+</script>
 
 </body>
 
