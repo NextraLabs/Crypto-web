@@ -24,343 +24,303 @@
 
   <style>
 
-    /* =========================
-       COMMUNITY
-    ========================= */
-
     .community-tabs {
-      display:flex;
-      gap:7px;
-      overflow-x:auto;
-      padding:2px 0 8px;
-      scrollbar-width:none;
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding: 2px 0 8px;
+      scrollbar-width: none;
     }
 
     .community-tabs::-webkit-scrollbar {
-      display:none;
+      display: none;
     }
 
     .community-tab {
-      border:1px solid var(--border);
-      background:transparent;
-      color:inherit;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:9px;
-      font-weight:800;
-      white-space:nowrap;
-      cursor:pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: inherit;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
     }
 
     .community-tab.active {
-      background:var(--text);
-      color:var(--bg);
-      border-color:var(--text);
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
     }
 
-    /* =========================
-       CREATE POST
-    ========================= */
-
     .create-post {
-      margin-top:8px;
-      padding:13px;
+      margin-top: 8px;
+      padding: 13px;
     }
 
     .post-input {
-      width:100%;
-      min-height:75px;
-      resize:vertical;
-      box-sizing:border-box;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:var(--bg);
-      color:inherit;
-      padding:11px;
-      font-family:inherit;
-      font-size:10px;
-      outline:none;
+      width: 100%;
+      min-height: 75px;
+      resize: vertical;
+      box-sizing: border-box;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      color: inherit;
+      padding: 11px;
+      font-family: inherit;
+      font-size: 10px;
+      outline: none;
     }
 
     .post-input:focus {
-      border-color:var(--text);
+      border-color: var(--text);
     }
 
     .post-actions {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      margin-top:9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 9px;
     }
 
     .post-type {
-      display:flex;
-      gap:6px;
-      flex-wrap:wrap;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
     }
 
     .type-btn {
-      border:1px solid var(--border);
-      background:transparent;
-      color:inherit;
-      padding:6px 8px;
-      border-radius:8px;
-      font-size:8px;
-      cursor:pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: 8px;
+      cursor: pointer;
     }
 
     .type-btn.active {
-      border-color:var(--text);
+      border-color: var(--text);
     }
 
     .post-btn {
-      border:0;
-      background:var(--text);
-      color:var(--bg);
-      padding:8px 13px;
-      border-radius:9px;
-      font-size:9px;
-      font-weight:900;
-      cursor:pointer;
+      border: 0;
+      background: var(--text);
+      color: var(--bg);
+      padding: 8px 13px;
+      border-radius: 9px;
+      font-size: 9px;
+      font-weight: 900;
+      cursor: pointer;
     }
 
     .post-btn:disabled {
-      opacity:.5;
-      cursor:not-allowed;
+      opacity: .6;
+      cursor: wait;
     }
 
-    /* =========================
-       POST
-    ========================= */
-
     .post {
-      margin-top:9px;
-      padding:13px;
+      margin-top: 9px;
+      padding: 13px;
     }
 
     .post-header {
-      display:flex;
-      align-items:center;
-      gap:9px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .profile-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      flex: 1;
+      min-width: 0;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .profile-link:hover {
+      text-decoration: none;
     }
 
     .avatar {
-      width:34px;
-      height:34px;
-      min-width:34px;
-      border-radius:50%;
-      background:var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:15px;
-      overflow:hidden;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      overflow: hidden;
     }
 
     .avatar img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .post-user {
-      flex:1;
-      min-width:0;
+      flex: 1;
+      min-width: 0;
     }
 
     .post-user strong {
-      font-size:10px;
-    }
-
-    .post-user a {
-      color:inherit;
-      text-decoration:none;
-    }
-
-    .post-user a:hover {
-      text-decoration:underline;
+      font-size: 10px;
     }
 
     .post-meta {
-      font-size:7px;
-      margin-top:2px;
+      font-size: 7px;
+      margin-top: 2px;
     }
 
-    /* =========================
-       FOLLOW
-    ========================= */
-
     .follow-btn {
-      border:1px solid var(--border);
-      background:transparent;
-      color:inherit;
-      padding:6px 9px;
-      border-radius:8px;
-      font-size:7px;
-      font-weight:800;
-      cursor:pointer;
-      white-space:nowrap;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: inherit;
+      padding: 6px 9px;
+      border-radius: 8px;
+      font-size: 7px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
     .follow-btn.following {
-      font-weight:900;
-      border-color:var(--text);
+      font-weight: 900;
     }
 
     .follow-btn:disabled {
-      opacity:.5;
+      opacity: .5;
     }
 
-    /* =========================
-       CONTENT
-    ========================= */
-
     .post-content {
-      font-size:10px;
-      line-height:1.65;
-      margin-top:10px;
-      white-space:pre-wrap;
-      overflow-wrap:anywhere;
+      font-size: 10px;
+      line-height: 1.65;
+      margin-top: 10px;
+      white-space: pre-wrap;
+      word-break: break-word;
     }
 
     .post-footer {
-      display:flex;
-      gap:16px;
-      margin-top:11px;
-      padding-top:9px;
-      border-top:1px solid var(--border);
+      display: flex;
+      gap: 16px;
+      margin-top: 11px;
+      padding-top: 9px;
+      border-top: 1px solid var(--border);
     }
 
     .post-action {
-      border:0;
-      background:transparent;
-      color:inherit;
-      padding:0;
-      font-size:8px;
-      cursor:pointer;
-    }
-
-    .post-action.liked {
-      font-weight:900;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      font-size: 8px;
+      cursor: pointer;
     }
 
     .post-action:disabled {
-      opacity:.5;
+      opacity: .5;
     }
 
-    /* =========================
-       COMMENTS
-    ========================= */
+    .post-action.liked {
+      font-weight: 900;
+    }
 
     .comments {
-      display:none;
-      margin-top:10px;
-      padding-top:10px;
-      border-top:1px solid var(--border);
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
     }
 
     .comments.show {
-      display:block;
+      display: block;
+    }
+
+    .comments-list {
+      display: block;
     }
 
     .comment {
-      display:flex;
-      gap:7px;
-      margin-bottom:8px;
+      display: flex;
+      gap: 7px;
+      margin-bottom: 8px;
     }
 
     .comment-avatar {
-      width:24px;
-      height:24px;
-      min-width:24px;
-      border-radius:50%;
-      background:var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:11px;
-      overflow:hidden;
-    }
-
-    .comment-avatar img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
     }
 
     .comment-body {
-      background:var(--border);
-      border-radius:9px;
-      padding:7px 9px;
-      font-size:8px;
-      line-height:1.5;
-      overflow-wrap:anywhere;
+      background: var(--border);
+      border-radius: 9px;
+      padding: 7px 9px;
+      font-size: 8px;
+      line-height: 1.5;
     }
 
     .comment-body strong {
-      display:block;
-      margin-bottom:2px;
+      display: block;
+      margin-bottom: 2px;
     }
 
     .comment-box {
-      display:flex;
-      gap:6px;
-      margin-top:8px;
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
     }
 
     .comment-input {
-      flex:1;
-      min-width:0;
-      border:1px solid var(--border);
-      background:var(--bg);
-      color:inherit;
-      border-radius:8px;
-      padding:7px 8px;
-      font-size:8px;
-      outline:none;
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: inherit;
+      border-radius: 8px;
+      padding: 7px 8px;
+      font-size: 8px;
+      outline: none;
     }
 
     .comment-send {
-      border:0;
-      background:var(--text);
-      color:var(--bg);
-      border-radius:8px;
-      padding:0 10px;
-      font-size:8px;
-      font-weight:800;
-      cursor:pointer;
+      border: 0;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 8px;
+      padding: 0 10px;
+      font-size: 8px;
+      font-weight: 800;
+      cursor: pointer;
     }
 
-    /* =========================
-       STATUS
-    ========================= */
-
     .community-message {
-      text-align:center;
-      font-size:8px;
-      margin-top:8px;
-      min-height:12px;
+      text-align: center;
+      font-size: 8px;
+      margin-top: 8px;
+      min-height: 12px;
     }
 
     .loading-feed,
     .empty-feed {
-      text-align:center;
-      padding:30px 10px;
-      font-size:9px;
-    }
-
-    /* =========================
-       PROFILE LINK
-    ========================= */
-
-    .profile-link {
-      display:flex;
-      align-items:center;
-      gap:8px;
-      text-decoration:none;
-      color:inherit;
-      min-width:0;
+      text-align: center;
+      padding: 25px 10px;
+      font-size: 9px;
+      opacity: .7;
     }
 
   </style>
@@ -516,7 +476,7 @@
         id="following-count"
         style="font-size:15px;"
       >
-        —
+        0
       </strong>
 
       <div
@@ -654,7 +614,7 @@
   ></div>
 
 
-  <!-- FEED -->
+  <!-- FEED TITLE -->
 
   <div
     style="
@@ -667,6 +627,8 @@
   </div>
 
 
+  <!-- FEED -->
+
   <section id="community-feed">
 
     <div class="loading-feed">
@@ -676,7 +638,7 @@
   </section>
 
 
-  <!-- RULES -->
+  <!-- COMMUNITY RULES -->
 
   <div
     style="
@@ -734,6 +696,11 @@
 
 <script type="module">
 
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
 import {
   supabase
 } from "./js/supabase.js";
@@ -744,18 +711,13 @@ import {
 ===================================================== */
 
 let currentUser = null;
-
 let currentProfile = null;
 
-let selectedPostType =
-  "discussion";
+let selectedPostType = "discussion";
+let currentFilter = "latest";
 
 let allPosts = [];
-
 let followingIds = new Set();
-
-let currentFilter =
-  "latest";
 
 
 /* =====================================================
@@ -787,15 +749,15 @@ const message =
    MESSAGE
 ===================================================== */
 
-function showMessage(
-  text
-) {
+function showMessage(text) {
 
   if (!message)
     return;
 
+
   message.textContent =
     text;
+
 
   setTimeout(
     () => {
@@ -821,9 +783,7 @@ function showMessage(
    ESCAPE
 ===================================================== */
 
-function escapeHTML(
-  value
-) {
+function escapeHTML(value) {
 
   const div =
     document.createElement(
@@ -839,12 +799,10 @@ function escapeHTML(
 
 
 /* =====================================================
-   TIME AGO
+   TIME
 ===================================================== */
 
-function timeAgo(
-  date
-) {
+function timeAgo(date) {
 
   const seconds =
     Math.floor(
@@ -854,64 +812,60 @@ function timeAgo(
       ) / 1000
     );
 
+
   if (seconds < 60)
     return "Just now";
+
 
   const minutes =
     Math.floor(
       seconds / 60
     );
 
+
   if (minutes < 60)
     return `${minutes} min ago`;
+
 
   const hours =
     Math.floor(
       minutes / 60
     );
 
-  if (hours < 24)
-    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+
+  if (hours < 24) {
+
+    return `${hours} hour${
+      hours > 1
+        ? "s"
+        : ""
+    } ago`;
+
+  }
+
 
   const days =
     Math.floor(
       hours / 24
     );
 
-  if (days < 7)
-    return `${days} day${days > 1 ? "s" : ""} ago`;
 
-  return new Date(date)
-    .toLocaleDateString(
-      "id-ID"
-    );
+  if (days < 7) {
 
-}
+    return `${days} day${
+      days > 1
+        ? "s"
+        : ""
+    } ago`;
+
+  }
 
 
-/* =====================================================
-   TYPE LABEL
-===================================================== */
-
-function typeLabel(
-  type
-) {
-
-  const labels = {
-
-    discussion:
-      "💬 Discussion",
-
-    analysis:
-      "📊 Analysis",
-
-    education:
-      "📚 Education"
-
-  };
-
-  return labels[type] ||
-    labels.discussion;
+  return new Date(
+    date
+  ).toLocaleDateString(
+    "id-ID"
+  );
 
 }
 
@@ -920,9 +874,13 @@ function typeLabel(
    FORMAT NUMBER
 ===================================================== */
 
-function formatNumber(
-  number
-) {
+function formatNumber(number) {
+
+  number =
+    Number(
+      number || 0
+    );
+
 
   if (
     number >=
@@ -930,13 +888,15 @@ function formatNumber(
   ) {
 
     return (
-      number / 1000000
+      number /
+      1000000
     )
       .toFixed(1)
       .replace(
         ".0",
         ""
-      ) + "M";
+      ) +
+      "M";
 
   }
 
@@ -947,18 +907,47 @@ function formatNumber(
   ) {
 
     return (
-      number / 1000
+      number /
+      1000
     )
       .toFixed(1)
       .replace(
         ".0",
         ""
-      ) + "K";
+      ) +
+      "K";
 
   }
 
 
-  return number;
+  return String(
+    number
+  );
+
+}
+
+
+/* =====================================================
+   TYPE LABEL
+===================================================== */
+
+function typeLabel(type) {
+
+  return {
+
+    discussion:
+      "💬 Discussion",
+
+    analysis:
+      "📊 Analysis",
+
+    education:
+      "📚 Education"
+
+  }[
+    type
+  ] ||
+    "💬 Discussion";
 
 }
 
@@ -970,13 +959,25 @@ function formatNumber(
 async function loadAuth() {
 
   const {
-    data
+    data,
+    error
   } =
     await supabase.auth.getUser();
 
 
+  if (error) {
+
+    console.error(
+      "AUTH ERROR:",
+      error
+    );
+
+  }
+
+
   currentUser =
-    data?.user || null;
+    data?.user ||
+    null;
 
 
   if (
@@ -992,7 +993,8 @@ async function loadAuth() {
 
 
   const {
-    data: profile
+    data: profile,
+    error: profileError
   } =
     await supabase
       .from("profiles")
@@ -1006,8 +1008,19 @@ async function loadAuth() {
       .maybeSingle();
 
 
+  if (profileError) {
+
+    console.error(
+      "PROFILE ERROR:",
+      profileError
+    );
+
+  }
+
+
   currentProfile =
-    profile || null;
+    profile ||
+    null;
 
 
   await loadFollowing();
@@ -1016,7 +1029,7 @@ async function loadAuth() {
 
 
 /* =====================================================
-   LOAD FOLLOWING
+   FOLLOWING
 ===================================================== */
 
 async function loadFollowing() {
@@ -1049,7 +1062,7 @@ async function loadFollowing() {
   if (error) {
 
     console.error(
-      "Following error:",
+      "FOLLOWING ERROR:",
       error
     );
 
@@ -1062,108 +1075,100 @@ async function loadFollowing() {
     data || []
   )
     .forEach(
-      row =>
+      row => {
+
         followingIds.add(
           row.following_id
-        )
+        );
+
+      }
     );
 
 
-  const count =
-    document.getElementById(
-      "following-count"
-    );
-
-
-  if (count) {
-
-    count.textContent =
-      formatNumber(
-        followingIds.size
-      );
-
-  }
+  updateFollowingCount();
 
 }
 
 
 /* =====================================================
-   LOAD STATS
+   STATS
 ===================================================== */
 
 async function loadStats() {
 
-  const {
-    count: members
-  } =
+  const members =
     await supabase
       .from("profiles")
       .select(
         "id",
         {
-          count:"exact",
-          head:true
+          count:
+            "exact",
+          head:
+            true
         }
       );
 
 
-  const {
-    count: posts
-  } =
+  const posts =
     await supabase
       .from("community_posts")
       .select(
         "id",
         {
-          count:"exact",
-          head:true
+          count:
+            "exact",
+          head:
+            true
         }
       );
 
 
-  document
-    .getElementById(
+  const memberElement =
+    document.getElementById(
       "member-count"
-    )
-    ?.replaceChildren(
-      document.createTextNode(
-        formatNumber(
-          members || 0
-        )
-      )
     );
 
 
-  document
-    .getElementById(
+  const discussionElement =
+    document.getElementById(
       "discussion-count"
-    )
-    ?.replaceChildren(
-      document.createTextNode(
-        formatNumber(
-          posts || 0
-        )
-      )
     );
 
 
-  document
-    .getElementById(
-      "following-count"
-    )
-    ?.replaceChildren(
-      document.createTextNode(
-        formatNumber(
-          followingIds.size
-        )
-      )
-    );
+  if (
+    memberElement
+  ) {
+
+    memberElement.textContent =
+      formatNumber(
+        members.count ||
+        0
+      );
+
+  }
+
+
+  if (
+    discussionElement
+  ) {
+
+    discussionElement.textContent =
+      formatNumber(
+        posts.count ||
+        0
+      );
+
+  }
+
+
+  updateFollowingCount();
 
 }
 
 
 /* =====================================================
-   LOAD POSTS
+   LOAD FEED
 ===================================================== */
 
 async function loadFeed() {
@@ -1175,58 +1180,43 @@ async function loadFeed() {
   `;
 
 
+  /*
+    STEP 1
+    POSTS ONLY
+
+    Tidak menggunakan nested relation.
+  */
+
   const {
-    data,
+    data: posts,
     error
   } =
     await supabase
-      .from("community_posts")
-      .select(`
-        id,
-        user_id,
-        content,
-        post_type,
-        created_at,
-
-        profiles (
-          id,
-          username,
-          display_name,
-          avatar_url
-        ),
-
-        community_likes (
-          user_id
-        ),
-
-        community_comments (
-          id,
-          user_id,
-          content,
-          created_at,
-
-          profiles (
-            username,
-            display_name,
-            avatar_url
-          )
-        )
-      `)
+      .from(
+        "community_posts"
+      )
+      .select(
+        "id, user_id, content, post_type, created_at, updated_at"
+      )
       .order(
         "created_at",
         {
-          ascending:false
+          ascending:
+            false
         }
       )
-      .limit(100);
+      .limit(
+        100
+      );
 
 
   if (error) {
 
     console.error(
-      "Feed error:",
+      "COMMUNITY POSTS ERROR:",
       error
     );
+
 
     feed.innerHTML = `
       <div class="empty-feed">
@@ -1234,9 +1224,12 @@ async function loadFeed() {
       </div>
     `;
 
+
     showMessage(
+      error.message ||
       "Gagal memuat feed."
     );
+
 
     return;
 
@@ -1244,7 +1237,283 @@ async function loadFeed() {
 
 
   allPosts =
-    data || [];
+    posts ||
+    [];
+
+
+  if (
+    !allPosts.length
+  ) {
+
+    renderCurrentFeed();
+
+    return;
+
+  }
+
+
+  /*
+    STEP 2
+    PROFILES
+  */
+
+  const userIds =
+    [
+      ...new Set(
+        allPosts.map(
+          post =>
+            post.user_id
+        )
+      )
+    ];
+
+
+  const {
+    data: profiles,
+    error:
+      profileError
+  } =
+    await supabase
+      .from(
+        "profiles"
+      )
+      .select(
+        "id, username, display_name, avatar_url"
+      )
+      .in(
+        "id",
+        userIds
+      );
+
+
+  if (
+    profileError
+  ) {
+
+    console.error(
+      "PROFILE FEED ERROR:",
+      profileError
+    );
+
+  }
+
+
+  const profileMap =
+    new Map();
+
+
+  (
+    profiles ||
+    []
+  )
+    .forEach(
+      profile => {
+
+        profileMap.set(
+          profile.id,
+          profile
+        );
+
+      }
+    );
+
+
+  /*
+    STEP 3
+    LIKES
+  */
+
+  const postIds =
+    allPosts.map(
+      post =>
+        post.id
+    );
+
+
+  const {
+    data: likes,
+    error:
+      likesError
+  } =
+    await supabase
+      .from(
+        "community_likes"
+      )
+      .select(
+        "post_id, user_id"
+      )
+      .in(
+        "post_id",
+        postIds
+      );
+
+
+  if (
+    likesError
+  ) {
+
+    console.error(
+      "LIKES ERROR:",
+      likesError
+    );
+
+  }
+
+
+  /*
+    STEP 4
+    COMMENTS
+  */
+
+  const {
+    data: comments,
+    error:
+      commentsError
+  } =
+    await supabase
+      .from(
+        "community_comments"
+      )
+      .select(
+        "id, post_id, user_id, content, created_at"
+      )
+      .in(
+        "post_id",
+        postIds
+      )
+      .order(
+        "created_at",
+        {
+          ascending:
+            true
+        }
+      );
+
+
+  if (
+    commentsError
+  ) {
+
+    console.error(
+      "COMMENTS ERROR:",
+      commentsError
+    );
+
+  }
+
+
+  /*
+    GROUP LIKES
+  */
+
+  const likeMap =
+    new Map();
+
+
+  (
+    likes ||
+    []
+  )
+    .forEach(
+      like => {
+
+        if (
+          !likeMap.has(
+            like.post_id
+          )
+        ) {
+
+          likeMap.set(
+            like.post_id,
+            []
+          );
+
+        }
+
+
+        likeMap
+          .get(
+            like.post_id
+          )
+          .push(
+            like
+          );
+
+      }
+    );
+
+
+  /*
+    GROUP COMMENTS
+  */
+
+  const commentMap =
+    new Map();
+
+
+  (
+    comments ||
+    []
+  )
+    .forEach(
+      comment => {
+
+        if (
+          !commentMap.has(
+            comment.post_id
+          )
+        ) {
+
+          commentMap.set(
+            comment.post_id,
+            []
+          );
+
+        }
+
+
+        commentMap
+          .get(
+            comment.post_id
+          )
+          .push(
+            comment
+          );
+
+      }
+    );
+
+
+  /*
+    MERGE
+  */
+
+  allPosts =
+    allPosts.map(
+      post => ({
+
+        ...post,
+
+        profiles:
+          profileMap.get(
+            post.user_id
+          ) ||
+          {},
+
+        community_likes:
+          likeMap.get(
+            post.id
+          ) ||
+          [],
+
+        community_comments:
+          commentMap.get(
+            post.id
+          ) ||
+          []
+
+      })
+    );
 
 
   renderCurrentFeed();
@@ -1253,13 +1522,15 @@ async function loadFeed() {
 
 
 /* =====================================================
-   FILTER FEED
+   FILTER
 ===================================================== */
 
 function getFilteredPosts() {
 
   let posts =
-    [...allPosts];
+    [
+      ...allPosts
+    ];
 
 
   if (
@@ -1271,15 +1542,26 @@ function getFilteredPosts() {
       (
         a,
         b
-      ) =>
-        (
-          b.community_likes?.length ||
-          0
-        ) -
-        (
-          a.community_likes?.length ||
-          0
-        )
+      ) => {
+
+        const likesA =
+          a.community_likes
+            ?.length ||
+          0;
+
+
+        const likesB =
+          b.community_likes
+            ?.length ||
+          0;
+
+
+        return (
+          likesB -
+          likesA
+        );
+
+      }
     );
 
   }
@@ -1328,7 +1610,7 @@ function getFilteredPosts() {
 
 
 /* =====================================================
-   RENDER CURRENT FEED
+   RENDER FEED
 ===================================================== */
 
 function renderCurrentFeed() {
@@ -1340,15 +1622,13 @@ function renderCurrentFeed() {
 }
 
 
-/* =====================================================
-   RENDER FEED
-===================================================== */
-
 function renderFeed(
   posts
 ) {
 
-  if (!posts.length) {
+  if (
+    !posts.length
+  ) {
 
     let text =
       "Belum ada post.";
@@ -1372,6 +1652,7 @@ function renderFeed(
         ${text}
       </div>
     `;
+
 
     return;
 
@@ -1398,7 +1679,7 @@ function renderFeed(
 
 
 /* =====================================================
-   RENDER POST
+   POST HTML
 ===================================================== */
 
 function renderPost(
@@ -1435,21 +1716,25 @@ function renderPost(
 
 
   const liked =
-    currentUser &&
-    likes.some(
-      like =>
-        like.user_id ===
-        currentUser.id
+    !!(
+      currentUser &&
+      likes.some(
+        like =>
+          like.user_id ===
+          currentUser.id
+      )
     );
 
 
-  const isOwn =
-    currentUser &&
-    post.user_id ===
-    currentUser.id;
+  const ownPost =
+    !!(
+      currentUser &&
+      post.user_id ===
+      currentUser.id
+    );
 
 
-  const isFollowing =
+  const following =
     followingIds.has(
       post.user_id
     );
@@ -1459,7 +1744,9 @@ function renderPost(
     avatar
       ? `
         <img
-          src="${escapeHTML(avatar)}"
+          src="${escapeHTML(
+            avatar
+          )}"
           alt=""
         >
       `
@@ -1467,24 +1754,26 @@ function renderPost(
 
 
   const followHTML =
-    !isOwn
-      ? `
+    ownPost
+      ? ""
+      : `
         <button
           class="follow-btn ${
-            isFollowing
+            following
               ? "following"
               : ""
           }"
-          data-user-id="${post.user_id}"
+          data-user-id="${escapeHTML(
+            post.user_id
+          )}"
         >
           ${
-            isFollowing
+            following
               ? "✓ Following"
               : "+ Follow"
           }
         </button>
-      `
-      : "";
+      `;
 
 
   const commentsHTML =
@@ -1492,38 +1781,17 @@ function renderPost(
       .map(
         comment => {
 
-          const cp =
-            comment.profiles ||
-            {};
-
-
           return `
-
             <div class="comment">
 
               <div class="comment-avatar">
-
-                ${
-                  cp.avatar_url
-                    ? `
-                      <img
-                        src="${escapeHTML(cp.avatar_url)}"
-                        alt=""
-                      >
-                    `
-                    : "👤"
-                }
-
+                👤
               </div>
 
               <div class="comment-body">
 
                 <strong>
-                  ${escapeHTML(
-                    cp.display_name ||
-                    cp.username ||
-                    "user"
-                  )}
+                  User
                 </strong>
 
                 ${escapeHTML(
@@ -1533,7 +1801,6 @@ function renderPost(
               </div>
 
             </div>
-
           `;
 
         }
@@ -1545,9 +1812,15 @@ function renderPost(
 
     <article
       class="coin-card post"
-      data-id="${post.id}"
-      data-user-id="${post.user_id}"
-      data-type="${post.post_type}"
+      data-id="${escapeHTML(
+        post.id
+      )}"
+      data-user-id="${escapeHTML(
+        post.user_id
+      )}"
+      data-type="${escapeHTML(
+        post.post_type
+      )}"
       data-likes="${likes.length}"
     >
 
@@ -1555,7 +1828,9 @@ function renderPost(
 
         <a
           class="profile-link"
-          href="trader-profile.html?username=${encodeURIComponent(username)}"
+          href="trader-profile.html?username=${encodeURIComponent(
+            username
+          )}"
         >
 
           <div class="avatar">
@@ -1665,7 +1940,9 @@ function renderPost(
             placeholder="Tulis komentar..."
           >
 
-          <button class="comment-send">
+          <button
+            class="comment-send"
+          >
             Send
           </button>
 
@@ -1684,98 +1961,103 @@ function renderPost(
    CREATE POST
 ===================================================== */
 
-publishButton
-  ?.addEventListener(
-    "click",
-    async () => {
+publishButton?.addEventListener(
+  "click",
+  async () => {
 
-      if (!currentUser) {
+    if (
+      !currentUser
+    ) {
 
-        window.location.href =
-          "login.html";
+      window.location.href =
+        "login.html";
 
-        return;
-
-      }
-
-
-      const text =
-        input.value.trim();
-
-
-      if (!text) {
-
-        showMessage(
-          "Tulis sesuatu terlebih dahulu."
-        );
-
-        return;
-
-      }
-
-
-      publishButton.disabled =
-        true;
-
-      publishButton.textContent =
-        "Posting...";
-
-
-      const {
-        error
-      } =
-        await supabase
-          .from("community_posts")
-          .insert({
-
-            user_id:
-              currentUser.id,
-
-            content:
-              text,
-
-            post_type:
-              selectedPostType
-
-          });
-
-
-      publishButton.disabled =
-        false;
-
-      publishButton.textContent =
-        "Post";
-
-
-      if (error) {
-
-        console.error(
-          "Create post:",
-          error
-        );
-
-        showMessage(
-          "Post gagal dibuat."
-        );
-
-        return;
-
-      }
-
-
-      input.value = "";
-
-      showMessage(
-        "Post berhasil dibuat 🔥"
-      );
-
-
-      await loadFeed();
-
-      await loadStats();
+      return;
 
     }
-  );
+
+
+    const text =
+      input.value.trim();
+
+
+    if (!text) {
+
+      showMessage(
+        "Tulis sesuatu terlebih dahulu."
+      );
+
+      return;
+
+    }
+
+
+    publishButton.disabled =
+      true;
+
+    publishButton.textContent =
+      "Posting...";
+
+
+    const {
+      error
+    } =
+      await supabase
+        .from(
+          "community_posts"
+        )
+        .insert({
+
+          user_id:
+            currentUser.id,
+
+          content:
+            text,
+
+          post_type:
+            selectedPostType
+
+        });
+
+
+    publishButton.disabled =
+      false;
+
+    publishButton.textContent =
+      "Post";
+
+
+    if (error) {
+
+      console.error(
+        "CREATE POST ERROR:",
+        error
+      );
+
+      showMessage(
+        error.message ||
+        "Post gagal dibuat."
+      );
+
+      return;
+
+    }
+
+
+    input.value = "";
+
+
+    showMessage(
+      "Post berhasil dibuat 🔥"
+    );
+
+
+    await loadFeed();
+
+    await loadStats();
+
+  }
+);
 
 
 /* =====================================================
@@ -1828,7 +2110,9 @@ async function toggleLike(
   post
 ) {
 
-  if (!currentUser) {
+  if (
+    !currentUser
+  ) {
 
     window.location.href =
       "login.html";
@@ -1864,13 +2148,19 @@ async function toggleLike(
     true;
 
 
+  let error =
+    null;
+
+
   if (liked) {
 
-    const {
+    ({
       error
     } =
       await supabase
-        .from("community_likes")
+        .from(
+          "community_likes"
+        )
         .delete()
         .eq(
           "post_id",
@@ -1879,32 +2169,17 @@ async function toggleLike(
         .eq(
           "user_id",
           currentUser.id
-        );
-
-
-    if (!error) {
-
-      button.classList.remove(
-        "liked"
-      );
-
-      count.textContent =
-        Math.max(
-          0,
-          Number(
-            count.textContent
-          ) - 1
-        );
-
-    }
+        ));
 
   } else {
 
-    const {
+    ({
       error
     } =
       await supabase
-        .from("community_likes")
+        .from(
+          "community_likes"
+        )
         .insert({
 
           post_id:
@@ -1913,21 +2188,46 @@ async function toggleLike(
           user_id:
             currentUser.id
 
-        });
+        }));
+
+  }
 
 
-    if (!error) {
+  if (error) {
 
-      button.classList.add(
-        "liked"
-      );
+    console.error(
+      "LIKE ERROR:",
+      error
+    );
 
-      count.textContent =
+    showMessage(
+      error.message ||
+      "Like gagal."
+    );
+
+  } else {
+
+    button.classList.toggle(
+      "liked"
+    );
+
+
+    count.textContent =
+      Math.max(
+        0,
         Number(
           count.textContent
-        ) + 1;
+        ) +
+        (
+          liked
+            ? -1
+            : 1
+        )
+      );
 
-    }
+
+    post.dataset.likes =
+      count.textContent;
 
   }
 
@@ -1939,14 +2239,16 @@ async function toggleLike(
 
 
 /* =====================================================
-   FOLLOW / UNFOLLOW
+   FOLLOW
 ===================================================== */
 
 async function toggleFollow(
   button
 ) {
 
-  if (!currentUser) {
+  if (
+    !currentUser
+  ) {
 
     window.location.href =
       "login.html";
@@ -1960,16 +2262,6 @@ async function toggleFollow(
     button.dataset.userId;
 
 
-  if (
-    followingId ===
-    currentUser.id
-  ) {
-
-    return;
-
-  }
-
-
   const isFollowing =
     button.classList.contains(
       "following"
@@ -1980,13 +2272,21 @@ async function toggleFollow(
     true;
 
 
-  if (isFollowing) {
+  let error =
+    null;
 
-    const {
+
+  if (
+    isFollowing
+  ) {
+
+    ({
       error
     } =
       await supabase
-        .from("follows")
+        .from(
+          "follows"
+        )
         .delete()
         .eq(
           "follower_id",
@@ -1995,48 +2295,17 @@ async function toggleFollow(
         .eq(
           "following_id",
           followingId
-        );
-
-
-    if (error) {
-
-      console.error(
-        "Unfollow:",
-        error
-      );
-
-      showMessage(
-        "Gagal berhenti mengikuti."
-      );
-
-    } else {
-
-      followingIds.delete(
-        followingId
-      );
-
-      button.classList.remove(
-        "following"
-      );
-
-      button.textContent =
-        "+ Follow";
-
-      updateFollowingCount();
-
-      showMessage(
-        "Berhenti mengikuti."
-      );
-
-    }
+        ));
 
   } else {
 
-    const {
+    ({
       error
     } =
       await supabase
-        .from("follows")
+        .from(
+          "follows"
+        )
         .insert({
 
           follower_id:
@@ -2045,18 +2314,31 @@ async function toggleFollow(
           following_id:
             followingId
 
-        });
+        }));
+
+  }
 
 
-    if (error) {
+  if (error) {
 
-      console.error(
-        "Follow:",
-        error
-      );
+    console.error(
+      "FOLLOW ERROR:",
+      error
+    );
 
-      showMessage(
-        "Gagal mengikuti user."
+    showMessage(
+      error.message ||
+      "Follow gagal."
+    );
+
+  } else {
+
+    if (
+      isFollowing
+    ) {
+
+      followingIds.delete(
+        followingId
       );
 
     } else {
@@ -2065,20 +2347,21 @@ async function toggleFollow(
         followingId
       );
 
-      button.classList.add(
-        "following"
-      );
-
-      button.textContent =
-        "✓ Following";
-
-      updateFollowingCount();
-
-      showMessage(
-        "Sekarang kamu mengikuti trader ini 🔥"
-      );
-
     }
+
+
+    button.classList.toggle(
+      "following"
+    );
+
+
+    button.textContent =
+      isFollowing
+        ? "+ Follow"
+        : "✓ Following";
+
+
+    updateFollowingCount();
 
   }
 
@@ -2089,6 +2372,10 @@ async function toggleFollow(
 }
 
 
+/* =====================================================
+   FOLLOW COUNT
+===================================================== */
+
 function updateFollowingCount() {
 
   const element =
@@ -2097,7 +2384,9 @@ function updateFollowingCount() {
     );
 
 
-  if (element) {
+  if (
+    element
+  ) {
 
     element.textContent =
       formatNumber(
@@ -2110,126 +2399,16 @@ function updateFollowingCount() {
 
 
 /* =====================================================
-   COMMENTS
-===================================================== */
-
-async function loadComments(
-  post
-) {
-
-  const {
-    data,
-    error
-  } =
-    await supabase
-      .from("community_comments")
-      .select(`
-        id,
-        user_id,
-        content,
-        created_at,
-
-        profiles (
-          username,
-          display_name,
-          avatar_url
-        )
-      `)
-      .eq(
-        "post_id",
-        post.dataset.id
-      )
-      .order(
-        "created_at",
-        {
-          ascending:true
-        }
-      );
-
-
-  if (error) {
-
-    console.error(
-      "Comments:",
-      error
-    );
-
-    return;
-
-  }
-
-
-  const list =
-    post.querySelector(
-      ".comments-list"
-    );
-
-
-  list.innerHTML =
-    (data || [])
-      .map(
-        comment => {
-
-          const p =
-            comment.profiles ||
-            {};
-
-
-          return `
-
-            <div class="comment">
-
-              <div class="comment-avatar">
-
-                ${
-                  p.avatar_url
-                    ? `
-                      <img
-                        src="${escapeHTML(p.avatar_url)}"
-                        alt=""
-                      >
-                    `
-                    : "👤"
-                }
-
-              </div>
-
-              <div class="comment-body">
-
-                <strong>
-                  ${escapeHTML(
-                    p.display_name ||
-                    p.username ||
-                    "user"
-                  )}
-                </strong>
-
-                ${escapeHTML(
-                  comment.content
-                )}
-
-              </div>
-
-            </div>
-
-          `;
-
-        }
-      )
-      .join("");
-
-}
-
-
-/* =====================================================
-   SEND COMMENT
+   COMMENT
 ===================================================== */
 
 async function sendComment(
   post
 ) {
 
-  if (!currentUser) {
+  if (
+    !currentUser
+  ) {
 
     window.location.href =
       "login.html";
@@ -2239,27 +2418,27 @@ async function sendComment(
   }
 
 
-  const input =
+  const commentInput =
     post.querySelector(
       ".comment-input"
     );
 
 
   const text =
-    input.value.trim();
+    commentInput.value.trim();
 
 
   if (!text)
     return;
 
 
-  const button =
+  const sendButton =
     post.querySelector(
       ".comment-send"
     );
 
 
-  button.disabled =
+  sendButton.disabled =
     true;
 
 
@@ -2267,7 +2446,9 @@ async function sendComment(
     error
   } =
     await supabase
-      .from("community_comments")
+      .from(
+        "community_comments"
+      )
       .insert({
 
         post_id:
@@ -2282,19 +2463,20 @@ async function sendComment(
       });
 
 
-  button.disabled =
+  sendButton.disabled =
     false;
 
 
   if (error) {
 
     console.error(
-      "Comment:",
+      "COMMENT ERROR:",
       error
     );
 
     showMessage(
-      "Komentar gagal dikirim."
+      error.message ||
+      "Komentar gagal."
     );
 
     return;
@@ -2302,27 +2484,11 @@ async function sendComment(
   }
 
 
-  input.value = "";
-
-  await loadComments(
-    post
-  );
+  commentInput.value =
+    "";
 
 
-  const count =
-    post.querySelector(
-      ".comment-btn span"
-    );
-
-
-  if (count) {
-
-    count.textContent =
-      Number(
-        count.textContent
-      ) + 1;
-
-  }
+  await loadFeed();
 
 
   showMessage(
@@ -2376,9 +2542,7 @@ async function sharePost(
 
   } catch {
 
-    console.log(
-      "Share cancelled."
-    );
+    /* User cancelled share */
 
   }
 
@@ -2393,128 +2557,101 @@ function attachPostEvents(
   post
 ) {
 
-  const like =
-    post.querySelector(
+  post
+    .querySelector(
       ".like-btn"
-    );
-
-
-  like?.addEventListener(
-    "click",
-    () =>
-      toggleLike(
-        post
-      )
-  );
-
-
-  const comment =
-    post.querySelector(
-      ".comment-btn"
-    );
-
-
-  comment?.addEventListener(
-    "click",
-    async () => {
-
-      const box =
-        post.querySelector(
-          ".comments"
-        );
-
-
-      box.classList.toggle(
-        "show"
-      );
-
-
-      if (
-        box.classList.contains(
-          "show"
-        )
-      ) {
-
-        await loadComments(
+    )
+    ?.addEventListener(
+      "click",
+      () =>
+        toggleLike(
           post
-        );
+        )
+    );
+
+
+  post
+    .querySelector(
+      ".follow-btn"
+    )
+    ?.addEventListener(
+      "click",
+      event =>
+        toggleFollow(
+          event.currentTarget
+        )
+    );
+
+
+  post
+    .querySelector(
+      ".comment-btn"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
+
+        post
+          .querySelector(
+            ".comments"
+          )
+          ?.classList.toggle(
+            "show"
+          );
 
       }
-
-    }
-  );
+    );
 
 
-  const send =
-    post.querySelector(
+  post
+    .querySelector(
       ".comment-send"
-    );
-
-
-  send?.addEventListener(
-    "click",
-    () =>
-      sendComment(
-        post
-      )
-  );
-
-
-  const commentInput =
-    post.querySelector(
-      ".comment-input"
-    );
-
-
-  commentInput?.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key ===
-        "Enter"
-      ) {
-
-        event.preventDefault();
-
+    )
+    ?.addEventListener(
+      "click",
+      () =>
         sendComment(
           post
-        );
+        )
+    );
+
+
+  post
+    .querySelector(
+      ".comment-input"
+    )
+    ?.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key ===
+          "Enter"
+        ) {
+
+          event.preventDefault();
+
+          sendComment(
+            post
+          );
+
+        }
 
       }
-
-    }
-  );
+    );
 
 
-  const share =
-    post.querySelector(
+  post
+    .querySelector(
       ".share-btn"
+    )
+    ?.addEventListener(
+      "click",
+      () =>
+        sharePost(
+          post
+        )
     );
-
-
-  share?.addEventListener(
-    "click",
-    () =>
-      sharePost(
-        post
-      )
-  );
-
-
-  const follow =
-    post.querySelector(
-      ".follow-btn"
-    );
-
-
-  follow?.addEventListener(
-    "click",
-    () =>
-      toggleFollow(
-        follow
-      )
-  );
 
 }
 
@@ -2595,21 +2732,20 @@ document
 
 supabase
   .channel(
-    "nextra-community-v10"
+    "nextra-community-v10-1"
   )
 
   .on(
     "postgres_changes",
     {
-      event:"*",
-      schema:"public",
-      table:"community_posts"
+      event: "*",
+      schema: "public",
+      table: "community_posts"
     },
-    async () => {
+    () => {
 
-      await loadFeed();
-
-      await loadStats();
+      loadFeed();
+      loadStats();
 
     }
   )
@@ -2617,13 +2753,13 @@ supabase
   .on(
     "postgres_changes",
     {
-      event:"*",
-      schema:"public",
-      table:"community_likes"
+      event: "*",
+      schema: "public",
+      table: "community_likes"
     },
-    async () => {
+    () => {
 
-      await loadFeed();
+      loadFeed();
 
     }
   )
@@ -2631,13 +2767,13 @@ supabase
   .on(
     "postgres_changes",
     {
-      event:"*",
-      schema:"public",
-      table:"community_comments"
+      event: "*",
+      schema: "public",
+      table: "community_comments"
     },
-    async () => {
+    () => {
 
-      await loadFeed();
+      loadFeed();
 
     }
   )
@@ -2645,15 +2781,14 @@ supabase
   .on(
     "postgres_changes",
     {
-      event:"*",
-      schema:"public",
-      table:"follows"
+      event: "*",
+      schema: "public",
+      table: "follows"
     },
-    async () => {
+    () => {
 
-      await loadFollowing();
-
-      await loadFeed();
+      loadFollowing();
+      loadFeed();
 
     }
   )
@@ -2671,9 +2806,13 @@ async function init() {
 
     await loadAuth();
 
+
     await Promise.all([
+
       loadFeed(),
+
       loadStats()
+
     ]);
 
   } catch (
@@ -2681,13 +2820,14 @@ async function init() {
   ) {
 
     console.error(
-      "Community init:",
+      "COMMUNITY INIT ERROR:",
       error
     );
 
+
     feed.innerHTML = `
       <div class="empty-feed">
-        Community gagal dimuat.
+        Gagal memuat Community.
       </div>
     `;
 
@@ -2697,6 +2837,7 @@ async function init() {
 
 
 init();
+
 
 </script>
 
