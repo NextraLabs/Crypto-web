@@ -1,223 +1,492 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070a">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <title>NEXTRA — Futures V100</title>
 
-  <title>NEXTRA — Futures</title>
+  <link rel="stylesheet" href="css/style.css">
 
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+  <style>
+    .fv100 {
+      display:grid;
+      gap:10px;
+    }
 
+    .fv-hero,
+    .fv-card,
+    .fv-stat,
+    .fv-filter,
+    .fv-error {
+      border:1px solid var(--border);
+      background:var(--card);
+      border-radius:15px;
+    }
+
+    .fv-hero {
+      padding:14px;
+    }
+
+    .fv-title {
+      font-size:18px;
+      font-weight:950;
+    }
+
+    .fv-sub {
+      margin-top:4px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .fv-status {
+      display:flex;
+      justify-content:space-between;
+      margin-top:10px;
+      font-size:8px;
+      font-weight:900;
+    }
+
+    .fv-live {
+      color:var(--accent);
+    }
+
+    .fv-summary {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:6px;
+    }
+
+    .fv-stat {
+      padding:10px 5px;
+      text-align:center;
+    }
+
+    .fv-label {
+      color:var(--muted);
+      font-size:6px;
+      font-weight:800;
+    }
+
+    .fv-value {
+      margin-top:4px;
+      font-size:14px;
+      font-weight:950;
+    }
+
+    .fv-filters {
+      display:flex;
+      gap:6px;
+      overflow-x:auto;
+      padding:2px 0;
+    }
+
+    .fv-filter {
+      flex:0 0 auto;
+      padding:7px 11px;
+      color:var(--text);
+      font-size:8px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .fv-filter.active {
+      background:var(--accent);
+      color:#05070a;
+      border-color:var(--accent);
+    }
+
+    #futures-content {
+      display:grid;
+      gap:8px;
+    }
+
+    .fv-card {
+      padding:12px;
+    }
+
+    .fv-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+    }
+
+    .fv-symbol {
+      font-size:13px;
+      font-weight:950;
+    }
+
+    .fv-price {
+      margin-top:5px;
+      font-size:17px;
+      font-weight:950;
+    }
+
+    .fv-change {
+      margin-top:2px;
+      font-size:8px;
+      font-weight:900;
+    }
+
+    .up {
+      color:var(--accent);
+    }
+
+    .down {
+      color:var(--danger);
+    }
+
+    .dim {
+      color:var(--muted);
+    }
+
+    .fv-badge {
+      padding:6px 8px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-size:7px;
+      font-weight:950;
+      text-align:center;
+    }
+
+    .fv-score {
+      margin-top:10px;
+    }
+
+    .fv-score-row {
+      display:flex;
+      justify-content:space-between;
+      font-size:7px;
+      font-weight:900;
+    }
+
+    .fv-bar {
+      height:5px;
+      margin-top:5px;
+      border-radius:99px;
+      overflow:hidden;
+      background:rgba(255,255,255,.06);
+    }
+
+    .fv-fill {
+      height:100%;
+      background:var(--accent);
+      border-radius:inherit;
+    }
+
+    .fv-metrics {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:6px;
+      margin-top:10px;
+    }
+
+    .fv-metric {
+      padding:8px;
+      border-radius:10px;
+      background:rgba(255,255,255,.025);
+    }
+
+    .fv-metric-label {
+      color:var(--muted);
+      font-size:6px;
+      font-weight:800;
+    }
+
+    .fv-metric-value {
+      margin-top:3px;
+      font-size:9px;
+      font-weight:950;
+    }
+
+    .fv-bottom {
+      display:flex;
+      justify-content:space-between;
+      margin-top:10px;
+      padding-top:9px;
+      border-top:1px solid var(--border);
+    }
+
+    .fv-bottom span {
+      font-size:7px;
+      font-weight:900;
+    }
+
+    .fv-empty,
+    .fv-error {
+      padding:25px 12px;
+      text-align:center;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    @media(max-width:420px) {
+      .fv-summary {
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-  <main class="container">
+<main class="container fv100">
 
+  <header class="topbar">
 
-    <!-- HEADER -->
+    <div>
+      <h1 class="title">
+        Futures<span class="dot">.</span>
+      </h1>
 
-    <header class="topbar">
+      <p class="subtitle">
+        NEXTRA Futures Intelligence V100
+      </p>
+    </div>
 
-      <div>
+    <div style="display:flex;gap:6px;">
 
-        <h1 class="title">
-          Futures<span class="dot">.</span>
-        </h1>
-
-        <p class="subtitle">
-          Crypto perpetual futures intelligence
-        </p>
-
-      </div>
-
-
-      <div
-        style="
-          display:flex;
-          gap:6px;
-        "
+      <button
+        class="icon-btn"
+        id="futures-refresh"
+        title="Refresh"
       >
+        ↻
+      </button>
 
-        <button
-          class="icon-btn"
-          id="futures-refresh"
-          title="Refresh"
-        >
-          ↻
-        </button>
-
-
-        <button
-          class="icon-btn"
-          id="theme-toggle"
-          title="Ganti tema"
-        >
-          ◐
-        </button>
-
-      </div>
-
-    </header>
-
-
-
-    <!-- INFO -->
-
-    <section
-      class="highlight-box"
-      style="
-        margin-bottom:14px;
-      "
-    >
-
-      <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-        "
+      <button
+        class="icon-btn"
+        id="theme-toggle"
+        title="Ganti tema"
       >
-
-        <div>
-
-          <div
-            style="
-              font-size:11px;
-              font-weight:800;
-            "
-          >
-            ⚡ Futures Scanner
-          </div>
-
-          <div
-            class="dim"
-            style="
-              font-size:9px;
-              margin-top:4px;
-            "
-          >
-            Funding rate, open interest
-            dan market bias.
-          </div>
-
-        </div>
-
-
-        <div
-          id="futures-update"
-          style="
-            font-size:8px;
-            color:var(--accent);
-          "
-        >
-          Loading...
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- FUTURES -->
-
-    <section id="futures-content">
-
-      <div class="loading">
-        Memuat Futures...
-      </div>
-
-    </section>
-
-
-
-    <!-- DISCLAIMER -->
-
-    <div
-      style="
-        margin-top:18px;
-        padding:12px;
-        border:1px solid var(--border);
-        border-radius:12px;
-        color:var(--faint);
-        font-size:8px;
-        line-height:1.5;
-        text-align:center;
-      "
-    >
-
-      Data berasal dari endpoint publik
-      Binance Futures.
-
-      Funding rate dan bias hanyalah
-      indikator market, bukan jaminan
-      arah harga.
+        ◐
+      </button>
 
     </div>
 
-
-  </main>
-
+  </header>
 
 
-  <!-- BOTTOM NAV -->
+  <section class="fv-hero">
 
-  <div id="bottom-nav"></div>
+    <div class="fv-title">
+      ⚡ Futures V100
+    </div>
+
+    <div class="fv-sub">
+      Perpetual futures scanner & multi-signal intelligence
+    </div>
+
+    <div class="fv-status">
+
+      <span
+        id="futures-status"
+        class="fv-live"
+      >
+        READY
+      </span>
+
+      <span id="futures-update">
+        --
+      </span>
+
+    </div>
+
+  </section>
 
 
+  <section class="fv-summary">
 
-  <!-- SCRIPTS -->
+    <div class="fv-stat">
+      <div class="fv-label">BULLISH</div>
+      <div
+        id="fv-bullish"
+        class="fv-value up"
+      >
+        --
+      </div>
+    </div>
 
-  <script src="js/app.js"></script>
+    <div class="fv-stat">
+      <div class="fv-label">BEARISH</div>
+      <div
+        id="fv-bearish"
+        class="fv-value down"
+      >
+        --
+      </div>
+    </div>
 
-  <script src="js/api.js"></script>
+    <div class="fv-stat">
+      <div class="fv-label">HIGH SCORE</div>
+      <div
+        id="fv-high"
+        class="fv-value"
+      >
+        --
+      </div>
+    </div>
 
-  <script src="js/features/futures.js"></script>
+    <div class="fv-stat">
+      <div class="fv-label">HIGH RISK</div>
+      <div
+        id="fv-risk"
+        class="fv-value down"
+      >
+        --
+      </div>
+    </div>
+
+  </section>
 
 
-  <script>
+  <div class="fv-filters">
 
-    document
-      .getElementById(
-        "theme-toggle"
-      )
-      ?.addEventListener(
+    <button
+      class="fv-filter active"
+      data-filter="all"
+    >
+      ALL
+    </button>
+
+    <button
+      class="fv-filter"
+      data-filter="bullish"
+    >
+      🟢 BULLISH
+    </button>
+
+    <button
+      class="fv-filter"
+      data-filter="bearish"
+    >
+      🔴 BEARISH
+    </button>
+
+    <button
+      class="fv-filter"
+      data-filter="score"
+    >
+      🎯 80+
+    </button>
+
+    <button
+      class="fv-filter"
+      data-filter="risk"
+    >
+      ⚠️ HIGH RISK
+    </button>
+
+  </div>
+
+
+  <section id="futures-content">
+
+    <div class="fv-empty">
+      Scanning Futures Market...
+    </div>
+
+  </section>
+
+
+  <div
+    style="
+      padding:10px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      color:var(--faint);
+      font-size:7px;
+      line-height:1.5;
+      text-align:center;
+    "
+  >
+    Futures intelligence adalah alat analisis.
+    Bukan jaminan profit atau prediksi pasti harga.
+  </div>
+
+</main>
+
+
+<div id="bottom-nav"></div>
+
+
+<script src="js/app.js"></script>
+<script src="js/api.js"></script>
+<script src="js/features/futures.js"></script>
+
+
+<script>
+
+document
+  .getElementById("theme-toggle")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      if (
+        typeof toggleTheme === "function"
+      ) {
+        toggleTheme();
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("futures-refresh")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      if (
+        window.NEXTRA_FUTURES
+      ) {
+
+        NEXTRA_FUTURES.refresh();
+
+      }
+
+    }
+  );
+
+
+document
+  .querySelectorAll(".fv-filter")
+  .forEach(
+    button => {
+
+      button.addEventListener(
         "click",
         () => {
 
-          toggleTheme();
+          document
+            .querySelectorAll(".fv-filter")
+            .forEach(
+              item =>
+                item.classList.remove("active")
+            );
+
+          button.classList.add("active");
+
+          window.NEXTRA_FUTURES_FILTER =
+            button.dataset.filter;
+
+          if (
+            typeof renderFuturesV100 === "function"
+          ) {
+            renderFuturesV100();
+          }
 
         }
       );
 
+    }
+  );
 
-    document
-      .getElementById(
-        "futures-refresh"
-      )
-      ?.addEventListener(
-        "click",
-        () => {
-
-          NEXTRA_FUTURES.refresh();
-
-        }
-      );
-
-  </script>
-
+</script>
 
 </body>
-
 </html>
