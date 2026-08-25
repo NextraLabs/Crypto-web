@@ -9,17 +9,314 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
   <title>NEXTRA — Learn</title>
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
+
+  <style>
+
+    .learn-hero {
+      padding: 18px;
+      margin-bottom: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(57,242,160,.10),
+          rgba(53,207,255,.05)
+        );
+    }
+
+    .learn-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(57,242,160,.10);
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .learn-title {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+
+    .learn-description {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .progress-card {
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .progress-title {
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .progress-percent {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .progress-bar {
+      height: 6px;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--surface-soft);
+    }
+
+    .progress-fill {
+      width: 20%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .section-title {
+      margin: 18px 0 9px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .continue-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .continue-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: rgba(57,242,160,.10);
+      font-size: 21px;
+    }
+
+    .continue-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .continue-label {
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .continue-name {
+      margin-top: 3px;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .continue-meta {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .learn-button {
+      padding: 8px 11px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--green);
+      color: #07100c;
+      font-size: 8px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .path-card {
+      display: block;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      transition: .2s ease;
+    }
+
+    .path-card:active {
+      transform: scale(.985);
+    }
+
+    .path-top {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .path-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background: var(--surface-soft);
+      font-size: 20px;
+    }
+
+    .path-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .path-name {
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .path-description {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 8px;
+      line-height: 1.5;
+    }
+
+    .path-number {
+      color: var(--subtle);
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .path-progress {
+      height: 4px;
+      margin-top: 11px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--surface-soft);
+    }
+
+    .path-progress-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+    }
+
+    .path-bottom {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 7px;
+    }
+
+    .lesson-card {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 12px;
+      margin-bottom: 8px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .lesson-number {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 9px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .lesson-content {
+      flex: 1;
+    }
+
+    .lesson-name {
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .lesson-meta {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 7px;
+    }
+
+    .lesson-status {
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .disclaimer {
+      margin: 18px 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--subtle);
+      font-size: 8px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
+
 <main class="container">
+
 
   <!-- HEADER -->
 
@@ -49,473 +346,522 @@
 
   <!-- HERO -->
 
-  <section
-    class="highlight-box"
-    style="
-      margin-bottom:14px;
-      padding:16px;
-    "
-  >
+  <section class="learn-hero">
 
-    <div
-      style="
-        font-size:18px;
-        font-weight:900;
-      "
-    >
-      📚 Crypto Learning Hub
+    <div class="learn-badge">
+      📚 NEXTRA ACADEMY
     </div>
 
-    <div
-      class="dim"
-      style="
-        font-size:9px;
-        line-height:1.6;
-        margin-top:6px;
-      "
-    >
-      Pelajari crypto dan trading dari
-      dasar sampai memahami market
-      seperti seorang trader.
+    <h2 class="learn-title">
+      Become a smarter trader.
+    </h2>
+
+    <p class="learn-description">
+      Pelajari crypto dari dasar sampai
+      memahami market, technical analysis,
+      futures dan risk management.
+    </p>
+
+  </section>
+
+
+  <!-- PROGRESS -->
+
+  <section class="progress-card">
+
+    <div class="progress-top">
+
+      <div class="progress-title">
+        Your Learning Progress
+      </div>
+
+      <div class="progress-percent">
+        20%
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div class="progress-fill"></div>
+
+    </div>
+
+    <div class="progress-meta">
+
+      <span>
+        2 of 10 lessons
+      </span>
+
+      <span>
+        Keep going 🚀
+      </span>
+
     </div>
 
   </section>
 
 
-  <!-- CATEGORIES -->
+  <!-- CONTINUE -->
 
-  <div
-    style="
-      font-size:10px;
-      font-weight:800;
-      margin:16px 0 8px;
-    "
+  <div class="section-title">
+    Continue Learning
+  </div>
+
+
+  <a
+    href="lesson.html?lesson=bitcoin-basics"
+    class="continue-card"
   >
+
+    <div class="continue-icon">
+      ₿
+    </div>
+
+    <div class="continue-content">
+
+      <div class="continue-label">
+        Next Lesson
+      </div>
+
+      <div class="continue-name">
+        Bitcoin & Blockchain
+      </div>
+
+      <div class="continue-meta">
+        Crypto Basics • 8 min
+      </div>
+
+    </div>
+
+    <button
+      class="learn-button"
+      type="button"
+    >
+      Continue
+    </button>
+
+  </a>
+
+
+  <!-- LEARNING PATHS -->
+
+  <div class="section-title">
     Learning Paths
   </div>
 
 
-  <section>
+  <!-- PATH 01 -->
 
+  <a
+    href="lesson.html?path=basics"
+    class="path-card"
+  >
 
-    <!-- BEGINNER -->
+    <div class="path-top">
 
-    <article
-      class="coin-card"
-      style="display:block;"
-    >
+      <div class="path-icon">
+        🌱
+      </div>
 
-      <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:12px;
-        "
-      >
+      <div class="path-content">
 
-        <div style="font-size:24px;">
-          🌱
+        <div class="path-name">
+          Crypto Basics
         </div>
 
-        <div style="flex:1;">
-
-          <strong>
-            Crypto Basics
-          </strong>
-
-          <div
-            class="dim"
-            style="
-              font-size:8px;
-              margin-top:3px;
-            "
-          >
-            Untuk pemula
-          </div>
-
+        <div class="path-description">
+          Fondasi crypto untuk pemula.
         </div>
-
-        <span class="dim">
-          01
-        </span>
 
       </div>
 
-
-      <div
-        style="
-          margin-top:10px;
-          padding-top:10px;
-          border-top:
-            1px solid var(--border);
-        "
-      >
-
-        <p
-          class="dim"
-          style="
-            font-size:9px;
-            line-height:1.6;
-            margin:0;
-          "
-        >
-          Pelajari Bitcoin, blockchain,
-          wallet, exchange, market cap,
-          supply dan istilah crypto dasar.
-        </p>
-
+      <div class="path-number">
+        01
       </div>
 
-    </article>
+    </div>
 
-
-    <!-- TECHNICAL -->
-
-    <article
-      class="coin-card"
-      style="display:block;"
-    >
+    <div class="path-progress">
 
       <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:12px;
-        "
-      >
+        class="path-progress-fill"
+        style="width:40%;"
+      ></div>
 
-        <div style="font-size:24px;">
-          📈
+    </div>
+
+    <div class="path-bottom">
+
+      <span>
+        2 / 5 lessons
+      </span>
+
+      <span>
+        Beginner
+      </span>
+
+    </div>
+
+  </a>
+
+
+  <!-- PATH 02 -->
+
+  <a
+    href="lesson.html?path=technical"
+    class="path-card"
+  >
+
+    <div class="path-top">
+
+      <div class="path-icon">
+        📈
+      </div>
+
+      <div class="path-content">
+
+        <div class="path-name">
+          Technical Analysis
         </div>
 
-        <div style="flex:1;">
-
-          <strong>
-            Technical Analysis
-          </strong>
-
-          <div
-            class="dim"
-            style="
-              font-size:8px;
-              margin-top:3px;
-            "
-          >
-            Membaca chart
-          </div>
-
+        <div class="path-description">
+          Belajar membaca chart dan price action.
         </div>
 
-        <span class="dim">
-          02
-        </span>
-
       </div>
 
-
-      <div
-        style="
-          margin-top:10px;
-          padding-top:10px;
-          border-top:
-            1px solid var(--border);
-        "
-      >
-
-        <p
-          class="dim"
-          style="
-            font-size:9px;
-            line-height:1.6;
-            margin:0;
-          "
-        >
-          Support, resistance, trend,
-          candlestick, volume, RSI,
-          moving average dan momentum.
-        </p>
-
+      <div class="path-number">
+        02
       </div>
 
-    </article>
+    </div>
 
-
-    <!-- FUTURES -->
-
-    <article
-      class="coin-card"
-      style="display:block;"
-    >
+    <div class="path-progress">
 
       <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:12px;
-        "
-      >
+        class="path-progress-fill"
+        style="width:0%;"
+      ></div>
 
-        <div style="font-size:24px;">
-          ⚡
+    </div>
+
+    <div class="path-bottom">
+
+      <span>
+        0 / 6 lessons
+      </span>
+
+      <span>
+        Intermediate
+      </span>
+
+    </div>
+
+  </a>
+
+
+  <!-- PATH 03 -->
+
+  <a
+    href="lesson.html?path=futures"
+    class="path-card"
+  >
+
+    <div class="path-top">
+
+      <div class="path-icon">
+        ⚡
+      </div>
+
+      <div class="path-content">
+
+        <div class="path-name">
+          Futures Trading
         </div>
 
-        <div style="flex:1;">
-
-          <strong>
-            Futures Trading
-          </strong>
-
-          <div
-            class="dim"
-            style="
-              font-size:8px;
-              margin-top:3px;
-            "
-          >
-            Perpetual futures
-          </div>
-
+        <div class="path-description">
+          Pahami leverage, funding dan liquidation.
         </div>
 
-        <span class="dim">
-          03
-        </span>
-
       </div>
 
-
-      <div
-        style="
-          margin-top:10px;
-          padding-top:10px;
-          border-top:
-            1px solid var(--border);
-        "
-      >
-
-        <p
-          class="dim"
-          style="
-            font-size:9px;
-            line-height:1.6;
-            margin:0;
-          "
-        >
-          Long, short, leverage, margin,
-          funding rate, open interest,
-          liquidation dan risiko futures.
-        </p>
-
+      <div class="path-number">
+        03
       </div>
 
-    </article>
+    </div>
 
-
-    <!-- RISK -->
-
-    <article
-      class="coin-card"
-      style="display:block;"
-    >
+    <div class="path-progress">
 
       <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:12px;
-        "
-      >
+        class="path-progress-fill"
+        style="width:0%;"
+      ></div>
 
-        <div style="font-size:24px;">
-          🛡️
+    </div>
+
+    <div class="path-bottom">
+
+      <span>
+        0 / 6 lessons
+      </span>
+
+      <span>
+        Advanced
+      </span>
+
+    </div>
+
+  </a>
+
+
+  <!-- PATH 04 -->
+
+  <a
+    href="lesson.html?path=risk"
+    class="path-card"
+  >
+
+    <div class="path-top">
+
+      <div class="path-icon">
+        🛡️
+      </div>
+
+      <div class="path-content">
+
+        <div class="path-name">
+          Risk Management
         </div>
 
-        <div style="flex:1;">
-
-          <strong>
-            Risk Management
-          </strong>
-
-          <div
-            class="dim"
-            style="
-              font-size:8px;
-              margin-top:3px;
-            "
-          >
-            Melindungi modal
-          </div>
-
+        <div class="path-description">
+          Lindungi modal dan kontrol risiko trading.
         </div>
 
-        <span class="dim">
-          04
-        </span>
-
       </div>
 
-
-      <div
-        style="
-          margin-top:10px;
-          padding-top:10px;
-          border-top:
-            1px solid var(--border);
-        "
-      >
-
-        <p
-          class="dim"
-          style="
-            font-size:9px;
-            line-height:1.6;
-            margin:0;
-          "
-        >
-          Position sizing, stop loss,
-          risk/reward, drawdown dan
-          cara menghindari over-leverage.
-        </p>
-
+      <div class="path-number">
+        04
       </div>
 
-    </article>
+    </div>
 
-
-    <!-- ON-CHAIN -->
-
-    <article
-      class="coin-card"
-      style="display:block;"
-    >
+    <div class="path-progress">
 
       <div
-        style="
-          display:flex;
-          align-items:center;
-          gap:12px;
-        "
-      >
+        class="path-progress-fill"
+        style="width:0%;"
+      ></div>
 
-        <div style="font-size:24px;">
-          🔗
+    </div>
+
+    <div class="path-bottom">
+
+      <span>
+        0 / 5 lessons
+      </span>
+
+      <span>
+        Essential
+      </span>
+
+    </div>
+
+  </a>
+
+
+  <!-- PATH 05 -->
+
+  <a
+    href="lesson.html?path=onchain"
+    class="path-card"
+  >
+
+    <div class="path-top">
+
+      <div class="path-icon">
+        🔗
+      </div>
+
+      <div class="path-content">
+
+        <div class="path-name">
+          On-Chain & Market Data
         </div>
 
-        <div style="flex:1;">
-
-          <strong>
-            On-Chain & Market Data
-          </strong>
-
-          <div
-            class="dim"
-            style="
-              font-size:8px;
-              margin-top:3px;
-            "
-          >
-            Memahami data market
-          </div>
-
+        <div class="path-description">
+          Pahami data yang menggerakkan market.
         </div>
 
-        <span class="dim">
-          05
-        </span>
-
       </div>
 
+      <div class="path-number">
+        05
+      </div>
+
+    </div>
+
+    <div class="path-progress">
 
       <div
-        style="
-          margin-top:10px;
-          padding-top:10px;
-          border-top:
-            1px solid var(--border);
-        "
-      >
+        class="path-progress-fill"
+        style="width:0%;"
+      ></div>
 
-        <p
-          class="dim"
-          style="
-            font-size:9px;
-            line-height:1.6;
-            margin:0;
-          "
-        >
-          Market cap, volume, open interest,
-          funding, liquidity dan data
-          blockchain.
-        </p>
+    </div>
 
+    <div class="path-bottom">
+
+      <span>
+        0 / 5 lessons
+      </span>
+
+      <span>
+        Advanced
+      </span>
+
+    </div>
+
+  </a>
+
+
+  <!-- FEATURED LESSONS -->
+
+  <div class="section-title">
+    Featured Lessons
+  </div>
+
+
+  <div class="lesson-card">
+
+    <div class="lesson-number">
+      01
+    </div>
+
+    <div class="lesson-content">
+
+      <div class="lesson-name">
+        Apa itu Bitcoin?
       </div>
 
-    </article>
+      <div class="lesson-meta">
+        Crypto Basics • 5 min
+      </div>
+
+    </div>
+
+    <div class="lesson-status">
+      ✓
+    </div>
+
+  </div>
 
 
-  </section>
+  <div class="lesson-card">
+
+    <div class="lesson-number">
+      02
+    </div>
+
+    <div class="lesson-content">
+
+      <div class="lesson-name">
+        Cara Kerja Blockchain
+      </div>
+
+      <div class="lesson-meta">
+        Crypto Basics • 7 min
+      </div>
+
+    </div>
+
+    <div class="lesson-status">
+      →
+    </div>
+
+  </div>
+
+
+  <div class="lesson-card">
+
+    <div class="lesson-number">
+      03
+    </div>
+
+    <div class="lesson-content">
+
+      <div class="lesson-name">
+        Membaca Candlestick
+      </div>
+
+      <div class="lesson-meta">
+        Technical Analysis • 8 min
+      </div>
+
+    </div>
+
+    <div class="lesson-status">
+      🔒
+    </div>
+
+  </div>
+
+
+  <div class="lesson-card">
+
+    <div class="lesson-number">
+      04
+    </div>
+
+    <div class="lesson-content">
+
+      <div class="lesson-name">
+        Apa itu Leverage?
+      </div>
+
+      <div class="lesson-meta">
+        Futures Trading • 6 min
+      </div>
+
+    </div>
+
+    <div class="lesson-status">
+      🔒
+    </div>
+
+  </div>
 
 
   <!-- QUICK GUIDE -->
 
-  <div
-    style="
-      font-size:10px;
-      font-weight:800;
-      margin:18px 0 8px;
-    "
-  >
-    Quick Guide
+  <div class="section-title">
+    Recommended Path
   </div>
 
 
-  <section
-    class="coin-card"
-    style="display:block;"
-  >
+  <section class="progress-card">
 
-    <div
-      style="
-        font-size:11px;
-        font-weight:800;
-      "
-    >
-      💡 Mulai dari mana?
+    <div class="progress-title">
+      🌱 Baru mulai crypto?
     </div>
 
-
-    <div
-      class="dim"
-      style="
-        font-size:9px;
-        line-height:1.6;
-        margin-top:7px;
-      "
+    <p
+      class="learn-description"
+      style="margin-bottom:0;"
     >
-      Kalau kamu baru mengenal crypto,
-      mulai dari <b>Crypto Basics</b>.
-      Setelah itu pelajari Technical
-      Analysis dan Risk Management
-      sebelum mencoba Futures.
-    </div>
+      Mulai dari Crypto Basics → Technical
+      Analysis → Risk Management → Futures.
+      Jangan buru-buru menggunakan leverage
+      sebelum memahami risikonya.
+    </p>
 
   </section>
 
 
   <!-- DISCLAIMER -->
 
-  <div
-    style="
-      margin-top:18px;
-      padding:12px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      color:var(--faint);
-      font-size:8px;
-      line-height:1.5;
-      text-align:center;
-    "
-  >
+  <div class="disclaimer">
 
     Materi edukasi NEXTRA hanya untuk
     tujuan pembelajaran dan bukan
@@ -556,6 +902,7 @@ document
   );
 
 </script>
+
 
 </body>
 
