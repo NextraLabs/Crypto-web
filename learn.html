@@ -2,6 +2,7 @@
 <html lang="id">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -75,7 +76,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
     }
 
     .progress-title {
@@ -98,10 +98,11 @@
     }
 
     .progress-fill {
-      width: 20%;
+      width: 0%;
       height: 100%;
       border-radius: inherit;
       background: var(--green);
+      transition: width .3s ease;
     }
 
     .progress-meta {
@@ -127,6 +128,8 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: var(--surface);
+      text-decoration: none;
+      color: inherit;
     }
 
     .continue-icon {
@@ -172,7 +175,6 @@
       color: #07100c;
       font-size: 8px;
       font-weight: 900;
-      cursor: pointer;
     }
 
     .path-card {
@@ -182,11 +184,8 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: var(--surface);
-      transition: .2s ease;
-    }
-
-    .path-card:active {
-      transform: scale(.985);
+      color: inherit;
+      text-decoration: none;
     }
 
     .path-top {
@@ -375,22 +374,28 @@
         Your Learning Progress
       </div>
 
-      <div class="progress-percent">
-        20%
+      <div
+        class="progress-percent"
+        id="learning-percent"
+      >
+        0%
       </div>
 
     </div>
 
     <div class="progress-bar">
 
-      <div class="progress-fill"></div>
+      <div
+        class="progress-fill"
+        id="learning-fill"
+      ></div>
 
     </div>
 
     <div class="progress-meta">
 
-      <span>
-        2 of 10 lessons
+      <span id="learning-count">
+        0 of 10 lessons
       </span>
 
       <span>
@@ -434,12 +439,9 @@
 
     </div>
 
-    <button
-      class="learn-button"
-      type="button"
-    >
+    <span class="learn-button">
       Continue
-    </button>
+    </span>
 
   </a>
 
@@ -450,8 +452,6 @@
     Learning Paths
   </div>
 
-
-  <!-- PATH 01 -->
 
   <a
     href="lesson.html?path=basics"
@@ -486,15 +486,16 @@
 
       <div
         class="path-progress-fill"
-        style="width:40%;"
+        id="basics-progress"
+        style="width:0%;"
       ></div>
 
     </div>
 
     <div class="path-bottom">
 
-      <span>
-        2 / 5 lessons
+      <span id="basics-count">
+        0 / 5 lessons
       </span>
 
       <span>
@@ -505,8 +506,6 @@
 
   </a>
 
-
-  <!-- PATH 02 -->
 
   <a
     href="lesson.html?path=technical"
@@ -561,8 +560,6 @@
   </a>
 
 
-  <!-- PATH 03 -->
-
   <a
     href="lesson.html?path=futures"
     class="path-card"
@@ -616,8 +613,6 @@
   </a>
 
 
-  <!-- PATH 04 -->
-
   <a
     href="lesson.html?path=risk"
     class="path-card"
@@ -670,8 +665,6 @@
 
   </a>
 
-
-  <!-- PATH 05 -->
 
   <a
     href="lesson.html?path=onchain"
@@ -733,7 +726,11 @@
   </div>
 
 
-  <div class="lesson-card">
+  <a
+    href="lesson.html?lesson=bitcoin-basics"
+    class="lesson-card"
+    style="text-decoration:none;color:inherit;"
+  >
 
     <div class="lesson-number">
       01
@@ -742,20 +739,23 @@
     <div class="lesson-content">
 
       <div class="lesson-name">
-        Apa itu Bitcoin?
+        Bitcoin & Blockchain
       </div>
 
       <div class="lesson-meta">
-        Crypto Basics • 5 min
+        Crypto Basics • 8 min
       </div>
 
     </div>
 
-    <div class="lesson-status">
-      ✓
+    <div
+      class="lesson-status"
+      id="lesson-01-status"
+    >
+      →
     </div>
 
-  </div>
+  </a>
 
 
   <div class="lesson-card">
@@ -777,7 +777,7 @@
     </div>
 
     <div class="lesson-status">
-      →
+      🔒
     </div>
 
   </div>
@@ -833,7 +833,7 @@
   </div>
 
 
-  <!-- QUICK GUIDE -->
+  <!-- RECOMMENDED -->
 
   <div class="section-title">
     Recommended Path
@@ -850,10 +850,12 @@
       class="learn-description"
       style="margin-bottom:0;"
     >
-      Mulai dari Crypto Basics → Technical
-      Analysis → Risk Management → Futures.
-      Jangan buru-buru menggunakan leverage
-      sebelum memahami risikonya.
+      Mulai dari Crypto Basics →
+      Technical Analysis →
+      Risk Management →
+      Futures.
+      Jangan buru-buru menggunakan
+      leverage sebelum memahami risikonya.
     </p>
 
   </section>
@@ -883,23 +885,162 @@
 
 <script>
 
-document
-  .getElementById("theme-toggle")
-  ?.addEventListener(
-    "click",
-    () => {
+  /*
+   * NEXTRA LEARNING PROGRESS
+   */
 
-      if (
-        typeof toggleTheme ===
-        "function"
-      ) {
+  const totalLessons = 10;
 
-        toggleTheme();
+  const lessonStatus = {
 
-      }
+    bitcoinBasics:
+      localStorage.getItem(
+        "nextra_lesson_bitcoin_basics"
+      ) === "completed"
+
+  };
+
+
+  /*
+   * COUNT COMPLETED
+   */
+
+  let completed = 0;
+
+  if (lessonStatus.bitcoinBasics) {
+
+    completed++;
+
+  }
+
+
+  /*
+   * GLOBAL PROGRESS
+   */
+
+  const percent =
+    Math.round(
+      (completed / totalLessons) * 100
+    );
+
+
+  const percentElement =
+    document.getElementById(
+      "learning-percent"
+    );
+
+  const fillElement =
+    document.getElementById(
+      "learning-fill"
+    );
+
+  const countElement =
+    document.getElementById(
+      "learning-count"
+    );
+
+
+  if (percentElement) {
+
+    percentElement.textContent =
+      percent + "%";
+
+  }
+
+
+  if (fillElement) {
+
+    fillElement.style.width =
+      percent + "%";
+
+  }
+
+
+  if (countElement) {
+
+    countElement.textContent =
+      completed +
+      " of " +
+      totalLessons +
+      " lessons";
+
+  }
+
+
+  /*
+   * CRYPTO BASICS PROGRESS
+   */
+
+  if (lessonStatus.bitcoinBasics) {
+
+    const basicsProgress =
+      document.getElementById(
+        "basics-progress"
+      );
+
+    const basicsCount =
+      document.getElementById(
+        "basics-count"
+      );
+
+    if (basicsProgress) {
+
+      basicsProgress.style.width =
+        "20%";
 
     }
-  );
+
+    if (basicsCount) {
+
+      basicsCount.textContent =
+        "1 / 5 lessons";
+
+    }
+
+  }
+
+
+  /*
+   * LESSON STATUS
+   */
+
+  if (lessonStatus.bitcoinBasics) {
+
+    const status =
+      document.getElementById(
+        "lesson-01-status"
+      );
+
+    if (status) {
+
+      status.textContent = "✓";
+
+    }
+
+  }
+
+
+  /*
+   * THEME BUTTON
+   */
+
+  document
+    .getElementById("theme-toggle")
+    ?.addEventListener(
+      "click",
+      () => {
+
+        if (
+          typeof toggleTheme ===
+          "function"
+        ) {
+
+          toggleTheme();
+
+        }
+
+      }
+    );
 
 </script>
 
