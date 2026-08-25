@@ -15,7 +15,7 @@
     content="#070909"
   >
 
-  <title>NEXTRA — Lesson</title>
+  <title>NEXTRA — Learn</title>
 
   <link
     rel="stylesheet"
@@ -36,6 +36,7 @@
       color: var(--muted);
       font-size: 9px;
       font-weight: 800;
+      text-decoration: none;
     }
 
     .lesson-category {
@@ -127,6 +128,41 @@
       line-height: 1.6;
     }
 
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 11px;
+    }
+
+    .flow-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px;
+      border-radius: 10px;
+      background: var(--surface-soft);
+    }
+
+    .flow-number {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: rgba(57,242,160,.10);
+      color: var(--green);
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .flow-text {
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
     .example-box {
       padding: 13px;
       margin-top: 10px;
@@ -160,10 +196,6 @@
       text-align: left;
       font-size: 9px;
       cursor: pointer;
-    }
-
-    .quiz-option:hover {
-      border-color: var(--green);
     }
 
     .quiz-result {
@@ -216,6 +248,25 @@
       cursor: pointer;
     }
 
+    .navigation {
+      display: flex;
+      gap: 8px;
+      margin: 15px 0;
+    }
+
+    .nav-button {
+      flex: 1;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--text);
+      text-align: center;
+      text-decoration: none;
+      font-size: 8px;
+      font-weight: 800;
+    }
+
     .disclaimer {
       margin: 18px 0;
       padding: 12px;
@@ -237,8 +288,6 @@
 
 <main class="container">
 
-
-  <!-- HEADER -->
 
   <header class="topbar">
 
@@ -264,206 +313,14 @@
   </header>
 
 
-  <!-- LESSON HEADER -->
-
-  <section class="lesson-header">
-
-    <a
-      href="learn.html"
-      class="back-link"
-    >
-      ← Back to Learn
-    </a>
-
-    <div class="lesson-category">
-      Crypto Basics
-    </div>
-
-    <h1 class="lesson-title">
-      Bitcoin & Blockchain
-    </h1>
-
-    <p class="lesson-subtitle">
-      Memahami apa itu Bitcoin dan bagaimana
-      teknologi blockchain bekerja.
-    </p>
-
-    <div class="lesson-meta">
-
-      <span class="meta-pill">
-        🌱 Beginner
-      </span>
-
-      <span class="meta-pill">
-        ⏱ 8 min
-      </span>
-
-      <span class="meta-pill">
-        Lesson 01
-      </span>
-
-    </div>
-
-  </section>
+  <section
+    class="lesson-header"
+    id="lesson-header"
+  ></section>
 
 
-  <!-- INTRO -->
+  <div id="lesson-content"></div>
 
-  <article class="article-card">
-
-    <h2>
-      Apa itu Bitcoin?
-    </h2>
-
-    <p>
-      Bitcoin adalah aset digital yang dapat
-      digunakan untuk mengirim dan menerima
-      nilai tanpa membutuhkan pihak pusat
-      seperti bank.
-    </p>
-
-    <p>
-      Bitcoin diperkenalkan pada tahun 2009
-      dan menggunakan jaringan komputer
-      terdesentralisasi untuk mencatat
-      transaksi.
-    </p>
-
-    <div class="highlight">
-      💡 Intinya: Bitcoin adalah aset digital,
-      sedangkan blockchain adalah teknologi
-      yang digunakan untuk mencatat transaksinya.
-    </div>
-
-  </article>
-
-
-  <!-- BLOCKCHAIN -->
-
-  <article class="article-card">
-
-    <h2>
-      Apa itu Blockchain?
-    </h2>
-
-    <p>
-      Blockchain adalah buku catatan digital
-      yang menyimpan data transaksi dalam
-      kumpulan blok yang saling terhubung.
-    </p>
-
-    <p>
-      Setiap blok berisi data transaksi dan
-      terhubung dengan blok sebelumnya.
-      Karena data disimpan oleh banyak komputer,
-      sistemnya tidak bergantung pada satu
-      server pusat.
-    </p>
-
-    <h3>
-      Karakteristik utama
-    </h3>
-
-    <ul>
-
-      <li>
-        Terdesentralisasi
-      </li>
-
-      <li>
-        Transparan
-      </li>
-
-      <li>
-        Sulit diubah setelah tercatat
-      </li>
-
-      <li>
-        Divalidasi oleh jaringan komputer
-      </li>
-
-    </ul>
-
-  </article>
-
-
-  <!-- HOW IT WORKS -->
-
-  <article class="article-card">
-
-    <h2>
-      Bagaimana transaksi Bitcoin bekerja?
-    </h2>
-
-    <p>
-      Ketika seseorang mengirim Bitcoin,
-      transaksi tersebut disiarkan ke jaringan.
-      Komputer dalam jaringan kemudian
-      memverifikasi transaksi tersebut.
-    </p>
-
-    <div class="example-box">
-
-      <div class="example-label">
-        Contoh sederhana
-      </div>
-
-      <div class="example-text">
-
-        Mankami mengirim Bitcoin →
-        transaksi disiarkan →
-        jaringan memverifikasi →
-        transaksi dimasukkan ke blockchain.
-
-      </div>
-
-    </div>
-
-  </article>
-
-
-  <!-- IMPORTANT TERMS -->
-
-  <article class="article-card">
-
-    <h2>
-      Istilah penting
-    </h2>
-
-    <h3>
-      Wallet
-    </h3>
-
-    <p>
-      Tempat untuk mengelola akses terhadap
-      aset crypto. Wallet menggunakan
-      cryptographic keys untuk mengotorisasi
-      transaksi.
-    </p>
-
-    <h3>
-      Address
-    </h3>
-
-    <p>
-      Identitas tujuan yang digunakan untuk
-      menerima aset crypto.
-    </p>
-
-    <h3>
-      Private Key
-    </h3>
-
-    <p>
-      Informasi rahasia yang digunakan untuk
-      mengotorisasi transaksi. Jangan pernah
-      membagikannya kepada orang lain.
-    </p>
-
-  </article>
-
-
-  <!-- QUICK QUIZ -->
 
   <article class="article-card">
 
@@ -471,31 +328,9 @@
       🧠 Quick Quiz
     </h2>
 
-    <p>
-      Apa fungsi utama blockchain dalam
-      ekosistem Bitcoin?
-    </p>
+    <p id="quiz-question"></p>
 
-    <button
-      class="quiz-option"
-      onclick="checkAnswer(false)"
-    >
-      A. Menentukan harga Bitcoin
-    </button>
-
-    <button
-      class="quiz-option"
-      onclick="checkAnswer(true)"
-    >
-      B. Mencatat dan memverifikasi transaksi
-    </button>
-
-    <button
-      class="quiz-option"
-      onclick="checkAnswer(false)"
-    >
-      C. Menentukan keuntungan trader
-    </button>
+    <div id="quiz-options"></div>
 
     <div
       class="quiz-result"
@@ -504,8 +339,6 @@
 
   </article>
 
-
-  <!-- COMPLETE -->
 
   <section class="complete-box">
 
@@ -519,7 +352,7 @@
 
     <div class="complete-text">
       Tandai lesson ini selesai untuk
-      melanjutkan progress belajar kamu.
+      menyimpan progress belajar kamu.
     </div>
 
     <button
@@ -533,7 +366,33 @@
   </section>
 
 
-  <!-- DISCLAIMER -->
+  <div class="navigation">
+
+    <a
+      class="nav-button"
+      id="previous-button"
+      href="#"
+    >
+      ← Previous
+    </a>
+
+    <a
+      class="nav-button"
+      href="learn.html"
+    >
+      All Lessons
+    </a>
+
+    <a
+      class="nav-button"
+      id="next-button"
+      href="#"
+    >
+      Next →
+    </a>
+
+  </div>
+
 
   <div class="disclaimer">
 
@@ -547,8 +406,6 @@
 </main>
 
 
-<!-- BOTTOM NAV -->
-
 <div id="bottom-nav"></div>
 
 
@@ -557,94 +414,1170 @@
 
 <script>
 
-  document
-    .getElementById("theme-toggle")
-    ?.addEventListener(
-      "click",
-      () => {
 
-        if (
-          typeof toggleTheme ===
-          "function"
-        ) {
-
-          toggleTheme();
-
-        }
-
-      }
-    );
+/* ================================
+   NEXTRA ACADEMY
+================================ */
 
 
-  function checkAnswer(correct) {
+const lessons = {
 
-    const result =
-      document.getElementById(
-        "quiz-result"
-      );
+  1: {
 
-    result.style.display = "block";
+    category: "Crypto Basics",
 
-    if (correct) {
+    title: "Bitcoin & Blockchain",
 
-      result.textContent =
-        "✓ Benar! Blockchain mencatat dan membantu memverifikasi transaksi.";
+    subtitle:
+      "Memahami apa itu Bitcoin dan bagaimana teknologi blockchain bekerja.",
 
-    } else {
+    level: "Beginner",
 
-      result.textContent =
-        "✕ Belum tepat. Coba ingat kembali fungsi utama blockchain.";
+    time: "8 min",
 
-    }
+    content: `
+
+      <article class="article-card">
+
+        <h2>Apa itu Bitcoin?</h2>
+
+        <p>
+          Bitcoin adalah aset digital yang
+          memungkinkan seseorang mengirim dan
+          menerima nilai melalui jaringan
+          komputer tanpa membutuhkan bank
+          sebagai perantara.
+        </p>
+
+        <p>
+          Bitcoin diperkenalkan pada tahun 2009
+          dan menggunakan teknologi blockchain
+          untuk mencatat transaksi.
+        </p>
+
+        <div class="highlight">
+          💡 Bitcoin adalah aset digital,
+          sedangkan blockchain adalah teknologi
+          yang membantu mencatat transaksinya.
+        </div>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Apa itu Blockchain?</h2>
+
+        <p>
+          Blockchain adalah sistem pencatatan
+          digital yang menyimpan data dalam
+          kumpulan block yang saling terhubung.
+        </p>
+
+        <ul>
+
+          <li>Terdesentralisasi</li>
+
+          <li>Transparan</li>
+
+          <li>Menggunakan kriptografi</li>
+
+          <li>Sulit diubah secara sepihak</li>
+
+        </ul>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa hubungan Bitcoin dengan blockchain?",
+
+    options: [
+
+      ["Bitcoin menggunakan blockchain untuk mencatat transaksi.", true],
+
+      ["Blockchain adalah nama lain Bitcoin.", false],
+
+      ["Bitcoin hanya digunakan untuk membuat blockchain.", false]
+
+    ]
+
+  },
+
+
+  2: {
+
+    category: "Crypto Basics",
+
+    title: "Cara Kerja Blockchain",
+
+    subtitle:
+      "Memahami bagaimana transaksi diverifikasi dan dimasukkan ke dalam blockchain.",
+
+    level: "Beginner",
+
+    time: "7 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Bagaimana blockchain bekerja?</h2>
+
+        <p>
+          Ketika transaksi dibuat, transaksi
+          tersebut disiarkan ke jaringan.
+          Komputer dalam jaringan kemudian
+          memverifikasi transaksi.
+        </p>
+
+        <div class="flow">
+
+          <div class="flow-item">
+            <div class="flow-number">01</div>
+            <div class="flow-text">
+              Transaksi dibuat.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">02</div>
+            <div class="flow-text">
+              Transaksi disiarkan ke jaringan.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">03</div>
+            <div class="flow-text">
+              Jaringan memvalidasi transaksi.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">04</div>
+            <div class="flow-text">
+              Transaksi masuk ke block.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">05</div>
+            <div class="flow-text">
+              Block menjadi bagian blockchain.
+            </div>
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Apa itu Hash?</h2>
+
+        <p>
+          Hash adalah hasil proses kriptografi
+          yang menghasilkan representasi data.
+        </p>
+
+        <div class="highlight">
+          Jika data berubah, hash yang dihasilkan
+          juga berubah. Hal ini membantu menjaga
+          integritas data.
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa yang terjadi sebelum transaksi masuk ke block?",
+
+    options: [
+
+      ["Transaksi divalidasi oleh jaringan.", true],
+
+      ["Harga Bitcoin harus naik.", false],
+
+      ["Pengguna harus membeli Bitcoin lagi.", false]
+
+    ]
+
+  },
+
+
+  3: {
+
+    category: "Technical Analysis",
+
+    title: "Membaca Candlestick",
+
+    subtitle:
+      "Pelajari dasar candlestick dan bagaimana membaca pergerakan harga.",
+
+    level: "Beginner",
+
+    time: "8 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Apa itu Candlestick?</h2>
+
+        <p>
+          Candlestick adalah cara visual untuk
+          menampilkan pergerakan harga dalam
+          periode tertentu.
+        </p>
+
+        <p>
+          Satu candle biasanya menunjukkan
+          Open, High, Low dan Close.
+        </p>
+
+        <div class="flow">
+
+          <div class="flow-item">
+            <div class="flow-number">O</div>
+            <div class="flow-text">
+              Open — harga saat periode dimulai.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">H</div>
+            <div class="flow-text">
+              High — harga tertinggi.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">L</div>
+            <div class="flow-text">
+              Low — harga terendah.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">C</div>
+            <div class="flow-text">
+              Close — harga saat periode berakhir.
+            </div>
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Body dan Wick</h2>
+
+        <p>
+          Body menunjukkan jarak antara Open
+          dan Close.
+        </p>
+
+        <p>
+          Wick menunjukkan seberapa tinggi
+          atau rendah harga bergerak selama
+          periode tersebut.
+        </p>
+
+        <div class="highlight">
+          💡 Jangan membaca satu candle secara
+          terpisah. Konteks trend dan timeframe
+          juga penting.
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa yang ditunjukkan oleh body candlestick?",
+
+    options: [
+
+      ["Perbedaan antara Open dan Close.", true],
+
+      ["Volume trading saja.", false],
+
+      ["Market cap sebuah coin.", false]
+
+    ]
+
+  },
+
+
+  4: {
+
+    category: "Technical Analysis",
+
+    title: "Support & Resistance",
+
+    subtitle:
+      "Memahami area harga yang sering menjadi perhatian trader.",
+
+    level: "Beginner",
+
+    time: "7 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Support</h2>
+
+        <p>
+          Support adalah area harga yang secara
+          historis sering mendapat tekanan beli
+          sehingga harga dapat mengalami
+          perlambatan penurunan.
+        </p>
+
+        <div class="highlight">
+          Support bukan garis yang pasti.
+          Harga tetap bisa menembusnya.
+        </div>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Resistance</h2>
+
+        <p>
+          Resistance adalah area harga yang
+          sering mendapat tekanan jual sehingga
+          kenaikan harga dapat melambat.
+        </p>
+
+        <div class="example-box">
+
+          <div class="example-label">
+            Cara sederhana
+          </div>
+
+          <div class="example-text">
+            Support berada di bawah harga,
+            resistance biasanya berada di atas
+            harga.
+          </div>
+
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Di mana biasanya support berada relatif terhadap harga?",
+
+    options: [
+
+      ["Di bawah harga.", true],
+
+      ["Selalu di atas harga.", false],
+
+      ["Tidak berhubungan dengan harga.", false]
+
+    ]
+
+  },
+
+
+  5: {
+
+    category: "Technical Analysis",
+
+    title: "Trend & Market Structure",
+
+    subtitle:
+      "Belajar mengenali arah pergerakan market.",
+
+    level: "Intermediate",
+
+    time: "9 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Apa itu Trend?</h2>
+
+        <p>
+          Trend menggambarkan kecenderungan
+          pergerakan harga dalam suatu periode.
+        </p>
+
+        <ul>
+
+          <li>Uptrend — kecenderungan naik.</li>
+
+          <li>Downtrend — kecenderungan turun.</li>
+
+          <li>Sideways — bergerak dalam range.</li>
+
+        </ul>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Higher High & Higher Low</h2>
+
+        <p>
+          Dalam uptrend, trader sering mengamati
+          higher high dan higher low sebagai
+          bagian dari struktur market.
+        </p>
+
+        <div class="highlight">
+          Struktur market membantu memberikan
+          konteks terhadap arah pergerakan harga.
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa karakteristik umum uptrend?",
+
+    options: [
+
+      ["Higher highs dan higher lows.", true],
+
+      ["Harga selalu turun.", false],
+
+      ["Tidak ada pergerakan harga.", false]
+
+    ]
+
+  },
+
+
+  6: {
+
+    category: "Risk Management",
+
+    title: "Risk Management",
+
+    subtitle:
+      "Mengapa pengelolaan risiko sangat penting dalam trading.",
+
+    level: "Intermediate",
+
+    time: "8 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Kenapa Risk Management penting?</h2>
+
+        <p>
+          Trading bukan hanya tentang mencari
+          profit. Kemampuan menjaga modal juga
+          sangat penting.
+        </p>
+
+        <p>
+          Bahkan strategi yang bagus dapat
+          mengalami kerugian.
+        </p>
+
+        <div class="highlight">
+          💡 Tujuan utama risk management adalah
+          menjaga agar satu kesalahan tidak
+          menghancurkan seluruh modal.
+        </div>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Position Size</h2>
+
+        <p>
+          Position size menentukan seberapa besar
+          posisi yang dibuka dibandingkan dengan
+          modal.
+        </p>
+
+        <ul>
+
+          <li>Tentukan risiko sebelum entry.</li>
+
+          <li>Gunakan stop loss bila sesuai strategi.</li>
+
+          <li>Hindari mempertaruhkan seluruh modal.</li>
+
+        </ul>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa tujuan utama risk management?",
+
+    options: [
+
+      ["Mengontrol dan membatasi risiko kerugian.", true],
+
+      ["Menjamin profit setiap trade.", false],
+
+      ["Membuat semua trade pasti menang.", false]
+
+    ]
+
+  },
+
+
+  7: {
+
+    category: "Futures Trading",
+
+    title: "Apa itu Leverage?",
+
+    subtitle:
+      "Memahami leverage dan mengapa leverage meningkatkan risiko.",
+
+    level: "Advanced",
+
+    time: "8 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Leverage</h2>
+
+        <p>
+          Leverage memungkinkan trader membuka
+          posisi dengan exposure yang lebih besar
+          dibandingkan modal yang digunakan.
+        </p>
+
+        <p>
+          Leverage dapat memperbesar potensi
+          keuntungan sekaligus memperbesar
+          potensi kerugian.
+        </p>
+
+        <div class="highlight">
+          ⚠️ Leverage bukan uang gratis.
+          Semakin besar leverage, semakin sensitif
+          posisi terhadap pergerakan harga.
+        </div>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Liquidation</h2>
+
+        <p>
+          Jika kerugian posisi mencapai kondisi
+          tertentu dan margin tidak lagi cukup,
+          posisi futures dapat dilikuidasi.
+        </p>
+
+        <div class="example-box">
+
+          <div class="example-label">
+            Ingat
+          </div>
+
+          <div class="example-text">
+            Leverage tinggi membutuhkan
+            pengelolaan risiko yang jauh lebih
+            disiplin.
+          </div>
+
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa efek leverage terhadap risiko?",
+
+    options: [
+
+      ["Leverage dapat memperbesar potensi keuntungan dan kerugian.", true],
+
+      ["Leverage menghilangkan risiko.", false],
+
+      ["Leverage menjamin posisi profit.", false]
+
+    ]
+
+  },
+
+
+  8: {
+
+    category: "Futures Trading",
+
+    title: "Funding Rate",
+
+    subtitle:
+      "Memahami funding rate pada perpetual futures.",
+
+    level: "Advanced",
+
+    time: "7 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Apa itu Funding Rate?</h2>
+
+        <p>
+          Funding rate adalah mekanisme pada
+          perpetual futures yang membantu menjaga
+          harga kontrak tetap dekat dengan harga
+          aset acuannya.
+        </p>
+
+        <p>
+          Pembayaran funding biasanya terjadi
+          antara trader long dan short.
+        </p>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Positif dan Negatif</h2>
+
+        <ul>
+
+          <li>
+            Funding positif biasanya berarti
+            long membayar short.
+          </li>
+
+          <li>
+            Funding negatif biasanya berarti
+            short membayar long.
+          </li>
+
+        </ul>
+
+        <div class="highlight">
+          💡 Funding rate dapat menjadi salah satu
+          data tambahan untuk membaca kondisi
+          positioning market.
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Pada funding rate positif, siapa yang biasanya membayar?",
+
+    options: [
+
+      ["Trader long membayar trader short.", true],
+
+      ["Trader short selalu membayar long.", false],
+
+      ["Exchange selalu membayar semua trader.", false]
+
+    ]
+
+  },
+
+
+  9: {
+
+    category: "Market Data",
+
+    title: "Volume & Open Interest",
+
+    subtitle:
+      "Mengenal dua data penting untuk membaca aktivitas market.",
+
+    level: "Advanced",
+
+    time: "9 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Volume</h2>
+
+        <p>
+          Volume menunjukkan jumlah aktivitas
+          perdagangan dalam periode tertentu.
+        </p>
+
+        <p>
+          Perubahan volume dapat memberikan
+          konteks tambahan terhadap pergerakan
+          harga.
+        </p>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Open Interest</h2>
+
+        <p>
+          Open interest menunjukkan jumlah
+          kontrak futures yang masih terbuka.
+        </p>
+
+        <div class="highlight">
+          Volume dan open interest bukan sinyal
+          trading otomatis. Keduanya perlu
+          dibaca bersama konteks harga dan data
+          lainnya.
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa yang ditunjukkan oleh open interest?",
+
+    options: [
+
+      ["Jumlah kontrak futures yang masih terbuka.", true],
+
+      ["Harga Bitcoin.", false],
+
+      ["Jumlah wallet Bitcoin.", false]
+
+    ]
+
+  },
+
+
+  10: {
+
+    category: "Trader Intelligence",
+
+    title: "Membangun Trading Plan",
+
+    subtitle:
+      "Menggabungkan analisis, entry, risiko dan evaluasi menjadi satu sistem.",
+
+    level: "Advanced",
+
+    time: "10 min",
+
+    content: `
+
+      <article class="article-card">
+
+        <h2>Trading Plan</h2>
+
+        <p>
+          Trading plan adalah aturan yang dibuat
+          sebelum trading agar keputusan tidak
+          sepenuhnya dipengaruhi emosi.
+        </p>
+
+        <div class="flow">
+
+          <div class="flow-item">
+            <div class="flow-number">01</div>
+            <div class="flow-text">
+              Tentukan kondisi market.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">02</div>
+            <div class="flow-text">
+              Tentukan alasan entry.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">03</div>
+            <div class="flow-text">
+              Tentukan invalidation dan risiko.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">04</div>
+            <div class="flow-text">
+              Tentukan target berdasarkan strategi.
+            </div>
+          </div>
+
+          <div class="flow-item">
+            <div class="flow-number">05</div>
+            <div class="flow-text">
+              Evaluasi hasil setelah trade.
+            </div>
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="article-card">
+
+        <h2>Trading Journal</h2>
+
+        <p>
+          Catat alasan entry, kondisi market,
+          hasil trade dan kesalahan yang terjadi.
+        </p>
+
+        <p>
+          Dengan jurnal, trader dapat menemukan
+          pola kesalahan dan memperbaiki proses
+          secara bertahap.
+        </p>
+
+        <div class="highlight">
+          🧠 Trader yang baik tidak hanya
+          mengejar profit. Mereka juga membangun
+          proses yang konsisten.
+        </div>
+
+      </article>
+
+    `,
+
+    question:
+      "Apa fungsi utama trading plan?",
+
+    options: [
+
+      ["Membantu membuat keputusan trading secara terstruktur.", true],
+
+      ["Menjamin semua trade profit.", false],
+
+      ["Menghilangkan semua risiko market.", false]
+
+    ]
 
   }
 
+};
 
-  function completeLesson() {
 
-    localStorage.setItem(
-      "nextra_lesson_bitcoin_basics",
-      "completed"
-    );
+/* ================================
+   GET LESSON
+================================ */
+
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+let lessonNumber =
+  parseInt(
+    params.get("lesson") || "1"
+  );
+
+
+if (
+  !lessons[lessonNumber]
+) {
+
+  lessonNumber = 1;
+
+}
+
+
+const lesson =
+  lessons[lessonNumber];
+
+
+/* ================================
+   HEADER
+================================ */
+
+
+document.getElementById(
+  "lesson-header"
+).innerHTML = `
+
+  <a
+    href="learn.html"
+    class="back-link"
+  >
+    ← Back to Learn
+  </a>
+
+  <div class="lesson-category">
+    ${lesson.category}
+  </div>
+
+  <h1 class="lesson-title">
+    ${lesson.title}
+  </h1>
+
+  <p class="lesson-subtitle">
+    ${lesson.subtitle}
+  </p>
+
+  <div class="lesson-meta">
+
+    <span class="meta-pill">
+      🌱 ${lesson.level}
+    </span>
+
+    <span class="meta-pill">
+      ⏱ ${lesson.time}
+    </span>
+
+    <span class="meta-pill">
+      Lesson ${lessonNumber}
+    </span>
+
+  </div>
+
+`;
+
+
+/* ================================
+   CONTENT
+================================ */
+
+
+document.getElementById(
+  "lesson-content"
+).innerHTML =
+  lesson.content;
+
+
+/* ================================
+   QUIZ
+================================ */
+
+
+document.getElementById(
+  "quiz-question"
+).textContent =
+  lesson.question;
+
+
+const quizOptions =
+  document.getElementById(
+    "quiz-options"
+  );
+
+
+lesson.options.forEach(
+  (option) => {
 
     const button =
-      document.getElementById(
-        "complete-button"
+      document.createElement(
+        "button"
       );
+
+    button.className =
+      "quiz-option";
+
+    button.textContent =
+      option[0];
+
+    button.onclick =
+      () => checkAnswer(
+        option[1]
+      );
+
+    quizOptions.appendChild(
+      button
+    );
+
+  }
+);
+
+
+function checkAnswer(
+  correct
+) {
+
+  const result =
+    document.getElementById(
+      "quiz-result"
+    );
+
+  result.style.display =
+    "block";
+
+  if (correct) {
+
+    result.textContent =
+      "✓ Benar! Jawaban kamu tepat.";
+
+  } else {
+
+    result.textContent =
+      "✕ Belum tepat. Coba baca kembali materi lesson ini.";
+
+  }
+
+}
+
+
+/* ================================
+   PROGRESS
+================================ */
+
+
+const storageKey =
+  "nextra_lesson_" +
+  lessonNumber;
+
+
+function completeLesson() {
+
+  localStorage.setItem(
+    storageKey,
+    "completed"
+  );
+
+  updateCompleteButton();
+
+}
+
+
+function updateCompleteButton() {
+
+  const button =
+    document.getElementById(
+      "complete-button"
+    );
+
+  if (
+    localStorage.getItem(
+      storageKey
+    ) === "completed"
+  ) {
 
     button.textContent =
       "✓ Lesson Completed";
 
-    button.style.opacity = ".65";
+    button.style.opacity =
+      ".65";
 
-    button.disabled = true;
+    button.disabled =
+      true;
 
   }
 
+}
 
-  if (
-    localStorage.getItem(
-      "nextra_lesson_bitcoin_basics"
-    ) === "completed"
-  ) {
 
-    const button =
-      document.getElementById(
-        "complete-button"
-      );
+updateCompleteButton();
 
-    if (button) {
 
-      button.textContent =
-        "✓ Lesson Completed";
+/* ================================
+   NAVIGATION
+================================ */
 
-      button.style.opacity = ".65";
 
-      button.disabled = true;
+const previousButton =
+  document.getElementById(
+    "previous-button"
+  );
+
+const nextButton =
+  document.getElementById(
+    "next-button"
+  );
+
+
+if (
+  lessonNumber <= 1
+) {
+
+  previousButton.style.opacity =
+    ".35";
+
+  previousButton.style.pointerEvents =
+    "none";
+
+} else {
+
+  previousButton.href =
+    "lesson.html?lesson=" +
+    (lessonNumber - 1);
+
+}
+
+
+if (
+  lessonNumber >= 10
+) {
+
+  nextButton.textContent =
+    "✓ Academy Complete";
+
+  nextButton.style.opacity =
+    ".5";
+
+  nextButton.style.pointerEvents =
+    "none";
+
+} else {
+
+  nextButton.href =
+    "lesson.html?lesson=" +
+    (lessonNumber + 1);
+
+}
+
+
+/* ================================
+   THEME
+================================ */
+
+
+document
+  .getElementById(
+    "theme-toggle"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      if (
+        typeof toggleTheme ===
+        "function"
+      ) {
+
+        toggleTheme();
+
+      }
 
     }
+  );
 
-  }
 
 </script>
 
