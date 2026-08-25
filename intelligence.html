@@ -2,6 +2,7 @@
 <html lang="id">
 
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -9,19 +10,257 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>NEXTRA — Intelligence</title>
+  <meta
+    name="theme-color"
+    content="#05070a"
+  >
+
+  <title>NEXTRA — Intelligence V100</title>
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
+
+  <style>
+
+    .intel-v100 {
+      display: grid;
+      gap: 10px;
+    }
+
+    .intel-hero,
+    .intel-card,
+    .intel-stat,
+    .intel-filter {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+    }
+
+    .intel-hero {
+      padding: 15px;
+    }
+
+    .intel-title {
+      font-size: 19px;
+      font-weight: 950;
+    }
+
+    .intel-sub {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .intel-status {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .intel-live {
+      color: var(--accent);
+    }
+
+    .intel-summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .intel-stat {
+      padding: 10px 5px;
+      text-align: center;
+    }
+
+    .intel-label {
+      color: var(--muted);
+      font-size: 6px;
+      font-weight: 800;
+    }
+
+    .intel-value {
+      margin-top: 4px;
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .intel-filters {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0;
+    }
+
+    .intel-filter {
+      flex: 0 0 auto;
+      padding: 7px 11px;
+      color: var(--text);
+      font-size: 8px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .intel-filter.active {
+      background: var(--accent);
+      color: #05070a;
+      border-color: var(--accent);
+    }
+
+    #intelligence-content {
+      display: grid;
+      gap: 8px;
+    }
+
+    .intel-card {
+      padding: 13px;
+    }
+
+    .intel-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .intel-symbol {
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .intel-price {
+      margin-top: 5px;
+      font-size: 17px;
+      font-weight: 950;
+    }
+
+    .intel-change {
+      margin-top: 2px;
+      font-size: 8px;
+      font-weight: 900;
+    }
+
+    .intel-badge {
+      padding: 7px 9px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      text-align: center;
+      font-size: 7px;
+      font-weight: 950;
+    }
+
+    .up {
+      color: var(--accent);
+    }
+
+    .down {
+      color: var(--danger);
+    }
+
+    .neutral {
+      color: var(--muted);
+    }
+
+    .intel-score {
+      margin-top: 11px;
+    }
+
+    .intel-score-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 7px;
+      font-weight: 900;
+    }
+
+    .intel-bar {
+      height: 5px;
+      margin-top: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .intel-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+    }
+
+    .intel-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .intel-metric {
+      padding: 8px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .intel-metric-label {
+      color: var(--muted);
+      font-size: 6px;
+      font-weight: 800;
+    }
+
+    .intel-metric-value {
+      margin-top: 3px;
+      font-size: 9px;
+      font-weight: 950;
+    }
+
+    .intel-insight {
+      margin-top: 10px;
+      padding: 9px;
+      border-left: 2px solid var(--accent);
+      border-radius: 7px;
+      background: rgba(255,255,255,.025);
+      font-size: 8px;
+      line-height: 1.6;
+    }
+
+    .intel-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 10px;
+      padding-top: 9px;
+      border-top: 1px solid var(--border);
+      font-size: 7px;
+      font-weight: 900;
+    }
+
+    .intel-empty {
+      padding: 25px 12px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: 9px;
+    }
+
+    @media(max-width:420px) {
+
+      .intel-summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
-<main class="container">
+<main class="container intel-v100">
 
-  <!-- HEADER -->
 
   <header class="topbar">
 
@@ -32,7 +271,7 @@
       </h1>
 
       <p class="subtitle">
-        AI-powered market intelligence
+        NEXTRA Market Intelligence V100
       </p>
 
     </div>
@@ -47,6 +286,7 @@
       <button
         class="icon-btn"
         id="intel-refresh"
+        title="Refresh"
       >
         ↻
       </button>
@@ -54,6 +294,7 @@
       <button
         class="icon-btn"
         id="theme-toggle"
+        title="Theme"
       >
         ◐
       </button>
@@ -63,105 +304,45 @@
   </header>
 
 
-  <!-- STATUS -->
+  <section class="intel-hero">
 
-  <section
-    class="highlight-box"
-    style="margin-bottom:14px;"
-  >
+    <div class="intel-title">
+      🧠 Market Intelligence
+    </div>
 
-    <div
-      style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-      "
-    >
+    <div class="intel-sub">
+      Multi-factor market analysis engine
+    </div>
 
-      <div>
+    <div class="intel-status">
 
-        <div
-          style="
-            font-size:12px;
-            font-weight:800;
-          "
-        >
-          🧠 NEXTRA Intelligence
-        </div>
-
-        <div
-          class="dim"
-          style="
-            font-size:9px;
-            margin-top:4px;
-          "
-        >
-          Real-time market intelligence
-        </div>
-
-      </div>
-
-      <div
+      <span
         id="intel-status"
-        style="
-          font-size:8px;
-          color:var(--accent);
-        "
+        class="intel-live"
       >
-        SCANNING
-      </div>
+        READY
+      </span>
+
+      <span id="intel-update">
+        --
+      </span>
 
     </div>
 
   </section>
 
 
-  <!-- MARKET SENTIMENT -->
+  <section class="intel-summary">
 
-  <section
-    class="coin-card"
-    style="
-      display:block;
-      margin-bottom:10px;
-    "
-  >
+    <div class="intel-stat">
 
-    <div
-      style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-      "
-    >
-
-      <div>
-
-        <div
-          class="dim"
-          style="font-size:8px;"
-        >
-          MARKET SENTIMENT
-        </div>
-
-        <div
-          id="market-sentiment"
-          style="
-            font-size:20px;
-            font-weight:900;
-            margin-top:4px;
-          "
-        >
-          --
-        </div>
-
+      <div class="intel-label">
+        BULLISH
       </div>
 
       <div
-        id="market-score"
-        style="
-          font-size:28px;
-          font-weight:900;
-        "
+        id="intel-bullish"
+        class="intel-value up"
       >
         --
       </div>
@@ -169,208 +350,201 @@
     </div>
 
 
-    <div
-      style="
-        margin-top:12px;
-        height:6px;
-        background:var(--border);
-        border-radius:10px;
-        overflow:hidden;
-      "
-    >
+    <div class="intel-stat">
+
+      <div class="intel-label">
+        BEARISH
+      </div>
 
       <div
-        id="sentiment-bar"
-        style="
-          width:50%;
-          height:100%;
-          background:var(--accent);
-          border-radius:10px;
-        "
-      ></div>
+        id="intel-bearish"
+        class="intel-value down"
+      >
+        --
+      </div>
 
     </div>
 
 
-    <div
-      style="
-        display:flex;
-        justify-content:space-between;
-        margin-top:6px;
-      "
-    >
+    <div class="intel-stat">
 
-      <span
-        class="dim"
-        style="font-size:8px;"
-      >
-        Bearish
-      </span>
+      <div class="intel-label">
+        STRONG
+      </div>
 
-      <span
-        class="dim"
-        style="font-size:8px;"
+      <div
+        id="intel-strong"
+        class="intel-value"
       >
-        Bullish
-      </span>
+        --
+      </div>
+
+    </div>
+
+
+    <div class="intel-stat">
+
+      <div class="intel-label">
+        RISK
+      </div>
+
+      <div
+        id="intel-risk"
+        class="intel-value down"
+      >
+        --
+      </div>
 
     </div>
 
   </section>
 
 
-  <!-- OVERVIEW -->
+  <div class="intel-filters">
 
-  <section
-    class="coin-card"
-    style="
-      display:block;
-      margin-bottom:12px;
-    "
-  >
-
-    <div
-      style="
-        font-size:10px;
-        font-weight:800;
-        margin-bottom:7px;
-      "
+    <button
+      class="intel-filter active"
+      data-filter="all"
     >
-      🧠 AI Market Overview
-    </div>
+      ALL
+    </button>
 
-    <div
-      id="ai-overview"
-      class="dim"
-      style="
-        font-size:9px;
-        line-height:1.6;
-      "
+    <button
+      class="intel-filter"
+      data-filter="bullish"
     >
-      Menganalisis kondisi market...
-    </div>
+      🟢 BULLISH
+    </button>
 
-  </section>
+    <button
+      class="intel-filter"
+      data-filter="bearish"
+    >
+      🔴 BEARISH
+    </button>
 
+    <button
+      class="intel-filter"
+      data-filter="strong"
+    >
+      🎯 80+
+    </button>
 
-  <!-- ASSETS -->
+    <button
+      class="intel-filter"
+      data-filter="risk"
+    >
+      ⚠️ HIGH RISK
+    </button>
 
-  <div
-    style="
-      font-size:10px;
-      font-weight:800;
-      margin:16px 0 8px;
-    "
-  >
-    Asset Intelligence
   </div>
 
 
-  <section id="intel-assets">
+  <section id="intelligence-content">
 
-    <div class="loading">
-      Menganalisis BTC, ETH dan SOL...
+    <div class="intel-empty">
+      🧠 Analyzing market...
     </div>
 
   </section>
 
 
-  <!-- DISCLAIMER -->
-
   <div
     style="
-      margin-top:18px;
-      padding:12px;
+      padding:10px;
       border:1px solid var(--border);
       border-radius:12px;
       color:var(--faint);
-      font-size:8px;
+      font-size:7px;
       line-height:1.5;
       text-align:center;
     "
   >
 
-    NEXTRA Intelligence menggunakan
-    data market untuk menghasilkan
-    analisis otomatis.
-
-    <br><br>
-
-    Bukan nasihat keuangan dan bukan
-    jaminan profit.
+    Intelligence memberikan analisis berbasis data.
+    Bukan jaminan profit atau prediksi pasti harga.
 
   </div>
+
 
 </main>
 
 
-<!-- BOTTOM NAV -->
-
 <div id="bottom-nav"></div>
 
 
-<!-- CORE -->
-
 <script src="js/app.js"></script>
-
 <script src="js/api.js"></script>
-
-
-<!-- INTELLIGENCE V2 -->
-
 <script src="js/features/intelligence.js"></script>
 
 
 <script>
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
+document
+  .getElementById("intel-refresh")
+  ?.addEventListener(
+    "click",
+    () => {
 
-    const refresh =
-      document.getElementById(
-        "intel-refresh"
-      );
+      if (
+        window.NEXTRA_INTELLIGENCE
+      ) {
 
-    if (refresh) {
+        NEXTRA_INTELLIGENCE.refresh();
 
-      refresh.addEventListener(
-        "click",
-        () => {
-
-          if (
-            window.NEXTRA_INTELLIGENCE
-          ) {
-
-            window
-              .NEXTRA_INTELLIGENCE
-              .refresh();
-
-          }
-
-        }
-      );
+      }
 
     }
+  );
 
 
-    const theme =
-      document.getElementById(
-        "theme-toggle"
-      );
+document
+  .getElementById("theme-toggle")
+  ?.addEventListener(
+    "click",
+    () => {
 
-    if (theme) {
+      if (
+        typeof toggleTheme === "function"
+      ) {
 
-      theme.addEventListener(
+        toggleTheme();
+
+      }
+
+    }
+  );
+
+
+document
+  .querySelectorAll(".intel-filter")
+  .forEach(
+    button => {
+
+      button.addEventListener(
         "click",
         () => {
 
+          document
+            .querySelectorAll(".intel-filter")
+            .forEach(
+              item =>
+                item.classList.remove(
+                  "active"
+                )
+            );
+
+          button.classList.add("active");
+
+          window.NEXTRA_INTELLIGENCE_FILTER =
+            button.dataset.filter;
+
           if (
-            typeof toggleTheme ===
+            typeof renderIntelligenceV100 ===
             "function"
           ) {
 
-            toggleTheme();
+            renderIntelligenceV100();
 
           }
 
@@ -378,9 +552,7 @@ document.addEventListener(
       );
 
     }
-
-  }
-);
+  );
 
 </script>
 
