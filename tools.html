@@ -2,49 +2,281 @@
 <html lang="id">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070909">
 
   <title>NEXTRA — Tools</title>
 
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+  <link rel="stylesheet" href="css/style.css">
 
+  <style>
+    /* =====================================================
+       NEXTRA TOOLS V1000
+    ===================================================== */
+
+    .tools-wrap {
+      padding-bottom: 100px;
+    }
+
+    .tools-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 0 14px;
+      scrollbar-width: none;
+    }
+
+    .tools-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tool-tab {
+      flex: 0 0 auto;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+      color: inherit;
+      padding: 10px 14px;
+      border-radius: 13px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: .2s ease;
+    }
+
+    .tool-tab.active {
+      background: rgba(66,245,167,.12);
+      border-color: rgba(66,245,167,.45);
+      color: #42f5a7;
+    }
+
+    .tool-panel {
+      display: none;
+    }
+
+    .tool-panel.active {
+      display: block;
+      animation: toolIn .2s ease;
+    }
+
+    @keyframes toolIn {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tool-card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.055),
+          rgba(255,255,255,.018)
+        );
+
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.18);
+    }
+
+    .tool-head {
+      margin-bottom: 18px;
+    }
+
+    .tool-head h2 {
+      margin: 0 0 6px;
+      font-size: 19px;
+    }
+
+    .tool-head p {
+      margin: 0;
+      opacity: .55;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .field {
+      margin-bottom: 13px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 11px;
+      opacity: .65;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px 14px;
+      border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+      color: inherit;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: rgba(66,245,167,.55);
+      box-shadow: 0 0 0 3px rgba(66,245,167,.06);
+    }
+
+    .calculate-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 14px;
+      background: #42f5a7;
+      color: #06100b;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .calculate-btn:active {
+      transform: scale(.985);
+    }
+
+    .secondary-btn {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 13px;
+      background: rgba(255,255,255,.035);
+      color: inherit;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .result {
+      margin-top: 16px;
+    }
+
+    .result-box {
+      border-radius: 17px;
+      padding: 16px;
+      background: rgba(66,245,167,.06);
+      border: 1px solid rgba(66,245,167,.16);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .result-item {
+      padding: 12px;
+      border-radius: 13px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .result-item span {
+      display: block;
+      font-size: 10px;
+      opacity: .5;
+      margin-bottom: 5px;
+    }
+
+    .result-item strong {
+      font-size: 15px;
+    }
+
+    .green {
+      color: #42f5a7;
+    }
+
+    .red {
+      color: #ff6b6b;
+    }
+
+    .history {
+      margin-top: 14px;
+    }
+
+    .history-title {
+      font-size: 10px;
+      letter-spacing: .8px;
+      opacity: .45;
+      margin-bottom: 8px;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 12px;
+      margin-bottom: 6px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.05);
+      font-size: 11px;
+    }
+
+    .clear-history {
+      border: 0;
+      background: none;
+      color: #ff6b6b;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .formula {
+      margin-top: 12px;
+      padding: 11px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+      font-size: 10px;
+      opacity: .55;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 700px) {
+      .tools-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .tool-panel {
+        min-width: 0;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-<main class="container">
-
+<main class="container tools-wrap">
 
   <!-- HEADER -->
-
   <header class="topbar">
 
     <div>
-
       <h1 class="title">
         Tools<span class="dot">.</span>
       </h1>
 
       <p class="subtitle">
-        Trading calculators
+        Professional trading calculators
       </p>
-
     </div>
-
 
     <button
       class="icon-btn"
       id="theme-toggle"
+      type="button"
+      aria-label="Theme"
     >
       ◐
     </button>
@@ -52,371 +284,707 @@
   </header>
 
 
-
   <!-- TABS -->
+  <div class="tools-tabs">
 
-  <div
-    class="tabs"
-    style="
-      overflow-x:auto;
-      margin-bottom:14px;
-    "
-  >
-
-    <button
-      class="tab active"
-      data-tool="position"
-    >
+    <button class="tool-tab active" data-tool="position">
       Position
     </button>
 
-    <button
-      class="tab"
-      data-tool="risk"
-    >
-      Risk / Reward
+    <button class="tool-tab" data-tool="rr">
+      R:R
     </button>
 
-    <button
-      class="tab"
-      data-tool="pnl"
-    >
+    <button class="tool-tab" data-tool="pnl">
       P&L
     </button>
 
-    <button
-      class="tab"
-      data-tool="liquidation"
-    >
+    <button class="tool-tab" data-tool="liq">
       Liquidation
+    </button>
+
+    <button class="tool-tab" data-tool="leverage">
+      Leverage
+    </button>
+
+    <button class="tool-tab" data-tool="margin">
+      Margin
+    </button>
+
+    <button class="tool-tab" data-tool="fee">
+      Fees
+    </button>
+
+    <button class="tool-tab" data-tool="dca">
+      DCA
+    </button>
+
+    <button class="tool-tab" data-tool="compound">
+      Compound
     </button>
 
   </div>
 
 
+  <div class="tools-grid">
 
-  <!-- POSITION SIZE -->
 
-  <section
-    id="tool-position"
-    class="tool-panel"
-  >
+    <!-- =================================================
+         POSITION SIZE
+    ================================================== -->
 
-    <div class="coin-card"
-      style="display:block;"
+    <section
+      class="tool-panel active"
+      id="tool-position"
     >
 
-      <h2 style="font-size:15px;">
-        Position Size
-      </h2>
+      <div class="tool-card">
 
-      <p class="dim"
-        style="font-size:9px;"
-      >
-        Hitung ukuran posisi berdasarkan
-        modal dan risiko.
-      </p>
+        <div class="tool-head">
 
+          <h2>Position Size</h2>
 
-      <label>Account Balance ($)</label>
+          <p>
+            Tentukan ukuran posisi berdasarkan
+            modal dan risiko maksimum.
+          </p>
 
-      <input
-        id="pos-balance"
-        class="search-input"
-        type="number"
-        placeholder="1000"
-      >
+        </div>
 
 
-      <label>Risk (%)</label>
-
-      <input
-        id="pos-risk"
-        class="search-input"
-        type="number"
-        placeholder="1"
-        step="0.1"
-      >
-
-
-      <label>Entry Price</label>
-
-      <input
-        id="pos-entry"
-        class="search-input"
-        type="number"
-        placeholder="100000"
-      >
+        <div class="field">
+          <label>Account Balance ($)</label>
+          <input
+            id="pos-balance"
+            type="number"
+            placeholder="1000"
+          >
+        </div>
 
 
-      <label>Stop Loss Price</label>
-
-      <input
-        id="pos-stop"
-        class="search-input"
-        type="number"
-        placeholder="98000"
-      >
-
-
-      <button
-        id="calculate-position"
-        class="primary-btn"
-        style="width:100%;margin-top:8px;"
-      >
-        Calculate
-      </button>
+        <div class="field">
+          <label>Risk (%)</label>
+          <input
+            id="pos-risk"
+            type="number"
+            step="0.1"
+            placeholder="1"
+          >
+        </div>
 
 
-      <div
-        id="position-result"
-        style="margin-top:14px;"
-      ></div>
+        <div class="field">
+          <label>Entry Price</label>
+          <input
+            id="pos-entry"
+            type="number"
+            placeholder="100000"
+          >
+        </div>
 
-    </div>
 
-  </section>
+        <div class="field">
+          <label>Stop Loss Price</label>
+          <input
+            id="pos-stop"
+            type="number"
+            placeholder="98000"
+          >
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-position"
+        >
+          Calculate Position
+        </button>
+
+
+        <div
+          class="result"
+          id="position-result"
+        ></div>
+
+
+        <div class="formula">
+          Position Size = Risk Amount ÷ Stop Distance × Entry
+        </div>
+
+      </div>
+
+    </section>
 
 
 
-  <!-- RISK REWARD -->
+    <!-- =================================================
+         RISK REWARD
+    ================================================== -->
 
-  <section
-    id="tool-risk"
-    class="tool-panel"
-    style="display:none;"
-  >
+    <section
+      class="tool-panel"
+      id="tool-rr"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>Risk / Reward</h2>
+
+          <p>
+            Hitung apakah setup trading memiliki
+            reward yang sepadan dengan risikonya.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Entry</label>
+          <input id="rr-entry" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Stop Loss</label>
+          <input id="rr-stop" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Take Profit</label>
+          <input id="rr-target" type="number">
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-rr"
+        >
+          Calculate R:R
+        </button>
+
+
+        <div
+          class="result"
+          id="rr-result"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PNL
+    ================================================== -->
+
+    <section
+      class="tool-panel"
+      id="tool-pnl"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>Profit & Loss</h2>
+
+          <p>
+            Simulasikan estimasi profit atau loss
+            dari sebuah posisi.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Entry Price</label>
+          <input id="pnl-entry" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Exit Price</label>
+          <input id="pnl-exit" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Position Size ($)</label>
+          <input id="pnl-size" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Side</label>
+
+          <select id="pnl-side">
+
+            <option value="long">
+              Long
+            </option>
+
+            <option value="short">
+              Short
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-pnl"
+        >
+          Calculate P&L
+        </button>
+
+
+        <div
+          class="result"
+          id="pnl-result"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         LIQUIDATION
+    ================================================== -->
+
+    <section
+      class="tool-panel"
+      id="tool-liq"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>Liquidation</h2>
+
+          <p>
+            Estimasi liquidation price berdasarkan
+            entry dan leverage.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Entry Price</label>
+          <input id="liq-entry" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Leverage</label>
+          <input
+            id="liq-leverage"
+            type="number"
+            placeholder="10"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Side</label>
+
+          <select id="liq-side">
+
+            <option value="long">
+              Long
+            </option>
+
+            <option value="short">
+              Short
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-liq"
+        >
+          Estimate Liquidation
+        </button>
+
+
+        <div
+          class="result"
+          id="liq-result"
+        ></div>
+
+
+        <div class="formula">
+          Estimasi sederhana. Liquidation aktual
+          dapat berbeda karena maintenance margin,
+          fees dan exchange rules.
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         LEVERAGE
+    ================================================== -->
+
+    <section
+      class="tool-panel"
+      id="tool-leverage"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>Leverage Calculator</h2>
+
+          <p>
+            Cari leverage berdasarkan position size
+            dan modal yang digunakan.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Position Size ($)</label>
+          <input id="lev-position" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Margin ($)</label>
+          <input id="lev-margin" type="number">
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-leverage"
+        >
+          Calculate Leverage
+        </button>
+
+
+        <div
+          class="result"
+          id="leverage-result"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         MARGIN
+    ================================================== -->
+
+    <section
+      class="tool-panel"
+      id="tool-margin"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>Margin Calculator</h2>
+
+          <p>
+            Hitung margin yang diperlukan untuk
+            membuka posisi futures.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Position Size ($)</label>
+          <input id="margin-position" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Leverage</label>
+          <input
+            id="margin-leverage"
+            type="number"
+            placeholder="10"
+          >
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-margin"
+        >
+          Calculate Margin
+        </button>
+
+
+        <div
+          class="result"
+          id="margin-result"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FEE
+    ================================================== -->
+
+    <section
+      class="tool-panel"
+      id="tool-fee"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>Trading Fee</h2>
+
+          <p>
+            Estimasi biaya trading berdasarkan
+            volume transaksi dan fee rate.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Trading Volume ($)</label>
+          <input id="fee-volume" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Fee Rate (%)</label>
+          <input
+            id="fee-rate"
+            type="number"
+            step="0.001"
+            placeholder="0.04"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Transactions</label>
+          <input
+            id="fee-transactions"
+            type="number"
+            value="1"
+            min="1"
+          >
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-fee"
+        >
+          Calculate Fee
+        </button>
+
+
+        <div
+          class="result"
+          id="fee-result"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         DCA
+    ================================================== -->
+
+    <section
+      class="tool-panel"
+      id="tool-dca"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>DCA Calculator</h2>
+
+          <p>
+            Hitung average entry dari beberapa
+            pembelian aset.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Total Investment ($)</label>
+          <input id="dca-investment" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Average Buy Price ($)</label>
+          <input id="dca-price" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Current Price ($)</label>
+          <input id="dca-current" type="number">
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-dca"
+        >
+          Calculate DCA
+        </button>
+
+
+        <div
+          class="result"
+          id="dca-result"
+        ></div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         COMPOUND
+    ================================================== -->
+
+    <section
+      class="tool-panel"
+      id="tool-compound"
+    >
+
+      <div class="tool-card">
+
+        <div class="tool-head">
+
+          <h2>Compounding</h2>
+
+          <p>
+            Simulasikan pertumbuhan modal dengan
+            return yang berulang.
+          </p>
+
+        </div>
+
+
+        <div class="field">
+          <label>Initial Capital ($)</label>
+          <input id="cmp-capital" type="number">
+        </div>
+
+
+        <div class="field">
+          <label>Return per Period (%)</label>
+          <input
+            id="cmp-return"
+            type="number"
+            step="0.1"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>Periods</label>
+          <input
+            id="cmp-periods"
+            type="number"
+            min="1"
+          >
+        </div>
+
+
+        <button
+          class="calculate-btn"
+          id="calc-compound"
+        >
+          Calculate Growth
+        </button>
+
+
+        <div
+          class="result"
+          id="compound-result"
+        ></div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- HISTORY -->
+
+  <section class="tool-card history">
 
     <div
-      class="coin-card"
-      style="display:block;"
+      style="
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-bottom:10px;
+      "
     >
 
-      <h2 style="font-size:15px;">
-        Risk / Reward
-      </h2>
-
-      <p class="dim"
-        style="font-size:9px;"
-      >
-        Hitung rasio risiko terhadap
-        potensi reward.
-      </p>
-
-
-      <label>Entry</label>
-
-      <input
-        id="rr-entry"
-        class="search-input"
-        type="number"
-      >
-
-
-      <label>Stop Loss</label>
-
-      <input
-        id="rr-stop"
-        class="search-input"
-        type="number"
-      >
-
-
-      <label>Take Profit</label>
-
-      <input
-        id="rr-target"
-        class="search-input"
-        type="number"
-      >
-
+      <div class="history-title">
+        RECENT CALCULATIONS
+      </div>
 
       <button
-        id="calculate-rr"
-        class="primary-btn"
-        style="width:100%;margin-top:8px;"
+        class="clear-history"
+        id="clear-history"
       >
-        Calculate
+        Clear
       </button>
-
-
-      <div
-        id="rr-result"
-        style="margin-top:14px;"
-      ></div>
 
     </div>
 
-  </section>
 
-
-
-  <!-- PNL -->
-
-  <section
-    id="tool-pnl"
-    class="tool-panel"
-    style="display:none;"
-  >
-
-    <div
-      class="coin-card"
-      style="display:block;"
-    >
-
-      <h2 style="font-size:15px;">
-        Profit & Loss
-      </h2>
-
-
-      <label>Entry Price</label>
-
-      <input
-        id="pnl-entry"
-        class="search-input"
-        type="number"
-      >
-
-
-      <label>Exit Price</label>
-
-      <input
-        id="pnl-exit"
-        class="search-input"
-        type="number"
-      >
-
-
-      <label>Position Size ($)</label>
-
-      <input
-        id="pnl-size"
-        class="search-input"
-        type="number"
-      >
-
-
-      <label>Side</label>
-
-      <select
-        id="pnl-side"
-        class="search-input"
-      >
-
-        <option value="long">
-          Long
-        </option>
-
-        <option value="short">
-          Short
-        </option>
-
-      </select>
-
-
-      <button
-        id="calculate-pnl"
-        class="primary-btn"
-        style="width:100%;margin-top:8px;"
-      >
-        Calculate
-      </button>
-
-
-      <div
-        id="pnl-result"
-        style="margin-top:14px;"
-      ></div>
-
+    <div id="history-list">
+      <div style="opacity:.4;font-size:11px;">
+        No calculations yet.
+      </div>
     </div>
 
   </section>
-
-
-
-  <!-- LIQUIDATION -->
-
-  <section
-    id="tool-liquidation"
-    class="tool-panel"
-    style="display:none;"
-  >
-
-    <div
-      class="coin-card"
-      style="display:block;"
-    >
-
-      <h2 style="font-size:15px;">
-        Liquidation Estimate
-      </h2>
-
-      <p class="dim"
-        style="font-size:9px;"
-      >
-        Estimasi sederhana liquidation
-        price untuk futures.
-      </p>
-
-
-      <label>Entry Price</label>
-
-      <input
-        id="liq-entry"
-        class="search-input"
-        type="number"
-      >
-
-
-      <label>Leverage</label>
-
-      <input
-        id="liq-leverage"
-        class="search-input"
-        type="number"
-        placeholder="10"
-      >
-
-
-      <label>Side</label>
-
-      <select
-        id="liq-side"
-        class="search-input"
-      >
-
-        <option value="long">
-          Long
-        </option>
-
-        <option value="short">
-          Short
-        </option>
-
-      </select>
-
-
-      <button
-        id="calculate-liquidation"
-        class="primary-btn"
-        style="width:100%;margin-top:8px;"
-      >
-        Calculate
-      </button>
-
-
-      <div
-        id="liq-result"
-        style="margin-top:14px;"
-      ></div>
-
-    </div>
-
-  </section>
-
 
 </main>
-
 
 
 <!-- NAV -->
@@ -424,78 +992,233 @@
 <div id="bottom-nav"></div>
 
 
-
 <script src="js/app.js"></script>
 
 
 <script>
+"use strict";
+
+/* =====================================================
+   NEXTRA TOOLS V1000 ENGINE
+===================================================== */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+/* =====================================================
+   FORMAT
+===================================================== */
 
 function money(value) {
 
   return "$" +
-    Number(value)
-      .toLocaleString(
-        "en-US",
-        {
-          maximumFractionDigits:2
-        }
-      );
+    Number(value).toLocaleString(
+      "en-US",
+      {
+        maximumFractionDigits: 4
+      }
+    );
 
 }
 
 
-/* ===============================
+function number(value) {
+
+  return Number(value).toLocaleString(
+    "en-US",
+    {
+      maximumFractionDigits: 6
+    }
+  );
+
+}
+
+
+function valid(...values) {
+
+  return values.every(
+    value =>
+      Number.isFinite(value) &&
+      value > 0
+  );
+
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+const HISTORY_KEY =
+  "nextra_tools_history_v1000";
+
+
+function getHistory() {
+
+  try {
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(
+          HISTORY_KEY
+        ) || "[]"
+      );
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  } catch {
+
+    return [];
+
+  }
+
+}
+
+
+function saveHistory(
+  title,
+  value
+) {
+
+  const history =
+    getHistory();
+
+  history.unshift({
+    title,
+    value,
+    time:
+      new Date().toLocaleTimeString(
+        "id-ID",
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      )
+  });
+
+  localStorage.setItem(
+    HISTORY_KEY,
+    JSON.stringify(
+      history.slice(0, 8)
+    )
+  );
+
+  renderHistory();
+
+}
+
+
+function renderHistory() {
+
+  const list =
+    $("history-list");
+
+  const history =
+    getHistory();
+
+  if (!history.length) {
+
+    list.innerHTML =
+      `<div style="opacity:.4;font-size:11px;">
+        No calculations yet.
+      </div>`;
+
+    return;
+
+  }
+
+  list.innerHTML =
+    history.map(
+      item => `
+        <div class="history-item">
+
+          <div>
+            <strong>
+              ${item.title}
+            </strong>
+
+            <div style="opacity:.45;margin-top:3px;">
+              ${item.time}
+            </div>
+          </div>
+
+          <span>
+            ${item.value}
+          </span>
+
+        </div>
+      `
+    ).join("");
+
+}
+
+
+$("clear-history")
+  ?.addEventListener(
+    "click",
+    () => {
+
+      localStorage.removeItem(
+        HISTORY_KEY
+      );
+
+      renderHistory();
+
+    }
+  );
+
+
+renderHistory();
+
+
+/* =====================================================
    TABS
-================================ */
+===================================================== */
 
 document
-  .querySelectorAll("[data-tool]")
-  .forEach(button => {
+  .querySelectorAll(".tool-tab")
+  .forEach(tab => {
 
-    button.addEventListener(
+    tab.addEventListener(
       "click",
       () => {
 
-        const tool =
-          button.dataset.tool;
+        const target =
+          tab.dataset.tool;
 
+        document
+          .querySelectorAll(
+            ".tool-tab"
+          )
+          .forEach(
+            item =>
+              item.classList.remove(
+                "active"
+              )
+          );
+
+        tab.classList.add(
+          "active"
+        );
 
         document
           .querySelectorAll(
             ".tool-panel"
           )
-          .forEach(panel => {
+          .forEach(
+            panel =>
+              panel.classList.remove(
+                "active"
+              )
+          );
 
-            panel.style.display =
-              "none";
-
-          });
-
-
-        document
-          .getElementById(
-            `tool-${tool}`
-          )
-          .style.display =
-          "block";
-
-
-        document
-          .querySelectorAll(
-            "[data-tool]"
-          )
-          .forEach(btn => {
-
-            btn.classList.remove(
-              "active"
-            );
-
-          });
-
-
-        button.classList.add(
-          "active"
-        );
+        $("tool-" + target)
+          ?.classList.add(
+            "active"
+          );
 
       }
     );
@@ -503,294 +1226,290 @@ document
   });
 
 
-/* ===============================
+/* =====================================================
    POSITION SIZE
-================================ */
+===================================================== */
 
-document
-  .getElementById(
-    "calculate-position"
-  )
+$("calc-position")
   .addEventListener(
     "click",
     () => {
 
       const balance =
         Number(
-          document.getElementById(
-            "pos-balance"
-          ).value
+          $("pos-balance").value
         );
-
 
       const risk =
         Number(
-          document.getElementById(
-            "pos-risk"
-          ).value
+          $("pos-risk").value
         );
-
 
       const entry =
         Number(
-          document.getElementById(
-            "pos-entry"
-          ).value
+          $("pos-entry").value
         );
-
 
       const stop =
         Number(
-          document.getElementById(
-            "pos-stop"
-          ).value
+          $("pos-stop").value
         );
 
-
       if (
-        !balance ||
-        !risk ||
-        !entry ||
-        !stop
+        !valid(
+          balance,
+          risk,
+          entry,
+          stop
+        )
       ) {
+
+        $("position-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
 
         return;
 
       }
 
+      if (entry === stop) {
+
+        $("position-result").innerHTML =
+          `<div class="result-box red">
+            Entry and Stop Loss cannot be equal.
+          </div>`;
+
+        return;
+
+      }
 
       const riskAmount =
-        balance *
-        risk /
-        100;
+        balance * risk / 100;
 
-
-      const priceRisk =
+      const distance =
         Math.abs(
           entry - stop
         );
 
+      const quantity =
+        riskAmount / distance;
 
-      const coins =
-        riskAmount /
-        priceRisk;
+      const positionSize =
+        quantity * entry;
 
+      $("position-result").innerHTML = `
 
-      const position =
-        coins *
-        entry;
+        <div class="result-box">
 
+          <div class="result-grid">
 
-      document
-        .getElementById(
-          "position-result"
-        )
-        .innerHTML = `
-
-          <div class="highlight-box">
-
-            <div class="dim">
-              Maximum Risk
+            <div class="result-item">
+              <span>Maximum Risk</span>
+              <strong>
+                ${money(riskAmount)}
+              </strong>
             </div>
 
-            <strong>
-              ${money(riskAmount)}
-            </strong>
-
-            <br><br>
-
-            <div class="dim">
-              Position Size
+            <div class="result-item">
+              <span>Position Size</span>
+              <strong>
+                ${money(positionSize)}
+              </strong>
             </div>
 
-            <strong>
-              ${money(position)}
-            </strong>
-
-            <br><br>
-
-            <div class="dim">
-              Quantity
+            <div class="result-item">
+              <span>Quantity</span>
+              <strong>
+                ${number(quantity)}
+              </strong>
             </div>
 
-            <strong>
-              ${coins.toFixed(6)}
-            </strong>
+            <div class="result-item">
+              <span>Stop Distance</span>
+              <strong>
+                ${money(distance)}
+              </strong>
+            </div>
 
           </div>
 
-        `;
+        </div>
+      `;
+
+      saveHistory(
+        "Position Size",
+        money(positionSize)
+      );
 
     }
   );
 
 
-/* ===============================
-   RISK / REWARD
-================================ */
+/* =====================================================
+   RISK REWARD
+===================================================== */
 
-document
-  .getElementById(
-    "calculate-rr"
-  )
+$("calc-rr")
   .addEventListener(
     "click",
     () => {
 
       const entry =
         Number(
-          document.getElementById(
-            "rr-entry"
-          ).value
+          $("rr-entry").value
         );
-
 
       const stop =
         Number(
-          document.getElementById(
-            "rr-stop"
-          ).value
+          $("rr-stop").value
         );
-
 
       const target =
         Number(
-          document.getElementById(
-            "rr-target"
-          ).value
+          $("rr-target").value
         );
 
-
       if (
-        !entry ||
-        !stop ||
-        !target
-      ) return;
+        !valid(
+          entry,
+          stop,
+          target
+        )
+      ) {
 
+        $("rr-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
+
+        return;
+
+      }
 
       const risk =
         Math.abs(
           entry - stop
         );
-
 
       const reward =
         Math.abs(
           target - entry
         );
 
+      if (!risk) return;
 
       const ratio =
-        reward /
-        risk;
+        reward / risk;
 
+      const cls =
+        ratio >= 2
+          ? "green"
+          : "";
 
-      document
-        .getElementById(
-          "rr-result"
-        )
-        .innerHTML = `
+      $("rr-result").innerHTML = `
 
-          <div class="highlight-box">
+        <div class="result-box">
 
-            <div class="dim">
-              Risk
+          <div class="result-grid">
+
+            <div class="result-item">
+              <span>Risk</span>
+              <strong>
+                ${money(risk)}
+              </strong>
             </div>
 
-            <strong>
-              ${money(risk)}
-            </strong>
-
-            <br><br>
-
-            <div class="dim">
-              Reward
+            <div class="result-item">
+              <span>Reward</span>
+              <strong>
+                ${money(reward)}
+              </strong>
             </div>
 
-            <strong>
-              ${money(reward)}
-            </strong>
-
-            <br><br>
-
-            <div class="dim">
-              Risk / Reward
+            <div class="result-item">
+              <span>Ratio</span>
+              <strong class="${cls}">
+                1 : ${ratio.toFixed(2)}
+              </strong>
             </div>
 
-            <strong
-              class="${
-                ratio >= 2
-                  ? "up"
-                  : ""
-              }"
-            >
-              1 : ${ratio.toFixed(2)}
-            </strong>
+            <div class="result-item">
+              <span>Quality</span>
+              <strong class="${cls}">
+                ${
+                  ratio >= 3
+                    ? "Excellent"
+                    : ratio >= 2
+                      ? "Good"
+                      : "Low"
+                }
+              </strong>
+            </div>
 
           </div>
 
-        `;
+        </div>
+      `;
+
+      saveHistory(
+        "Risk / Reward",
+        "1 : " +
+        ratio.toFixed(2)
+      );
 
     }
   );
 
 
-/* ===============================
+/* =====================================================
    PNL
-================================ */
+===================================================== */
 
-document
-  .getElementById(
-    "calculate-pnl"
-  )
+$("calc-pnl")
   .addEventListener(
     "click",
     () => {
 
       const entry =
         Number(
-          document.getElementById(
-            "pnl-entry"
-          ).value
+          $("pnl-entry").value
         );
-
 
       const exit =
         Number(
-          document.getElementById(
-            "pnl-exit"
-          ).value
+          $("pnl-exit").value
         );
-
 
       const size =
         Number(
-          document.getElementById(
-            "pnl-size"
-          ).value
+          $("pnl-size").value
         );
 
-
       const side =
-        document.getElementById(
-          "pnl-side"
-        ).value;
-
+        $("pnl-side").value;
 
       if (
-        !entry ||
-        !exit ||
-        !size
-      ) return;
+        !valid(
+          entry,
+          exit,
+          size
+        )
+      ) {
 
+        $("pnl-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
+
+        return;
+
+      }
 
       let percentage =
         (
           exit - entry
-        ) /
-        entry *
-        100;
-
+        ) / entry * 100;
 
       if (
         side === "short"
@@ -800,106 +1519,95 @@ document
 
       }
 
-
       const pnl =
         size *
         percentage /
         100;
 
-
       const cls =
         pnl >= 0
-          ? "up"
-          : "down";
+          ? "green"
+          : "red";
 
+      $("pnl-result").innerHTML = `
 
-      document
-        .getElementById(
-          "pnl-result"
-        )
-        .innerHTML = `
+        <div class="result-box">
 
-          <div class="highlight-box">
+          <div class="result-grid">
 
-            <div class="dim">
-              P&L
+            <div class="result-item">
+              <span>P&L</span>
+              <strong class="${cls}">
+                ${pnl >= 0 ? "+" : ""}
+                ${money(pnl)}
+              </strong>
             </div>
 
-            <strong
-              class="${cls}"
-              style="font-size:20px;"
-            >
-              ${pnl >= 0 ? "+" : ""}
-              ${money(pnl)}
-            </strong>
-
-            <br><br>
-
-            <div class="dim">
-              Return
+            <div class="result-item">
+              <span>Return</span>
+              <strong class="${cls}">
+                ${percentage.toFixed(2)}%
+              </strong>
             </div>
-
-            <strong
-              class="${cls}"
-            >
-              ${percentage.toFixed(2)}%
-            </strong>
 
           </div>
 
-        `;
+        </div>
+      `;
+
+      saveHistory(
+        "P&L",
+        (pnl >= 0 ? "+" : "") +
+        money(pnl)
+      );
 
     }
   );
 
 
-/* ===============================
+/* =====================================================
    LIQUIDATION
-================================ */
+===================================================== */
 
-document
-  .getElementById(
-    "calculate-liquidation"
-  )
+$("calc-liq")
   .addEventListener(
     "click",
     () => {
 
       const entry =
         Number(
-          document.getElementById(
-            "liq-entry"
-          ).value
+          $("liq-entry").value
         );
-
 
       const leverage =
         Number(
-          document.getElementById(
-            "liq-leverage"
-          ).value
+          $("liq-leverage").value
         );
 
-
       const side =
-        document.getElementById(
-          "liq-side"
-        ).value;
-
+        $("liq-side").value;
 
       if (
-        !entry ||
-        !leverage ||
+        !valid(
+          entry,
+          leverage
+        ) ||
         leverage <= 1
-      ) return;
+      ) {
 
+        $("liq-result").innerHTML =
+          `<div class="result-box red">
+            Leverage must be greater than 1x.
+          </div>`;
+
+        return;
+
+      }
 
       const maintenance =
         0.005;
 
-
       let liquidation;
-
 
       if (
         side === "long"
@@ -909,9 +1617,7 @@ document
           entry *
           (
             1 -
-            (
-              1 / leverage
-            ) +
+            1 / leverage +
             maintenance
           );
 
@@ -921,78 +1627,479 @@ document
           entry *
           (
             1 +
-            (
-              1 / leverage
-            ) -
+            1 / leverage -
             maintenance
           );
 
       }
 
+      $("liq-result").innerHTML = `
 
-      document
-        .getElementById(
-          "liq-result"
-        )
-        .innerHTML = `
+        <div class="result-box">
 
-          <div class="highlight-box">
+          <div class="result-item">
 
-            <div class="dim">
-              Estimated Liquidation
-            </div>
+            <span>
+              Estimated Liquidation Price
+            </span>
 
-            <strong
-              style="font-size:20px;"
-            >
-              ${money(
-                liquidation
-              )}
+            <strong>
+              ${money(liquidation)}
             </strong>
-
-            <br><br>
-
-            <div
-              class="dim"
-              style="
-                font-size:8px;
-              "
-            >
-              Ini hanya estimasi.
-              Harga liquidation sebenarnya
-              dapat berbeda karena maintenance
-              margin, fee, tier posisi dan
-              aturan exchange.
-            </div>
 
           </div>
 
-        `;
+        </div>
+      `;
+
+      saveHistory(
+        "Liquidation",
+        money(liquidation)
+      );
 
     }
   );
 
 
-/* ===============================
-   THEME
-================================ */
+/* =====================================================
+   LEVERAGE
+===================================================== */
 
-document
-  .getElementById(
-    "theme-toggle"
-  )
-  ?.addEventListener(
+$("calc-leverage")
+  .addEventListener(
     "click",
     () => {
 
-      toggleTheme();
+      const position =
+        Number(
+          $("lev-position").value
+        );
+
+      const margin =
+        Number(
+          $("lev-margin").value
+        );
+
+      if (
+        !valid(
+          position,
+          margin
+        )
+      ) {
+
+        $("leverage-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
+
+        return;
+
+      }
+
+      const leverage =
+        position / margin;
+
+      $("leverage-result").innerHTML = `
+
+        <div class="result-box">
+
+          <div class="result-grid">
+
+            <div class="result-item">
+              <span>Position</span>
+              <strong>
+                ${money(position)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Margin</span>
+              <strong>
+                ${money(margin)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Leverage</span>
+              <strong class="green">
+                ${leverage.toFixed(2)}x
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      saveHistory(
+        "Leverage",
+        leverage.toFixed(2) + "x"
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   MARGIN
+===================================================== */
+
+$("calc-margin")
+  .addEventListener(
+    "click",
+    () => {
+
+      const position =
+        Number(
+          $("margin-position").value
+        );
+
+      const leverage =
+        Number(
+          $("margin-leverage").value
+        );
+
+      if (
+        !valid(
+          position,
+          leverage
+        )
+      ) {
+
+        $("margin-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
+
+        return;
+
+      }
+
+      const margin =
+        position / leverage;
+
+      $("margin-result").innerHTML = `
+
+        <div class="result-box">
+
+          <div class="result-item">
+
+            <span>
+              Required Margin
+            </span>
+
+            <strong class="green">
+              ${money(margin)}
+            </strong>
+
+          </div>
+
+        </div>
+      `;
+
+      saveHistory(
+        "Margin",
+        money(margin)
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   FEE
+===================================================== */
+
+$("calc-fee")
+  .addEventListener(
+    "click",
+    () => {
+
+      const volume =
+        Number(
+          $("fee-volume").value
+        );
+
+      const rate =
+        Number(
+          $("fee-rate").value
+        );
+
+      const transactions =
+        Number(
+          $("fee-transactions").value
+        );
+
+      if (
+        !valid(
+          volume,
+          rate,
+          transactions
+        )
+      ) {
+
+        $("fee-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
+
+        return;
+
+      }
+
+      const totalVolume =
+        volume *
+        transactions;
+
+      const fee =
+        totalVolume *
+        rate /
+        100;
+
+      $("fee-result").innerHTML = `
+
+        <div class="result-box">
+
+          <div class="result-grid">
+
+            <div class="result-item">
+              <span>Total Volume</span>
+              <strong>
+                ${money(totalVolume)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Total Fee</span>
+              <strong class="red">
+                ${money(fee)}
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      saveHistory(
+        "Trading Fee",
+        money(fee)
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   DCA
+===================================================== */
+
+$("calc-dca")
+  .addEventListener(
+    "click",
+    () => {
+
+      const investment =
+        Number(
+          $("dca-investment").value
+        );
+
+      const average =
+        Number(
+          $("dca-price").value
+        );
+
+      const current =
+        Number(
+          $("dca-current").value
+        );
+
+      if (
+        !valid(
+          investment,
+          average,
+          current
+        )
+      ) {
+
+        $("dca-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
+
+        return;
+
+      }
+
+      const quantity =
+        investment / average;
+
+      const currentValue =
+        quantity * current;
+
+      const pnl =
+        currentValue -
+        investment;
+
+      const percentage =
+        pnl /
+        investment *
+        100;
+
+      const cls =
+        pnl >= 0
+          ? "green"
+          : "red";
+
+      $("dca-result").innerHTML = `
+
+        <div class="result-box">
+
+          <div class="result-grid">
+
+            <div class="result-item">
+              <span>Quantity</span>
+              <strong>
+                ${number(quantity)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Current Value</span>
+              <strong>
+                ${money(currentValue)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>P&L</span>
+              <strong class="${cls}">
+                ${pnl >= 0 ? "+" : ""}
+                ${money(pnl)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Return</span>
+              <strong class="${cls}">
+                ${percentage.toFixed(2)}%
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      saveHistory(
+        "DCA",
+        percentage.toFixed(2) + "%"
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   COMPOUND
+===================================================== */
+
+$("calc-compound")
+  .addEventListener(
+    "click",
+    () => {
+
+      const capital =
+        Number(
+          $("cmp-capital").value
+        );
+
+      const rate =
+        Number(
+          $("cmp-return").value
+        );
+
+      const periods =
+        Number(
+          $("cmp-periods").value
+        );
+
+      if (
+        !valid(
+          capital,
+          periods
+        ) ||
+        rate <= -100
+      ) {
+
+        $("compound-result").innerHTML =
+          `<div class="result-box red">
+            Please enter valid values.
+          </div>`;
+
+        return;
+
+      }
+
+      const finalValue =
+        capital *
+        Math.pow(
+          1 + rate / 100,
+          periods
+        );
+
+      const profit =
+        finalValue -
+        capital;
+
+      $("compound-result").innerHTML = `
+
+        <div class="result-box">
+
+          <div class="result-grid">
+
+            <div class="result-item">
+              <span>Initial Capital</span>
+              <strong>
+                ${money(capital)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Final Value</span>
+              <strong class="green">
+                ${money(finalValue)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Total Profit</span>
+              <strong class="green">
+                +${money(profit)}
+              </strong>
+            </div>
+
+            <div class="result-item">
+              <span>Periods</span>
+              <strong>
+                ${periods}
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      saveHistory(
+        "Compounding",
+        money(finalValue)
+      );
 
     }
   );
 
 </script>
 
-
 </body>
-
 </html>
