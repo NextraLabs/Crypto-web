@@ -1,2627 +1,536 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#070909"
-  >
-
-  <title>Profile — NEXTRA</title>
-
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
-
-  <link
-    rel="stylesheet"
-    href="css/profile.css"
-  >
-
-  <style>
-
-    /* =====================================================
-       NEXTRA PROFILE V100
-    ====================================================== */
-
-    :root {
-      --nextra-bg: #070909;
-      --nextra-card: #0c1113;
-      --nextra-card-2: #101618;
-      --nextra-border: rgba(255,255,255,.07);
-      --nextra-text: #f5f7f7;
-      --nextra-muted: rgba(245,247,247,.55);
-      --nextra-green: #42f5a7;
-      --nextra-red: #ff6b6b;
-    }
-
-
-    /* =====================================================
-       AUTH LOADING
-    ====================================================== */
-
-    .auth-loading {
-
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: #070909;
-      color: #fff;
-
-      font-size: 12px;
-      letter-spacing: .4px;
-
-    }
-
-
-    .auth-loading.hidden {
-      display: none;
-    }
-
-
-    .auth-loading-inner {
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-
-    }
-
-
-    .auth-spinner {
-
-      width: 28px;
-      height: 28px;
-
-      border: 2px solid rgba(255,255,255,.1);
-      border-top-color: #42f5a7;
-
-      border-radius: 50%;
-
-      animation:
-        authSpin .7s linear infinite;
-
-    }
-
-
-    @keyframes authSpin {
-
-      to {
-        transform: rotate(360deg);
-      }
-
-    }
-
-
-    /* =====================================================
-       PROFILE ITEM BUTTON FIX
-    ====================================================== */
-
-    .profile-item.profile-button {
-
-      appearance: none;
-      -webkit-appearance: none;
-
-      width: 100%;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-
-      padding: 16px 18px;
-
-      margin: 0;
-
-      border: 1px solid var(--nextra-border) !important;
-      border-radius: 16px;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.035),
-          rgba(255,255,255,.018)
-        ) !important;
-
-      color: var(--nextra-text) !important;
-
-      text-align: left;
-
-      font-family: inherit;
-      font-size: inherit;
-
-      box-shadow: none !important;
-
-      cursor: pointer;
-
-      transition:
-        background .18s ease,
-        border-color .18s ease,
-        transform .18s ease;
-
-    }
-
-
-    .profile-item.profile-button:hover {
-
-      background:
-        rgba(255,255,255,.055) !important;
-
-      border-color:
-        rgba(255,255,255,.12) !important;
-
-    }
-
-
-    .profile-item.profile-button:active {
-
-      transform: scale(.99);
-
-    }
-
-
-    .profile-item.profile-button > div {
-
-      min-width: 0;
-
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-
-    }
-
-
-    .profile-item.profile-button strong {
-
-      color: var(--nextra-text) !important;
-
-    }
-
-
-    .profile-item.profile-button .logout-title {
-
-      color: var(--nextra-red) !important;
-
-    }
-
-
-    .profile-item.profile-button span {
-
-      color: var(--nextra-muted);
-
-    }
-
-
-    .profile-item.profile-button .profile-arrow {
-
-      color: rgba(255,255,255,.45) !important;
-
-      font-size: 24px;
-      line-height: 1;
-
-    }
-
-
-    /* =====================================================
-       LANGUAGE BUTTON
-    ====================================================== */
-
-    #languageButton {
-
-      appearance: none;
-      -webkit-appearance: none;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.035),
-          rgba(255,255,255,.018)
-        ) !important;
-
-      color: var(--nextra-text) !important;
-
-      border: 1px solid var(--nextra-border) !important;
-
-      box-shadow: none !important;
-
-    }
-
-
-    #languageButton:hover {
-
-      background:
-        rgba(255,255,255,.055) !important;
-
-      border-color:
-        rgba(255,255,255,.12) !important;
-
-    }
-
-
-    #languageButton strong {
-
-      color: var(--nextra-text) !important;
-
-    }
-
-
-    #languageButton span {
-
-      color: var(--nextra-muted);
-
-    }
-
-
-    #languageButton .profile-arrow {
-
-      color: rgba(255,255,255,.45) !important;
-
-    }
-
-
-    /* =====================================================
-       LANGUAGE MODAL
-    ====================================================== */
-
-    .language-modal {
-
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-
-      display: none;
-
-      align-items: flex-end;
-      justify-content: center;
-
-      padding: 16px;
-
-      background:
-        rgba(0,0,0,.72);
-
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-
-    }
-
-
-    .language-modal.show {
-
-      display: flex;
-
-    }
-
-
-    .language-panel {
-
-      width: 100%;
-      max-width: 520px;
-
-      max-height: 82vh;
-
-      overflow-y: auto;
-
-      padding: 20px;
-
-      background:
-        #0b0f11;
-
-      border:
-        1px solid rgba(255,255,255,.08);
-
-      border-radius: 24px;
-
-      box-shadow:
-        0 25px 70px rgba(0,0,0,.55);
-
-      animation:
-        languagePanelIn .22s ease;
-
-    }
-
-
-    @keyframes languagePanelIn {
-
-      from {
-
-        transform:
-          translateY(30px);
-
-        opacity: 0;
-
-      }
-
-      to {
-
-        transform:
-          translateY(0);
-
-        opacity: 1;
-
-      }
-
-    }
-
-
-    .language-panel-header {
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 18px;
-
-    }
-
-
-    .language-panel-header h3 {
-
-      margin: 0;
-
-      color: #fff;
-
-      font-size: 20px;
-
-    }
-
-
-    .language-close {
-
-      appearance: none;
-      -webkit-appearance: none;
-
-      width: 38px;
-      height: 38px;
-
-      padding: 0;
-
-      border: 1px solid rgba(255,255,255,.07);
-
-      border-radius: 50%;
-
-      background:
-        rgba(255,255,255,.07) !important;
-
-      color: #fff !important;
-
-      font-size: 22px;
-
-      cursor: pointer;
-
-    }
-
-
-    .language-list {
-
-      display: grid;
-      gap: 8px;
-
-    }
-
-
-    .language-option {
-
-      appearance: none;
-      -webkit-appearance: none;
-
-      width: 100%;
-
-      display: flex;
-      align-items: center;
-
-      gap: 13px;
-
-      padding: 13px;
-
-      border:
-        1px solid rgba(255,255,255,.06) !important;
-
-      border-radius: 15px;
-
-      background:
-        rgba(255,255,255,.025) !important;
-
-      color: #fff !important;
-
-      text-align: left;
-
-      font-family: inherit;
-
-      cursor: pointer;
-
-      transition: .18s ease;
-
-    }
-
-
-    .language-option:hover {
-
-      background:
-        rgba(255,255,255,.07) !important;
-
-    }
-
-
-    .language-option.selected {
-
-      border-color:
-        rgba(66,245,167,.65) !important;
-
-      background:
-        rgba(66,245,167,.08) !important;
-
-    }
-
-
-    .language-flag {
-
-      width: 38px;
-      height: 38px;
-
-      display: grid;
-      place-items: center;
-
-      flex: 0 0 38px;
-
-      border-radius: 11px;
-
-      background:
-        rgba(255,255,255,.06);
-
-      font-size: 20px;
-
-    }
-
-
-    .language-info {
-
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-
-      min-width: 0;
-
-    }
-
-
-    .language-info strong {
-
-      color: #fff !important;
-
-      font-size: 14px;
-
-    }
-
-
-    .language-info span {
-
-      color:
-        rgba(255,255,255,.5) !important;
-
-      font-size: 12px;
-
-    }
-
-
-    .language-check {
-
-      margin-left: auto;
-
-      color: var(--nextra-green) !important;
-
-      font-size: 18px;
-
-      opacity: 0;
-
-    }
-
-
-    .language-option.selected
-    .language-check {
-
-      opacity: 1;
-
-    }
-
-
-    /* =====================================================
-       MOBILE
-    ====================================================== */
-
-    @media (max-width: 699px) {
-
-      .language-modal {
-
-        align-items: flex-end;
-
-      }
-
-    }
-
-
-    @media (min-width: 700px) {
-
-      .language-modal {
-
-        align-items: center;
-
-      }
-
-    }
-
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070909">
+<title>Profile — NEXTRA</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/profile.css">
+<style>
+:root {
+  --nextra-bg: #070909;
+  --nextra-card: #0c1113;
+  --nextra-card-2: #101618;
+  --nextra-border: rgba(255,255,255,.07);
+  --nextra-text: #f5f7f7;
+  --nextra-muted: rgba(245,247,247,.55);
+  --nextra-green: #42f5a7;
+  --nextra-red: #ff6b6b;
+}
+.auth-loading {
+  position: fixed; inset: 0; z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  background: #070909; color: #fff; font-size: 12px; letter-spacing: .4px;
+}
+.auth-loading.hidden { display: none; }
+.auth-loading-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.auth-spinner {
+  width: 28px; height: 28px;
+  border: 2px solid rgba(255,255,255,.1);
+  border-top-color: #42f5a7;
+  border-radius: 50%;
+  animation: authSpin .7s linear infinite;
+}
+@keyframes authSpin { to { transform: rotate(360deg); } }
+.profile-item.profile-button {
+  appearance: none; -webkit-appearance: none; width: 100%;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 16px 18px; margin: 0;
+  border: 1px solid var(--nextra-border) !important;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018)) !important;
+  color: var(--nextra-text) !important;
+  text-align: left; font-family: inherit; font-size: inherit;
+  box-shadow: none !important; cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.profile-item.profile-button:hover {
+  background: rgba(255,255,255,.055) !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+.profile-item.profile-button:active { transform: scale(.99); }
+.profile-item.profile-button > div { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.profile-item.profile-button strong { color: var(--nextra-text) !important; }
+.profile-item.profile-button .logout-title { color: var(--nextra-red) !important; }
+.profile-item.profile-button span { color: var(--nextra-muted); }
+.profile-item.profile-button .profile-arrow { color: rgba(255,255,255,.45) !important; font-size: 24px; line-height: 1; }
+#languageButton {
+  appearance: none; -webkit-appearance: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018)) !important;
+  color: var(--nextra-text) !important;
+  border: 1px solid var(--nextra-border) !important;
+  box-shadow: none !important;
+}
+#languageButton:hover {
+  background: rgba(255,255,255,.055) !important;
+  border-color: rgba(255,255,255,.12) !important;
+}
+#languageButton strong { color: var(--nextra-text) !important; }
+#languageButton span { color: var(--nextra-muted); }
+#languageButton .profile-arrow { color: rgba(255,255,255,.45) !important; }
+.language-modal {
+  position: fixed; inset: 0; z-index: 9999; display: none;
+  align-items: flex-end; justify-content: center; padding: 16px;
+  background: rgba(0,0,0,.72);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.language-modal.show { display: flex; }
+.language-panel {
+  width: 100%; max-width: 520px; max-height: 82vh; overflow-y: auto; padding: 20px;
+  background: #0b0f11; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 24px; box-shadow: 0 25px 70px rgba(0,0,0,.55);
+  animation: languagePanelIn .22s ease;
+}
+@keyframes languagePanelIn {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.language-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.language-panel-header h3 { margin: 0; color: #fff; font-size: 20px; }
+.language-close {
+  appearance: none; -webkit-appearance: none; width: 38px; height: 38px; padding: 0;
+  border: 1px solid rgba(255,255,255,.07); border-radius: 50%;
+  background: rgba(255,255,255,.07) !important; color: #fff !important;
+  font-size: 22px; cursor: pointer;
+}
+.language-list { display: grid; gap: 8px; }
+.language-option {
+  appearance: none; -webkit-appearance: none; width: 100%;
+  display: flex; align-items: center; gap: 13px; padding: 13px;
+  border: 1px solid rgba(255,255,255,.06) !important; border-radius: 15px;
+  background: rgba(255,255,255,.025) !important; color: #fff !important;
+  text-align: left; font-family: inherit; cursor: pointer; transition: .18s ease;
+}
+.language-option:hover { background: rgba(255,255,255,.07) !important; }
+.language-option.selected {
+  border-color: rgba(66,245,167,.65) !important;
+  background: rgba(66,245,167,.08) !important;
+}
+.language-flag {
+  width: 38px; height: 38px; display: grid; place-items: center; flex: 0 0 38px;
+  border-radius: 11px; background: rgba(255,255,255,.06); font-size: 20px;
+}
+.language-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.language-info strong { color: #fff !important; font-size: 14px; }
+.language-info span { color: rgba(255,255,255,.5) !important; font-size: 12px; }
+.language-check { margin-left: auto; color: var(--nextra-green) !important; font-size: 18px; opacity: 0; }
+.language-option.selected .language-check { opacity: 1; }
+@media (max-width: 699px) { .language-modal { align-items: flex-end; } }
+@media (min-width: 700px) { .language-modal { align-items: center; } }
+</style>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-xVCiSuNfVQzPR83C"></script>
 </head>
-
-
 <body>
-
-
-<!-- =====================================================
-     AUTH LOADING
-====================================================== -->
-
-<div
-  id="authLoading"
-  class="auth-loading"
->
-
+<div id="authLoading" class="auth-loading">
   <div class="auth-loading-inner">
-
     <div class="auth-spinner"></div>
-
-    <span>
-      Checking account...
-    </span>
-
+    <span>Checking account...</span>
   </div>
-
 </div>
-
-
-
-<!-- =====================================================
-     PROFILE PAGE
-====================================================== -->
-
-<main
-  class="container"
-  id="profilePage"
-  hidden
->
-
-
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
-
+<main class="container" id="profilePage" hidden>
   <header class="topbar">
-
     <div>
-
-      <h1 class="title">
-
-        Profile<span class="dot">.</span>
-
-      </h1>
-
-      <p class="subtitle">
-
-        Your NEXTRA identity
-
-      </p>
-
+      <h1 class="title">Profile<span class="dot">.</span></h1>
+      <p class="subtitle">Your NEXTRA identity</p>
     </div>
-
-
-    <a
-      href="index.html"
-      class="icon-btn"
-      aria-label="Back to Home"
-    >
-      ←
-    </a>
-
+    <a href="index.html" class="icon-btn" aria-label="Back to Home">←</a>
   </header>
-
-
-
-  <!-- =====================================================
-       PROFILE CARD
-  ====================================================== -->
-
   <section class="profile-card">
-
     <div class="profile-cover">
-
       <div class="profile-glow"></div>
-
-
-      <button
-        class="profile-avatar"
-        id="avatarButton"
-        type="button"
-        aria-label="Change profile photo"
-      >
-
-        <span id="avatarInitial">
-          N
-        </span>
-
-
-        <img
-          id="avatarImage"
-          alt="Profile photo"
-        >
-
-
-        <span class="avatar-camera">
-          📷
-        </span>
-
+      <button class="profile-avatar" id="avatarButton" type="button" aria-label="Change profile photo">
+        <span id="avatarInitial">N</span>
+        <img id="avatarImage" alt="Profile photo">
+        <span class="avatar-camera">📷</span>
       </button>
-
     </div>
-
-
-
     <div class="profile-main">
-
       <div class="profile-name-row">
-
         <div>
-
-          <h2 id="profileName">
-            NEXTRA User
-          </h2>
-
-          <p id="profileUsername">
-            @nextra_user
-          </p>
-
+          <h2 id="profileName">NEXTRA User</h2>
+          <p id="profileUsername">@nextra_user</p>
         </div>
-
-
-        <span class="profile-status">
-
-          <i></i>
-
-          Active
-
-        </span>
-
+        <span class="profile-status"><i></i>Active</span>
       </div>
-
-
-      <button
-        class="profile-edit-btn"
-        id="editProfileBtn"
-        type="button"
-      >
-        ✏️ Edit Profile
-      </button>
-
+      <button class="profile-edit-btn" id="editProfileBtn" type="button">✏️ Edit Profile</button>
     </div>
-
   </section>
-
-
-
-  <!-- =====================================================
-       AVATAR INPUT
-  ====================================================== -->
-
-  <input
-    type="file"
-    id="avatarInput"
-    accept="image/*"
-    hidden
-  >
-
-
-
-  <!-- =====================================================
-       EDIT PROFILE
-  ====================================================== -->
-
-  <section
-    class="profile-section"
-    id="editProfilePanel"
-    hidden
-  >
-
-    <div class="section-label">
-      EDIT PROFILE
-    </div>
-
-
+  <input type="file" id="avatarInput" accept="image/*" hidden>
+  <section class="profile-section" id="editProfilePanel" hidden>
+    <div class="section-label">EDIT PROFILE</div>
     <div class="profile-edit-card">
-
-      <label for="nameInput">
-        Display name
-      </label>
-
-      <input
-        id="nameInput"
-        type="text"
-        maxlength="30"
-        placeholder="Your name"
-      >
-
-
-      <label for="usernameInput">
-        Username
-      </label>
-
-      <input
-        id="usernameInput"
-        type="text"
-        maxlength="20"
-        placeholder="nextra_user"
-      >
-
-
+      <label for="nameInput">Display name</label>
+      <input id="nameInput" type="text" maxlength="30" placeholder="Your name">
+      <label for="usernameInput">Username</label>
+      <input id="usernameInput" type="text" maxlength="20" placeholder="nextra_user">
       <div class="profile-edit-actions">
-
-        <button
-          id="cancelProfileBtn"
-          type="button"
-          class="profile-secondary-btn"
-        >
-          Cancel
-        </button>
-
-
-        <button
-          id="saveProfileBtn"
-          type="button"
-          class="profile-primary-btn"
-        >
-          Save changes
-        </button>
-
+        <button id="cancelProfileBtn" type="button" class="profile-secondary-btn">Cancel</button>
+        <button id="saveProfileBtn" type="button" class="profile-primary-btn">Save changes</button>
       </div>
-
     </div>
-
   </section>
-
-
-
-  <!-- =====================================================
-       TRADER LEVEL
-  ====================================================== -->
-
   <section class="trader-level-card">
-
     <div class="trader-level-top">
-
       <div>
-
-        <span class="mini-label">
-          TRADER LEVEL
-        </span>
-
-        <h3>
-          Rookie Trader
-        </h3>
-
+        <span class="mini-label">TRADER LEVEL</span>
+        <h3>Rookie Trader</h3>
       </div>
-
-
-      <div class="level-number">
-        LVL 01
-      </div>
-
+      <div class="level-number">LVL 01</div>
     </div>
-
-
-    <div class="xp-row">
-
-      <span>
-        120 XP
-      </span>
-
-      <span>
-        1,000 XP
-      </span>
-
-    </div>
-
-
-    <div class="xp-track">
-
-      <div
-        class="xp-progress"
-        style="width:12%"
-      ></div>
-
-    </div>
-
-
-    <p class="xp-description">
-      Keep exploring NEXTRA to unlock your next level.
-    </p>
-
+    <div class="xp-row"><span>120 XP</span><span>1,000 XP</span></div>
+    <div class="xp-track"><div class="xp-progress" style="width:12%"></div></div>
+    <p class="xp-description">Keep exploring NEXTRA to unlock your next level.</p>
   </section>
-
-
-
-  <!-- =====================================================
-       ACCOUNT PLAN
-  ====================================================== -->
-
   <section class="plan-card">
-
-    <div class="plan-icon">
-      N
-    </div>
-
-
+    <div class="plan-icon">N</div>
     <div class="plan-content">
-
-      <span class="mini-label">
-        CURRENT PLAN
-      </span>
-
-      <strong>
-        NEXTRA Free
-      </strong>
-
-      <span>
-        Core market intelligence
-      </span>
-
+      <span class="mini-label">CURRENT PLAN</span>
+      <strong id="planTierText">NEXTRA Free</strong>
+      <span id="planDescText">Core market intelligence</span>
     </div>
-
-
-    <button
-      class="plan-button"
-      type="button"
-    >
-      Upgrade
-    </button>
-
+    <button class="plan-button" type="button" id="planButton">Upgrade</button>
   </section>
-
-
-
-  <!-- =====================================================
-       STATS
-  ====================================================== -->
-
   <section class="profile-stats">
-
-    <div class="profile-stat">
-
-      <strong id="watchlistCount">
-        0
-      </strong>
-
-      <span>
-        Watchlist
-      </span>
-
-    </div>
-
-
-    <div class="profile-stat">
-
-      <strong id="alertCount">
-        0
-      </strong>
-
-      <span>
-        Alerts
-      </span>
-
-    </div>
-
-
-    <div class="profile-stat">
-
-      <strong id="marketCount">
-        0
-      </strong>
-
-      <span>
-        Markets
-      </span>
-
-    </div>
-
+    <div class="profile-stat"><strong id="watchlistCount">0</strong><span>Watchlist</span></div>
+    <div class="profile-stat"><strong id="alertCount">0</strong><span>Alerts</span></div>
+    <div class="profile-stat"><strong id="marketCount">0</strong><span>Markets</span></div>
   </section>
-
-
-
-  <!-- =====================================================
-       ACHIEVEMENTS
-  ====================================================== -->
-
   <section class="profile-section">
-
-    <div class="section-label">
-      ACHIEVEMENTS
-    </div>
-
-
+    <div class="section-label">ACHIEVEMENTS</div>
     <div class="achievement-grid">
-
       <div class="achievement-card active">
-
-        <div class="achievement-icon">
-          ◈
-        </div>
-
-        <strong>
-          First Look
-        </strong>
-
-        <span>
-          Explored NEXTRA
-        </span>
-
+        <div class="achievement-icon">◈</div>
+        <strong>First Look</strong>
+        <span>Explored NEXTRA</span>
       </div>
-
-
       <div class="achievement-card">
-
-        <div class="achievement-icon">
-          ⭐
-        </div>
-
-        <strong>
-          Watcher
-        </strong>
-
-        <span>
-          Build watchlist
-        </span>
-
+        <div class="achievement-icon">⭐</div>
+        <strong>Watcher</strong>
+        <span>Build watchlist</span>
       </div>
-
-
       <div class="achievement-card">
-
-        <div class="achievement-icon">
-          ⚡
-        </div>
-
-        <strong>
-          Futures
-        </strong>
-
-        <span>
-          Open futures
-        </span>
-
+        <div class="achievement-icon">⚡</div>
+        <strong>Futures</strong>
+        <span>Open futures</span>
       </div>
-
-
       <div class="achievement-card">
-
-        <div class="achievement-icon">
-          🔥
-        </div>
-
-        <strong>
-          Market Hunter
-        </strong>
-
-        <span>
-          Track markets
-        </span>
-
+        <div class="achievement-icon">🔥</div>
+        <strong>Market Hunter</strong>
+        <span>Track markets</span>
       </div>
-
     </div>
-
   </section>
-
-
-
-  <!-- =====================================================
-       ACCOUNT
-  ====================================================== -->
-
   <section class="profile-section">
-
-    <div class="section-label">
-      ACCOUNT
-    </div>
-
-
+    <div class="section-label">ACCOUNT</div>
     <div class="profile-item">
-
       <div>
-
-        <strong>
-          Email
-        </strong>
-
-        <span id="accountEmail">
-          Loading...
-        </span>
-
+        <strong>Email</strong>
+        <span id="accountEmail">Loading...</span>
       </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
+      <span class="profile-arrow">›</span>
     </div>
-
-
     <div class="profile-item">
-
       <div>
-
-        <strong>
-          Account Status
-        </strong>
-
-        <span class="up">
-          Active account
-        </span>
-
+        <strong>Account Status</strong>
+        <span class="up">Active account</span>
       </div>
-
-
-      <span class="profile-check">
-        ✓
-      </span>
-
+      <span class="profile-check">✓</span>
     </div>
-
-
-    <!-- =================================================
-         LOGOUT V100
-    ================================================== -->
-
-    <button
-      type="button"
-      class="profile-item profile-button"
-      id="logoutButton"
-    >
-
+    <button type="button" class="profile-item profile-button" id="logoutButton">
       <div>
-
-        <strong class="logout-title">
-          🚪 Logout
-        </strong>
-
-        <span>
-          Keluar dari akun NEXTRA
-        </span>
-
+        <strong class="logout-title">🚪 Logout</strong>
+        <span>Keluar dari akun NEXTRA</span>
       </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
+      <span class="profile-arrow">›</span>
     </button>
-
   </section>
-
-
-
-  <!-- =====================================================
-       QUICK ACTIONS
-  ====================================================== -->
-
   <section class="profile-section">
-
-    <div class="section-label">
-      QUICK ACTIONS
-    </div>
-
-
-    <a
-      href="markets.html"
-      class="profile-item"
-    >
-
+    <div class="section-label">QUICK ACTIONS</div>
+    <a href="markets.html" class="profile-item">
       <div>
-
-        <strong>
-          ⭐ Watchlist
-        </strong>
-
-        <span>
-          Manage favorite assets
-        </span>
-
+        <strong>⭐ Watchlist</strong>
+        <span>Manage favorite assets</span>
       </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
+      <span class="profile-arrow">›</span>
     </a>
-
-
-    <a
-      href="futures.html"
-      class="profile-item"
-    >
-
+    <a href="futures.html" class="profile-item">
       <div>
-
-        <strong>
-          ⚡ Futures
-        </strong>
-
-        <span>
-          Binance Futures market
-        </span>
-
+        <strong>⚡ Futures</strong>
+        <span>Binance Futures market</span>
       </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
+      <span class="profile-arrow">›</span>
     </a>
-
-
     <div class="profile-item">
-
       <div>
-
-        <strong>
-          🔔 Notifications
-        </strong>
-
-        <span>
-          Manage market alerts
-        </span>
-
+        <strong>🔔 Notifications</strong>
+        <span>Manage market alerts</span>
       </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
+      <span class="profile-arrow">›</span>
     </div>
-
   </section>
-
-
-
-  <!-- =====================================================
-       PREFERENCES
-  ====================================================== -->
-
   <section class="profile-section">
-
-    <div class="section-label">
-      PREFERENCES
-    </div>
-
-
+    <div class="section-label">PREFERENCES</div>
     <div class="profile-item">
-
       <div>
-
-        <strong>
-          Appearance
-        </strong>
-
-        <span>
-          Dark mode
-        </span>
-
+        <strong>Appearance</strong>
+        <span>Dark mode</span>
       </div>
-
-
-      <span>
-        ◐
-      </span>
-
+      <span>◐</span>
     </div>
-
-
-
-    <!-- =================================================
-         LANGUAGE V100
-    ================================================== -->
-
-    <button
-      class="profile-item profile-button"
-      id="languageButton"
-      type="button"
-    >
-
+    <button class="profile-item profile-button" id="languageButton" type="button">
       <div>
-
-        <strong>
-          Language
-        </strong>
-
-        <span id="currentLanguage">
-          Bahasa Indonesia
-        </span>
-
+        <strong>Language</strong>
+        <span id="currentLanguage">Bahasa Indonesia</span>
       </div>
-
-
-      <span class="profile-arrow">
-        ›
-      </span>
-
+      <span class="profile-arrow">›</span>
     </button>
-
   </section>
-
-
-
-  <!-- =====================================================
-       ABOUT
-  ====================================================== -->
-
   <section class="profile-section">
-
-    <div class="section-label">
-      ABOUT NEXTRA
-    </div>
-
-
+    <div class="section-label">ABOUT NEXTRA</div>
     <div class="profile-item">
-
       <div>
-
-        <strong>
-          NEXTRA
-        </strong>
-
-        <span>
-          Your Market. Your Intelligence.
-        </span>
-
+        <strong>NEXTRA</strong>
+        <span>Your Market. Your Intelligence.</span>
       </div>
-
-
-      <span>
-        v1.0
-      </span>
-
+      <span>v1.0</span>
     </div>
-
   </section>
-
-
-
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-
-  <div class="profile-footer">
-    NEXTRA © 2026
-  </div>
-
-
+  <div class="profile-footer">NEXTRA © 2026</div>
 </main>
-
-
-
-<!-- =====================================================
-     LANGUAGE MODAL
-====================================================== -->
-
-<div
-  class="language-modal"
-  id="languageModal"
-  aria-hidden="true"
->
-
+<div class="language-modal" id="languageModal" aria-hidden="true">
   <div class="language-panel">
-
     <div class="language-panel-header">
-
-      <h3>
-        🌍 Language
-      </h3>
-
-
-      <button
-        type="button"
-        class="language-close"
-        id="languageClose"
-        aria-label="Close"
-      >
-        ×
-      </button>
-
+      <h3>🌍 Language</h3>
+      <button type="button" class="language-close" id="languageClose" aria-label="Close">×</button>
     </div>
-
-
-    <div
-      class="language-list"
-      id="languageList"
-    ></div>
-
+    <div class="language-list" id="languageList"></div>
   </div>
-
 </div>
-
-
-
-<!-- =====================================================
-     BOTTOM NAV
-====================================================== -->
-
 <div id="bottom-nav"></div>
-
-
-
-<!-- =====================================================
-     GLOBAL JS
-====================================================== -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="js/api.js"></script>
-
 <script src="js/app.js"></script>
-
 <script src="js/features/i18n.js"></script>
-
 <script src="js/features/profile-stats.js"></script>
-
-
-
-<!-- =====================================================
-     NEXTRA PROFILE V100 JS
-====================================================== -->
-
 <script>
-
 (() => {
-
-  "use strict";
-
-
-  /* =====================================================
-     SUPABASE
-  ====================================================== */
-
-  const SUPABASE_URL =
-    "https://uvtbntwgooxqjbyjkvkd.supabase.co";
-
-
-  const SUPABASE_KEY =
-    "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
-
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
-
-
-
-  /* =====================================================
-     STORAGE KEYS
-  ====================================================== */
-
-  const AVATAR_KEY =
-    "nextra_avatar";
-
-
-  const SETTINGS_KEY =
-    "nextra_settings";
-
-
-
-  /* =====================================================
-     ELEMENTS
-  ====================================================== */
-
-  const authLoading =
-    document.getElementById(
-      "authLoading"
-    );
-
-
-  const profilePage =
-    document.getElementById(
-      "profilePage"
-    );
-
-
-  const nameEl =
-    document.getElementById(
-      "profileName"
-    );
-
-
-  const usernameEl =
-    document.getElementById(
-      "profileUsername"
-    );
-
-
-  const accountEmail =
-    document.getElementById(
-      "accountEmail"
-    );
-
-
-  const avatarInitial =
-    document.getElementById(
-      "avatarInitial"
-    );
-
-
-  const avatarImage =
-    document.getElementById(
-      "avatarImage"
-    );
-
-
-  const avatarButton =
-    document.getElementById(
-      "avatarButton"
-    );
-
-
-  const avatarInput =
-    document.getElementById(
-      "avatarInput"
-    );
-
-
-  const editProfileBtn =
-    document.getElementById(
-      "editProfileBtn"
-    );
-
-
-  const editProfilePanel =
-    document.getElementById(
-      "editProfilePanel"
-    );
-
-
-  const nameInput =
-    document.getElementById(
-      "nameInput"
-    );
-
-
-  const usernameInput =
-    document.getElementById(
-      "usernameInput"
-    );
-
-
-  const saveProfileBtn =
-    document.getElementById(
-      "saveProfileBtn"
-    );
-
-
-  const cancelProfileBtn =
-    document.getElementById(
-      "cancelProfileBtn"
-    );
-
-
-  const logoutButton =
-    document.getElementById(
-      "logoutButton"
-    );
-
-
-  const languageButton =
-    document.getElementById(
-      "languageButton"
-    );
-
-
-  const languageModal =
-    document.getElementById(
-      "languageModal"
-    );
-
-
-  const languageClose =
-    document.getElementById(
-      "languageClose"
-    );
-
-
-  const languageList =
-    document.getElementById(
-      "languageList"
-    );
-
-
-  const currentLanguage =
-    document.getElementById(
-      "currentLanguage"
-    );
-
-
-
-  /* =====================================================
-     PROFILE STATE
-  ====================================================== */
-
-  let currentUser = null;
-
-
-  let profile = {
-
-    name:
-      "NEXTRA User",
-
-    username:
-      "nextra_user"
-
+"use strict";
+const SUPABASE_URL = "https://uvtbntwgooxqjbyjkvkd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+window.supabaseClient = supabaseClient;
+const AVATAR_KEY = "nextra_avatar";
+const SETTINGS_KEY = "nextra_settings";
+const authLoading = document.getElementById("authLoading");
+const profilePage = document.getElementById("profilePage");
+const nameEl = document.getElementById("profileName");
+const usernameEl = document.getElementById("profileUsername");
+const accountEmail = document.getElementById("accountEmail");
+const avatarInitial = document.getElementById("avatarInitial");
+const avatarImage = document.getElementById("avatarImage");
+const avatarButton = document.getElementById("avatarButton");
+const avatarInput = document.getElementById("avatarInput");
+const editProfileBtn = document.getElementById("editProfileBtn");
+const editProfilePanel = document.getElementById("editProfilePanel");
+const nameInput = document.getElementById("nameInput");
+const usernameInput = document.getElementById("usernameInput");
+const saveProfileBtn = document.getElementById("saveProfileBtn");
+const cancelProfileBtn = document.getElementById("cancelProfileBtn");
+const logoutButton = document.getElementById("logoutButton");
+const languageButton = document.getElementById("languageButton");
+const languageModal = document.getElementById("languageModal");
+const languageClose = document.getElementById("languageClose");
+const languageList = document.getElementById("languageList");
+const currentLanguage = document.getElementById("currentLanguage");
+let currentUser = null;
+let profile = { name: "NEXTRA User", username: "nextra_user" };
+function getSettings() {
+  try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}"); }
+  catch { return {}; }
+}
+function saveSettings(settings) { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
+const LANGUAGE_DATA = [
+["id","🇮🇩","Bahasa Indonesia","Bahasa Indonesia"],["en","🇺🇸","English","English"],
+["es","🇪🇸","Español","Spanish"],["fr","🇫🇷","Français","French"],
+["de","🇩🇪","Deutsch","German"],["it","🇮🇹","Italiano","Italian"],
+["pt","🇵🇹","Português","Portuguese"],["pt-BR","🇧🇷","Português (Brasil)","Portuguese Brazil"],
+["ru","🇷🇺","Русский","Russian"],["zh","🇨🇳","简体中文","Chinese Simplified"],
+["zh-TW","🇹🇼","繁體中文","Chinese Traditional"],["ja","🇯🇵","日本語","Japanese"],
+["ko","🇰🇷","한국어","Korean"],["tr","🇹🇷","Türkçe","Turkish"],
+["vi","🇻🇳","Tiếng Việt","Vietnamese"],["th","🇹🇭","ไทย","Thai"],
+["ar","🇸🇦","العربية","Arabic"],["hi","🇮🇳","हिन्दी","Hindi"],
+["nl","🇳🇱","Nederlands","Dutch"],["pl","🇵🇱","Polski","Polish"]
+];
+function getCurrentLanguage() {
+  const settings = getSettings();
+  if (window.NEXTRA_I18N && window.NEXTRA_I18N.languages && window.NEXTRA_I18N.languages[settings.language]) return settings.language;
+  return "id";
+}
+function getLanguageName(code) {
+  const found = LANGUAGE_DATA.find(l => l[0] === code);
+  return found ? found[2] : "Bahasa Indonesia";
+}
+function renderLanguages() {
+  if (!languageList) return;
+  const selected = getCurrentLanguage();
+  languageList.innerHTML = "";
+  LANGUAGE_DATA.forEach(l => {
+    const [code, flag, nativeName, englishName] = l;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "language-option";
+    if (code === selected) button.classList.add("selected");
+    button.innerHTML = `<span class="language-flag">${flag}</span><span class="language-info"><strong>${nativeName}</strong><span>${englishName}</span></span><span class="language-check">✓</span>`;
+    button.addEventListener("click", () => { selectLanguage(code); });
+    languageList.appendChild(button);
+  });
+}
+function selectLanguage(code) {
+  const settings = getSettings();
+  settings.language = code;
+  saveSettings(settings);
+  if (currentLanguage) currentLanguage.textContent = getLanguageName(code);
+  document.documentElement.lang = code;
+  if (window.NEXTRA_I18N && typeof window.NEXTRA_I18N.translatePage === "function") window.NEXTRA_I18N.translatePage();
+  window.dispatchEvent(new CustomEvent("nextra:languageChanged", { detail: { language: code } }));
+  renderLanguages();
+  closeLanguage();
+}
+function openLanguage() {
+  renderLanguages();
+  languageModal.classList.add("show");
+  languageModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+function closeLanguage() {
+  languageModal.classList.remove("show");
+  languageModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+languageButton?.addEventListener("click", openLanguage);
+languageClose?.addEventListener("click", closeLanguage);
+languageModal?.addEventListener("click", event => { if (event.target === languageModal) closeLanguage(); });
+document.addEventListener("keydown", event => { if (event.key === "Escape") closeLanguage(); });
+if (currentLanguage) currentLanguage.textContent = getLanguageName(getCurrentLanguage());
+function renderAvatar() {
+  const savedAvatar = localStorage.getItem(AVATAR_KEY);
+  if (savedAvatar && avatarImage) {
+    avatarImage.src = savedAvatar;
+    avatarImage.classList.add("visible");
+    avatarInitial.style.display = "none";
+  } else {
+    avatarImage.classList.remove("visible");
+    avatarInitial.style.display = "block";
+  }
+}
+avatarButton?.addEventListener("click", () => { avatarInput?.click(); });
+avatarInput?.addEventListener("change", event => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  if (!file.type.startsWith("image/")) { alert("File harus berupa gambar."); return; }
+  if (file.size > 2 * 1024 * 1024) { alert("Ukuran foto maksimal 2 MB."); return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    try { localStorage.setItem(AVATAR_KEY, reader.result); renderAvatar(); }
+    catch { alert("Foto terlalu besar."); }
   };
-
-
-
-  /* =====================================================
-     SETTINGS
-  ====================================================== */
-
-  function getSettings() {
-
-    try {
-
-      return JSON.parse(
-        localStorage.getItem(
-          SETTINGS_KEY
-        ) || "{}"
-      );
-
-    }
-
-    catch {
-
-      return {};
-
-    }
-
+  reader.readAsDataURL(file);
+});
+function renderProfile() {
+  nameEl.textContent = profile.name;
+  usernameEl.textContent = "@" + profile.username;
+  avatarInitial.textContent = (profile.name.trim()[0] || "N").toUpperCase();
+  accountEmail.textContent = currentUser?.email || "Email tidak tersedia";
+  renderAvatar();
+}
+editProfileBtn?.addEventListener("click", () => {
+  nameInput.value = profile.name;
+  usernameInput.value = profile.username;
+  editProfilePanel.hidden = false;
+  nameInput.focus();
+});
+cancelProfileBtn?.addEventListener("click", () => { editProfilePanel.hidden = true; });
+saveProfileBtn?.addEventListener("click", async () => {
+  const newName = nameInput.value.trim().slice(0, 30);
+  const newUsername = usernameInput.value.trim().replace(/[^a-zA-Z0-9_]/g, "").slice(0, 20);
+  if (!newName) { alert("Display name tidak boleh kosong."); return; }
+  if (!newUsername) { alert("Username tidak boleh kosong."); return; }
+  saveProfileBtn.disabled = true;
+  saveProfileBtn.textContent = "Saving...";
+  try {
+    const { data, error } = await supabaseClient.auth.updateUser({ data: { display_name: newName, username: newUsername } });
+    if (error) throw error;
+    profile.name = newName;
+    profile.username = newUsername;
+    if (data?.user) currentUser = data.user;
+    renderProfile();
+    editProfilePanel.hidden = true;
+  } catch (error) {
+    console.error("Profile update error:", error);
+    alert("Gagal menyimpan profile:\n" + error.message);
+  } finally {
+    saveProfileBtn.disabled = false;
+    saveProfileBtn.textContent = "Save changes";
   }
-
-
-  function saveSettings(settings) {
-
-    localStorage.setItem(
-      SETTINGS_KEY,
-      JSON.stringify(settings)
-    );
-
+});
+function loadStats() {
+  try {
+    const watchlist = JSON.parse(localStorage.getItem("nextra_watchlist") || "[]");
+    document.getElementById("watchlistCount").textContent = Array.isArray(watchlist) ? watchlist.length : 0;
+  } catch { document.getElementById("watchlistCount").textContent = "0"; }
+  try {
+    const alerts = JSON.parse(localStorage.getItem("nextra_alerts") || "[]");
+    document.getElementById("alertCount").textContent = Array.isArray(alerts) ? alerts.length : 0;
+  } catch { document.getElementById("alertCount").textContent = "0"; }
+  document.getElementById("marketCount").textContent = "Live";
+}
+logoutButton?.addEventListener("click", async () => {
+  const confirmed = confirm("Yakin ingin logout dari NEXTRA?");
+  if (!confirmed) return;
+  logoutButton.disabled = true;
+  const title = logoutButton.querySelector(".logout-title");
+  if (title) title.textContent = "Logging out...";
+  try {
+    const { error } = await supabaseClient.auth.signOut({ scope: "local" });
+    if (error) throw error;
+    window.location.href = "index.html";
+  } catch (error) {
+    console.error("Logout error:", error);
+    alert("Gagal logout:\n" + error.message);
+    logoutButton.disabled = false;
+    if (title) title.textContent = "🚪 Logout";
   }
-
-
-
-  /* =====================================================
-     LANGUAGE
-  ====================================================== */
-
-  const LANGUAGE_DATA = [
-
-    ["id", "🇮🇩", "Bahasa Indonesia", "Bahasa Indonesia"],
-    ["en", "🇺🇸", "English", "English"],
-    ["es", "🇪🇸", "Español", "Spanish"],
-    ["fr", "🇫🇷", "Français", "French"],
-    ["de", "🇩🇪", "Deutsch", "German"],
-    ["it", "🇮🇹", "Italiano", "Italian"],
-    ["pt", "🇵🇹", "Português", "Portuguese"],
-    ["pt-BR", "🇧🇷", "Português (Brasil)", "Portuguese Brazil"],
-    ["ru", "🇷🇺", "Русский", "Russian"],
-    ["zh", "🇨🇳", "简体中文", "Chinese Simplified"],
-    ["zh-TW", "🇹🇼", "繁體中文", "Chinese Traditional"],
-    ["ja", "🇯🇵", "日本語", "Japanese"],
-    ["ko", "🇰🇷", "한국어", "Korean"],
-    ["tr", "🇹🇷", "Türkçe", "Turkish"],
-    ["vi", "🇻🇳", "Tiếng Việt", "Vietnamese"],
-    ["th", "🇹🇭", "ไทย", "Thai"],
-    ["ar", "🇸🇦", "العربية", "Arabic"],
-    ["hi", "🇮🇳", "हिन्दी", "Hindi"],
-    ["nl", "🇳🇱", "Nederlands", "Dutch"],
-    ["pl", "🇵🇱", "Polski", "Polish"]
-
-  ];
-
-
-
-  function getCurrentLanguage() {
-
-    const settings =
-      getSettings();
-
-
-    if (
-      window.NEXTRA_I18N &&
-      window.NEXTRA_I18N.languages &&
-      window.NEXTRA_I18N.languages[
-        settings.language
-      ]
-    ) {
-
-      return settings.language;
-
-    }
-
-
-    return "id";
-
+});
+async function initAuth() {
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
+    if (error) throw error;
+    const session = data?.session;
+    if (!session) { window.location.replace("login.html"); return; }
+    currentUser = session.user;
+    const metadata = currentUser.user_metadata || {};
+    const emailUsername = currentUser.email ? currentUser.email.split("@")[0] : "nextra_user";
+    profile.name = String(metadata.display_name || metadata.name || emailUsername || "NEXTRA User").slice(0, 30);
+    profile.username = String(metadata.username || emailUsername || "nextra_user").replace(/[^a-zA-Z0-9_]/g, "").slice(0, 20);
+    renderProfile();
+    loadStats();
+    profilePage.hidden = false;
+    authLoading.classList.add("hidden");
+    if (window.NEXTRA_PREMIUM && typeof window.NEXTRA_PREMIUM.render === "function") window.NEXTRA_PREMIUM.render();
+  } catch (error) {
+    console.error("NEXTRA Auth error:", error);
+    window.location.replace("login.html");
   }
-
-
-
-  function getLanguageName(code) {
-
-    const found =
-      LANGUAGE_DATA.find(
-        language =>
-          language[0] === code
-      );
-
-
-    return found
-      ? found[2]
-      : "Bahasa Indonesia";
-
-  }
-
-
-
-  function renderLanguages() {
-
-    if (!languageList)
-      return;
-
-
-    const selected =
-      getCurrentLanguage();
-
-
-    languageList.innerHTML = "";
-
-
-    LANGUAGE_DATA.forEach(
-      language => {
-
-        const [
-          code,
-          flag,
-          nativeName,
-          englishName
-        ] = language;
-
-
-        const button =
-          document.createElement(
-            "button"
-          );
-
-
-        button.type =
-          "button";
-
-
-        button.className =
-          "language-option";
-
-
-        if (
-          code === selected
-        ) {
-
-          button.classList.add(
-            "selected"
-          );
-
-        }
-
-
-        button.innerHTML = `
-
-          <span class="language-flag">
-            ${flag}
-          </span>
-
-          <span class="language-info">
-
-            <strong>
-              ${nativeName}
-            </strong>
-
-            <span>
-              ${englishName}
-            </span>
-
-          </span>
-
-          <span class="language-check">
-            ✓
-          </span>
-
-        `;
-
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            selectLanguage(code);
-
-          }
-        );
-
-
-        languageList.appendChild(
-          button
-        );
-
-      }
-    );
-
-  }
-
-
-
-  function selectLanguage(code) {
-
-    const settings =
-      getSettings();
-
-
-    settings.language =
-      code;
-
-
-    saveSettings(settings);
-
-
-    if (currentLanguage) {
-
-      currentLanguage.textContent =
-        getLanguageName(code);
-
-    }
-
-
-    document.documentElement.lang =
-      code;
-
-
-    if (
-      window.NEXTRA_I18N &&
-      typeof
-        window.NEXTRA_I18N.translatePage
-        === "function"
-    ) {
-
-      window.NEXTRA_I18N.translatePage();
-
-    }
-
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "nextra:languageChanged",
-        {
-          detail: {
-            language: code
-          }
-        }
-      )
-    );
-
-
-    renderLanguages();
-
-    closeLanguage();
-
-  }
-
-
-
-  function openLanguage() {
-
-    renderLanguages();
-
-
-    languageModal.classList.add(
-      "show"
-    );
-
-
-    languageModal.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-
-    document.body.style.overflow =
-      "hidden";
-
-  }
-
-
-
-  function closeLanguage() {
-
-    languageModal.classList.remove(
-      "show"
-    );
-
-
-    languageModal.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-
-    document.body.style.overflow =
-      "";
-
-  }
-
-
-  languageButton?.addEventListener(
-    "click",
-    openLanguage
-  );
-
-
-  languageClose?.addEventListener(
-    "click",
-    closeLanguage
-  );
-
-
-  languageModal?.addEventListener(
-    "click",
-    event => {
-
-      if (
-        event.target ===
-        languageModal
-      ) {
-
-        closeLanguage();
-
-      }
-
-    }
-  );
-
-
-  document.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key ===
-        "Escape"
-      ) {
-
-        closeLanguage();
-
-      }
-
-    }
-  );
-
-
-  if (currentLanguage) {
-
-    currentLanguage.textContent =
-      getLanguageName(
-        getCurrentLanguage()
-      );
-
-  }
-
-
-
-  /* =====================================================
-     AVATAR
-  ====================================================== */
-
-  function renderAvatar() {
-
-    const savedAvatar =
-      localStorage.getItem(
-        AVATAR_KEY
-      );
-
-
-    if (
-      savedAvatar &&
-      avatarImage
-    ) {
-
-      avatarImage.src =
-        savedAvatar;
-
-
-      avatarImage.classList.add(
-        "visible"
-      );
-
-
-      avatarInitial.style.display =
-        "none";
-
-    }
-
-    else {
-
-      avatarImage.classList.remove(
-        "visible"
-      );
-
-
-      avatarInitial.style.display =
-        "block";
-
-    }
-
-  }
-
-
-
-  avatarButton?.addEventListener(
-    "click",
-    () => {
-
-      avatarInput?.click();
-
-    }
-  );
-
-
-  avatarInput?.addEventListener(
-    "change",
-    event => {
-
-      const file =
-        event.target.files?.[0];
-
-
-      if (!file)
-        return;
-
-
-      if (
-        !file.type.startsWith(
-          "image/"
-        )
-      ) {
-
-        alert(
-          "File harus berupa gambar."
-        );
-
-        return;
-
-      }
-
-
-      if (
-        file.size >
-        2 * 1024 * 1024
-      ) {
-
-        alert(
-          "Ukuran foto maksimal 2 MB."
-        );
-
-        return;
-
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        () => {
-
-          try {
-
-            localStorage.setItem(
-              AVATAR_KEY,
-              reader.result
-            );
-
-
-            renderAvatar();
-
-          }
-
-          catch {
-
-            alert(
-              "Foto terlalu besar."
-            );
-
-          }
-
-        };
-
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
-
-
-  /* =====================================================
-     PROFILE RENDER
-  ====================================================== */
-
-  function renderProfile() {
-
-    nameEl.textContent =
-      profile.name;
-
-
-    usernameEl.textContent =
-      "@" +
-      profile.username;
-
-
-    avatarInitial.textContent =
-      (
-        profile.name
-          .trim()[0]
-        || "N"
-      ).toUpperCase();
-
-
-    accountEmail.textContent =
-      currentUser?.email ||
-      "Email tidak tersedia";
-
-
-    renderAvatar();
-
-  }
-
-
-
-  /* =====================================================
-     EDIT PROFILE
-  ====================================================== */
-
-  editProfileBtn?.addEventListener(
-    "click",
-    () => {
-
-      nameInput.value =
-        profile.name;
-
-
-      usernameInput.value =
-        profile.username;
-
-
-      editProfilePanel.hidden =
-        false;
-
-
-      nameInput.focus();
-
-    }
-  );
-
-
-  cancelProfileBtn?.addEventListener(
-    "click",
-    () => {
-
-      editProfilePanel.hidden =
-        true;
-
-    }
-  );
-
-
-  saveProfileBtn?.addEventListener(
-    "click",
-    async () => {
-
-      const newName =
-        nameInput.value
-          .trim()
-          .slice(0, 30);
-
-
-      const newUsername =
-        usernameInput.value
-          .trim()
-          .replace(
-            /[^a-zA-Z0-9_]/g,
-            ""
-          )
-          .slice(0, 20);
-
-
-      if (!newName) {
-
-        alert(
-          "Display name tidak boleh kosong."
-        );
-
-        return;
-
-      }
-
-
-      if (!newUsername) {
-
-        alert(
-          "Username tidak boleh kosong."
-        );
-
-        return;
-
-      }
-
-
-      saveProfileBtn.disabled =
-        true;
-
-
-      saveProfileBtn.textContent =
-        "Saving...";
-
-
-      try {
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .auth
-            .updateUser({
-
-              data: {
-
-                display_name:
-                  newName,
-
-                username:
-                  newUsername
-
-              }
-
-            });
-
-
-        if (error) {
-
-          throw error;
-
-        }
-
-
-        profile.name =
-          newName;
-
-
-        profile.username =
-          newUsername;
-
-
-        if (data?.user) {
-
-          currentUser =
-            data.user;
-
-        }
-
-
-        renderProfile();
-
-
-        editProfilePanel.hidden =
-          true;
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Profile update error:",
-          error
-        );
-
-
-        alert(
-          "Gagal menyimpan profile:\n" +
-          error.message
-        );
-
-      }
-
-      finally {
-
-        saveProfileBtn.disabled =
-          false;
-
-
-        saveProfileBtn.textContent =
-          "Save changes";
-
-      }
-
-    }
-  );
-
-
-
-  /* =====================================================
-     STATS
-  ====================================================== */
-
-  function loadStats() {
-
-    try {
-
-      const watchlist =
-        JSON.parse(
-          localStorage.getItem(
-            "nextra_watchlist"
-          ) || "[]"
-        );
-
-
-      document.getElementById(
-        "watchlistCount"
-      ).textContent =
-        Array.isArray(watchlist)
-          ? watchlist.length
-          : 0;
-
-    }
-
-    catch {
-
-      document.getElementById(
-        "watchlistCount"
-      ).textContent =
-        "0";
-
-    }
-
-
-    try {
-
-      const alerts =
-        JSON.parse(
-          localStorage.getItem(
-            "nextra_alerts"
-          ) || "[]"
-        );
-
-
-      document.getElementById(
-        "alertCount"
-      ).textContent =
-        Array.isArray(alerts)
-          ? alerts.length
-          : 0;
-
-    }
-
-    catch {
-
-      document.getElementById(
-        "alertCount"
-      ).textContent =
-        "0";
-
-    }
-
-
-    document.getElementById(
-      "marketCount"
-    ).textContent =
-      "Live";
-
-  }
-
-
-
-  /* =====================================================
-     LOGOUT
-  ====================================================== */
-
-  logoutButton?.addEventListener(
-    "click",
-    async () => {
-
-      const confirmed =
-        confirm(
-          "Yakin ingin logout dari NEXTRA?"
-        );
-
-
-      if (!confirmed)
-        return;
-
-
-      logoutButton.disabled =
-        true;
-
-
-      const title =
-        logoutButton.querySelector(
-          ".logout-title"
-        );
-
-
-      if (title) {
-
-        title.textContent =
-          "Logging out...";
-
-      }
-
-
-      try {
-
-        const {
-          error
-        } =
-          await supabaseClient
-            .auth
-            .signOut({
-              scope: "local"
-            });
-
-
-        if (error) {
-
-          throw error;
-
-        }
-
-
-        window.location.href =
-          "index.html";
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Logout error:",
-          error
-        );
-
-
-        alert(
-          "Gagal logout:\n" +
-          error.message
-        );
-
-
-        logoutButton.disabled =
-          false;
-
-
-        if (title) {
-
-          title.textContent =
-            "🚪 Logout";
-
-        }
-
-      }
-
-    }
-  );
-
-
-
-  /* =====================================================
-     AUTH INIT
-  ====================================================== */
-
-  async function initAuth() {
-
-    try {
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient
-          .auth
-          .getSession();
-
-
-      if (error) {
-
-        throw error;
-
-      }
-
-
-      const session =
-        data?.session;
-
-
-      if (!session) {
-
-        window.location.replace(
-          "login.html"
-        );
-
-        return;
-
-      }
-
-
-      currentUser =
-        session.user;
-
-
-      const metadata =
-        currentUser.user_metadata ||
-        {};
-
-
-      const emailUsername =
-        currentUser.email
-          ? currentUser.email
-              .split("@")[0]
-          : "nextra_user";
-
-
-      profile.name =
-        String(
-          metadata.display_name ||
-          metadata.name ||
-          emailUsername ||
-          "NEXTRA User"
-        ).slice(0, 30);
-
-
-      profile.username =
-        String(
-          metadata.username ||
-          emailUsername ||
-          "nextra_user"
-        )
-        .replace(
-          /[^a-zA-Z0-9_]/g,
-          ""
-        )
-        .slice(0, 20);
-
-
-      renderProfile();
-
-      loadStats();
-
-
-      profilePage.hidden =
-        false;
-
-
-      authLoading.classList.add(
-        "hidden"
-      );
-
-    }
-
-    catch (error) {
-
-      console.error(
-        "NEXTRA Auth error:",
-        error
-      );
-
-
-      window.location.replace(
-        "login.html"
-      );
-
-    }
-
-  }
-
-
-
-  /* =====================================================
-     AUTH STATE
-  ====================================================== */
-
-  supabaseClient
-    .auth
-    .onAuthStateChange(
-      (
-        event,
-        session
-      ) => {
-
-        if (
-          event ===
-          "SIGNED_OUT"
-        ) {
-
-          window.location.replace(
-            "login.html"
-          );
-
-          return;
-
-        }
-
-
-        if (
-          event ===
-          "TOKEN_REFRESHED"
-        ) {
-
-          return;
-
-        }
-
-
-        if (!session) {
-
-          window.location.replace(
-            "login.html"
-          );
-
-        }
-
-      }
-    );
-
-
-
-  /* =====================================================
-     START
-  ====================================================== */
-
-  initAuth();
-
-
+}
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (event === "SIGNED_OUT") { window.location.replace("login.html"); return; }
+  if (event === "TOKEN_REFRESHED") return;
+  if (!session) window.location.replace("login.html");
+});
+initAuth();
 })();
-
 </script>
-
-
+<script src="js/premium.js"></script>
 </body>
-
 </html>
