@@ -1,32 +1,710 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pantau</title>
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/components.css" />
-<link rel="stylesheet" href="css/responsive.css" />
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#070909"
+  >
+
+  <title>NEXTRA — Crypto Education</title>
+
+
+  <!-- =====================================================
+       SEO
+  ====================================================== -->
+
+  <meta
+    name="description"
+    content="Pelajari cryptocurrency bersama NEXTRA. Temukan materi tentang Bitcoin, blockchain, market crypto, trading, futures, technical analysis, dan risk management."
+  >
+
+  <meta
+    name="keywords"
+    content="NEXTRA, crypto education, belajar crypto, cryptocurrency, Bitcoin, blockchain, crypto trading, futures, technical analysis, risk management"
+  >
+
+  <meta
+    name="author"
+    content="NEXTRA"
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <link
+    rel="canonical"
+    href="https://nextralabs.github.io/Crypto-web/education.html"
+  >
+
+
+  <!-- =====================================================
+       OPEN GRAPH
+  ====================================================== -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:title"
+    content="Crypto Education | NEXTRA"
+  >
+
+  <meta
+    property="og:description"
+    content="Belajar crypto, blockchain, Bitcoin, trading, futures, technical analysis, dan risk management bersama NEXTRA."
+  >
+
+  <meta
+    property="og:url"
+    content="https://nextralabs.github.io/Crypto-web/education.html"
+  >
+
+  <meta
+    property="og:site_name"
+    content="NEXTRA"
+  >
+
+  <meta
+    property="og:locale"
+    content="id_ID"
+  >
+
+
+  <!-- =====================================================
+       TWITTER / X
+  ====================================================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Crypto Education | NEXTRA"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Materi edukasi crypto untuk memahami Bitcoin, blockchain, trading, futures, technical analysis, dan risk management."
+  >
+
+
+  <!-- =====================================================
+       STRUCTURED DATA
+  ====================================================== -->
+
+  <script type="application/ld+json">
+
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "NEXTRA",
+    "url": "https://nextralabs.github.io/Crypto-web/",
+    "description": "Platform edukasi cryptocurrency dan market intelligence.",
+    "sameAs": [
+      "https://nextralabs.github.io/Crypto-web/"
+    ]
+  }
+
+  </script>
+
+
+  <!-- =====================================================
+       STYLES
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/components.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/responsive.css"
+  >
+
+  <style>
+
+    .education-hero {
+      margin-bottom: 24px;
+      padding: 22px 18px;
+      border: 1px solid rgba(57,242,160,.12);
+      border-radius: 20px;
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53,207,255,.12),
+          transparent 45%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(57,242,160,.08),
+          transparent 48%
+        ),
+        var(--surface);
+    }
+
+
+    .education-label {
+      color: var(--green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+
+    .education-title {
+      margin: 10px 0 8px;
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -.7px;
+      font-weight: 850;
+    }
+
+
+    .education-title span {
+      color: var(--green);
+    }
+
+
+    .education-description {
+      margin: 0;
+      max-width: 340px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+
+    .education-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2,minmax(0,1fr));
+      gap: 8px;
+    }
+
+
+    .education-card {
+      position: relative;
+      min-height: 120px;
+      padding: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      transition:
+        transform .18s ease,
+        border-color .18s ease;
+    }
+
+
+    .education-card:hover {
+      transform: translateY(-2px);
+      border-color:
+        rgba(57,242,160,.25);
+    }
+
+
+    .education-icon {
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: 11px;
+
+      border-radius: 10px;
+
+      background:
+        rgba(57,242,160,.07);
+
+      color: var(--green);
+
+      font-size: 16px;
+    }
+
+
+    .education-card h2 {
+      margin: 0;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+
+    .education-card p {
+      margin: 5px 0 0;
+
+      color: var(--muted);
+
+      font-size: 8px;
+      line-height: 1.45;
+    }
+
+
+    .education-arrow {
+      position: absolute;
+
+      right: 12px;
+      bottom: 10px;
+
+      color: var(--subtle);
+
+      font-size: 11px;
+    }
+
+
+    .education-note {
+      margin-top: 20px;
+      padding: 14px;
+
+      border: 1px solid var(--line);
+      border-radius: 15px;
+
+      background: var(--surface);
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+
+    .education-note strong {
+      color: var(--text);
+    }
+
+
+    .education-footer {
+      margin-top: 28px;
+      padding-bottom: 20px;
+
+      color: var(--subtle);
+
+      font-size: 8px;
+      text-align: center;
+    }
+
+
+    @media (max-width: 360px) {
+
+      .education-title {
+        font-size: 23px;
+      }
+
+      .education-grid {
+        gap: 6px;
+      }
+
+      .education-card {
+        padding: 11px;
+      }
+
+    }
+
+  </style>
+
 </head>
+
+
 <body>
-<div class="container">
-  <div class="topbar">
-    <div><h1 class="title">Pantau<span class="dot">.</span></h1></div>
-    <button class="icon-btn" id="themeBtn">🌙</button>
+
+
+<main class="container">
+
+
+  <!-- =====================================================
+       TOPBAR
+  ====================================================== -->
+
+  <header class="topbar">
+
+    <div>
+
+      <h1 class="title">
+        NEXTRA<span class="dot">.</span>
+      </h1>
+
+      <p class="subtitle">
+        Your Market. Your Intelligence.
+      </p>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      id="themeBtn"
+      title="Ganti tema"
+      aria-label="Ganti tema"
+    >
+      ◐
+    </button>
+
+  </header>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="education-hero">
+
+    <div class="education-label">
+      NEXTRA Education
+    </div>
+
+
+    <h2 class="education-title">
+
+      Learn crypto.<br>
+
+      <span>Understand the market.</span>
+
+    </h2>
+
+
+    <p class="education-description">
+
+      Pelajari dasar cryptocurrency,
+      blockchain, market, trading,
+      futures, dan manajemen risiko
+      dengan penjelasan yang lebih sederhana.
+
+    </p>
+
+  </section>
+
+
+  <!-- =====================================================
+       EDUCATION
+  ====================================================== -->
+
+  <section>
+
+    <div class="home-section-header">
+
+      <div>
+
+        <h2 class="home-section-title">
+          Crypto Education
+        </h2>
+
+        <div class="home-section-sub">
+          Mulai belajar dari dasar
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="education-grid">
+
+
+      <a
+        href="learn.html"
+        class="education-card"
+        style="text-decoration:none;color:inherit;"
+      >
+
+        <div class="education-icon">
+          ₿
+        </div>
+
+        <h2>
+          Crypto Basics
+        </h2>
+
+        <p>
+          Kenali cryptocurrency,
+          Bitcoin, dan cara kerja
+          aset digital.
+        </p>
+
+        <div class="education-arrow">
+          →
+        </div>
+
+      </a>
+
+
+      <a
+        href="learn.html"
+        class="education-card"
+        style="text-decoration:none;color:inherit;"
+      >
+
+        <div class="education-icon">
+          ⛓
+        </div>
+
+        <h2>
+          Blockchain
+        </h2>
+
+        <p>
+          Pahami teknologi blockchain
+          dan bagaimana transaksi
+          crypto diproses.
+        </p>
+
+        <div class="education-arrow">
+          →
+        </div>
+
+      </a>
+
+
+      <a
+        href="learn.html"
+        class="education-card"
+        style="text-decoration:none;color:inherit;"
+      >
+
+        <div class="education-icon">
+          📊
+        </div>
+
+        <h2>
+          Market Analysis
+        </h2>
+
+        <p>
+          Pelajari cara membaca harga,
+          trend, support, resistance,
+          dan market movement.
+        </p>
+
+        <div class="education-arrow">
+          →
+        </div>
+
+      </a>
+
+
+      <a
+        href="learn.html"
+        class="education-card"
+        style="text-decoration:none;color:inherit;"
+      >
+
+        <div class="education-icon">
+          📈
+        </div>
+
+        <h2>
+          Technical Analysis
+        </h2>
+
+        <p>
+          Kenali indikator dan konsep
+          dasar technical analysis
+          untuk membaca chart.
+        </p>
+
+        <div class="education-arrow">
+          →
+        </div>
+
+      </a>
+
+
+      <a
+        href="learn.html"
+        class="education-card"
+        style="text-decoration:none;color:inherit;"
+      >
+
+        <div class="education-icon">
+          ⚡
+        </div>
+
+        <h2>
+          Futures Trading
+        </h2>
+
+        <p>
+          Pahami leverage, funding,
+          liquidation, dan risiko
+          futures trading.
+        </p>
+
+        <div class="education-arrow">
+          →
+        </div>
+
+      </a>
+
+
+      <a
+        href="learn.html"
+        class="education-card"
+        style="text-decoration:none;color:inherit;"
+      >
+
+        <div class="education-icon">
+          🛡
+        </div>
+
+        <h2>
+          Risk Management
+        </h2>
+
+        <p>
+          Pelajari pentingnya mengelola
+          risiko sebelum mengambil
+          keputusan trading.
+        </p>
+
+        <div class="education-arrow">
+          →
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       NOTE
+  ====================================================== -->
+
+  <div class="education-note">
+
+    <strong>Catatan:</strong>
+    Materi NEXTRA dibuat untuk tujuan
+    edukasi dan informasi. Crypto memiliki
+    risiko tinggi dan bukan merupakan
+    jaminan keuntungan.
+
   </div>
-  <div class="coming-soon">
-    <div class="big-icon">🚧</div>
-    <p>Halaman ini segera hadir.</p>
-  </div>
-</div>
+
+
+  <footer class="education-footer">
+
+    NEXTRA · Your Market. Your Intelligence.
+
+  </footer>
+
+
+</main>
+
+
 <div id="bottom-nav"></div>
+
+
+<!-- =====================================================
+     APP
+====================================================== -->
+
 <script src="js/api.js"></script>
+
 <script src="js/app.js"></script>
+
+
 <script>
-initTheme(); renderNav();
-const b = document.getElementById("themeBtn");
-b.textContent = document.documentElement.getAttribute("data-theme")==="dark"?"🌙":"☀️";
-b.addEventListener("click",()=>{b.textContent=toggleTheme()==="dark"?"🌙":"☀️";});
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    if (
+      typeof initTheme === "function"
+    ) {
+
+      initTheme();
+
+    }
+
+
+    if (
+      typeof renderNav === "function"
+    ) {
+
+      renderNav();
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "themeBtn"
+      );
+
+
+    if (!button) {
+      return;
+    }
+
+
+    if (
+      document.documentElement
+        .getAttribute("data-theme")
+        === "dark"
+    ) {
+
+      button.textContent = "🌙";
+
+    } else {
+
+      button.textContent = "☀️";
+
+    }
+
+
+    if (
+      typeof toggleTheme === "function"
+    ) {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          const theme =
+            toggleTheme();
+
+
+          button.textContent =
+            theme === "dark"
+              ? "🌙"
+              : "☀️";
+
+        }
+      );
+
+    }
+
+  }
+);
+
 </script>
+
+
 </body>
+
 </html>
