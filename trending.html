@@ -1,32 +1,200 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Pantau</title>
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/components.css" />
-<link rel="stylesheet" href="css/responsive.css" />
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Trending Crypto | NEXTRA</title>
+
+
+  <!-- =====================================================
+       SEO
+  ====================================================== -->
+
+  <meta
+    name="description"
+    content="Temukan cryptocurrency yang sedang trending dan ramai diperhatikan di market dengan NEXTRA."
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <link
+    rel="canonical"
+    href="https://nextralabs.github.io/Crypto-web/trending.html"
+  >
+
+
+  <!-- =====================================================
+       OPEN GRAPH
+  ====================================================== -->
+
+  <meta
+    property="og:type"
+    content="website"
+  >
+
+  <meta
+    property="og:title"
+    content="Trending Crypto | NEXTRA"
+  >
+
+  <meta
+    property="og:description"
+    content="Temukan cryptocurrency yang sedang trending dan ramai diperhatikan di market."
+  >
+
+  <meta
+    property="og:url"
+    content="https://nextralabs.github.io/Crypto-web/trending.html"
+  >
+
+  <meta
+    property="og:site_name"
+    content="NEXTRA"
+  >
+
+  <meta
+    property="og:locale"
+    content="id_ID"
+  >
+
+
+  <!-- =====================================================
+       TWITTER / X
+  ====================================================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Trending Crypto | NEXTRA"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Temukan cryptocurrency yang sedang trending dengan NEXTRA."
+  >
+
+
+  <!-- =====================================================
+       STYLES
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/components.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/responsive.css"
+  >
+
 </head>
+
+
 <body>
+
 <div class="container">
+
   <div class="topbar">
-    <div><h1 class="title">Pantau<span class="dot">.</span></h1></div>
-    <button class="icon-btn" id="themeBtn">🌙</button>
+
+    <div>
+
+      <h1 class="title">
+        NEXTRA<span class="dot">.</span>
+      </h1>
+
+    </div>
+
+
+    <button
+      class="icon-btn"
+      id="themeBtn"
+      aria-label="Ganti tema"
+      title="Ganti tema"
+    >
+      🌙
+    </button>
+
   </div>
+
+
   <div class="coming-soon">
-    <div class="big-icon">🚧</div>
-    <p>Halaman ini segera hadir.</p>
+
+    <div class="big-icon">
+      🚧
+    </div>
+
+    <p>
+      Halaman ini segera hadir.
+    </p>
+
   </div>
+
 </div>
+
+
 <div id="bottom-nav"></div>
+
+
 <script src="js/api.js"></script>
+
 <script src="js/app.js"></script>
+
+
 <script>
-initTheme(); renderNav();
-const b = document.getElementById("themeBtn");
-b.textContent = document.documentElement.getAttribute("data-theme")==="dark"?"🌙":"☀️";
-b.addEventListener("click",()=>{b.textContent=toggleTheme()==="dark"?"🌙":"☀️";});
+
+initTheme();
+
+renderNav();
+
+
+const b =
+  document.getElementById(
+    "themeBtn"
+  );
+
+
+b.textContent =
+  document.documentElement
+    .getAttribute("data-theme") === "dark"
+      ? "🌙"
+      : "☀️";
+
+
+b.addEventListener(
+  "click",
+  () => {
+
+    b.textContent =
+      toggleTheme() === "dark"
+        ? "🌙"
+        : "☀️";
+
+  }
+);
+
 </script>
+
+
 </body>
+
 </html>
