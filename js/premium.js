@@ -31,7 +31,7 @@
       console.error("Gagal cek status premium:", error);
       return null;
     }
-    return data; // null kalau belum ada langganan aktif
+    return data;
   }
 
   async function handleUpgradeClick() {
@@ -111,7 +111,6 @@
     planButton.addEventListener("click", handleUpgradeClick);
   }
 
-  // Diekspos supaya profile.html bisa memanggil ulang setelah login dikonfirmasi
   window.NEXTRA_PREMIUM = {
     render: renderPremiumStatus,
   };
