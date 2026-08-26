@@ -1343,4 +1343,130 @@
             <path
               d="
                 M3.5 10.7
-                12 3.
+                
+12 3.8
+                20.5 10.7
+                v9.1
+                a1.7 1.7 0 0 1-1.7 1.7
+                H5.2
+                a1.7 1.7 0 0 1-1.7-1.7Z
+              "
+            />
+
+            <path
+              d="
+                M9 21.5
+                v-6.8
+                h6
+                v6.8
+              "
+            />
+
+          </svg>
+
+        </div>
+
+
+        <div class="quick-name">
+          Home
+        </div>
+
+
+        <div class="quick-description">
+          Back to dashboard
+        </div>
+
+
+        <div class="quick-arrow">
+          →
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =================================================
+       BRAND FOOTER
+  ================================================= -->
+
+  <footer class="more-footer">
+
+    <div class="more-footer-logo">
+      NEXTRA<span>.</span>
+    </div>
+
+    <div class="more-footer-text">
+      Your Market. Your Intelligence.
+    </div>
+
+  </footer>
+
+
+</main>
+
+
+<div id="bottom-nav"></div>
+
+
+<script src="js/app.js"></script>
+
+
+<script>
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    if (
+      typeof initTheme === "function"
+    ) {
+
+      initTheme();
+
+    }
+
+
+    if (
+      typeof renderNav === "function"
+    ) {
+
+      renderNav();
+
+    }
+
+
+    const button =
+      document.getElementById(
+        "theme-toggle"
+      );
+
+
+    if (
+      typeof toggleTheme === "function" &&
+      button
+    ) {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          toggleTheme();
+
+        }
+      );
+
+    }
+
+  }
+);
+
+</script>
+
+
+</body>
+
+  </html>
