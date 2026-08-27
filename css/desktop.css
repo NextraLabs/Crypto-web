@@ -336,3 +336,180 @@
   }
 
 }
+
+/* =========================================================
+   NEXTRA DESKTOP — POLISH V1
+   NAVBAR + HOME STRUCTURE
+========================================================= */
+
+@media (min-width: 700px) {
+
+  /* =========================
+     DESKTOP NAVBAR
+  ========================= */
+
+  .bottom-nav {
+    height: 72px;
+
+    justify-content: flex-start;
+
+    padding: 0 42px;
+
+    gap: 14px;
+  }
+
+  .bottom-nav::before {
+    content: "NEXTRA";
+
+    margin-right: 28px;
+
+    color: var(--text);
+
+    font-size: 19px;
+    font-weight: 850;
+
+    letter-spacing: -.055em;
+  }
+
+  .nav-item {
+    width: 108px;
+    height: 46px;
+
+    font-size: 12px;
+  }
+
+  .nav-item.active {
+    background:
+      rgba(57,242,160,.08);
+  }
+
+
+  /* =========================
+     PAGE POSITION
+  ========================= */
+
+  .container {
+    padding-top: 112px;
+  }
+
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .topbar {
+    display: flex;
+    align-items: flex-end;
+
+    padding-bottom: 8px;
+
+    margin-bottom: 26px;
+  }
+
+  .title {
+    font-size: 38px;
+  }
+
+
+  /* =========================
+     SEARCH
+  ========================= */
+
+  .search-input {
+    max-width: 760px;
+  }
+
+
+  /* =========================
+     MARKET LIST
+  ========================= */
+
+  #home-market-list {
+    display: block;
+
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border:
+      1px solid var(--line);
+
+    border-radius: 18px;
+  }
+
+  #home-market-list .coin-card {
+    display: grid;
+
+    grid-template-columns:
+      minmax(180px, 1fr)
+      180px
+      130px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    min-height: 76px;
+
+    padding:
+      14px 24px;
+  }
+
+  #home-market-list .coin-price,
+  #home-market-list .coin-change {
+    margin-left: 0;
+  }
+
+
+  /* =========================
+     DESKTOP SECTION SPACING
+  ========================= */
+
+  .highlight-box {
+    max-width: 900px;
+
+    margin:
+      22px 0;
+  }
+
+
+  /* =========================
+     GENERIC DESKTOP CARDS
+  ========================= */
+
+  .card,
+  .panel,
+  .market-card,
+  .stat-card {
+    box-shadow:
+      0 12px 35px
+      rgba(0,0,0,.12);
+  }
+
+}
+
+
+/* =========================================================
+   WIDE DESKTOP
+========================================================= */
+
+@media (min-width: 1100px) {
+
+  .bottom-nav {
+    padding-left: 55px;
+    padding-right: 55px;
+  }
+
+  .bottom-nav::before {
+    margin-right: 45px;
+  }
+
+  .nav-item {
+    width: 120px;
+  }
+
+  .container {
+    padding-top: 118px;
+  }
+
+}
