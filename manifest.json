@@ -1,0 +1,20 @@
+{
+  "name": "NEXTRA — Your Market. Your Intelligence.",
+  "short_name": "NEXTRA",
+  "description": "Crypto market intelligence platform untuk memantau market secara real-time.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#070909",
+  "background_color": "#070909",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
