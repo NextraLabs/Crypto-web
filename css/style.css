@@ -1096,3 +1096,361 @@ td {
   }
 
 }
+
+/* =========================================================
+   NEXTRA — REAL DESKTOP EXPERIENCE
+========================================================= */
+
+@media (min-width: 700px) {
+
+  /* MAIN DESKTOP CONTAINER */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 42px 60px;
+  }
+
+  /* HEADER */
+  .topbar {
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  /* SEARCH */
+  .search-input {
+    height: 52px;
+    font-size: 14px;
+  }
+
+  /* TABS */
+  .tabs {
+    gap: 30px;
+    margin-top: 26px;
+  }
+
+  .tab {
+    font-size: 14px;
+  }
+
+  /* COIN LIST */
+  #home-market-list {
+    border-radius: 18px;
+  }
+
+  .coin-card {
+    min-height: 78px;
+    padding: 15px 18px;
+  }
+
+  .coin-card:hover {
+    padding-left: 18px;
+    padding-right: 18px;
+    border-radius: 0;
+  }
+
+  .coin-symbol {
+    font-size: 16px;
+  }
+
+  .coin-pair {
+    font-size: 12px;
+  }
+
+  .coin-price {
+    font-size: 15px;
+  }
+
+  .coin-change {
+    font-size: 13px;
+  }
+
+  /* TABLE */
+  table th {
+    font-size: 11px;
+    padding: 13px 12px;
+  }
+
+  table td {
+    font-size: 14px;
+    padding: 16px 12px;
+  }
+
+
+  /* =====================================================
+     DESKTOP BOTTOM NAV → TOP NAV
+  ====================================================== */
+
+  .bottom-nav {
+
+    position: sticky;
+
+    top: 0;
+
+    left: auto;
+
+    bottom: auto;
+
+    transform: none;
+
+    width: 100%;
+
+    max-width: none;
+
+    height: 64px;
+
+    margin: 0;
+
+    padding: 6px 24px;
+
+    border-radius: 0;
+
+    border-top: 0;
+
+    border-left: 0;
+
+    border-right: 0;
+
+    border-bottom: 1px solid var(--line);
+
+    background: rgba(7,9,9,.92);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(160%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(160%);
+
+    box-shadow:
+      0 8px 30px rgba(0,0,0,.15);
+
+    grid-template-columns:
+      repeat(5, minmax(100px, 150px));
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 0;
+  }
+
+
+  [data-theme="light"] .bottom-nav {
+
+    background:
+      rgba(255,255,255,.92);
+
+    box-shadow:
+      0 8px 30px rgba(0,0,0,.08);
+  }
+
+
+  .nav-item {
+
+    height: 50px;
+
+    flex-direction: row;
+
+    gap: 8px;
+
+    border-radius: 11px;
+  }
+
+
+  .nav-icon {
+
+    width: 20px;
+    height: 20px;
+  }
+
+
+  .nav-icon svg {
+
+    width: 19px;
+    height: 19px;
+  }
+
+
+  .nav-label {
+
+    font-size: 11px;
+  }
+
+
+  .nav-item.active::before {
+
+    top: auto;
+
+    bottom: 4px;
+
+    width: 28px;
+
+    height: 2px;
+  }
+
+
+  .nav-item.active .nav-icon {
+
+    transform:
+      scale(1.04);
+  }
+
+
+  /* =====================================================
+     DESKTOP CONTENT WIDTH
+  ====================================================== */
+
+  .home-hero {
+
+    padding: 34px 32px;
+
+    border-radius: 24px;
+  }
+
+
+  .hero-title {
+
+    font-size: 38px;
+  }
+
+
+  .hero-description {
+
+    max-width: 600px;
+
+    font-size: 13px;
+  }
+
+
+  .hero-stats {
+
+    gap: 12px;
+  }
+
+
+  .hero-stat {
+
+    padding: 15px;
+  }
+
+
+  .hero-stat strong {
+
+    font-size: 15px;
+  }
+
+
+  .hero-stat span {
+
+    font-size: 10px;
+  }
+
+
+  /* EXPLORE CARDS */
+
+  .explore-grid {
+
+    grid-template-columns:
+      repeat(4, 1fr);
+
+    gap: 12px;
+  }
+
+
+  .explore-card {
+
+    min-height: 140px;
+    padding: 18px !important;
+  }
+
+
+  .explore-name {
+
+    font-size: 13px;
+  }
+
+
+  .explore-desc {
+
+    max-width: 180px;
+
+    font-size: 9px;
+  }
+
+
+  /* INFO CARDS */
+
+  .nextra-info-grid {
+
+    grid-template-columns:
+      repeat(4, 1fr);
+
+    gap: 12px;
+  }
+
+
+  .nextra-info-card {
+
+    min-height: 80px;
+
+    padding: 14px;
+  }
+
+
+  /* PULSE */
+
+  .pulse-card {
+
+    padding: 20px;
+
+    border-radius: 18px;
+  }
+
+
+  .pulse-name {
+
+    font-size: 14px;
+  }
+
+
+  .pulse-value {
+
+    font-size: 24px;
+  }
+
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  .container {
+
+    max-width: 1400px;
+
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+  .home-hero {
+
+    padding: 42px;
+  }
+
+  .hero-title {
+
+    font-size: 44px;
+  }
+
+   }
