@@ -32,23 +32,38 @@
 
     body {
       min-height: 100vh;
+
       font-family: Arial, sans-serif;
+
       background: #05070a;
+
       color: #fff;
+
       display: flex;
+
       align-items: center;
       justify-content: center;
+
       padding: 20px;
     }
 
     .login-box {
       width: 100%;
       max-width: 400px;
+
       background: #0c1013;
-      border: 1px solid rgba(255,255,255,.08);
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
       border-radius: 22px;
+
       padding: 30px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.45);
+
+      box-shadow:
+        0 25px 80px
+        rgba(0,0,0,.45);
     }
 
     /* LOGO */
@@ -87,130 +102,6 @@
       line-height: 1.5;
     }
 
-    /* LABEL */
-
-    label {
-      display: block;
-      font-size: 12px;
-      margin-bottom: 7px;
-    }
-
-    /* INPUT */
-
-    input {
-      width: 100%;
-      height: 46px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: #12171a;
-      color: white;
-      padding: 0 14px;
-      outline: none;
-      transition: .2s ease;
-    }
-
-    input:focus {
-      border-color: #42f5a7;
-      box-shadow:
-        0 0 0 3px
-        rgba(66,245,167,.06);
-    }
-
-    input::placeholder {
-      color: #59636a;
-    }
-
-    /* PASSWORD */
-
-    .password-wrapper {
-      position: relative;
-      margin-bottom: 16px;
-    }
-
-    .password-wrapper input {
-      padding-right: 50px;
-      margin-bottom: 0;
-    }
-
-    /* EYE BUTTON */
-
-    .toggle-password {
-      position: absolute;
-      right: 7px;
-      top: 50%;
-      transform: translateY(-50%);
-
-      width: 38px;
-      height: 38px;
-
-      padding: 0;
-      margin: 0;
-
-      border: none;
-      border-radius: 9px;
-
-      background: transparent;
-      color: #69747b;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      transition: .2s ease;
-    }
-
-    .toggle-password:hover {
-      background: rgba(255,255,255,.05);
-      color: #42f5a7;
-      filter: none;
-    }
-
-    .toggle-password:active {
-      transform: translateY(-50%) scale(.94);
-    }
-
-    .toggle-password svg {
-      width: 20px;
-      height: 20px;
-      display: block;
-    }
-
-    /* LOGIN BUTTON */
-
-    .login-button {
-      width: 100%;
-      height: 46px;
-
-      border: none;
-      border-radius: 12px;
-
-      background: #42f5a7;
-      color: #06100b;
-
-      font-weight: bold;
-      cursor: pointer;
-
-      margin-top: 4px;
-
-      transition: .2s ease;
-    }
-
-    .login-button:hover {
-      filter: brightness(1.05);
-    }
-
-    .login-button:active {
-      transform: scale(.98);
-    }
-
-    .login-button:disabled {
-      opacity: .6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
     /* MESSAGE */
 
     .message {
@@ -232,40 +123,263 @@
     }
 
     .error {
-      background: rgba(255,70,70,.1);
+      background:
+        rgba(255,70,70,.1);
+
       color: #ff8585;
-      border: 1px solid rgba(255,70,70,.12);
+
+      border:
+        1px solid
+        rgba(255,70,70,.12);
     }
 
     .success {
-      background: rgba(66,245,167,.1);
+      background:
+        rgba(66,245,167,.1);
+
       color: #42f5a7;
-      border: 1px solid rgba(66,245,167,.12);
+
+      border:
+        1px solid
+        rgba(66,245,167,.12);
     }
 
-    /* LINKS */
+    /* LABEL */
 
-    .links {
-      text-align: center;
-      margin-top: 18px;
+    label {
+      display: block;
+
       font-size: 12px;
-      color: #7f8a91;
+
+      margin-bottom: 7px;
     }
 
-    a {
-      color: #42f5a7;
-      text-decoration: none;
+    /* INPUT */
+
+    input {
+      width: 100%;
+
+      height: 46px;
+
+      border-radius: 12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
+      background: #12171a;
+
+      color: white;
+
+      padding: 0 14px;
+
+      outline: none;
+
       transition: .2s ease;
     }
 
-    a:hover {
+    input:focus {
+      border-color: #42f5a7;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(66,245,167,.06);
+    }
+
+    input::placeholder {
+      color: #59636a;
+    }
+
+    /* PASSWORD */
+
+    .password-wrapper {
+      position: relative;
+
+      margin-bottom: 12px;
+    }
+
+    .password-wrapper input {
+      padding-right: 52px;
+    }
+
+    .toggle-password {
+      position: absolute;
+
+      right: 7px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      width: 38px;
+
+      height: 38px;
+
+      padding: 0;
+
+      margin: 0;
+
+      border: none;
+
+      border-radius: 9px;
+
+      background: transparent;
+
+      color: #69747b;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+    }
+
+    .toggle-password:hover {
+      background:
+        rgba(255,255,255,.05);
+
+      color: #42f5a7;
+    }
+
+    .toggle-password svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* OPTIONS */
+
+    .login-options {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-bottom: 18px;
+
+      font-size: 11px;
+
+      color: #7f8a91;
+    }
+
+    .remember {
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      cursor: pointer;
+
+      margin: 0;
+
+      font-size: 11px;
+    }
+
+    .remember input {
+      width: 15px;
+      height: 15px;
+
+      margin: 0;
+
+      accent-color: #42f5a7;
+
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      color: #42f5a7;
+
+      text-decoration: none;
+
+      white-space: nowrap;
+    }
+
+    .forgot-link:hover {
       text-decoration: underline;
+    }
+
+    /* LOGIN BUTTON */
+
+    .login-button {
+      width: 100%;
+
+      height: 46px;
+
+      border: none;
+
+      border-radius: 12px;
+
+      background: #42f5a7;
+
+      color: #06100b;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: .2s ease;
+    }
+
+    .login-button:hover {
+      filter: brightness(1.05);
+    }
+
+    .login-button:active {
+      transform: scale(.98);
+    }
+
+    .login-button:disabled {
+      opacity: .6;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+    /* SECURITY */
+
+    .security {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      margin-top: 13px;
+
+      color: #59636a;
+
+      font-size: 10px;
+
+      text-align: center;
+    }
+
+    .security-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #42f5a7;
+
+      box-shadow:
+        0 0 8px
+        rgba(66,245,167,.6);
     }
 
     /* DIVIDER */
 
     .divider {
       display: flex;
+
       align-items: center;
 
       gap: 10px;
@@ -289,22 +403,120 @@
       flex: 1;
     }
 
-    /* SECURITY */
+    /* GOOGLE */
 
-    .security-note {
+    .google-button {
+      width: 100%;
+
+      height: 46px;
+
+      border-radius: 12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.1);
+
+      background: #12171a;
+
+      color: #fff;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      transition: .2s ease;
+    }
+
+    .google-button:hover {
+      background: #171d21;
+
+      border-color:
+        rgba(255,255,255,.18);
+    }
+
+    .google-icon {
+      width: 19px;
+      height: 19px;
+    }
+
+    .google-button:disabled {
+      opacity: .6;
+
+      cursor: not-allowed;
+    }
+
+    /* RESEND */
+
+    .resend {
+      display: none;
+
       text-align: center;
 
-      margin-top: 20px;
+      margin-top: 15px;
 
-      color: #59636a;
+      font-size: 11px;
 
-      font-size: 10px;
+      color: #7f8a91;
 
       line-height: 1.5;
     }
 
-    .security-note span {
+    .resend.show {
+      display: block;
+    }
+
+    .resend button {
+      width: auto;
+
+      height: auto;
+
+      border: none;
+
+      background: transparent;
+
       color: #42f5a7;
+
+      padding: 0;
+
+      margin: 0;
+
+      font-size: 11px;
+
+      cursor: pointer;
+    }
+
+    .resend button:hover {
+      text-decoration: underline;
+    }
+
+    /* LINKS */
+
+    .links {
+      text-align: center;
+
+      margin-top: 18px;
+
+      font-size: 12px;
+
+      color: #7f8a91;
+    }
+
+    a {
+      color: #42f5a7;
+
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
 
     /* MOBILE */
@@ -343,6 +555,7 @@
 
     </div>
 
+
     <!-- TITLE -->
 
     <h2>
@@ -353,12 +566,14 @@
       Masuk ke akun NEXTRA kamu.
     </p>
 
+
     <!-- MESSAGE -->
 
     <div
       id="message"
       class="message"
     ></div>
+
 
     <!-- FORM -->
 
@@ -377,6 +592,7 @@
         autocomplete="email"
         required
       >
+
 
       <!-- PASSWORD -->
 
@@ -403,8 +619,6 @@
           title="Tampilkan password"
         >
 
-          <!-- EYE ICON -->
-
           <svg
             id="eyeIcon"
             viewBox="0 0 24 24"
@@ -413,7 +627,6 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            aria-hidden="true"
           >
 
             <path
@@ -432,7 +645,37 @@
 
       </div>
 
-      <!-- LOGIN BUTTON -->
+
+      <!-- OPTIONS -->
+
+      <div class="login-options">
+
+        <label class="remember">
+
+          <input
+            type="checkbox"
+            id="rememberMe"
+            checked
+          >
+
+          <span>
+            Ingat Saya
+          </span>
+
+        </label>
+
+
+        <a
+          href="forgot-password.html"
+          class="forgot-link"
+        >
+          Lupa password?
+        </a>
+
+      </div>
+
+
+      <!-- LOGIN -->
 
       <button
         id="loginButton"
@@ -442,23 +685,89 @@
         Masuk
       </button>
 
+
     </form>
 
-    <!-- FORGOT PASSWORD -->
 
-    <div class="links">
+    <!-- SECURITY -->
 
-      <a href="forgot-password.html">
-        Lupa password?
-      </a>
+    <div class="security">
+
+      <span class="security-dot"></span>
+
+      Login aman & terenkripsi
 
     </div>
+
+
+    <!-- RESEND VERIFICATION -->
+
+    <div
+      id="resendArea"
+      class="resend"
+    >
+
+      Belum menerima email verifikasi?
+
+      <br>
+
+      <button
+        type="button"
+        id="resendButton"
+      >
+        Kirim ulang verifikasi email
+      </button>
+
+    </div>
+
 
     <!-- DIVIDER -->
 
     <div class="divider">
       ATAU
     </div>
+
+
+    <!-- GOOGLE -->
+
+    <button
+      type="button"
+      id="googleButton"
+      class="google-button"
+    >
+
+      <svg
+        class="google-icon"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+
+        <path
+          fill="#4285F4"
+          d="M21.35 12.27c0-.78-.07-1.53-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42Z"
+        />
+
+        <path
+          fill="#34A853"
+          d="M12 21.98c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.69-1.72-5.46-4.03H3.3v2.52A9.75 9.75 0 0 0 12 21.98Z"
+        />
+
+        <path
+          fill="#FBBC05"
+          d="M6.54 14.07A5.86 5.86 0 0 1 6.23 12c0-.72.12-1.42.31-2.07V7.41H3.3A9.98 9.98 0 0 0 2.25 12c0 1.61.39 3.14 1.05 4.59l3.24-2.52Z"
+        />
+
+        <path
+          fill="#EA4335"
+          d="M12 5.9c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.83 2.98 14.63 2.02 12 2.02a9.75 9.75 0 0 0-8.7 5.39l3.24 2.52C7.31 7.62 9.46 5.9 12 5.9Z"
+        />
+
+      </svg>
+
+      Masuk dengan Google
+
+    </button>
+
 
     <!-- REGISTER -->
 
@@ -472,6 +781,7 @@
 
     </div>
 
+
     <!-- HOME -->
 
     <div class="links">
@@ -482,16 +792,8 @@
 
     </div>
 
-    <!-- SECURITY -->
-
-    <div class="security-note">
-
-      Login kamu diproses secara aman melalui
-      <span>NEXTRA</span>.
-
-    </div>
-
   </div>
+
 
   <!-- SUPABASE -->
 
@@ -499,10 +801,11 @@
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
   ></script>
 
+
   <script>
 
     /* =====================================
-       SUPABASE CONFIG
+       SUPABASE
     ===================================== */
 
     const SUPABASE_URL =
@@ -514,8 +817,16 @@
     const supabaseClient =
       window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_KEY
+        SUPABASE_KEY,
+        {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+          }
+        }
       );
+
 
     /* =====================================
        ELEMENTS
@@ -546,6 +857,11 @@
         "eyeIcon"
       );
 
+    const rememberMe =
+      document.getElementById(
+        "rememberMe"
+      );
+
     const message =
       document.getElementById(
         "message"
@@ -556,61 +872,21 @@
         "loginButton"
       );
 
-    /* =====================================
-       SHOW / HIDE PASSWORD
-    ===================================== */
+    const resendArea =
+      document.getElementById(
+        "resendArea"
+      );
 
-    togglePassword.addEventListener(
-      "click",
-      function() {
+    const resendButton =
+      document.getElementById(
+        "resendButton"
+      );
 
-        const isPassword =
-          passwordInput.type === "password";
+    const googleButton =
+      document.getElementById(
+        "googleButton"
+      );
 
-        if (isPassword) {
-
-          passwordInput.type = "text";
-
-          eyeIcon.innerHTML = `
-            <path d="M3 3l18 18"/>
-            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
-            <path d="M9.9 5.2A10.6 10.6 0 0 1 12 5c6.5 0 10 7 10 7a18.5 18.5 0 0 1-3.1 3.8"/>
-            <path d="M6.6 6.6C3.6 8.4 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 3.4-.6"/>
-          `;
-
-          togglePassword.setAttribute(
-            "aria-label",
-            "Sembunyikan password"
-          );
-
-          togglePassword.setAttribute(
-            "title",
-            "Sembunyikan password"
-          );
-
-        } else {
-
-          passwordInput.type = "password";
-
-          eyeIcon.innerHTML = `
-            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/>
-            <circle cx="12" cy="12" r="3"/>
-          `;
-
-          togglePassword.setAttribute(
-            "aria-label",
-            "Tampilkan password"
-          );
-
-          togglePassword.setAttribute(
-            "title",
-            "Tampilkan password"
-          );
-
-        }
-
-      }
-    );
 
     /* =====================================
        MESSAGE
@@ -629,6 +905,7 @@
 
     }
 
+
     function hideMessage() {
 
       message.textContent =
@@ -638,6 +915,76 @@
         "message";
 
     }
+
+
+    /* =====================================
+       EYE ICON
+    ===================================== */
+
+    function eyeOpen() {
+
+      return `
+        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/>
+        <circle cx="12" cy="12" r="3"/>
+      `;
+
+    }
+
+
+    function eyeClosed() {
+
+      return `
+        <path d="M3 3l18 18"/>
+        <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
+        <path d="M9.9 5.2A10.6 10.6 0 0 1 12 5c6.5 0 10 7 10 7a18.5 18.5 0 0 1-3.1 3.8"/>
+        <path d="M6.6 6.6C3.6 8.4 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 3.4-.6"/>
+      `;
+
+    }
+
+
+    /* =====================================
+       SHOW / HIDE PASSWORD
+    ===================================== */
+
+    togglePassword.addEventListener(
+      "click",
+      function() {
+
+        const hidden =
+          passwordInput.type === "password";
+
+        if (hidden) {
+
+          passwordInput.type =
+            "text";
+
+          eyeIcon.innerHTML =
+            eyeClosed();
+
+          togglePassword.setAttribute(
+            "aria-label",
+            "Sembunyikan password"
+          );
+
+        } else {
+
+          passwordInput.type =
+            "password";
+
+          eyeIcon.innerHTML =
+            eyeOpen();
+
+          togglePassword.setAttribute(
+            "aria-label",
+            "Tampilkan password"
+          );
+
+        }
+
+      }
+    );
+
 
     /* =====================================
        LOGIN
@@ -651,6 +998,11 @@
 
         hideMessage();
 
+        resendArea.classList.remove(
+          "show"
+        );
+
+
         const email =
           emailInput
             .value
@@ -660,7 +1012,6 @@
           passwordInput
             .value;
 
-        /* VALIDATION */
 
         if (!email) {
 
@@ -672,7 +1023,9 @@
           emailInput.focus();
 
           return;
+
         }
+
 
         if (!emailInput.checkValidity()) {
 
@@ -684,7 +1037,9 @@
           emailInput.focus();
 
           return;
+
         }
+
 
         if (!password) {
 
@@ -696,7 +1051,9 @@
           passwordInput.focus();
 
           return;
+
         }
+
 
         if (password.length < 6) {
 
@@ -708,26 +1065,35 @@
           passwordInput.focus();
 
           return;
+
         }
 
-        /* BUTTON */
 
         loginButton.disabled =
           true;
 
+        googleButton.disabled =
+          true;
+
         loginButton.textContent =
           "Memproses...";
+
 
         showMessage(
           "Sedang masuk ke akun kamu...",
           "success"
         );
 
+
         try {
 
-          /* SUPABASE LOGIN */
+          /*
+            Supabase Auth menggunakan
+            session persistence otomatis.
+          */
 
           const {
+            data,
             error
           } =
             await supabaseClient
@@ -742,7 +1108,6 @@
 
               });
 
-          /* ERROR */
 
           if (error) {
 
@@ -751,58 +1116,89 @@
               error
             );
 
-            let errorMessage =
-              "Email atau password salah.";
+
+            const errorText =
+              (
+                error.message ||
+                ""
+              ).toLowerCase();
+
 
             if (
-              error.message &&
-              error.message
-                .toLowerCase()
-                .includes(
-                  "email not confirmed"
-                )
+              errorText.includes(
+                "email not confirmed"
+              )
             ) {
 
-              errorMessage =
-                "Email kamu belum diverifikasi.";
+              showMessage(
+                "Email kamu belum diverifikasi.",
+                "error"
+              );
+
+              resendArea.classList.add(
+                "show"
+              );
+
+            } else if (
+              errorText.includes(
+                "invalid login credentials"
+              )
+            ) {
+
+              showMessage(
+                "Email atau password salah.",
+                "error"
+              );
+
+            } else {
+
+              showMessage(
+                "Login gagal. Coba lagi.",
+                "error"
+              );
 
             }
 
-            showMessage(
-              errorMessage,
-              "error"
-            );
 
             loginButton.disabled =
+              false;
+
+            googleButton.disabled =
               false;
 
             loginButton.textContent =
               "Masuk";
 
             return;
+
           }
+
 
           /* SUCCESS */
 
-          showMessage(
-            "Login berhasil! Mengarahkan...",
-            "success"
-          );
+          if (data && data.session) {
 
-          loginButton.textContent =
-            "Berhasil ✓";
+            showMessage(
+              "Login berhasil! Mengarahkan...",
+              "success"
+            );
 
-          /* REDIRECT */
+            loginButton.textContent =
+              "Berhasil ✓";
 
-          setTimeout(
-            () => {
 
-              window.location.href =
-                "index.html";
+            setTimeout(
+              function() {
 
-            },
-            500
-          );
+                window.location.href =
+                  "index.html";
+
+              },
+              500
+            );
+
+          }
+
 
         } catch (error) {
 
@@ -811,12 +1207,17 @@
             error
           );
 
+
           showMessage(
             "Terjadi kesalahan. Coba lagi.",
             "error"
           );
 
+
           loginButton.disabled =
+            false;
+
+          googleButton.disabled =
             false;
 
           loginButton.textContent =
@@ -826,6 +1227,291 @@
 
       }
     );
+
+
+    /* =====================================
+       RESEND EMAIL VERIFICATION
+    ===================================== */
+
+    resendButton.addEventListener(
+      "click",
+      async function() {
+
+        const email =
+          emailInput
+            .value
+            .trim();
+
+
+        if (!email) {
+
+          showMessage(
+            "Masukkan email terlebih dahulu.",
+            "error"
+          );
+
+          emailInput.focus();
+
+          return;
+
+        }
+
+
+        if (!emailInput.checkValidity()) {
+
+          showMessage(
+            "Format email tidak valid.",
+            "error"
+          );
+
+          emailInput.focus();
+
+          return;
+
+        }
+
+
+        resendButton.disabled =
+          true;
+
+        resendButton.textContent =
+          "Mengirim...";
+
+
+        try {
+
+          const {
+            error
+          } =
+            await supabaseClient
+              .auth
+              .resend({
+
+                type:
+                  "signup",
+
+                email:
+                  email
+
+              });
+
+
+          if (error) {
+
+            console.error(
+              "Resend error:",
+              error
+            );
+
+            showMessage(
+              "Gagal mengirim ulang verifikasi.",
+              "error"
+            );
+
+            resendButton.disabled =
+              false;
+
+            resendButton.textContent =
+              "Kirim ulang verifikasi email";
+
+            return;
+
+          }
+
+
+          showMessage(
+            "Email verifikasi sudah dikirim ulang. Cek inbox kamu.",
+            "success"
+          );
+
+
+          resendButton.textContent =
+            "Email terkirim ✓";
+
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          showMessage(
+            "Terjadi kesalahan. Coba lagi.",
+            "error"
+          );
+
+          resendButton.disabled =
+            false;
+
+          resendButton.textContent =
+            "Kirim ulang verifikasi email";
+
+        }
+
+      }
+    );
+
+
+    /* =====================================
+       GOOGLE LOGIN
+    ===================================== */
+
+    googleButton.addEventListener(
+      "click",
+      async function() {
+
+        googleButton.disabled =
+          true;
+
+        loginButton.disabled =
+          true;
+
+        googleButton.textContent =
+          "Menghubungkan...";
+
+
+        showMessage(
+          "Menghubungkan ke Google...",
+          "success"
+        );
+
+
+        try {
+
+          const {
+            error
+          } =
+            await supabaseClient
+              .auth
+              .signInWithOAuth({
+
+                provider:
+                  "google",
+
+                options: {
+
+                  redirectTo:
+                    window.location.origin +
+                    "/index.html"
+
+                }
+
+              });
+
+
+          if (error) {
+
+            console.error(
+              "Google login error:",
+              error
+            );
+
+            showMessage(
+              "Login Google belum tersedia atau belum dikonfigurasi.",
+              "error"
+            );
+
+            googleButton.disabled =
+              false;
+
+            loginButton.disabled =
+              false;
+
+            googleButton.textContent =
+              "Masuk dengan Google";
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          showMessage(
+            "Gagal menghubungkan ke Google.",
+            "error"
+          );
+
+          googleButton.disabled =
+            false;
+
+          loginButton.disabled =
+            false;
+
+          googleButton.textContent =
+            "Masuk dengan Google";
+
+        }
+
+      }
+    );
+
+
+    /* =====================================
+       SESSION CHECK
+    ===================================== */
+
+    async function checkExistingSession() {
+
+      try {
+
+        const {
+          data
+        } =
+          await supabaseClient
+            .auth
+            .getSession();
+
+
+        if (
+          data &&
+          data.session
+        ) {
+
+          /*
+            User sudah login.
+            Tidak dipaksa redirect agar
+            halaman login tetap bisa dibuka.
+          */
+
+          console.log(
+            "Active NEXTRA session detected."
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Session check error:",
+          error
+        );
+
+      }
+
+    }
+
+
+    checkExistingSession();
+
+
+    /* =====================================
+       AUTH STATE
+    ===================================== */
+
+    supabaseClient
+      .auth
+      .onAuthStateChange(
+        function(event, session) {
+
+          console.log(
+            "Auth event:",
+            event
+          );
+
+        }
+      );
 
   </script>
 
