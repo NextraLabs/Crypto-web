@@ -781,3 +781,279 @@
   }
 
 }
+
+/* =========================================================
+   NEXTRA — SIDEBAR PREMIUM POLISH
+========================================================= */
+
+@media (min-width: 700px) {
+
+  /* SIDEBAR */
+
+  .desktop-sidebar {
+    background:
+      linear-gradient(
+        180deg,
+        var(--surface),
+        var(--bg)
+      );
+
+    box-shadow:
+      12px 0 40px rgba(0,0,0,.18);
+  }
+
+
+  /* BRAND */
+
+  .sidebar-brand {
+    position: relative;
+
+    padding:
+      10px 14px 24px;
+
+    margin-bottom: 12px;
+  }
+
+  .sidebar-brand span {
+    font-size: 26px;
+    font-weight: 900;
+
+    letter-spacing: -.065em;
+  }
+
+  .sidebar-brand span::after {
+    content: "";
+
+    display: inline-block;
+
+    width: 7px;
+    height: 7px;
+
+    margin-left: 5px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+
+    box-shadow:
+      0 0 12px
+      rgba(57,242,160,.7);
+  }
+
+
+  /* SECTION */
+
+  .sidebar-section {
+    position: relative;
+
+    margin-top: 12px;
+
+    padding-top: 4px;
+  }
+
+  .sidebar-section + .sidebar-section {
+    margin-top: 18px;
+
+    padding-top: 14px;
+
+    border-top:
+      1px solid var(--line);
+  }
+
+
+  .sidebar-title {
+    padding:
+      4px 13px 8px;
+
+    color: var(--subtle);
+
+    font-size: 9px;
+
+    font-weight: 850;
+
+    letter-spacing: .16em;
+  }
+
+
+  /* ITEMS */
+
+  .sidebar-item {
+    min-height: 45px;
+
+    padding:
+      0 13px;
+
+    border:
+      1px solid transparent;
+
+    border-radius: 12px;
+  }
+
+
+  .sidebar-item span {
+    width: 23px;
+
+    font-size: 16px;
+
+    opacity: .85;
+  }
+
+
+  .sidebar-item strong {
+    font-size: 12px;
+
+    letter-spacing: -.01em;
+  }
+
+
+  .sidebar-item:hover {
+    border-color:
+      var(--line);
+
+    background:
+      rgba(255,255,255,.035);
+
+    transform:
+      translateX(2px);
+  }
+
+
+  .sidebar-item.active {
+    border-color:
+      rgba(57,242,160,.12);
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(57,242,160,.12),
+        rgba(57,242,160,.035)
+      );
+
+    box-shadow:
+      inset 0 0 20px
+      rgba(57,242,160,.025);
+  }
+
+
+  .sidebar-item.active span {
+    opacity: 1;
+
+    transform:
+      scale(1.08);
+  }
+
+
+  /* ACTIVE LINE */
+
+  .sidebar-item.active::before {
+    width: 3px;
+
+    height: 25px;
+
+    box-shadow:
+      0 0 14px
+      rgba(57,242,160,.8);
+  }
+
+
+  /* FOOTER */
+
+  .sidebar-footer {
+    margin-top: auto;
+
+    padding-top: 18px;
+  }
+
+
+  .sidebar-status {
+    min-height: 60px;
+
+    padding:
+      12px 13px;
+
+    border:
+      1px solid
+      rgba(57,242,160,.08);
+
+    border-radius: 14px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(57,242,160,.07),
+        rgba(57,242,160,.015)
+      );
+  }
+
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+
+    animation:
+      nextraPulse 2s ease-in-out infinite;
+  }
+
+
+  @keyframes nextraPulse {
+
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: .45;
+      transform: scale(.8);
+    }
+
+  }
+
+
+  /* CONTENT */
+
+  .container {
+    padding-top: 42px;
+  }
+
+
+  /* DESKTOP SCROLLBAR */
+
+  .desktop-sidebar::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .desktop-sidebar::-webkit-scrollbar-thumb {
+    background:
+      rgba(255,255,255,.08);
+
+    border-radius: 999px;
+  }
+
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  .desktop-sidebar {
+    width: 275px;
+  }
+
+  .sidebar-item {
+    min-height: 47px;
+  }
+
+  .sidebar-item strong {
+    font-size: 13px;
+  }
+
+  .sidebar-brand span {
+    font-size: 28px;
+  }
+
+     }
