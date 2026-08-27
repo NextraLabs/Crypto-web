@@ -1,215 +1,29 @@
 /* =========================================================
-   NEXTRA — DESKTOP DASHBOARD
-   Desktop only — mobile untouched
+   NEXTRA — DESKTOP SYSTEM
+   Desktop only
+   Mobile layout remains controlled by style.css
 ========================================================= */
 
 @media (min-width: 700px) {
 
+  /* =======================================================
+     GLOBAL
+  ======================================================= */
+
   html,
   body {
     min-width: 100%;
-  }
-
-  body {
     overflow-x: hidden;
   }
 
-  /* ================================================
-     MAIN CONTENT
-  ================================================= */
-
-  .container {
-    width: min(1440px, calc(100% - 96px));
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 110px 0 70px;
+  body {
+    padding-bottom: 0;
   }
 
 
-  /* ================================================
-     HEADER
-  ================================================= */
-
-  .topbar {
-    margin-bottom: 30px;
-  }
-
-  .title {
-    font-size: 42px;
-    letter-spacing: -.06em;
-  }
-
-  .subtitle {
-    font-size: 13px;
-  }
-
-
-  /* ================================================
-     HERO
-  ================================================= */
-
-  .home-hero {
-    min-height: 280px;
-    padding: 38px 42px;
-    border-radius: 24px;
-  }
-
-  .hero-title {
-    max-width: 700px;
-    font-size: 42px;
-  }
-
-  .hero-description {
-    max-width: 600px;
-    font-size: 13px;
-  }
-
-  .home-search {
-    max-width: 700px;
-  }
-
-  .home-search input {
-    height: 48px;
-    font-size: 13px;
-  }
-
-  .home-search button {
-    height: 48px;
-    padding: 0 22px;
-  }
-
-  .hero-stats {
-    max-width: 700px;
-    gap: 10px;
-  }
-
-  .hero-stat {
-    padding: 14px;
-  }
-
-  .hero-stat strong {
-    font-size: 14px;
-  }
-
-  .hero-stat span {
-    font-size: 9px;
-  }
-
-
-  /* ================================================
-     HOME DASHBOARD
-  ================================================= */
-
-  #home-market-list {
-    width: 100%;
-    border-radius: 18px;
-  }
-
-  #home-market-list .coin-card {
-    min-height: 78px;
-    padding: 15px 20px;
-  }
-
-  #home-market-list .coin-card:hover {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-
-  /* ================================================
-     EXPLORE
-  ================================================= */
-
-  .explore-grid {
-    grid-template-columns:
-      repeat(4, minmax(0, 1fr));
-
-    gap: 14px;
-  }
-
-  .explore-card {
-    min-height: 150px;
-    padding: 20px !important;
-    border-radius: 18px !important;
-  }
-
-  .explore-icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .explore-name {
-    font-size: 13px;
-  }
-
-  .explore-desc {
-    max-width: 210px;
-    font-size: 9px;
-  }
-
-
-  /* ================================================
-     INFO
-  ================================================= */
-
-  .nextra-info-grid {
-    grid-template-columns:
-      repeat(4, minmax(0, 1fr));
-
-    gap: 14px;
-  }
-
-  .nextra-info-card {
-    min-height: 90px;
-    padding: 15px;
-    border-radius: 16px;
-  }
-
-
-  /* ================================================
-     PULSE
-  ================================================= */
-
-  .pulse-card {
-    padding: 22px;
-    border-radius: 20px;
-  }
-
-  .pulse-value {
-    font-size: 25px;
-  }
-
-
-  /* ================================================
-     CARDS
-  ================================================= */
-
-  .card,
-  .panel,
-  .market-card,
-  .stat-card {
-    border-radius: 18px;
-  }
-
-
-  /* ================================================
-     TABLE
-  ================================================= */
-
-  table th {
-    padding: 14px 16px;
-    font-size: 11px;
-  }
-
-  table td {
-    padding: 17px 16px;
-    font-size: 14px;
-  }
-
-
-  /* ================================================
-     DESKTOP NAVBAR
-  ================================================= */
+  /* =======================================================
+     TOP NAVIGATION
+  ======================================================= */
 
   .bottom-nav {
 
@@ -217,6 +31,7 @@
 
     top: 0;
     left: 0;
+    right: 0;
     bottom: auto;
 
     transform: none;
@@ -224,19 +39,21 @@
     width: 100%;
     max-width: none;
 
-    height: 70px;
+    height: 72px;
 
     display: flex;
 
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
-    gap: 10px;
+    gap: 8px;
 
-    padding: 7px 30px;
+    padding: 0 42px;
 
     border: 0;
-    border-bottom: 1px solid var(--line);
+
+    border-bottom:
+      1px solid var(--line);
 
     border-radius: 0;
 
@@ -264,18 +81,87 @@
   }
 
 
+  /* =======================================================
+     DESKTOP BRAND
+  ======================================================= */
+
+  .bottom-nav::before {
+
+    content: "NEXTRA";
+
+    display: flex;
+
+    align-items: center;
+
+    margin-right: 34px;
+
+    color: var(--text);
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    font-weight: 850;
+
+    letter-spacing: -.06em;
+  }
+
+
+  /* =======================================================
+     NAV ITEMS
+  ======================================================= */
+
   .nav-item {
 
-    width: 125px;
-    height: 48px;
+    position: relative;
+
+    width: 116px;
+    height: 46px;
+
+    display: flex;
 
     flex-direction: row;
 
+    align-items: center;
     justify-content: center;
 
     gap: 8px;
 
     border-radius: 12px;
+
+    color: var(--muted);
+
+    transition:
+      background .18s ease,
+      color .18s ease,
+      transform .18s ease;
+  }
+
+
+  .nav-item.active {
+
+    color: var(--green);
+
+    background:
+      rgba(57,242,160,.08);
+  }
+
+
+  .nav-item:hover {
+
+    color: var(--text);
+
+    background:
+      rgba(255,255,255,.035);
+  }
+
+
+  .nav-item.active:hover {
+
+    color: var(--green);
+
+    background:
+      rgba(57,242,160,.10);
   }
 
 
@@ -296,16 +182,497 @@
   .nav-label {
 
     font-size: 11px;
+
+    font-weight: 700;
   }
 
 
   .nav-item.active::before {
 
     top: auto;
+
     bottom: 2px;
 
     width: 30px;
+
     height: 2px;
+  }
+
+
+  /* =======================================================
+     MAIN CONTAINER
+  ======================================================= */
+
+  .container {
+
+    width:
+      min(
+        1440px,
+        calc(100% - 96px)
+      );
+
+    max-width: 1440px;
+
+    margin: 0 auto;
+
+    padding:
+      112px
+      0
+      70px;
+  }
+
+
+  /* =======================================================
+     PAGE HEADER
+  ======================================================= */
+
+  .topbar {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 30px;
+  }
+
+
+  .title {
+
+    font-size: 40px;
+
+    line-height: 1;
+
+    letter-spacing: -.06em;
+  }
+
+
+  .subtitle {
+
+    margin-top: 8px;
+
+    font-size: 13px;
+  }
+
+
+  /* =======================================================
+     SEARCH
+  ======================================================= */
+
+  .search-input {
+
+    width: 100%;
+
+    max-width: 780px;
+
+    height: 54px;
+
+    padding:
+      0 18px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+  }
+
+
+  /* =======================================================
+     TABS
+  ======================================================= */
+
+  .tabs {
+
+    gap: 34px;
+
+    margin:
+      26px 0
+      16px;
+
+    padding-bottom: 10px;
+  }
+
+
+  .tab {
+
+    font-size: 14px;
+
+    padding:
+      9px 0;
+  }
+
+
+  /* =======================================================
+     GENERIC CARDS
+  ======================================================= */
+
+  .card,
+  .panel,
+  .market-card,
+  .stat-card {
+
+    border-radius: 18px;
+
+    box-shadow:
+      0 12px 35px
+      rgba(0,0,0,.12);
+  }
+
+
+  /* =======================================================
+     HOME HERO
+  ======================================================= */
+
+  .home-hero {
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.55fr)
+      minmax(280px, .75fr);
+
+    align-items: center;
+
+    gap: 50px;
+
+    min-height: 320px;
+
+    padding:
+      44px 48px;
+
+    border-radius: 24px;
+  }
+
+
+  .hero-title {
+
+    max-width: 760px;
+
+    font-size: 46px;
+
+    line-height: 1.04;
+
+    letter-spacing: -.055em;
+  }
+
+
+  .hero-description {
+
+    max-width: 620px;
+
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+  }
+
+
+  /* =======================================================
+     HOME SEARCH
+  ======================================================= */
+
+  .home-search {
+
+    max-width: 720px;
+
+    margin-top: 22px;
+  }
+
+
+  .home-search input {
+
+    height: 50px;
+
+    font-size: 13px;
+  }
+
+
+  .home-search button {
+
+    height: 50px;
+
+    padding:
+      0 22px;
+  }
+
+
+  /* =======================================================
+     HERO STATS
+  ======================================================= */
+
+  .hero-stats {
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    max-width: 330px;
+
+    margin-top: 0;
+  }
+
+
+  .hero-stat {
+
+    min-height: 78px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+  }
+
+
+  .hero-stat strong {
+
+    font-size: 15px;
+  }
+
+
+  .hero-stat span {
+
+    font-size: 10px;
+  }
+
+
+  /* =======================================================
+     MARKET DASHBOARD
+  ======================================================= */
+
+  #home-market-list {
+
+    width: 100%;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+
+    border:
+      1px solid var(--line);
+
+    border-radius: 18px;
+
+    background:
+      var(--surface);
+  }
+
+
+  #home-market-list .coin-card {
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(300px, 1fr)
+      220px
+      160px;
+
+    align-items: center;
+
+    gap: 25px;
+
+    min-height: 80px;
+
+    padding:
+      15px 28px;
+  }
+
+
+  #home-market-list .coin-price,
+  #home-market-list .coin-change {
+
+    margin-left: 0;
+  }
+
+
+  #home-market-list .coin-price {
+
+    text-align: right;
+  }
+
+
+  #home-market-list .coin-change {
+
+    text-align: right;
+  }
+
+
+  #home-market-list .coin-card:hover {
+
+    padding-left: 28px;
+
+    padding-right: 28px;
+
+    background:
+      rgba(57,242,160,.035);
+  }
+
+
+  /* =======================================================
+     HIGHLIGHT
+  ======================================================= */
+
+  .highlight-box {
+
+    max-width: 100%;
+
+    margin:
+      24px 0;
+
+    padding: 20px;
+
+    border-radius: 16px;
+  }
+
+
+  /* =======================================================
+     EXPLORE GRID
+  ======================================================= */
+
+  .explore-grid {
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 20px;
+  }
+
+
+  .explore-card {
+
+    min-height: 150px;
+
+    padding:
+      20px !important;
+
+    border-radius:
+      18px !important;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+  }
+
+
+  .explore-icon {
+
+    width: 42px;
+    height: 42px;
+  }
+
+
+  .explore-name {
+
+    font-size: 14px;
+  }
+
+
+  .explore-desc {
+
+    max-width: 220px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+
+  /* =======================================================
+     INFO GRID
+  ======================================================= */
+
+  .nextra-info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-top: 20px;
+  }
+
+
+  .nextra-info-card {
+
+    min-height: 95px;
+
+    padding: 16px;
+
+    border-radius: 16px;
+  }
+
+
+  /* =======================================================
+     PULSE
+  ======================================================= */
+
+  .pulse-card {
+
+    margin-top: 20px;
+
+    padding: 24px;
+
+    border-radius: 20px;
+  }
+
+
+  .pulse-value {
+
+    font-size: 26px;
+  }
+
+
+  /* =======================================================
+     TABLES
+  ======================================================= */
+
+  table {
+
+    width: 100%;
+  }
+
+
+  table th {
+
+    padding:
+      14px 16px;
+
+    font-size: 11px;
+  }
+
+
+  table td {
+
+    padding:
+      17px 16px;
+
+    font-size: 14px;
+  }
+
+
+  /* =======================================================
+     LOADING / EMPTY
+  ======================================================= */
+
+  .loading,
+  .empty-state {
+
+    padding:
+      70px 20px;
+
+    font-size: 14px;
   }
 
 }
@@ -317,199 +684,83 @@
 
 @media (min-width: 1200px) {
 
+  .bottom-nav {
+
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+
+
+  .bottom-nav::before {
+
+    margin-right: 48px;
+  }
+
+
+  .nav-item {
+
+    width: 125px;
+  }
+
+
   .container {
-    width: min(1500px, calc(100% - 120px));
+
+    width:
+      min(
+        1500px,
+        calc(100% - 120px)
+      );
+
     max-width: 1500px;
   }
 
+
   .home-hero {
-    padding: 44px 48px;
+
+    grid-template-columns:
+      minmax(0, 1.8fr)
+      minmax(320px, .7fr);
+
+    gap: 70px;
+
+    min-height: 350px;
+
+    padding:
+      50px 56px;
   }
 
+
   .hero-title {
-    font-size: 46px;
+
+    font-size: 52px;
   }
+
+
+  #home-market-list .coin-card {
+
+    grid-template-columns:
+      minmax(400px, 1fr)
+      240px
+      180px;
+
+    min-height: 84px;
+
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+
+  #home-market-list .coin-card:hover {
+
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
 
   .explore-grid,
   .nextra-info-grid {
-    gap: 16px;
-  }
 
-}
-
-/* =========================================================
-   NEXTRA DESKTOP — POLISH V1
-   NAVBAR + HOME STRUCTURE
-========================================================= */
-
-@media (min-width: 700px) {
-
-  /* =========================
-     DESKTOP NAVBAR
-  ========================= */
-
-  .bottom-nav {
-    height: 72px;
-
-    justify-content: flex-start;
-
-    padding: 0 42px;
-
-    gap: 14px;
-  }
-
-  .bottom-nav::before {
-    content: "NEXTRA";
-
-    margin-right: 28px;
-
-    color: var(--text);
-
-    font-size: 19px;
-    font-weight: 850;
-
-    letter-spacing: -.055em;
-  }
-
-  .nav-item {
-    width: 108px;
-    height: 46px;
-
-    font-size: 12px;
-  }
-
-  .nav-item.active {
-    background:
-      rgba(57,242,160,.08);
-  }
-
-
-  /* =========================
-     PAGE POSITION
-  ========================= */
-
-  .container {
-    padding-top: 112px;
-  }
-
-
-  /* =========================
-     HEADER
-  ========================= */
-
-  .topbar {
-    display: flex;
-    align-items: flex-end;
-
-    padding-bottom: 8px;
-
-    margin-bottom: 26px;
-  }
-
-  .title {
-    font-size: 38px;
-  }
-
-
-  /* =========================
-     SEARCH
-  ========================= */
-
-  .search-input {
-    max-width: 760px;
-  }
-
-
-  /* =========================
-     MARKET LIST
-  ========================= */
-
-  #home-market-list {
-    display: block;
-
-    overflow: hidden;
-
-    background: var(--surface);
-
-    border:
-      1px solid var(--line);
-
-    border-radius: 18px;
-  }
-
-  #home-market-list .coin-card {
-    display: grid;
-
-    grid-template-columns:
-      minmax(180px, 1fr)
-      180px
-      130px;
-
-    align-items: center;
-
-    gap: 20px;
-
-    min-height: 76px;
-
-    padding:
-      14px 24px;
-  }
-
-  #home-market-list .coin-price,
-  #home-market-list .coin-change {
-    margin-left: 0;
-  }
-
-
-  /* =========================
-     DESKTOP SECTION SPACING
-  ========================= */
-
-  .highlight-box {
-    max-width: 900px;
-
-    margin:
-      22px 0;
-  }
-
-
-  /* =========================
-     GENERIC DESKTOP CARDS
-  ========================= */
-
-  .card,
-  .panel,
-  .market-card,
-  .stat-card {
-    box-shadow:
-      0 12px 35px
-      rgba(0,0,0,.12);
-  }
-
-}
-
-
-/* =========================================================
-   WIDE DESKTOP
-========================================================= */
-
-@media (min-width: 1100px) {
-
-  .bottom-nav {
-    padding-left: 55px;
-    padding-right: 55px;
-  }
-
-  .bottom-nav::before {
-    margin-right: 45px;
-  }
-
-  .nav-item {
-    width: 120px;
-  }
-
-  .container {
-    padding-top: 118px;
+    gap: 18px;
   }
 
 }
