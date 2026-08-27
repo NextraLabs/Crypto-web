@@ -1,0 +1,338 @@
+/* =========================================================
+   NEXTRA — DESKTOP DASHBOARD
+   Desktop only — mobile untouched
+========================================================= */
+
+@media (min-width: 700px) {
+
+  html,
+  body {
+    min-width: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* ================================================
+     MAIN CONTENT
+  ================================================= */
+
+  .container {
+    width: min(1440px, calc(100% - 96px));
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 110px 0 70px;
+  }
+
+
+  /* ================================================
+     HEADER
+  ================================================= */
+
+  .topbar {
+    margin-bottom: 30px;
+  }
+
+  .title {
+    font-size: 42px;
+    letter-spacing: -.06em;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+
+  /* ================================================
+     HERO
+  ================================================= */
+
+  .home-hero {
+    min-height: 280px;
+    padding: 38px 42px;
+    border-radius: 24px;
+  }
+
+  .hero-title {
+    max-width: 700px;
+    font-size: 42px;
+  }
+
+  .hero-description {
+    max-width: 600px;
+    font-size: 13px;
+  }
+
+  .home-search {
+    max-width: 700px;
+  }
+
+  .home-search input {
+    height: 48px;
+    font-size: 13px;
+  }
+
+  .home-search button {
+    height: 48px;
+    padding: 0 22px;
+  }
+
+  .hero-stats {
+    max-width: 700px;
+    gap: 10px;
+  }
+
+  .hero-stat {
+    padding: 14px;
+  }
+
+  .hero-stat strong {
+    font-size: 14px;
+  }
+
+  .hero-stat span {
+    font-size: 9px;
+  }
+
+
+  /* ================================================
+     HOME DASHBOARD
+  ================================================= */
+
+  #home-market-list {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  #home-market-list .coin-card {
+    min-height: 78px;
+    padding: 15px 20px;
+  }
+
+  #home-market-list .coin-card:hover {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+
+  /* ================================================
+     EXPLORE
+  ================================================= */
+
+  .explore-grid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+
+  .explore-card {
+    min-height: 150px;
+    padding: 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .explore-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .explore-name {
+    font-size: 13px;
+  }
+
+  .explore-desc {
+    max-width: 210px;
+    font-size: 9px;
+  }
+
+
+  /* ================================================
+     INFO
+  ================================================= */
+
+  .nextra-info-grid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+
+  .nextra-info-card {
+    min-height: 90px;
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+
+  /* ================================================
+     PULSE
+  ================================================= */
+
+  .pulse-card {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .pulse-value {
+    font-size: 25px;
+  }
+
+
+  /* ================================================
+     CARDS
+  ================================================= */
+
+  .card,
+  .panel,
+  .market-card,
+  .stat-card {
+    border-radius: 18px;
+  }
+
+
+  /* ================================================
+     TABLE
+  ================================================= */
+
+  table th {
+    padding: 14px 16px;
+    font-size: 11px;
+  }
+
+  table td {
+    padding: 17px 16px;
+    font-size: 14px;
+  }
+
+
+  /* ================================================
+     DESKTOP NAVBAR
+  ================================================= */
+
+  .bottom-nav {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: auto;
+
+    transform: none;
+
+    width: 100%;
+    max-width: none;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 7px 30px;
+
+    border: 0;
+    border-bottom: 1px solid var(--line);
+
+    border-radius: 0;
+
+    background:
+      rgba(7,9,9,.94);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(160%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(160%);
+
+    box-shadow:
+      0 8px 30px
+      rgba(0,0,0,.18);
+  }
+
+
+  [data-theme="light"] .bottom-nav {
+
+    background:
+      rgba(255,255,255,.94);
+  }
+
+
+  .nav-item {
+
+    width: 125px;
+    height: 48px;
+
+    flex-direction: row;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 12px;
+  }
+
+
+  .nav-icon {
+
+    width: 20px;
+    height: 20px;
+  }
+
+
+  .nav-icon svg {
+
+    width: 19px;
+    height: 19px;
+  }
+
+
+  .nav-label {
+
+    font-size: 11px;
+  }
+
+
+  .nav-item.active::before {
+
+    top: auto;
+    bottom: 2px;
+
+    width: 30px;
+    height: 2px;
+  }
+
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  .container {
+    width: min(1500px, calc(100% - 120px));
+    max-width: 1500px;
+  }
+
+  .home-hero {
+    padding: 44px 48px;
+  }
+
+  .hero-title {
+    font-size: 46px;
+  }
+
+  .explore-grid,
+  .nextra-info-grid {
+    gap: 16px;
+  }
+
+    }
