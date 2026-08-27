@@ -22,7 +22,6 @@
 
   <title>Login — NEXTRA</title>
 
-
   <style>
 
     * {
@@ -31,274 +30,166 @@
       padding: 0;
     }
 
-
     body {
-
       min-height: 100vh;
-
-      font-family:
-        Arial,
-        sans-serif;
-
+      font-family: Arial, sans-serif;
       background: #05070a;
-
       color: #fff;
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
-
       padding: 20px;
     }
 
-
-    /* =====================================
-       LOGIN BOX
-    ===================================== */
-
     .login-box {
-
       width: 100%;
-
       max-width: 400px;
-
       background: #0c1013;
-
-      border:
-        1px solid
-        rgba(255,255,255,.08);
-
+      border: 1px solid rgba(255,255,255,.08);
       border-radius: 22px;
-
       padding: 30px;
-
-      box-shadow:
-        0 25px 80px
-        rgba(0,0,0,.45);
+      box-shadow: 0 25px 80px rgba(0,0,0,.45);
     }
 
-
-    /* =====================================
-       LOGO
-    ===================================== */
+    /* LOGO */
 
     .logo {
-
       text-align: center;
-
       margin-bottom: 28px;
     }
 
-
     .logo h1 {
-
       font-size: 34px;
-
       letter-spacing: -1px;
     }
 
-
     .logo span {
-
       color: #42f5a7;
     }
 
-
     .logo p {
-
       color: #7f8a91;
-
       font-size: 12px;
-
       margin-top: 6px;
     }
 
-
-    /* =====================================
-       TITLE
-    ===================================== */
+    /* TITLE */
 
     h2 {
-
       font-size: 22px;
-
       margin-bottom: 7px;
     }
 
-
     .subtitle {
-
       color: #7f8a91;
-
       font-size: 12px;
-
       margin-bottom: 22px;
-
       line-height: 1.5;
     }
 
-
-    /* =====================================
-       LABEL
-    ===================================== */
+    /* LABEL */
 
     label {
-
       display: block;
-
       font-size: 12px;
-
       margin-bottom: 7px;
     }
 
-
-    /* =====================================
-       INPUT
-    ===================================== */
+    /* INPUT */
 
     input {
-
       width: 100%;
-
       height: 46px;
-
       border-radius: 12px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.1);
-
+      border: 1px solid rgba(255,255,255,.1);
       background: #12171a;
-
       color: white;
-
       padding: 0 14px;
-
       outline: none;
-
       transition: .2s ease;
     }
 
-
     input:focus {
-
       border-color: #42f5a7;
-
       box-shadow:
         0 0 0 3px
         rgba(66,245,167,.06);
     }
 
-
     input::placeholder {
-
       color: #59636a;
     }
 
-
-    /* =====================================
-       PASSWORD WRAPPER
-    ===================================== */
+    /* PASSWORD */
 
     .password-wrapper {
-
       position: relative;
-
       margin-bottom: 16px;
     }
 
-
     .password-wrapper input {
-
       padding-right: 50px;
-
       margin-bottom: 0;
     }
 
-
-    /* =====================================
-       SHOW PASSWORD BUTTON
-    ===================================== */
+    /* EYE BUTTON */
 
     .toggle-password {
-
       position: absolute;
-
-      right: 8px;
-
+      right: 7px;
       top: 50%;
+      transform: translateY(-50%);
 
-      transform:
-        translateY(-50%);
-
-      width: 36px;
-
-      height: 36px;
+      width: 38px;
+      height: 38px;
 
       padding: 0;
-
       margin: 0;
 
       border: none;
+      border-radius: 9px;
 
       background: transparent;
-
-      color: #7f8a91;
+      color: #69747b;
 
       cursor: pointer;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
-      font-size: 17px;
-
-      border-radius: 8px;
+      transition: .2s ease;
     }
 
-
     .toggle-password:hover {
-
-      background:
-        rgba(255,255,255,.05);
-
+      background: rgba(255,255,255,.05);
       color: #42f5a7;
-
       filter: none;
     }
 
-
     .toggle-password:active {
-
-      transform:
-        translateY(-50%);
+      transform: translateY(-50%) scale(.94);
     }
 
+    .toggle-password svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
 
-    /* =====================================
-       LOGIN BUTTON
-    ===================================== */
+    /* LOGIN BUTTON */
 
     .login-button {
-
       width: 100%;
-
       height: 46px;
 
       border: none;
-
       border-radius: 12px;
 
       background: #42f5a7;
-
       color: #06100b;
 
       font-weight: bold;
-
       cursor: pointer;
 
       margin-top: 4px;
@@ -306,35 +197,23 @@
       transition: .2s ease;
     }
 
-
     .login-button:hover {
-
       filter: brightness(1.05);
     }
 
-
     .login-button:active {
-
       transform: scale(.98);
     }
 
-
     .login-button:disabled {
-
       opacity: .6;
-
       cursor: not-allowed;
-
       transform: none;
     }
 
-
-    /* =====================================
-       MESSAGE
-    ===================================== */
+    /* MESSAGE */
 
     .message {
-
       display: none;
 
       padding: 11px;
@@ -348,79 +227,45 @@
       line-height: 1.5;
     }
 
-
     .message.show {
-
       display: block;
     }
 
-
     .error {
-
-      background:
-        rgba(255,70,70,.1);
-
+      background: rgba(255,70,70,.1);
       color: #ff8585;
-
-      border:
-        1px solid
-        rgba(255,70,70,.12);
+      border: 1px solid rgba(255,70,70,.12);
     }
-
 
     .success {
-
-      background:
-        rgba(66,245,167,.1);
-
+      background: rgba(66,245,167,.1);
       color: #42f5a7;
-
-      border:
-        1px solid
-        rgba(66,245,167,.12);
+      border: 1px solid rgba(66,245,167,.12);
     }
 
-
-    /* =====================================
-       LINKS
-    ===================================== */
+    /* LINKS */
 
     .links {
-
       text-align: center;
-
       margin-top: 18px;
-
       font-size: 12px;
-
       color: #7f8a91;
     }
 
-
     a {
-
       color: #42f5a7;
-
       text-decoration: none;
-
       transition: .2s ease;
     }
 
-
     a:hover {
-
       text-decoration: underline;
     }
 
-
-    /* =====================================
-       DIVIDER
-    ===================================== */
+    /* DIVIDER */
 
     .divider {
-
       display: flex;
-
       align-items: center;
 
       gap: 10px;
@@ -432,10 +277,8 @@
       font-size: 10px;
     }
 
-
     .divider::before,
     .divider::after {
-
       content: "";
 
       height: 1px;
@@ -446,13 +289,9 @@
       flex: 1;
     }
 
-
-    /* =====================================
-       SECURITY NOTE
-    ===================================== */
+    /* SECURITY */
 
     .security-note {
-
       text-align: center;
 
       margin-top: 20px;
@@ -464,27 +303,19 @@
       line-height: 1.5;
     }
 
-
     .security-note span {
-
       color: #42f5a7;
     }
 
-
-    /* =====================================
-       MOBILE
-    ===================================== */
+    /* MOBILE */
 
     @media (max-width: 360px) {
 
       .login-box {
-
         padding: 24px;
       }
 
-
       .logo h1 {
-
         font-size: 30px;
       }
 
@@ -494,12 +325,9 @@
 
 </head>
 
-
 <body>
 
-
   <div class="login-box">
-
 
     <!-- LOGO -->
 
@@ -515,18 +343,15 @@
 
     </div>
 
-
     <!-- TITLE -->
 
     <h2>
       Masuk
     </h2>
 
-
     <p class="subtitle">
       Masuk ke akun NEXTRA kamu.
     </p>
-
 
     <!-- MESSAGE -->
 
@@ -535,18 +360,15 @@
       class="message"
     ></div>
 
-
     <!-- FORM -->
 
     <form id="loginForm">
-
 
       <!-- EMAIL -->
 
       <label for="email">
         Email
       </label>
-
 
       <input
         type="email"
@@ -556,13 +378,11 @@
         required
       >
 
-
       <!-- PASSWORD -->
 
       <label for="password">
         Password
       </label>
-
 
       <div class="password-wrapper">
 
@@ -575,7 +395,6 @@
           required
         >
 
-
         <button
           type="button"
           class="toggle-password"
@@ -583,11 +402,35 @@
           aria-label="Tampilkan password"
           title="Tampilkan password"
         >
-          👁️
+
+          <!-- EYE ICON -->
+
+          <svg
+            id="eyeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+
+            <path
+              d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"
+            />
+
+            <circle
+              cx="12"
+              cy="12"
+              r="3"
+            />
+
+          </svg>
+
         </button>
 
       </div>
-
 
       <!-- LOGIN BUTTON -->
 
@@ -599,9 +442,7 @@
         Masuk
       </button>
 
-
     </form>
-
 
     <!-- FORGOT PASSWORD -->
 
@@ -613,13 +454,11 @@
 
     </div>
 
-
     <!-- DIVIDER -->
 
     <div class="divider">
       ATAU
     </div>
-
 
     <!-- REGISTER -->
 
@@ -633,7 +472,6 @@
 
     </div>
 
-
     <!-- HOME -->
 
     <div class="links">
@@ -644,31 +482,24 @@
 
     </div>
 
-
     <!-- SECURITY -->
 
     <div class="security-note">
 
-      🔒 Login kamu diproses secara aman melalui
+      Login kamu diproses secara aman melalui
       <span>NEXTRA</span>.
 
     </div>
 
-
   </div>
 
-
-  <!-- =====================================
-       SUPABASE
-  ===================================== -->
+  <!-- SUPABASE -->
 
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
   ></script>
 
-
   <script>
-
 
     /* =====================================
        SUPABASE CONFIG
@@ -677,17 +508,14 @@
     const SUPABASE_URL =
       "https://uvtbntwgooxqjbyjkvkd.supabase.co";
 
-
     const SUPABASE_KEY =
       "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
-
 
     const supabaseClient =
       window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_KEY
       );
-
 
     /* =====================================
        ELEMENTS
@@ -698,36 +526,35 @@
         "loginForm"
       );
 
-
     const emailInput =
       document.getElementById(
         "email"
       );
-
 
     const passwordInput =
       document.getElementById(
         "password"
       );
 
-
     const togglePassword =
       document.getElementById(
         "togglePassword"
       );
 
+    const eyeIcon =
+      document.getElementById(
+        "eyeIcon"
+      );
 
     const message =
       document.getElementById(
         "message"
       );
 
-
     const loginButton =
       document.getElementById(
         "loginButton"
       );
-
 
     /* =====================================
        SHOW / HIDE PASSWORD
@@ -740,14 +567,16 @@
         const isPassword =
           passwordInput.type === "password";
 
-
         if (isPassword) {
 
-          passwordInput.type =
-            "text";
+          passwordInput.type = "text";
 
-          togglePassword.textContent =
-            "🙈";
+          eyeIcon.innerHTML = `
+            <path d="M3 3l18 18"/>
+            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
+            <path d="M9.9 5.2A10.6 10.6 0 0 1 12 5c6.5 0 10 7 10 7a18.5 18.5 0 0 1-3.1 3.8"/>
+            <path d="M6.6 6.6C3.6 8.4 2 12 2 12s3.5 7 10 7a10.5 10.5 0 0 0 3.4-.6"/>
+          `;
 
           togglePassword.setAttribute(
             "aria-label",
@@ -761,11 +590,12 @@
 
         } else {
 
-          passwordInput.type =
-            "password";
+          passwordInput.type = "password";
 
-          togglePassword.textContent =
-            "👁️";
+          eyeIcon.innerHTML = `
+            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          `;
 
           togglePassword.setAttribute(
             "aria-label",
@@ -781,7 +611,6 @@
 
       }
     );
-
 
     /* =====================================
        MESSAGE
@@ -800,7 +629,6 @@
 
     }
 
-
     function hideMessage() {
 
       message.textContent =
@@ -810,7 +638,6 @@
         "message";
 
     }
-
 
     /* =====================================
        LOGIN
@@ -822,24 +649,18 @@
 
         e.preventDefault();
 
-
         hideMessage();
-
 
         const email =
           emailInput
             .value
             .trim();
 
-
         const password =
           passwordInput
             .value;
 
-
-        /* =================================
-           VALIDATION
-        ================================= */
+        /* VALIDATION */
 
         if (!email) {
 
@@ -853,7 +674,6 @@
           return;
         }
 
-
         if (!emailInput.checkValidity()) {
 
           showMessage(
@@ -865,7 +685,6 @@
 
           return;
         }
-
 
         if (!password) {
 
@@ -879,7 +698,6 @@
           return;
         }
 
-
         if (password.length < 6) {
 
           showMessage(
@@ -892,10 +710,7 @@
           return;
         }
 
-
-        /* =================================
-           BUTTON STATE
-        ================================= */
+        /* BUTTON */
 
         loginButton.disabled =
           true;
@@ -903,19 +718,14 @@
         loginButton.textContent =
           "Memproses...";
 
-
         showMessage(
           "Sedang masuk ke akun kamu...",
           "success"
         );
 
-
         try {
 
-
-          /* ===============================
-             SUPABASE LOGIN
-          =============================== */
+          /* SUPABASE LOGIN */
 
           const {
             error
@@ -932,10 +742,7 @@
 
               });
 
-
-          /* ===============================
-             ERROR
-          =============================== */
+          /* ERROR */
 
           if (error) {
 
@@ -944,16 +751,16 @@
               error
             );
 
-
             let errorMessage =
               "Email atau password salah.";
-
 
             if (
               error.message &&
               error.message
                 .toLowerCase()
-                .includes("email not confirmed")
+                .includes(
+                  "email not confirmed"
+                )
             ) {
 
               errorMessage =
@@ -961,12 +768,10 @@
 
             }
 
-
             showMessage(
               errorMessage,
               "error"
             );
-
 
             loginButton.disabled =
               false;
@@ -974,28 +779,20 @@
             loginButton.textContent =
               "Masuk";
 
-
             return;
           }
 
-
-          /* ===============================
-             SUCCESS
-          =============================== */
+          /* SUCCESS */
 
           showMessage(
             "Login berhasil! Mengarahkan...",
             "success"
           );
 
-
           loginButton.textContent =
             "Berhasil ✓";
 
-
-          /* ===============================
-             REDIRECT
-          =============================== */
+          /* REDIRECT */
 
           setTimeout(
             () => {
@@ -1007,21 +804,17 @@
             500
           );
 
-
         } catch (error) {
-
 
           console.error(
             "Unexpected login error:",
             error
           );
 
-
           showMessage(
             "Terjadi kesalahan. Coba lagi.",
             "error"
           );
-
 
           loginButton.disabled =
             false;
@@ -1034,9 +827,7 @@
       }
     );
 
-
   </script>
-
 
 </body>
 
