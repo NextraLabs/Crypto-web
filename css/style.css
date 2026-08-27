@@ -1454,3 +1454,255 @@ td {
   }
 
    }
+
+/* =========================================================
+   NEXTRA — DESKTOP DASHBOARD OVERRIDE
+   Mobile layout stays untouched
+========================================================= */
+
+@media (min-width: 700px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Desktop page width */
+  .container {
+    width: min(1400px, calc(100% - 80px));
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 42px 0 70px;
+  }
+
+  /* Desktop header */
+  .topbar {
+    margin-bottom: 34px;
+  }
+
+  .title {
+    font-size: 40px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  /* Desktop search */
+  .search-input {
+    height: 54px;
+    border-radius: 14px;
+    font-size: 15px;
+  }
+
+  /* Desktop tabs */
+  .tabs {
+    margin-top: 28px;
+    margin-bottom: 18px;
+    gap: 34px;
+  }
+
+  .tab {
+    font-size: 14px;
+    padding: 9px 0;
+  }
+
+  /* Desktop coin area */
+  #home-market-list {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--surface);
+  }
+
+  .coin-card {
+    min-height: 82px;
+    padding: 16px 22px;
+    transition:
+      background .16s ease,
+      padding .16s ease;
+  }
+
+  .coin-card:hover {
+    padding-left: 22px;
+    padding-right: 22px;
+    border-radius: 0;
+    background: rgba(57,242,160,.035);
+  }
+
+  .coin-symbol {
+    font-size: 16px;
+  }
+
+  .coin-pair {
+    font-size: 12px;
+  }
+
+  .coin-price {
+    font-size: 15px;
+  }
+
+  .coin-change {
+    font-size: 13px;
+  }
+
+
+  /* =====================================================
+     DESKTOP NAVIGATION
+  ====================================================== */
+
+  .bottom-nav {
+
+    position: fixed;
+
+    top: 0;
+    bottom: auto;
+    left: 0;
+
+    transform: none;
+
+    width: 100%;
+    max-width: none;
+
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 6px 32px;
+
+    border: 0;
+    border-bottom: 1px solid var(--line);
+
+    border-radius: 0;
+
+    background: rgba(7,9,9,.94);
+
+    backdrop-filter:
+      blur(24px)
+      saturate(160%);
+
+    -webkit-backdrop-filter:
+      blur(24px)
+      saturate(160%);
+
+    box-shadow:
+      0 8px 30px rgba(0,0,0,.18);
+  }
+
+
+  [data-theme="light"] .bottom-nav {
+    background: rgba(255,255,255,.94);
+  }
+
+
+  .nav-item {
+
+    width: 120px;
+    height: 48px;
+
+    flex-direction: row;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 12px;
+  }
+
+
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  .nav-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+
+  .nav-label {
+    font-size: 11px;
+  }
+
+
+  .nav-item.active::before {
+    top: auto;
+    bottom: 2px;
+    width: 32px;
+    height: 2px;
+  }
+
+
+  /* Push content below desktop navbar */
+  .container {
+    padding-top: 105px;
+  }
+
+
+  /* =====================================================
+     DESKTOP GRID HELPERS
+  ====================================================== */
+
+  .card,
+  .panel,
+  .market-card,
+  .stat-card {
+    border-radius: 18px;
+  }
+
+
+  .highlight-box {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+
+  .mini-stat {
+    padding: 16px 0;
+  }
+
+
+  /* Desktop tables */
+  table th {
+    padding: 14px 16px;
+    font-size: 11px;
+  }
+
+  table td {
+    padding: 17px 16px;
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  .container {
+    width: min(1500px, calc(100% - 120px));
+    max-width: 1500px;
+  }
+
+  .title {
+    font-size: 44px;
+  }
+
+  .search-input {
+    height: 56px;
+  }
+
+  .coin-card {
+    min-height: 86px;
+  }
+
+     }
