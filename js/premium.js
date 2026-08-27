@@ -70,7 +70,7 @@
       window.snap.pay(data.token, {
         onSuccess: function () {
           alert("Pembayaran berhasil! Status Premium kamu akan aktif sebentar lagi.");
-          window.location.reload();
+          setTimeout(() => window.location.reload(), 2000);
         },
         onPending: function () {
           alert("Pembayaran kamu sedang diproses. Cek status di halaman Profile.");
@@ -114,5 +114,17 @@
   window.NEXTRA_PREMIUM = {
     render: renderPremiumStatus,
   };
+
+  // Coba render sendiri berulang kali sampai auth siap,
+  // tidak bergantung sepenuhnya dipanggil dari profile.html.
+  let attempts = 0;
+  const tryRender = setInterval(() => {
+    attempts++;
+    if (window.supabaseClient) {
+      renderPremiumStatus();
+      clearInterval(tryRender);
+    }
+    if (attempts > 20) clearInterval(tryRender); // stop setelah ~10 detik
+  }, 500);
 
 })();
