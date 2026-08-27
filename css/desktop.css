@@ -1,7 +1,7 @@
 /* =========================================================
-   NEXTRA — DESKTOP SYSTEM
+   NEXTRA — DESKTOP SIDEBAR SYSTEM
    Desktop only
-   Mobile layout remains controlled by style.css
+   Mobile remains untouched
 ========================================================= */
 
 @media (min-width: 700px) {
@@ -22,7 +22,7 @@
 
 
   /* =======================================================
-     TOP NAVIGATION
+     SIDEBAR
   ======================================================= */
 
   .bottom-nav {
@@ -31,34 +31,36 @@
 
     top: 0;
     left: 0;
-    right: 0;
-    bottom: auto;
+    bottom: 0;
 
     transform: none;
 
-    width: 100%;
-    max-width: none;
+    width: 250px;
+    max-width: 250px;
 
-    height: 72px;
+    height: 100vh;
 
     display: flex;
 
-    align-items: center;
+    flex-direction: column;
+
+    align-items: stretch;
     justify-content: flex-start;
 
-    gap: 8px;
+    gap: 5px;
 
-    padding: 0 42px;
+    padding:
+      24px 16px;
 
     border: 0;
 
-    border-bottom:
+    border-right:
       1px solid var(--line);
 
     border-radius: 0;
 
     background:
-      rgba(7,9,9,.94);
+      rgba(7,9,9,.96);
 
     backdrop-filter:
       blur(24px)
@@ -69,20 +71,27 @@
       saturate(160%);
 
     box-shadow:
-      0 8px 30px
+      8px 0 35px
       rgba(0,0,0,.18);
+
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
 
   [data-theme="light"] .bottom-nav {
 
     background:
-      rgba(255,255,255,.94);
+      rgba(255,255,255,.97);
+
+    box-shadow:
+      8px 0 30px
+      rgba(0,0,0,.08);
   }
 
 
   /* =======================================================
-     DESKTOP BRAND
+     BRAND
   ======================================================= */
 
   .bottom-nav::before {
@@ -93,17 +102,26 @@
 
     align-items: center;
 
-    margin-right: 34px;
+    height: 52px;
+
+    margin:
+      0 10px 24px;
+
+    padding:
+      0 4px;
 
     color: var(--text);
 
-    font-size: 20px;
+    font-size: 24px;
 
     line-height: 1;
 
     font-weight: 850;
 
     letter-spacing: -.06em;
+
+    border-bottom:
+      1px solid var(--line);
   }
 
 
@@ -115,35 +133,34 @@
 
     position: relative;
 
-    width: 116px;
-    height: 46px;
+    width: 100%;
+    height: 48px;
+
+    flex: none;
 
     display: flex;
 
     flex-direction: row;
 
     align-items: center;
-    justify-content: center;
 
-    gap: 8px;
+    justify-content: flex-start;
+
+    gap: 13px;
+
+    padding:
+      0 14px;
 
     border-radius: 12px;
 
     color: var(--muted);
 
+    text-decoration: none;
+
     transition:
-      background .18s ease,
       color .18s ease,
+      background .18s ease,
       transform .18s ease;
-  }
-
-
-  .nav-item.active {
-
-    color: var(--green);
-
-    background:
-      rgba(57,242,160,.08);
   }
 
 
@@ -152,7 +169,16 @@
     color: var(--text);
 
     background:
-      rgba(255,255,255,.035);
+      rgba(255,255,255,.045);
+  }
+
+
+  .nav-item.active {
+
+    color: var(--green);
+
+    background:
+      rgba(57,242,160,.09);
   }
 
 
@@ -161,46 +187,105 @@
     color: var(--green);
 
     background:
-      rgba(57,242,160,.10);
+      rgba(57,242,160,.12);
   }
 
 
+  /* =======================================================
+     ICON
+  ======================================================= */
+
   .nav-icon {
 
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
+
+    flex: 0 0 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
   }
 
 
   .nav-icon svg {
 
-    width: 19px;
-    height: 19px;
-  }
+    width: 20px;
+    height: 20px;
 
+    fill: none;
 
-  .nav-label {
+    stroke:
+      currentColor;
 
-    font-size: 11px;
+    stroke-width: 1.8;
 
-    font-weight: 700;
-  }
-
-
-  .nav-item.active::before {
-
-    top: auto;
-
-    bottom: 2px;
-
-    width: 30px;
-
-    height: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
 
   /* =======================================================
-     MAIN CONTAINER
+     LABEL
+  ======================================================= */
+
+  .nav-label {
+
+    font-size: 13px;
+
+    line-height: 1;
+
+    font-weight: 650;
+
+    letter-spacing: 0;
+  }
+
+
+  /* =======================================================
+     ACTIVE INDICATOR
+  ======================================================= */
+
+  .nav-item.active::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    width: 3px;
+    height: 24px;
+
+    transform:
+      translateY(-50%);
+
+    border-radius:
+      0 999px 999px 0;
+
+    background:
+      var(--green);
+
+    box-shadow:
+      0 0 12px
+      rgba(57,242,160,.65);
+  }
+
+
+  /* =======================================================
+     PRESS
+  ======================================================= */
+
+  .nav-item:active {
+
+    transform:
+      scale(.98);
+  }
+
+
+  /* =======================================================
+     MAIN CONTENT
   ======================================================= */
 
   .container {
@@ -208,17 +293,18 @@
     width:
       min(
         1440px,
-        calc(100% - 96px)
+        calc(100% - 330px)
       );
 
     max-width: 1440px;
 
-    margin: 0 auto;
+    margin-left:
+      290px;
+
+    margin-right: 40px;
 
     padding:
-      112px
-      0
-      70px;
+      40px 0 70px;
   }
 
 
@@ -288,8 +374,7 @@
     gap: 34px;
 
     margin:
-      26px 0
-      16px;
+      26px 0 16px;
 
     padding-bottom: 10px;
   }
@@ -330,8 +415,8 @@
     display: grid;
 
     grid-template-columns:
-      minmax(0, 1.55fr)
-      minmax(280px, .75fr);
+      minmax(0, 1.6fr)
+      minmax(260px, .75fr);
 
     align-items: center;
 
@@ -413,8 +498,6 @@
     gap: 12px;
 
     max-width: 330px;
-
-    margin-top: 0;
   }
 
 
@@ -441,7 +524,7 @@
 
 
   /* =======================================================
-     MARKET DASHBOARD
+     MARKET
   ======================================================= */
 
   #home-market-list {
@@ -486,16 +569,6 @@
   #home-market-list .coin-change {
 
     margin-left: 0;
-  }
-
-
-  #home-market-list .coin-price {
-
-    text-align: right;
-  }
-
-
-  #home-market-list .coin-change {
 
     text-align: right;
   }
@@ -513,24 +586,7 @@
 
 
   /* =======================================================
-     HIGHLIGHT
-  ======================================================= */
-
-  .highlight-box {
-
-    max-width: 100%;
-
-    margin:
-      24px 0;
-
-    padding: 20px;
-
-    border-radius: 16px;
-  }
-
-
-  /* =======================================================
-     EXPLORE GRID
+     EXPLORE
   ======================================================= */
 
   .explore-grid {
@@ -553,14 +609,14 @@
     padding:
       20px !important;
 
-    border-radius:
-      18px !important;
-
     display: flex;
 
     flex-direction: column;
 
     justify-content: space-between;
+
+    border-radius:
+      18px !important;
   }
 
 
@@ -588,7 +644,7 @@
 
 
   /* =======================================================
-     INFO GRID
+     INFO
   ======================================================= */
 
   .nextra-info-grid {
@@ -635,7 +691,24 @@
 
 
   /* =======================================================
-     TABLES
+     HIGHLIGHT
+  ======================================================= */
+
+  .highlight-box {
+
+    max-width: 100%;
+
+    margin:
+      24px 0;
+
+    padding: 20px;
+
+    border-radius: 16px;
+  }
+
+
+  /* =======================================================
+     TABLE
   ======================================================= */
 
   table {
@@ -663,7 +736,7 @@
 
 
   /* =======================================================
-     LOADING / EMPTY
+     LOADING
   ======================================================= */
 
   .loading,
@@ -686,20 +759,11 @@
 
   .bottom-nav {
 
-    padding-left: 56px;
-    padding-right: 56px;
-  }
+    width: 265px;
+    max-width: 265px;
 
-
-  .bottom-nav::before {
-
-    margin-right: 48px;
-  }
-
-
-  .nav-item {
-
-    width: 125px;
+    padding:
+      28px 18px;
   }
 
 
@@ -708,10 +772,35 @@
     width:
       min(
         1500px,
-        calc(100% - 120px)
+        calc(100% - 355px)
       );
 
     max-width: 1500px;
+
+    margin-left:
+      305px;
+
+    margin-right: 50px;
+  }
+
+
+  .bottom-nav::before {
+
+    font-size: 26px;
+
+    margin-bottom: 28px;
+  }
+
+
+  .nav-item {
+
+    height: 50px;
+  }
+
+
+  .nav-label {
+
+    font-size: 13px;
   }
 
 
@@ -761,6 +850,38 @@
   .nextra-info-grid {
 
     gap: 18px;
+  }
+
+}
+
+
+/* =========================================================
+   EXTRA LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1600px) {
+
+  .bottom-nav {
+
+    width: 280px;
+    max-width: 280px;
+  }
+
+
+  .container {
+
+    width:
+      min(
+        1600px,
+        calc(100% - 390px)
+      );
+
+    max-width: 1600px;
+
+    margin-left:
+      325px;
+
+    margin-right: 65px;
   }
 
 }
