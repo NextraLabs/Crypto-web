@@ -18,12 +18,14 @@
       border: 1px solid var(--line, rgba(255,255,255,.08));
       border-radius: 20px;
     }
-    .alert-panel h3 { margin: 0 0 14px; font-size: 16px; }
-    .alert-field { margin-bottom: 12px; }
-    .alert-field label {
-      display: block; margin-bottom: 6px; font-size: 10px;
-      color: var(--muted, rgba(255,255,255,.55));
-    }
+    .alert-panel {
+  width: 100%; max-width: 460px; padding: 20px;
+  max-height: 82vh;
+  overflow-y: auto;
+  background: var(--surface, #0c1113);
+  border: 1px solid var(--line, rgba(255,255,255,.08));
+  border-radius: 20px;
+      }
     .alert-field input, .alert-field select {
       width: 100%; padding: 12px; border-radius: 12px;
       border: 1px solid var(--line, rgba(255,255,255,.1));
