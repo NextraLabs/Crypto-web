@@ -885,3 +885,103 @@
   }
 
 }
+
+/* =========================================================
+   NEXTRA — SIDEBAR POLISH
+========================================================= */
+
+@media (min-width: 700px) {
+
+  .bottom-nav {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+  .bottom-nav::after {
+    content: "MARKET INTELLIGENCE";
+    display: block;
+
+    margin:
+      20px 12px 8px;
+
+    padding-top: 18px;
+
+    border-top:
+      1px solid var(--line);
+
+    color: var(--subtle);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: .12em;
+  }
+
+  .nav-item {
+    min-height: 48px;
+  }
+
+  .nav-item:not(.active) {
+    opacity: .88;
+  }
+
+  .nav-item:hover {
+    opacity: 1;
+  }
+
+  .nav-item.active {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================================
+   SIDEBAR EXTRA SPACE
+========================================================= */
+
+@media (min-width: 1000px) {
+
+  .bottom-nav {
+    width: 255px;
+    max-width: 255px;
+  }
+
+  .container {
+    width:
+      calc(100% - 335px);
+
+    max-width: 1500px;
+
+    margin-left: 295px;
+    margin-right: 40px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY LARGE SCREEN
+========================================================= */
+
+@media (min-width: 1400px) {
+
+  .bottom-nav {
+    width: 270px;
+    max-width: 270px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .container {
+    width:
+      calc(100% - 370px);
+
+    max-width: 1600px;
+
+    margin-left: 310px;
+    margin-right: 60px;
+  }
+
+     }
