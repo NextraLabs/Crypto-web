@@ -10,7 +10,18 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="theme-color"
+    content="#05070a"
+  >
+
+  <meta
+    name="description"
+    content="Login NEXTRA — Your Market. Your Intelligence."
+  >
+
   <title>Login — NEXTRA</title>
+
 
   <style>
 
@@ -20,7 +31,9 @@
       padding: 0;
     }
 
+
     body {
+
       min-height: 100vh;
 
       font-family:
@@ -34,11 +47,16 @@
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       padding: 20px;
     }
 
+
+    /* =====================================
+       LOGIN BOX
+    ===================================== */
 
     .login-box {
 
@@ -62,7 +80,9 @@
     }
 
 
-    /* LOGO */
+    /* =====================================
+       LOGO
+    ===================================== */
 
     .logo {
 
@@ -96,7 +116,9 @@
     }
 
 
-    /* TITLE */
+    /* =====================================
+       TITLE
+    ===================================== */
 
     h2 {
 
@@ -113,10 +135,14 @@
       font-size: 12px;
 
       margin-bottom: 22px;
+
+      line-height: 1.5;
     }
 
 
-    /* LABEL */
+    /* =====================================
+       LABEL
+    ===================================== */
 
     label {
 
@@ -128,7 +154,9 @@
     }
 
 
-    /* INPUT */
+    /* =====================================
+       INPUT
+    ===================================== */
 
     input {
 
@@ -150,8 +178,6 @@
 
       outline: none;
 
-      margin-bottom: 16px;
-
       transition: .2s ease;
     }
 
@@ -172,9 +198,92 @@
     }
 
 
-    /* BUTTON */
+    /* =====================================
+       PASSWORD WRAPPER
+    ===================================== */
 
-    button {
+    .password-wrapper {
+
+      position: relative;
+
+      margin-bottom: 16px;
+    }
+
+
+    .password-wrapper input {
+
+      padding-right: 50px;
+
+      margin-bottom: 0;
+    }
+
+
+    /* =====================================
+       SHOW PASSWORD BUTTON
+    ===================================== */
+
+    .toggle-password {
+
+      position: absolute;
+
+      right: 8px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      width: 36px;
+
+      height: 36px;
+
+      padding: 0;
+
+      margin: 0;
+
+      border: none;
+
+      background: transparent;
+
+      color: #7f8a91;
+
+      cursor: pointer;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 17px;
+
+      border-radius: 8px;
+    }
+
+
+    .toggle-password:hover {
+
+      background:
+        rgba(255,255,255,.05);
+
+      color: #42f5a7;
+
+      filter: none;
+    }
+
+
+    .toggle-password:active {
+
+      transform:
+        translateY(-50%);
+    }
+
+
+    /* =====================================
+       LOGIN BUTTON
+    ===================================== */
+
+    .login-button {
 
       width: 100%;
 
@@ -198,19 +307,19 @@
     }
 
 
-    button:hover {
+    .login-button:hover {
 
       filter: brightness(1.05);
     }
 
 
-    button:active {
+    .login-button:active {
 
       transform: scale(.98);
     }
 
 
-    button:disabled {
+    .login-button:disabled {
 
       opacity: .6;
 
@@ -220,7 +329,9 @@
     }
 
 
-    /* MESSAGE */
+    /* =====================================
+       MESSAGE
+    ===================================== */
 
     .message {
 
@@ -250,6 +361,10 @@
         rgba(255,70,70,.1);
 
       color: #ff8585;
+
+      border:
+        1px solid
+        rgba(255,70,70,.12);
     }
 
 
@@ -259,10 +374,16 @@
         rgba(66,245,167,.1);
 
       color: #42f5a7;
+
+      border:
+        1px solid
+        rgba(66,245,167,.12);
     }
 
 
-    /* LINKS */
+    /* =====================================
+       LINKS
+    ===================================== */
 
     .links {
 
@@ -292,7 +413,9 @@
     }
 
 
-    /* DIVIDER */
+    /* =====================================
+       DIVIDER
+    ===================================== */
 
     .divider {
 
@@ -324,7 +447,33 @@
     }
 
 
-    /* MOBILE */
+    /* =====================================
+       SECURITY NOTE
+    ===================================== */
+
+    .security-note {
+
+      text-align: center;
+
+      margin-top: 20px;
+
+      color: #59636a;
+
+      font-size: 10px;
+
+      line-height: 1.5;
+    }
+
+
+    .security-note span {
+
+      color: #42f5a7;
+    }
+
+
+    /* =====================================
+       MOBILE
+    ===================================== */
 
     @media (max-width: 360px) {
 
@@ -332,6 +481,7 @@
 
         padding: 24px;
       }
+
 
       .logo h1 {
 
@@ -414,19 +564,36 @@
       </label>
 
 
-      <input
-        type="password"
-        id="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        required
-      >
+      <div class="password-wrapper">
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Masukkan password"
+          autocomplete="current-password"
+          minlength="6"
+          required
+        >
+
+
+        <button
+          type="button"
+          class="toggle-password"
+          id="togglePassword"
+          aria-label="Tampilkan password"
+          title="Tampilkan password"
+        >
+          👁️
+        </button>
+
+      </div>
 
 
       <!-- LOGIN BUTTON -->
 
       <button
         id="loginButton"
+        class="login-button"
         type="submit"
       >
         Masuk
@@ -478,10 +645,22 @@
     </div>
 
 
+    <!-- SECURITY -->
+
+    <div class="security-note">
+
+      🔒 Login kamu diproses secara aman melalui
+      <span>NEXTRA</span>.
+
+    </div>
+
+
   </div>
 
 
-  <!-- SUPABASE -->
+  <!-- =====================================
+       SUPABASE
+  ===================================== -->
 
   <script
     src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
@@ -494,7 +673,6 @@
     /* =====================================
        SUPABASE CONFIG
     ===================================== */
-
 
     const SUPABASE_URL =
       "https://uvtbntwgooxqjbyjkvkd.supabase.co";
@@ -515,10 +693,27 @@
        ELEMENTS
     ===================================== */
 
-
     const form =
       document.getElementById(
         "loginForm"
+      );
+
+
+    const emailInput =
+      document.getElementById(
+        "email"
+      );
+
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+
+    const togglePassword =
+      document.getElementById(
+        "togglePassword"
       );
 
 
@@ -535,9 +730,62 @@
 
 
     /* =====================================
-       MESSAGE
+       SHOW / HIDE PASSWORD
     ===================================== */
 
+    togglePassword.addEventListener(
+      "click",
+      function() {
+
+        const isPassword =
+          passwordInput.type === "password";
+
+
+        if (isPassword) {
+
+          passwordInput.type =
+            "text";
+
+          togglePassword.textContent =
+            "🙈";
+
+          togglePassword.setAttribute(
+            "aria-label",
+            "Sembunyikan password"
+          );
+
+          togglePassword.setAttribute(
+            "title",
+            "Sembunyikan password"
+          );
+
+        } else {
+
+          passwordInput.type =
+            "password";
+
+          togglePassword.textContent =
+            "👁️";
+
+          togglePassword.setAttribute(
+            "aria-label",
+            "Tampilkan password"
+          );
+
+          togglePassword.setAttribute(
+            "title",
+            "Tampilkan password"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================
+       MESSAGE
+    ===================================== */
 
     function showMessage(
       text,
@@ -553,10 +801,20 @@
     }
 
 
+    function hideMessage() {
+
+      message.textContent =
+        "";
+
+      message.className =
+        "message";
+
+    }
+
+
     /* =====================================
        LOGIN
     ===================================== */
-
 
     form.addEventListener(
       "submit",
@@ -565,20 +823,79 @@
         e.preventDefault();
 
 
+        hideMessage();
+
+
         const email =
-          document
-            .getElementById("email")
+          emailInput
             .value
             .trim();
 
 
         const password =
-          document
-            .getElementById("password")
+          passwordInput
             .value;
 
 
-        /* BUTTON STATE */
+        /* =================================
+           VALIDATION
+        ================================= */
+
+        if (!email) {
+
+          showMessage(
+            "Masukkan email kamu.",
+            "error"
+          );
+
+          emailInput.focus();
+
+          return;
+        }
+
+
+        if (!emailInput.checkValidity()) {
+
+          showMessage(
+            "Format email tidak valid.",
+            "error"
+          );
+
+          emailInput.focus();
+
+          return;
+        }
+
+
+        if (!password) {
+
+          showMessage(
+            "Masukkan password kamu.",
+            "error"
+          );
+
+          passwordInput.focus();
+
+          return;
+        }
+
+
+        if (password.length < 6) {
+
+          showMessage(
+            "Password minimal 6 karakter.",
+            "error"
+          );
+
+          passwordInput.focus();
+
+          return;
+        }
+
+
+        /* =================================
+           BUTTON STATE
+        ================================= */
 
         loginButton.disabled =
           true;
@@ -588,7 +905,7 @@
 
 
         showMessage(
-          "Sedang masuk...",
+          "Sedang masuk ke akun kamu...",
           "success"
         );
 
@@ -596,7 +913,9 @@
         try {
 
 
-          /* SUPABASE LOGIN */
+          /* ===============================
+             SUPABASE LOGIN
+          =============================== */
 
           const {
             error
@@ -614,7 +933,9 @@
               });
 
 
-          /* ERROR */
+          /* ===============================
+             ERROR
+          =============================== */
 
           if (error) {
 
@@ -624,17 +945,43 @@
             );
 
 
+            let errorMessage =
+              "Email atau password salah.";
+
+
+            if (
+              error.message &&
+              error.message
+                .toLowerCase()
+                .includes("email not confirmed")
+            ) {
+
+              errorMessage =
+                "Email kamu belum diverifikasi.";
+
+            }
+
+
             showMessage(
-              "Email atau password salah.",
+              errorMessage,
               "error"
             );
+
+
+            loginButton.disabled =
+              false;
+
+            loginButton.textContent =
+              "Masuk";
 
 
             return;
           }
 
 
-          /* SUCCESS */
+          /* ===============================
+             SUCCESS
+          =============================== */
 
           showMessage(
             "Login berhasil! Mengarahkan...",
@@ -642,7 +989,13 @@
           );
 
 
-          /* REDIRECT */
+          loginButton.textContent =
+            "Berhasil ✓";
+
+
+          /* ===============================
+             REDIRECT
+          =============================== */
 
           setTimeout(
             () => {
@@ -659,6 +1012,7 @@
 
 
           console.error(
+            "Unexpected login error:",
             error
           );
 
@@ -669,12 +1023,8 @@
           );
 
 
-        } finally {
-
-
           loginButton.disabled =
             false;
-
 
           loginButton.textContent =
             "Masuk";
