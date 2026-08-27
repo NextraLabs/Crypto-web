@@ -1,10 +1,9 @@
 /* =========================================================
-   NEXTRA — DESKTOP SIDEBAR SYSTEM
-   Desktop only
-   Mobile remains untouched
+   NEXTRA DESKTOP
+   FULL SIDEBAR DASHBOARD
 ========================================================= */
 
-@media (min-width: 700px) {
+@media (min-width:700px) {
 
   /* =======================================================
      GLOBAL
@@ -12,12 +11,17 @@
 
   html,
   body {
-    min-width: 100%;
-    overflow-x: hidden;
+    min-width:100%;
+    overflow-x:hidden;
   }
 
-  body {
-    padding-bottom: 0;
+
+  /* =======================================================
+     HIDE MOBILE NAV
+  ======================================================= */
+
+  #bottom-nav {
+    display:none !important;
   }
 
 
@@ -25,61 +29,39 @@
      SIDEBAR
   ======================================================= */
 
-  .bottom-nav {
+  .desktop-sidebar {
 
-    position: fixed;
+    position:fixed;
 
-    top: 0;
-    left: 0;
-    bottom: 0;
+    top:0;
+    left:0;
+    bottom:0;
 
-    transform: none;
+    z-index:9999;
 
-    width: 250px;
-    max-width: 250px;
+    width:260px;
 
-    height: 100vh;
+    display:flex;
 
-    display: flex;
+    flex-direction:column;
 
-    flex-direction: column;
+    padding:24px 15px;
 
-    align-items: stretch;
-    justify-content: flex-start;
+    overflow-y:auto;
 
-    gap: 5px;
-
-    padding:
-      24px 16px;
-
-    border: 0;
+    background:
+      var(--surface);
 
     border-right:
       1px solid var(--line);
 
-    border-radius: 0;
-
-    background:
-      rgba(7,9,9,.96);
-
-    backdrop-filter:
-      blur(24px)
-      saturate(160%);
-
-    -webkit-backdrop-filter:
-      blur(24px)
-      saturate(160%);
-
     box-shadow:
       8px 0 35px
       rgba(0,0,0,.18);
-
-    overflow-y: auto;
-    overflow-x: hidden;
   }
 
 
-  [data-theme="light"] .bottom-nav {
+  [data-theme="light"] .desktop-sidebar {
 
     background:
       rgba(255,255,255,.97);
@@ -94,169 +76,164 @@
      BRAND
   ======================================================= */
 
-  .bottom-nav::before {
-
-    content: "NEXTRA";
-
-    display: flex;
-
-    align-items: center;
-
-    height: 52px;
-
-    margin:
-      0 10px 24px;
+  .sidebar-brand {
 
     padding:
-      0 4px;
+      8px 12px 22px;
 
-    color: var(--text);
-
-    font-size: 24px;
-
-    line-height: 1;
-
-    font-weight: 850;
-
-    letter-spacing: -.06em;
+    margin-bottom:12px;
 
     border-bottom:
       1px solid var(--line);
   }
 
 
+  .sidebar-brand span {
+
+    display:block;
+
+    color:var(--text);
+
+    font-size:25px;
+
+    font-weight:900;
+
+    letter-spacing:-.06em;
+  }
+
+
+  .sidebar-brand small {
+
+    display:block;
+
+    margin-top:7px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.4;
+  }
+
+
   /* =======================================================
-     NAV ITEMS
+     SECTION
   ======================================================= */
 
-  .nav-item {
+  .sidebar-section {
 
-    position: relative;
+    margin-top:14px;
+  }
 
-    width: 100%;
-    height: 48px;
 
-    flex: none;
-
-    display: flex;
-
-    flex-direction: row;
-
-    align-items: center;
-
-    justify-content: flex-start;
-
-    gap: 13px;
+  .sidebar-title {
 
     padding:
-      0 14px;
+      7px 12px;
 
-    border-radius: 12px;
+    margin-bottom:4px;
 
-    color: var(--muted);
+    color:var(--subtle);
 
-    text-decoration: none;
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:.14em;
+  }
+
+
+  /* =======================================================
+     ITEMS
+  ======================================================= */
+
+  .sidebar-item {
+
+    position:relative;
+
+    width:100%;
+
+    min-height:46px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:
+      0 13px;
+
+    margin:2px 0;
+
+    border-radius:11px;
+
+    color:var(--muted);
+
+    text-decoration:none;
 
     transition:
-      color .18s ease,
       background .18s ease,
+      color .18s ease,
       transform .18s ease;
   }
 
 
-  .nav-item:hover {
+  .sidebar-item span {
 
-    color: var(--text);
+    width:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:17px;
+
+    line-height:1;
+  }
+
+
+  .sidebar-item strong {
+
+    font-size:12px;
+
+    font-weight:650;
+  }
+
+
+  .sidebar-item:hover {
+
+    color:var(--text);
 
     background:
       rgba(255,255,255,.045);
   }
 
 
-  .nav-item.active {
+  .sidebar-item.active {
 
-    color: var(--green);
+    color:var(--green);
 
     background:
       rgba(57,242,160,.09);
   }
 
 
-  .nav-item.active:hover {
+  .sidebar-item.active::before {
 
-    color: var(--green);
+    content:"";
 
-    background:
-      rgba(57,242,160,.12);
-  }
+    position:absolute;
 
+    left:0;
 
-  /* =======================================================
-     ICON
-  ======================================================= */
+    top:50%;
 
-  .nav-icon {
+    width:3px;
 
-    width: 22px;
-    height: 22px;
-
-    flex: 0 0 22px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-  }
-
-
-  .nav-icon svg {
-
-    width: 20px;
-    height: 20px;
-
-    fill: none;
-
-    stroke:
-      currentColor;
-
-    stroke-width: 1.8;
-
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-
-  /* =======================================================
-     LABEL
-  ======================================================= */
-
-  .nav-label {
-
-    font-size: 13px;
-
-    line-height: 1;
-
-    font-weight: 650;
-
-    letter-spacing: 0;
-  }
-
-
-  /* =======================================================
-     ACTIVE INDICATOR
-  ======================================================= */
-
-  .nav-item.active::before {
-
-    content: "";
-
-    position: absolute;
-
-    top: 50%;
-    left: 0;
-
-    width: 3px;
-    height: 24px;
+    height:24px;
 
     transform:
       translateY(-50%);
@@ -269,18 +246,91 @@
 
     box-shadow:
       0 0 12px
-      rgba(57,242,160,.65);
+      rgba(57,242,160,.7);
+  }
+
+
+  .sidebar-item:active {
+
+    transform:scale(.98);
   }
 
 
   /* =======================================================
-     PRESS
+     FOOTER
   ======================================================= */
 
-  .nav-item:active {
+  .sidebar-footer {
 
-    transform:
-      scale(.98);
+    margin-top:auto;
+
+    padding-top:16px;
+
+    border-top:
+      1px solid var(--line);
+  }
+
+
+  .sidebar-status {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+      12px;
+
+    border-radius:12px;
+
+    background:
+      rgba(57,242,160,.035);
+  }
+
+
+  .status-dot {
+
+    width:8px;
+
+    height:8px;
+
+    flex:none;
+
+    border-radius:50%;
+
+    background:
+      var(--green);
+
+    box-shadow:
+      0 0 10px
+      rgba(57,242,160,.7);
+  }
+
+
+  .sidebar-status strong {
+
+    display:block;
+
+    color:var(--text);
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:.05em;
+  }
+
+
+  .sidebar-status small {
+
+    display:block;
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:9px;
   }
 
 
@@ -291,56 +341,50 @@
   .container {
 
     width:
-      min(
-        1440px,
-        calc(100% - 330px)
-      );
+      calc(100% - 320px);
 
-    max-width: 1440px;
+    max-width:1500px;
 
-    margin-left:
-      290px;
+    margin-left:295px;
 
-    margin-right: 40px;
+    margin-right:25px;
 
     padding:
-      40px 0 70px;
+      38px 0 70px;
   }
 
 
   /* =======================================================
-     PAGE HEADER
+     HEADER
   ======================================================= */
 
   .topbar {
 
-    display: flex;
+    display:flex;
 
-    align-items: flex-end;
+    align-items:flex-end;
 
-    justify-content: space-between;
+    justify-content:space-between;
 
-    gap: 30px;
+    gap:30px;
 
-    margin-bottom: 30px;
+    margin-bottom:28px;
   }
 
 
   .title {
 
-    font-size: 40px;
+    font-size:40px;
 
-    line-height: 1;
-
-    letter-spacing: -.06em;
+    letter-spacing:-.06em;
   }
 
 
   .subtitle {
 
-    margin-top: 8px;
+    font-size:13px;
 
-    font-size: 13px;
+    margin-top:8px;
   }
 
 
@@ -350,18 +394,13 @@
 
   .search-input {
 
-    width: 100%;
+    height:52px;
 
-    max-width: 780px;
+    max-width:800px;
 
-    height: 54px;
+    border-radius:14px;
 
-    padding:
-      0 18px;
-
-    border-radius: 14px;
-
-    font-size: 14px;
+    font-size:14px;
   }
 
 
@@ -371,26 +410,21 @@
 
   .tabs {
 
-    gap: 34px;
+    gap:32px;
 
     margin:
-      26px 0 16px;
-
-    padding-bottom: 10px;
+      25px 0 15px;
   }
 
 
   .tab {
 
-    font-size: 14px;
-
-    padding:
-      9px 0;
+    font-size:13px;
   }
 
 
   /* =======================================================
-     GENERIC CARDS
+     CARDS
   ======================================================= */
 
   .card,
@@ -398,7 +432,7 @@
   .market-card,
   .stat-card {
 
-    border-radius: 18px;
+    border-radius:18px;
 
     box-shadow:
       0 12px 35px
@@ -412,75 +446,44 @@
 
   .home-hero {
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
-      minmax(0, 1.6fr)
-      minmax(260px, .75fr);
+      minmax(0,1.6fr)
+      minmax(270px,.7fr);
 
-    align-items: center;
+    gap:45px;
 
-    gap: 50px;
+    align-items:center;
 
-    min-height: 320px;
+    min-height:310px;
 
     padding:
-      44px 48px;
+      42px 48px;
 
-    border-radius: 24px;
+    border-radius:22px;
   }
 
 
   .hero-title {
 
-    max-width: 760px;
+    max-width:760px;
 
-    font-size: 46px;
+    font-size:46px;
 
-    line-height: 1.04;
+    line-height:1.04;
 
-    letter-spacing: -.055em;
+    letter-spacing:-.055em;
   }
 
 
   .hero-description {
 
-    max-width: 620px;
+    max-width:620px;
 
-    margin-top: 15px;
+    margin-top:14px;
 
-    font-size: 14px;
-
-    line-height: 1.6;
-  }
-
-
-  /* =======================================================
-     HOME SEARCH
-  ======================================================= */
-
-  .home-search {
-
-    max-width: 720px;
-
-    margin-top: 22px;
-  }
-
-
-  .home-search input {
-
-    height: 50px;
-
-    font-size: 13px;
-  }
-
-
-  .home-search button {
-
-    height: 50px;
-
-    padding:
-      0 22px;
+    line-height:1.6;
   }
 
 
@@ -490,36 +493,22 @@
 
   .hero-stats {
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+      repeat(2,1fr);
 
-    gap: 12px;
-
-    max-width: 330px;
+    gap:12px;
   }
 
 
   .hero-stat {
 
-    min-height: 78px;
+    min-height:75px;
 
-    padding: 15px;
+    padding:15px;
 
-    border-radius: 14px;
-  }
-
-
-  .hero-stat strong {
-
-    font-size: 15px;
-  }
-
-
-  .hero-stat span {
-
-    font-size: 10px;
+    border-radius:14px;
   }
 
 
@@ -529,16 +518,16 @@
 
   #home-market-list {
 
-    width: 100%;
+    width:100%;
 
-    margin-top: 20px;
+    overflow:hidden;
 
-    overflow: hidden;
+    margin-top:20px;
 
     border:
       1px solid var(--line);
 
-    border-radius: 18px;
+    border-radius:18px;
 
     background:
       var(--surface);
@@ -547,18 +536,18 @@
 
   #home-market-list .coin-card {
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
-      minmax(300px, 1fr)
+      minmax(300px,1fr)
       220px
       160px;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 25px;
+    gap:25px;
 
-    min-height: 80px;
+    min-height:78px;
 
     padding:
       15px 28px;
@@ -568,17 +557,17 @@
   #home-market-list .coin-price,
   #home-market-list .coin-change {
 
-    margin-left: 0;
+    margin-left:0;
 
-    text-align: right;
+    text-align:right;
   }
 
 
   #home-market-list .coin-card:hover {
 
-    padding-left: 28px;
+    padding-left:28px;
 
-    padding-right: 28px;
+    padding-right:28px;
 
     background:
       rgba(57,242,160,.035);
@@ -586,124 +575,56 @@
 
 
   /* =======================================================
-     EXPLORE
+     EXPLORE GRID
   ======================================================= */
 
   .explore-grid {
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
-      repeat(4, minmax(0, 1fr));
+      repeat(4,minmax(0,1fr));
 
-    gap: 16px;
+    gap:16px;
 
-    margin-top: 20px;
+    margin-top:20px;
   }
 
 
   .explore-card {
 
-    min-height: 150px;
+    min-height:145px;
 
-    padding:
-      20px !important;
+    padding:20px !important;
 
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-
-    border-radius:
-      18px !important;
-  }
-
-
-  .explore-icon {
-
-    width: 42px;
-    height: 42px;
-  }
-
-
-  .explore-name {
-
-    font-size: 14px;
-  }
-
-
-  .explore-desc {
-
-    max-width: 220px;
-
-    font-size: 10px;
-
-    line-height: 1.5;
+    border-radius:18px !important;
   }
 
 
   /* =======================================================
-     INFO
+     INFO GRID
   ======================================================= */
 
   .nextra-info-grid {
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
-      repeat(4, minmax(0, 1fr));
+      repeat(4,minmax(0,1fr));
 
-    gap: 16px;
+    gap:16px;
 
-    margin-top: 20px;
+    margin-top:20px;
   }
 
 
   .nextra-info-card {
 
-    min-height: 95px;
+    min-height:95px;
 
-    padding: 16px;
+    padding:16px;
 
-    border-radius: 16px;
-  }
-
-
-  /* =======================================================
-     PULSE
-  ======================================================= */
-
-  .pulse-card {
-
-    margin-top: 20px;
-
-    padding: 24px;
-
-    border-radius: 20px;
-  }
-
-
-  .pulse-value {
-
-    font-size: 26px;
-  }
-
-
-  /* =======================================================
-     HIGHLIGHT
-  ======================================================= */
-
-  .highlight-box {
-
-    max-width: 100%;
-
-    margin:
-      24px 0;
-
-    padding: 20px;
-
-    border-radius: 16px;
+    border-radius:16px;
   }
 
 
@@ -713,7 +634,7 @@
 
   table {
 
-    width: 100%;
+    width:100%;
   }
 
 
@@ -722,7 +643,7 @@
     padding:
       14px 16px;
 
-    font-size: 11px;
+    font-size:11px;
   }
 
 
@@ -731,21 +652,7 @@
     padding:
       17px 16px;
 
-    font-size: 14px;
-  }
-
-
-  /* =======================================================
-     LOADING
-  ======================================================= */
-
-  .loading,
-  .empty-state {
-
-    padding:
-      70px 20px;
-
-    font-size: 14px;
+    font-size:14px;
   }
 
 }
@@ -755,12 +662,11 @@
    LARGE DESKTOP
 ========================================================= */
 
-@media (min-width: 1200px) {
+@media (min-width:1200px) {
 
-  .bottom-nav {
+  .desktop-sidebar {
 
-    width: 265px;
-    max-width: 265px;
+    width:275px;
 
     padding:
       28px 18px;
@@ -770,218 +676,84 @@
   .container {
 
     width:
-      min(
-        1500px,
-        calc(100% - 355px)
-      );
+      calc(100% - 360px);
 
-    max-width: 1500px;
+    margin-left:310px;
 
-    margin-left:
-      305px;
-
-    margin-right: 50px;
+    margin-right:50px;
   }
 
 
-  .bottom-nav::before {
+  .sidebar-brand span {
 
-    font-size: 26px;
-
-    margin-bottom: 28px;
+    font-size:27px;
   }
 
 
-  .nav-item {
+  .sidebar-item {
 
-    height: 50px;
+    min-height:49px;
   }
 
 
-  .nav-label {
+  .sidebar-item strong {
 
-    font-size: 13px;
+    font-size:13px;
   }
 
 
   .home-hero {
 
     grid-template-columns:
-      minmax(0, 1.8fr)
-      minmax(320px, .7fr);
+      minmax(0,1.8fr)
+      minmax(320px,.7fr);
 
-    gap: 70px;
-
-    min-height: 350px;
+    min-height:340px;
 
     padding:
-      50px 56px;
+      48px 54px;
   }
 
 
   .hero-title {
 
-    font-size: 52px;
+    font-size:52px;
   }
 
 
   #home-market-list .coin-card {
 
     grid-template-columns:
-      minmax(400px, 1fr)
+      minmax(400px,1fr)
       240px
       180px;
 
-    min-height: 84px;
-
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-
-  #home-market-list .coin-card:hover {
-
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-
-
-  .explore-grid,
-  .nextra-info-grid {
-
-    gap: 18px;
+    min-height:82px;
   }
 
 }
 
 
 /* =========================================================
-   EXTRA LARGE DESKTOP
+   EXTRA LARGE
 ========================================================= */
 
-@media (min-width: 1600px) {
+@media (min-width:1600px) {
 
-  .bottom-nav {
+  .desktop-sidebar {
 
-    width: 280px;
-    max-width: 280px;
+    width:290px;
   }
 
 
   .container {
 
     width:
-      min(
-        1600px,
-        calc(100% - 390px)
-      );
+      calc(100% - 390px);
 
-    max-width: 1600px;
+    margin-left:325px;
 
-    margin-left:
-      325px;
-
-    margin-right: 65px;
+    margin-right:65px;
   }
 
 }
-
-/* =========================================================
-   NEXTRA — SIDEBAR POLISH
-========================================================= */
-
-@media (min-width: 700px) {
-
-  .bottom-nav {
-    padding-top: 22px;
-    padding-bottom: 22px;
-  }
-
-  .bottom-nav::after {
-    content: "MARKET INTELLIGENCE";
-    display: block;
-
-    margin:
-      20px 12px 8px;
-
-    padding-top: 18px;
-
-    border-top:
-      1px solid var(--line);
-
-    color: var(--subtle);
-
-    font-size: 9px;
-    font-weight: 800;
-
-    letter-spacing: .12em;
-  }
-
-  .nav-item {
-    min-height: 48px;
-  }
-
-  .nav-item:not(.active) {
-    opacity: .88;
-  }
-
-  .nav-item:hover {
-    opacity: 1;
-  }
-
-  .nav-item.active {
-    opacity: 1;
-  }
-
-}
-
-
-/* =========================================================
-   SIDEBAR EXTRA SPACE
-========================================================= */
-
-@media (min-width: 1000px) {
-
-  .bottom-nav {
-    width: 255px;
-    max-width: 255px;
-  }
-
-  .container {
-    width:
-      calc(100% - 335px);
-
-    max-width: 1500px;
-
-    margin-left: 295px;
-    margin-right: 40px;
-  }
-
-}
-
-
-/* =========================================================
-   VERY LARGE SCREEN
-========================================================= */
-
-@media (min-width: 1400px) {
-
-  .bottom-nav {
-    width: 270px;
-    max-width: 270px;
-
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .container {
-    width:
-      calc(100% - 370px);
-
-    max-width: 1600px;
-
-    margin-left: 310px;
-    margin-right: 60px;
-  }
-
-     }
