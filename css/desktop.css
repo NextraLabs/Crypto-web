@@ -757,3 +757,27 @@
   }
 
 }
+
+/* =========================================================
+   FIX — REMOVE OLD TOP NAV ON DESKTOP
+========================================================= */
+
+@media (min-width: 700px) {
+
+  /* Sembunyikan nav lama */
+  .bottom-nav {
+    display: none !important;
+  }
+
+  /* Pastikan sidebar baru tetap tampil */
+  .desktop-sidebar {
+    display: flex !important;
+  }
+
+  /* Pastikan konten tidak tertutup sidebar */
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+}
