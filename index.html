@@ -14,18 +14,20 @@
     name="theme-color"
     content="#070909"
   >
-<meta
-  name="google-site-verification"
-  content="DdsCpO50Ysr4nQIPLrG4RemsfTdFZ0jv_jG5aXd6oNI"
-/>
+
+  <meta
+    name="google-site-verification"
+    content="DdsCpO50Ysr4nQIPLrG4RemsfTdFZ0jv_jG5aXd6oNI"
+  >
+
   <title>NEXTRA — Your Market. Your Intelligence.</title>
 
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="favicon.svg"
+  >
 
-<link
-  rel="icon"
-  type="image/svg+xml"
-  href="favicon.svg"
->
   <!-- =====================================================
        SEO
   ====================================================== -->
@@ -54,7 +56,6 @@
     rel="canonical"
     href="https://nextralabs.github.io/Crypto-web/"
   >
-
 
   <!-- =====================================================
        OPEN GRAPH
@@ -90,7 +91,6 @@
     content="id_ID"
   >
 
-
   <!-- =====================================================
        TWITTER / X
   ====================================================== -->
@@ -109,7 +109,6 @@
     name="twitter:description"
     content="Real-time crypto market intelligence, trading tools, futures, trending coins, dan crypto education."
   >
-
 
   <!-- =====================================================
        STRUCTURED DATA
@@ -134,7 +133,6 @@
   }
   </script>
 
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -145,18 +143,25 @@
   }
   </script>
 
+  <!-- =====================================================
+       CSS
+  ====================================================== -->
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
-  <link
-  rel="stylesheet"
-  href="css/desktop.css"
->
 
+  <link
+    rel="stylesheet"
+    href="css/desktop.css"
+  >
 
   <style>
+
+    /* =====================================================
+       HOME HERO
+    ====================================================== */
 
     .home-hero {
       position: relative;
@@ -166,8 +171,16 @@
       border: 1px solid rgba(57,242,160,.12);
       border-radius: 21px;
       background:
-        radial-gradient(circle at 100% 0%, rgba(53,207,255,.13), transparent 43%),
-        radial-gradient(circle at 0% 100%, rgba(57,242,160,.09), transparent 48%),
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(53,207,255,.13),
+          transparent 43%
+        ),
+        radial-gradient(
+          circle at 0% 100%,
+          rgba(57,242,160,.09),
+          transparent 48%
+        ),
         var(--surface);
       box-shadow: 0 12px 35px rgba(0,0,0,.16);
     }
@@ -206,13 +219,16 @@
     }
 
     @keyframes pulse {
-      0%,100% {
+
+      0%,
+      100% {
         opacity: 1;
       }
 
       50% {
         opacity: .35;
       }
+
     }
 
     .hero-title {
@@ -235,7 +251,9 @@
       line-height: 1.65;
     }
 
-    /* SEARCH */
+    /* =====================================================
+       HOME SEARCH
+    ====================================================== */
 
     .home-search {
       display: flex;
@@ -272,6 +290,10 @@
       white-space: nowrap;
     }
 
+    /* =====================================================
+       HERO STATS
+    ====================================================== */
+
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(3,1fr);
@@ -299,38 +321,30 @@
       font-size: 8px;
     }
 
-    .home-section-header {
+    /* =====================================================
+       MARKET OVERVIEW
+    ====================================================== */
+
+    .market-overview {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .market-overview .stat-card {
+      min-width: 0;
+    }
+
+    .market-overview .mini-stat {
+      min-height: 70px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .home-section-title {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-    }
-
-    .home-section-sub {
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 9px;
-    }
-
-    .home-view-all {
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      color: var(--muted);
-      font-size: 9px;
-      transition: .18s ease;
-    }
-
-    .home-view-all:hover {
-      color: var(--green);
-      border-color: rgba(57,242,160,.25);
-    }
+    /* =====================================================
+       HOME MARKET
+    ====================================================== */
 
     #home-market-list {
       display: flex;
@@ -363,6 +377,10 @@
       font-weight: 700;
       text-align: center;
     }
+
+    /* =====================================================
+       MARKET PULSE
+    ====================================================== */
 
     .pulse-card {
       margin-top: 23px;
@@ -407,7 +425,12 @@
       width: 0%;
       height: 100%;
       border-radius: 999px;
-      background: linear-gradient(90deg,var(--green),var(--blue));
+      background:
+        linear-gradient(
+          90deg,
+          var(--green),
+          var(--blue)
+        );
       transition: width .5s ease;
     }
 
@@ -418,6 +441,10 @@
       color: var(--subtle);
       font-size: 8px;
     }
+
+    /* =====================================================
+       EXPLORE
+    ====================================================== */
 
     .explore-title {
       margin: 25px 0 10px;
@@ -493,14 +520,6 @@
       font-size: 11px;
     }
 
-    .home-footer {
-      margin-top: 30px;
-      padding-bottom: 20px;
-      color: var(--subtle);
-      font-size: 8px;
-      text-align: center;
-    }
-
     /* =====================================================
        NEXTRA INFO
     ====================================================== */
@@ -528,7 +547,11 @@
 
     .nextra-info-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
       gap: 8px;
     }
 
@@ -640,6 +663,22 @@
       font-size: 8px;
     }
 
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .home-footer {
+      margin-top: 30px;
+      padding-bottom: 20px;
+      color: var(--subtle);
+      font-size: 8px;
+      text-align: center;
+    }
+
+    /* =====================================================
+       SMALL DEVICES
+    ====================================================== */
+
     @media (max-width: 360px) {
 
       .hero-title {
@@ -679,13 +718,22 @@
     }
 
   </style>
-<link rel="manifest" href="manifest.json">
+
+  <link
+    rel="manifest"
+    href="manifest.json"
+  >
+
 </head>
 
 
 <body>
 
 <main class="container">
+
+  <!-- =====================================================
+       TOPBAR
+  ====================================================== -->
 
   <header class="topbar">
 
@@ -744,7 +792,9 @@
   </header>
 
 
-  <!-- HERO -->
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
 
   <section class="home-hero">
 
@@ -758,13 +808,17 @@
 
     </div>
 
+
     <h2 class="hero-title">
 
       Understand the market.<br>
 
-      <span>Trade with intelligence.</span>
+      <span>
+        Trade with intelligence.
+      </span>
 
     </h2>
+
 
     <p class="hero-description">
 
@@ -798,18 +852,41 @@
     <div class="hero-stats">
 
       <div class="hero-stat">
-        <strong>LIVE</strong>
-        <span>Market Data</span>
+
+        <strong>
+          LIVE
+        </strong>
+
+        <span>
+          Market Data
+        </span>
+
       </div>
 
-      <div class="hero-stat">
-        <strong>24H</strong>
-        <span>Price Movement</span>
-      </div>
 
       <div class="hero-stat">
-        <strong>AI</strong>
-        <span>Intelligence</span>
+
+        <strong>
+          24H
+        </strong>
+
+        <span>
+          Price Movement
+        </span>
+
+      </div>
+
+
+      <div class="hero-stat">
+
+        <strong>
+          AI
+        </strong>
+
+        <span>
+          Intelligence
+        </span>
+
       </div>
 
     </div>
@@ -818,64 +895,155 @@
 
 
   <!-- =====================================================
-     MARKET OVERVIEW
-===================================================== -->
+       MARKET OVERVIEW
+  ====================================================== -->
 
-<section>
+  <section>
 
-  <div class="section-header">
+    <div class="section-header">
 
-    <div>
-      <h2>Market Overview</h2>
+      <div>
 
-      <p>
-        Real-time overview of the crypto market
-      </p>
-    </div>
+        <h2>
+          Market Overview
+        </h2>
 
-    <a
-      href="markets.html"
-      class="section-action"
-    >
-      View Markets →
-    </a>
+        <p>
+          Real-time overview of the crypto market
+        </p>
 
-  </div>
-
-
-  <div class="market-overview">
-
-   
       </div>
+
+
+      <a
+        href="markets.html"
+        class="section-action"
+      >
+        View Markets →
+      </a>
+
     </div>
 
-    <div class="stat-card">
-      <div class="mini-stat">
-        <span>PRICE MOVEMENT</span>
-        <strong>24H</strong>
+
+    <div class="market-overview">
+
+      <div class="stat-card">
+
+        <div class="mini-stat">
+
+          <span>
+            MARKET STATUS
+          </span>
+
+          <strong>
+            Live
+          </strong>
+
+        </div>
+
       </div>
-    </div>
 
-    <div class="stat-card">
-      <div class="mini-stat">
-        <span>MARKET DATA</span>
-        <strong>Real-time</strong>
+
+      <div class="stat-card">
+
+        <div class="mini-stat">
+
+          <span>
+            PRICE MOVEMENT
+          </span>
+
+          <strong>
+            24H
+          </strong>
+
+        </div>
+
       </div>
-    </div>
 
-    <div class="stat-card">
-      <div class="mini-stat">
-        <span>INTELLIGENCE</span>
-        <strong>Active</strong>
+
+      <div class="stat-card">
+
+        <div class="mini-stat">
+
+          <span>
+            MARKET DATA
+          </span>
+
+          <strong>
+            Real-time
+          </strong>
+
+        </div>
+
       </div>
-    </div>
 
-  </div>
+
+      <div class="stat-card">
+
+        <div class="mini-stat">
+
+          <span>
+            INTELLIGENCE
+          </span>
+
+          <strong>
+            Active
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </section>
 
 
-  <!-- MARKET PULSE -->
+  <!-- =====================================================
+       MARKET LIST
+  ====================================================== -->
+
+  <section>
+
+    <div class="home-section-header">
+
+      <div>
+
+        <h2 class="home-section-title">
+          Top Market
+        </h2>
+
+        <div class="home-section-sub">
+          Live crypto prices
+        </div>
+
+      </div>
+
+
+      <a
+        href="markets.html"
+        class="home-view-all"
+      >
+        View All →
+      </a>
+
+    </div>
+
+
+    <div id="home-market-list">
+
+      <div class="loading-box">
+        Loading market...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MARKET PULSE
+  ====================================================== -->
 
   <section class="pulse-card">
 
@@ -892,6 +1060,7 @@
         </div>
 
       </div>
+
 
       <div
         id="market-pulse"
@@ -915,16 +1084,26 @@
 
     <div class="pulse-labels">
 
-      <span>Bearish</span>
-      <span>Neutral</span>
-      <span>Bullish</span>
+      <span>
+        Bearish
+      </span>
+
+      <span>
+        Neutral
+      </span>
+
+      <span>
+        Bullish
+      </span>
 
     </div>
 
   </section>
 
 
-  <!-- EXPLORE -->
+  <!-- =====================================================
+       EXPLORE
+  ====================================================== -->
 
   <section>
 
@@ -935,6 +1114,8 @@
 
     <div class="explore-grid">
 
+
+      <!-- MARKETS -->
 
       <a
         href="markets.html"
@@ -955,6 +1136,7 @@
 
         </div>
 
+
         <div class="explore-name">
           Markets
         </div>
@@ -970,6 +1152,8 @@
       </a>
 
 
+      <!-- TRENDING -->
+
       <a
         href="trending.html"
         class="coin-card explore-card"
@@ -979,12 +1163,21 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M4 16c3-1 4-5 6-9 2 4 3 7 6 7 1.7 0 2.8-1 4-3"/>
+            <path
+              d="
+                M4 16
+                c3-1 4-5 6-9
+                2 4 3 7 6 7
+                1.7 0 2.8-1 4-3
+              "
+            />
+
             <path d="M16 5h4v4"/>
 
           </svg>
 
         </div>
+
 
         <div class="explore-name">
           Trending
@@ -1001,6 +1194,8 @@
       </a>
 
 
+      <!-- TOOLS -->
+
       <a
         href="tools.html"
         class="coin-card explore-card"
@@ -1010,12 +1205,25 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/>
+            <path
+              d="
+                M14.7 6.3
+                a4 4 0 0 0-5.4 5.4
+                L4 17
+                l3 3
+                5.3-5.3
+                a4 4 0 0 0 5.4-5.4
+                L15 12
+                l-3-3z
+              "
+            />
+
             <path d="m14 4 6 6"/>
 
           </svg>
 
         </div>
+
 
         <div class="explore-name">
           Tools
@@ -1032,6 +1240,8 @@
       </a>
 
 
+      <!-- EDUCATION -->
+
       <a
         href="education.html"
         class="coin-card explore-card"
@@ -1041,7 +1251,17 @@
 
           <svg viewBox="0 0 24 24">
 
-            <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22z"/>
+            <path
+              d="
+                M4 5.5
+                A2.5 2.5 0 0 1 6.5 3
+                H20
+                v17
+                H6.5
+                A2.5 2.5 0 0 0 4 22z
+              "
+            />
+
             <path d="M4 5.5V22"/>
             <path d="M8 7h8"/>
             <path d="M8 11h6"/>
@@ -1049,6 +1269,7 @@
           </svg>
 
         </div>
+
 
         <div class="explore-name">
           Learn
@@ -1069,23 +1290,21 @@
   </section>
 
 
-  <!-- NEXTRA INFO -->
+  <!-- =====================================================
+       NEXTRA INFO
+  ====================================================== -->
 
   <section class="nextra-info">
 
     <div class="nextra-info-header">
 
-      <div>
+      <h2 class="nextra-info-title">
+        NEXTRA
+      </h2>
 
-        <h2 class="nextra-info-title">
-          NEXTRA
-        </h2>
-
-        <p class="nextra-info-subtitle">
-          Learn more about the platform
-        </p>
-
-      </div>
+      <p class="nextra-info-subtitle">
+        Learn more about the platform
+      </p>
 
     </div>
 
@@ -1103,11 +1322,20 @@
         </span>
 
         <span>
-          <strong>About</strong>
-          <small>Tentang NEXTRA</small>
+
+          <strong>
+            About
+          </strong>
+
+          <small>
+            Tentang NEXTRA
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
 
@@ -1122,11 +1350,20 @@
         </span>
 
         <span>
-          <strong>FAQ</strong>
-          <small>Pertanyaan umum</small>
+
+          <strong>
+            FAQ
+          </strong>
+
+          <small>
+            Pertanyaan umum
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
 
@@ -1141,11 +1378,20 @@
         </span>
 
         <span>
-          <strong>Contact</strong>
-          <small>Hubungi kami</small>
+
+          <strong>
+            Contact
+          </strong>
+
+          <small>
+            Hubungi kami
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
 
@@ -1160,11 +1406,20 @@
         </span>
 
         <span>
-          <strong>Learn</strong>
-          <small>Crypto education</small>
+
+          <strong>
+            Learn
+          </strong>
+
+          <small>
+            Crypto education
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
 
@@ -1179,11 +1434,20 @@
         </span>
 
         <span>
-          <strong>Changelog</strong>
-          <small>Update NEXTRA</small>
+
+          <strong>
+            Changelog
+          </strong>
+
+          <small>
+            Update NEXTRA
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
 
@@ -1193,16 +1457,30 @@
         class="nextra-info-card"
       >
 
-        <span class="nextra-info-icon warning">
+        <span
+          class="
+            nextra-info-icon
+            warning
+          "
+        >
           !
         </span>
 
         <span>
-          <strong>Risk Disclaimer</strong>
-          <small>Pahami risiko crypto</small>
+
+          <strong>
+            Risk Disclaimer
+          </strong>
+
+          <small>
+            Pahami risiko crypto
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
 
@@ -1217,11 +1495,20 @@
         </span>
 
         <span>
-          <strong>Privacy</strong>
-          <small>Kebijakan privasi</small>
+
+          <strong>
+            Privacy
+          </strong>
+
+          <small>
+            Kebijakan privasi
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
 
@@ -1236,19 +1523,31 @@
         </span>
 
         <span>
-          <strong>Terms</strong>
-          <small>Syarat penggunaan</small>
+
+          <strong>
+            Terms
+          </strong>
+
+          <small>
+            Syarat penggunaan
+          </small>
+
         </span>
 
-        <b>→</b>
+        <b>
+          →
+        </b>
 
       </a>
-
 
     </div>
 
   </section>
 
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <footer class="home-footer">
 
@@ -1256,117 +1555,300 @@
 
   </footer>
 
-
 </main>
 
 
-  <nav class="desktop-sidebar">
+<!-- =====================================================
+     DESKTOP SIDEBAR
+===================================================== -->
+
+<nav class="desktop-sidebar">
 
   <div class="sidebar-brand">
-    <span>NEXTRA</span>
-    <small>Your Market. Your Intelligence.</small>
-  </div>
 
-  <div class="sidebar-section">
-    <div class="sidebar-title">MAIN</div>
+    <span>
+      NEXTRA
+    </span>
 
-    <a href="index.html" class="sidebar-item active">
-      <span>⌂</span>
-      <strong>Home</strong>
-    </a>
+    <small>
+      Your Market. Your Intelligence.
+    </small>
 
-    <a href="markets.html" class="sidebar-item">
-      <span>◈</span>
-      <strong>Markets</strong>
-    </a>
-
-    <a href="radar.html" class="sidebar-item">
-      <span>◉</span>
-      <strong>Radar</strong>
-    </a>
-
-    <a href="trending.html" class="sidebar-item">
-      <span>↗</span>
-      <strong>Trending</strong>
-    </a>
-
-    <a href="watchlist.html" class="sidebar-item">
-      <span>★</span>
-      <strong>Watchlist</strong>
-    </a>
   </div>
 
 
   <div class="sidebar-section">
-    <div class="sidebar-title">INTELLIGENCE</div>
 
-    <a href="intelligence.html" class="sidebar-item">
-      <span>✦</span>
-      <strong>Intelligence</strong>
+    <div class="sidebar-title">
+      MAIN
+    </div>
+
+
+    <a
+      href="index.html"
+      class="sidebar-item active"
+    >
+
+      <span>
+        ⌂
+      </span>
+
+      <strong>
+        Home
+      </strong>
+
     </a>
 
-    <a href="futures.html" class="sidebar-item">
-      <span>⌁</span>
-      <strong>Futures</strong>
+
+    <a
+      href="markets.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ◈
+      </span>
+
+      <strong>
+        Markets
+      </strong>
+
     </a>
 
-    <a href="tools.html" class="sidebar-item">
-      <span>⚒</span>
-      <strong>Trading Tools</strong>
+
+    <a
+      href="radar.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ◉
+      </span>
+
+      <strong>
+        Radar
+      </strong>
+
     </a>
+
+
+    <a
+      href="trending.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ↗
+      </span>
+
+      <strong>
+        Trending
+      </strong>
+
+    </a>
+
+
+    <a
+      href="watchlist.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ★
+      </span>
+
+      <strong>
+        Watchlist
+      </strong>
+
+    </a>
+
   </div>
 
 
   <div class="sidebar-section">
-    <div class="sidebar-title">LEARN</div>
 
-    <a href="education.html" class="sidebar-item">
-      <span>▣</span>
-      <strong>Education</strong>
+    <div class="sidebar-title">
+      INTELLIGENCE
+    </div>
+
+
+    <a
+      href="intelligence.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ✦
+      </span>
+
+      <strong>
+        Intelligence
+      </strong>
+
     </a>
 
-    <a href="learn.html" class="sidebar-item">
-      <span>?</span>
-      <strong>Learn</strong>
+
+    <a
+      href="futures.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ⌁
+      </span>
+
+      <strong>
+        Futures
+      </strong>
+
     </a>
+
+
+    <a
+      href="tools.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ⚒
+      </span>
+
+      <strong>
+        Trading Tools
+      </strong>
+
+    </a>
+
   </div>
 
 
   <div class="sidebar-section">
-    <div class="sidebar-title">ACCOUNT</div>
 
-    <a href="profile.html" class="sidebar-item">
-      <span>●</span>
-      <strong>Profile</strong>
+    <div class="sidebar-title">
+      LEARN
+    </div>
+
+
+    <a
+      href="education.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ▣
+      </span>
+
+      <strong>
+        Education
+      </strong>
+
     </a>
 
-    <a href="settings.html" class="sidebar-item">
-      <span>⚙</span>
-      <strong>Settings</strong>
+
+    <a
+      href="learn.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ?
+      </span>
+
+      <strong>
+        Learn
+      </strong>
+
     </a>
 
-    <a href="more.html" class="sidebar-item">
-      <span>☰</span>
-      <strong>More</strong>
+  </div>
+
+
+  <div class="sidebar-section">
+
+    <div class="sidebar-title">
+      ACCOUNT
+    </div>
+
+
+    <a
+      href="profile.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ●
+      </span>
+
+      <strong>
+        Profile
+      </strong>
+
     </a>
+
+
+    <a
+      href="settings.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ⚙
+      </span>
+
+      <strong>
+        Settings
+      </strong>
+
+    </a>
+
+
+    <a
+      href="more.html"
+      class="sidebar-item"
+    >
+
+      <span>
+        ☰
+      </span>
+
+      <strong>
+        More
+      </strong>
+
+    </a>
+
   </div>
 
 
   <div class="sidebar-footer">
 
     <div class="sidebar-status">
+
       <span class="status-dot"></span>
 
       <div>
-        <strong>MARKET ONLINE</strong>
-        <small>Live market data</small>
+
+        <strong>
+          MARKET ONLINE
+        </strong>
+
+        <small>
+          Live market data
+        </small>
+
       </div>
+
     </div>
 
   </div>
 
 </nav>
 
+
+<!-- =====================================================
+     MOBILE BOTTOM NAV
+===================================================== -->
 
 <div id="bottom-nav"></div>
 
@@ -1376,6 +1858,7 @@
 ===================================================== -->
 
 <script src="js/app.js"></script>
+
 <script src="js/api.js"></script>
 
 
@@ -1388,564 +1871,634 @@
 
 <script>
 
-const SUPABASE_URL =
-  "https://uvtbntwgooxqjbyjkvkd.supabase.co";
+  /* =====================================================
+     SUPABASE CONFIG
+  ====================================================== */
 
-const SUPABASE_KEY =
-  "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
+  const SUPABASE_URL =
+    "https://uvtbntwgooxqjbyjkvkd.supabase.co";
 
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+  const SUPABASE_KEY =
+    "sb_publishable_Ensrp6OEPwQCoY76nQMFDg_lEofX2qO";
 
 
-/* =====================================================
-   AUTH UI
-===================================================== */
-
-async function updateAuthButton() {
-
-  const button =
-    document.getElementById(
-      "auth-button"
-    );
-
-  const text =
-    document.getElementById(
-      "auth-text"
-    );
-
-  const icon =
-    document.getElementById(
-      "auth-icon"
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
     );
 
 
-  if (
-    !button ||
-    !text ||
-    !icon
-  ) {
-    return;
-  }
+  /* =====================================================
+     AUTH UI
+  ====================================================== */
 
+  async function updateAuthButton() {
 
-  try {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .auth
-        .getSession();
-
-
-    if (error) {
-
-      console.error(
-        "Session error:",
-        error
+    const button =
+      document.getElementById(
+        "auth-button"
       );
+
+    const text =
+      document.getElementById(
+        "auth-text"
+      );
+
+    const icon =
+      document.getElementById(
+        "auth-icon"
+      );
+
+
+    if (
+      !button ||
+      !text ||
+      !icon
+    ) {
 
       return;
 
     }
 
 
-    const session =
-      data?.session;
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .auth
+          .getSession();
 
 
-    if (session) {
+      if (error) {
 
-      button.href =
-        "profile.html";
+        console.error(
+          "Session error:",
+          error
+        );
 
-      text.textContent =
-        "Profile";
+        return;
 
-      icon.textContent =
-        "●";
+      }
 
-      button.title =
-        "Buka profile";
+
+      const session =
+        data?.session;
+
+
+      if (session) {
+
+        button.href =
+          "profile.html";
+
+        text.textContent =
+          "Profile";
+
+        icon.textContent =
+          "●";
+
+        button.title =
+          "Buka profile";
+
+      }
+
+      else {
+
+        button.href =
+          "login.html";
+
+        text.textContent =
+          "Login";
+
+        icon.textContent =
+          "↪";
+
+        button.title =
+          "Masuk ke NEXTRA";
+
+      }
 
     }
 
-    else {
+    catch (error) {
 
-      button.href =
-        "login.html";
-
-      text.textContent =
-        "Login";
-
-      icon.textContent =
-        "↪";
-
-      button.title =
-        "Masuk ke NEXTRA";
+      console.error(
+        "Auth UI error:",
+        error
+      );
 
     }
-
 
   }
 
-  catch(error) {
 
-    console.error(
-      "Auth UI error:",
-      error
+  /* =====================================================
+     AUTH STATE LISTENER
+  ====================================================== */
+
+  supabaseClient
+    .auth
+    .onAuthStateChange(
+      (
+        event,
+        session
+      ) => {
+
+        updateAuthButton();
+
+      }
     );
 
+
+  /* =====================================================
+     HOME MARKET
+  ====================================================== */
+
+  const homeContainer =
+    document.getElementById(
+      "home-market-list"
+    );
+
+
+  async function loadHomeMarkets() {
+
+    if (!homeContainer) {
+
+      return;
+
+    }
+
+
+    try {
+
+      const coins =
+        await NEXTRA_API
+          .fetchNormalizedMarkets({
+
+            page: 1,
+            perPage: 6
+
+          });
+
+
+      if (
+        !coins ||
+        !coins.length
+      ) {
+
+        throw new Error(
+          "Market kosong"
+        );
+
+      }
+
+
+      homeContainer.innerHTML =
+
+        coins
+          .map(
+            (
+              coin,
+              index
+            ) => {
+
+              const change =
+                Number(
+                  coin.change24h
+                ) || 0;
+
+
+              const changeClass =
+                change >= 0
+                  ? "up"
+                  : "down";
+
+
+              const sign =
+                change >= 0
+                  ? "+"
+                  : "";
+
+
+              return `
+
+                <a
+                  href="coin.html?id=${encodeURIComponent(
+                    coin.id
+                  )}"
+                  class="coin-card"
+                >
+
+                  <div class="market-rank">
+                    ${String(
+                      index + 1
+                    ).padStart(2,"0")}
+                  </div>
+
+
+                  ${
+                    coin.image
+                      ? `
+
+                        <img
+                          src="${coin.image}"
+                          width="36"
+                          height="36"
+                          style="
+                            border-radius:50%;
+                            flex-shrink:0;
+                          "
+                          alt="${coin.name}"
+                          loading="lazy"
+                        >
+
+                      `
+                      : ""
+                  }
+
+
+                  <div
+                    style="
+                      flex:1;
+                      min-width:0;
+                    "
+                  >
+
+                    <div class="coin-symbol">
+                      ${coin.symbol}
+                    </div>
+
+                    <div class="coin-pair">
+                      ${coin.name}
+                    </div>
+
+                  </div>
+
+
+                  <div>
+
+                    <div class="coin-price">
+
+                      ${formatHomePrice(
+                        coin.price
+                      )}
+
+                    </div>
+
+
+                    <div
+                      class="
+                        coin-change
+                        ${changeClass}
+                      "
+                    >
+
+                      ${sign}${change.toFixed(2)}%
+
+                    </div>
+
+                  </div>
+
+                </a>
+
+              `;
+
+            }
+          )
+          .join("");
+
+
+      updateMarketPulse(
+        coins
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Home market error:",
+        error
+      );
+
+
+      homeContainer.innerHTML = `
+
+        <div class="error-box">
+
+          ⚠️ Gagal memuat market.
+
+          <br>
+
+          <button
+            class="icon-btn"
+            style="margin-top:10px;"
+            onclick="loadHomeMarkets()"
+          >
+            Coba lagi
+          </button>
+
+        </div>
+
+      `;
+
+    }
+
   }
 
-}
+
+  /* =====================================================
+     PRICE FORMAT
+  ====================================================== */
+
+  function formatHomePrice(
+    price
+  ) {
+
+    price =
+      Number(price);
 
 
-/* =====================================================
-   AUTH STATE LISTENER
-===================================================== */
+    if (
+      !Number.isFinite(price)
+    ) {
 
-supabaseClient
-  .auth
-  .onAuthStateChange(
-    (
-      event,
-      session
-    ) => {
+      return "-";
+
+    }
+
+
+    if (
+      price >= 1000
+    ) {
+
+      return "$" +
+        price.toLocaleString(
+          "en-US",
+          {
+            maximumFractionDigits: 0
+          }
+        );
+
+    }
+
+
+    if (
+      price >= 1
+    ) {
+
+      return "$" +
+        price.toFixed(2);
+
+    }
+
+
+    if (
+      price >= .01
+    ) {
+
+      return "$" +
+        price.toFixed(4);
+
+    }
+
+
+    return "$" +
+      price.toPrecision(5);
+
+  }
+
+
+  /* =====================================================
+     MARKET PULSE
+  ====================================================== */
+
+  function updateMarketPulse(
+    coins
+  ) {
+
+    const pulse =
+      document.getElementById(
+        "market-pulse"
+      );
+
+
+    const bar =
+      document.getElementById(
+        "market-pulse-bar"
+      );
+
+
+    if (
+      !pulse ||
+      !bar
+    ) {
+
+      return;
+
+    }
+
+
+    const valid =
+      coins.filter(
+        coin =>
+          Number.isFinite(
+            Number(
+              coin.change24h
+            )
+          )
+      );
+
+
+    if (
+      !valid.length
+    ) {
+
+      pulse.textContent =
+        "—";
+
+      bar.style.width =
+        "0%";
+
+      return;
+
+    }
+
+
+    const gainers =
+      valid.filter(
+        coin =>
+          Number(
+            coin.change24h
+          ) >= 0
+      ).length;
+
+
+    const percentage =
+      Math.round(
+        (
+          gainers /
+          valid.length
+        ) * 100
+      );
+
+
+    pulse.textContent =
+      percentage + "%";
+
+
+    bar.style.width =
+      percentage + "%";
+
+  }
+
+
+  /* =====================================================
+     HOME SEARCH
+  ====================================================== */
+
+  const homeSearch =
+    document.getElementById(
+      "home-search"
+    );
+
+
+  const homeSearchBtn =
+    document.getElementById(
+      "home-search-btn"
+    );
+
+
+  function goToMarketSearch() {
+
+    const query =
+      homeSearch?.value
+        ?.trim();
+
+
+    if (!query) {
+
+      homeSearch?.focus();
+
+      return;
+
+    }
+
+
+    window.location.href =
+      "markets.html?search=" +
+      encodeURIComponent(
+        query
+      );
+
+  }
+
+
+  homeSearchBtn?.addEventListener(
+    "click",
+    goToMarketSearch
+  );
+
+
+  homeSearch?.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        goToMarketSearch();
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     THEME BUTTON
+  ====================================================== */
+
+  document
+    .getElementById(
+      "theme-toggle"
+    )
+    ?.addEventListener(
+      "click",
+      () => {
+
+        if (
+          typeof toggleTheme ===
+          "function"
+        ) {
+
+          toggleTheme();
+
+        }
+
+      }
+    );
+
+
+  /* =====================================================
+     INIT
+  ====================================================== */
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+      loadHomeMarkets();
 
       updateAuthButton();
 
     }
   );
 
-
-/* =====================================================
-   HOME MARKET
-===================================================== */
-
-const homeContainer =
-  document.getElementById(
-    "home-market-list"
-  );
-
-
-async function loadHomeMarkets() {
-
-  try {
-
-    const coins =
-      await NEXTRA_API
-        .fetchNormalizedMarkets({
-
-          page: 1,
-          perPage: 6
-
-        });
-
-
-    if (
-      !coins ||
-      !coins.length
-    ) {
-
-      throw new Error(
-        "Market kosong"
-      );
-
-    }
-
-
-    homeContainer.innerHTML =
-
-      coins
-        .map((coin,index) => {
-
-          const change =
-            Number(
-              coin.change24h
-            ) || 0;
-
-
-          const changeClass =
-            change >= 0
-              ? "up"
-              : "down";
-
-
-          const sign =
-            change >= 0
-              ? "+"
-              : "";
-
-
-          return `
-
-            <a
-              href="coin.html?id=${encodeURIComponent(coin.id)}"
-              class="coin-card"
-            >
-
-              <div class="market-rank">
-                ${String(index + 1)
-                  .padStart(2,"0")}
-              </div>
-
-
-              ${
-                coin.image
-                  ? `
-
-                    <img
-                      src="${coin.image}"
-                      width="36"
-                      height="36"
-                      style="
-                        border-radius:50%;
-                        flex-shrink:0;
-                      "
-                      alt="${coin.name}"
-                      loading="lazy"
-                    >
-
-                  `
-                  : ""
-              }
-
-
-              <div
-                style="
-                  flex:1;
-                  min-width:0;
-                "
-              >
-
-                <div class="coin-symbol">
-                  ${coin.symbol}
-                </div>
-
-                <div class="coin-pair">
-                  ${coin.name}
-                </div>
-
-              </div>
-
-
-              <div>
-
-                <div class="coin-price">
-
-                  ${formatHomePrice(
-                    coin.price
-                  )}
-
-                </div>
-
-
-                <div
-                  class="
-                    coin-change
-                    ${changeClass}
-                  "
-                >
-
-                  ${sign}${change.toFixed(2)}%
-
-                </div>
-
-              </div>
-
-            </a>
-
-          `;
-
-        })
-
-        .join("");
-
-
-    updateMarketPulse(
-      coins
-    );
-
-
-  }
-
-  catch(error) {
-
-    console.error(
-      "Home market error:",
-      error
-    );
-
-
-    homeContainer.innerHTML = `
-
-      <div class="error-box">
-
-        ⚠️ Gagal memuat market.
-
-        <br>
-
-        <button
-          class="icon-btn"
-          style="margin-top:10px;"
-          onclick="loadHomeMarkets()"
-        >
-          Coba lagi
-        </button>
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* =====================================================
-   PRICE FORMAT
-===================================================== */
-
-function formatHomePrice(price) {
-
-  price =
-    Number(price);
-
-
-  if (
-    !Number.isFinite(price)
-  ) {
-
-    return "-";
-
-  }
-
-
-  if (price >= 1000) {
-
-    return "$" +
-      price.toLocaleString(
-        "en-US",
-        {
-          maximumFractionDigits: 0
-        }
-      );
-
-  }
-
-
-  if (price >= 1) {
-
-    return "$" +
-      price.toFixed(2);
-
-  }
-
-
-  if (price >= .01) {
-
-    return "$" +
-      price.toFixed(4);
-
-  }
-
-
-  return "$" +
-    price.toPrecision(5);
-
-}
-
-
-/* =====================================================
-   MARKET PULSE
-===================================================== */
-
-function updateMarketPulse(coins) {
-
-  const pulse =
-    document.getElementById(
-      "market-pulse"
-    );
-
-
-  const bar =
-    document.getElementById(
-      "market-pulse-bar"
-    );
-
-
-  if (
-    !pulse ||
-    !bar
-  ) {
-    return;
-  }
-
-
-  const valid =
-    coins.filter(
-      coin =>
-        Number.isFinite(
-          Number(
-            coin.change24h
-          )
-        )
-    );
-
-
-  if (!valid.length) {
-
-    pulse.textContent =
-      "—";
-
-    bar.style.width =
-      "0%";
-
-    return;
-
-  }
-
-
-  const gainers =
-    valid.filter(
-      coin =>
-        Number(
-          coin.change24h
-        ) >= 0
-    ).length;
-
-
-  const percentage =
-    Math.round(
-      (
-        gainers /
-        valid.length
-      ) * 100
-    );
-
-
-  pulse.textContent =
-    percentage + "%";
-
-
-  bar.style.width =
-    percentage + "%";
-
-}
-
-
-/* =====================================================
-   HOME SEARCH
-===================================================== */
-
-const homeSearch =
-  document.getElementById(
-    "home-search"
-  );
-
-
-const homeSearchBtn =
-  document.getElementById(
-    "home-search-btn"
-  );
-
-
-function goToMarketSearch() {
-
-  const query =
-    homeSearch?.value
-      ?.trim();
-
-
-  if (!query) {
-
-    homeSearch?.focus();
-
-    return;
-
-  }
-
-
-  window.location.href =
-    "markets.html?search=" +
-    encodeURIComponent(
-      query
-    );
-
-}
-
-
-homeSearchBtn?.addEventListener(
-  "click",
-  goToMarketSearch
-);
-
-
-homeSearch?.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key === "Enter"
-    ) {
-
-      goToMarketSearch();
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   THEME BUTTON
-===================================================== */
-
-document
-  .getElementById(
-    "theme-toggle"
-  )
-  ?.addEventListener(
-    "click",
-    () => {
-
-      toggleTheme();
-
-    }
-  );
-
-
-/* =====================================================
-   INIT
-===================================================== */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    loadHomeMarkets();
-
-    updateAuthButton();
-
-  }
-);
-
 </script>
+
+
+<!-- =====================================================
+     SERVICE WORKER
+===================================================== -->
+
 <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js")
-        .then(() => console.log("NEXTRA Service Worker aktif"))
-        .catch(error => console.error("NEXTRA Service Worker gagal:", error));
-    });
+
+  if (
+    "serviceWorker" in navigator
+  ) {
+
+    window.addEventListener(
+      "load",
+      () => {
+
+        navigator.serviceWorker
+          .register("./sw.js")
+          .then(
+            () =>
+              console.log(
+                "NEXTRA Service Worker aktif"
+              )
+          )
+          .catch(
+            error =>
+              console.error(
+                "NEXTRA Service Worker gagal:",
+                error
+              )
+          );
+
+      }
+    );
+
   }
+
 </script>
+
 
 </body>
 
