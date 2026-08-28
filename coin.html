@@ -116,6 +116,17 @@
     </section>
 
     <section class="coin-card" style="display:block;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <strong style="font-size:11px;">🧠 Smart AI Analysis</strong>
+        <span class="dim" style="font-size:7px;">Premium</span>
+      </div>
+      <button id="ai-analysis-btn" class="primary-btn" style="width:100%;">
+        🧠 Generate AI Analysis
+      </button>
+      <div id="ai-analysis-result" style="display:none;margin-top:12px;padding:12px;border:1px solid var(--line, rgba(255,255,255,.08));border-radius:12px;font-size:11px;line-height:1.6;"></div>
+    </section>
+
+    <section class="coin-card" style="display:block;margin-bottom:12px;">
       <div style="font-size:11px;font-weight:900;margin-bottom:10px;">Market Data</div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:7px;">
         <div class="mini-stat"><span>Market Cap</span><strong id="market-cap">-</strong></div>
@@ -187,6 +198,7 @@
 <script src="js/api.js"></script>
 <script src="js/features/coin.js"></script>
 <script src="js/features/alerts.js"></script>
+<script src="js/features/ai-analysis.js"></script>
 
 <script>
 (() => {
